@@ -1,9 +1,9 @@
 const Xprz = require("xprz");
 
 const { Route } = new Xprz();
-const { setRoute, res, default: route } = new Route();
-setRoute("/").get(() => {
-  const { send } = res();
+const route = new Route();
+route.setRoute("/").get(() => {
+  const { send } = route.res();
   send("hi");
 });
 
