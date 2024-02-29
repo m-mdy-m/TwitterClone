@@ -1,4 +1,10 @@
 <%- include("includes/base.ejs") %>
 <%- include("includes/header.ejs") %>
-    <h1>Welcome Home Mahdi</h1>
+    <h1>login</h1>
+    <form action="/login" method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <input type="email" name="email" placeholder="email">
+    </form>
+    <a href="/signup">Need an account? register here</a>
 <%- include("includes/end.ejs") %>
