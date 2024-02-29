@@ -1,0 +1,24 @@
+{
+  "name": "nextweet",
+  "version": "1.0.0",
+  "description": "NexTweet redefines social networking with its open-source platform, empowering users with enhanced features, seamless interaction, and a vibrant community. Join the evolution of microblogging and experience the next frontier of connected conversations! 🌟🚀",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-mdy-m/NexTweet.git"
+  },
+  "keywords": [
+    "nodejs",
+    "nexttweet",
+    "express"
+  ],
+  "author": "mahdi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m-mdy-m/NexTweet/issues"
+  },
+  "homepage": "https://github.com/m-mdy-m/NexTweet#readme"
+}
