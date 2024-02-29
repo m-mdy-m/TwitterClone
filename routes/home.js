@@ -1,10 +1,10 @@
 const Xprz = require("xprz");
-const isAuth = $read("middleware/is-auth").isAuth;
+const ensureAuthenticated = $read("middleware/is-auth").ensureAuthenticated;
 const { Route } = new Xprz();
 const route = new Route();
 route
   .setRoute("/")
-  .using([isAuth])
+  .using([ensureAuthenticated])
   .get(() => {
     const { status } = route.res();
     status(200).render("home", {
