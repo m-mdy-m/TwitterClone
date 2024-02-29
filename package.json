@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/m-mdy-m/NexTweet/issues"
   },
-  "homepage": "https://github.com/m-mdy-m/NexTweet#readme"
+  "homepage": "https://github.com/m-mdy-m/NexTweet#readme",
+  "dependencies": {
+    "xprz": "^1.0.5"
+  }
 }
