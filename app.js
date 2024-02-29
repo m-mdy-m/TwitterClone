@@ -1,4 +1,6 @@
 const Xprz = require("xprz");
-const { App } = new Xprz();
-const { launch } = new App();
+const { App, HttpMethod, Route } = new Xprz();
+const { launch, loadRoutes,setTemplateEngine } = new App();
 launch();
+setTemplateEngine().ejs()
+loadRoutes()
