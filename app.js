@@ -4,5 +4,5 @@ const { launch, loadRoutes, setTemplateEngine, useJsonBody,static } = new App();
 launch(); // start server
 useJsonBody();
 setTemplateEngine().ejs(); // set template
-static('public')
+static('public') // add public static file
 loadRoutes("routes"); // load all file routes
