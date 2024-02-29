@@ -23,6 +23,6 @@
   "homepage": "https://github.com/m-mdy-m/NexTweet#readme",
   "dependencies": {
     "nodemon": "^3.1.0",
-    "xprz": "^1.0.5"
+    "xprz": "^1.0.6"
   }
 }
