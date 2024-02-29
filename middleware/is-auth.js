@@ -1,9 +1,6 @@
-exports.ensureAuthenticated = (statuscode = 401, redirect = "/signup") => {
-  return (req, res, nxt) => {
-    if (req.session && req.session.user) {
-      nxt();
-    } else {
-      res.status(statuscode).redirect(redirect);
-    }
-  };
-};
+exports.ensureAuthenticated  = (req,res,nxt,statuscode=401, redirect = '/signup',)=>{
+  if (req.session && req.session.user) {
+    return nxt()
+  }
+  return res.status(statuscode).redirect(redirect);
+}
