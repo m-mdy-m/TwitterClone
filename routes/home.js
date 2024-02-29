@@ -3,8 +3,8 @@ const Xprz = require("xprz");
 const { Route } = new Xprz();
 const route = new Route();
 route.setRoute("/").get(() => {
-  const { send } = route.res();
-  send("hi");
+  const { render, status } = route.res();
+  status(200).render("home");
 });
 
 module.exports = route;
