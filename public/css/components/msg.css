@@ -1,0 +1,17 @@
+.msg-error {
+  text-transform: capitalize;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  color: #ccd3ca;
+  padding: 4px;
+}
+.msg-error-server {
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  background-color: #fc6736;
+  border-radius: 8px;
+}

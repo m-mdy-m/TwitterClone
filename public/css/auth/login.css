@@ -1,3 +1,11 @@
+.m-4 {
+  margin: 1rem
+}
+
+.mt-4 {
+  margin-top: 1rem
+}
+
 .flex {
   display: flex
 }
@@ -14,8 +22,28 @@
   height: 100vh
 }
 
+.h-8 {
+  height: 2rem
+}
+
 .w-52 {
   width: 13rem
+}
+
+.w-full {
+  width: 100%
+}
+
+.w-12 {
+  width: 3rem
+}
+
+.w-8 {
+  width: 2rem
+}
+
+.w-1\/2 {
+  width: 50%
 }
 
 .flex-col {
