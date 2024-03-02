@@ -69,11 +69,17 @@ formGroup.forEach((forms) => {
     handleErrorMessage(name, errorMessage, input, errorMessageElement);
   });
 });
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (validationCount >= 6) {
-    axios.post(mainUrl+"/signup",{
-        
-    })
+    try {
+      const formData = new FormData(form); // Collect form data
+      const requestData = Object.fromEntries(formData.entries()); // Convert FormData to object
+      const response = await axios.post(mainUrl + "/signup", requestData);
+      console.log("response =>", response.data);
+    } catch (error) {
+      // Handle error
+      console.error("Error:", error);
+    }
   }
 });
