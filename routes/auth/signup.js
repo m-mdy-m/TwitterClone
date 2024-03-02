@@ -30,6 +30,8 @@ route
       const password = isPassword(body.password);
       const passwordConf = body.password === body.passwordConf;
       if (username && email && password && passwordConf) {
+      }else{
+        
       }
     } catch (error) {
       status(400).json({

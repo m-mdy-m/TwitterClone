@@ -71,9 +71,6 @@ formGroup.forEach((forms) => {
 });
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const msgErrorServer = document.querySelector(".msg-error-fetch");
-  msgErrorServer.style.background = "#fc6736";
-  msgErrorServer.innerHTML = ""; // Clear previous error messages
   if (validationCount >= 4) {
     try {
       const formData = new FormData(form); // Collect form data
@@ -83,8 +80,11 @@ form.addEventListener("submit", async (e) => {
       // Optionally, reset the form after successful submission
       form.reset();
     } catch (error) {
-      const h1 = document.createElement("h1");
+      const msgErrorServer = document.querySelector(".msg-error-fetch");
+      msgErrorServer.style.background = "#fc6736";
+      msgErrorServer.innerHTML = ""; // Clear previous error messages
       if (error) {
+        const h1 = document.createElement("h1");
         msgErrorServer.appendChild(h1);
       }
       // Handle error
