@@ -1,11 +1,18 @@
 <%- include("../includes/base.ejs") %>
-<link rel="stylesheet" href="/css/auth/login.css">
+<link rel="stylesheet" href="/css/auth/login.css" />
 <%- include("../includes/header.ejs") %>
-    <h1 class="text-3xl">login</h1>
-    <form action="/login" method="post" class="bg-red-400 flex justify-center flex-col">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
-        <input type="email" name="email" placeholder="email">
-    </form>
-    <a href="/signup">Need an account? register here</a>
+<div
+  class="flex justify-center flex-col w-full bg-[#59D5E0] p-4 h-full [&>*]:text-center">
+  <h1 class="text-3xl">login</h1>
+  <form
+    action="/login"
+    method="post"
+    class="flex justify-center items-center flex-col [&>*]:m-2 [&>*]:p-2 [&>*]:rounded-md"
+  >
+    <input type="text" name="username" placeholder="username" />
+    <input type="password" name="password" placeholder="password" />
+    <input type="email" name="email" placeholder="email" />
+  </form>
+  <a href="/signup">Need an account? register here</a>
+</div>
 <%- include("../includes/end.ejs") %>
