@@ -50,6 +50,9 @@ formGroup.forEach((forms) => {
           if (!msg) {
             msg = "password do not match";
           }
+          if (isValid && msg) {
+            msg = null;
+          }
       }
     } catch (error) {
       msg = error.message;
