@@ -1,3 +1,4 @@
+import axios from 'axios';
 const formGroup = document.querySelectorAll(".form-group");
 const form = document.getElementById("registerForm");
 const msgErrors = document.querySelectorAll(".msg-error");
@@ -72,8 +73,7 @@ formGroup.forEach((forms) => {
 });
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (count >= 4) {
-    console.log("co =>", count);
+  if (count >= 8) {
+    axios.post()
   }
-  console.log("count +>", count);
 });
