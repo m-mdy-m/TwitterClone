@@ -1,3 +1,4 @@
+import axios from 'axios';
 const mainUrl = "http://localhost:3000/";
 const formGroup = document.querySelectorAll(".form-group");
 const form = document.getElementById("registerForm");
@@ -69,12 +70,11 @@ formGroup.forEach((forms) => {
     handleErrorMessage(name, errorMessage, input, errorMessageElement);
   });
 });
-// form.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   if (validationCount >= 8) {
-//     // Add logic to retrieve form data and send it using axios.post
-//     axios.post(mainUrl + "/signup", {
-//       // Add form data properties here
-//     });
-//   }
-// });
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (validationCount >= 6) {
+    axios.post(mainUrl+"/signup",{
+        
+    })
+  }
+});
