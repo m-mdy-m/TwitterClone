@@ -71,9 +71,9 @@ formGroup.forEach((forms) => {
 });
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const msgErrorServer = document.querySelector(".msg-error-server");
-  const h1 = document.createElement("h1");
-  msgErrorServer.appendChild(h1);
+  const msgErrorServer = document.querySelector(".msg-error-fetch");
+  msgErrorServer.style.background = "#fc6736";
+  msgErrorServer.innerHTML = ""; // Clear previous error messages
   if (validationCount >= 4) {
     try {
       const formData = new FormData(form); // Collect form data
@@ -83,6 +83,7 @@ form.addEventListener("submit", async (e) => {
       // Optionally, reset the form after successful submission
       form.reset();
     } catch (error) {
+      const h1 = document.createElement("h1");
       // Handle error
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -105,6 +106,7 @@ form.addEventListener("submit", async (e) => {
         h1.innerHTML =
           "Error occurred during request setup. Please try again later.";
       }
+      msgErrorServer.appendChild(h1);
     }
   }
 });

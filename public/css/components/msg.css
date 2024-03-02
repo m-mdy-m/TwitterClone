@@ -6,13 +6,12 @@
   color: #ccd3ca;
   padding: 4px;
 }
-.msg-error-server {
+.msg-error-fetch {
   position: absolute;
   top: 3rem;
   left: 50%;
   transform: translate(-50%, -50%);
   margin: auto;
-  background-color: #fc6736;
   border-radius: 8px;
   text-align: center;
   font-family: sans-serif;
