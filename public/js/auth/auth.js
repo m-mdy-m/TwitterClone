@@ -71,7 +71,9 @@ formGroup.forEach((forms) => {
 });
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  console.log("validationCount=>", validationCount);
+  const msgErrorServer = document.querySelector(".msg-error-server");
+  const h1 = document.createElement("h1");
+  msgErrorServer.appendChild(h1);
   if (validationCount >= 4) {
     try {
       const formData = new FormData(form); // Collect form data
@@ -85,21 +87,24 @@ form.addEventListener("submit", async (e) => {
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        console.error("Server responded with error status:", error.response.status);
-        console.error("Error data:", error.response.data);
+        h1.innerHTML =
+          ("Server responded with error status:", error.response.status);
+        h1.innerHTML = ("Error data:", error.response.data);
         // Display error message to the user
-        alert("Server error occurred. Please try again later.");
+        h1.innerHTML = "Server error occurred. Please try again later.";
       } else if (error.request) {
         // The request was made but no response was received
-        console.error("No response received from server:", error.request);
+        h1.innerHTML = ("No response received from server:", error.request);
         // Display error message to the user
-        alert("No response received from server. Please check your internet connection.");
+        h1.innerHTML =
+          "No response received from server. Please check your internet connection.";
       } else {
         // Something happened in setting up the request that triggered an error
-        console.error("Error occurred during request setup:", error.message);
+        h1.innerHTML = ("Error occurred during request setup:", error.message);
         // Display error message to the user
-        alert("Error occurred during request setup. Please try again later.");
+        h1.innerHTML =
+          "Error occurred during request setup. Please try again later.";
       }
     }
-    }
+  }
 });
