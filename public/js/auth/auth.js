@@ -71,15 +71,15 @@ formGroup.forEach((forms) => {
 });
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  console.log('validationCount=>',validationCount);
+  console.log("validationCount=>", validationCount);
   if (validationCount >= 4) {
     try {
       const formData = new FormData(form); // Collect form data
       const requestData = Object.fromEntries(formData.entries()); // Convert FormData to object
-      console.log('requestData =>',requestData);
       const response = await axios.post(mainUrl + "/signup", requestData);
-      console.log("response =>", response);
       console.log("response =>", response.data);
+      // Optionally, reset the form after successful submission
+      form.reset();
     } catch (error) {
       // Handle error
       console.error("Error:", error);
