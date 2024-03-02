@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon ./app.js",
-    "css" : "npx tailwindcss -i ./public/css/main.css -o ./public/css/auth/login.css --watch"
+    "css": "npx tailwindcss -i ./public/css/main.css -o ./public/css/auth/login.css --watch"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   "dependencies": {
     "ejs": "^3.1.9",
     "nodemon": "^3.1.0",
+    "vfyjs": "^1.1.9",
     "xprz": "^1.0.7"
   },
   "devDependencies": {
