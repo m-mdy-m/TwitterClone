@@ -1,4 +1,3 @@
-import axios from 'axios';
 const mainUrl = "http://localhost:3000/";
 const formGroup = document.querySelectorAll(".form-group");
 const form = document.getElementById("registerForm");
