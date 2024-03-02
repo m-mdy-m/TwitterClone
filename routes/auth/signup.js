@@ -1,5 +1,12 @@
 const Xprz = require("xprz");
 const { Route } = new Xprz();
+const {
+  isPassword,
+  isEmail,
+  isUsername,
+  trimValue,
+  inputValidations,
+} = require("vfyjs");
 const route = new Route();
 route
   .setRoute("/signup")
@@ -11,7 +18,17 @@ route
   })
   .post(() => {
     const { getBody } = route.req();
+    const { status, json } = route.res();
     const body = getBody();
-    console.log("body=>", body);
+    try {
+      const username = isUsername(body.username);
+      const email = isEmail(body.email);
+      const password = isPassword(body.password);
+      const passwordConf = body.password === body.passwordConf;
+      if (username && email && password && passwordConf) {
+      }
+    } catch (error) {
+      status(400).json({ error: error.message });
+    }
   });
 module.exports = route;
