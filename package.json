@@ -4,7 +4,8 @@
   "description": "NexTweet redefines social networking with its open-source platform, empowering users with enhanced features, seamless interaction, and a vibrant community. Join the evolution of microblogging and experience the next frontier of connected conversations! 🌟🚀",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./app.js"
+    "start": "nodemon ./app.js",
+    "css" : "npx tailwindcss -i ./public/css/main.css -o ./public/css/auth/login.css --watch"
   },
   "repository": {
     "type": "git",
