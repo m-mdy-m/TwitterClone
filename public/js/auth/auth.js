@@ -26,7 +26,7 @@ function handleErrorMessage(name, msg, input, i) {
 
 formGroup.forEach((forms) => {
   const input = forms.querySelector("input");
-
+  const i = forms.querySelector("i");
   input.addEventListener("input", () => {
     let name = input.name,
       isValid,
@@ -54,5 +54,6 @@ formGroup.forEach((forms) => {
     } catch (error) {
       msg = error.message;
     }
+    handleErrorMessage(name, msg, input, i);
   });
 });
