@@ -14,6 +14,9 @@ function handleErrorMessage(name, msg, input, errorMessageElement) {
   const setBackgroundAndMessage = (color, message) => {
     input.style.backgroundColor = color;
     errorMessageElement.innerHTML = message;
+    if (!message) {
+      errorMessageElement.style.background = "transparent";
+    }
   };
   switch (name) {
     case "username":
