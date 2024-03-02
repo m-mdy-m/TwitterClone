@@ -27,12 +27,14 @@ function handleErrorMessage(name, msg, input, i) {
 formGroup.forEach((forms) => {
   const input = forms.querySelector("input");
   const i = forms.querySelector("i");
+  i.style.background = "transparent";
   input.addEventListener("input", () => {
     let name = input.name,
       isValid,
-      msg;
+      msg = null;
 
     try {
+      i.style.background = "#ff004ca1";
       switch (name) {
         case "username":
           isValid = vfyjs.isUsername(input);
