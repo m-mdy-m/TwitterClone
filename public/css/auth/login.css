@@ -44,6 +44,21 @@
   background-color: rgb(248 113 113 / var(--tw-bg-opacity))
 }
 
+.bg-\[\#0099ff\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 153 255 / var(--tw-bg-opacity))
+}
+
+.bg-\[\#00a2ff\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 162 255 / var(--tw-bg-opacity))
+}
+
+.bg-\[\#41b9ff\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(65 185 255 / var(--tw-bg-opacity))
+}
+
 .p-4 {
   padding: 1rem
 }
@@ -63,6 +78,11 @@
   color: rgb(0 153 255 / var(--tw-text-opacity))
 }
 
+.text-\[\#4ab4fa\] {
+  --tw-text-opacity: 1;
+  color: rgb(74 180 250 / var(--tw-text-opacity))
+}
+
 .\[\&\>\*\]\:m-2>* {
   margin: 0.5rem
 }
@@ -77,4 +97,8 @@
 
 .\[\&\>\*\]\:text-center>* {
   text-align: center
+}
+
+.\[\&\>\*\]\:capitalize>* {
+  text-transform: capitalize
 }

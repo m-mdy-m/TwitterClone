@@ -1,0 +1,8 @@
+.input-form {
+  margin: 8px;
+  padding: 4px;
+  border-radius: 8px;
+  text-transform: capitalize;
+  border: none;
+  outline: none;
+}
