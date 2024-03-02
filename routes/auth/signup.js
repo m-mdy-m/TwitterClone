@@ -14,10 +14,12 @@ route
     const { status } = route.res();
     status(200).render("auth/signup.ejs", {
       Title: "signup",
-      username: "",
-      email: "",
-      password: "",
-      passwordConf: "",
+      oldValue: {
+        username: "",
+        email: "",
+        password: "",
+        passwordConf: "",
+      },
     });
   })
   .post(() => {
@@ -30,7 +32,7 @@ route
       const password = isPassword(body.password);
       const passwordConf = body.password === body.passwordConf;
       if (username && email && password && passwordConf) {
-      }else{
+      } else {
         
       }
     } catch (error) {

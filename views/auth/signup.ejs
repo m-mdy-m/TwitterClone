@@ -6,19 +6,19 @@
     <form id="registerForm" action="/signup" method="post" class="flex-col flex justify-center items-center bg-slate-300 p-4 rounded-lg">
         <h1 class="text-3xl text-center">Register</h1>
         <div class=" form-group flex justify-center flex-col items-center">
-          <input type="text" name="username" placeholder="username" class="input-form" value=<%= username  %> />
+          <input type="text" name="username" placeholder="username" class="input-form" value=<%-  oldValue.username %> />
           <i class="msg-error"></i>
         </div>
         <div class=" form-group flex justify-center flex-col items-center">
-          <input type="email" name="email" placeholder="email" class="input-form" value=<%= email  %> />
+          <input type="email" name="email" placeholder="email" class="input-form" value=<%-  oldValue.email  %> />
           <i class="msg-error"></i>
         </div>
         <div class=" form-group flex justify-center flex-col items-center">
-          <input id="password" type="password" name="password" placeholder="password"  value=<%= password  %>  class="input-form"/>
+          <input id="password" type="password" name="password" placeholder="password"  value=<%-  oldValue.password %>  class="input-form"/>
           <i class="msg-error"></i>
         </div>
         <div class=" form-group flex justify-center flex-col items-center">
-          <input id="ConfPassword" type="password" name="passwordConf" placeholder="Confirm Password" value=<%= passwordConf  %>  class="input-form"/>
+          <input id="ConfPassword" type="password" name="passwordConf" placeholder="Confirm Password" value=<%-  oldValue.passwordConf  %>  class="input-form"/>
           <i class="msg-error"></i>
         </div>
         <button type="submit" class="w-52 h-12 bg-[#41b9ff]">signup</button>

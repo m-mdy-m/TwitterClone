@@ -83,8 +83,8 @@ form.addEventListener("submit", async (e) => {
       const msgErrorServer = document.querySelector(".msg-error-fetch");
       msgErrorServer.style.background = "#fc6736";
       msgErrorServer.innerHTML = ""; // Clear previous error messages
+      const h1 = document.createElement("h1");
       if (error) {
-        const h1 = document.createElement("h1");
         msgErrorServer.appendChild(h1);
       }
       // Handle error
