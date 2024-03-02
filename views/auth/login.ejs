@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="/css/auth/login.css" />
 <%- include("../includes/header.ejs") %>
 <div
-  class="flex justify-center flex-col w-full bg-[#59D5E0] p-4 h-full [&>*]:text-center">
+  class="flex justify-center flex-col w-full  p-4 h-full [&>*]:text-center"
+>
   <h1 class="text-3xl">login</h1>
   <form
     action="/login"
@@ -12,7 +13,10 @@
     <input type="text" name="username" placeholder="username" />
     <input type="password" name="password" placeholder="password" />
     <input type="email" name="email" placeholder="email" />
+    <button type="submit" class="w-52 h-12 bg-red-400">login</button>
   </form>
-  <a href="/signup">Need an account? register here</a>
+  <p class="text-xl text-[#0099ff]">
+    Need an account? <a href="/signup">register here</a>
+  </p>
 </div>
 <%- include("../includes/end.ejs") %>

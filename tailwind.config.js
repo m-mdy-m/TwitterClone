@@ -3,6 +3,9 @@ module.exports = {
   content: ["./views/**/*.ejs"],
   theme: {
     extend: {
+      backgroundColor:{
+        body:"#0099ff"
+      },
       container: {
         center: true,
       },
