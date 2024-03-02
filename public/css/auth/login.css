@@ -1,3 +1,8 @@
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem
+}
+
 .flex {
   display: flex
 }
@@ -34,6 +39,10 @@
   justify-content: center
 }
 
+.rounded-lg {
+  border-radius: 0.5rem
+}
+
 .bg-body {
   --tw-bg-opacity: 1;
   background-color: rgb(0 153 255 / var(--tw-bg-opacity))
@@ -59,8 +68,22 @@
   background-color: rgb(65 185 255 / var(--tw-bg-opacity))
 }
 
+.bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity))
+}
+
 .p-4 {
   padding: 1rem
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem
+}
+
+.text-center {
+  text-align: center
 }
 
 .text-3xl {
