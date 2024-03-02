@@ -1,7 +1,8 @@
 <%- include("../includes/base.ejs") %>
+<link rel="stylesheet" href="/css/auth/login.css">
 <%- include("../includes/header.ejs") %>
     <h1>login</h1>
-    <form action="/login" method="post">
+    <form action="/login" method="post" class="bg-red-400 flex justify-center">
         <input type="text" name="username" placeholder="username">
         <input type="password" name="password" placeholder="password">
         <input type="email" name="email" placeholder="email">
