@@ -78,12 +78,13 @@ form.addEventListener("submit", async (e) => {
     try {
       const formData = new FormData(form); // Collect form data
       const requestData = Object.fromEntries(formData.entries()); // Convert FormData to object
-      const response = await axios.post(mainUrl + "/signup", requestData);
+      const response = await axios.post(mainUrl + "signup", requestData);
       console.log("response =>", response.data);
       // Optionally, reset the form after successful submission
       form.reset();
     } catch (error) {
       const h1 = document.createElement("h1");
+      msgErrorServer.appendChild(h1);
       // Handle error
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -106,7 +107,6 @@ form.addEventListener("submit", async (e) => {
         h1.innerHTML =
           "Error occurred during request setup. Please try again later.";
       }
-      msgErrorServer.appendChild(h1);
     }
   }
 });
