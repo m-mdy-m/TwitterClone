@@ -14,6 +14,10 @@ route
     const { status } = route.res();
     status(200).render("auth/signup.ejs", {
       Title: "signup",
+      username: "",
+      email: "",
+      password: "",
+      passwordConf: "",
     });
   })
   .post(() => {
@@ -28,7 +32,15 @@ route
       if (username && email && password && passwordConf) {
       }
     } catch (error) {
-      status(400).json({ error: error.message });
+      status(400).json({
+        error: error.message,
+        data: {
+          username: body.username,
+          email: body.email,
+          password: body.password,
+          passwordConf: body.passwordConf,
+        },
+      });
     }
   });
 module.exports = route;
