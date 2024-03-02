@@ -69,5 +69,11 @@ formGroup.forEach((forms) => {
     }
     handleErrorMessage(name, msg, input, i);
   });
-  console.log(count);
+});
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (count >= 4) {
+    console.log("co =>", count);
+  }
+  console.log("count +>", count);
 });
