@@ -1,13 +1,65 @@
-import axios from 'axios';
-const formGroup = document.querySelectorAll(".form-group");
+import axios from "axios";
+const mainUrl = "http://localhost:3000/";
 const form = document.getElementById("registerForm");
-const msgErrors = document.querySelectorAll(".msg-error");
-const valid = "#90EE90";
-const invalid = "#d04848";
-let passwordFiled;
-let count = 0;
-function isValidations(isValue) {
-  return isValue ? count++ : count--;
+const formInputs = Array.from(document.querySelectorAll(".form-group input"));
+const validColor = "#90EE90";
+const invalidColor = "#d04848";
+let passwordField;
+let validInputCount = 0;
+
+// Function to validate inputs and update error messages
+function validateInput(input, errorMessage) {
+  let isValid = true;
+  let message = null;
+
+  switch (input.name) {
+    case "username":
+      isValid = vfyjs.isUsername(input);
+      break;
+    case "email":
+      isValid = vfyjs.isEmail(input);
+      break;
+    case "password":
+      passwordField = input.value;
+      isValid = vfyjs.isPassword(input);
+      break;
+    case "passwordConf":
+      const confirmPassword = input.value;
+      isValid = confirmPassword === passwordField;
+      if (!isValid) {
+        message = "Passwords do not match";
+      }
+      break;
+  }
+
+  if (isValid) {
+    validInputCount++;
+    input.style.backgroundColor = validColor;
+    errorMessage.innerHTML = null;
+  } else {
+    input.style.backgroundColor = invalidColor;
+    errorMessage.innerHTML = message;
+  }
+}
+
+// Function to handle form submission
+function handleSubmit(event) {
+  event.preventDefault();
+  if (validInputCount >= 8) {
+    const formData = new FormData(form);
+    const userData = Object.fromEntries(formData.entries());
+
+    axios
+      .post(mainUrl + "/signup", userData)
+      .then((response) => {
+        // Handle successful form submission response
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle error during form submission
+        console.error("Error:", error);
+      });
+  }
 }
 function handleErrorMessage(name, msg, input, i) {
   const isMsg = (msg, i) => {
@@ -29,51 +81,11 @@ function handleErrorMessage(name, msg, input, i) {
       break;
   }
 }
-formGroup.forEach((forms) => {
-  const input = forms.querySelector("input");
-  const i = forms.querySelector("i");
-  i.style.background = "transparent";
+// Event listeners for form inputs
+formInputs.forEach((input) => {
+  const errorMessage = input.nextElementSibling;
   input.addEventListener("input", () => {
-    let name = input.name,
-      isValid,
-      msg = null;
-
-    try {
-      i.style.background = "#ff004ca1";
-      switch (name) {
-        case "username":
-          isValid = vfyjs.isUsername(input);
-          isValidations(isValid);
-          break;
-        case "email":
-          isValid = vfyjs.isEmail(input);
-          isValidations(isValid);
-          break;
-        case "password":
-          passwordFiled = input.value;
-          isValid = vfyjs.isPassword(input);
-          isValidations(isValid);
-          break;
-        case "passwordConf":
-          let Confirm = input.value;
-          isValid = Confirm === passwordFiled;
-          if (!msg) {
-            msg = "password do not match";
-          }
-          if (isValid && msg) {
-            msg = null;
-            count++;
-          }
-      }
-    } catch (error) {
-      msg = error.message;
-    }
-    handleErrorMessage(name, msg, input, i);
+    validateInput(input, errorMessage);
   });
 });
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (count >= 8) {
-    axios.post()
-  }
-});
+form.addEventListener("submit", handleSubmit);
