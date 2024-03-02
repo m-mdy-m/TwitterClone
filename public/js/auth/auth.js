@@ -1,4 +1,58 @@
-import { vfyjs } from "../lib/vfyjs/vfyjs.bundle";
-const password = document.getElementById("password");
-const ConfPassword = document.getElementById("ConfPassword");
-const registerForm = document.getElementById("registerForm");
+const formGroup = document.querySelectorAll(".form-group");
+const msgErrors = document.querySelectorAll(".msg-error");
+const valid = "#90EE90";
+const invalid = "#d04848";
+let passwordFiled;
+
+function handleErrorMessage(name, msg, input, i) {
+  const isMsg = (msg, i) => {
+    if (msg) {
+      input.style.backgroundColor = invalid;
+      i.innerHTML = msg;
+    } else {
+      input.style.backgroundColor = valid;
+      i.innerHTML = null;
+    }
+  };
+  switch (name) {
+    case "username":
+    case "email":
+    case "password":
+    case "passwordConf":
+      isMsg(msg, i);
+      break;
+  }
+}
+
+formGroup.forEach((forms) => {
+  const input = forms.querySelector("input");
+
+  input.addEventListener("input", () => {
+    let name = input.name,
+      isValid,
+      msg;
+
+    try {
+      switch (name) {
+        case "username":
+          isValid = vfyjs.isUsername(input);
+          break;
+        case "email":
+          isValid = vfyjs.isEmail(input);
+          break;
+        case "password":
+          passwordFiled = input.value;
+          isValid = vfyjs.isPassword(input);
+          break;
+        case "passwordConf":
+          let Confirm = input.value;
+          isValid = Confirm === passwordFiled;
+          if (!msg) {
+            msg = "password do not match";
+          }
+      }
+    } catch (error) {
+      msg = error.message;
+    }
+  });
+});
