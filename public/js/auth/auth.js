@@ -82,7 +82,24 @@ form.addEventListener("submit", async (e) => {
       form.reset();
     } catch (error) {
       // Handle error
-      console.error("Error:", error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Server responded with error status:", error.response.status);
+        console.error("Error data:", error.response.data);
+        // Display error message to the user
+        alert("Server error occurred. Please try again later.");
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("No response received from server:", error.request);
+        // Display error message to the user
+        alert("No response received from server. Please check your internet connection.");
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error("Error occurred during request setup:", error.message);
+        // Display error message to the user
+        alert("Error occurred during request setup. Please try again later.");
+      }
     }
-  }
+    }
 });
