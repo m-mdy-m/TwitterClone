@@ -4,12 +4,15 @@
 <div class="flex justify-center items-center flex-col h-full">
     <form action="/login" method="post" class="flex-col flex justify-center items-center bg-slate-300 p-4 rounded-lg">
         <h1 class="text-3xl text-center">Register</h1>
+        <input type="text" name="firstname" placeholder="firstname" class="input-form"/>
+        <input type="text" name="lastname" placeholder="lastname" class="input-form"/>
         <input type="text" name="username" placeholder="username" class="input-form"/>
-        <input type="password" name="password" placeholder="password" class="input-form"/>
         <input type="email" name="email" placeholder="email" class="input-form"/>
+        <input type="password" name="password" placeholder="password" class="input-form"/>
+        <input type="password" name="passwordConf" placeholder="Confirm Password" class="input-form"/>
         <button type="submit" class="w-52 h-12 bg-[#41b9ff]">signup</button>
         <p class="text-xl text-[#4ab4fa]">
-          Need an account? <a href="/signup">register here</a>
+          Already have an account?<a href="/login">Login here</a>
         </p>
       </form>
   </div>
