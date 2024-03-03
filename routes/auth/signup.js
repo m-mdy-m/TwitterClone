@@ -36,15 +36,6 @@ route
           password: body.password,
           passwordConf: body.passwordConf,
         });
-        // status(400).json({
-        //   error: "Validation failed Please Try Again",
-        //   data: {
-        //     username: body.username,
-        //     email: body.email,
-        //     password: body.password,
-        //     passwordConf: body.passwordConf,
-        //   },
-        // });
       }
     } catch (error) {
       // Handle other errors (e.g., database error)
