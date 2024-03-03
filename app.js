@@ -19,8 +19,7 @@ const store = connectMongoDbSession({
   uri: process.env.MONGODB_URI,
   collection: "sessions",
 });
-
-// Define options for session middleware, including session secret and store
+// // Define options for session middleware, including session secret and store
 const options = {
   secret: "ha ha ha", // Replace with a secure secret
   resave: false,

@@ -18,7 +18,6 @@ exports.getSignup = (req, res) => {
 exports.postSignup = async (req, res) => {
   const { getBody,getReq } = req;
   const request = getReq()
-  console.log('request =>',request)
   const { getJsonHandler, status } = res;
   const {created,  validationFailed, internalServerError } = getJsonHandler();
   const body = getBody();
@@ -48,11 +47,8 @@ exports.postSignup = async (req, res) => {
           email: email,
           password: hashedPassword,
         });
-        console.log('req.session 1=>',request.session);
-        request.session.user = result;
-        console.log('req.session 2=>',request.session);
-        console.log('req.session.user =>',request.session.user);
-        console.log('result=>',result);
+        request.session.user =  result;
+        await request.save()
         return created(result)
       }
     } else {
