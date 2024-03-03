@@ -16,9 +16,9 @@ exports.getSignup = (req, res) => {
   });
 };
 exports.postSignup = async (req, res) => {
-  const { getBody } = req;
+  const { getBody,req:request } = req;
   const { getJsonHandler, status } = res;
-  const {created, success, validationFailed, internalServerError } = getJsonHandler();
+  const {created,  validationFailed, internalServerError } = getJsonHandler();
   const body = getBody();
   try {
     const username = body.username;
@@ -46,7 +46,11 @@ exports.postSignup = async (req, res) => {
           email: email,
           password: hashedPassword,
         });
-        req.session.user = result;
+        console.log('req.session 1=>',request.session);
+        request.session.user = result;
+        console.log('req.session 2=>',request.session);
+        console.log('req.session.user =>',request.session.user);
+        console.log('result=>',result);
         return created(result)
       }
     } else {
@@ -59,6 +63,7 @@ exports.postSignup = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log('error=>',error.message);
     // Handle other errors (e.g., database error)
     internalServerError("An error occurred while processing your request.");
   }

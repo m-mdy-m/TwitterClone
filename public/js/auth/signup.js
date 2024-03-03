@@ -85,6 +85,7 @@ form.addEventListener("submit", async (e) => {
       // Parse JSON message and display its contents
       const message = response.data.message;
       msgSuccess.innerHTML = message; // Display JSON message
+      window.location.href = '/' // redirected
     } catch (error) {
       const msgErrorServer = document.querySelector(".msg-error-fetch");
       msgErrorServer.style.background = "#fc6736";
@@ -95,8 +96,6 @@ form.addEventListener("submit", async (e) => {
       if (error.response) {
         const errorMessage = error.response.data.error;
         const formData = error.response.data.validationErrors;
-        console.log("error.response=>", error.response);
-        console.log("formData=>", formData);
         h1.innerHTML = errorMessage;
         if (formData) {
           // Set form values based on the data received from the server
