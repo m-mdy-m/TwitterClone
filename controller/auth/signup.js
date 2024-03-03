@@ -1,4 +1,7 @@
 const { isPassword, isEmail, isUsername } = require("vfyjs");
+const Xprz = require("xprz");
+const {Package }  = new Xprz()
+const { bcryptjs} = new Package()
 const User = $read("model/User");
 exports.getSignup = (req, res) => {
   const { status } = res;
@@ -21,6 +24,7 @@ exports.postSignup = async (req, res) => {
     const username = body.username;
     const email = body.email;
     const password = body.password;
+    const hashedPassword = await bcryptjs().hash(password)
     const passwordConf = password === body.passwordConf;
     if (
       isUsername(body.username) &&
@@ -40,7 +44,7 @@ exports.postSignup = async (req, res) => {
         const result = await User.create({
           username: username,
           email: email,
-          password: password,
+          password: hashedPassword,
         });
         console.log("result =>", result);
         success("Signup successful");
