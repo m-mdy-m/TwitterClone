@@ -12,7 +12,7 @@ exports.getSignup = (req, res) => {
     },
   });
 };
-exports.postSignup = (req, res) => {
+exports.postSignup = async (req, res) => {
   const { getBody } = req;
   const { getJsonHandler } = res;
   const { success, validationFailed, internalServerError } = getJsonHandler();
@@ -23,8 +23,9 @@ exports.postSignup = (req, res) => {
     const password = body.password
     const passwordConf = password === body.passwordConf;
     if (isUsername(body.username) && isEmail(body.email) && isPassword(body.password) && passwordConf) {
-        User.findOne({username : username,email : email})
-      success("Signup successful");
+        const user = await User.findOne({username : username,email : email})
+        console.log('user =>',user);
+    //   success("Signup successful");
     } else {
       // Validation failed
       validationFailed({
