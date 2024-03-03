@@ -18,3 +18,6 @@ const options = {
 
 // Initialize session middleware with the specified options
 session(options);
+
+flash();
+csrf();

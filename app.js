@@ -10,7 +10,7 @@ useJsonBody(); // Parsing JSON request bodies
 setTemplateEngine().ejs(); // set template engine ejs
 static("public"); // Serving static files from the 'public' directory
 $read("middleware/setup");
-
-$read("utils/database"); // Loading database utility
+use($read('middleware/locals'))
 use($read('middleware/user'))
+$read("utils/database"); // Loading database utility
 loadRoutes("routes"); // Loading routes from the 'routes' directory
