@@ -11,6 +11,7 @@
         <p class="text-xl text-[#4ab4fa]">
           Need an account? <a href="/signup">register here</a>
         </p>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       </form>
   </div>
 <%- include("../includes/end.ejs") %>
