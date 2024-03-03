@@ -16,7 +16,9 @@ exports.getSignup = (req, res) => {
   });
 };
 exports.postSignup = async (req, res) => {
-  const { getBody,req:request } = req;
+  const { getBody,getReq } = req;
+  const request = getReq()
+  console.log('request =>',request)
   const { getJsonHandler, status } = res;
   const {created,  validationFailed, internalServerError } = getJsonHandler();
   const body = getBody();
