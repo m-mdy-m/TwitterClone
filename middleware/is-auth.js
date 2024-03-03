@@ -1,7 +1,6 @@
-exports.ensureAuthenticated = (req, res, nxt) => {
+exports.ensureAuthenticated = (req, res, next) => {
   if (req.session && req.session.user) {
-    console.log('nxt()=>',nxt());
-    return nxt();
+    return next();
   }
   return res.status(401).redirect("/login");
 };

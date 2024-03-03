@@ -5,10 +5,11 @@ const { SharedApp, App, Package } = new Xprz();
 const { dotenv, session, connectMongoDbSession, csrf, flash } = new Package();
 dotenv().setupDot();
 // Destructuring commonly used methods from the App instance
-const { use, launch, loadRoutes, setTemplateEngine, useJsonBody, static } =
+const { launch, loadRoutes, setTemplateEngine, useJsonBody, static } =
   new App();
 launch(); // Launching the server
 useJsonBody(); // Parsing JSON request bodies
+setTemplateEngine().ejs();
 const { getApp } = new SharedApp();
 static("public"); // Serving static files from the 'public' directory
 
@@ -26,5 +27,5 @@ const options = {
 };
 session(options);
 
-loadRoutes("routes"); // Loading routes from the 'routes' directory
 $read("utils/database"); // Loading database utility
+loadRoutes("routes"); // Loading routes from the 'routes' directory
