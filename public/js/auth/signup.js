@@ -95,12 +95,16 @@ form.addEventListener("submit", async (e) => {
       if (error.response) {
         const errorMessage = error.response.data.error;
         const formData = error.response.data.validationErrors;
+        console.log("error.response=>", error.response);
+        console.log("formData=>", formData);
         h1.innerHTML = errorMessage;
-        // Set form values based on the data received from the server
-        for (const [name, value] of Object.entries(formData)) {
-          const input = form.querySelector(`[name="${name}"]`);
-          if (input) {
-            input.value = value;
+        if (formData) {
+          // Set form values based on the data received from the server
+          for (const [name, value] of Object.entries(formData)) {
+            const input = form.querySelector(`[name="${name}"]`);
+            if (input) {
+              input.value = value;
+            }
           }
         }
       } else if (error.request) {
@@ -108,7 +112,7 @@ form.addEventListener("submit", async (e) => {
         h1.innerHTML = "No response received from server";
       } else {
         // Something happened in setting up the request that triggered an error
-        h1.innerHTML = "Error occurred during request setup"+ error.message;
+        h1.innerHTML = "Error occurred during request setup" + error.message;
       }
     }
   }
