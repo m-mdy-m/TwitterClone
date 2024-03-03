@@ -1,5 +1,5 @@
 const Xprz = require("xprz");
-const { ensureAuthenticated } = $read("middleware");
+const {ensureAuthenticated} = $read("middleware/is-auth");
 const { Route } = new Xprz();
 const route = new Route();
 route
