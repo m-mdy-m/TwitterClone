@@ -18,11 +18,12 @@ exports.postSignup = (req, res) => {
   const { success, validationFailed, internalServerError } = getJsonHandler();
   const body = getBody();
   try {
-    const username = isUsername(body.username);
-    const email = isEmail(body.email);
-    const password = isPassword(body.password);
-    const passwordConf = body.password === body.passwordConf;
-    if (username && email && password && passwordConf) {
+    const username = body.username
+    const email = body.email
+    const password = body.password
+    const passwordConf = password === body.passwordConf;
+    if (isUsername(body.username) && isEmail(body.email) && isPassword(body.password) && passwordConf) {
+        User.findOne({username : username,email : email})
       success("Signup successful");
     } else {
       // Validation failed
