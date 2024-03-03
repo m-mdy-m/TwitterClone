@@ -19,13 +19,11 @@ const store = connectMongoDbSession({
 });
 // Define options for session middleware, including session secret and store
 const options = {
-  secret: "ha ha ha", 
+  secret: "ha ha ha",
   resave: false,
   saveUninitialized: true,
   store: store,
 };
-
-// Initialize session middleware with the specified options
 session(options);
 
 loadRoutes("routes"); // Loading routes from the 'routes' directory

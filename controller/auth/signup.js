@@ -47,6 +47,7 @@ exports.postSignup = async (req, res) => {
           email: email,
           password: hashedPassword,
         });
+        console.log('result=>',result);
         request.session.user=  result
         created(result)
       }
