@@ -39,7 +39,7 @@ route
       }
     } catch (error) {
       // Handle other errors (e.g., database error)
-      internalServerError();
+      internalServerError("An error occurred while processing your request.");
     }
   });
 module.exports = route;
