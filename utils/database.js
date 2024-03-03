@@ -4,7 +4,7 @@ class Database {
     this.connect();
   }
   connect() {
-    return mongoose
+    mongoose
       .connect(process.env.MONGODB_URI)
       .then(console.log("connect to database"));
   }
