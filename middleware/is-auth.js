@@ -5,7 +5,3 @@ exports.ensureAuthenticated = (req, res, next) => {
   }
   return res.status(401).redirect("/login");
 };
-exports.test = (req,res,nxt)=>{
-  console.log('test list middleware')
-  return nxt()
-}
