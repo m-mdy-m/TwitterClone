@@ -1,9 +1,9 @@
-exports.getHome = (req,res)=>{
-    const {getReq } = req
-    const request = getReq()
-    const { status } = res;
+exports.getHome = (request,response)=>{
+    const {getReq } = request
+    const req = getReq()
+    const { status } = response;
     status(200).render("home", {
       Title: "Home",
-      user : request.user
+      user : req.user
     });
 }
