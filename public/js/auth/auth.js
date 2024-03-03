@@ -77,7 +77,6 @@ form.addEventListener("submit", async (e) => {
       const formData = new FormData(form); // Collect form data
       const requestData = Object.fromEntries(formData.entries()); // Convert FormData to object
       const response = await axios.post("/signup", requestData);
-      console.log("response =>", response.data);
       // Optionally, reset the form after successful submission
       form.reset();
       // Display success message to the user
@@ -85,7 +84,7 @@ form.addEventListener("submit", async (e) => {
       msgSuccess.style.background = "#90EE90";
       // Parse JSON message and display its contents
       const message = response.data.message;
-      msgSuccess.innerHTML = JSON.stringify(message); // Display JSON message
+      msgSuccess.innerHTML = message; // Display JSON message
     } catch (error) {
       const msgErrorServer = document.querySelector(".msg-error-fetch");
       msgErrorServer.style.background = "#fc6736";
@@ -95,7 +94,7 @@ form.addEventListener("submit", async (e) => {
       // Handle error
       if (error.response) {
         const errorMessage = error.response.data.error;
-        const formData = error.response.data.data;
+        const formData = error.response.data.validationErrors;
         h1.innerHTML = errorMessage;
         // Set form values based on the data received from the server
         for (const [name, value] of Object.entries(formData)) {

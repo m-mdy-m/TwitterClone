@@ -18,7 +18,8 @@ route
   })
   .post(() => {
     const { getBody } = route.req();
-    const { status } = route.res();
+    const { status, getJsonHandler } = route.res();
+    const { success, validationFailed } = getJsonHandler();
     const body = getBody();
     try {
       const username = isUsername(body.username);
@@ -26,22 +27,28 @@ route
       const password = isPassword(body.password);
       const passwordConf = body.password === body.passwordConf;
       if (username && email && password && passwordConf) {
-        status(200).json({ message: "Signup successful" });
+        success("Signup successful");
       } else {
         // Validation failed
-        status(400).json({
-          error: "Validation failed Please Try Again",
-          data: {
+        validationFailed({
             username: body.username,
             email: body.email,
             password: body.password,
             passwordConf: body.passwordConf,
-          },
         });
+        // status(400).json({
+        //   error: "Validation failed Please Try Again",
+        //   data: {
+        //     username: body.username,
+        //     email: body.email,
+        //     password: body.password,
+        //     passwordConf: body.passwordConf,
+        //   },
+        // });
       }
     } catch (error) {
       // Handle other errors (e.g., database error)
-    status(500).json({ error: "Internal server error" });
+      status(500).json({ error: "Internal server error" });
     }
   });
 module.exports = route;
