@@ -29,7 +29,6 @@ exports.postSignup = async (req, res) => {
       passwordConf
     ) {
       const user = await User.findOne({ username: username, email: email });
-      console.log("user=>", user);
       if (user) {
         // If user exists, send user information to the client
         status(200).json({
@@ -38,7 +37,6 @@ exports.postSignup = async (req, res) => {
         });
         return; // Exit from the function
       } else {
-        console.log('user is null')
         const result = await User.create({
           username: username,
           email: email,
