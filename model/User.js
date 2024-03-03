@@ -1,4 +1,4 @@
-const { Schema, default: mongoose } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const UserSchema = new Schema({
   username: {
     type: String,
@@ -22,4 +22,4 @@ const UserSchema = new Schema({
     default: "/assets/images/profilePic.png",
   },
 });
-module.exports = mongoose.model("User", UserSchema);
+module.exports = model("User", UserSchema);
