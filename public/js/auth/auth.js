@@ -29,6 +29,7 @@ function handleErrorMessage(name, msg, input, errorMessageElement) {
 }
 formGroup.forEach((forms) => {
   const input = forms.querySelector("input");
+  input.value = "";
   const errorMessageElement = forms.querySelector("i");
   errorMessageElement.style.background = "transparent";
   input.addEventListener("input", () => {
@@ -84,30 +85,25 @@ form.addEventListener("submit", async (e) => {
       msgErrorServer.style.background = "#fc6736";
       msgErrorServer.innerHTML = ""; // Clear previous error messages
       const h1 = document.createElement("h1");
-      if (error) {
-        msgErrorServer.appendChild(h1);
-      }
+      msgErrorServer.appendChild(h1);
       // Handle error
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        h1.innerHTML =
-          ("Server responded with error status:", error.response.status);
-        h1.innerHTML = ("Error data:", error.response.data);
-        // Display error message to the user
-        h1.innerHTML = "Server error occurred. Please try again later.";
+        const errorMessage = error.response.data.error;
+        const formData = error.response.data.data;
+        h1.innerHTML = errorMessage;
+        // Set form values based on the data received from the server
+        for (const [name, value] of Object.entries(formData)) {
+          const input = form.querySelector(`[name="${name}"]`);
+          if (input) {
+            input.value = value;
+          }
+        }
       } else if (error.request) {
         // The request was made but no response was received
-        h1.innerHTML = ("No response received from server:", error.request);
-        // Display error message to the user
-        h1.innerHTML =
-          "No response received from server. Please check your internet connection.";
+        h1.innerHTML = "No response received from server";
       } else {
         // Something happened in setting up the request that triggered an error
-        h1.innerHTML = ("Error occurred during request setup:", error.message);
-        // Display error message to the user
-        h1.innerHTML =
-          "Error occurred during request setup. Please try again later.";
+        (h1.innerHTML = "Error occurred during request setup"), error.message;
       }
     }
   }

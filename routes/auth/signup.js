@@ -1,12 +1,6 @@
 const Xprz = require("xprz");
 const { Route } = new Xprz();
-const {
-  isPassword,
-  isEmail,
-  isUsername,
-  trimValue,
-  inputValidations,
-} = require("vfyjs");
+const { isPassword, isEmail, isUsername } = require("vfyjs");
 const route = new Route();
 route
   .setRoute("/signup")
@@ -15,16 +9,16 @@ route
     status(200).render("auth/signup.ejs", {
       Title: "signup",
       oldValue: {
-        username: "",
-        email: "",
-        password: "",
-        passwordConf: "",
+        username: null,
+        email: null,
+        password: null,
+        passwordConf: null,
       },
     });
   })
   .post(() => {
     const { getBody } = route.req();
-    const { status, json } = route.res();
+    const { status } = route.res();
     const body = getBody();
     try {
       const username = isUsername(body.username);
@@ -33,7 +27,16 @@ route
       const passwordConf = body.password === body.passwordConf;
       if (username && email && password && passwordConf) {
       } else {
-        
+        // Validation failed
+        status(400).json({
+          error: "Validation failed Please Try Again",
+          data: {
+            username: body.username,
+            email: body.email,
+            password: body.password,
+            passwordConf: body.passwordConf,
+          },
+        });
       }
     } catch (error) {
       status(400).json({
