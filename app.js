@@ -12,4 +12,4 @@ setTemplateEngine().ejs(); // Setting up the template engine (using EJS in this 
 static("public"); // Serving static files from the 'public' directory
 loadRoutes("routes"); // Loading routes from the 'routes' directory
 $read("utils/database"); // Loading database utility
-
+$read("middleware/setup");
