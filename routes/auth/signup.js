@@ -18,8 +18,8 @@ route
   })
   .post(() => {
     const { getBody } = route.req();
-    const { status, getJsonHandler } = route.res();
-    const { success, validationFailed } = getJsonHandler();
+    const { getJsonHandler } = route.res();
+    const { success, validationFailed, internalServerError } = getJsonHandler();
     const body = getBody();
     try {
       const username = isUsername(body.username);
@@ -31,10 +31,10 @@ route
       } else {
         // Validation failed
         validationFailed({
-            username: body.username,
-            email: body.email,
-            password: body.password,
-            passwordConf: body.passwordConf,
+          username: body.username,
+          email: body.email,
+          password: body.password,
+          passwordConf: body.passwordConf,
         });
         // status(400).json({
         //   error: "Validation failed Please Try Again",
@@ -48,7 +48,7 @@ route
       }
     } catch (error) {
       // Handle other errors (e.g., database error)
-      status(500).json({ error: "Internal server error" });
+      internalServerError();
     }
   });
 module.exports = route;
