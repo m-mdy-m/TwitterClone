@@ -26,6 +26,7 @@ route
       const password = isPassword(body.password);
       const passwordConf = body.password === body.passwordConf;
       if (username && email && password && passwordConf) {
+        status(200).json({ message: "Signup successful" });
       } else {
         // Validation failed
         status(400).json({
@@ -39,15 +40,8 @@ route
         });
       }
     } catch (error) {
-      status(400).json({
-        error: error.message,
-        data: {
-          username: body.username,
-          email: body.email,
-          password: body.password,
-          passwordConf: body.passwordConf,
-        },
-      });
+      // Handle other errors (e.g., database error)
+    status(500).json({ error: "Internal server error" });
     }
   });
 module.exports = route;

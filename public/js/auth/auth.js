@@ -80,6 +80,12 @@ form.addEventListener("submit", async (e) => {
       console.log("response =>", response.data);
       // Optionally, reset the form after successful submission
       form.reset();
+      // Display success message to the user
+      const msgSuccess = document.querySelector(".msg-success");
+      msgSuccess.style.background = "#90EE90";
+      // Parse JSON message and display its contents
+      const message = response.data.message;
+      msgSuccess.innerHTML = JSON.stringify(message); // Display JSON message
     } catch (error) {
       const msgErrorServer = document.querySelector(".msg-error-fetch");
       msgErrorServer.style.background = "#fc6736";
