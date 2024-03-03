@@ -14,20 +14,31 @@ exports.getSignup = (req, res) => {
 };
 exports.postSignup = async (req, res) => {
   const { getBody } = req;
-  const { getJsonHandler } = res;
+  const { getJsonHandler, status } = res;
   const { success, validationFailed, internalServerError } = getJsonHandler();
   const body = getBody();
   try {
-    const username = body.username
-    const email = body.email
-    const password = body.password
+    const username = body.username;
+    const email = body.email;
+    const password = body.password;
     const passwordConf = password === body.passwordConf;
-    if (isUsername(body.username) && isEmail(body.email) && isPassword(body.password) && passwordConf) {
-        const user = await User.findOne({username : username,email : email})
-        if(user){
-          
-        }
-    //   success("Signup successful");
+    if (
+      isUsername(body.username) &&
+      isEmail(body.email) &&
+      isPassword(body.password) &&
+      passwordConf
+    ) {
+      const user = await User.findOne({ username: username, email: email });
+      if (user) {
+        // If user exists, send user information to the client
+        status(200).json({
+          success: false,
+          message: "User already exists",
+          user,
+        });
+        return; // Exit from the function
+      }
+      //   success("Signup successful");
     } else {
       // Validation failed
       validationFailed({
