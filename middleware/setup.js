@@ -18,9 +18,3 @@ const options = {
 
 // Initialize session middleware with the specified options
 session(options);
-
-// Enable CSRF protection middleware
-csrf();
-
-// Enable flash messaging middleware
-flash();
