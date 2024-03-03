@@ -11,27 +11,22 @@ launch(); // Launching the server
 useJsonBody(); // Parsing JSON request bodies
 const { getApp } = new SharedApp();
 static("public"); // Serving static files from the 'public' directory
-loadRoutes("routes"); // Loading routes from the 'routes' directory
-$read("utils/database"); // Loading database utility
 
 // Connect to MongoDB session store using the provided URI and specify the collection name
 const store = connectMongoDbSession({
   uri: process.env.MONGODB_URI,
   collection: "sessions",
 });
-// // Define options for session middleware, including session secret and store
+// Define options for session middleware, including session secret and store
 const options = {
-  secret: "ha ha ha", // Replace with a secure secret
+  secret: "ha ha ha", 
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   store: store,
 };
 
 // Initialize session middleware with the specified options
 session(options);
 
-// Enable CSRF protection middleware
-csrf();
-
-// Enable flash messaging middleware
-flash();
+loadRoutes("routes"); // Loading routes from the 'routes' directory
+$read("utils/database"); // Loading database utility

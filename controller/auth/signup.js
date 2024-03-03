@@ -47,9 +47,8 @@ exports.postSignup = async (req, res) => {
           email: email,
           password: hashedPassword,
         });
-        request.session.user =  result;
-        await request.save()
-        return created(result)
+        request.session.user=  result
+        created(result)
       }
     } else {
       // Validation failed
