@@ -24,7 +24,9 @@ exports.postSignup = async (req, res) => {
     const passwordConf = password === body.passwordConf;
     if (isUsername(body.username) && isEmail(body.email) && isPassword(body.password) && passwordConf) {
         const user = await User.findOne({username : username,email : email})
-        console.log('user =>',user);
+        if(user){
+          
+        }
     //   success("Signup successful");
     } else {
       // Validation failed
