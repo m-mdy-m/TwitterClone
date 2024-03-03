@@ -108,7 +108,7 @@ form.addEventListener("submit", async (e) => {
         h1.innerHTML = "No response received from server";
       } else {
         // Something happened in setting up the request that triggered an error
-        (h1.innerHTML = "Error occurred during request setup"), error.message;
+        h1.innerHTML = "Error occurred during request setup"+ error.message;
       }
     }
   }

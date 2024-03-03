@@ -34,7 +34,6 @@ exports.postSignup = async (req, res) => {
         status(200).json({
           success: false,
           message: "User already exists",
-          user,
         });
         return; // Exit from the function
       }
