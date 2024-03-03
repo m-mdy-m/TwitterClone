@@ -21,5 +21,5 @@ const UserSchema = new Schema({
     type: String,
     default: "/assets/images/profilePic.png",
   },
-});
+},{timestamps : true});
 module.exports = model("User", UserSchema);
