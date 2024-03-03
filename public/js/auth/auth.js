@@ -104,9 +104,8 @@ form.addEventListener("submit", async (e) => {
           }
         }
       } else if (error.request) {
-        const errorMessage = error.request.data.message
         // The request was made but no response was received
-        h1.innerHTML = errorMessage
+        h1.innerHTML = "No response received from server";
       } else {
         // Something happened in setting up the request that triggered an error
         (h1.innerHTML = "Error occurred during request setup"), error.message;
