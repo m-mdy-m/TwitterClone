@@ -7,6 +7,8 @@
   padding: 4px;
 }
 .msg-errors {
+  width: 50%;
+  height: 3rem;
   position: absolute;
   top: 3rem;
   left: 50%;
