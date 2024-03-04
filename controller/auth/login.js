@@ -15,6 +15,9 @@ exports.getLogin = (req, res) => {
     },
   });
 };
+// password  : A242sxcz@
+// username : m-mdy-mA2
+// email : mahdimamashli1383@gmail.com
 exports.postLogin = async (req, res) => {
   const { getReq, getBody } = req;
   const { getJsonHandler, status } = res;
@@ -25,10 +28,8 @@ exports.postLogin = async (req, res) => {
   const email = body.email;
   const password = body.password;
   const user = await User.findOne({ username: username, email: email });
-  console.log("user=>", user);
-  console.log("username=>", username);
-  console.log("email=>", email);
-  if (!user) {
+  const isUser = user._id.toString() === request.user._id.toString();
+  if (!isUser) {
     // If user exists, send user information to the client
     return status(200).json({
       success: false,
