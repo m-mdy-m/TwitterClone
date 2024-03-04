@@ -21,7 +21,7 @@ exports.getLogin = (req, res) => {
 exports.postLogin = async (req, res) => {
   const { getReq, getBody } = req;
   const { getJsonHandler, status } = res;
-  const {} = getJsonHandler();
+  const { created } = getJsonHandler();
   const request = getReq();
   const body = getBody();
   const username = body.username;
@@ -35,6 +35,11 @@ exports.postLogin = async (req, res) => {
       success: false,
       message: "User is no login",
     });
+  } else {
+    const result = await bcryptjs().compare(password, user.password);
+    if (result) {
+      request.session.user = user;
+      created(user);
+    }
   }
-  const hashedPassword = await bcryptjs().compare();
 };
