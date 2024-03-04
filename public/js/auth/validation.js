@@ -21,20 +21,20 @@ export async function handleSubmit(e, submitUrl) {
   }
 }
 function handleNotSuccess(data) {
-  msgElm.classList.add("msg-failedLogin");
+  msgElm.classList.add("msg-errors");
   const message = data.message;
   displayMessage(msgElm, message, "#944E63"); // Clear previous error messages
 }
 // Function to handle successful form submission
 function handleSuccess(message) {
   form.reset();
-  msgElm.classList.add("msg-success");
+  msgElm.classList.add("msg-errors");
   displayMessage(msgElm, message, "#90EE90");
   window.location.href = "/";
 }
 // Function to handle server errors
 function handleServerError(error) {
-  msgElm.classList.add("msg-success");
+  msgElm.classList.add("msg-errors");
   msgElm.innerHTML = ""; // Clear previous error messages
   let errorMessage = "An error occurred";
   if (error.response) {
