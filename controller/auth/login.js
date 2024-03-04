@@ -7,6 +7,12 @@ exports.getLogin = (req, res) => {
   const { status } = res;
   status(200).render("auth/login.ejs", {
     Title: "Login",
+    oldValue: {
+      username: null,
+      email: null,
+      password: null,
+      passwordConf: null,
+    },
   });
 };
 exports.postLogin = async (req, res) => {
@@ -17,9 +23,18 @@ exports.postLogin = async (req, res) => {
   const body = getBody();
   const username = body.username;
   const email = body.email;
-  const user = await User.findOne({ username: username, email: email });
-  if (!user) {
-  }
   const password = body.password;
+  const user = await User.findOne({ username: username, email: email });
+  console.log("user=>", user);
+  console.log("username=>", username);
+  console.log("email=>", email);
+  console.log("password=>", password);
+  if (!user) {
+    // If user exists, send user information to the client
+    return status(200).json({
+      success: false,
+      message: "User is no login",
+    });
+  }
   const hashedPassword = await bcryptjs().compare();
 };

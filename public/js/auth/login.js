@@ -1,10 +1,16 @@
-import {handleFormValidation} from './utils'
+import { handleFormValidation } from "./utils.js";
 const form = document.getElementById("registerForm");
-let validationCount = 0;
-handleFormValidation(validationCount)
+let count;
+handleFormValidation().then((count) => {
+    console.log("Validation count =>", count);
+    return count; // This line is optional, as count is already returned by the function
+  }).then((c) => {
+    count = c; // Assign count here if you need to use it outside this block
+  });
 form.addEventListener("submit", async (e) => {
+  console.log("count +>", count);
   e.preventDefault();
-  if (validationCount >= 4) {
+  if (count >= 4) {
     try {
       const formData = new FormData(form); // Collect form data
       const requestData = Object.fromEntries(formData.entries()); // Convert FormData to object
@@ -17,7 +23,7 @@ form.addEventListener("submit", async (e) => {
       // Parse JSON message and display its contents
       const message = response.data.message;
       msgSuccess.innerHTML = message; // Display JSON message
-      window.location.href = '/' // redirected
+      window.location.href = "/"; // redirected
     } catch (error) {
       const msgErrorServer = document.querySelector(".msg-error-fetch");
       msgErrorServer.style.background = "#fc6736";

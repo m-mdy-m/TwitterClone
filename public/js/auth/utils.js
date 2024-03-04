@@ -2,7 +2,8 @@ const validColor = "#90EE90";
 const invalidColor = "#d04848";
 const formGroup = document.querySelectorAll(".form-group");
 let passwordField;
-export function handleFormValidation(validationCount) {
+let validationCount = 0;
+export function handleFormValidation() {
   function incrementValidations(isValid) {
     validationCount += isValid ? 1 : -1;
   }
@@ -66,5 +67,5 @@ export function handleFormValidation(validationCount) {
       handleErrorMessage(name, errorMessage, input, errorMessageElement);
     });
   });
-  return validationCount;
+  return Promise.resolve(validationCount);
 }
