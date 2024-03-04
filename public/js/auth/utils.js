@@ -1,14 +1,22 @@
+// Constants for valid and invalid colors
 const validColor = "#90EE90";
 const invalidColor = "#d04848";
+let passwordField;
+// Select all form groups
 const formGroup = document.querySelectorAll(".form-group");
+// Initialize validation count
 export let validationCount = 0;
+// Function to validate input fields
 function validateInput(input, errorMessageElement) {
+  // Extract input name and initialize variables
   let name = input.name,
     isValid,
     errorMessage = null;
 
   try {
+    // Set background color for error message element
     errorMessageElement.style.background = "#ff004ca1";
+    // Validate input based on input name
     switch (name) {
       case "username":
         isValid = vfyjs.isUsername(input);
@@ -39,12 +47,20 @@ function validateInput(input, errorMessageElement) {
   } catch (error) {
     errorMessage = error.message;
   }
-  handleErrorMessage(name, errorMessage, input, errorMessageElement,errorMessage ? invalidColor : validColor,);
+  // Handle error message and background color
+  handleErrorMessage(
+    name,
+    errorMessage,
+    input,
+    errorMessageElement,
+    errorMessage ? invalidColor : validColor
+  );
 }
-
+// Function to increment validation count
 function incrementValidations(isValid) {
   return (validationCount += isValid ? 1 : -1);
 }
+// Function to set background color and error message
 function setBackgroundAndMessage(input, errorMessageElement, color, message) {
   input.style.backgroundColor = color;
   errorMessageElement.innerHTML = message;
@@ -52,29 +68,34 @@ function setBackgroundAndMessage(input, errorMessageElement, color, message) {
     errorMessageElement.style.background = "transparent";
   }
 }
+// Function to handle error message
 function handleErrorMessage(name, msg, input, errorMessageElement) {
   switch (name) {
     case "username":
     case "email":
     case "password":
     case "passwordConf":
-      setBackgroundAndMessage(input,errorMessageElement,msg ? invalidColor : validColor, msg);
+      setBackgroundAndMessage(
+        input,
+        errorMessageElement,
+        msg ? invalidColor : validColor,
+        msg
+      );
       break;
   }
 }
-let passwordField;
+// Handler function for input event
 function handleInputEvent(event) {
   const input = event.target;
   const errorMessageElement = input.nextElementSibling;
   errorMessageElement.style.background = "transparent";
   validateInput(input, errorMessageElement);
 }
+// Function to handle form validation
 export function handleFormValidation() {
   formGroup.forEach((forms) => {
     const input = forms.querySelector("input");
     input.value = "";
-    // const errorMessageElement = forms.querySelector("i");
-    // errorMessageElement.style.background = "transparent";
     input.addEventListener("input", handleInputEvent);
   });
 }
