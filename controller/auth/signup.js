@@ -40,7 +40,6 @@ exports.postSignup = async (req, res) => {
           success: false,
           message: "User already exists",
         });
-        ; // Exit from the function
       } else {
         const result = await User.create({
           username: username,

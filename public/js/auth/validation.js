@@ -1,6 +1,7 @@
 // Function to handle form submission
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
+const msgElm = document.getElementById('msgElm')
 handleFormValidation();
 export async function handleSubmit(e) {
   e.preventDefault();
@@ -9,23 +10,32 @@ export async function handleSubmit(e) {
       const formData = new FormData(form);
       const requestData = Object.fromEntries(formData.entries());
       const response = await axios.post("/login", requestData);
-      handleSuccess(response.data.message);
+      console.log('response=>',response.data);
+      if (response.data.success) {
+        handleSuccess(response.data.message);
+      }else{
+        handleNotSuccess(response.data)
+      }
     } catch (error) {
       handleServerError(error);
     }
   }
 }
-
+function handleNotSuccess(data){
+  const failedLogin = msgElm.classList.add('msg-failedLogin')
+  const message = data.message
+  displayMessage(failedLogin, message, "#944E63");// Clear previous error messages
+}
 // Function to handle successful form submission
 function handleSuccess(message) {
   form.reset();
-  const msgSuccess = document.querySelector(".msg-success");
+  const msgSuccess= msgElm.classList.add('msg-success')
   displayMessage(msgSuccess, message, "#90EE90");
   window.location.href = "/";
 }
 // Function to handle server errors
 function handleServerError(error) {
-  const msgErrorServer = document.querySelector(".msg-error-fetch");
+  const msgErrorServer = msgElm.classList.add('msg-success')
   msgErrorServer.innerHTML = ""; // Clear previous error messages
   let errorMessage = "An error occurred";
   if (error.response) {

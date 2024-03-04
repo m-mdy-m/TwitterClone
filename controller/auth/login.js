@@ -29,7 +29,7 @@ exports.postLogin = async (req, res) => {
     // If user exists, send user information to the client
     return status(200).json({
       success: false,
-      message: "User is no login",
+      message: "User is no signup",
     });
   }
   const hashedPassword = await bcryptjs().compare();
