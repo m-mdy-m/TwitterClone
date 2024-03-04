@@ -1,9 +1,7 @@
 import { handleFormValidation } from "./utils.js";
 const form = document.getElementById("registerForm");
 let count;
-handleFormValidation().then((count) => {
-    console.log('Validation count =>', count);
-  });
+handleFormValidation();
 form.addEventListener("submit", async (e) => {
   console.log("count +>", count);
   e.preventDefault();

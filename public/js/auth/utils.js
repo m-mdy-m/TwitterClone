@@ -1,35 +1,35 @@
 const validColor = "#90EE90";
 const invalidColor = "#d04848";
 const formGroup = document.querySelectorAll(".form-group");
-let passwordField;
 let validationCount = 0;
-export function handleFormValidation() {
-  function incrementValidations(isValid) {
-    return (validationCount += isValid ? 1 : -1);
-  }
-  function handleErrorMessage(name, msg, input, errorMessageElement) {
-    const setBackgroundAndMessage = (color, message) => {
-      input.style.backgroundColor = color;
-      errorMessageElement.innerHTML = message;
-      if (!message) {
-        errorMessageElement.style.background = "transparent";
-      }
-    };
-    switch (name) {
-      case "username":
-      case "email":
-      case "password":
-      case "passwordConf":
-        setBackgroundAndMessage(msg ? invalidColor : validColor, msg);
-        break;
+function incrementValidations(isValid) {
+  return (validationCount += isValid ? 1 : -1);
+}
+function handleErrorMessage(name, msg, input, errorMessageElement) {
+  const setBackgroundAndMessage = (color, message) => {
+    input.style.backgroundColor = color;
+    errorMessageElement.innerHTML = message;
+    if (!message) {
+      errorMessageElement.style.background = "transparent";
     }
+  };
+  switch (name) {
+    case "username":
+    case "email":
+    case "password":
+    case "passwordConf":
+      setBackgroundAndMessage(msg ? invalidColor : validColor, msg);
+      break;
   }
+}
+let passwordField;
+export function handleFormValidation() {
   formGroup.forEach((forms) => {
     const input = forms.querySelector("input");
     input.value = "";
     const errorMessageElement = forms.querySelector("i");
     errorMessageElement.style.background = "transparent";
-    input.addEventListener("input", () => {
+    return input.addEventListener("input", () => {
       let name = input.name,
         isValid,
         errorMessage = null;
@@ -65,7 +65,7 @@ export function handleFormValidation() {
         errorMessage = error.message;
       }
       handleErrorMessage(name, errorMessage, input, errorMessageElement);
-      console.log("validationCount=>", validationCount);
+      console.log("validationCount =>", validationCount);
     });
   });
 }
