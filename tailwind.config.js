@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor:{
-        body:"#0099ff"
+        body:"#000000"
       },
       container: {
         center: true,
