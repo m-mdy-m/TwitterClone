@@ -2,10 +2,7 @@ import { handleFormValidation } from "./utils.js";
 const form = document.getElementById("registerForm");
 let count;
 handleFormValidation().then((count) => {
-    console.log("Validation count =>", count);
-    return count;
-  }).then((c) => {
-    count = c; 
+    console.log('Validation count =>', count);
   });
 form.addEventListener("submit", async (e) => {
   console.log("count +>", count);

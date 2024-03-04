@@ -65,7 +65,7 @@ export function handleFormValidation() {
         errorMessage = error.message;
       }
       handleErrorMessage(name, errorMessage, input, errorMessageElement);
-      return Promise.resolve(validationCount);
+      console.log("validationCount=>", validationCount);
     });
   });
 }
