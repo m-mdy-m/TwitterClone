@@ -39,8 +39,7 @@ function validateInput(input, errorMessageElement) {
   } catch (error) {
     errorMessage = error.message;
   }
-  setBackgroundAndMessage(input,errorMessageElement,)
-  // handleErrorMessage(name, errorMessage, input, errorMessageElement,errorMessage ? invalidColor : validColor,);
+  handleErrorMessage(name, errorMessage, input, errorMessageElement,errorMessage ? invalidColor : validColor,);
 }
 
 function incrementValidations(isValid) {
@@ -53,16 +52,16 @@ function setBackgroundAndMessage(input, errorMessageElement, color, message) {
     errorMessageElement.style.background = "transparent";
   }
 }
-// function handleErrorMessage(name, msg, input, errorMessageElement) {
-//   switch (name) {
-//     case "username":
-//     case "email":
-//     case "password":
-//     case "passwordConf":
-//       setBackgroundAndMessage(input,errorMessageElement,msg ? invalidColor : validColor, msg);
-//       break;
-//   }
-// }
+function handleErrorMessage(name, msg, input, errorMessageElement) {
+  switch (name) {
+    case "username":
+    case "email":
+    case "password":
+    case "passwordConf":
+      setBackgroundAndMessage(input,errorMessageElement,msg ? invalidColor : validColor, msg);
+      break;
+  }
+}
 let passwordField;
 function handleInputEvent(event) {
   const input = event.target;
