@@ -4,12 +4,9 @@ const formGroup = document.querySelectorAll(".form-group");
 let passwordField;
 let validationCount = 0;
 export function handleFormValidation() {
-  console.log("validationCount 2=>", validationCount);
   function incrementValidations(isValid) {
-    validationCount += isValid ? 1 : -1;
-    console.log("validationCount 1=>", validationCount);
+    return (validationCount += isValid ? 1 : -1);
   }
-  console.log("validationCount 3=>", validationCount);
   function handleErrorMessage(name, msg, input, errorMessageElement) {
     const setBackgroundAndMessage = (color, message) => {
       input.style.backgroundColor = color;
@@ -68,7 +65,7 @@ export function handleFormValidation() {
         errorMessage = error.message;
       }
       handleErrorMessage(name, errorMessage, input, errorMessageElement);
+      return Promise.resolve(validationCount);
     });
   });
-  return Promise.resolve(validationCount);
 }
