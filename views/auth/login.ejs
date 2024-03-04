@@ -1,12 +1,23 @@
 <%- include("../includes/base.ejs") %>
 <link rel="stylesheet" href="/css/auth/login.css" />
 <%- include("../includes/header.ejs") %>
+<div class="msg-error-fetch h-12 w-1/2"></div>
+<div class="msg-success h-12 w-1/2"></div>
 <div class="flex justify-center items-center flex-col h-full">
-    <form action="/login" method="post" class="flex-col flex justify-center items-center bg-slate-300 p-4 rounded-lg">
+    <form id="registerForm" action="/login" method="post" class="flex-col flex justify-center items-center bg-slate-300 p-4 rounded-lg">
         <h1 class="text-3xl text-center">login</h1>
-        <input type="text" name="logUsername" placeholder="username" class="input-form"/>
-        <input type="password" name="logPassword" placeholder="password" class="input-form"/>
-        <input type="email" name="logEmail" placeholder="email" class="input-form"/>
+        <div class=" form-group flex justify-center flex-col items-center">
+          <input type="text" name="username" placeholder="username" class="input-form" value=<%-oldValue.username%>/>
+          <i class="msg-error"></i>
+        </div>
+        <div class=" form-group flex justify-center flex-col items-center">
+          <input type="email" name="email" placeholder="email" class="input-form" value=<%-oldValue.email%>/>
+          <i class="msg-error"></i>
+        </div>
+        <div class=" form-group flex justify-center flex-col items-center">
+          <input id="password" type="password" name="password" placeholder="password" class="input-form" value=<%-oldValue.password%>/>
+          <i class="msg-error"></i>
+        </div>
         <button type="submit" class="w-52 h-12 bg-[#41b9ff]">login</button>
         <p class="text-xl text-[#4ab4fa]">
           Need an account? <a href="/signup">register here</a>
