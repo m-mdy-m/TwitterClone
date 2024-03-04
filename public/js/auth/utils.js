@@ -4,9 +4,12 @@ const formGroup = document.querySelectorAll(".form-group");
 let passwordField;
 let validationCount = 0;
 export function handleFormValidation() {
+  console.log("validationCount 2=>", validationCount);
   function incrementValidations(isValid) {
     validationCount += isValid ? 1 : -1;
+    console.log("validationCount 1=>", validationCount);
   }
+  console.log("validationCount 3=>", validationCount);
   function handleErrorMessage(name, msg, input, errorMessageElement) {
     const setBackgroundAndMessage = (color, message) => {
       input.style.backgroundColor = color;

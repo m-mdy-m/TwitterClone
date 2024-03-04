@@ -3,9 +3,9 @@ const form = document.getElementById("registerForm");
 let count;
 handleFormValidation().then((count) => {
     console.log("Validation count =>", count);
-    return count; // This line is optional, as count is already returned by the function
+    return count;
   }).then((c) => {
-    count = c; // Assign count here if you need to use it outside this block
+    count = c; 
   });
 form.addEventListener("submit", async (e) => {
   console.log("count +>", count);
