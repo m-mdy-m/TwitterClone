@@ -25,11 +25,14 @@ exports.postLogin = async (req, res) => {
   const email = body.email;
   const password = body.password;
   const user = await User.findOne({ username: username, email: email });
+  console.log("user=>", user);
+  console.log("username=>", username);
+  console.log("email=>", email);
   if (!user) {
     // If user exists, send user information to the client
     return status(200).json({
       success: false,
-      message: "User is no signup",
+      message: "User is no login",
     });
   }
   const hashedPassword = await bcryptjs().compare();
