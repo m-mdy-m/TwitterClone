@@ -10,7 +10,6 @@ export async function handleSubmit(e, submitUrl) {
       const formData = new FormData(form);
       const requestData = Object.fromEntries(formData.entries());
       const response = await axios.post(submitUrl, requestData);
-      console.log("response=>", response.data);
       if (response.data.success) {
         handleSuccess(response.data.message);
       } else {
