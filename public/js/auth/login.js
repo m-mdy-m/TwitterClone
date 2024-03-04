@@ -1,11 +1,9 @@
-import { handleFormValidation } from "./utils.js";
+import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
-let count;
 handleFormValidation();
 form.addEventListener("submit", async (e) => {
-  console.log("count +>", count);
   e.preventDefault();
-  if (count >= 4) {
+  if (validationCount >= 4) {
     try {
       const formData = new FormData(form); // Collect form data
       const requestData = Object.fromEntries(formData.entries()); // Convert FormData to object

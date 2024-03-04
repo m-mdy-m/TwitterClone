@@ -1,7 +1,7 @@
 const validColor = "#90EE90";
 const invalidColor = "#d04848";
 const formGroup = document.querySelectorAll(".form-group");
-let validationCount = 0;
+export let validationCount = 0;
 function incrementValidations(isValid) {
   return (validationCount += isValid ? 1 : -1);
 }
@@ -65,7 +65,6 @@ export function handleFormValidation() {
         errorMessage = error.message;
       }
       handleErrorMessage(name, errorMessage, input, errorMessageElement);
-      console.log("validationCount =>", validationCount);
     });
   });
 }
