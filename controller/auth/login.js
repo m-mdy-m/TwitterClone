@@ -15,9 +15,6 @@ exports.getLogin = (req, res) => {
     },
   });
 };
-// password  : A242sxcz@
-// username : m-mdy-mA2
-// email : mahdimamashli1383@gmail.com
 exports.postLogin = async (req, res) => {
   const { getReq, getBody } = req;
   const { getJsonHandler, status } = res;
