@@ -1,8 +1,13 @@
-import login from "./login.js";
+import handleFormSubmitLogin from "./login.js";
 import logout from "./logout.js";
-import signup from "./signup.js";
+import handleFormSubmitSignup from "./signup.js";
 const logoutButton = document.querySelector(".logout");
 const form = document.getElementById("registerForm");
-signup(form);
-login(form);
+const url = window.location.href;
+if (url === "/auth/signup") {
+  form.addEventListener("submit", handleFormSubmitSignup);
+}
+if (url === "/auth/login") {
+  form.addEventListener("submit", handleFormSubmitLogin);
+}
 logout(logoutButton);
