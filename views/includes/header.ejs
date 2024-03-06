@@ -1,7 +1,38 @@
 </head>
 <body class="bg-body">
     <div class="container h-screen grid grid-cols-container">
-        <header>
-
-            
+        <header class="bg-blue-600 wrapper__home-navigation flex flex-col items-center justify-start px-2 py-1">
+            <div class="flex flex-col items-start space-y-4 ">
+                <a href="/home" class="flex items-center text-white mr-4">
+                    <img src="/assets/icon/nav/home.svg" alt="HOME" class="p-1 bg-[#1DA1F2] mr-2 rounded-full">
+                    <h2 class="text-lg font-semibold">Home</h2>
+                </a>
+                <a href="/search" class="flex items-center text-white mr-4">
+                    <img src="/assets/icon/nav/search.svg" alt="SEARCH" class="p-1 bg-[#2895F0] mr-2 rounded-full">
+                    <h2 class="text-lg font-semibold">Search</h2>
+                </a>
+            <% if(isAuth){ %>
+                    <a href="/notifications" class="flex items-center text-white mr-4">
+                        <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION" class="p-1 bg-[#3BA9FE] mr-2 rounded-full">
+                        <h2 class="text-lg font-semibold">Notifications</h2>
+                    </a>
+                    <a href="/messages" class="flex items-center text-white mr-4">
+                        <img src="/assets/icon/nav/mail.svg" alt="MESSAGE" class="p-1 bg-[#47B3FD] mr-2 rounded-full">
+                        <h2 class="text-lg font-semibold">Messages</h2>
+                    </a>
+                    <a href="/profile" class="flex items-center text-white mr-4">
+                        <img src="/assets/icon/nav/user.svg" alt="USER" class="p-1 bg-[#54BFFF] mr-2 rounded-full">
+                        <h2 class="text-lg font-semibold">Profile</h2>
+                    </a>
+                    <a href="/logout" class="flex items-center text-white">
+                        <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="p-1 bg-[#6AC6FF] mr-2 rounded-full">
+                        <h2 class="text-lg font-semibold">Logout</h2>
+                    </a>
+            <% } else{%>
+                    <a href="/login" class="flex items-center text-white">
+                        <img src="/assets/icon/utils/login.svg" alt="LOGIN" class="p-1 bg-[#6AC6FF] mr-2 rounded-full">
+                        <h2 class="text-lg font-semibold">Login</h2>
+                    </a>
+            <% } %>
+            </div>
         </header>
