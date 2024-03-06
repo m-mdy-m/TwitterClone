@@ -4,8 +4,8 @@
     <div class="wrapper__home-container">
         <div class="bg-red-600"></div>
         <div class="bg-green-600"></div>
-        <div class="bg-blue-600 flex justify-evenly items-center px-4 py-2 flex-col">
-            <div class="flex items-center flex-col">
+        <div class="bg-blue-600 flex justify-start items-center flex-col">
+            <div class="flex items-start justify-center flex-col [&>*]:m-4">
                 <a href="/home" class="flex items-center text-white mr-4">
                     <img src="/assets/icon/nav/home.svg" alt="HOME" class="h-6 w-6 mr-2">
                     <h2 class="text-lg font-semibold">Home</h2>
@@ -14,9 +14,7 @@
                     <img src="/assets/icon/nav/search.svg" alt="SEARCH" class="h-6 w-6 mr-2">
                     <h2 class="text-lg font-semibold">Search</h2>
                 </a>
-            </div>
             <% if(isAuth){ %>
-                <div class="flex items-center flex-col">
                     <a href="/notifications" class="flex items-center text-white mr-4">
                         <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION" class="h-6 w-6 mr-2">
                         <h2 class="text-lg font-semibold">Notifications</h2>
@@ -35,7 +33,6 @@
                     </a>
                 </div>
             <% } else{%>
-                <div class="flex items-center flex-col">
                     <a href="/login" class="flex items-center text-white">
                         <img src="/assets/icon/utils/login.svg" alt="LOGIN" class="h-6 w-6 mr-2">
                         <h2 class="text-lg font-semibold">Login</h2>

@@ -46,6 +46,10 @@
   flex-direction: column
 }
 
+.items-start {
+  align-items: flex-start
+}
+
 .items-center {
   align-items: center
 }
@@ -150,4 +154,8 @@
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.\[\&\>\*\]\:m-4>* {
+  margin: 1rem
 }
