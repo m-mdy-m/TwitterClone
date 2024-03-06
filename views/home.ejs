@@ -5,35 +5,41 @@
         <div class="bg-red-600"></div>
         <div class="bg-green-600"></div>
         <div class="bg-blue-600 flex justify-start items items-center flex-col">
-            <div class="flex items-center">
-                <h2 class="text-white mr-2">HOME</h2>
-                <a href="/home" class="block"><img src="/assets/icon/nav/home.svg" alt="HOME"></a>
-            </div>
-            <div class="flex items-center">
-                <h2 class="text-white mr-2">SEARCH</h2>
-                <a href="/search" class="block"><img src="/assets/icon/nav/search.svg" alt="SEARCH"></a>
+            <div class="flex items-center flex-col">
+                <a href="/home" class="flex items-center text-white mr-4">
+                    <img src="/assets/icon/nav/home.svg" alt="HOME" class="h-6 w-6 mr-2">
+                    <h2 class="text-lg font-semibold">Home</h2>
+                </a>
+                <a href="/search" class="flex items-center text-white mr-4">
+                    <img src="/assets/icon/nav/search.svg" alt="SEARCH" class="h-6 w-6 mr-2">
+                    <h2 class="text-lg font-semibold">Search</h2>
+                </a>
             </div>
             <% if(isAuth){ %>
-                <div class="flex items-center">
-                    <h2 class="text-white mr-2">NOTIFICATION</h2>
-                    <a href="/notifications" class="block"><img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION"></a>
-                </div>
-                <div class="flex items-center">
-                    <h2 class="text-white mr-2">MESSAGE</h2>
-                    <a href="/messages" class="block"><img src="/assets/icon/nav/mail.svg" alt="MESSAGE"></a>
-                </div>
-                <div class="flex items-center">
-                    <h2 class="text-white mr-2">USER</h2>
-                    <a href="/profile" class="block"><img src="/assets/icon/nav/user.svg" alt="USER"></a>
-                </div>
-                <div class="flex items-center">
-                    <h2 class="text-white mr-2">LOGOUT</h2>
-                    <a href="/logout" class="block"><img src="/assets/icon/utils/logout.svg" alt="LOGOUT"></a>
+                <div class="flex items-center flex-col">
+                    <a href="/notifications" class="flex items-center text-white mr-4">
+                        <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION" class="h-6 w-6 mr-2">
+                        <h2 class="text-lg font-semibold">Notifications</h2>
+                    </a>
+                    <a href="/messages" class="flex items-center text-white mr-4">
+                        <img src="/assets/icon/nav/mail.svg" alt="MESSAGE" class="h-6 w-6 mr-2">
+                        <h2 class="text-lg font-semibold">Messages</h2>
+                    </a>
+                    <a href="/profile" class="flex items-center text-white mr-4">
+                        <img src="/assets/icon/nav/user.svg" alt="USER" class="h-6 w-6 mr-2">
+                        <h2 class="text-lg font-semibold">Profile</h2>
+                    </a>
+                    <a href="/logout" class="flex items-center text-white">
+                        <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="h-6 w-6 mr-2">
+                        <h2 class="text-lg font-semibold">Logout</h2>
+                    </a>
                 </div>
             <% } else{%>
-                <div class="flex items-center">
-                    <h2 class="text-white mr-2">LOGIN</h2>
-                    <a href="/login" class="block"><img src="/assets/icon/utils/login.svg" alt="LOGIN"></a>
+                <div class="flex items-center flex-col">
+                    <a href="/login" class="flex items-center text-white">
+                        <img src="/assets/icon/utils/login.svg" alt="LOGIN" class="h-6 w-6 mr-2">
+                        <h2 class="text-lg font-semibold">Login</h2>
+                    </a>
                 </div>
             <% } %>
         </div>
