@@ -16,10 +16,10 @@ exports.getSignup = (req, res) => {
   });
 };
 exports.postSignup = async (req, res) => {
-  const { getBody,getReq } = req;
-  const request = getReq()
+  const { getBody, getReq } = req;
+  const request = getReq();
   const { getJsonHandler, status } = res;
-  const {created,  validationFailed, internalServerError } = getJsonHandler();
+  const { created, validationFailed, internalServerError } = getJsonHandler();
   const body = getBody();
   try {
     const username = body.username;
@@ -33,7 +33,16 @@ exports.postSignup = async (req, res) => {
       isPassword(body.password) &&
       passwordConf
     ) {
-      const user = await User.findOne({ username: username, email: email });
+      let user;
+      try {
+        user = await User.findOne({ username: username, email: email });
+      } catch (error) {
+        return status(200).json({
+          success: false,
+          message: "User already exists",
+        });
+      }
+      console.log('user =>',user);
       if (user) {
         // If user exists, send user information to the client
         return status(200).json({
@@ -46,8 +55,8 @@ exports.postSignup = async (req, res) => {
           email: email,
           password: hashedPassword,
         });
-        request.session.user=  result
-        created(result)
+        request.session.user = result;
+        created(result);
       }
     } else {
       // Validation failed
@@ -59,7 +68,7 @@ exports.postSignup = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log('error=>',error.message);
+    console.log("error=>", error.message);
     // Handle other errors (e.g., database error)
     internalServerError("An error occurred while processing your request.");
   }

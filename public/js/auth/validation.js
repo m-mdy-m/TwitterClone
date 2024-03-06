@@ -34,6 +34,7 @@ function handleNotSuccess(data) {
   msgElm.classList.add("msg-errors");
   // Extract error message from server response data
   const message = data.message;
+  console.log('=>',);
   // Display error message to the user
   displayMessage(msgElm, message, "#944E63");
   window.location.href = '/signup'
