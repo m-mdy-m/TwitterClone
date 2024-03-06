@@ -9,20 +9,26 @@
                 <img src="/assets/icon/nav/home.svg" alt="HOME">
             </div>
             <div>
-                <img src="/assets/icon/nav/mail.svg" alt="MESSAGE">
-            </div>
-            <div>
-                <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION">
-            </div>
-            <div>
                 <img src="/assets/icon/nav/search.svg" alt="SEARCH">
             </div>
-            <div>
-                <img src="/assets/icon/nav/user.svg" alt="USER">
-            </div>
-            <div>
-                <img src="/assets/icon/utils/logout.svg" alt="LOGOUT">
-            </div>
+            <% if(isAuth){ %>
+                <div>
+                    <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION">
+                </div>
+                <div>
+                    <img src="/assets/icon/nav/mail.svg" alt="MESSAGE">
+                </div>
+                <div>
+                    <img src="/assets/icon/nav/user.svg" alt="USER">
+                </div>
+                <div>
+                    <img src="/assets/icon/utils/logout.svg" alt="LOGOUT">
+                </div>
+            <% } else{%>
+                <div>
+                    <img src="/assets/icon/utils/login.svg" alt="LOGIN">
+                </div>
+            <% } %>
         </div>
     </div>
 <%- include("includes/end.ejs") %>

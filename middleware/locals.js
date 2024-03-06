@@ -1,5 +1,6 @@
 module.exports = (req, res, nxt) => {
-  res.locals.isAuth = req.session.isLogged;
+  console.log('req.session.user +>',req.session.user)
+  res.locals.isAuth = req.session.user;
   res.locals.csrfToken = req.csrfToken();
   nxt();
 };
