@@ -75,3 +75,8 @@
   --tw-text-opacity: 1;
   color: rgb(74 180 250 / var(--tw-text-opacity))
 }
+
+.text-slate-300 {
+  --tw-text-opacity: 1;
+  color: rgb(203 213 225 / var(--tw-text-opacity))
+}
