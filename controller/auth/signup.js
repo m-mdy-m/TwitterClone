@@ -33,16 +33,7 @@ exports.postSignup = async (req, res) => {
       isPassword(body.password) &&
       passwordConf
     ) {
-      let user;
-      try {
-        user = await User.findOne({ username: username, email: email });
-      } catch (error) {
-        return status(200).json({
-          success: false,
-          message: "User already exists",
-        });
-      }
-      console.log('user =>',user);
+      let user = await User.findOne({$or : [{username : username}, {email : email}]});
       if (user) {
         // If user exists, send user information to the client
         return status(200).json({

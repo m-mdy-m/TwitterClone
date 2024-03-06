@@ -14,6 +14,7 @@ export async function handleSubmit(e, submitUrl) {
       const requestData = Object.fromEntries(formData.entries());
       // Send form data to the server via POST request
       const response = await axios.post(submitUrl, requestData);
+      console.log("response.data.=>", response.data);
       // Handle server response based on success or failure
       if (response.data.success) {
         // If the server indicates success, handle accordingly
@@ -34,10 +35,11 @@ function handleNotSuccess(data) {
   msgElm.classList.add("msg-errors");
   // Extract error message from server response data
   const message = data.message;
-  console.log('=>',);
   // Display error message to the user
   displayMessage(msgElm, message, "#944E63");
-  window.location.href = '/signup'
+  if (window.location.href !== "/signup") {
+    window.location.href = "/signup";
+  }
 }
 // Function to handle successful form submission
 function handleSuccess(message) {
