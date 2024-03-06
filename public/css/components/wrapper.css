@@ -1,7 +1,0 @@
-.header__navigation a:hover img {
-  filter: brightness(70%);
-}
-.header-grid{
-  grid-column: 2/3;
-  grid-row: 1/2;
-}
