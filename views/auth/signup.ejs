@@ -1,8 +1,8 @@
 <%- include("../includes/base.ejs") %>
 <link rel="stylesheet" href="/css/auth/auth.css" />
 <%- include("../includes/header.ejs") %>
-<div id="msgElm"></div>
-<div class="flex justify-center items-center flex-col h-full">
+<main class="flex justify-center items-center flex-col h-full">
+  <div id="msgElm"></div>
     <form id="registerForm" action="/signup" method="post" class="flex-col flex justify-center items-center bg-slate-300 p-4 rounded-lg">
         <h1 class="text-3xl text-center">Register</h1>
         <div class=" form-group flex justify-center flex-col items-center">
@@ -27,6 +27,6 @@
         </p>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       </form>
-  </div>
+  </main>
   <script src="/js/auth/signup.js" type="module"></script>
   <%- include("../includes/end.ejs") %>
