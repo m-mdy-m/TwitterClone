@@ -1,5 +1,4 @@
-const logoutButton = document.querySelector(".logout");
-async function logout() {
+async function logout(button) {
   try {
     const response = await axios.post("/auth/logout");
     console.log("Logout response:", response);
@@ -7,6 +6,6 @@ async function logout() {
   } catch (error) {
     console.error("Logout error:", error);
   }
+  button.addEventListener("click", logout);
 }
-logoutButton.addEventListener("click", logout);
 export default logout;
