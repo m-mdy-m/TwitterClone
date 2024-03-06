@@ -3,11 +3,11 @@ module.exports = {
   content: ["./views/**/*.ejs"],
   theme: {
     extend: {
-      gridTemplateColumns:{
-        container :  '15% minmax(85%, 1fr);',
+      gridTemplateColumns: {
+        container: " minmax(85%, 1fr) 15%;",
       },
-      backgroundColor:{
-        body:"#000000"
+      backgroundColor: {
+        body: "#000000",
       },
       container: {
         center: true,

@@ -1,10 +1,7 @@
-.wrapper__home-container {
-  display: grid;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  grid-template-columns: 10% minmax(75%, 1fr) 15%;
-}
-.wrapper__home-navigation a:hover img {
+.header__navigation a:hover img {
   filter: brightness(70%);
+}
+.header-grid{
+  grid-column: 2/3;
+  grid-row: 1/2;
 }

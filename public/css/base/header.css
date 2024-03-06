@@ -35,7 +35,7 @@
 }
 
 .grid-cols-container {
-  grid-template-columns: 15% minmax(85%, 1fr);
+  grid-template-columns: minmax(85%, 1fr) 15%;
 }
 
 .flex-col {
