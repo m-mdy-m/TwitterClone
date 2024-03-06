@@ -1,6 +1,7 @@
-const { default: login } = require("./login");
-const { default: logout } = require("./logout");
-const { default: signup } = require("./signup");
-login;
-logout;
-signup;
+import login from "./login.js";
+import logout from "./logout.js";
+import signup from "./signup.js";
+const form = document.getElementById("registerForm");
+signup(form)
+login(form)
+export { login, logout, signup };
