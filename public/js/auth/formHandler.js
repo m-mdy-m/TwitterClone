@@ -1,8 +1,7 @@
-import { handleSubmit } from "./validation.js";
+import { handleSubmit } from "./validation.js.js";
 // Define a wrapper function to dynamically pass the submit URL to handleSubmit
-function handleFormSubmit(event) {
+function formHandler(event, submitUrl) {
   // Replace 'submitUrl' with the dynamic URL you want to use
-  const submitUrl = "/auth/login";
   handleSubmit(event, submitUrl);
 }
-export default handleFormSubmit;
+export default formHandler;
