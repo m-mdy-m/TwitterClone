@@ -3,7 +3,7 @@ const form = document.getElementById("registerForm");
 // Define a wrapper function to dynamically pass the submit URL to handleSubmit
 function handleFormSubmit(event) {
     // Replace 'submitUrl' with the dynamic URL you want to use
-    const submitUrl = "/login";
+    const submitUrl = "/auth/login";
     handleSubmit(event, submitUrl);
   }
   

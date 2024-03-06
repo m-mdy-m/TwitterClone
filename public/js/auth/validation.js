@@ -36,9 +36,6 @@ function handleNotSuccess(data) {
   const message = data.message;
   // Display error message to the user
   displayMessage(msgElm, message, "#944E63");
-  if (window.location.href !== "/signup") {
-    window.location.href = "/signup";
-  }
 }
 // Function to handle successful form submission
 function handleSuccess(message) {

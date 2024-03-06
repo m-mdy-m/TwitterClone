@@ -3,7 +3,7 @@
 <%- include("../includes/header.ejs") %>
 <main class="flex justify-center items-center flex-col h-full">
   <div id="msgElm"></div>
-  <form id="registerForm" action="/login" method="post" class="flex-col flex justify-center items-center bg-slate-300 p-4 rounded-lg">
+  <form id="registerForm" action="/auth/login" method="post" class="flex-col flex justify-center items-center bg-slate-300 p-4 rounded-lg">
     <h1 class="text-3xl text-center">login</h1>
     <div class=" form-group flex justify-center flex-col items-center">
       <input type="text" name="username" placeholder="username" class="input-form" value=<%-oldValue.username%>/>

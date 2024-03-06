@@ -15,6 +15,11 @@ exports.getLogin = (req, res) => {
     },
   });
 };
+/**
+ *  username : Ads242sxz
+ * email : mahdimamssashli1383@gmail.com
+ * password : Asd24242@4
+ */
 exports.postLogin = async (req, res) => {
   const { getReq, getBody } = req;
   const { getJsonHandler, status } = res;
@@ -25,18 +30,31 @@ exports.postLogin = async (req, res) => {
   const email = body.email;
   const password = body.password;
   const user = await User.findOne({ username: username, email: email });
-  const isUser = user._id.toString() === request.user._id.toString();
-  if (!isUser) {
-    // If user exists, send user information to the client
-    return status(200).json({
+  if (!user) {
+    return res.status(200).json({
       success: false,
-      message: "User is no login",
+      message: "User not found. Please login or register.",
     });
-  } else {
-    const result = await bcryptjs().compare(password, user.password);
-    if (result) {
-      request.session.user = user;
-      created(user);
-    }
   }
+  const isCurrentUser = user._id.toString() === request.user._id.toString();
+  if (!isCurrentUser) {
+    return res.status(200).json({
+      success: false,
+      message: "You are not authorized to perform this action.",
+    });
+  }
+
+  const passwordMatches = await bcryptjs().compare(password, user.password);
+  if (!passwordMatches) {
+    return res.status(200).json({
+      success: false,
+      message: "Incorrect password. Please try again.",
+    });
+  }
+  req.session.user = user;
+
+  return res.status(200).json({
+    success: true,
+    message: "Logged in successfully.",
+  });
 };
