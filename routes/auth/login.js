@@ -1,12 +1,10 @@
-const Xprz = require("xprz");
-
-const { Route } = new Xprz();
+const { Route } = $read("utils/helper");
 const { getLogin, postLogin } = $read("controller/auth/login");
-const route = new Route();
+const route= new Route();
 route.group("/auth", (r) => {
   r.setRoute("/login").get(getLogin).post(postLogin);
   r.setRoute("/logout").get(() => {
-    const { send } = route.res();
+    const { send } = r.res();
     send("hi");
   });
 });
