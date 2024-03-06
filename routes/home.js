@@ -1,7 +1,7 @@
 const { Route } = $read("utils/helper");
-const getHomeMiddleware = $read("middleware/getHome");
-const { getHome } = $read("controller/home/home");
 const route = new Route();
-route.setRoute("/home").using(getHomeMiddleware).get(getHome);
+const redirectToHome = $read("middleware/redirectToHome");
+const { getHome } = $read("controller/home/home");
+route.setRoute("/home").using(redirectToHome).get(getHome);
 
 module.exports = route;
