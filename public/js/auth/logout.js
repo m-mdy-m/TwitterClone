@@ -1,11 +1,21 @@
-async function logout(button) {
+import { getCsrfToken } from "./utils.js";
+
+async function handler(){
   try {
-    const response = await axios.post("/auth/logout");
+    const csrfToken = await getCsrfToken(); 
+    const response = await axios.post("/auth/logout", {}, {
+      headers: {
+        'X-CSRF-Token': csrfToken // Include CSRF token in request headers
+      }
+    });
     console.log("Logout response:", response);
     // Optionally, perform additional actions after logout
   } catch (error) {
     console.error("Logout error:", error);
   }
-  button.addEventListener("click", logout);
+}
+function logout(button) {
+  
+  button.addEventListener("click", handler);
 }
 export default logout;

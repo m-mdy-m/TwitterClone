@@ -99,3 +99,13 @@ export function handleFormValidation() {
     input.addEventListener("input", handleInputEvent);
   });
 }
+
+export function getCsrfToken() {
+  // Retrieve CSRF token from a cookie named 'csrf_token'
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("csrf_token="))
+    .split("=")[1];
+  console.log('token=>',token);
+  return token;
+}

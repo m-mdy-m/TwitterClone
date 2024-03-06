@@ -4,7 +4,6 @@ const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
 handleFormValidation();
 export async function handleSubmit(e, submitUrl) {
-  console.log('hi');
   e.preventDefault();
   // Ensure that form validation count meets the required threshold
   if (validationCount >= 4) {
