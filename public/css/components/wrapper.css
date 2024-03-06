@@ -3,5 +3,5 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 10% minmax(80%, 1fr) 10%;
 }
