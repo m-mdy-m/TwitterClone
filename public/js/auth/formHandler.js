@@ -1,7 +1,12 @@
 import { handleSubmit } from "./validation.js";
-// Define a wrapper function to dynamically pass the submit URL to handleSubmit
-function formHandler(event, submitUrl) {
-  // Replace 'submitUrl' with the dynamic URL you want to use
-  handleSubmit(event, submitUrl);
+let submitUrl;
+function getUrl(url) {
+  submitUrl = url;
 }
-export default formHandler;
+// Define a wrapper function to dynamically pass the submit URL to handleSubmit
+function formHandler(event) {
+  // Replace 'submitUrl' with the dynamic URL you want to use
+  console.log('submitUrl=>',submitUrl);
+  return handleSubmit(event, submitUrl);
+}
+export { formHandler, getUrl };
