@@ -1,3 +1,6 @@
+.header__navigation {
+  margin-top: 2rem;
+}
 .header__navigation a:hover img {
   filter: brightness(70%);
 }
@@ -6,9 +9,10 @@
   grid-row: 1/2;
 }
 .images__icons-nav {
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: 0.25rem;
   margin-right: 0.5rem;
   border-radius: 50%;
 }
+
