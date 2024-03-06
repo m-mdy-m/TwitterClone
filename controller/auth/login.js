@@ -17,7 +17,7 @@ exports.getLogin = (req, res) => {
 };
 /**
  *  username : Ads242sxz
- * email : mahdimamssashli1383@gmail.com
+ * email : mahdimamashli1383@gmail.com
  * password : Asd24242@4
  */
 exports.postLogin = async (req, res) => {
