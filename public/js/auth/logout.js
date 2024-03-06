@@ -10,10 +10,9 @@ async function handler(){
       'X-CSRF-TOKEN': csrfToken
     };
     const response = await axios.post("/auth/logout", {}, { headers });
-
     // Check if the response is successful
-    if (response.status === 200 && response.data && response.data.success) {
-      window.location.href ='/home'
+    if (response.status === 200 && response.data.success) {
+      window.location.href ='/login'
       // Optionally, perform additional actions after logout
     } else {
       msgElm.classList.add('msg-errors')
