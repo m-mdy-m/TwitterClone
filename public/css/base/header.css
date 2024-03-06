@@ -27,7 +27,7 @@
 }
 
 .grid-cols-container {
-  grid-template-columns: minmax(85%, 1fr) 15%;
+  grid-template-columns: 15% minmax(85%, 1fr);
 }
 
 .flex-col {
@@ -50,10 +50,10 @@
   justify-content: center
 }
 
-.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+.space-y-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2rem * var(--tw-space-y-reverse))
 }
 
 .rounded-lg {
