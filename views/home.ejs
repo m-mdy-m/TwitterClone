@@ -4,29 +4,36 @@
     <div class="wrapper__home-container">
         <div class="bg-red-600"></div>
         <div class="bg-green-600"></div>
-        <div class="bg-blue-600">
-            <div>
-                <img src="/assets/icon/nav/home.svg" alt="HOME">
+        <div class="bg-blue-600 flex justify-start items items-center flex-col">
+            <div class="flex items-center">
+                <h2 class="text-white mr-2">HOME</h2>
+                <a href="/home" class="block"><img src="/assets/icon/nav/home.svg" alt="HOME"></a>
             </div>
-            <div>
-                <img src="/assets/icon/nav/search.svg" alt="SEARCH">
+            <div class="flex items-center">
+                <h2 class="text-white mr-2">SEARCH</h2>
+                <a href="/search" class="block"><img src="/assets/icon/nav/search.svg" alt="SEARCH"></a>
             </div>
             <% if(isAuth){ %>
-                <div>
-                    <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION">
+                <div class="flex items-center">
+                    <h2 class="text-white mr-2">NOTIFICATION</h2>
+                    <a href="/notifications" class="block"><img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION"></a>
                 </div>
-                <div>
-                    <img src="/assets/icon/nav/mail.svg" alt="MESSAGE">
+                <div class="flex items-center">
+                    <h2 class="text-white mr-2">MESSAGE</h2>
+                    <a href="/messages" class="block"><img src="/assets/icon/nav/mail.svg" alt="MESSAGE"></a>
                 </div>
-                <div>
-                    <img src="/assets/icon/nav/user.svg" alt="USER">
+                <div class="flex items-center">
+                    <h2 class="text-white mr-2">USER</h2>
+                    <a href="/profile" class="block"><img src="/assets/icon/nav/user.svg" alt="USER"></a>
                 </div>
-                <div>
-                    <img src="/assets/icon/utils/logout.svg" alt="LOGOUT">
+                <div class="flex items-center">
+                    <h2 class="text-white mr-2">LOGOUT</h2>
+                    <a href="/logout" class="block"><img src="/assets/icon/utils/logout.svg" alt="LOGOUT"></a>
                 </div>
             <% } else{%>
-                <div>
-                    <img src="/assets/icon/utils/login.svg" alt="LOGIN">
+                <div class="flex items-center">
+                    <h2 class="text-white mr-2">LOGIN</h2>
+                    <a href="/login" class="block"><img src="/assets/icon/utils/login.svg" alt="LOGIN"></a>
                 </div>
             <% } %>
         </div>
