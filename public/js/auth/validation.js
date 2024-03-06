@@ -6,7 +6,7 @@ handleFormValidation();
 export async function handleSubmit(e, submitUrl) {
   e.preventDefault();
   // Ensure that form validation count meets the required threshold
-  if (validationCount >= 4) {
+  if (validationCount >= 3) {
     try {
       // Collect form data
       const formData = new FormData(form);
