@@ -1,7 +1,7 @@
 const { Route } = $read("utils/helper");
-const { ensureAuthenticated } = $read("middleware/is-auth");
+const getHomeMiddleware = $read("middleware/getHome");
 const { getHome } = $read("controller/home/home");
 const route = new Route();
-route.setRoute("/").using([ensureAuthenticated]).get(getHome);
+route.setRoute("/home").using(getHomeMiddleware).get(getHome);
 
 module.exports = route;

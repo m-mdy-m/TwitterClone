@@ -49,7 +49,7 @@ function handleSuccess(message) {
   // Display success message to the user
   displayMessage(msgElm, message, "#90EE90");
   // Redirect user to the home page after successful submission
-  window.location.href = "/";
+  window.location.href = "/home";
 }
 // Function to handle server errors
 function handleServerError(error) {

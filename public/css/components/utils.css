@@ -1,6 +1,12 @@
 .header__navigation {
   margin-top: 2rem;
 }
+.header__navigation a {
+  padding: 4px;
+}
+.header__navigation a:hover {
+  filter: brightness(70%);
+}
 .header__navigation a:hover img {
   filter: brightness(70%);
 }
@@ -11,4 +17,3 @@
   margin-right: 0.5rem;
   border-radius: 50%;
 }
-
