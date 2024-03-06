@@ -3,7 +3,7 @@ import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
 handleFormValidation();
-export default async function handleSubmit(e, submitUrl) {
+export async function handleSubmit(e, submitUrl) {
   e.preventDefault();
   // Ensure that form validation count meets the required threshold
   if (validationCount >= 4) {

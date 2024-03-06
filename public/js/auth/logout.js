@@ -28,7 +28,8 @@ async function handler(){
   }
 }
 function logout(button) {
-  
-  button.addEventListener("click", handler);
+  if (button) {
+    button.addEventListener("click", handler);
+  }
 }
 export default logout;
