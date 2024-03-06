@@ -3,7 +3,7 @@ import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
 handleFormValidation();
-export async function handleSubmit(e, submitUrl) {
+export default async function handleSubmit(e, submitUrl) {
   e.preventDefault();
   // Ensure that form validation count meets the required threshold
   if (validationCount >= 4) {
@@ -74,7 +74,7 @@ function handleServerError(error) {
   displayMessage(msgElm, errorMessage, "#fc6736");
 }
 // Function to display messages
-function displayMessage(element, message, color) {
+export function displayMessage(element, message, color) {
   // Set background color of message element
   element.style.background = color;
   // Set message content of message element
