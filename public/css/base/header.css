@@ -38,6 +38,10 @@
   z-index: 10
 }
 
+.z-20 {
+  z-index: 20
+}
+
 .mt-2 {
   margin-top: 0.5rem
 }
@@ -98,6 +102,10 @@
   height: 2rem
 }
 
+.h-20 {
+  height: 5rem
+}
+
 .w-32 {
   width: 8rem
 }
@@ -116,6 +124,14 @@
 
 .w-8 {
   width: 2rem
+}
+
+.w-20 {
+  width: 5rem
+}
+
+.w-12 {
+  width: 3rem
 }
 
 .-translate-x-1\/2 {
@@ -200,6 +216,10 @@
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+}
+
+.overflow-hidden {
+  overflow: hidden
 }
 
 .rounded-full {
@@ -316,6 +336,16 @@
 .bg-\[\#202636\] {
   --tw-bg-opacity: 1;
   background-color: rgb(32 38 54 / var(--tw-bg-opacity))
+}
+
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
 .bg-gradient-to-b {
@@ -445,6 +475,21 @@
   color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+
+.text-gray-100 {
+  --tw-text-opacity: 1;
+  color: rgb(243 244 246 / var(--tw-text-opacity))
+}
+
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
+}
+
 .opacity-0 {
   opacity: 0
 }
@@ -464,6 +509,12 @@
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
@@ -537,6 +588,15 @@
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.hover\:text-gray-100:hover {
+  --tw-text-opacity: 1;
+  color: rgb(243 244 246 / var(--tw-text-opacity))
+}
+
+.hover\:opacity-50:hover {
+  opacity: 0.5
 }
 
 .group:hover .group-hover\:flex {
