@@ -1,27 +1,28 @@
 <%- include("../includes/base.ejs") %>
 <link rel="stylesheet" href="/css/auth/auth.css" />
 <%- include("../includes/header.ejs") %>
-<main class="flex justify-center items-center flex-col h-full">
+<main class="flex justify-center items-center flex-col h-full text-white">
   <div id="msgElm"></div>
-  <form id="registerForm" action="/auth/login" method="post" class="flex-col flex justify-center items-center bg-slate-300 p-4 rounded-lg">
-    <h1 class="text-3xl text-center">login</h1>
-    <div class=" form-group flex justify-center flex-col items-center">
-      <input type="text" name="username" placeholder="username" class="input-form" value=<%-oldValue.username%>/>
-      <i class="msg-error"></i>
-    </div>
-    <div class=" form-group flex justify-center flex-col items-center">
-      <input type="email" name="email" placeholder="email" class="input-form" value=<%-oldValue.email%>/>
-      <i class="msg-error"></i>
-    </div>
-    <div class=" form-group flex justify-center flex-col items-center">
-      <input id="password" type="password" name="password" placeholder="password" class="input-form" value=<%-oldValue.password%>/>
-      <i class="msg-error"></i>
-    </div>
-    <button type="submit" class="w-52 h-12 bg-[#41b9ff]">login</button>
-    <p class="text-xl text-[#4ab4fa]">
-      Need an account? <a href="/auth/signup">register here</a>
-    </p>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <form id="registerForm" action="/auth/login" method="post" class="flex-col flex justify-center items-center bg-gray-800 p-4 rounded-lg">
+      <h1 class="text-3xl text-center mb-4">Login</h1>
+      <div class="form-group flex justify-center flex-col items-center">
+          <input type="text" name="username" placeholder="Username" class="input-form bg-gray-700 text-white" value="<%-oldValue.username%>"/>
+          <i class="msg-error"></i>
+      </div>
+      <div class="form-group flex justify-center flex-col items-center">
+          <input type="email" name="email" placeholder="Email" class="input-form bg-gray-700 text-white" value="<%-oldValue.email%>"/>
+          <i class="msg-error"></i>
+      </div>
+      <div class="form-group flex justify-center flex-col items-center">
+          <input id="password" type="password" name="password" placeholder="Password" class="input-form bg-gray-700 text-white" value="<%-oldValue.password%>"/>
+          <i class="msg-error"></i>
+      </div>
+      <button type="submit" class="w-52 h-12 bg-blue-500 hover:bg-blue-600 rounded-md">Login</button>
+      <p class="text-xl mt-4">
+          Need an account? <a href="/auth/signup" class="text-blue-400">Register here</a>
+      </p>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
   </form>
 </main>
+
 <%- include("../includes/end.ejs") %>
