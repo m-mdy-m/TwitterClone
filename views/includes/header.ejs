@@ -1,9 +1,9 @@
 </head>
 <body class="bg-body">
     <div class="container h-screen grid grid-cols-container ">
-        <header class="header__navigation flex flex-col items-center justify-start px-2 py-1">
+        <header class="header__navigation bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E] flex flex-col items-center justify-start px-2 py-1">
             <!-- Profile User Section -->
-            <div class="flex flex-col justify-center items-center bg-gray-800 rounded-lg p-8 shadow-lg">
+            <div class="flex flex-col justify-center items-center  rounded-lg p-8 shadow-lg">
                 <!-- Profile User Default -->
                 <div class="flex flex-col justify-center items-center">
                     <img id="profilePic" src="/assets/images/profilePic.png" alt="Profile Picture" class="w-32 h-32 rounded-full border-4 border-white">
@@ -31,43 +31,44 @@
                     </div>
                 </div>
             </div>
-            <nav class="flex w-full mt-2 h-full flex-col items-start space-y-8">
+            <!-- navigation -->
+            <nav class="flex w-full mt-2 h-full flex-col items-start space-y-8 p-4  rounded-lg shadow-lg">
                 <!-- Home Link -->
-                <a href="/home" class="header__navigation-link">
+                <a href="/home" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                     <img src="/assets/icon/nav/home.svg" alt="HOME" class="bg-[#1DA1F2] images__icons-nav">
                     <h2 class="text-lg font-semibold text-white">Home</h2>
                 </a>
                 <!-- Search Link -->
-                <a href="/search" class="header__navigation-link">
-                    <img src="/assets/icon/nav/search.svg" alt="SEARCH" class="bg-[#2895F0] images__icons-nav">
+                <a href="/search" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                    <img src="/assets/icon/nav/search.svg" alt="SEARCH" class="images__icons-nav  bg-[#2895F0] ">
                     <h2 class="text-lg font-semibold text-white">Search</h2>
                 </a>
             <% if(isAuth){ %>
                     <!-- Notifications Link -->
-                    <a href="/notifications" class="header__navigation-link">
-                        <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION" class="bg-[#3BA9FE] images__icons-nav">
+                    <a href="/notifications" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                        <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION" class="images__icons-nav  bg-[#3BA9FE]">
                         <h2 class="text-lg font-semibold text-white">Notifications</h2>
                     </a>
                     <!-- Messages Link -->
-                    <a href="/messages" class="header__navigation-link">
-                        <img src="/assets/icon/nav/mail.svg" alt="MESSAGE" class="bg-[#47B3FD] images__icons-nav">
+                    <a href="/messages" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                        <img src="/assets/icon/nav/mail.svg" alt="MESSAGE" class="images__icons-nav  bg-[#47B3FD]">
                         <h2 class="text-lg font-semibold text-white">Messages</h2>
                     </a>
                     <!-- Profile Link -->
-                    <a href="/profile" class="header__navigation-link">
-                        <img src="/assets/icon/nav/user.svg" alt="USER" class="bg-[#54BFFF] images__icons-nav">
+                    <a href="/profile" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                        <img src="/assets/icon/nav/user.svg" alt="USER" class="images__icons-nav  bg-[#54BFFF]">
                         <h2 class="text-lg font-semibold text-white">Profile</h2>
                     </a>
                     <!-- Logout Link -->
-                    <a href="/auth/logout" class="header__navigation-link logout">
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="bg-[#6AC6FF] images__icons-nav">
+                    <a href="/auth/logout" class="header__navigation-link logout  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %> ">
+                        <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="images__icons-nav bg-[#6AC6FF]">
                         <h2 class="text-lg font-semibold text-white">Logout</h2>
                     </a>
             <% } else{%>
                     <!-- Signup Link -->
-                    <a href="/auth/signup" class="header__navigation-link">
-                        <img src="/assets/icon/utils/login.svg" alt="Signup" class="bg-[#6AC6FF] images__icons-nav">
+                    <a href="/auth/signup" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                        <img src="/assets/icon/utils/login.svg" alt="Signup" class="images__icons-nav  bg-[#6AC6FF]">
                         <h2 class="text-lg font-semibold text-white">Signup</h2>
                     </a>
             <% } %>
