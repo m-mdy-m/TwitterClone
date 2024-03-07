@@ -25,7 +25,7 @@ module.exports = {
           mobile: "300px", // Mobile screens (default)
           smallTb: "600px", // Small tablets
           tablet: "900px", // Tablets
-          desktops: "1050px", // Desktops
+          desktop: "1050px", // Desktops
           large: "1536px", // Large desktops
         },
       },
@@ -33,7 +33,7 @@ module.exports = {
         mobile: "300px", // Mobile screens (default)
         smallTb: "600px", // Small tablets
         tablet: "900px", // Tablets
-        desktops: "1050px", // Desktops
+        desktop: "1050px", // Desktops
         large: "1536px", // Large desktops
       },
     },
