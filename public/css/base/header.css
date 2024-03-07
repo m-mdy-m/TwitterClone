@@ -138,6 +138,10 @@
   margin-bottom: calc(1rem * var(--tw-space-y-reverse))
 }
 
+.overflow-hidden {
+  overflow: hidden
+}
+
 .rounded-full {
   border-radius: 9999px
 }
@@ -367,6 +371,72 @@
 @media (min-width: 300px) {
   .mobile\:absolute {
     position: absolute
+  }
+
+  .mobile\:mt-1 {
+    margin-top: 0.25rem
+  }
+
+  .mobile\:mt-2 {
+    margin-top: 0.5rem
+  }
+
+  .mobile\:hidden {
+    display: none
+  }
+
+  .mobile\:h-16 {
+    height: 4rem
+  }
+
+  .mobile\:h-12 {
+    height: 3rem
+  }
+
+  .mobile\:h-8 {
+    height: 2rem
+  }
+
+  .mobile\:w-16 {
+    width: 4rem
+  }
+
+  .mobile\:w-12 {
+    width: 3rem
+  }
+
+  .mobile\:w-8 {
+    width: 2rem
+  }
+
+  .mobile\:gap-0 {
+    gap: 0px
+  }
+
+  .mobile\:border {
+    border-width: 1px
+  }
+
+  .mobile\:p-0 {
+    padding: 0px
+  }
+
+  .mobile\:p-2 {
+    padding: 0.5rem
+  }
+
+  .mobile\:font-Aktiv__bold {
+    font-family: Aktiv-Bold
+  }
+
+  .mobile\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+  }
+
+  .mobile\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem
   }
 }
 

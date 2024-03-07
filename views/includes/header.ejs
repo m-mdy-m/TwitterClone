@@ -2,6 +2,6 @@
 <body class="bg-body">
     <%- include('./header/mobile.ejs') %>
     <div class="container file:h-screen grid grid-cols-container relative">
-        <header class="header__navigation bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E] flex flex-col items-center justify-start px-2 py-1">
+        <header class="header__navigation mobile:hidden bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E] flex flex-col items-center justify-start px-2 py-1">
             <%- include('./header/base.ejs',{isAuth:isAuth}) %>
         </header>
