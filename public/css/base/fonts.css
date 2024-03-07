@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "MAVIS";
+  src: url("../../fonts/MAVIS/MAVISRegular.woff");
+}
+@font-face {
+  font-family: "MAVIS-Bold";
+  src: url("../../fonts/MAVIS/MAVISBold.woff");
+}
+@font-face {
+  font-family: "MAVIS-Light";
+  src: url("../../fonts/MAVIS/MAVISLight.woff");
+}
+@font-face {
+  font-family: "Aktiv-Regular";
+  src: url("../../fonts/AktivGrotesk/AktivGroteskCorp-Regular.ttf");
+}
+@font-face {
+  font-family: "Aktiv-Light";
+  src: url("../../fonts/AktivGrotesk/AktivGroteskCorp-Light.ttf");
+}
+@font-face {
+  font-family: "Aktiv-Medium";
+  src: url("../../fonts/AktivGrotesk/AktivGroteskCorp-Medium.ttf");
+}
+@font-face {
+  font-family: "Aktiv-Bold";
+  src: url("../../fonts/AktivGrotesk/AktivGroteskCorp-Bold.ttf");
+}
+ 

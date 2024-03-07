@@ -3,6 +3,9 @@ module.exports = {
   content: ["./views/**/*.ejs"],
   theme: {
     extend: {
+      fontFamily:{
+        
+      },
       gridTemplateColumns: {
         container: " 30% minmax(70%, 1fr);",
       },

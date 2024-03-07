@@ -14,6 +14,10 @@
   height: 3rem
 }
 
+.h-32 {
+  height: 8rem
+}
+
 .h-full {
   height: 100%
 }
@@ -22,32 +26,12 @@
   height: 100vh
 }
 
-.h-8 {
-  height: 2rem
-}
-
-.h-24 {
-  height: 6rem
-}
-
-.h-32 {
-  height: 8rem
+.w-32 {
+  width: 8rem
 }
 
 .w-52 {
   width: 13rem
-}
-
-.w-8 {
-  width: 2rem
-}
-
-.w-24 {
-  width: 6rem
-}
-
-.w-32 {
-  width: 8rem
 }
 
 .grid-cols-container {
@@ -131,10 +115,6 @@
 
 .p-4 {
   padding: 1rem
-}
-
-.p-2 {
-  padding: 0.5rem
 }
 
 .px-2 {
