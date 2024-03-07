@@ -6,28 +6,20 @@
   position: relative
 }
 
-.left-0 {
-  left: 0px
-}
-
-.top-0 {
-  top: 0px
+.left-12 {
+  left: 3rem
 }
 
 .left-4 {
   left: 1rem
 }
 
-.top-4 {
-  top: 1rem
-}
-
-.left-12 {
-  left: 3rem
-}
-
 .top-10 {
   top: 2.5rem
+}
+
+.top-4 {
+  top: 1rem
 }
 
 .mb-4 {
@@ -70,24 +62,12 @@
   height: 8rem
 }
 
-.h-full {
-  height: 100%
-}
-
-.h-screen {
-  height: 100vh
-}
-
-.h-8 {
-  height: 2rem
-}
-
-.h-36 {
-  height: 9rem
-}
-
 .h-64 {
   height: 16rem
+}
+
+.h-full {
+  height: 100%
 }
 
 .w-12 {
@@ -98,24 +78,16 @@
   width: 8rem
 }
 
+.w-40 {
+  width: 10rem
+}
+
 .w-52 {
   width: 13rem
 }
 
 .w-full {
   width: 100%
-}
-
-.w-8 {
-  width: 2rem
-}
-
-.w-24 {
-  width: 6rem
-}
-
-.w-40 {
-  width: 10rem
 }
 
 .transform {
@@ -245,6 +217,10 @@
   --tw-gradient-to: #4f46e5 var(--tw-gradient-to-position)
 }
 
+.p-1 {
+  padding: 0.25rem
+}
+
 .p-2 {
   padding: 0.5rem
 }
@@ -255,10 +231,6 @@
 
 .p-8 {
   padding: 2rem
-}
-
-.p-1 {
-  padding: 0.25rem
 }
 
 .px-2 {
@@ -392,37 +364,14 @@
   color: rgb(243 244 246 / var(--tw-text-opacity))
 }
 
-.hover\:text-yellow-300:hover {
-  --tw-text-opacity: 1;
-  color: rgb(253 224 71 / var(--tw-text-opacity))
-}
-
 @media (min-width: 300px) {
   .mobile\:absolute {
     position: absolute
-  }
-
-  .mobile\:m-0 {
-    margin: 0px
-  }
-
-  .mobile\:hidden {
-    display: none
-  }
-
-  .mobile\:grid-cols-1 {
-    grid-template-columns: repeat(1, minmax(0, 1fr))
   }
 }
 
 @media (min-width: 900px) {
   .tablet\:hidden {
     display: none
-  }
-}
-
-@media (min-width: 1050px) {
-  .desktop\:m-auto {
-    margin: auto
   }
 }
