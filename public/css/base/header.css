@@ -131,6 +131,34 @@
   text-align: center
 }
 
+.font-Aktiv__bold {
+  font-family: Aktiv-Bold
+}
+
+.font-Aktiv__light {
+  font-family: Aktiv-Light
+}
+
+.font-Aktiv__medium {
+  font-family: Aktiv-Medium
+}
+
+.font-Aktiv__regular {
+  font-family: Aktiv-Regular
+}
+
+.font-mavis {
+  font-family: MAVIS
+}
+
+.font-mavis__bold {
+  font-family: MAVIS-Bold
+}
+
+.font-mavis__light {
+  font-family: MAVIS-Light
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem

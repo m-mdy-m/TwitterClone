@@ -1,5 +1,4 @@
 @tailwind utilities;
-@import url('base/fonts.css');
 @layer utilities {
   .header__navigation-link {
     @apply flex items-center text-white mr-4;
