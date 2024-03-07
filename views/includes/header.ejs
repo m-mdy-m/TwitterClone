@@ -2,7 +2,11 @@
 <body class="bg-body">
     <div class="container h-screen grid grid-cols-container ">
         <header class="header__navigation bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E] flex flex-col items-center justify-start px-2 py-1">
-            <%- include('./profile.ejs') %>
+            <% if(isAuth){ %>
+                <%- include('./profile.ejs') %>
+            <% }else{ %>
+                
+            <% } %>
             <!-- navigation -->
             <nav class="flex w-full mt-1 h-full flex-col items-start space-y-4 p-2  rounded-lg shadow-lg">
                 <!-- Home Link -->
