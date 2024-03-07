@@ -13,7 +13,7 @@ module.exports = {
         Aktiv__bold : "Aktiv-Bold",
       },
       gridTemplateColumns: {
-        container: " 30% minmax(70%, 1fr);",
+        container: " 25% minmax(75%, 1fr);",
       },
       backgroundColor: {
         body: "#101011",
