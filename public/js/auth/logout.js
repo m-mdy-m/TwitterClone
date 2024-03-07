@@ -12,7 +12,7 @@ async function handler(){
     const response = await axios.post("/auth/logout", {}, { headers });
     // Check if the response is successful
     if (response.status === 200 && response.data.success) {
-      window.location.href ='/login'
+      window.location.href ='auth/login'
       // Optionally, perform additional actions after logout
     } else {
       msgElm.classList.add('msg-errors')
