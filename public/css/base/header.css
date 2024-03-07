@@ -365,6 +365,10 @@
 }
 
 @media (min-width: 300px) {
+  .mobile\:absolute {
+    position: absolute
+  }
+
   .mobile\:m-0 {
     margin: 0px
   }
@@ -375,6 +379,12 @@
 
   .mobile\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr))
+  }
+}
+
+@media (min-width: 900px) {
+  .tablet\:hidden {
+    display: none
   }
 }
 
