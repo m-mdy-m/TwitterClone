@@ -66,6 +66,10 @@
   margin-top: 0.25rem
 }
 
+.block {
+  display: block
+}
+
 .flex {
   display: flex
 }
@@ -619,6 +623,12 @@
 
 .group:hover .group-hover\:opacity-100 {
   opacity: 1
+}
+
+@media (min-width: 300px) {
+  .mobile\:hidden {
+    display: none
+  }
 }
 
 @media (min-width: 768px) {
