@@ -4,7 +4,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        
+        mavis : "MAVIS",
+        mavis__bold : "MAVIS-Bold",
+        mavis__light : "MAVIS-Light",
+        Aktiv__regular : "Aktiv-Regular",
+        Aktiv__light : "Aktiv-Light",
+        Aktiv__medium : "Aktiv-Medium",
+        Aktiv__bold : "Aktiv-Bold",
       },
       gridTemplateColumns: {
         container: " 30% minmax(70%, 1fr);",
