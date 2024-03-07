@@ -31,34 +31,41 @@
                     </div>
                 </div>
             </div>
-            <nav class="flex w-full mt-2 h-full flex-col items-start space-y-8 ">
+            <nav class="flex w-full mt-2 h-full flex-col items-start space-y-8">
+                <!-- Home Link -->
                 <a href="/home" class="header__navigation-link">
                     <img src="/assets/icon/nav/home.svg" alt="HOME" class="bg-[#1DA1F2] images__icons-nav">
                     <h2 class="text-lg font-semibold text-white">Home</h2>
                 </a>
+                <!-- Search Link -->
                 <a href="/search" class="header__navigation-link">
                     <img src="/assets/icon/nav/search.svg" alt="SEARCH" class="bg-[#2895F0] images__icons-nav">
                     <h2 class="text-lg font-semibold text-white">Search</h2>
                 </a>
             <% if(isAuth){ %>
+                    <!-- Notifications Link -->
                     <a href="/notifications" class="header__navigation-link">
                         <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION" class="bg-[#3BA9FE] images__icons-nav">
                         <h2 class="text-lg font-semibold text-white">Notifications</h2>
                     </a>
+                    <!-- Messages Link -->
                     <a href="/messages" class="header__navigation-link">
                         <img src="/assets/icon/nav/mail.svg" alt="MESSAGE" class="bg-[#47B3FD] images__icons-nav">
                         <h2 class="text-lg font-semibold text-white">Messages</h2>
                     </a>
+                    <!-- Profile Link -->
                     <a href="/profile" class="header__navigation-link">
                         <img src="/assets/icon/nav/user.svg" alt="USER" class="bg-[#54BFFF] images__icons-nav">
                         <h2 class="text-lg font-semibold text-white">Profile</h2>
                     </a>
+                    <!-- Logout Link -->
                     <a href="/auth/logout" class="header__navigation-link logout">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="bg-[#6AC6FF] images__icons-nav">
                         <h2 class="text-lg font-semibold text-white">Logout</h2>
                     </a>
             <% } else{%>
+                    <!-- Signup Link -->
                     <a href="/auth/signup" class="header__navigation-link">
                         <img src="/assets/icon/utils/login.svg" alt="Signup" class="bg-[#6AC6FF] images__icons-nav">
                         <h2 class="text-lg font-semibold text-white">Signup</h2>
