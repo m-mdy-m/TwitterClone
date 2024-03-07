@@ -32,7 +32,7 @@
                 </div>
             </div>
             <!-- navigation -->
-            <nav class="flex w-full mt-2 h-full flex-col items-start space-y-8 p-4  rounded-lg shadow-lg">
+            <nav class="flex w-full mt-1 h-full flex-col items-start space-y-4 p-2  rounded-lg shadow-lg">
                 <!-- Home Link -->
                 <a href="/home" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                     <img src="/assets/icon/nav/home.svg" alt="HOME" class="bg-[#1DA1F2] images__icons-nav">
@@ -55,15 +55,15 @@
                         <h2 class="text-lg font-semibold text-white">Messages</h2>
                     </a>
                     <!-- Profile Link -->
-                    <a href="/profile" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                    <a href="/profile" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                         <img src="/assets/icon/nav/user.svg" alt="USER" class="images__icons-nav  bg-[#54BFFF]">
                         <h2 class="text-lg font-semibold text-white">Profile</h2>
                     </a>
                     <!-- Logout Link -->
-                    <a href="/auth/logout" class="header__navigation-link logout  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %> ">
+                    <a href="/auth/logout" class="header__navigation-link logout flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                         <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="images__icons-nav bg-[#6AC6FF]">
                         <h2 class="text-lg font-semibold text-white">Logout</h2>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %> ">
                     </a>
             <% } else{%>
                     <!-- Signup Link -->

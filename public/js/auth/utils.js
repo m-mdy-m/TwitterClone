@@ -1,6 +1,6 @@
 // Constants for valid and invalid colors
-const validColor = "#90EE90";
-const invalidColor = "#d04848";
+const validColor = "#2c713a";
+const invalidColor = "#9e3636";
 let passwordField;
 // Select all form groups
 const formGroup = document.querySelectorAll(".form-group");
