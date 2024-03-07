@@ -5,7 +5,12 @@
             <% if(isAuth){ %>
                 <%- include('./profile.ejs') %>
             <% }else{ %>
-                
+                <!-- Pale halo with signup icon -->
+                <div class="absolute top-0 left-0 right-0 bottom-0 bg-[#202636] opacity-30 rounded-lg hidden group-hover:flex items-center justify-center">
+                    <a href="/auth/signup" class="text-white font-Aktiv__regular text-4xl">
+                        <%- include('./profile.ejs') %>
+                    </a>
+                </div>
             <% } %>
             <!-- navigation -->
             <nav class="flex w-full mt-1 h-full flex-col items-start space-y-4 p-2  rounded-lg shadow-lg">
