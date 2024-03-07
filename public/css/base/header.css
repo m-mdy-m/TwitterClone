@@ -2,12 +2,24 @@
   position: absolute
 }
 
+.relative {
+  position: relative
+}
+
 .left-0 {
   left: 0px
 }
 
 .top-0 {
   top: 0px
+}
+
+.left-4 {
+  left: 1rem
+}
+
+.top-4 {
+  top: 1rem
 }
 
 .mb-4 {
@@ -298,6 +310,10 @@
   padding: 1rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.file\:h-screen::file-selector-button {
+  height: 100vh
 }
 
 .hover\:scale-105:hover {

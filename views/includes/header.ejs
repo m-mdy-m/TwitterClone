@@ -1,6 +1,7 @@
 </head>
 <body class="bg-body">
-    <div class="container mobile:m-0 desktop:m-auto h-screen grid grid-cols-container mobile:grid-cols-1 ">
+    <%- include('./header/mobile.ejs') %>
+    <div class="container file:h-screen grid grid-cols-container relative">
         <header class="header__navigation bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E] flex flex-col items-center justify-start px-2 py-1">
             <%- include('./header/base.ejs',{isAuth:isAuth}) %>
         </header>
