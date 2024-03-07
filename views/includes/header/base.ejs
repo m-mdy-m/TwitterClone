@@ -15,26 +15,14 @@
 <!-- navigation -->
 <nav class="flex w-full mt-1 h-full flex-col items-start space-y-4 p-2 rounded-lg shadow-lg">
     <!-- Home Link -->
-    <a href="/home" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
-        <img src="/assets/icon/nav/home.svg" alt="HOME" class=" images__icons-nav">
-        <h2 class="text-lg font-semibold text-white">Home</h2>
-    </a>
+    <%- include('./layouts/nav-icon.ejs', {url:'home'}) %>
     <% if(isAuth){ %>
         <!-- Notifications Link -->
-        <a href="/notifications" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
-            <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION" class="images__icons-nav ">
-            <h2 class="text-lg font-semibold text-white">Notifications</h2>
-        </a>
+        <%- include('./layouts/nav-icon.ejs', {url:'notifications'}) %>
         <!-- Messages Link -->
-        <a href="/messages" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
-            <img src="/assets/icon/nav/mail.svg" alt="MESSAGE" class="images__icons-nav">
-            <h2 class="text-lg font-semibold text-white">Messages</h2>
-        </a>
+        <%- include('./layouts/nav-icon.ejs', {url:'messages'}) %>
         <!-- Setting Link -->
-        <a href="/setting" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
-            <img src="/assets/icon/nav/setting.svg" alt="SETTING" class="images__icons-nav">
-            <h2 class="text-lg font-semibold text-white">Setting</h2>
-        </a>
+        <%- include('./layouts/nav-icon.ejs', {url:'setting'}) %>
         <!-- Logout Link -->
         <a href="/auth/logout" class="header__navigation-link logout flex items-center space-x-4 transition duration-300 transform hover:scale-105">
             <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="images__icons-nav">
