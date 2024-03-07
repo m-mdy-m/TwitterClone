@@ -9,7 +9,7 @@ async function handler(){
     const headers = {
       'X-CSRF-TOKEN': csrfToken
     };
-    const response = await axios.post("/auth/logout", {}, { headers });
+    const response = await axios.post("/auth/login", {}, { headers });
     // Check if the response is successful
     if (response.status === 200 && response.data.success) {
       window.location.href ='auth/login'
