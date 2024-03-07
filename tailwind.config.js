@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        container: " 15% minmax(85%, 1fr);",
+        container: " 30% minmax(70%, 1fr);",
       },
       backgroundColor: {
         body: "#101011",
