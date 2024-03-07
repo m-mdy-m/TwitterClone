@@ -6,7 +6,7 @@
                 <%- include('./profile.ejs') %>
             <% }else{ %>
                 <!-- Pale halo with signup icon -->
-                <div class="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center p-8 transform transition duration-300 hover:scale-105">
+                <div class="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center p-8 transform transition duration-300 hover:scale-105 mb-4">
                     <a href="/auth/signup" class="flex flex-col items-center justify-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-gray-300 hover:text-gray-100" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 1a9 9 0 0 0-6.364 15.364L10 19.243l6.364-2.879A9 9 0 0 0 10 1zm0 3a5.95 5.95 0 0 0-4.243 1.757A5.953 5.953 0 0 0 4 10c0 1.41.49 2.702 1.317 3.707L10 17.079l4.683-3.372A5.953 5.953 0 0 0 16 10c0-1.567-.61-3.034-1.732-4.243A5.95 5.95 0 0 0 10 4z" clip-rule="evenodd" />
@@ -15,31 +15,27 @@
                         <p class="text-gray-300 text-sm mt-2">Create an account to unlock more features</p>
                     </a>
                 </div>
-                <!-- Pale blank for profile section -->
-                <div class="rounded-lg p-8 mt-4 shadow-md">
-                    <p class="text-gray-700 text-center">Unlock the full profile experience by signing up!</p>
-                </div>
             <% } %>
             <!-- navigation -->
-            <nav class="flex w-full mt-1 h-full flex-col items-start space-y-4 p-2  rounded-lg shadow-lg">
+            <nav class="flex w-full mt-1 h-full flex-col items-start space-y-4 p-2 rounded-lg shadow-lg">
                 <!-- Home Link -->
                 <a href="/home" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                     <img src="/assets/icon/nav/home.svg" alt="HOME" class=" images__icons-nav">
                     <h2 class="text-lg font-semibold text-white">Home</h2>
                 </a>
-            <% if(isAuth){ %>
+                <% if(isAuth){ %>
                     <!-- Notifications Link -->
-                    <a href="/notifications" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                    <a href="/notifications" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                         <img src="/assets/icon/nav/notification.svg" alt="NOTIFICATION" class="images__icons-nav ">
                         <h2 class="text-lg font-semibold text-white">Notifications</h2>
                     </a>
                     <!-- Messages Link -->
-                    <a href="/messages" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                    <a href="/messages" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                         <img src="/assets/icon/nav/mail.svg" alt="MESSAGE" class="images__icons-nav">
                         <h2 class="text-lg font-semibold text-white">Messages</h2>
                     </a>
                     <!-- Setting Link -->
-                    <a href="/setting" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                    <a href="/setting" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                         <img src="/assets/icon/nav/setting.svg" alt="SETTING" class="images__icons-nav">
                         <h2 class="text-lg font-semibold text-white">Setting</h2>
                     </a>
@@ -49,12 +45,12 @@
                         <h2 class="text-lg font-semibold text-white">Logout</h2>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %> ">
                     </a>
-            <% } else{%>
+                <% } else{%>
                     <!-- Signup Link -->
-                    <a href="/auth/signup" class="header__navigation-link  flex items-center space-x-4 transition duration-300 transform hover:scale-105">
+                    <a href="/auth/signup" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
                         <img src="/assets/icon/utils/login.svg" alt="Signup" class="images__icons-nav ">
                         <h2 class="text-lg font-semibold text-white">Signup</h2>
                     </a>
-            <% } %>
+                <% } %>
             </nav>
         </header>
