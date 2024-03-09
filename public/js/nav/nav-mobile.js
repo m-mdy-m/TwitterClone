@@ -3,7 +3,6 @@ const iconNavigation = document.getElementById("iconNavigation");
 const cancelIcon = document.getElementById("cancelIcon");
 // Add event listener to the navigation icon to open the mobile navigation
 iconNavigation.addEventListener("click", () => {
-  console.log("clicked");
   navMobile.classList.add("show-nav-mobile");
 });
 
