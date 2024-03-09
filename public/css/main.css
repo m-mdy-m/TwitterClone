@@ -9,4 +9,7 @@
   .header__navigation-info-user-text{
     @apply text-sm
   }
+  .header__navigation-bg{
+    @apply bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E]
+  }
 }

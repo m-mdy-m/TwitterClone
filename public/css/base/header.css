@@ -6,36 +6,20 @@
   position: relative
 }
 
-.left-12 {
-  left: 3rem
+.left-0 {
+  left: 0px
 }
 
 .left-4 {
   left: 1rem
 }
 
-.top-10 {
-  top: 2.5rem
-}
-
-.top-4 {
-  top: 1rem
-}
-
-.left-0 {
-  left: 0px
-}
-
 .top-0 {
   top: 0px
 }
 
-.m-1 {
-  margin: 0.25rem
-}
-
-.m-5 {
-  margin: 1.25rem
+.top-4 {
+  top: 1rem
 }
 
 .mb-4 {
@@ -74,12 +58,12 @@
   height: 3rem
 }
 
-.h-32 {
-  height: 8rem
+.h-2\/3 {
+  height: 66.666667%
 }
 
-.h-64 {
-  height: 16rem
+.h-32 {
+  height: 8rem
 }
 
 .h-full {
@@ -90,14 +74,6 @@
   height: 100vh
 }
 
-.h-\[18rem\] {
-  height: 18rem
-}
-
-.h-2\/3 {
-  height: 66.666667%
-}
-
 .w-12 {
   width: 3rem
 }
@@ -106,8 +82,8 @@
   width: 8rem
 }
 
-.w-40 {
-  width: 10rem
+.w-48 {
+  width: 12rem
 }
 
 .w-52 {
@@ -118,8 +94,20 @@
   width: 100%
 }
 
-.w-48 {
-  width: 12rem
+.w-1\/6 {
+  width: 16.666667%
+}
+
+.w-4\/6 {
+  width: 66.666667%
+}
+
+.w-3\/6 {
+  width: 50%
+}
+
+.w-2\/6 {
+  width: 33.333333%
 }
 
 .transform {
@@ -223,11 +211,6 @@
   background-color: rgb(31 41 55 / var(--tw-bg-opacity))
 }
 
-.bg-red-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 113 113 / var(--tw-bg-opacity))
-}
-
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
 }
@@ -273,16 +256,12 @@
   padding: 1rem
 }
 
-.p-8 {
-  padding: 2rem
-}
-
-.p-3 {
-  padding: 0.75rem
-}
-
 .p-5 {
   padding: 1.25rem
+}
+
+.p-8 {
+  padding: 2rem
 }
 
 .px-2 {
@@ -400,6 +379,16 @@
   line-height: 1.25rem
 }
 
+.header__navigation-bg {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+  --tw-gradient-from: #0F141E var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(15 20 30 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  --tw-gradient-to: rgb(29 31 38 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #1D1F26 var(--tw-gradient-via-position), var(--tw-gradient-to);
+  --tw-gradient-to: #0F141E var(--tw-gradient-to-position)
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -456,8 +445,24 @@
     height: 3rem
   }
 
+  .mobile\:h-2\/3 {
+    height: 66.666667%
+  }
+
+  .mobile\:h-full {
+    height: 100%
+  }
+
   .mobile\:w-12 {
     width: 3rem
+  }
+
+  .mobile\:w-3\/6 {
+    width: 50%
+  }
+
+  .mobile\:w-4\/6 {
+    width: 66.666667%
   }
 
   .mobile\:gap-0 {
@@ -468,12 +473,12 @@
     border-width: 1px
   }
 
-  .mobile\:p-2 {
-    padding: 0.5rem
-  }
-
   .mobile\:p-1 {
     padding: 0.25rem
+  }
+
+  .mobile\:p-2 {
+    padding: 0.5rem
   }
 
   .mobile\:text-sm {
