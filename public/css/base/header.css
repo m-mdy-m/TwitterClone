@@ -156,12 +156,25 @@
   border-radius: 0.375rem
 }
 
+.border {
+  border-width: 1px
+}
+
 .border-4 {
   border-width: 4px
 }
 
 .border-b-4 {
   border-bottom-width: 4px
+}
+
+.border-l {
+  border-left-width: 1px
+}
+
+.border-\[\#28282a\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(40 40 42 / var(--tw-border-opacity))
 }
 
 .border-\[\#2f2f30\] {
@@ -174,9 +187,9 @@
   border-color: rgb(255 255 255 / var(--tw-border-opacity))
 }
 
-.bg-\[\#19191b\] {
+.bg-\[\#19191a\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(25 25 27 / var(--tw-bg-opacity))
+  background-color: rgb(25 25 26 / var(--tw-bg-opacity))
 }
 
 .bg-blue-500 {
