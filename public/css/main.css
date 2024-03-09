@@ -15,5 +15,7 @@
   .header__navigation-bg {
     @apply bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E];
   }
-  
+  .header__navigation-bg-transparent {
+    @apply bg-gradient-to-b from-transparent via-transparent to-transparent;
+  }
 }
