@@ -316,6 +316,10 @@
   font-family: Aktiv-Regular
 }
 
+.font-Aktiv__medium {
+  font-family: Aktiv-Medium
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -690,6 +694,14 @@
     padding: 0.25rem
   }
 
+  .mobile\:p-4 {
+    padding: 1rem
+  }
+
+  .mobile\:p-2 {
+    padding: 0.5rem
+  }
+
   .mobile\:text-base {
     font-size: 1rem;
     line-height: 1.5rem
@@ -703,6 +715,18 @@
   .mobile\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem
+  }
+
+  .mobile\:text-\[8px\] {
+    font-size: 8px
+  }
+
+  .mobile\:text-\[10px\] {
+    font-size: 10px
+  }
+
+  .mobile\:text-\[8\] {
+    color: 8
   }
 }
 
@@ -764,6 +788,11 @@
     font-size: 1rem;
     line-height: 1.5rem
   }
+
+  .smallTb\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+  }
 }
 
 @media (min-width: 900px) {
@@ -785,6 +814,16 @@
 
   .tablet\:flex-col {
     flex-direction: column
+  }
+
+  .tablet\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem
+  }
+
+  .tablet\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
   }
 }
 
