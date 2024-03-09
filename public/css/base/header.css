@@ -457,12 +457,28 @@
     margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
   }
 
+  .mobile\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0px * var(--tw-space-y-reverse))
+  }
+
+  .mobile\:space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+  }
+
   .mobile\:border {
     border-width: 1px
   }
 
   .mobile\:p-1 {
     padding: 0.25rem
+  }
+
+  .mobile\:p-0 {
+    padding: 0px
   }
 
   .mobile\:text-base {
