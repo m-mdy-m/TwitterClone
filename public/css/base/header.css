@@ -428,6 +428,12 @@
   }
 }
 
+@media (min-width: 600px) {
+  .smallTb\:hidden {
+    display: none
+  }
+}
+
 @media (min-width: 900px) {
   .tablet\:hidden {
     display: none
