@@ -1,13 +1,15 @@
-<%- include("includes/base.ejs") %> 
-<%- include("includes/header.ejs") %>
-    <!-- BOX HOME -->
-  <div class="grid grid-rows-home py-5 px-7">
-    <div class="w-full bg-red-500 flex justify-center">
-      <%- include('includes/home/story.ejs') %>
-    </div>
-    <!-- Wrapper Posts -->
-    <div class=""></div>
+<%- include("includes/base.ejs") %> <%- include("includes/header.ejs") %>
+<!-- BOX HOME -->
+<div class="grid grid-rows-home py-5 px-7">
+  <div class="w-full flex justify-start">
+    <%- include('includes/home/story.ejs') %>
+    <%- include('includes/home/story.ejs') %>
+    <%- include('includes/home/story.ejs') %>
+    <%- include('includes/home/story.ejs') %>
   </div>
-  <!-- Wrapper Directs -->
-  <div class="border-l border-[#28282a]"></div>
+  <!-- Wrapper Posts -->
+  <div class=""></div>
+</div>
+<!-- Wrapper Directs -->
+<div class="border-l border-[#28282a]"></div>
 <%- include("includes/end.ejs") %>
