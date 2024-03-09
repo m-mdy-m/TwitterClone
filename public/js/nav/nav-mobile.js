@@ -1,5 +1,15 @@
 const navMobile = document.getElementById("nav-mobile");
-
+const shouldDisplayWelcomePhoto = localStorage.getItem('showWelcomePhoto');
+if (shouldDisplayWelcomePhoto) {
+    document.getElementById('welcome-user').style.display = 'block';
+    // Optionally, set an expiry for the flag after 10 minutes
+    setTimeout(() => {
+        localStorage.removeItem('showWelcomePhoto');
+        document.getElementById('welcome-user').style.display = 'none';
+    }, 10 * 60 * 1000); // 10 minutes
+} else {
+    document.getElementById('welcome-user').style.display = 'none';
+}
 // Function to handle navigation events
 function handleNavigation() {
     const iconNavigation = document.getElementById("iconNavigation");
