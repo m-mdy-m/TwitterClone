@@ -22,6 +22,22 @@
   top: 1rem
 }
 
+.left-0 {
+  left: 0px
+}
+
+.top-0 {
+  top: 0px
+}
+
+.m-1 {
+  margin: 0.25rem
+}
+
+.m-5 {
+  margin: 1.25rem
+}
+
 .mb-4 {
   margin-bottom: 1rem
 }
@@ -74,6 +90,14 @@
   height: 100vh
 }
 
+.h-\[18rem\] {
+  height: 18rem
+}
+
+.h-2\/3 {
+  height: 66.666667%
+}
+
 .w-12 {
   width: 3rem
 }
@@ -92,6 +116,10 @@
 
 .w-full {
   width: 100%
+}
+
+.w-48 {
+  width: 12rem
 }
 
 .transform {
@@ -249,6 +277,14 @@
   padding: 2rem
 }
 
+.p-3 {
+  padding: 0.75rem
+}
+
+.p-5 {
+  padding: 1.25rem
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem
@@ -285,10 +321,6 @@
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem
-}
-
-.font-bold {
-  font-weight: 700
 }
 
 .font-semibold {
@@ -349,8 +381,23 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.file\:h-screen::file-selector-button {
-  height: 100vh
+.header__navigation-info-user {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700
+}
+
+@media (min-width: 300px) {
+  .header__navigation-info-user {
+    font-family: Aktiv-Medium;
+    font-size: 0.875rem;
+    line-height: 1.25rem
+  }
+}
+
+.header__navigation-info-user-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem
 }
 
 .hover\:scale-105:hover {
@@ -425,8 +472,8 @@
     padding: 0.5rem
   }
 
-  .mobile\:font-Aktiv__bold {
-    font-family: Aktiv-Bold
+  .mobile\:p-1 {
+    padding: 0.25rem
   }
 
   .mobile\:text-sm {
@@ -437,16 +484,6 @@
   .mobile\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem
-  }
-}
-
-@media (min-width: 600px) {
-  .smallTb\:flex {
-    display: flex
-  }
-
-  .smallTb\:hidden {
-    display: none
   }
 }
 
