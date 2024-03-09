@@ -30,7 +30,7 @@ module.exports = {
         },
       },
       screens: {
-        mobile: "300px", // Mobile screens (default)
+        mobile: "250px", // Mobile screens (default)
         smallTb: "600px", // Small tablets
         tablet: "900px", // Tablets
         desktop: "1050px", // Desktops

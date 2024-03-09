@@ -189,16 +189,6 @@
   padding: 1rem
 }
 
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem
-}
-
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
-}
-
 .text-center {
   text-align: center
 }
@@ -282,7 +272,7 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-@media (min-width: 300px) {
+@media (min-width: 250px) {
   .header__navigation-link {
     margin-right: 0px;
     padding: 0px
@@ -293,7 +283,7 @@
   font-weight: 700
 }
 
-@media (min-width: 300px) {
+@media (min-width: 250px) {
   .header__navigation-info-user {
     font-family: Aktiv-Medium;
     font-size: 0.875rem;
@@ -312,7 +302,7 @@
   font-weight: 700
 }
 
-@media (min-width: 300px) {
+@media (min-width: 250px) {
   .header__navigation-info-user i {
     font-family: Aktiv-Medium
   }
@@ -379,7 +369,7 @@
   color: rgb(243 244 246 / var(--tw-text-opacity))
 }
 
-@media (min-width: 300px) {
+@media (min-width: 250px) {
   .mobile\:fixed {
     position: fixed
   }
@@ -408,28 +398,20 @@
     margin-top: 0.5rem
   }
 
-  .mobile\:h-7 {
-    height: 1.75rem
-  }
-
-  .mobile\:h-14 {
-    height: 3.5rem
-  }
-
   .mobile\:h-16 {
     height: 4rem
   }
 
-  .mobile\:w-7 {
-    width: 1.75rem
-  }
-
-  .mobile\:w-14 {
-    width: 3.5rem
+  .mobile\:h-7 {
+    height: 1.75rem
   }
 
   .mobile\:w-16 {
     width: 4rem
+  }
+
+  .mobile\:w-7 {
+    width: 1.75rem
   }
 
   .mobile\:items-start {
