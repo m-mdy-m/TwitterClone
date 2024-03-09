@@ -62,6 +62,10 @@
   height: 8rem
 }
 
+.h-6 {
+  height: 1.5rem
+}
+
 .h-full {
   height: 100%
 }
@@ -82,8 +86,17 @@
   width: 13rem
 }
 
+.w-6 {
+  width: 1.5rem
+}
+
 .w-full {
   width: 100%
+}
+
+.rotate-0 {
+  --tw-rotate: 0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .transform {
@@ -301,8 +314,18 @@
   transition-duration: 150ms
 }
 
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
 .duration-300 {
   transition-duration: 300ms
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .header__navigation-link {
@@ -390,6 +413,11 @@
   color: rgb(243 244 246 / var(--tw-text-opacity))
 }
 
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px
+}
+
 @media (min-width: 300px) {
   .mobile\:absolute {
     position: absolute
@@ -457,12 +485,6 @@
     margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
   }
 
-  .mobile\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(0px * var(--tw-space-y-reverse))
-  }
-
   .mobile\:space-y-2 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -473,12 +495,12 @@
     border-width: 1px
   }
 
-  .mobile\:p-1 {
-    padding: 0.25rem
-  }
-
   .mobile\:p-0 {
     padding: 0px
+  }
+
+  .mobile\:p-1 {
+    padding: 0.25rem
   }
 
   .mobile\:text-base {
