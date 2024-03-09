@@ -1,0 +1,23 @@
+#nav-mobile {
+  width: 0;
+  height: 100%;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 9999;
+  transition: width 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.show-nav-mobile {
+  width: 66.666667%;
+  transform: translateX(0);
+  display: block !important;
+}
+
+.hide-nav-mobile {
+  width: 0;
+  transform: translateX(-100%);
+  display: none !important;
+}
