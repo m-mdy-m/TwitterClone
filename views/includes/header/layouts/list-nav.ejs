@@ -8,15 +8,15 @@
     <!-- Setting Link -->
     <%- include('./nav-icon.ejs', {url:'setting'}) %>
     <!-- Logout Link -->
-    <a href="/auth/logout" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 transition duration-300 transform hover:scale-105">
-        <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="tablet:images__icons-nav mobile:w-4 mobile:h-4">
-        <h2 class="text-lg font-semibold text-white capitalize mobile:text-base">Logout</h2>
+    <a href="/auth/logout" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105">
+        <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="tablet:images__icons-nav mobile:w-4 mobile:h-4 smallTb:w-8 smallTb:h-8">
+        <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">Logout</h2>
         <input type="hidden" name="_csrf" value="<%= csrfToken %> ">
     </a>
 <% } else{%>
     <!-- Signup Link -->
-    <a href="/auth/signup" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 transition duration-300 transform hover:scale-105">
-        <img src="/assets/icon/utils/login.svg" alt="Signup" class="tablet:images__icons-nav mobile:w-4 mobile:h-4 ">
-        <h2 class="text-lg font-semibold text-white capitalize mobile:text-base">Signup</h2>
+    <a href="/auth/signup" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105">
+        <img src="/assets/icon/utils/login.svg" alt="Signup" class="tablet:images__icons-nav mobile:w-4 mobile:h-4 smallTb:w-8 smallTb:h-8 ">
+        <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">Signup</h2>
     </a>
 <% } %>
