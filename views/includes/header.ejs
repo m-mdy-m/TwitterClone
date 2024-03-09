@@ -1,10 +1,5 @@
 </head>
 <body class="bg-body">
     <div class="container mobile:m-0 tablet:m-auto h-screen grid grid-cols-container relative">
-        <header class=" h-full header__navigation  header__navigation-bg flex flex-col items-center justify-start px-2 py-1">
-            <% if(screen.width < 900){ %>
-                <%- include('./header/mobile.ejs') %>
-            <% }else{ %>
-                <%- include('./header/base.ejs',{isAuth:isAuth}) %>
-            <% } %>
-        </header>
+        <%- include('./header/mobile.ejs') %>
+        <%- include('./header/base.ejs',{isAuth:isAuth}) %>
