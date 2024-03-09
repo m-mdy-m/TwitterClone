@@ -572,6 +572,14 @@
     position: absolute
   }
 
+  .mobile\:-left-\[100rem\] {
+    left: -100rem
+  }
+
+  .mobile\:top-0 {
+    top: 0px
+  }
+
   .mobile\:m-0 {
     margin: 0px
   }
@@ -682,6 +690,10 @@
     margin-bottom: calc(1.5rem * var(--tw-space-y-reverse))
   }
 
+  .mobile\:rounded-lg {
+    border-radius: 0.5rem
+  }
+
   .mobile\:border {
     border-width: 1px
   }
@@ -727,6 +739,12 @@
 
   .mobile\:text-\[8\] {
     color: 8
+  }
+
+  .mobile\:shadow-lg {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
   }
 }
 
@@ -796,6 +814,14 @@
 }
 
 @media (min-width: 900px) {
+  .tablet\:relative {
+    position: relative
+  }
+
+  .tablet\:inset-auto {
+    inset: auto
+  }
+
   .tablet\:m-auto {
     margin: auto
   }
@@ -812,8 +838,40 @@
     display: none
   }
 
+  .tablet\:h-full {
+    height: 100%
+  }
+
   .tablet\:flex-col {
     flex-direction: column
+  }
+
+  .tablet\:space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+  }
+
+  .tablet\:rounded-none {
+    border-radius: 0px
+  }
+
+  .tablet\:p-2 {
+    padding: 0.5rem
+  }
+
+  .tablet\:p-8 {
+    padding: 2rem
+  }
+
+  .tablet\:py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem
+  }
+
+  .tablet\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem
   }
 
   .tablet\:text-base {
@@ -824,6 +882,17 @@
   .tablet\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem
+  }
+
+  .tablet\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem
+  }
+
+  .tablet\:shadow-none {
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
   }
 }
 
