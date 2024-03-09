@@ -32,3 +32,8 @@
     width: 30%;
   }
 }
+@media screen and (min-width: 900px) {
+  .show-nav {
+    width: 100%;
+  }
+}

@@ -4,13 +4,13 @@
     @apply flex items-center text-white mr-4 mobile:mr-0 mobile:p-0 p-4 rounded-md justify-start w-full;
   }
   .header__navigation-info-user {
-    @apply text-lg mobile:text-sm font-bold mobile:font-Aktiv__medium;
+    @apply tablet:text-lg mobile:text-sm font-bold mobile:font-Aktiv__medium;
   }
   .header__navigation-info-user i {
     @apply mobile:font-Aktiv__medium font-bold;
   }
   .header__navigation-info-user-text {
-    @apply text-sm;
+    @apply mobile:text-sm;
   }
   .header__navigation-bg {
     @apply bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E];
