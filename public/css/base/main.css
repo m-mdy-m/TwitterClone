@@ -46,23 +46,12 @@
   z-index: 50;
 }
 
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-}
-
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .mr-4 {
@@ -79,10 +68,6 @@
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .flex {
@@ -107,6 +92,10 @@
 
 .h-16 {
   height: 4rem;
+}
+
+.h-32 {
+  height: 8rem;
 }
 
 .h-full {
@@ -151,6 +140,10 @@
 
 .grid-cols-main {
   grid-template-columns: 80% minmax(20% ,1fr);
+}
+
+.grid-cols-tweet {
+  grid-template-columns: 15% minmax(85%,1fr);
 }
 
 .grid-rows-home {
@@ -211,12 +204,12 @@
   border-width: 1px;
 }
 
-.border-4 {
-  border-width: 4px;
-}
-
 .border-2 {
   border-width: 2px;
+}
+
+.border-4 {
+  border-width: 4px;
 }
 
 .border-b-4 {
@@ -237,14 +230,14 @@
   border-color: rgb(47 47 48 / var(--tw-border-opacity));
 }
 
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
 .border-\[\#403e42\] {
   --tw-border-opacity: 1;
   border-color: rgb(64 62 66 / var(--tw-border-opacity));
+}
+
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
 .bg-\[\#19191a\] {
@@ -255,6 +248,11 @@
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.bg-blue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 
 .bg-body {
@@ -272,9 +270,14 @@
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
-.bg-red-500 {
+.bg-green-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+}
+
+.bg-yellow-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-br {
@@ -323,19 +326,33 @@
   padding: 1rem;
 }
 
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.px-7 {
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-.py-5 {
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.pt-5 {
   padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
 }
 
 .text-center {
@@ -884,14 +901,4 @@
     --tw-gradient-stops: var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to);
     --tw-gradient-to: transparent var(--tw-gradient-to-position);
   }
-}
-
-.\[\&\>\*\]\:mx-2>* {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-.\[\&\>\*\]\:px-2>* {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }

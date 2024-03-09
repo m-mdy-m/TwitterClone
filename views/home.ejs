@@ -1,9 +1,17 @@
 <%- include("includes/base.ejs") %> <%- include("includes/header.ejs") %>
 <!-- BOX HOME -->
-<div class="grid grid-rows-home py-5 px-7">
+<div class="grid grid-rows-home ">
   <%- include('includes/home/section-stories.ejs',{src : '/assets/icon/nav/user.svg',UsernameStory:'m__mdy__m'}) %>
   <!-- Wrapper Posts -->
-  <div class=""></div>
+  <div class="bg-green-400 pt-5 px-8">
+    <!-- Post Box -->
+    <div class="grid grid-cols-tweet h-32 rounded-lg px-4">
+      <div class="bg-blue-700 w-full h-full">
+        <%- include('includes/shared/user-profile.ejs') %>
+      </div>
+      <div class="bg-yellow-500 w-full h-full"></div>
+    </div>
+  </div>
 </div>
 <!-- Wrapper Directs -->
 <div class="border-l border-[#28282a]"></div>

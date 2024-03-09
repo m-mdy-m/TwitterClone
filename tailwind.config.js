@@ -15,6 +15,7 @@ module.exports = {
       gridTemplateColumns: {
         container: " 25% minmax(75%, 1fr);",
         main: "80% minmax(20% ,1fr)",
+        tweet: "15% minmax(85%,1fr)",
       },
       gridTemplateRows: {
         home: "20% minmax(80% ,1fr)",
