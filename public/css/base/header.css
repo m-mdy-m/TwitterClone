@@ -110,6 +110,10 @@
   grid-template-columns: 80% minmax(20% ,1fr)
 }
 
+.grid-rows-home {
+  grid-template-rows: 20% minmax(80% ,1fr)
+}
+
 .flex-col {
   flex-direction: column
 }
@@ -210,6 +214,16 @@
 .bg-gray-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity))
+}
+
+.bg-green-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity))
+}
+
+.bg-red-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity))
 }
 
 .bg-gradient-to-br {

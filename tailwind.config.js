@@ -3,18 +3,21 @@ module.exports = {
   content: ["./views/**/*.ejs"],
   theme: {
     extend: {
-      fontFamily:{
-        mavis : "MAVIS",
-        mavis__bold : "MAVIS-Bold",
-        mavis__light : "MAVIS-Light",
-        Aktiv__regular : "Aktiv-Regular",
-        Aktiv__light : "Aktiv-Light",
-        Aktiv__medium : "Aktiv-Medium",
-        Aktiv__bold : "Aktiv-Bold",
+      fontFamily: {
+        mavis: "MAVIS",
+        mavis__bold: "MAVIS-Bold",
+        mavis__light: "MAVIS-Light",
+        Aktiv__regular: "Aktiv-Regular",
+        Aktiv__light: "Aktiv-Light",
+        Aktiv__medium: "Aktiv-Medium",
+        Aktiv__bold: "Aktiv-Bold",
       },
       gridTemplateColumns: {
         container: " 25% minmax(75%, 1fr);",
-        main : "80% minmax(20% ,1fr)"
+        main: "80% minmax(20% ,1fr)",
+      },
+      gridTemplateRows: {
+        home: "15% minmax(85% ,1fr)",
       },
       backgroundColor: {
         body: "#131314",
