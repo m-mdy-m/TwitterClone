@@ -1,4 +1,5 @@
 const navMobile = document.getElementById("nav-mobile");
+
 // Function to handle navigation events
 function handleNavigation() {
     const iconNavigation = document.getElementById("iconNavigation");
