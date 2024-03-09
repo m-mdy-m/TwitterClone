@@ -22,6 +22,14 @@
   top: 1rem
 }
 
+.right-0 {
+  right: 0px
+}
+
+.right-4 {
+  right: 1rem
+}
+
 .mb-4 {
   margin-bottom: 1rem
 }
