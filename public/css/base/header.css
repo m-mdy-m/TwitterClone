@@ -612,6 +612,10 @@
     padding: 2rem
   }
 
+  .tablet\:p-5 {
+    padding: 1.25rem
+  }
+
   .tablet\:pt-0 {
     padding-top: 0px
   }

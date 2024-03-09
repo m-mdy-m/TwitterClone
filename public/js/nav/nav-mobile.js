@@ -18,7 +18,7 @@ function handleNavigation() {
 
     // Add event listener to close the mobile navigation if clicked outside of it
     document.addEventListener("click", (event) => {
-        if (!navMobile.contains(event.target) && !iconNavigation.contains(event.target)) {
+        if (!navMobile.contains(event.target) && !iconNavigation.contains(event.target) && window.innerWidth < 900) {
             navMobile.classList.add("hide-nav");
             navMobile.classList.remove("show-nav");
         }
