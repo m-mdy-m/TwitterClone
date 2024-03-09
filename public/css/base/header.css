@@ -30,14 +30,6 @@
   top: 1rem
 }
 
-.top-8 {
-  top: 2rem
-}
-
-.right-8 {
-  right: 2rem
-}
-
 .top-6 {
   top: 1.5rem
 }
@@ -213,16 +205,16 @@
   --tw-gradient-to: #4f46e5 var(--tw-gradient-to-position)
 }
 
+.p-0 {
+  padding: 0px
+}
+
 .p-1 {
   padding: 0.25rem
 }
 
 .p-4 {
   padding: 1rem
-}
-
-.p-0 {
-  padding: 0px
 }
 
 .text-center {
@@ -436,32 +428,12 @@
     height: 1.75rem
   }
 
-  .mobile\:h-8 {
-    height: 2rem
-  }
-
-  .mobile\:h-4 {
-    height: 1rem
-  }
-
   .mobile\:w-24 {
     width: 6rem
   }
 
   .mobile\:w-7 {
     width: 1.75rem
-  }
-
-  .mobile\:w-8 {
-    width: 2rem
-  }
-
-  .mobile\:w-4 {
-    width: 1rem
-  }
-
-  .mobile\:grid-cols-1 {
-    grid-template-columns: repeat(1, minmax(0, 1fr))
   }
 
   .mobile\:items-start {
@@ -510,10 +482,6 @@
 
   .mobile\:p-5 {
     padding: 1.25rem
-  }
-
-  .mobile\:p-8 {
-    padding: 2rem
   }
 
   .mobile\:px-2 {
@@ -635,10 +603,6 @@
     display: none
   }
 
-  .tablet\:h-12 {
-    height: 3rem
-  }
-
   .tablet\:h-32 {
     height: 8rem
   }
@@ -647,16 +611,8 @@
     height: 100%
   }
 
-  .tablet\:w-12 {
-    width: 3rem
-  }
-
   .tablet\:w-32 {
     width: 8rem
-  }
-
-  .tablet\:grid-cols-container {
-    grid-template-columns: 25% minmax(75%, 1fr);
   }
 
   .tablet\:flex-col {
