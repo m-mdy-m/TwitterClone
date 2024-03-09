@@ -1,16 +1,13 @@
 const navMobile = document.getElementById("nav-mobile");
 const iconNavigation = document.getElementById("iconNavigation");
 const cancelIcon = document.getElementById("cancelIcon");
-
-// Hide the mobile navigation initially
-navMobile.style.width = "0";
-
 // Add event listener to the navigation icon to open the mobile navigation
 iconNavigation.addEventListener("click", () => {
-  navMobile.style.width = "100%";
+  console.log("clicked");
+  navMobile.classList.add("show-nav-mobile");
 });
 
 // Add event listener to the cancel icon to close the mobile navigation
 cancelIcon.addEventListener("click", () => {
-  navMobile.style.width = "0";
+  navMobile.classList.remove("show-nav-mobile");
 });

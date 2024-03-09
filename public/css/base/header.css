@@ -14,20 +14,16 @@
   left: 1rem
 }
 
+.right-4 {
+  right: 1rem
+}
+
 .top-0 {
   top: 0px
 }
 
 .top-4 {
   top: 1rem
-}
-
-.right-0 {
-  right: 0px
-}
-
-.right-4 {
-  right: 1rem
 }
 
 .mb-4 {
@@ -70,10 +66,6 @@
   height: 8rem
 }
 
-.h-6 {
-  height: 1.5rem
-}
-
 .h-full {
   height: 100%
 }
@@ -94,17 +86,8 @@
   width: 13rem
 }
 
-.w-6 {
-  width: 1.5rem
-}
-
 .w-full {
   width: 100%
-}
-
-.rotate-0 {
-  --tw-rotate: 0deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .transform {
@@ -181,10 +164,6 @@
 
 .border-4 {
   border-width: 4px
-}
-
-.border-b {
-  border-bottom-width: 1px
 }
 
 .border-white {
@@ -307,14 +286,14 @@
   color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
 .text-teal-500 {
   --tw-text-opacity: 1;
   color: rgb(20 184 166 / var(--tw-text-opacity))
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 .shadow-lg {
@@ -327,12 +306,6 @@
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-
-.transition-transform {
-  transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
 }
@@ -409,6 +382,17 @@
   --tw-gradient-to: #0F141E var(--tw-gradient-to-position)
 }
 
+.show-nav-mobile {
+  display: block !important
+}
+
+@media (min-width: 300px) {
+  .show-nav-mobile {
+    height: 100%;
+    width: 66.666667%
+  }
+}
+
 .hover\:rotate-45:hover {
   --tw-rotate: 45deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
@@ -445,11 +429,6 @@
   opacity: 0.8
 }
 
-.focus\:outline-none:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px
-}
-
 @media (min-width: 300px) {
   .mobile\:absolute {
     position: absolute
@@ -483,28 +462,12 @@
     height: 1rem
   }
 
-  .mobile\:h-full {
-    height: 100%
-  }
-
   .mobile\:w-12 {
     width: 3rem
   }
 
   .mobile\:w-4 {
     width: 1rem
-  }
-
-  .mobile\:w-4\/6 {
-    width: 66.666667%
-  }
-
-  .mobile\:w-40 {
-    width: 10rem
-  }
-
-  .mobile\:w-0 {
-    width: 0px
   }
 
   .mobile\:items-start {

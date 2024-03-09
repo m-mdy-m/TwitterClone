@@ -15,5 +15,7 @@
   .header__navigation-bg{
     @apply bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E]
   }
-  
+  .show-nav-mobile{
+    @apply  mobile:w-4/6 mobile:h-full !block
+  }
 }
