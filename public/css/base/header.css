@@ -393,28 +393,12 @@
     display: none
   }
 
-  .mobile\:h-16 {
-    height: 4rem
-  }
-
   .mobile\:h-12 {
     height: 3rem
   }
 
-  .mobile\:h-8 {
-    height: 2rem
-  }
-
-  .mobile\:w-16 {
-    width: 4rem
-  }
-
   .mobile\:w-12 {
     width: 3rem
-  }
-
-  .mobile\:w-8 {
-    width: 2rem
   }
 
   .mobile\:gap-0 {
@@ -423,10 +407,6 @@
 
   .mobile\:border {
     border-width: 1px
-  }
-
-  .mobile\:p-0 {
-    padding: 0px
   }
 
   .mobile\:p-2 {

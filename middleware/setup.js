@@ -14,6 +14,9 @@ const options = {
   resave: false,
   saveUninitialized: false,
   store: store,
+  cookie: {
+    maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days in milliseconds
+  },
 };
 
 // Initialize session middleware with the specified options
