@@ -27,15 +27,12 @@
       transform: rotate(360deg);
     }
   }
-
   /* Apply animation to SVG */
-  .animate-spin {
-    animation: spin 6s linear infinite;
+  .animate-spin-story {
+    animation: spin 10s ease-in infinite;
   }
-
   /* Pause animation on hover */
-  .animate-spin-hover:hover {
+  .animate-spin-story:hover {
     animation-play-state: paused;
   }
-
 }

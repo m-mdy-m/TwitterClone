@@ -122,16 +122,6 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
@@ -503,11 +493,15 @@
 
 /* Apply animation to SVG */
 
-.animate-spin {
-  animation: spin 6s linear infinite;
+.animate-spin-story {
+  animation: spin 10s ease-in infinite;
 }
 
 /* Pause animation on hover */
+
+.animate-spin-story:hover {
+  animation-play-state: paused;
+}
 
 .hover\:rotate-45:hover {
   --tw-rotate: 45deg;
@@ -558,10 +552,6 @@
 .hover\:text-gray-100:hover {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
-}
-
-.hover\:animate-spin-hover:hover:hover {
-  animation-play-state: paused;
 }
 
 @media (min-width: 250px) {
