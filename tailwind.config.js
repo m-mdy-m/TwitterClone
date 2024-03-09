@@ -17,7 +17,7 @@ module.exports = {
         main : "80% minmax(20% ,1fr)"
       },
       backgroundColor: {
-        body: "#101011",
+        body: "#131314",
       },
       container: {
         center: true,
