@@ -499,6 +499,14 @@
     width: 66.666667%
   }
 
+  .mobile\:w-40 {
+    width: 10rem
+  }
+
+  .mobile\:w-0 {
+    width: 0px
+  }
+
   .mobile\:items-start {
     align-items: flex-start
   }
