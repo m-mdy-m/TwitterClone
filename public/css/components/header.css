@@ -1,5 +1,5 @@
 .show-nav {
-  width: 60%;
+  width: 80%;
   height: 100%;
   display: block !important;
   transition: all 500ms;
@@ -11,8 +11,23 @@
   transition: all 2s;
   left: -15rem;
 }
+@media screen and (min-width: 450px) {
+  .show-nav {
+    width: 60%;
+  }
+}
+@media screen and (min-width: 500px) {
+  .show-nav {
+    width: 50%;
+  }
+}
 @media screen and (min-width: 600px) {
   .show-nav {
     width: 40%;
+  }
+}
+@media screen and (min-width: 750px) {
+  .show-nav {
+    width: 30%;
   }
 }
