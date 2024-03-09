@@ -14,26 +14,5 @@
 <% } %>
 <!-- navigation -->
 <nav class="flex w-full mt-1 h-full flex-col items-start space-y-4 p-2 rounded-lg shadow-lg">
-    <!-- Home Link -->
-    <%- include('./layouts/nav-icon.ejs', {url:'home'}) %>
-    <% if(isAuth){ %>
-        <!-- Notifications Link -->
-        <%- include('./layouts/nav-icon.ejs', {url:'notifications'}) %>
-        <!-- Messages Link -->
-        <%- include('./layouts/nav-icon.ejs', {url:'messages'}) %>
-        <!-- Setting Link -->
-        <%- include('./layouts/nav-icon.ejs', {url:'setting'}) %>
-        <!-- Logout Link -->
-        <a href="/auth/logout" class="header__navigation-link logout flex items-center space-x-4 transition duration-300 transform hover:scale-105">
-            <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="images__icons-nav">
-            <h2 class="text-lg font-semibold text-white">Logout</h2>
-            <input type="hidden" name="_csrf" value="<%= csrfToken %> ">
-        </a>
-    <% } else{%>
-        <!-- Signup Link -->
-        <a href="/auth/signup" class="header__navigation-link flex items-center space-x-4 transition duration-300 transform hover:scale-105">
-            <img src="/assets/icon/utils/login.svg" alt="Signup" class="images__icons-nav ">
-            <h2 class="text-lg font-semibold text-white">Signup</h2>
-        </a>
-    <% } %>
+    <%- include('./layouts/list-nav.ejs', {isAuth:isAuth}) %>
 </nav>
