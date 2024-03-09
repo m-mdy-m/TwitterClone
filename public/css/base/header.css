@@ -46,12 +46,21 @@
   z-index: 50
 }
 
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem
+}
+
 .mb-4 {
   margin-bottom: 1rem
 }
 
 .mr-4 {
   margin-right: 1rem
+}
+
+.mt-1 {
+  margin-top: 0.25rem
 }
 
 .mt-2 {
@@ -78,6 +87,10 @@
   height: 3rem
 }
 
+.h-16 {
+  height: 4rem
+}
+
 .h-full {
   height: 100%
 }
@@ -88,6 +101,10 @@
 
 .w-12 {
   width: 3rem
+}
+
+.w-16 {
+  width: 4rem
 }
 
 .w-52 {
@@ -111,7 +128,7 @@
 }
 
 .grid-rows-home {
-  grid-template-rows: 15% minmax(85% ,1fr)
+  grid-template-rows: 20% minmax(80% ,1fr)
 }
 
 .flex-col {
@@ -128,6 +145,10 @@
 
 .justify-center {
   justify-content: center
+}
+
+.justify-between {
+  justify-content: space-between
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
@@ -168,6 +189,10 @@
   border-width: 4px
 }
 
+.border-b {
+  border-bottom-width: 1px
+}
+
 .border-b-4 {
   border-bottom-width: 4px
 }
@@ -184,6 +209,11 @@
 .border-\[\#2f2f30\] {
   --tw-border-opacity: 1;
   border-color: rgb(47 47 48 / var(--tw-border-opacity))
+}
+
+.border-\[\#6b6a73\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 106 115 / var(--tw-border-opacity))
 }
 
 .border-white {
@@ -214,16 +244,6 @@
 .bg-gray-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity))
-}
-
-.bg-green-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity))
-}
-
-.bg-red-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity))
 }
 
 .bg-gradient-to-br {
@@ -258,6 +278,35 @@
   padding: 1rem
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
+.pt-1 {
+  padding-top: 0.25rem
+}
+
 .text-center {
   text-align: center
 }
@@ -270,6 +319,10 @@
   font-family: Aktiv-Regular
 }
 
+.font-mavis__bold {
+  font-family: MAVIS-Bold
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -278,6 +331,11 @@
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem
 }
 
 .text-xl {
@@ -291,6 +349,11 @@
 
 .capitalize {
   text-transform: capitalize
+}
+
+.text-\[\#f0f0f0\] {
+  --tw-text-opacity: 1;
+  color: rgb(240 240 240 / var(--tw-text-opacity))
 }
 
 .text-blue-400 {
@@ -315,6 +378,14 @@
 
 .opacity-30 {
   opacity: 0.3
+}
+
+.outline-dashed {
+  outline-style: dashed
+}
+
+.outline-\[\#3e3d46\] {
+  outline-color: #3e3d46
 }
 
 .transition {

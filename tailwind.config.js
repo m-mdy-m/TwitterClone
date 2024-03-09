@@ -17,7 +17,7 @@ module.exports = {
         main: "80% minmax(20% ,1fr)",
       },
       gridTemplateRows: {
-        home: "15% minmax(85% ,1fr)",
+        home: "20% minmax(80% ,1fr)",
       },
       backgroundColor: {
         body: "#131314",
