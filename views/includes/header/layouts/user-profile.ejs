@@ -1,6 +1,9 @@
 <!-- Profile User Default -->
 <div class="flex flex-col items-center tablet:mt-0 mobile:mt-1">
-    <%- include('../../shared/img-user-profile.ejs') %>
+    <div class="flex justify-center items-center relative ">
+        <img src="/assets/icon/profile-utils/welcome.png" alt="welcome" class="absolute top-0 hidden z-20 welcome-user">
+        <%- include('../../shared/img-user-profile.ejs') %>
+    </div>
     <!-- User Name -->
     <h2 id="username" class="font-Aktiv__regular tablet:text-xl mobile:text-base mt-4 mobile:mt-2 smallTb:text-lg smallTb:mt-3 text-white">m__mdy__m</h2>
     <!-- Bio -->
