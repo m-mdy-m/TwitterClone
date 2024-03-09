@@ -548,6 +548,10 @@
     margin-top: 0.75rem
   }
 
+  .smallTb\:mt-2 {
+    margin-top: 0.5rem
+  }
+
   .smallTb\:h-8 {
     height: 2rem
   }
@@ -566,6 +570,10 @@
 
   .smallTb\:w-1\/2 {
     width: 50%
+  }
+
+  .smallTb\:gap-2 {
+    gap: 0.5rem
   }
 
   .smallTb\:space-x-3 > :not([hidden]) ~ :not([hidden]) {
