@@ -106,6 +106,10 @@
   cursor: pointer
 }
 
+.grid-cols-container {
+  grid-template-columns: 25% minmax(75%, 1fr);
+}
+
 .flex-col {
   flex-direction: column
 }
