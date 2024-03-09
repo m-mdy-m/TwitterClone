@@ -706,6 +706,33 @@
     margin: auto
   }
 
+  .tablet\:m-8 {
+    margin: 2rem
+  }
+
+  .tablet\:m-16 {
+    margin: 4rem
+  }
+
+  .tablet\:mx-16 {
+    margin-left: 4rem;
+    margin-right: 4rem
+  }
+
+  .tablet\:mx-12 {
+    margin-left: 3rem;
+    margin-right: 3rem
+  }
+
+  .tablet\:mx-8 {
+    margin-left: 2rem;
+    margin-right: 2rem
+  }
+
+  .tablet\:mt-4 {
+    margin-top: 1rem
+  }
+
   .tablet\:flex {
     display: flex
   }
