@@ -406,12 +406,52 @@
     height: 1.75rem
   }
 
+  .mobile\:h-\[4\] {
+    height: 4
+  }
+
+  .mobile\:h-\[\] {
+    height: 
+  }
+
+  .mobile\:h-1 {
+    height: 0.25rem
+  }
+
+  .mobile\:h-\[4\.5rem\] {
+    height: 4.5rem
+  }
+
+  .mobile\:h-2 {
+    height: 0.5rem
+  }
+
+  .mobile\:h-24 {
+    height: 6rem
+  }
+
   .mobile\:w-16 {
     width: 4rem
   }
 
   .mobile\:w-7 {
     width: 1.75rem
+  }
+
+  .mobile\:w-1 {
+    width: 0.25rem
+  }
+
+  .mobile\:w-\[4\.5rem\] {
+    width: 4.5rem
+  }
+
+  .mobile\:w-2 {
+    width: 0.5rem
+  }
+
+  .mobile\:w-24 {
+    width: 6rem
   }
 
   .mobile\:items-start {

@@ -1,6 +1,6 @@
+const navMobile = document.getElementById("nav-mobile");
 // Function to handle navigation events
 function handleNavigation() {
-    const navMobile = document.getElementById("nav-mobile");
     const iconNavigation = document.getElementById("iconNavigation");
     const cancelIcon = document.getElementById("cancelIcon");
 
@@ -23,6 +23,7 @@ function handleNavigation() {
             navMobile.classList.remove("show-nav");
         }
     });
+    
 }
 
 // Initial call to handle navigation events
@@ -32,5 +33,8 @@ handleNavigation();
 window.addEventListener("resize", () => {
     if (window.innerWidth < 900) {
         handleNavigation();
+    }else{
+        navMobile.classList.remove("show-nav");
+        navMobile.classList.remove("hide-nav");
     }
 });

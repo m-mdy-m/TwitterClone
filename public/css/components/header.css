@@ -12,14 +12,19 @@
   left: -20rem;
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 400px) {
   .show-nav {
     width: 60%;
   }
 }
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 450px) {
   .show-nav {
     width: 50%;
+  }
+}
+@media screen and (min-width: 500px) {
+  .show-nav {
+    width: 45%;
   }
 }
 @media screen and (min-width: 600px) {
