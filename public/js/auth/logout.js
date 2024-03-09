@@ -1,7 +1,7 @@
 import { displayMessage } from "./validation.js";
 const msgElm = document.getElementById("msgElm");
 async function handler(e) {
-  e.preventDefault()
+  e.preventDefault();
   try {
     // Fetch CSRF token from a hidden input field in your HTML
     const csrfToken = document.querySelector('input[name="_csrf"]').value;
@@ -13,7 +13,7 @@ async function handler(e) {
     // Check if the response is successful
     if (response.status === 200 && response.data.success) {
       window.location.href = "/auth/login";
-      // Optionally, perform additional actions after logout
+      localStorage.removeItem("showWelcomePhoto");
     } else {
       msgElm.classList.add("msg-errors");
       const message = response.data.message;

@@ -18,6 +18,7 @@ export async function handleSubmit(e, submitUrl) {
       if (response.data.success) {
         // If the server indicates success, handle accordingly
         handleSuccess(response.data.message);
+        localStorage.setItem('showWelcomePhoto','true')
       } else {
         // If the server indicates failure, handle accordingly
         handleNotSuccess(response.data);
