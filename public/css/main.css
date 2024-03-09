@@ -1,7 +1,7 @@
 @tailwind utilities;
 @layer utilities {
   .header__navigation-link {
-    @apply flex items-center text-white  mr-4 p-4 rounded-md justify-start w-full;
+    @apply flex items-center text-white mr-4 mobile:mr-0 mobile:p-0 p-4 rounded-md justify-start w-full;
   }
   .header__navigation-info-user{
     @apply text-lg mobile:text-sm font-bold mobile:font-Aktiv__medium 

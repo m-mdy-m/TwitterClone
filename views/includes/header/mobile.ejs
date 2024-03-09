@@ -7,7 +7,7 @@
 <div class=" header__navigation-bg mobile:w-4/6 mobile:h-full absolute top-0 left-0 p-5">
     <%- include('./layouts/user-profile.ejs') %>
     <%- include('./layouts/info.ejs') %>
-    <nav class="flex w-full mt-1 h-full flex-col items-start space-y-4 p-2 rounded-lg shadow-lg">
+    <nav class="flex w-full mt-4 h-full flex-col items-start space-y-4 p-2 rounded-lg shadow-lg mobile:justify-start mobile:items-start">
         <%- include('./layouts/list-nav.ejs', {isAuth:isAuth}) %>
     </nav>
 </div>

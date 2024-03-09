@@ -317,6 +317,13 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+@media (min-width: 300px) {
+  .header__navigation-link {
+    margin-right: 0px;
+    padding: 0px
+  }
+}
+
 .header__navigation-info-user {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -412,6 +419,10 @@
     height: 3rem
   }
 
+  .mobile\:h-4 {
+    height: 1rem
+  }
+
   .mobile\:h-full {
     height: 100%
   }
@@ -420,12 +431,30 @@
     width: 3rem
   }
 
+  .mobile\:w-4 {
+    width: 1rem
+  }
+
   .mobile\:w-4\/6 {
     width: 66.666667%
   }
 
+  .mobile\:items-start {
+    align-items: flex-start
+  }
+
+  .mobile\:justify-start {
+    justify-content: flex-start
+  }
+
   .mobile\:gap-0 {
     gap: 0px
+  }
+
+  .mobile\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
   }
 
   .mobile\:border {
@@ -434,6 +463,11 @@
 
   .mobile\:p-1 {
     padding: 0.25rem
+  }
+
+  .mobile\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem
   }
 
   .mobile\:text-sm {
