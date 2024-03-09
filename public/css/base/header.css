@@ -594,6 +594,10 @@
     inset: auto
   }
 
+  .tablet\:left-0 {
+    left: 0px
+  }
+
   .tablet\:flex {
     display: flex
   }
@@ -638,6 +642,16 @@
 
   .tablet\:p-8 {
     padding: 2rem
+  }
+
+  .tablet\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem
+  }
+
+  .tablet\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem
   }
 
   .tablet\:pt-0 {
