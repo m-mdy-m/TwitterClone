@@ -15,4 +15,27 @@
   .header__navigation-bg {
     @apply bg-gradient-to-b from-[#0F141E] via-[#1D1F26] to-[#0F141E];
   }
+  #nav-mobile {
+    width: 0;
+    height: 100%;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff; /* Adjust as needed */
+    z-index: 9999;
+    transition: width 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+
+  .show-nav-mobile {
+    width: 66.666667%; /* Adjust as needed */
+    transform: translateX(0);
+    display: block;
+  }
+
+  .hide-nav-mobile {
+    width: 0;
+    transform: translateX(-100%);
+    display: none;
+  }
 }
