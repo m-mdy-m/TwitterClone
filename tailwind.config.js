@@ -14,6 +14,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         container: " 25% minmax(75%, 1fr);",
+        main : "80% minmax(20% ,1fr)"
       },
       backgroundColor: {
         body: "#101011",
