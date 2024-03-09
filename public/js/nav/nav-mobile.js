@@ -1,4 +1,9 @@
 const navMobile = document.getElementById("nav-mobile");
-navMobile.addEventListener("click", () => {
-  console.log("click");
+const iconNavigation = document.getElementById("iconNavigation");
+const cancelIcon = document.getElementById("cancelIcon");
+cancelIcon.addEventListener("click", () => {
+  navMobile.style.cssText = 'display:none'
+});
+iconNavigation.addEventListener("click", () => {
+    iconNavigation.style.cssText = 'display:flex'
 });
