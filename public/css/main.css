@@ -29,7 +29,7 @@
   }
   /* Apply animation to SVG */
   .animate-spin-story {
-    animation: spin 10s ease-in infinite;
+    animation: spin 6s ease-in infinite;
   }
   /* Pause animation on hover */
   .animate-spin-story:hover {
