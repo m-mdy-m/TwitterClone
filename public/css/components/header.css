@@ -9,7 +9,7 @@
   width: 0;
   height: 100%;
   transition: all 2s;
-  left: -15rem;
+  left: -20rem;
 }
 @media screen and (min-width: 450px) {
   .show-nav {

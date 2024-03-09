@@ -30,6 +30,10 @@
   top: 1rem
 }
 
+.-left-80 {
+  left: -20rem
+}
+
 .mb-4 {
   margin-bottom: 1rem
 }
@@ -52,6 +56,10 @@
 
 .flex {
   display: flex
+}
+
+.table {
+  display: table
 }
 
 .grid {
@@ -628,6 +636,10 @@
 @media (min-width: 900px) {
   .tablet\:m-auto {
     margin: auto
+  }
+
+  .tablet\:block {
+    display: block
   }
 
   .tablet\:flex {
