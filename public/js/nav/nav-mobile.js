@@ -7,7 +7,7 @@ iconNavigation.addEventListener("click", () => {
     width: 66.666667%;
     height:100%;
     display: block !important;
-    transition: all 2s;
+    transition: all 500ms;
     left:0;
     `;
 });
@@ -20,8 +20,4 @@ cancelIcon.addEventListener("click", () => {
     transition: all 2s;
     left: -15rem;
     `;
-  setTimeout(() => {
-    navMobile.style.display = "none";
-    navMobile.style.height = "0";
-  }, 2000);
 });
