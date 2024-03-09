@@ -70,6 +70,10 @@
   height: 100%
 }
 
+.h-screen {
+  height: 100vh
+}
+
 .w-12 {
   width: 3rem
 }
@@ -381,12 +385,20 @@
     position: absolute
   }
 
+  .mobile\:m-0 {
+    margin: 0px
+  }
+
   .mobile\:mt-1 {
     margin-top: 0.25rem
   }
 
   .mobile\:mt-2 {
     margin-top: 0.5rem
+  }
+
+  .mobile\:flex {
+    display: flex
   }
 
   .mobile\:hidden {
@@ -429,12 +441,24 @@
 }
 
 @media (min-width: 600px) {
+  .smallTb\:flex {
+    display: flex
+  }
+
   .smallTb\:hidden {
     display: none
   }
 }
 
 @media (min-width: 900px) {
+  .tablet\:m-auto {
+    margin: auto
+  }
+
+  .tablet\:flex {
+    display: flex
+  }
+
   .tablet\:hidden {
     display: none
   }
