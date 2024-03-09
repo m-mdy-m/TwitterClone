@@ -1,16 +1,16 @@
 
-<header class="header__navigation-bg flex flex-col items-center justify-start px-2 py-1">
+<header class="flex flex-col items-center justify-start px-2 py-1">
     <!-- icon nav -->
     <div id="iconNavigation" class="mobile:absolute top-4 left-4">
         <svg class="w-12 h-12 text-white cursor-pointer transform transition duration-300 hover:scale-110 hover:bg-gray-800 p-1 rounded-full" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M6.25 8C6.25 7.58579 6.58579 7.25 7 7.25H17C17.4142 7.25 17.75 7.58579 17.75 8C17.75 8.41421 17.4142 8.75 17 8.75H7C6.58579 8.75 6.25 8.41421 6.25 8ZM6.25 12C6.25 11.5858 6.58579 11.25 7 11.25H17C17.4142 11.25 17.75 11.5858 17.75 12C17.75 12.4142 17.4142 12.75 17 12.75H7C6.58579 12.75 6.25 12.4142 6.25 12ZM7 15.25C6.58579 15.25 6.25 15.5858 6.25 16C6.25 16.4142 6.58579 16.75 7 16.75H17C17.4142 16.75 17.75 16.4142 17.75 16C17.75 15.5858 17.4142 15.25 17 15.25H7Z" fill="#fff"/>
         </svg>
     </div>
-    <div id="nav-mobile" class="header__navigation-bg fixed top-0 -left-80 p-5">
-        <div id="cancelIcon" class="mobile:absolute tablet:hidden cursor-pointer hover:opacity-80 transition-opacity ease-in-out duration-300 top-4 right-4 transform hover:rotate-45">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-teal-500">
-            <path d="M6.34311 14.8284C5.56206 15.6094 5.56206 16.8758 6.34311 17.6568C7.12416 18.4379 8.39049 18.4379 9.17154 17.6568L12 14.8284L14.8284 17.6568C15.6094 18.4379 16.8758 18.4379 17.6568 17.6568C18.4379 16.8758 18.4379 15.6094 17.6568 14.8284L14.8284 12L17.6568 9.17154C18.4379 8.39049 18.4379 7.12416 17.6568 6.34311C16.8758 5.56206 15.6094 5.56206 14.8284 6.34311L12 9.17154L9.17154 6.34311C8.39049 5.56206 7.12416 5.56206 6.34311 6.34311C5.56206 7.12416 5.56206 8.39049 6.34311 9.17154L9.17154 12L6.34311 14.8284Z" fill="#319795"/>
-        </svg>
+    <div id="nav-mobile" class="header__navigation-bg mobile:fixed tablet:flex tablet:flex-col top-0 -left-[100rem] p-5">
+        <div id="cancelIcon" class="mobile:absolute top-4 right-4 z-50 p-1 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 tablet:hidden cursor-pointer hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-700 transition duration-300 ease-in-out transform hover:rotate-45">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white">
+                <path d="M6.34311 14.8284C5.56206 15.6094 5.56206 16.8758 6.34311 17.6568C7.12416 18.4379 8.39049 18.4379 9.17154 17.6568L12 14.8284L14.8284 17.6568C15.6094 18.4379 16.8758 18.4379 17.6568 17.6568C18.4379 16.8758 18.4379 15.6094 17.6568 14.8284L14.8284 12L17.6568 9.17154C18.4379 8.39049 18.4379 7.12416 17.6568 6.34311C16.8758 5.56206 15.6094 5.56206 14.8284 6.34311L12 9.17154L9.17154 6.34311C8.39049 5.56206 7.12416 5.56206 6.34311 6.34311C5.56206 7.12416 5.56206 8.39049 6.34311 9.17154L9.17154 12L6.34311 14.8284Z" fill="#fff"/>
+            </svg>
         </div>
         <% if(isAuth){ %>
             <%- include('./profile.ejs') %>
