@@ -22,20 +22,20 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #fff; /* Adjust as needed */
+    background-color: #fff; 
     z-index: 9999;
     transition: width 0.5s ease-in-out, transform 0.5s ease-in-out;
   }
 
   .show-nav-mobile {
-    width: 66.666667%; /* Adjust as needed */
+    width: 66.666667%; 
     transform: translateX(0);
-    display: block;
+    display: block !important;
   }
 
   .hide-nav-mobile {
     width: 0;
     transform: translateX(-100%);
-    display: none;
+    display: none !important;
   }
 }

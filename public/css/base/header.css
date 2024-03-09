@@ -390,7 +390,6 @@
   top: 0;
   left: 0;
   background-color: #fff;
-  /* Adjust as needed */
   z-index: 9999;
   transition: width 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
