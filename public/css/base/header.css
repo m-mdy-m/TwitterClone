@@ -1,7 +1,3 @@
-.fixed {
-  position: fixed
-}
-
 .absolute {
   position: absolute
 }
@@ -10,13 +6,12 @@
   position: relative
 }
 
-.inset-0 {
-  inset: 0px
+.bottom-0 {
+  bottom: 0px
 }
 
-.inset-x-0 {
-  left: 0px;
-  right: 0px
+.left-0 {
+  left: 0px
 }
 
 .left-4 {
@@ -27,32 +22,24 @@
   right: 1rem
 }
 
-.top-4 {
-  top: 1rem
-}
-
 .top-0 {
   top: 0px
 }
 
-.left-0 {
-  left: 0px
+.top-4 {
+  top: 1rem
 }
 
-.bottom-0 {
-  bottom: 0px
+.top-8 {
+  top: 2rem
 }
 
-.z-50 {
-  z-index: 50
+.right-8 {
+  right: 2rem
 }
 
-.-z-0 {
-  z-index: 0
-}
-
-.-z-10 {
-  z-index: -10
+.top-6 {
+  top: 1.5rem
 }
 
 .z-10 {
@@ -61,6 +48,10 @@
 
 .z-20 {
   z-index: 20
+}
+
+.z-50 {
+  z-index: 50
 }
 
 .mb-4 {
@@ -115,24 +106,12 @@
   width: 100%
 }
 
-.w-8 {
-  width: 2rem
-}
-
-.w-16 {
-  width: 4rem
-}
-
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .cursor-pointer {
   cursor: pointer
-}
-
-.grid-cols-container {
-  grid-template-columns: 25% minmax(75%, 1fr);
 }
 
 .flex-col {
@@ -214,19 +193,6 @@
   background-color: rgb(31 41 55 / var(--tw-bg-opacity))
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-}
-
-.bg-opacity-50 {
-  --tw-bg-opacity: 0.5
-}
-
-.bg-opacity-80 {
-  --tw-bg-opacity: 0.8
-}
-
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops))
 }
@@ -255,8 +221,8 @@
   padding: 1rem
 }
 
-.p-5 {
-  padding: 1.25rem
+.p-0 {
+  padding: 0px
 }
 
 .text-center {
@@ -314,34 +280,8 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.opacity-5 {
-  opacity: 0.05
-}
-
-.opacity-50 {
-  opacity: 0.5
-}
-
 .opacity-30 {
   opacity: 0.3
-}
-
-.shadow-md {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
-.shadow-lg {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
-.backdrop-blur-md {
-  --tw-backdrop-blur: blur(12px);
-  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
 }
 
 .transition {
@@ -411,16 +351,6 @@
     font-size: 0.875rem;
     line-height: 1.25rem
   }
-}
-
-.header__navigation-bg {
-  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-  --tw-gradient-from: #0F141E var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(15 20 30 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-  --tw-gradient-to: rgb(29 31 38 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), #1D1F26 var(--tw-gradient-via-position), var(--tw-gradient-to);
-  --tw-gradient-to: #0F141E var(--tw-gradient-to-position)
 }
 
 .hover\:rotate-45:hover {
@@ -498,64 +428,40 @@
     margin-top: 0.5rem
   }
 
-  .mobile\:mb-4 {
-    margin-bottom: 1rem
-  }
-
-  .mobile\:h-16 {
-    height: 4rem
+  .mobile\:h-24 {
+    height: 6rem
   }
 
   .mobile\:h-7 {
     height: 1.75rem
   }
 
-  .mobile\:h-\[4\] {
-    height: 4
+  .mobile\:h-8 {
+    height: 2rem
   }
 
-  .mobile\:h-\[\] {
-    height: 
+  .mobile\:h-4 {
+    height: 1rem
   }
 
-  .mobile\:h-1 {
-    height: 0.25rem
-  }
-
-  .mobile\:h-\[4\.5rem\] {
-    height: 4.5rem
-  }
-
-  .mobile\:h-2 {
-    height: 0.5rem
-  }
-
-  .mobile\:h-24 {
-    height: 6rem
-  }
-
-  .mobile\:w-16 {
-    width: 4rem
+  .mobile\:w-24 {
+    width: 6rem
   }
 
   .mobile\:w-7 {
     width: 1.75rem
   }
 
-  .mobile\:w-1 {
-    width: 0.25rem
+  .mobile\:w-8 {
+    width: 2rem
   }
 
-  .mobile\:w-\[4\.5rem\] {
-    width: 4.5rem
+  .mobile\:w-4 {
+    width: 1rem
   }
 
-  .mobile\:w-2 {
-    width: 0.5rem
-  }
-
-  .mobile\:w-24 {
-    width: 6rem
+  .mobile\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr))
   }
 
   .mobile\:items-start {
@@ -716,35 +622,9 @@
     inset: auto
   }
 
-  .tablet\:m-auto {
-    margin: auto
-  }
-
-  .tablet\:m-8 {
-    margin: 2rem
-  }
-
-  .tablet\:m-16 {
-    margin: 4rem
-  }
-
-  .tablet\:mx-16 {
-    margin-left: 4rem;
-    margin-right: 4rem
-  }
-
-  .tablet\:mx-12 {
-    margin-left: 3rem;
-    margin-right: 3rem
-  }
-
   .tablet\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem
-  }
-
-  .tablet\:mt-4 {
-    margin-top: 1rem
   }
 
   .tablet\:flex {
@@ -755,6 +635,10 @@
     display: none
   }
 
+  .tablet\:h-12 {
+    height: 3rem
+  }
+
   .tablet\:h-32 {
     height: 8rem
   }
@@ -763,8 +647,16 @@
     height: 100%
   }
 
+  .tablet\:w-12 {
+    width: 3rem
+  }
+
   .tablet\:w-32 {
     width: 8rem
+  }
+
+  .tablet\:grid-cols-container {
+    grid-template-columns: 25% minmax(75%, 1fr);
   }
 
   .tablet\:flex-col {
@@ -781,18 +673,6 @@
     border-radius: 0px
   }
 
-  .tablet\:border {
-    border-width: 1px
-  }
-
-  .tablet\:border-s {
-    border-inline-start-width: 1px
-  }
-
-  .tablet\:border-solid {
-    border-style: solid
-  }
-
   .tablet\:p-2 {
     padding: 0.5rem
   }
@@ -803,10 +683,6 @@
 
   .tablet\:p-8 {
     padding: 2rem
-  }
-
-  .tablet\:p-5 {
-    padding: 1.25rem
   }
 
   .tablet\:pt-0 {
@@ -826,24 +702,6 @@
   .tablet\:shadow-none {
     --tw-shadow: 0 0 #0000;
     --tw-shadow-colored: 0 0 #0000;
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-  }
-
-  .tablet\:shadow {
-    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-  }
-
-  .tablet\:shadow-lg {
-    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-  }
-
-  .tablet\:shadow-sm {
-    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
   }
 }
