@@ -1,0 +1,13 @@
+.show-nav {
+  width: 66.666667%;
+  height: 100%;
+  display: block !important;
+  transition: all 500ms;
+  left: 0;
+}
+.hide-nav {
+  width: 0;
+  height: 100%;
+  transition: all 2s;
+  left: -15rem;
+}
