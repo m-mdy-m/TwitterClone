@@ -111,7 +111,7 @@
 }
 
 .grid-rows-home {
-  grid-template-rows: 20% minmax(80% ,1fr)
+  grid-template-rows: 15% minmax(85% ,1fr)
 }
 
 .flex-col {
