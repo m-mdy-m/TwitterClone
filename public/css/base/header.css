@@ -498,6 +498,10 @@
     margin-top: 0.5rem
   }
 
+  .mobile\:mb-4 {
+    margin-bottom: 1rem
+  }
+
   .mobile\:h-16 {
     height: 4rem
   }
@@ -634,6 +638,16 @@
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+  }
+
+  .mobile\:header__navigation-bg {
+    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+    --tw-gradient-from: #0F141E var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(15 20 30 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-gradient-to: rgb(29 31 38 / 0)  var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), #1D1F26 var(--tw-gradient-via-position), var(--tw-gradient-to);
+    --tw-gradient-to: #0F141E var(--tw-gradient-to-position)
   }
 }
 

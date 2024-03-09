@@ -5,34 +5,5 @@
 }
 .bg-body {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity))
-}
-@media (min-width: 300px) {
-  .container {
-    max-width: 300px;
-  }
-}
-
-@media (min-width: 600px) {
-  .container {
-    max-width: 600px;
-  }
-}
-
-@media (min-width: 900px) {
-  .container {
-    max-width: 900px;
-  }
-}
-
-@media (min-width: 1050px) {
-  .container {
-    max-width: 1050px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
