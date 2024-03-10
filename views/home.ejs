@@ -3,7 +3,7 @@
 <div class="grid grid-rows-home ">
   <%- include('includes/home/section-stories.ejs',{src : '/assets/icon/nav/user.svg',UsernameStory:'m__mdy__m'}) %>
   <!-- Wrapper Posts -->
-  <div class="bg-green-400 pt-5 px-12">
+  <div class="pt-5 px-12">
     <!-- Post Box -->
     <div class="grid grid-rows-tweet h-32 rounded-lg px-4 py-2 bg-[#111010]">
       <!-- up tweet section -->
@@ -19,8 +19,24 @@
           <input type="text" placeholder="What's happening?" class="w-full bg-[#161617] px-1 py-2 border border-[#343435] text-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
         </div>
       </div>
-      <!-- bottom tweet section -->
-      <div class="bg-yellow-500 w-full h-full">
+      <!-- Bottom tweet section -->
+      <div class="bg-yellow-500 w-full h-full flex justify-start items-center">
+        <!-- Tweet icons -->
+        <div class="mr-4 animate-bounce">
+          <img src="/assets/icon/twwets/circle.svg" alt="">
+        </div>
+        <div class="mr-4 animate-bounce">
+          <img src="/assets/icon/twwets/filter.svg" alt="">
+        </div>
+        <div class="mr-4 animate-bounce">
+          <img src="/assets/icon/twwets/calendar.svg" alt="">
+        </div>
+        <div class="mr-4 animate-bounce">
+          <img src="/assets/icon/twwets/location.svg" alt="">
+        </div>
+        <div class="animate-bounce">
+          <img src="/assets/icon/twwets/information.svg" alt="">
+        </div>
       </div>
     </div>
   </div>
