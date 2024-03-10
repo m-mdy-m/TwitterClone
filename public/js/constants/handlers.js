@@ -1,4 +1,3 @@
-
 const iconElement = document.getElementById("icon-tweet");
 // Function to hide the icon when textarea is focused
 export function hideIconOnFocus() {
@@ -11,11 +10,23 @@ export function showIconOnBlur() {
 }
 // Function to validate input value on keypress
 export function validateInput(e) {
-  const value = e.target.value;
-  // Trim the input value
-  const trimmed = vfyjs.trimValue(value);
-  // Perform input validations
+  const tweet = e.target.value;
+  const validation = validateTweet(tweet);
+  if (!validation.valid) {
+    
+  }
+}
+export function validateTweet(tweet) {
+  const trimmed = vfyjs.trimValue(tweet);
   const validator = vfyjs.inputValidations(trimmed);
-  validator.hasAlphanumeric();
-  validator.hasAlphabetic();
+  const maxLength = validator.hasMaxLength(280);
+  console.log('mav =>',maxLength);
+  // Check tweet length
+  if (!maxLength) {
+    return {
+      valid: false,
+      message: `Tweet exceeds maximum length of ${280} characters`,
+    };
+  }
+  return { valid: true, message: "Tweet is valid" };
 }
