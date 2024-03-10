@@ -13,8 +13,5 @@ static("public"); // Serving static files from the 'public' directory
 $read("middleware/setup");
 use($read("middleware/user"));
 use($read("middleware/locals"));
-setBaseRoute("/get-csrf-token").GET((req, res) => {
-  res.json({ csfToken: req.session.csrfSecret });
-});
 $read("utils/database"); // Loading database utility
 loadRoutes("routes"); // Loading routes from the 'routes' directory
