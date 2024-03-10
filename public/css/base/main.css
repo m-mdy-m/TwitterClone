@@ -78,6 +78,10 @@
   margin-top: 1rem;
 }
 
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
 .flex {
   display: flex;
 }
@@ -126,6 +130,23 @@
   height: 1rem;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-min {
+  height: -moz-min-content;
+  height: min-content;
+}
+
+.min-h-32 {
+  min-height: 8rem;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -160,6 +181,10 @@
 
 .w-4 {
   width: 1rem;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .-translate-y-1\/2 {
@@ -372,6 +397,11 @@
   background-color: rgb(21 128 61 / var(--tw-bg-opacity));
 }
 
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -442,6 +472,10 @@
 
 .to-\[\#585858\] {
   --tw-gradient-to: #585858 var(--tw-gradient-to-position);
+}
+
+.fill-current {
+  fill: currentColor;
 }
 
 .p-0 {
