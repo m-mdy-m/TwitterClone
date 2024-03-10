@@ -1,9 +1,13 @@
 import { displayMessage } from "../auth/validation.js";
-
+// DOM elements
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
 const msgElm = document.getElementById("msgElm");
 const maxLength = 300;
+/**
+ * Sends the tweet data to the backend if it passes validation;
+ * otherwise, displays an error message.
+ */
 export function sendDataToBackend(tweet, validation) {
   if (validation.valid) {
     msgElm.style.opacity = 0;
@@ -14,7 +18,10 @@ export function sendDataToBackend(tweet, validation) {
     displayMessage(msgElm, validation.message, "#FF0000");
   }
 }
-
+/**
+ * Updates the character count display and validates the tweet length.
+ * Adjusts styles based on the length and validation status.
+ */
 export function updateCharCount(e) {
   const tweet = e.target.value;
   const validation = validateTweet(tweet);
@@ -48,6 +55,10 @@ export function showIconOnBlur(e) {
   iconElement.style.opacity = 1;
   iconElement.style.zIndex = 1;
 }
+/**
+ * Validates the tweet, checking for empty, excessive length, and other criteria.
+ * Returns an object with the validity status and an error message if applicable.
+ */
 export function validateTweet(tweet) {
   const value = vfyjs.trimValue(tweet);
   const length = value.length;
@@ -65,5 +76,6 @@ export function validateTweet(tweet) {
       message: `Tweet exceeds maximum length of ${maxLength} characters`,
     };
   }
+  // If all checks pass, the tweet is considered valid
   return { valid: true };
 }
