@@ -2,9 +2,20 @@ import { displayMessage } from "../auth/validation.js";
 
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
-const tweetButton = document.getElementById("tweetButton");
 const msgElm = document.getElementById("msgElm");
-const maxLength = 380;
+const maxLength = 300;
+const minLength = 20
+export function sendDataToBackend(tweet, validation) {
+  if (validation.valid) {
+    msgElm.style.opacity=0
+    msgElm.style.display = 'none'
+    console.log("is valid");
+  } else {
+    msgElm.style.display = 'block'
+    displayMessage(msgElm, validation.message, "#FF0000");
+  }
+}
+
 export function updateCharCount(e) {
   const tweet = e.target.value;
   const validation = validateTweet(tweet);
@@ -15,9 +26,11 @@ export function updateCharCount(e) {
   if (currentLength > maxLength) {
     charCount.style.color = "red";
     textarea.style.cssText = "border-color:red;";
+    return { valid: validation.valid ,message : validation.message};
   } else {
     charCount.style.color = "rgb(107, 114, 128)";
     textarea.style.cssText = "border-color: #343435;";
+    return { valid: validation.valid };
   }
 }
 
@@ -35,11 +48,16 @@ export function showIconOnBlur(e) {
   iconElement.style.zIndex = 1;
 }
 export function validateTweet(tweet) {
-  const trimmed = vfyjs.trimValue(tweet);
-  const validator = vfyjs.inputValidations(trimmed);
-  const max = validator.hasMaxLength(maxLength);
+  const value = vfyjs.trimValue(tweet);
+  const length = value.length
+  console.log('length=>',length);
   // Check tweet length
-  if (!max) {
+  if (length < minLength) {
+    return {
+      valid: false,
+      message: `Tweet should be at least ${minLength} characters long`,
+    };
+  }else if (length >= maxLength) {
     return {
       valid: false,
       message: `Tweet exceeds maximum length of ${maxLength} characters`,
@@ -47,5 +65,3 @@ export function validateTweet(tweet) {
   }
   return { valid: true };
 }
-
-function sendBacked() {}
