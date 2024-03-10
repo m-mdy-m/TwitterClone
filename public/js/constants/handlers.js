@@ -1,6 +1,6 @@
-function handleFocus() {
-  document.getElementById("icon-tweet").style.opacity = "0";
+export function handleFocus(elm) {
+  elm.style.opacity = 0
 }
-function handleBlur() {
-  document.getElementById("icon-tweet").style.opacity = "100";
+export function handleBlur(elm) {
+  elm.style.opacity = 100
 }
