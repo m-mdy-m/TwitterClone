@@ -79,8 +79,11 @@ function handleServerError(error) {
 export function displayMessage(element, message, color) {
   // Set background color of message element
   element.style.background = color;
+  // Set opacity of message element
+  element.style.opacity = 1;
   // Set message content of message element
   element.innerHTML = message;
+  return
 }
 
 // Function to update form values based on server response

@@ -1,8 +1,13 @@
+import { displayMessage } from "../auth/validation.js";
+
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
 const tweetButton = document.getElementById("tweetButton");
+const msgElm = document.getElementById("msgElm");
 const maxLength = 380;
 export function updateCharCount(e) {
+  const tweet = e.target.value;
+  const validation = validateTweet(tweet);
   let currentLength = e.target.value.length;
   const textarea = e.target;
   charCount.textContent = `${currentLength}/${maxLength}`;
@@ -10,11 +15,9 @@ export function updateCharCount(e) {
   if (currentLength > maxLength) {
     charCount.style.color = "red";
     textarea.style.cssText = "border-color:red;";
-    return { valid: false, message: `Tweet exceeds maximum length of ${maxLength} characters` };
   } else {
     charCount.style.color = "rgb(107, 114, 128)";
     textarea.style.cssText = "border-color: #343435;";
-    return { valid: true};
   }
 }
 
@@ -31,17 +34,6 @@ export function showIconOnBlur(e) {
   iconElement.style.opacity = 1;
   iconElement.style.zIndex = 1;
 }
-// Function to validate input value on keypress
-export function validateInput(e) {
-  const tweet = e.target.value;
-  const validation = validateTweet(tweet);
-  const validationCount = updateCharCount(e)
-  if (validation.valid && validationCount.valid) {
-    sendBacked(tweet)
-  }else{
-
-  }
-}
 export function validateTweet(tweet) {
   const trimmed = vfyjs.trimValue(tweet);
   const validator = vfyjs.inputValidations(trimmed);
@@ -53,7 +45,7 @@ export function validateTweet(tweet) {
       message: `Tweet exceeds maximum length of ${maxLength} characters`,
     };
   }
-  return { valid: true};
+  return { valid: true };
 }
 
-function sendBacked(){}
+function sendBacked() {}
