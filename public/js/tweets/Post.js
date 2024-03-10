@@ -13,16 +13,14 @@ export async function createTweet(val) {
     msgElm.style.display = "none";
     // Send a POST request to create the tweet
     try {
-      console.log("get req post =>");
-      console.log("val.value=>", val.value);
-      // Extract CSRF token from hidden input field
-      const csrfToken = document.querySelector('input[name="_csrf"]').value;
+       // Fetch CSRF token
+    const csrfToken = await getCSRFToken();
+    if (!csrfToken) {
+      console.error('CSRF token is missing');
+      return;
+    }
       // Send a POST request to create the tweet with CSRF token included in headers
-      const response = await axios.post("/tweets", val.value, {
-        headers: {
-          'X-CSRF-Token': csrfToken
-        }
-      });
+      const response = await axios.post("/tweets", val.value);
       console.log("response =>", response);
     } catch (error) {
       console.log("error =>", error.message);
