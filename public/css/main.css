@@ -35,4 +35,9 @@
   .animate-spin-story:hover {
     animation-play-state: paused;
   }
+  @keyframes opacity {
+    50% {
+      opacity: .5;
+    }
+  }
 }

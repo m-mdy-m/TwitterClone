@@ -3,6 +3,9 @@ module.exports = {
   content: ["./views/**/*.ejs"],
   theme: {
     extend: {
+      animation:{
+        opacity: "opacity 3s ease-in infinite;"
+      },
       fontFamily: {
         mavis: "MAVIS",
         mavis__bold: "MAVIS-Bold",
