@@ -4,11 +4,13 @@ const maxLength = 380;
 // Function to hide the icon when textarea is focused
 export function hideIconOnFocus() {
   iconElement.style.opacity = 0;
+  iconElement.style.zIndex = -10;
 }
 
 // Function to show the icon when textarea loses focus
 export function showIconOnBlur() {
   iconElement.style.opacity = 1;
+  iconElement.style.zIndex = 1;
 }
 // Function to validate input value on keypress
 export function validateInput(e) {
@@ -32,14 +34,14 @@ export function validateTweet(tweet) {
 }
 export function updateCharCount(e) {
   const currentLength = e.target.value.length;
-  const textarea = e.target
+  const textarea = e.target;
   charCount.textContent = `${currentLength}/${maxLength}`;
   // Change color if exceeding maximum limit
   if (currentLength > maxLength) {
-    charCount.style.color = 'red';
-    textarea.style.cssText = 'border:1px solid red'
-  }else{
-    charCount.style.color = 'rgb(107, 114, 128)';
-    textarea.style.cssText = 'border:1px solid #343435'
+    charCount.style.color = "red";
+    textarea.style.cssText = "border:1px solid red";
+  } else {
+    charCount.style.color = "rgb(107, 114, 128)";
+    textarea.style.cssText = "border:1px solid #343435";
   }
 }
