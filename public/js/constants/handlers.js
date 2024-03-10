@@ -1,5 +1,6 @@
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
+const tweetButton = document.getElementById("tweetButton");
 const maxLength = 380;
 export function updateCharCount(e) {
   let currentLength = e.target.value.length;
@@ -9,23 +10,24 @@ export function updateCharCount(e) {
   if (currentLength > maxLength) {
     charCount.style.color = "red";
     textarea.style.cssText = "border-color:red;";
-    
+    return { valid: false, message: `Tweet exceeds maximum length of ${maxLength} characters` };
   } else {
     charCount.style.color = "rgb(107, 114, 128)";
     textarea.style.cssText = "border-color: #343435;";
+    return { valid: true};
   }
 }
 
 // Function to hide the icon when textarea is focused
 export function hideIconOnFocus(e) {
-  const textarea =  e.target
+  const textarea = e.target;
   iconElement.style.opacity = 0;
   iconElement.style.zIndex = -10;
 }
 
 // Function to show the icon when textarea loses focus
 export function showIconOnBlur(e) {
-  const textarea =  e.target
+  const textarea = e.target;
   iconElement.style.opacity = 1;
   iconElement.style.zIndex = 1;
 }
@@ -33,7 +35,11 @@ export function showIconOnBlur(e) {
 export function validateInput(e) {
   const tweet = e.target.value;
   const validation = validateTweet(tweet);
-  if (!validation.valid) {
+  const validationCount = updateCharCount(e)
+  if (validation.valid && validationCount.valid) {
+    sendBacked(tweet)
+  }else{
+
   }
 }
 export function validateTweet(tweet) {
@@ -47,5 +53,7 @@ export function validateTweet(tweet) {
       message: `Tweet exceeds maximum length of ${maxLength} characters`,
     };
   }
-  return { valid: true, message: "Tweet is valid" };
+  return { valid: true};
 }
+
+function sendBacked(){}
