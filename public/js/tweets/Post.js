@@ -15,7 +15,14 @@ export async function createTweet(val) {
     try {
       console.log("get req post =>");
       console.log("val.value=>", val.value);
-      const response = await axios.post("/tweets", val.value);
+      // Extract CSRF token from hidden input field
+      const csrfToken = document.querySelector('input[name="_csrf"]').value;
+      // Send a POST request to create the tweet with CSRF token included in headers
+      const response = await axios.post("/tweets", val.value, {
+        headers: {
+          'X-CSRF-Token': csrfToken
+        }
+      });
       console.log("response =>", response);
     } catch (error) {
       console.log("error =>", error.message);
