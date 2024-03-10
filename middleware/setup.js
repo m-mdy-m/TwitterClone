@@ -1,7 +1,7 @@
 const Xprz = require("xprz");
 
 const { Package } = new Xprz();
-const { session, connectMongoDbSession, csrf, flash } = new Package();
+const { session, connectMongoDbSession, csrf } = new Package();
 // Connect to MongoDB session store using the provided URI and specify the collection name
 const store = connectMongoDbSession({
   uri: process.env.MONGODB_URI,
@@ -22,5 +22,6 @@ const options = {
 // Initialize session middleware with the specified options
 session(options);
 
-flash();
+// Initialize CSRF protection middleware
 csrf();
+
