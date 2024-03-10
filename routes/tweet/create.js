@@ -8,9 +8,9 @@ router.setRoute("/tweets").post(() => {
   // Retrieve CSRF token from the request headers
   const csrfToken = req.headers["x-csrf-token"];
   // Retrieve CSRF token from the user's session
-  const storedCsrfToken = req.session.csrfSecret
-    console.log('csrfToken=>',csrfToken);
-    console.log('storedCsrfToken=>',storedCsrfToken);
+  const storedCsrfToken = req.session.csrfSecret;
+  console.log("csrfToken=>", csrfToken);
+  console.log("storedCsrfToken=>", storedCsrfToken);
   // Verify CSRF token
   if (csrfToken === storedCsrfToken) {
     // CSRF token is valid, process the request
