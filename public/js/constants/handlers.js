@@ -8,12 +8,11 @@ const maxLength = 300;
  * Sends the tweet data to the backend if it passes validation;
  * otherwise, displays an error message.
  */
-export function sendDataToBackend(validation) {
+export async function sendDataToBackend(validation) {
   if (validation.valid) {
-    console.log('tweet', validation.value)
     msgElm.style.opacity = 0;
     msgElm.style.display = "none";
-    console.log("is valid");
+    const response = await axios.post('/home',validation.value)
   } else {
     msgElm.style.display = "block";
     displayMessage(msgElm, validation.message, "#FF0000");
