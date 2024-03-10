@@ -182,6 +182,14 @@
   min-height: 4rem;
 }
 
+.min-h-20 {
+  min-height: 5rem;
+}
+
+.min-h-28 {
+  min-height: 7rem;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -301,6 +309,10 @@
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .overflow-ellipsis {
