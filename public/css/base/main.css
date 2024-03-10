@@ -175,6 +175,10 @@
   cursor: pointer;
 }
 
+.resize-none {
+  resize: none;
+}
+
 .grid-cols-main {
   grid-template-columns: 80% minmax(20% ,1fr);
 }
