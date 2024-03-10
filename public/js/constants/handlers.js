@@ -9,11 +9,13 @@ export function hideIconOnFocus() {
 export function showIconOnBlur() {
   iconElement.style.opacity = 1;
 }
-export function keypress(e){
-  const value = e.target.value
-  const trimmed = vfyjs.trimValue(value)
-  console.log('trimmed=>',trimmed);
-  const validator = vfyjs.inputValidations(trimmed)
-  const a = validator.hasAlphanumeric()
-  console.log('a=>',a);
+// Function to validate input value on keypress
+export function validateInput(e) {
+  const value = e.target.value;
+  // Trim the input value
+  const trimmed = vfyjs.trimValue(value);
+  // Perform input validations
+  const validator = vfyjs.inputValidations(trimmed);
+  validator.hasAlphanumeric();
+  validator.hasAlphabetic();
 }
