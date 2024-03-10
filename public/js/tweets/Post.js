@@ -12,8 +12,14 @@ export async function createTweet(val) {
     msgElm.style.opacity = 0;
     msgElm.style.display = "none";
     // Send a POST request to create the tweet
-    const response = await axios.post("/tweets", val.value);
-    console.log("response =>", response);
+    try {
+      console.log("get req post =>");
+      console.log("val.value=>", val.value);
+      const response = await axios.post("/tweets", val.value);
+      console.log("response =>", response);
+    } catch (error) {
+      console.log("error =>", error.message);
+    }
   } else {
     // If the tweet data is invalid, display the error message
     msgElm.style.display = "block";
