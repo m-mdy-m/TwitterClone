@@ -4,14 +4,13 @@ const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
 const msgElm = document.getElementById("msgElm");
 const maxLength = 300;
-const minLength = 20
 export function sendDataToBackend(tweet, validation) {
   if (validation.valid) {
-    msgElm.style.opacity=0
-    msgElm.style.display = 'none'
+    msgElm.style.opacity = 0;
+    msgElm.style.display = "none";
     console.log("is valid");
   } else {
-    msgElm.style.display = 'block'
+    msgElm.style.display = "block";
     displayMessage(msgElm, validation.message, "#FF0000");
   }
 }
@@ -26,7 +25,9 @@ export function updateCharCount(e) {
   if (currentLength > maxLength) {
     charCount.style.color = "red";
     textarea.style.cssText = "border-color:red;";
-    return { valid: validation.valid ,message : validation.message};
+    return { valid: validation.valid, message: validation.message };
+  } else if (!validation.valid) {
+    return { valid: validation.valid, message: validation.message };
   } else {
     charCount.style.color = "rgb(107, 114, 128)";
     textarea.style.cssText = "border-color: #343435;";
@@ -49,15 +50,16 @@ export function showIconOnBlur(e) {
 }
 export function validateTweet(tweet) {
   const value = vfyjs.trimValue(tweet);
-  const length = value.length
-  console.log('length=>',length);
-  // Check tweet length
-  if (length < minLength) {
+  const length = value.length;
+  // Check if the input is empty
+  if (length === 0) {
     return {
       valid: false,
-      message: `Tweet should be at least ${minLength} characters long`,
+      message: "Tweet cannot be empty",
     };
-  }else if (length >= maxLength) {
+  }
+  // Check tweet length against the maximum length
+  if (length >= maxLength) {
     return {
       valid: false,
       message: `Tweet exceeds maximum length of ${maxLength} characters`,
