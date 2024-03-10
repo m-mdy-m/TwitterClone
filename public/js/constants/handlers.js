@@ -1,23 +1,7 @@
-import { displayMessage } from "../auth/validation.js";
 // DOM elements
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
-const msgElm = document.getElementById("msgElm");
 const maxLength = 300;
-/**
- * Sends the tweet data to the backend if it passes validation;
- * otherwise, displays an error message.
- */
-export async function sendDataToBackend(validation) {
-  if (validation.valid) {
-    msgElm.style.opacity = 0;
-    msgElm.style.display = "none";
-    const response = await axios.post('/home',validation.value)
-  } else {
-    msgElm.style.display = "block";
-    displayMessage(msgElm, validation.message, "#FF0000");
-  }
-}
 /**
  * Updates the character count display and validates the tweet length.
  * Adjusts styles based on the length and validation status.
