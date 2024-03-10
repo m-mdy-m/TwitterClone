@@ -5,6 +5,7 @@ router.setRoute("/tweets").post(() => {
   const { getBody, getReq } = router.req();
   const body = getBody();
   const req = getReq();
+  console.log("req : ", req);
   // Retrieve CSRF token from the request headers
   const csrfToken = req.headers["X-CSRF-Token"];
 

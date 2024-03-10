@@ -14,7 +14,6 @@ export async function createTweet(val) {
     try {
       // Fetch CSRF token
       const csrfToken = await getCSRFToken();
-      console.log("CSRF Token from request:", csrfToken);
       if (!csrfToken) {
         throw new Error("CSRF token is missing");
       }
@@ -26,7 +25,7 @@ export async function createTweet(val) {
       });
       console.log("Tweet created:", response);
     } catch (error) {
-      console.log("error =>", error.message);
+      console.log("Error creating tweet:", error.message);
     }
   } else {
     // If the tweet data is invalid, display the error message
