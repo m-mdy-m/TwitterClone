@@ -3,7 +3,7 @@
 <div class="grid grid-rows-home ">
   <%- include('includes/home/section-stories.ejs',{src : '/assets/icon/nav/user.svg',UsernameStory:'m__mdy__m'}) %>
   <!-- Wrapper Posts -->
-  <div class="pt-5 px-12">
+  <div class="pt-5 px-12 relative overflow-auto">
     <!-- Post Box -->
     <div class="grid grid-rows-tweet min-h-32 rounded-2xl px-4 py-2 bg-[#111010]">
       <!-- up tweet section -->
@@ -55,7 +55,7 @@
       </div>
     </div>
     <!-- Reading Posts -->
-    <div class="w-full min-h-32 mt-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 py-2">
+    <div class="w-full h-auto mt-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 py-2">
       <div class="flex justify-between items-center">
         <!-- Wrapper info user -->
         <div class="flex justify-start items-center">
@@ -88,11 +88,14 @@
         </div>
       </div>
       <!-- Wrapper Content Tweet -->
-      <div class=" flex flex-col">
-        <!-- Content -->
-        <div class="flex w-full justify-center border-b border-red-600 p-4">
-            Content Tweet
-        </div>
+      <div class="w-full flex justify-between items-center flex-col pb-2 pr-2">
+        <!-- Content Tweet -->
+          <div class="border-b border-[#252424] pt-2 pr-2">
+              <!-- Text overlay -->
+              <div class="flex justify-center items-center text-white text-lg font-semibold">
+                  <p>Quisquam, molestias ducimus officiis architecto ullam facilis enim pariatur dolore, neque dolor ut. Iure ab omnis esse voluptatibus est voluptate, eligendi officia. Nam et tenetur perferendis itaque praesentium qui nesciunt est harum?</p>
+              </div>
+          </div>
         <!-- Info Tweet -->
         <div class="flex w-full justify-start items-center px-4 py-2 text-white  [&>*]:cursor-pointer">
             <!-- Comment -->
