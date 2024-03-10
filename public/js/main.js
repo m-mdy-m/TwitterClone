@@ -1,6 +1,8 @@
-import { handleBlur,handleFocus } from "./Constants/handlers.js";
-const elm = document.getElementById("icon-tweet");
-const textarea = document.getElementById("tweetInput");
+// Importing handlers from a separate file
+import { hideIconOnFocus, showIconOnBlur } from "./Constants/handlers.js";
 
-textarea.addEventListener("focus", () => handleFocus(elm));
-textarea.addEventListener("blur", () => handleBlur(elm));
+// Get references to the textarea and the icon element
+const textarea = document.getElementById("tweetInput");
+// Add event listeners to handle focus and blur events
+textarea.addEventListener("focus", hideIconOnFocus);
+textarea.addEventListener("blur", showIconOnBlur);

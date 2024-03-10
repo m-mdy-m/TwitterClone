@@ -1,6 +1,10 @@
-export function handleFocus(elm) {
-  elm.style.opacity = 0
+const iconElement = document.getElementById("icon-tweet");
+// Function to hide the icon when textarea is focused
+export function hideIconOnFocus() {
+  iconElement.style.opacity = 0;
 }
-export function handleBlur(elm) {
-  elm.style.opacity = 100
+
+// Function to show the icon when textarea loses focus
+export function showIconOnBlur() {
+  iconElement.style.opacity = 1;
 }
