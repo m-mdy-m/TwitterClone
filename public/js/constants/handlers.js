@@ -8,8 +8,9 @@ const maxLength = 300;
  * Sends the tweet data to the backend if it passes validation;
  * otherwise, displays an error message.
  */
-export function sendDataToBackend(tweet, validation) {
+export function sendDataToBackend(validation) {
   if (validation.valid) {
+    console.log('tweet', validation.value)
     msgElm.style.opacity = 0;
     msgElm.style.display = "none";
     console.log("is valid");
@@ -38,7 +39,7 @@ export function updateCharCount(e) {
   } else {
     charCount.style.color = "rgb(107, 114, 128)";
     textarea.style.cssText = "border-color: #343435;";
-    return { valid: validation.valid };
+    return { valid: validation.valid,value:validation.value };
   }
 }
 
@@ -60,7 +61,7 @@ export function showIconOnBlur(e) {
  * Returns an object with the validity status and an error message if applicable.
  */
 export function validateTweet(tweet) {
-  const value = vfyjs.trimValue(tweet);
+  const value = tweet.trim();
   const length = value.length;
   // Check if the input is empty
   if (length === 0) {
@@ -77,5 +78,5 @@ export function validateTweet(tweet) {
     };
   }
   // If all checks pass, the tweet is considered valid
-  return { valid: true };
+  return { valid: true,value : value };
 }
