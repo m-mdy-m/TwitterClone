@@ -3,21 +3,25 @@
 <div class="grid grid-rows-home ">
   <%- include('includes/home/section-stories.ejs',{src : '/assets/icon/nav/user.svg',UsernameStory:'m__mdy__m'}) %>
   <!-- Wrapper Posts -->
-  <div class="bg-green-400 pt-5 px-8">
+  <div class="bg-green-400 pt-5 px-12">
     <!-- Post Box -->
-    <div class="grid grid-rows-2 h-32 rounded-lg px-4">
+    <div class="grid grid-rows-2 h-32 rounded-lg px-4 py-2 bg-[#111010]">
       <!-- up tweet section -->
       <div class="w-full h-full grid grid-cols-tweet">
-        <div class="bg-blue-400 flex flex-col justify-center items-center">
+        <!-- User Profile -->
+        <div class="flex flex-col justify-center items-center">
           <div class="bg-gradient-to-tr from-[#222224] to-[#262629] rounded-full flex justify-center items-center border border-[#403e42] shadow-lg  cursor-pointer duration-100 transition-all hover:scale-105 ">
-            <!-- Placeholder for an icon or image -->
               <img src="/assets/images/profilePic.png" alt="" class="profilePic w-12 h-12">
           </div>
         </div>
-        <div class="bg-red-700"></div>
+        <!-- Tweet section -->
+        <div class="flex justify-center items-center ">
+          <input type="text" placeholder="What's happening?" class="w-full px-2 py-3 bg-[#161617] border-2 border-[#343435] text-[#4b4e52] h-3/4 rounded-lg focus:outline-none">
+        </div>
       </div>
       <!-- bottom tweet section -->
-      <div class="bg-yellow-500 w-full h-full"></div>
+      <div class="bg-yellow-500 w-full h-full">
+      </div>
     </div>
   </div>
 </div>
