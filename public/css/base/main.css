@@ -54,6 +54,10 @@
   margin-bottom: 1rem;
 }
 
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -72,10 +76,6 @@
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.ml-1 {
-  margin-left: 0.25rem;
 }
 
 .flex {
@@ -110,16 +110,16 @@
   height: 1.5rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .h-full {
   height: 100%;
 }
 
 .h-screen {
   height: 100vh;
-}
-
-.h-8 {
-  height: 2rem;
 }
 
 .w-10 {
@@ -142,16 +142,16 @@
   width: 1.5rem;
 }
 
+.w-8 {
+  width: 2rem;
+}
+
 .w-auto {
   width: auto;
 }
 
 .w-full {
   width: 100%;
-}
-
-.w-8 {
-  width: 2rem;
 }
 
 .-translate-y-1\/2 {
@@ -195,10 +195,6 @@
   flex-direction: column;
 }
 
-.items-start {
-  align-items: flex-start;
-}
-
 .items-center {
   align-items: center;
 }
@@ -219,16 +215,16 @@
   justify-content: space-evenly;
 }
 
-.space-x-4 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.25rem * var(--tw-space-x-reverse));
   margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .overflow-hidden {
@@ -324,11 +320,6 @@
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
-.bg-blue-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-}
-
 .bg-body {
   --tw-bg-opacity: 1;
   background-color: rgb(19 19 20 / var(--tw-bg-opacity));
@@ -344,14 +335,9 @@
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
-.bg-green-600 {
+.bg-red-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-}
-
-.bg-red-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-br {
@@ -469,12 +455,12 @@
   font-family: Aktiv-Regular;
 }
 
-.font-mavis__bold {
-  font-family: MAVIS-Bold;
-}
-
 .font-mavis {
   font-family: MAVIS;
+}
+
+.font-mavis__bold {
+  font-family: MAVIS-Bold;
 }
 
 .text-3xl {
@@ -506,16 +492,17 @@
   font-weight: 600;
 }
 
-.font-bold {
-  font-weight: 700;
-}
-
 .uppercase {
   text-transform: uppercase;
 }
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.text-\[\#9e9ca1\] {
+  --tw-text-opacity: 1;
+  color: rgb(158 156 161 / var(--tw-text-opacity));
 }
 
 .text-\[\#C4C4C4\] {
@@ -538,24 +525,14 @@
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-.text-gray-700 {
+.text-white {
   --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.text-\[\#9e9ca1\] {
-  --tw-text-opacity: 1;
-  color: rgb(158 156 161 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .opacity-30 {
@@ -1071,11 +1048,6 @@
   .tablet\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  .tablet\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
   }
 
   .tablet\:shadow-none {
