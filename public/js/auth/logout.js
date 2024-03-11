@@ -1,4 +1,5 @@
 // Import the displayMessage function from the validation module
+import getCSRFToken from "../Constants/getCSRFToken.js";
 import { displayMessage } from "./validation.js";
 
 // Get the message element from the DOM
@@ -11,7 +12,7 @@ async function handler(e) {
 
   try {
     // Fetch the CSRF token from a hidden input field in the HTML
-    const csrfToken = document.querySelector('input[name="_csrf"]').value;
+    const csrfToken = await getCSRFToken()
     
     // Include the CSRF token in the request headers
     const headers = {
