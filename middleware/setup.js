@@ -21,6 +21,5 @@ const options = {
 
 // Initialize session middleware with the specified options
 session(options);
-const csrfHandler  = csrf()
-csrfHandler.provideCsrfToken();
-csrfHandler.regenerateSecret()
+// Initialize CSRF protection middleware with cookie option and provide CSRF token endpoint
+csrf({ cookie: true }).provideCsrfToken();

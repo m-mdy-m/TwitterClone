@@ -1,4 +1,5 @@
 // Function to handle form submission
+import getCSRFToken from "../Constants/getCSRFToken.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
@@ -8,12 +9,17 @@ export async function handleSubmit(e, submitUrl) {
   // Ensure that form validation count meets the required threshold
   if (validationCount >= 3) {
     try {
+      const csrfToken = await getCSRFToken()
       // Collect form data
       const formData = new FormData(form);
       // Convert form data to object
       const requestData = Object.fromEntries(formData.entries());
       // Send form data to the server via POST request
-      const response = await axios.post(submitUrl, requestData);
+      const response = await axios.post(submitUrl, requestData,{
+        headers: {
+          "X-CSRF-Token": csrfToken
+        },
+      });
       // Handle server response based on success or failure
       if (response.data.success) {
         // If the server indicates success, handle accordingly

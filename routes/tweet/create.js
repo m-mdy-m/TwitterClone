@@ -4,7 +4,7 @@ const router = new Route();
 router.setRoute("/tweets").post((req, res) => {
   try {
     const clientCsrfToken = req.headers["x-csrf-token"];
-    console.log('clientCsrfToken : ',clientCsrfToken);
+    console.log("clientCsrfToken : ", clientCsrfToken);
 
     if (clientCsrfToken) {
       console.log("CSRF token is valid");

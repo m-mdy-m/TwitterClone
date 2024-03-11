@@ -34,7 +34,7 @@
     "mongoose": "^8.2.0",
     "nodemon": "^3.1.0",
     "vfyjs": "^1.1.9",
-    "xprz": "^1.1.1"
+    "xprz": "^1.1.1-beta"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.18",
