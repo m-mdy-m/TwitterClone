@@ -1,7 +1,8 @@
 const Xprz = require("xprz");
 
-const { Package } = new Xprz();
+const {Package } = new Xprz();
 const { session, connectMongoDbSession, csrf } = new Package();
+
 // Connect to MongoDB session store using the provided URI and specify the collection name
 const store = connectMongoDbSession({
   uri: process.env.MONGODB_URI,
