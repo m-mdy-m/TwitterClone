@@ -1,8 +1,8 @@
 <%- include("../includes/base.ejs") %>
 <link rel="stylesheet" href="/css/auth/auth.css" />
 <%- include("../includes/header.ejs") %>
-<main class="flex justify-center items-center flex-col h-full text-white">
-  <div id="msgElm"></div>
+<div id="msgElm" class="absolute top-4 left-[25%] opacity-0 transform text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300 pointer-events-none z-50"></div>
+<div class="flex justify-center items-center flex-col h-full text-white">
   <form id="registerForm" action="/auth/signup" method="post" class="flex-col flex justify-center items-center bg-gray-800 p-4 rounded-lg">
       <h1 class="text-3xl text-center mb-4">Register</h1>
       <div class="form-group flex justify-center flex-col items-center">
@@ -25,8 +25,7 @@
       <p class="text-xl mt-4">
           Already have an account? <a href="/auth/login" class="text-blue-400">Login here</a>
       </p>
-      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
   </form>
-</main>
-
-  <%- include("../includes/end.ejs") %>
+</div>
+<script type="module" src="/js/auth/shared.auth.js"></script>
+ <%- include("../includes/end.ejs") %>

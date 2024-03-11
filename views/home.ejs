@@ -1,6 +1,7 @@
 <%- include("includes/base.ejs") %> <%- include("includes/header.ejs") %>
 <!-- BOX HOME -->
-<div id="msgElm" class="absolute top-4 left-[25%] opacity-0 transform text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300 pointer-events-none z-50"></div><div class="grid grid-rows-home ">
+<div id="msgElm" class="absolute top-4 left-[25%] opacity-0 transform text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300 pointer-events-none z-50"></div>
+<div class="grid grid-rows-home ">
   <%- include('includes/home/section-stories.ejs',{src : '/assets/icon/nav/user.svg',UsernameStory:'m__mdy__m'}) %>
   <!-- Wrapper Posts -->
   <div class="pt-5 px-12 relative overflow-auto">
@@ -12,4 +13,5 @@
 </div>
 <!-- Wrapper Directs -->
 <div class="border-l border-[#28282a]"></div>
+<script type="module" src="/js/main.js"></script>
 <%- include("includes/end.ejs") %>
