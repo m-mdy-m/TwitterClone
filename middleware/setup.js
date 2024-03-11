@@ -21,5 +21,4 @@ const options = {
 
 // Initialize session middleware with the specified options
 session(options);
-const csurf = csrf();
-csurf.provideCsrfToken();
+csrf().provideCsrfToken();
