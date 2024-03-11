@@ -19,11 +19,14 @@ export async function createTweet(val) {
       if (!csrfToken) {
         throw new Error("CSRF token is missing");
       }
-
+      // Log headers to see if the CSRF token is set
+      console.log("Request headers:", {
+        "X-CSRF-Token": csrfToken,
+      });
       // Send a POST request to create the tweet with CSRF token included in the request body
       const response = await axios.post("/tweets", val.value, {
         headers: {
-          "X-CSRF-Token": csrfToken,
+          "X-CSRF-Token": csrfToken.trim(),
         },
       });
 
