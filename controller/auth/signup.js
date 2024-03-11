@@ -3,8 +3,7 @@ const Xprz = require("xprz");
 const { Package } = new Xprz();
 const { bcryptjs } = new Package();
 const User = $read("model/User");
-exports.getSignup = (req, res) => {
-  const { status } = res;
+exports.getSignup = (req, { status }) => {
   status(200).render("auth/signup.ejs", {
     Title: "signup",
     oldValue: {
@@ -15,10 +14,8 @@ exports.getSignup = (req, res) => {
     },
   });
 };
-exports.postSignup = async (req, res) => {
-  const { getBody, getReq } = req;
-  const request = getReq();
-  const { getJsonHandler, status } = res;
+exports.postSignup = async (req, { getJsonHandler, status }) => {
+  const { getBody } = req;
   const { created, validationFailed, internalServerError } = getJsonHandler();
   const body = getBody();
   try {
@@ -46,7 +43,7 @@ exports.postSignup = async (req, res) => {
           email: email,
           password: hashedPassword,
         });
-        request.session.user = result;
+        req.session.user = result;
         created(result);
       }
     } else {

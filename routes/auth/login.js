@@ -3,10 +3,8 @@ const { getLogin, postLogin } = $read("controller/auth/login");
 const route = new Route();
 route.group("/auth", (r) => {
   r.setRoute("/login").get(getLogin).post(postLogin);
-  r.setRoute("/logout").post((req, res) => {
-    const { getJsonHandler } = res();
-    const { success } = getJsonHandler();
-    const { error } = req();
+  r.setRoute("/logout").post((req, { getJsonHandler }) => {
+    const { success, error } = getJsonHandler();
     if (req.session) {
       req.session.destroy((err) => {
         if (err) {
