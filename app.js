@@ -7,9 +7,11 @@ new Package().dotenv().setupDot();
 const { use, launch, loadRoutes, setTemplateEngine, useJsonBody, static } =
   new App();
 launch(); // Launching the server
+const cookieParser = $install('cookie-parser')
 useJsonBody(); // Parsing JSON request bodies
 setTemplateEngine().ejs(); // set template engine ejs
 static("public"); // Serving static files from the 'public' directory
+use(cookieParser())
 $read("middleware/setup");
 use($read("middleware/user"));
 use($read("middleware/locals"));
