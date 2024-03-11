@@ -4,16 +4,17 @@ const { Package } = new Xprz();
 const { bcryptjs } = new Package();
 const User = $read("model/User");
 exports.getLogin = (req, res) => {
-  const { status } = res;
-  status(200).render("auth/login.ejs", {
-    Title: "Login",
-    oldValue: {
-      username: null,
-      email: null,
-      password: null,
-      passwordConf: null,
-    },
-  });
+  res()
+    .status(200)
+    .render("auth/login.ejs", {
+      Title: "Login",
+      oldValue: {
+        username: null,
+        email: null,
+        password: null,
+        passwordConf: null,
+      },
+    });
 };
 /**
  *  username : Ads242sxz
@@ -21,8 +22,7 @@ exports.getLogin = (req, res) => {
  * password : Asd24242@4
  */
 exports.postLogin = async (req, res) => {
-  const { getReq, getBody } = req;
-  const request = getReq();
+  const { getBody } = req();
   const body = getBody();
   const username = body.username;
   const email = body.email;
@@ -41,7 +41,7 @@ exports.postLogin = async (req, res) => {
       message: "Incorrect password. Please try again.",
     });
   }
-  request.session.user = user;
+  req.session.user = user;
 
   return res.status(200).json({
     success: true,
