@@ -1,5 +1,5 @@
-exports.getHome = ({getReq}, {status}) => {
-  const req = getReq();
+exports.getHome = (req, res) => {
+  const { status } = res();
   status(200).render("home", {
     Title: "Home",
     user: req.user,
