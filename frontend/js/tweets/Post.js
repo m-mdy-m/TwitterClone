@@ -37,8 +37,11 @@ export async function createTweet(val) {
       const responseData = response.data;
       if (response.data.success) {
         const tweetData = responseData.data;
-        const { username, content, profilePic } = tweetData.postedBy;
-
+        const content = tweetData.content
+        const { username, profilePic } = tweetData.postedBy;
+        console.log('responseData=>',responseData);
+        console.log('content=>',content);
+        console.log('tweetData.postedBy=>',tweetData.postedBy);
         // Create the tweet template
         const tweetTemplate = Tweet({ username, content, profile: profilePic });
 
