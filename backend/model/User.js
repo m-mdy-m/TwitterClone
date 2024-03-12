@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   },
   profilePic: {
     type: String,
-    default: "/assets/images/profilePic.png",
+    default: "",
   },
 },{timestamps : true});
 module.exports = model("User", UserSchema);
