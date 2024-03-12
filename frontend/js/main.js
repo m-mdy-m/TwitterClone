@@ -1,6 +1,5 @@
 // Importing handlers from a separate file
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./Constants/handlers.js";
-import { renderNav } from "./templates/navigation.js";
 import { fetchTweets } from "./tweets/Get.js";
 import { createTweet } from "./tweets/Post.js";
 fetchTweets()

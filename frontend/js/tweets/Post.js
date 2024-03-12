@@ -1,6 +1,6 @@
 import { displayMessage } from "../auth/validation.js";
 import getCSRFToken from "../Constants/getCSRFToken.js";
-import template from "./TemplateTweet.js";
+import template from "../templates/tweet-create.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
 const wrapper = document.getElementById("wrapperTweet");
@@ -37,9 +37,6 @@ export async function createTweet(val) {
       const dataPost = response.data.data;
       const dataUser = dataPost.postedBy;
       if (response.data.success) {
-        console.log("dataUser.username=>", dataUser.username);
-        console.log("dataPost.content=>", dataPost.content);
-        console.log("dataUser.profilePic=>", dataUser.profilePic);
         // Create the tweet template
         const tweetTemplate = template(
           dataUser.username,

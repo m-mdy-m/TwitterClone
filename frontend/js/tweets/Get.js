@@ -15,6 +15,7 @@ export async function fetchTweets() {
     } else {
       // Display error message with error-related color
       msgElm.style.display = "block";
+      console.log('response=>',response);
       displayMessage(msgElm, response.data.error, "#ff6347"); // Error color
       console.error("Failed to fetch tweets:", response.data.error);
     }
