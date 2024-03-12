@@ -49,7 +49,7 @@ export async function createTweet(val) {
         // Create the tweet template
         const tweetTemplateString = template(dataUser.username, dataPost.content, dataUser.profilePic);
         // Append the first child of the container to WrapperPost
-        wrapper.innerHTML = tweetTemplateString
+        wrapper.innerHTML += tweetTemplateString
       }
       console.log("Tweet created:", response);
     } catch (error) {
