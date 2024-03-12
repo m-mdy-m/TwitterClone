@@ -4,10 +4,9 @@ const Xprz = require("xprz");
 const { App, Package } = new Xprz();
 new Package().dotenv().setupDot(); // Loading environment variables from '.env' file
 // Destructuring commonly used methods from the App instance
-const { use, launch, loadRoutes, setTemplateEngine, useJsonBody, static } =  new App();
+const { use, launch, loadRoutes, useJsonBody, static } =  new App();
 launch(); // Launching the server
 useJsonBody(); // Parsing JSON request bodies
-setTemplateEngine().ejs(); // set template engine ejs
 static("frontend"); // Serving static files from 'frontend' directory
 const cookieParser = $install("cookie-parser"); // Installing and using cookie-parser middleware
 use(cookieParser());
