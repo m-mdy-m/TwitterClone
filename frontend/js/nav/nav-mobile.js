@@ -1,31 +1,8 @@
 import logout from "../auth/logout.js";
 import { renderNavMenu, renderNavMobile } from "./navigation.js";
-
-const navMobile = document.getElementById("nav-mobile");
-const shouldDisplayWelcomePhoto = localStorage.getItem("showWelcomePhoto");
-const isAuth = localStorage.getItem("logged");
-renderNavMenu(isAuth);
-renderNavMobile(isAuth);
-const btnLogout = document.querySelector(".logout");
-logout(btnLogout);
-if (shouldDisplayWelcomePhoto) {
-  document.querySelectorAll(".welcome-user").forEach((el) => {
-    el.style.display = "block";
-  });
-  // Optionally, set an expiry for the flag after 10 minutes
-  setTimeout(() => {
-    localStorage.removeItem("showWelcomePhoto");
-    document.querySelectorAll(".welcome-user").forEach((el) => {
-      el.style.display = "none";
-    });
-  }, 10 * 60 * 1000); // 10 minutes
-} else {
-  document.querySelectorAll(".welcome-user").forEach((el) => {
-    el.style.display = "none";
-  });
-}
 // Function to handle navigation events
 function handleNavigation() {
+  const navMobile = document.getElementById("nav-mobile");
   const iconNavigation = document.getElementById("iconNavigation");
   const cancelIcon = document.getElementById("cancelIcon");
 
@@ -53,16 +30,51 @@ function handleNavigation() {
     }
   });
 }
+// Function to execute components on document load
+function onDocumentLoad() {
+  const shouldDisplayWelcomePhoto = localStorage.getItem("showWelcomePhoto");
+  const isAuth = localStorage.getItem("logged");
 
-// Initial call to handle navigation events
-handleNavigation();
+  // Render navigation menu and mobile navigation
+  renderNavMenu(isAuth);
+  renderNavMobile(isAuth);
 
-// Call the function whenever the window is resized
-window.addEventListener("resize", () => {
-  if (window.innerWidth < 900) {
-    handleNavigation();
+  // Initialize logout functionality
+  const btnLogout = document.querySelector(".logout");
+  logout(btnLogout);
+
+  // Handle navigation events
+  handleNavigation();
+
+  // Optionally display welcome photo
+  if (shouldDisplayWelcomePhoto) {
+    document.querySelectorAll(".welcome-user").forEach((el) => {
+      el.style.display = "block";
+    });
+    // Optionally, set an expiry for the flag after 10 minutes
+    setTimeout(() => {
+      localStorage.removeItem("showWelcomePhoto");
+      document.querySelectorAll(".welcome-user").forEach((el) => {
+        el.style.display = "none";
+      });
+    }, 10 * 60 * 1000); // 10 minutes
   } else {
-    navMobile.classList.remove("show-nav");
-    navMobile.classList.remove("hide-nav");
+    document.querySelectorAll(".welcome-user").forEach((el) => {
+      el.style.display = "none";
+    });
   }
-});
+
+  // Call the function whenever the window is resized
+  window.addEventListener("resize", () => {
+    const navMobile = document.getElementById("nav-mobile");
+    if (window.innerWidth < 900) {
+      handleNavigation();
+    } else {
+      navMobile.classList.remove("show-nav");
+      navMobile.classList.remove("hide-nav");
+    }
+  });
+}
+
+// Execute onDocumentLoad function when the document is loaded
+document.addEventListener("DOMContentLoaded", onDocumentLoad);
