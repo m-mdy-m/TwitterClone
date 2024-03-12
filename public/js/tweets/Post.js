@@ -3,7 +3,6 @@ import getCSRFToken from "../Constants/getCSRFToken.js";
 import template from "./TemplateTweet.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
-
 const WrapperPost = document.getElementById("WrapperPost");
 
 // Function to create a tweet
@@ -39,7 +38,13 @@ export async function createTweet(val) {
       const dataPost = response.data.data;
       const dataUser = dataPost.postedBy;
       if (response.data.success) {
-        template(dataUser.username, dataPost.content, dataUser.profilePic);
+        console.log('dataUser.username=>',dataUser.username);
+        console.log('dataPost.content=>',dataPost.content);
+        console.log('dataUser.profilePic=>',dataUser.profilePic);
+        // Create the tweet template
+        const tweetTemplate = template(dataUser.username, dataPost.content, dataUser.profilePic);
+        // Append the tweet template as a child of WrapperPost
+        WrapperPost.appendChild(tweetTemplate);
       }
       console.log("Tweet created:", response);
     } catch (error) {

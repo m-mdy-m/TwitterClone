@@ -1,8 +1,11 @@
+import { getCurrentTimeFormatted } from "../Constants/handlers";
 
-
-
-
-function template(username,content,profile = "/assets/images/profilePic.png") {
+function template(
+  username,
+  content,
+  profile = "/assets/images/profilePic.png"
+) {
+  const currentTimeFormatted = getCurrentTimeFormatted();
   return `<div class="w-full min-h-32 h-auto mt-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 py-2">
   <!-- up section tweet -->
 <div class="flex justify-between items-center">
@@ -20,11 +23,7 @@ function template(username,content,profile = "/assets/images/profilePic.png") {
             <!-- Time Published -->
             <div class="flex justify-center items-center text-gray-500">
                 <p class="flex items-center space-x-1 font-mavis__bold text-sm">
-                    <em class="text-[#9e9ca1]">15</em>
-                    <span class="text-[#9e9ca1]">Aug</span>
-                    <span>•</span>
-                    <span class="text-[#9e9ca1]">4:21</span>
-                    <span class="text-[#9e9ca1] uppercase ml-1">PM</span>
+                <em class="text-[#9e9ca1]">${currentTimeFormatted}</em>
                 </p>
             </div>
         </div>
