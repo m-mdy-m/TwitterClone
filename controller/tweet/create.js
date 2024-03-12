@@ -13,7 +13,8 @@ exports.postTweet = async (req, res) => {
   };
   try {
     const post = await PostTweet.create(data);
-    created(post);
+    const result = await PostTweet.populate(post,{path : 'postedBy'})
+    created(result);
   } catch (error) {
     internalServerError("Internal server error. Unable to post the tweet.");
   }
