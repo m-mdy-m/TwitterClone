@@ -5,10 +5,8 @@ import { getCurrentTimeFormatted } from '../common/handlers.js';
 
 function Tweet({ username, content, profile= "/assets/images/profilePic.png" }) {
   const currentTimeFormatted = getCurrentTimeFormatted();
-  console.log('content  1=>',content);
-  console.log('username  1=>',username);
   return `
-    <div class="w-full min-h-32 h-auto mt-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 py-2">
+    <div class="w-full min-h-24 h-auto mt-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 py-2">
       <div class="flex justify-between items-center">
         ${UserInfo({ username, profile, currentTimeFormatted })}
         <div class="flex justify-center items-center w-8 h-8 transition-transform cursor-pointer transform hover:scale-110">

@@ -39,14 +39,12 @@ export async function createTweet(val) {
         const tweetData = responseData.data;
         const content = tweetData.content
         const { username, profilePic } = tweetData.postedBy;
-        console.log('responseData=>',responseData);
-        console.log('content=>',content);
-        console.log('tweetData.postedBy=>',tweetData.postedBy);
         // Create the tweet template
         const tweetTemplate = Tweet({ username, content, profile: profilePic });
 
         // Append the tweet template to the wrapper element
         wrapper.insertAdjacentHTML("beforeend", tweetTemplate);
+        document.getElementById('tweetInput').value = ''
         console.log("Tweet created:", response);
       } else {
         displayMessage(msgElm, responseData.error, "ffd700");
