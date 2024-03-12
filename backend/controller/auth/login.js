@@ -2,7 +2,7 @@ const Xprz = require("xprz");
 
 const { Package } = new Xprz();
 const { bcryptjs } = new Package();
-const User = $read("model/User");
+const User = $read("backend/model/User");
 exports.getLogin = (req, { status }) => {
   status(200).render("auth/login.ejs", {
     Title: "Login",

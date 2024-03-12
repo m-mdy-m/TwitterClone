@@ -2,7 +2,7 @@ const { isPassword, isEmail, isUsername } = require("vfyjs");
 const Xprz = require("xprz");
 const { Package } = new Xprz();
 const { bcryptjs } = new Package();
-const User = $read("model/User");
+const User = $read("backend/model/User");
 exports.getSignup = (req, { status }) => {
   status(200).render("auth/signup.ejs", {
     Title: "signup",

@@ -11,8 +11,8 @@ useJsonBody(); // Parsing JSON request bodies
 setTemplateEngine().ejs(); // set template engine ejs
 const cookieParser = $install("cookie-parser");
 use(cookieParser());
-$read("middleware/setup");
-use($read("middleware/user"));
-use($read("middleware/locals"));
-$read("utils/database"); // Loading database utility
-loadRoutes("routes"); // Loading routes from the 'routes' directory
+$read("backend/middleware/setup");
+use($read("backend/middleware/user"));
+use($read("backend/middleware/locals"));
+$read("backend/utils/database"); // Loading database utility
+loadRoutes("backend/routes"); // Loading routes from the 'routes' directory

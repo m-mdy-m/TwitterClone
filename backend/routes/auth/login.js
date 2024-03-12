@@ -1,5 +1,5 @@
-const { Route } = $read("utils/helper");
-const { getLogin, postLogin } = $read("controller/auth/login");
+const { Route } = $read("backend/utils/helper");
+const { getLogin, postLogin } = $read("backend/controller/auth/login");
 const route = new Route();
 route.group("/auth", (r) => {
   r.setRoute("/login").get(getLogin).post(postLogin);
