@@ -10,7 +10,7 @@ export async function fetchTweets() {
     // Check if the request was successful
     if (response.data.success) {
       // Display the fetched tweets
-      console.log("Fetched tweets:", response.data.data);
+      console.log("Fetched tweets:", response.data);
       // Handle displaying tweets on the UI as needed
     } else {
       // Display error message with error-related color
