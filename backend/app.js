@@ -13,6 +13,5 @@ const cookieParser = $install("cookie-parser");
 use(cookieParser());
 $read("backend/middleware/setup");
 use($read("backend/middleware/user"));
-use($read("backend/middleware/locals"));
 $read("backend/utils/database"); // Loading database utility
 loadRoutes("backend/routes"); // Loading routes from the 'routes' directory

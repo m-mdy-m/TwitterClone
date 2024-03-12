@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="../css/base/based.css"> 
+    <link rel="stylesheet" href="../css/components/shared.css">
+</head>
+<body>
+    <div class="container mobile:m-0 tablet:px-4 h-screen grid mobile:grid-cols-1 tablet:grid-cols-container">
+        <header class="flex flex-col items-center tablet:h-auto justify-start mobile:pl-2 mobile:py-1 tablet:m-4 mobile:absolute tablet:relative">
+            <!-- Icon Navigation -->
+            <div id="iconNavigation" class="mobile:absolute top-4 left-4 tablet:hidden">
+                <svg class="w-12 h-12  text-white cursor-pointer transform transition duration-300 hover:scale-110 hover:bg-gray-800 p-1 rounded-full" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.25 8C6.25 7.58579 6.58579 7.25 7 7.25H17C17.4142 7.25 17.75 7.58579 17.75 8C17.75 8.41421 17.4142 8.75 17 8.75H7C6.58579 8.75 6.25 8.41421 6.25 8ZM6.25 12C6.25 11.5858 6.58579 11.25 7 11.25H17C17.4142 11.25 17.75 11.5858 17.75 12C17.75 12.4142 17.4142 12.75 17 12.75H7C6.58579 12.75 6.25 12.4142 6.25 12ZM7 15.25C6.58579 15.25 6.25 15.5858 6.25 16C6.25 16.4142 6.58579 16.75 7 16.75H17C17.4142 16.75 17.75 16.4142 17.75 16C17.75 15.5858 17.4142 15.25 17 15.25H7Z" fill="#fff"/>
+                </svg>
+            </div>
+            <!-- Navigation Mobile -->
+            <div id="nav-mobile" class="mobile:header__navigation-bg tablet:header__navigation-bg-transparent  mobile:fixed tablet:flex tablet:flex-col tablet:relative tablet:h-full tablet:left-0 mobile:top-0 mobile:-left-[100rem] mobile:p-5 tablet:p-0">
+                <img src="/assets/icon/profile-utils/clip-342.png" alt="clip-342" class="absolute bottom-0 hidden left-0 opacity-30 welcome-user">
+                <div id="cancelIcon" class="mobile:absolute tablet:hidden top-6 right-4 z-50 p-0 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 cursor-pointer hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-700 transition duration-300 ease-in-out transform hover:rotate-45">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white">
+                        <path d="M6.34311 14.8284C5.56206 15.6094 5.56206 16.8758 6.34311 17.6568C7.12416 18.4379 8.39049 18.4379 9.17154 17.6568L12 14.8284L14.8284 17.6568C15.6094 18.4379 16.8758 18.4379 17.6568 17.6568C18.4379 16.8758 18.4379 15.6094 17.6568 14.8284L14.8284 12L17.6568 9.17154C18.4379 8.39049 18.4379 7.12416 17.6568 6.34311C16.8758 5.56206 15.6094 5.56206 14.8284 6.34311L12 9.17154L9.17154 6.34311C8.39049 5.56206 7.12416 5.56206 6.34311 6.34311C5.56206 7.12416 5.56206 8.39049 6.34311 9.17154L9.17154 12L6.34311 14.8284Z" fill="#fff"/>
+                    </svg>
+                </div>
+                <% if(isAuth){ %>
+                    <!-- Profile User Section -->
+                    <div class="flex flex-col items-center rounded-lg mobile:p-0 tablet:p-2 tablet:pt-0">
+                        <%- include('./layouts/user-profile.ejs') %>
+                        <%- include('./layouts/info.ejs') %>
+                    </div>
+                <% }else{ %>
+                    <!-- Signup Button -->
+                    <div class="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center tablet:p-8 mobile:p-2 transform transition duration-300 hover:scale-105 mb-4">
+                        <a href="/auth/signup" class="flex flex-col items-center justify-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-gray-300 hover:text-gray-100" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 1a9 9 0 0 0-6.364 15.364L10 19.243l6.364-2.879A9 9 0 0 0 10 1zm0 3a5.95 5.95 0 0 0-4.243 1.757A5.953 5.953 0 0 0 4 10c0 1.41.49 2.702 1.317 3.707L10 17.079l4.683-3.372A5.953 5.953 0 0 0 16 10c0-1.567-.61-3.034-1.732-4.243A5.95 5.95 0 0 0 10 4z" clip-rule="evenodd" />
+                            </svg>
+                            <h2 class="font-semibold text-xl hover:text-gray-100">Sign Up</h2>
+                            <p class="text-gray-300 mobile:text-[10px] mt-2 tablet:text-sm font-Aktiv__medium">Create an account to unlock more features</p>
+                        </a>
+                    </div>
+                <% } %>
+                <!-- Navigation Menu -->
+                <nav class="flex w-full mt-4 h-full flex-col tablet:space-y-4 mobile:space-y-6 smallTb:space-y-3 tablet:p-0 smallTb:p-2 mobile:p-0 mobile:rounded-lg tablet:rounded-none mobile:shadow-lg tablet:shadow-none mobile:justify-start mobile:items-start">
+                    <!-- Home Link -->
+                    <a href="/home" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
+                        <img src="../assets/icon/nav/home.svg" alt="home" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
+                        <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">home</h2>
+                    </a>
+                    <% if(isAuth){ %>
+                        <!-- Notifications Link -->
+                        <a href="/notifications" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
+                            <img src="../assets/icon/nav/notifications.svg" alt="notifications" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
+                            <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">notifications</h2>
+                        </a>
+                        <!-- Messages Link -->
+                        <a href="/messages" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
+                            <img src="../assets/icon/nav/messages.svg" alt="messages" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
+                            <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">messages</h2>
+                        </a>
+                        <!-- Setting Link -->
+                        <a href="/setting" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
+                            <img src="../assets/icon/nav/setting.svg" alt="setting" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
+                            <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">setting</h2>
+                        </a>
+                        <!-- Logout Link -->
+                        <a href="/auth/logout" class="header__navigation-link flex items-center logout space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
+                            <button type="submit" class="flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105">
+                                <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
+                                <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">Logout</h2>
+                            </button>
+                        </a>
+                    <% } else{%>
+                        <!-- Signup Link -->
+                        <a href="/auth/signup" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
+                            <img src="/assets/icon/utils/login.svg" alt="Signup" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8 ">
+                            <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">Signup</h2>
+                        </a>
+                    <% } %>
+                </nav>
+            </div>
+        </header>
+        <main  class="grid grid-cols-main mt-4 mr-4 mb-4 bg-[#19191a] rounded-lg border border-[#28282a] relative">
+        <div id="msgElm" class="absolute top-4 left-[25%] opacity-0 transform text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300 pointer-events-none z-50"></div>
+        <div class="grid grid-rows-home ">
+            <!-- Wrapper All box story -->
+            <div class="w-full flex justify-start pt-5 px-12">
+                <!-- Your Add Story -->
+                <div class="flex justify-start items-center w-auto mr-2">
+                  <!-- Story Box -->
+                  <div class="px-2 h-full flex justify-evenly items-center flex-col">
+                    <!-- Animated Plus Icon -->
+                    <div class="bg-gradient-to-tr from-[#222224] to-[#262629] rounded-full w-16 h-16 flex justify-center items-center outline-dashed outline-[#403e42] shadow-lg  cursor-pointer duration-100 transition-all hover:scale-105 ">
+                      <!-- Placeholder for an icon or image -->
+                        <svg class="w-10 h-10 text-[#C4C4C4] animate-spin-story" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <!-- Plus icon -->
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                    </div>
+                    <!-- Add Story Text -->
+                    <h1 class="mt-1 text-sm font-mavis__bold text-white">Add Story</h1>
+                  </div>
+                </div>
+                <!-- Wrapper Story -->
+                <div class="flex justify-start items-center w-auto mr-2">
+                    <!-- Story Box -->
+                    <div class="px-2 h-full flex justify-evenly items-center flex-col">
+                      <!-- Animated Plus Icon -->
+                      <div class="bg-gradient-to-tr from-[#222224] to-[#262629] rounded-full w-16 h-16 flex justify-center items-center border-2 border-[#403e42] shadow-lg  cursor-pointer duration-100 transition-all hover:scale-105 ">
+                        <!-- Placeholder for an icon or image -->
+                          <img src="../assets/icon/nav/user.svg" alt="" class="w-10 h-10 text-[#C4C4C4] ">
+                      </div>
+                      <!-- User Name Story Text -->
+                      <h1 class="mt-1 text-sm font-mavis__bold text-white">m__mdy__m</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- Wrapper Posts -->
+            <div class="pt-5 px-12 relative overflow-auto">
+              <!-- Post Box -->
+              <div class="flex flex-col min-h-32 rounded-2xl px-4 py-2 bg-[#111010]">
+                <!-- up tweet section -->
+                <div class="grid grid-cols-tweet py-2">
+                  <!-- User Profile -->
+                  <div class="flex flex-col justify-start items-center">
+                    <div class="bg-gradient-to-tr from-[#222224] to-[#262629] rounded-full flex justify-center items-center border border-[#403e42] shadow-lg  cursor-pointer duration-100 transition-all hover:scale-105 ">
+                        <img src="../assets/images/profilePic.png" alt="" class="profilePic w-12 h-12">
+                    </div>
+                  </div>
+                  <!-- Tweet section -->
+                  <div class="flex justify-center items-center relative">
+                    <textarea id="tweetInput" placeholder="What's happening?" class="pr-7 h-auto min-h-32 w-full bg-[#161617] px-1 py-2 border border-[#343435] text-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none overflow-hidden"></textarea>
+                    <!-- Absolute SVG icon -->
+                    <div id="icon-tweet" class="absolute right-2 top-5 transform -translate-y-1/2 opacity-100 transition-opacity duration-300">
+                      <svg width="24" height="24" class="h-6 w-6 cursor-pointer animate-opacity" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.9813 4.0651C22.151 2.85824 21.141 1.849 19.9342 2.0187C13.0461 2.98731 7.59633 8.43705 6.62773 15.3252C6.5831 15.6426 6.62001 15.9464 6.72061 16.2186C6.72061 16.2186 6.72061 16.2187 6.72062 16.2187L1.46967 21.4696C1.17678 21.7625 1.17678 22.2374 1.46967 22.5303C1.76256 22.8231 2.23744 22.8231 2.53033 22.5303L7.78115 17.2794C8.05326 17.38 8.35686 17.4169 8.67411 17.3723C11.2473 17.0106 13.6198 16.0235 15.6329 14.5697C16.0381 14.2771 16.262 13.8 16.262 13.3002C16.262 12.3905 16.9995 11.653 17.9092 11.653C18.409 11.653 18.8861 11.4291 19.1787 11.0239C20.6325 9.01079 21.6196 6.6383 21.9813 4.0651ZM6.72062 16.2187C6.902 16.7095 7.29037 17.098 7.78115 17.2794V17.2794L12.5976 12.4629C12.8905 12.1701 12.8905 11.6952 12.5976 11.4023C12.3047 11.1094 11.8299 11.1094 11.537 11.4023L6.72062 16.2187Z" fill="#4D85F1"/>
+                      </svg>
+                    </div>
+                    <p id="charCount" class="absolute bottom-1 text-xs right-0 mr-2 text-gray-500">0/380</p>
+                  </div>
+                </div>
+                <!-- Bottom tweet section -->
+                <div class="w-full h-full flex justify-between items-center">
+                  <!-- Wrapper Icons  -->
+                  <div class="flex justify-start items-center [&>*]:cursor-pointer px-4">
+                  <!-- Tweet icons with hover animation -->
+                    <div class="mr-4 icon-container  transform transition duration-150 hover:scale-110">
+                      <img src="../assets/icon/twwets/circle.svg" alt="">
+                    </div>
+                    <div class="mr-4 icon-container  transform transition duration-150 hover:scale-110">
+                      <img src="../assets/icon/twwets/filter.svg" alt="">
+                    </div>
+                    <div class="mr-4 icon-container transform transition duration-150 hover:scale-110">
+                      <img src="../assets/icon/twwets/calendar.svg" alt="">
+                    </div>
+                    <div class="mr-4 icon-container  transform transition duration-150 hover:scale-110">
+                      <img src="../assets/icon/twwets/location.svg" alt="">
+                    </div>
+                    <div class=" icon-container transform transition duration-150 hover:scale-110">
+                      <img src="../assets/icon/twwets/information.svg" alt="">
+                    </div>
+                  </div>
+                  <!-- Wrapper Button Tweet -->
+                  <div id="tweetButton" class="flex justify-center items-center">
+                    <button type="button" class="px-3 py-1 rounded-lg text-white font-Aktiv__light  bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-150 ease-in-out  transform hover:scale-105 shadow-md focus:outline-none">
+                      Tweet
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Wrapper Tweets -->
+              <div class="flex flex-col justify-center " id="wrapperTweet">
+                <!-- Reading Posts -->
+              </div>
+            </div>
+          </div>
+          <!-- Wrapper Directs -->
+          <div class="border-l border-[#28282a]"></div>
+        </main>
+    </div>
+</body>
+</html>
