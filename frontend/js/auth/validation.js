@@ -1,6 +1,5 @@
 // Function to handle form submission
 import getCSRFToken from "../Constants/getCSRFToken.js";
-import { renderNavMenu } from "../templates/navigation.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
@@ -21,13 +20,13 @@ export async function handleSubmit(e, submitUrl) {
           "X-CSRF-Token": csrfToken
         },
       });
-      renderNavMenu(response.data.success)
       // Handle server response based on success or failure
       if (response.data.success) {
         // If the server indicates success, handle accordingly
         handleSuccess(response.data.message);
         // Set the 'showWelcomePhoto' flag to 'true' in localStorage
         localStorage.setItem('showWelcomePhoto','true') 
+        localStorage.setItem('logged','true')
       } else {
         // If the server indicates failure, handle accordingly
         handleNotSuccess(response.data);

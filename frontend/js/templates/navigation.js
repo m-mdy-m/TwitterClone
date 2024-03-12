@@ -88,7 +88,7 @@ export function renderNavMenu(isAuth = false) {
   }
 }
 
-export function renderNavMobile(isAuth) {
+export function renderNavMobile(isAuth = false) {
   if (isAuth) {
     navMobile.innerHTML = authTemplateMobile;
   } else {
