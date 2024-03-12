@@ -1,7 +1,10 @@
 import { displayMessage } from "../auth/validation.js";
 import getCSRFToken from "../Constants/getCSRFToken.js";
+import template from "./TemplateTweet.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
+
+const WrapperPost = document.getElementById("WrapperPost");
 
 // Function to create a tweet
 export async function createTweet(val) {
@@ -33,7 +36,11 @@ export async function createTweet(val) {
       };
       // Send a POST request to create the tweet with CSRF token included in the request body
       const response = await axios.post("/tweets", data, header);
-
+      const dataPost = response.data.data;
+      const dataUser = dataPost.postedBy;
+      if (response.data.success) {
+        template(dataUser.username, dataPost.content, dataUser.profilePic);
+      }
       console.log("Tweet created:", response);
     } catch (error) {
       // Handle errors
