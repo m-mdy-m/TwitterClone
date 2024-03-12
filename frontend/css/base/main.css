@@ -74,10 +74,6 @@
   margin-bottom: 1rem;
 }
 
-.ml-1 {
-  margin-left: 0.25rem;
-}
-
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -96,6 +92,10 @@
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.block {
+  display: block;
 }
 
 .flex {
@@ -142,8 +142,16 @@
   height: 100vh;
 }
 
+.min-h-24 {
+  min-height: 6rem;
+}
+
 .min-h-32 {
   min-height: 8rem;
+}
+
+.min-h-28 {
+  min-height: 7rem;
 }
 
 .w-10 {
@@ -156,10 +164,6 @@
 
 .w-16 {
   width: 4rem;
-}
-
-.w-52 {
-  width: 13rem;
 }
 
 .w-6 {
@@ -197,6 +201,10 @@
 
 .resize-none {
   resize: none;
+}
+
+.resize {
+  resize: both;
 }
 
 .grid-cols-main {
@@ -467,16 +475,13 @@
   padding-bottom: 0.5rem;
 }
 
-.pb-2 {
-  padding-bottom: 0.5rem;
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .pb-3 {
   padding-bottom: 0.75rem;
-}
-
-.pb-5 {
-  padding-bottom: 1.25rem;
 }
 
 .pr-2 {
@@ -553,13 +558,12 @@
   text-transform: uppercase;
 }
 
-.capitalize {
-  text-transform: capitalize;
+.lowercase {
+  text-transform: lowercase;
 }
 
-.text-\[\#9e9ca1\] {
-  --tw-text-opacity: 1;
-  color: rgb(158 156 161 / var(--tw-text-opacity));
+.capitalize {
+  text-transform: capitalize;
 }
 
 .text-\[\#C4C4C4\] {
@@ -622,6 +626,15 @@
 
 .outline-\[\#403e42\] {
   outline-color: #403e42;
+}
+
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .transition {
