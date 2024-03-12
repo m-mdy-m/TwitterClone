@@ -15,21 +15,41 @@ export async function createTweet(val) {
       // Fetch CSRF token
       const csrfToken = await getCSRFToken();
       if (!csrfToken) {
-        throw new Error("CSRF token is missing");
+        msgElm.style.display = "block";
+        displayMessage(
+          msgElm,
+          "Unable to create tweet. CSRF token is missing or invalid.",
+          "#ff6347"
+        );
+        return;
       }
-      const data = undefined
-      // Send a POST request to create the tweet with CSRF token included in the request body
-      const response = await axios.post("/tweets", {tweet : data}, {
+      const data = {
+        tweet: undefined,
+      };
+      const header = {
         headers: {
           "X-CSRF-Token": csrfToken,
         },
-      });
+      };
+      // Send a POST request to create the tweet with CSRF token included in the request body
+      const response = await axios.post("/tweets", data, header);
 
       console.log("Tweet created:", response);
     } catch (error) {
-       const response = error.response
+      // Handle errors
+      if (error.response && error.response.data && error.response.data.error) {
+        // Display error message returned from the server
         msgElm.style.display = "block";
-       displayMessage(msgElm,response.data.error,'#fc6736')
+        displayMessage(msgElm, error.response.data.error, "#ffd700");
+      } else {
+        // Display a generic error message for other errors
+        msgElm.style.display = "block";
+        displayMessage(
+          msgElm,
+          "An unexpected error occurred while creating the tweet. Please try again later.",
+          "#cc0000"
+        );
+      }
     }
   } else {
     // If the tweet data is invalid, display the error message
