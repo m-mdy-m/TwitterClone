@@ -1,5 +1,6 @@
 // Function to handle form submission
 import getCSRFToken from "../Constants/getCSRFToken.js";
+import { renderNav } from "../templates/navigation.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
@@ -20,6 +21,7 @@ export async function handleSubmit(e, submitUrl) {
           "X-CSRF-Token": csrfToken
         },
       });
+      renderNav(response.data.success)
       // Handle server response based on success or failure
       if (response.data.success) {
         // If the server indicates success, handle accordingly

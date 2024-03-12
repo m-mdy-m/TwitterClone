@@ -30,8 +30,9 @@ const defaultTemplate = `
 </a>
 `;
 
-export function renderNav(isAuth=false, nav) {
-  if (isAuth) {
+export function renderNav(isAuth=false) {
+const nav = document.getElementById('nav-menu')
+if (isAuth) {
     nav.insertAdjacentHTML("afterend", authTemplate);
   } else {
     nav.insertAdjacentHTML("afterend", defaultTemplate);
