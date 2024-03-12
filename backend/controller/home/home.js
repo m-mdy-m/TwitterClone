@@ -1,15 +1,8 @@
-const PostTweet = require("../../model/PostTweet");
 const path = require("path");
-exports.getHome = async (req, {json,status,sendFile}) => {
+exports.getHome = async (req, { status, sendFile }) => {
   try {
-    // Fetch tweets from the database
-    const tweets = await PostTweet.find();
-    // Send JSON response with success true and tweet data
-    sendFile(path.join(process.cwd(),'/frontend/html/home.html'))
-    json({
-      success: true,
-      data: tweets,
-    });
+    // Send the HTML file to the client
+    sendFile(path.join(process.cwd(), "/frontend/html/home.html"));
   } catch (error) {
     // If an error occurs, send an error response
     status(500).json({

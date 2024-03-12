@@ -36,3 +36,22 @@ exports.postTweet = async (req, { getJsonHandler }) => {
     internalServerError("Internal server error. Unable to post the tweet.");
   }
 };
+exports.getTweets = async (req, res) => {
+  try {
+    // Fetch tweets from the database
+    const tweets = await PostTweet.find();
+
+    // Send JSON response with success true and tweet data
+    res.status(200).json({
+      success: true,
+      tweets: tweets,
+    });
+
+  } catch (error) {
+    // If an error occurs, send an error response
+    res.status(500).json({
+      success: false,
+      error: "Failed to fetch tweets",
+    });
+  }
+};

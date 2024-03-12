@@ -5,7 +5,7 @@ const msgElm = document.getElementById("msgElm");
 export async function fetchTweets() {
   try {
     // Make a GET request to fetch tweets
-    const response = await axios.get("/");
+    const response = await axios.get("/tweets");
     console.log("response=>", response);
     // Check if the request was successful
     if (response.data.success) {
@@ -15,7 +15,7 @@ export async function fetchTweets() {
     } else {
       // Display error message with error-related color
       msgElm.style.display = "block";
-      console.log('response=>',response);
+      console.log("response=>", response);
       displayMessage(msgElm, response.data.error, "#ff6347"); // Error color
       console.error("Failed to fetch tweets:", response.data.error);
     }
