@@ -1,4 +1,4 @@
-import { getCurrentTimeFormatted } from "../Constants/handlers";
+import { getCurrentTimeFormatted } from "../Constants/handlers.js";
 
 function template(
   username,
@@ -7,8 +7,8 @@ function template(
 ) {
   const currentTimeFormatted = getCurrentTimeFormatted();
   return `<div class="w-full min-h-32 h-auto mt-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 py-2">
-  <!-- up section tweet -->
-<div class="flex justify-between items-center">
+    <!-- up section tweet -->
+    <div class="flex justify-between items-center">
     <!-- Wrapper info user -->
     <div class="flex justify-start items-center">
         <!-- User Profile -->
@@ -17,13 +17,12 @@ function template(
         </div>
         <div class="flex justify-center flex-col items-center h-full px-2">
             <!-- User name -->
-            <div class="flex justify-center flex-col items-center">
+            <div class="flex justify-start w-full items-center">
                 <h2 class="username font-Aktiv__regular text-xs  text-white">${username}</h2>
             </div>
             <!-- Time Published -->
             <div class="flex justify-center items-center text-gray-500">
-                <p class="flex items-center space-x-1 font-mavis__bold text-sm">
-                <em class="text-[#9e9ca1]">${currentTimeFormatted}</em>
+                <p class="flex items-center space-x-1 font-mavis__bold text-sm">${currentTimeFormatted}
                 </p>
             </div>
         </div>
@@ -38,14 +37,14 @@ function template(
   <!-- Wrapper Content Tweet -->
   <div class="min-h-32 w-full flex justify-between items-center flex-col pb-3 pr-2">
     <!-- Content Tweet -->
-      <div class="border-b border-[#252424] pb-2">
+      <div class="border-b border-[#252424] py-3 w-full h-full">
           <!-- Text overlay -->
-          <div class="flex justify-center items-center text-white text-base font-Aktiv__regular">
+          <div class="flex justify-start items-center text-white text-base font-Aktiv__regular">
               <p>${content}</p>
           </div>
       </div>
     <!-- Info Tweet -->
-    <div class="flex w-full justify-start items-center pt-3 pb-5 px-2 text-white  [&>*]:cursor-pointer">
+    <div class="flex w-full justify-start items-center pt-3 px-2 text-white  [&>*]:cursor-pointer">
         <!-- Comment -->
         <div class="flex items-center mr-4 icon-container  transform transition duration-150 hover:scale-110">
             <img src="/assets/icon/nav/chat-comment.svg" alt="comment">
