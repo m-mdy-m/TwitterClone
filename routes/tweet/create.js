@@ -6,7 +6,7 @@ router.setRoute("/tweets").post((req, res) => {
   const { getJsonHandler} = res
   const {badRequest} = getJsonHandler()
   if (!body.tweet) {
-    return badRequest()
+    return badRequest("Tweet content is missing.")
   }
 });
 
