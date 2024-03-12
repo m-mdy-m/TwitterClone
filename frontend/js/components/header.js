@@ -1,5 +1,5 @@
-export function header(){
-    return `
+export default function Header() {
+  return `
             <!-- Icon Navigation -->
             <div id="iconNavigation" class="mobile:absolute top-4 left-4 tablet:hidden">
                 <svg class="w-12 h-12  text-white cursor-pointer transform transition duration-300 hover:scale-110 hover:bg-gray-800 p-1 rounded-full" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,5 +27,5 @@ export function header(){
                     </div>
                 </nav>
             </div>
-    `
+    `;
 }
