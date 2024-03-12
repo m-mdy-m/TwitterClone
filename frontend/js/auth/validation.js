@@ -1,5 +1,5 @@
 // Function to handle form submission
-import getCSRFToken from "../Constants/getCSRFToken.js";
+import getCSRFToken from "../common/getCSRFToken.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
@@ -9,15 +9,15 @@ export async function handleSubmit(e, submitUrl) {
   // Ensure that form validation count meets the required threshold
   if (validationCount >= 3) {
     try {
-      const csrfToken = await getCSRFToken()
+      const csrfToken = await getCSRFToken();
       // Collect form data
       const formData = new FormData(form);
       // Convert form data to object
       const requestData = Object.fromEntries(formData.entries());
       // Send form data to the server via POST request
-      const response = await axios.post(submitUrl, requestData,{
+      const response = await axios.post(submitUrl, requestData, {
         headers: {
-          "X-CSRF-Token": csrfToken
+          "X-CSRF-Token": csrfToken,
         },
       });
       // Handle server response based on success or failure
@@ -25,8 +25,8 @@ export async function handleSubmit(e, submitUrl) {
         // If the server indicates success, handle accordingly
         handleSuccess(response.data.message);
         // Set the 'showWelcomePhoto' flag to 'true' in localStorage
-        localStorage.setItem('showWelcomePhoto','true') 
-        localStorage.setItem('logged','true')
+        localStorage.setItem("showWelcomePhoto", "true");
+        localStorage.setItem("logged", "true");
       } else {
         // If the server indicates failure, handle accordingly
         handleNotSuccess(response.data);
@@ -90,7 +90,7 @@ export function displayMessage(element, message, color) {
   element.style.opacity = 1;
   // Set message content of message element
   element.innerHTML = message;
-  return
+  return;
 }
 
 // Function to update form values based on server response

@@ -1,4 +1,4 @@
-import { getCurrentTimeFormatted } from "../Constants/handlers.js";
+import { getCurrentTimeFormatted } from "../common/handlers.js";
 
 function template(
   username,

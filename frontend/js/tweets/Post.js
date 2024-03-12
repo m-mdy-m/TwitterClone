@@ -1,5 +1,5 @@
 import { displayMessage } from "../auth/validation.js";
-import getCSRFToken from "../Constants/getCSRFToken.js";
+import getCSRFToken from "../common/getCSRFToken.js";
 import template from "../templates/tweet-create.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
