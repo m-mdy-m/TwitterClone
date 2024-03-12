@@ -1,5 +1,5 @@
 // Function to handle form submission
-import getCSRFToken from "../Constants/getCSRFToken.js";
+import getCSRFToken from "../common/getCSRFToken.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
