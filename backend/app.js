@@ -9,6 +9,7 @@ const { use, launch, loadRoutes, setTemplateEngine, useJsonBody, static } =
 launch(); // Launching the server
 useJsonBody(); // Parsing JSON request bodies
 setTemplateEngine().ejs(); // set template engine ejs
+static('frontend')
 const cookieParser = $install("cookie-parser");
 use(cookieParser());
 $read("backend/middleware/setup");
