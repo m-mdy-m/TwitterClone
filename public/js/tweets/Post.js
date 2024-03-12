@@ -24,7 +24,7 @@ export async function createTweet(val) {
         return;
       }
       const data = {
-        tweet: undefined,
+        tweet: val.value,
       };
       const header = {
         headers: {
