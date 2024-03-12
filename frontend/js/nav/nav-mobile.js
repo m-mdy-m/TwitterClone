@@ -1,11 +1,13 @@
-import { renderNavMenu,renderNavMobile } from "./navigation.js";
+import logout from "../auth/logout.js";
+import { renderNavMenu, renderNavMobile } from "./navigation.js";
 
 const navMobile = document.getElementById("nav-mobile");
 const shouldDisplayWelcomePhoto = localStorage.getItem("showWelcomePhoto");
 const isAuth = localStorage.getItem("logged");
 renderNavMenu(isAuth);
 renderNavMobile(isAuth);
-
+const btnLogout = document.querySelector(".logout");
+logout(btnLogout);
 if (shouldDisplayWelcomePhoto) {
   document.querySelectorAll(".welcome-user").forEach((el) => {
     el.style.display = "block";

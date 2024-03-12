@@ -18,10 +18,9 @@ async function handler(e) {
     const headers = {
       "X-CSRF-TOKEN": csrfToken,
     };
-
     // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
     const response = await axios.post("/auth/logout", {}, { headers });
-
+    console.log('response =>',response);
     // Check if the response is successful
     if (response.status === 200 && response.data.success) {
       // Redirect the user to the login page

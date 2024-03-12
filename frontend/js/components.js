@@ -1,6 +1,5 @@
 // Import your header component function here
-import { LoginForm } from "./components/form/Login.js";
-import { SignupForm } from "./components/form/Signup.js";
+import { LoginForm, SignupForm } from "./components/form/FormHandler.js";
 import Header from "./components/header.js"; // Adjust the path as necessary
 
 // Function to insert the header into the DOM
@@ -27,8 +26,8 @@ function insertForm() {
   }
 }
 
+insertHeader();
 // Call the insertHeader function when the DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  insertHeader();
   insertForm();
 });
