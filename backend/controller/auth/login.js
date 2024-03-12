@@ -1,18 +1,11 @@
 const Xprz = require("xprz");
+const path = require("path");
 
 const { Package } = new Xprz();
 const { bcryptjs } = new Package();
 const User = $read("backend/model/User");
-exports.getLogin = (req, { status }) => {
-  status(200).render("auth/login.ejs", {
-    Title: "Login",
-    oldValue: {
-      username: null,
-      email: null,
-      password: null,
-      passwordConf: null,
-    },
-  });
+exports.getLogin = (req, { sendFile }) => {
+  sendFile(path.join(process.cwd(), "/frontend/html/auth/login.html"));
 };
 /**
  *  username : Ads242sxz

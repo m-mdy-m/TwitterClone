@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Signup</title>
     <link rel="stylesheet" href="/css/base/based.css"> 
     <link rel="stylesheet" href="/css/components/shared.css">
     <link rel="stylesheet" href="/css/auth/auth.css">
@@ -40,27 +40,31 @@
         </header>
         <main class="grid grid-cols-main mt-4 mr-4 mb-4 bg-[#19191a] rounded-lg border border-[#28282a] relative">
         <div id="msgElm" class="absolute top-4 left-[25%] opacity-0 transform text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300 pointer-events-none z-50"></div>
-            <div class="flex justify-center items-center flex-col h-full text-white">
-                <form id="registerForm" action="/auth/login" method="post" class="flex-col flex justify-center items-center bg-gray-800 p-4 rounded-lg">
-                    <h1 class="text-3xl text-center mb-4">Login</h1>
-                    <div class="form-group flex justify-center flex-col items-center">
-                        <input type="text" name="username" placeholder="Username" class="input-form bg-gray-700 text-white" value=""/>
-                        <i class="msg-error"></i>
-                    </div>
-                    <div class="form-group flex justify-center flex-col items-center">
-                        <input type="email" name="email" placeholder="Email" class="input-form bg-gray-700 text-white" value=""/>
-                        <i class="msg-error"></i>
-                    </div>
-                    <div class="form-group flex justify-center flex-col items-center">
-                        <input id="password" type="password" name="password" placeholder="Password" class="input-form bg-gray-700 text-white" value=""/>
-                        <i class="msg-error"></i>
-                    </div>
-                    <button type="submit" class="w-52 h-12 bg-blue-500 hover:bg-blue-600 rounded-md">Login</button>
-                    <p class="text-xl mt-4">
-                        Need an account? <a href="/auth/signup" class="text-blue-400">Register here</a>
-                    </p>
-                </form>
-            </div>
+        <div class="flex justify-center items-center flex-col h-full text-white">
+            <form id="registerForm" action="/auth/signup" method="post" class="flex-col flex justify-center items-center bg-gray-800 p-4 rounded-lg">
+                <h1 class="text-3xl text-center mb-4">Register</h1>
+                <div class="form-group flex justify-center flex-col items-center">
+                    <input type="text" name="username" placeholder="Username" class="input-form bg-gray-700 text-white" value=""/>
+                    <i class="msg-error"></i>
+                </div>
+                <div class="form-group flex justify-center flex-col items-center">
+                    <input type="email" name="email" placeholder="Email" class="input-form bg-gray-700 text-white" value=""/>
+                    <i class="msg-error"></i>
+                </div>
+                <div class="form-group flex justify-center flex-col items-center">
+                    <input id="password" type="password" name="password" placeholder="Password" class="input-form bg-gray-700 text-white" value=""/>
+                    <i class="msg-error"></i>
+                </div>
+                <div class="form-group flex justify-center flex-col items-center">
+                    <input id="ConfPassword" type="password" name="passwordConf" placeholder="Confirm Password" class="input-form bg-gray-700 text-white" value=""/>
+                    <i class="msg-error"></i>
+                </div>
+                <button type="submit" class="w-52 h-12 bg-blue-500 hover:bg-blue-600 rounded-md">Signup</button>
+                <p class="text-xl mt-4">
+                    Already have an account? <a href="/auth/login" class="text-blue-400">Login here</a>
+                </p>
+            </form>
+          </div>
         </main>
     </div>
     <script type="module" src="/js/main.js"></script>
