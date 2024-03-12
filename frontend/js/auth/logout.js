@@ -1,5 +1,5 @@
 // Import the displayMessage function from the validation module
-import getCSRFToken from "../Constants/getCSRFToken.js";
+import getCSRFToken from "../common/getCSRFToken.js";
 import { displayMessage } from "./validation.js";
 
 // Get the message element from the DOM
