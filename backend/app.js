@@ -9,7 +9,6 @@ const { use, launch, loadRoutes, setTemplateEngine, useJsonBody, static } =
 launch(); // Launching the server
 useJsonBody(); // Parsing JSON request bodies
 setTemplateEngine().ejs(); // set template engine ejs
-static("public"); // Serving static files from the 'public' directory
 const cookieParser = $install('cookie-parser')
 use(cookieParser())
 $read("middleware/setup");
