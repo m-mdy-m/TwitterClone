@@ -1,4 +1,4 @@
-const { renderNavMenu, renderNavMobile } = require("./navigation");
+import { renderNavMenu,renderNavMobile } from "./navigation.js";
 
 const navMobile = document.getElementById("nav-mobile");
 const shouldDisplayWelcomePhoto = localStorage.getItem("showWelcomePhoto");
