@@ -1,7 +1,8 @@
 // Importing handlers from a separate file
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./Constants/handlers.js";
+import { fetchTweets } from "./tweets/Get.js";
 import { createTweet } from "./tweets/Post.js";
-
+fetchTweets()
 const tweetButton = document.getElementById("tweetButton");
 const textarea = document.getElementById("tweetInput");
 // Get references to the textarea and the icon element

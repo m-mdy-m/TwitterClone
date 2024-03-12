@@ -36,7 +36,3 @@ exports.postTweet = async (req, { getJsonHandler }) => {
     internalServerError("Internal server error. Unable to post the tweet.");
   }
 };
-
-exports.getTweets = async (req, res) => {
-  const tweets = await PostTweet.find();
-};
