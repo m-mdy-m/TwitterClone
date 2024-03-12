@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const PostTweet = new Schema(
   {
-    Tweet: {
+    content: {
       type: String,
       trim: true,
     },
