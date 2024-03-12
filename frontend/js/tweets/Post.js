@@ -1,6 +1,6 @@
 import { displayMessage } from "../auth/validation.js";
 import getCSRFToken from "../common/getCSRFToken.js";
-import template from "../components/tweet-create.js";
+import Tweet from "../components/Tweet.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
 const wrapper = document.getElementById("wrapperTweet");
@@ -34,25 +34,20 @@ export async function createTweet(val) {
       };
       // Send a POST request to create the tweet with CSRF token included in the request body
       const response = await axios.post("/tweets", data, header);
-      const dataPost = response.data.data;
-      const dataUser = dataPost.postedBy;
+      const responseData = response.data;
       if (response.data.success) {
+        const tweetData = responseData.data;
+        const { username, content, profilePic } = tweetData.postedBy;
+
         // Create the tweet template
-        const tweetTemplate = template(
-          dataUser.username,
-          dataPost.content,
-          dataUser.profilePic
-        );
-        // Create the tweet template
-        const tweetTemplateString = template(
-          dataUser.username,
-          dataPost.content,
-          dataUser.profilePic
-        );
-        // Append the first child of the container to WrapperPost
-        wrapper.innerHTML += tweetTemplateString;
+        const tweetTemplate = Tweet({ username, content, profile: profilePic });
+
+        // Append the tweet template to the wrapper element
+        wrapper.insertAdjacentHTML("beforeend", tweetTemplate);
+        console.log("Tweet created:", response);
+      } else {
+        displayMessage(msgElm, responseData.error, "ffd700");
       }
-      console.log("Tweet created:", response);
     } catch (error) {
       console.log("error =>", error);
       // Handle errors
