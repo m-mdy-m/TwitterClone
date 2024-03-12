@@ -1,6 +1,6 @@
 import { displayMessage } from "../auth/validation.js";
-import getCSRFToken from "../common/getCSRFToken.js";
-import template from "../templates/tweet-create.js";
+import getCSRFToken from "../Constants/getCSRFToken.js";
+import template from "../components/tweet-create.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
 const wrapper = document.getElementById("wrapperTweet");
@@ -44,9 +44,13 @@ export async function createTweet(val) {
           dataUser.profilePic
         );
         // Create the tweet template
-        const tweetTemplateString = template(dataUser.username, dataPost.content, dataUser.profilePic);
+        const tweetTemplateString = template(
+          dataUser.username,
+          dataPost.content,
+          dataUser.profilePic
+        );
         // Append the first child of the container to WrapperPost
-        wrapper.innerHTML += tweetTemplateString
+        wrapper.innerHTML += tweetTemplateString;
       }
       console.log("Tweet created:", response);
     } catch (error) {

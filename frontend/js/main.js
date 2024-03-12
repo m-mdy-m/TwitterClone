@@ -1,6 +1,6 @@
 // Importing handlers from a separate file
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
-import { fetchTweets } from "./common/helper.js";
+import { fetchTweets } from "./Constants/helper.js";
 import { createTweet } from "./tweets/Post.js";
 fetchTweets()
 const tweetButton = document.getElementById("tweetButton");

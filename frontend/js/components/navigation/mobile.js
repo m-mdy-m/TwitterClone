@@ -1,37 +1,6 @@
-const authTemplateMenu = `
-<!-- Notifications Link -->
-<a href="/notifications" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
-    <img src="../assets/icon/nav/notifications.svg" alt="notifications" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
-    <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">notifications</h2>
-</a>
-<!-- Messages Link -->
-<a href="/messages" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
-    <img src="../assets/icon/nav/messages.svg" alt="messages" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
-    <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">messages</h2>
-</a>
-<!-- Setting Link -->
-<a href="/setting" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
-    <img src="../assets/icon/nav/setting.svg" alt="setting" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
-    <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">setting</h2>
-</a>
-<!-- Logout Link -->
-<a href="/auth/logout" class="header__navigation-link flex items-center logout space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
-    <button type="submit" class="flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105">
-        <img src="/assets/icon/utils/logout.svg" alt="LOGOUT" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
-        <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">Logout</h2>
-    </button>
-</a>`;
-
-const defaultTemplateMenu = `
-<!-- Signup Link -->
-<a href="/auth/signup" class="header__navigation-link flex items-center space-x-4 mobile:space-x-2 smallTb:space-x-3 transition duration-300 transform hover:scale-105 hover:bg-[#232627]">
-    <img src="../assets/icon/utils/login.svg" alt="Signup" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8 ">
-    <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">Signup</h2>
-</a>
-`;
-
-const authTemplateMobile = `
-<!-- Profile User Section -->
+export function MobileNavigation({ isAuth }) {
+  const authTemplateMobile = `
+    <!-- Profile User Section -->
     <div class="flex flex-col items-center rounded-lg mobile:p-0 tablet:p-2 tablet:pt-0">
         <!-- Profile User Default -->
         <div class="flex flex-col items-center tablet:mt-0 mobile:mt-1">
@@ -65,8 +34,8 @@ const authTemplateMobile = `
     </div>
 `;
 
-const defaultTemplateMobile = `
-<!-- Signup Button -->
+  const defaultTemplateMobile = `
+    <!-- Signup Button -->
  <div class="bg-gradient-to-br w-full from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center tablet:p-8 mobile:p-2 transform transition duration-300 hover:scale-105 mb-4">
      <a href="/auth/signup" class="flex flex-col items-center justify-center text-white">
          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-gray-300 hover:text-gray-100" viewBox="0 0 20 20" fill="currentColor">
@@ -75,23 +44,8 @@ const defaultTemplateMobile = `
          <h2 class="font-semibold text-xl hover:text-gray-100">Sign Up</h2>
          <p class="text-gray-300 mobile:text-[10px] mt-2 tablet:text-sm font-Aktiv__medium">Create an account to unlock more features</p>
      </a>
- </div>
+    </div>
 `;
-
-const navMenu = document.getElementById("nav-menu-template");
-const navMobile = document.getElementById("nav-mobile-template");
-export function renderNavMenu(isAuth) {
-  if (isAuth) {
-    navMenu.innerHTML = authTemplateMenu;
-  } else {
-    navMenu.innerHTML = defaultTemplateMenu;
-  }
-}
-
-export function renderNavMobile(isAuth) {
-  if (isAuth) {
-    navMobile.innerHTML = authTemplateMobile;
-  } else {
-    navMobile.innerHTML = defaultTemplateMobile;
-  }
+  const template = isAuth ? authTemplateMobile : defaultTemplateMobile;
+  return template;
 }
