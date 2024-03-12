@@ -1,13 +1,7 @@
 const Xprz = require("xprz");
 const { Route } = new Xprz();
+const { postTweet } = $read('controller/tweet/create')
 const router = new Route();
-router.setRoute("/tweets").post((req, res) => {
-  const body = req.getBody();
-  const { getJsonHandler} = res
-  const {badRequest} = getJsonHandler()
-  if (!body.tweet) {
-    return badRequest("Tweet content is missing.")
-  }
-});
+router.setRoute("/tweets").post(postTweet);
 
 module.exports = router;
