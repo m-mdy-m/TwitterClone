@@ -10,7 +10,6 @@ exports.getHome = async (req, res) => {
       data: tweets,
     });
   } catch (error) {
-    console.log("error =>", error);
     // If an error occurs, send an error response
     res.status(500).json({
       success: false,
