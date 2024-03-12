@@ -1,4 +1,5 @@
-import { renderNavMenu, renderNavMobile } from "../templates/navigation.js";
+const { renderNavMenu, renderNavMobile } = require("./navigation");
+
 const navMobile = document.getElementById("nav-mobile");
 const shouldDisplayWelcomePhoto = localStorage.getItem("showWelcomePhoto");
 const isAuth = localStorage.getItem("logged");
