@@ -28,6 +28,7 @@ async function handler(e) {
       window.location.href = "/auth/login";
       // Remove the 'showWelcomePhoto' flag from localStorage
       localStorage.removeItem("showWelcomePhoto");
+      localStorage.removeItem("logged");
     } else {
       // If the logout process fails, display an error message
       msgElm.classList.add("msg-errors");
