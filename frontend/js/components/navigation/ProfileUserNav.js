@@ -1,6 +1,6 @@
 import { Profile } from "../Profile.js";
 
-export function ProfileUserNav({profile= '/assets/images/profilePic.png',username='m__mdy__m',}) {
+export function ProfileUserNav({profile,username}) {
   return `<!-- Profile User Default -->
     <div class="flex flex-col items-center tablet:mt-0 mobile:mt-1">
         <div class="flex justify-center items-center relative ">
