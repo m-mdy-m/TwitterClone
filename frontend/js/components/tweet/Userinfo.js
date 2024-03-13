@@ -1,4 +1,4 @@
-import { UserProfile } from "./UserProfile";
+import { UserProfile } from "./UserProfile.js";
 
 export function UserInfo({ username, profile, currentTimeFormatted }) {
   return `

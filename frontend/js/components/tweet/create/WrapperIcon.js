@@ -1,4 +1,4 @@
-import { Icon } from "../Icon";
+import { Icon } from "../Icon.js";
 
 export function WrapperIcon() {
   return `
