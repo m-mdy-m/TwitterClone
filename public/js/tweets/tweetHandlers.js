@@ -36,8 +36,8 @@ export function ShowTweets(response) {
 // Function to render a single tweet template
 function renderTweet(tweet) {
   // Extract relevant data from the tweet object
-  const { username, profilePic, content, createdAt } = tweet;
-
+  const { postedBy, content, createdAt } = tweet;
+  const { username, profilePic } = postedBy;
   // Format the creation time of the tweet
   const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
 
