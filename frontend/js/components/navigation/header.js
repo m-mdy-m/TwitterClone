@@ -1,4 +1,4 @@
-import { GenerateLink } from "./GenerateLink";
+import { GenerateLink } from "./GenerateLink.js";
 
 export function HeaderNavigation({ isAuth }) {
   const links = ["notifications", "messages", "setting"];
