@@ -1,9 +1,9 @@
+import { UserProfile } from "./UserProfile";
+
 export function UserInfo({ username, profile, currentTimeFormatted }) {
   return `
       <div class="flex justify-start items-center">
-          <div class="bg-gradient-to-tr from-[#222224] to-[#262629] rounded-full flex justify-center items-center border border-[#403e42] shadow-lg cursor-pointer duration-100 transition-all hover:scale-105">
-              <img src="${profile}" alt="${username}" class="profilePic w-8 h-8">
-          </div>
+         ${UserProfile({username:username,profile:profile,width:8,height:8})}  
           <div class="flex justify-center flex-col items-center h-full px-2">
               <div class="flex justify-start w-full items-center">
                   <h2 class="username font-Aktiv__regular text-xs text-white">${username}</h2>
@@ -14,5 +14,4 @@ export function UserInfo({ username, profile, currentTimeFormatted }) {
           </div>
       </div>
     `;
-  }
-  
+}
