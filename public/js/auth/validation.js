@@ -25,8 +25,8 @@ export async function handleSubmit(e, submitUrl) {
         // If the server indicates success, handle accordingly
         handleSuccess(response.data.message);
         // Set the 'showWelcomePhoto' flag to 'true' in localStorage
-        localStorage.setItem("showWelcomePhoto", "true");
-        localStorage.setItem("logged", "true");
+        localStorage.setItem("showWelcomePhoto", response.data.success);
+        localStorage.setItem("logged", response.data.success);
       } else {
         // If the server indicates failure, handle accordingly
         handleNotSuccess(response.data);
