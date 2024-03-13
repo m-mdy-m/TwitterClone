@@ -9,3 +9,6 @@ export function AddTweet(response){
     wrapper.insertAdjacentHTML("beforeend", tweetTemplate);
     document.getElementById('tweetInput').value = ''
 }
+export function ShowTweets(response){
+
+}

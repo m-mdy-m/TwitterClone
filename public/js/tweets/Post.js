@@ -1,6 +1,6 @@
 import { displayMessage } from "../auth/validation.js";
 import getCSRFToken from "../common/getCSRFToken.js";
-import { AddTweet } from "./add-tweet.js";
+import { AddTweet } from "./tweetHandlers.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
 // Function to create a tweet
