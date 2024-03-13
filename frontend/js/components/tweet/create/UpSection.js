@@ -1,4 +1,4 @@
-import { UserProfile } from "../UserProfile";
+import { UserProfile } from "../UserProfile.js";
 
 export function UpSection({username,profile}){
     return `<!-- User Profile -->
