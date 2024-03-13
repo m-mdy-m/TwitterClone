@@ -1,5 +1,5 @@
-import { HeaderNavigation } from "../navigation/header.js";
-import { MobileNavigation } from "../navigation/mobile.js";
+import { HeaderNavigation } from "./navigation/header.js";
+import { MobileNavigation } from "./navigation/mobile.js";
 
 export default function Header({ isAuth, profile, username }) {
   return `

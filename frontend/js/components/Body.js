@@ -1,5 +1,5 @@
 import Header from "./header.js";
-import { mainContent } from "../mainContent.js";
+import { mainContent } from "./mainContent.js";
 
 export function BodyContent({ isAuth, profile, username }) {
   return `
