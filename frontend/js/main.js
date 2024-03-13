@@ -5,7 +5,7 @@ const routes = {
   "/home": {
     title: "Home Page",
     cssPaths: ["home.css"],
-    scriptPaths: ["home.js"],
+    scriptPaths: ["nav/nav-mobile.js"],
     isModule: true,
   },
 };
