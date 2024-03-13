@@ -3,7 +3,7 @@ import { UserProfile } from "../UserProfile.js";
 export function UpSection({username,profile}){
     return `<!-- User Profile -->
     <div class="flex flex-col justify-start items-center">
-      ${UserProfile({username:username,profile:profile,width:12,height:12})}
+      ${UserProfile({username:username,profile:profile,className:'w-12 h-12'})}
     </div>
     <!-- Tweet section -->
     <div class="flex justify-center items-center relative">

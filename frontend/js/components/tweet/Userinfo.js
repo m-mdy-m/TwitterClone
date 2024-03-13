@@ -3,7 +3,7 @@ import { UserProfile } from "./UserProfile.js";
 export function UserInfo({ username, profile, currentTimeFormatted }) {
   return `
       <div class="flex justify-start items-center">
-         ${UserProfile({username:username,profile:profile,width:8,height:8})}  
+         ${UserProfile({username:username,profile:profile,className : "w-8 h-8"})}  
           <div class="flex justify-center flex-col items-center h-full px-2">
               <div class="flex justify-start w-full items-center">
                   <h2 class="username font-Aktiv__regular text-xs text-white">${username}</h2>
