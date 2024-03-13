@@ -1,4 +1,4 @@
-export function Scripts(scriptPaths, isModule = false) {
+export function generateScriptTags(scriptPaths, isModule = false) {
   let template = "";
   if (Array.isArray(scriptPaths)) {
     scriptPaths.forEach((script) => {
