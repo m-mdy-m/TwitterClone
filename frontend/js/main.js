@@ -4,8 +4,7 @@ import { HTML } from "./components/html/htmlContent.js";
 const routes = {
   "/home": {
     title: "Home Page",
-    cssPaths: ["home.css"],
-    scriptPaths: ["nav/nav-mobile.js"],
+    scriptPaths: "nav/nav-mobile.js",
     isModule: true,
   },
 };
