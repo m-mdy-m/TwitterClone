@@ -1,4 +1,4 @@
-import { Profile } from "../Profile.js";
+import { Profile } from "../common/Profile.js";
 
 export function UserProfile({ username, profile, className }) {
   return `
