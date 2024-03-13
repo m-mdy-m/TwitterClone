@@ -1,11 +1,19 @@
 export function Scripts(scriptPaths, isModule = false) {
   let template = "";
-  scriptPaths.forEach((script) => {
+  if (Array.isArray(scriptPaths)) {
+    scriptPaths.forEach((script) => {
+      if (isModule) {
+        template += `<script type="module" src="/js/${script}"></script>`;
+      } else {
+        template += `<script src="/js/${script}"></script>`;
+      }
+    });
+  } else {
     if (isModule) {
-      template += `<script type="module" src="/js/${script}"></script>`;
+      template += `<script type="module" src="/js/${scriptPaths}"></script>`;
     } else {
-      template += `<script src="${script}"></script>`;
+      template += `<script src="/js/${scriptPaths}"></script>`;
     }
-  });
+  }
   return template;
 }
