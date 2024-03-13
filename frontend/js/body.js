@@ -1,12 +1,12 @@
 import { BodyContent } from "./components/Body.js";
-const isAuth = localStorage.getItem('logged')
+const isAuth = localStorage.getItem("logged");
 // Define routes and corresponding HTML content
 const routes = {
   "/home": {
     isAuth,
-    profile:'/assets/images/profilePic.png',
-    username : "m__mdy__m",
-    scriptPaths: ["nav/nav-mobile.js"],
+    profile: "/assets/images/profilePic.png",
+    username: "m__mdy__m",
+    scriptPaths: ["nav/nav-mobile.js", "home.js"],
     isModule: true,
   },
 };

@@ -5,7 +5,7 @@ const { Package } = new Xprz();
 const { bcryptjs } = new Package();
 const User = $read("backend/model/User");
 exports.getLogin = (req, { sendFile }) => {
-  sendFile(path.join(process.cwd(), "/frontend/html/auth/login.html"));
+  sendFile(path.join(process.cwd(), "/frontend/html/main.html"));
 };
 /**
  *  username : Ads242sxz
