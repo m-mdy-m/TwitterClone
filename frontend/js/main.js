@@ -4,7 +4,7 @@ import { HTML } from "./components/html/htmlContent.js";
 const routes = {
   "/home": {
     title: "Home Page",
-    scriptPaths: "nav/nav-mobile.js",
+    scriptPaths: ["nav/nav-mobile.js"],
     isModule: true,
   },
 };
@@ -22,7 +22,7 @@ function handleRouteChange() {
 }
 
 // Event listener for route changes
-window.addEventListener("popstate", handleRouteChange);
+window.addEventListener("popstate", handleRouteChange());
 
 // Initial route handling
 handleRouteChange();
