@@ -1,5 +1,5 @@
-export function Profile({ profile, username, width, height }) {
+export function Profile({ profile, username, width, height, className = "" }) {
   return `
-    <img src="${profile}" alt="${username}" class="profilePic w-${width} h-${height}">
+    <img src="${profile}" alt="${username}" class="profilePic w-${width} h-${height} ${className}">
     `;
 }
