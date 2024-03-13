@@ -11,4 +11,4 @@ const routes = {
   },
 };
 header.innerHTML = Header(routes);
-main.innerHTML = mainContent();
+main.innerHTML += mainContent();
