@@ -4,7 +4,7 @@ const Xprz = require("xprz");
 const { App, Package } = new Xprz();
 new Package().dotenv().setupDot(); // Loading environment variables from '.env' file
 // Destructuring commonly used methods from the App instance
-const { use, launch, loadRoutes, useJsonBody, static } =  new App();
+const { use, launch, loadRoutes, useJsonBody, static } = new App();
 launch(); // Launching the server
 useJsonBody(); // Parsing JSON request bodies
 static("public"); // Serving static files from 'public' directory
