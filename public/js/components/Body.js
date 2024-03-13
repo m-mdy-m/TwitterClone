@@ -1,5 +1,4 @@
 import Header from "./common/header.js";
-import { ScriptTemplate } from "./html/ScriptTemplate.js";
 import { mainContent } from "./mainContent.js";
 
 export function BodyContent({ isAuth, profile, username}) {
