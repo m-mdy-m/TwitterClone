@@ -63,16 +63,3 @@ export function validateTweet(tweet) {
   // If all checks pass, the tweet is considered valid
   return { valid: true,value : value };
 }
-
-
-export function getCurrentTimeFormatted() {
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const month = currentDate.toLocaleString('default', { month: 'short' });
-  let hours = currentDate.getHours();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12 || 12;
-  const minutes = currentDate.getMinutes();
-
-  return `${day} ${month} • ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
-}
