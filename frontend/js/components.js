@@ -34,5 +34,5 @@ function insertForm() {
 // Call the insertHeader function when the DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
   insertHeader();
+  insertForm();
 });
-insertForm();
