@@ -142,16 +142,12 @@
   height: 100vh;
 }
 
-.min-h-24 {
-  min-height: 6rem;
+.min-h-28 {
+  min-height: 7rem;
 }
 
 .min-h-32 {
   min-height: 8rem;
-}
-
-.min-h-28 {
-  min-height: 7rem;
 }
 
 .w-10 {
