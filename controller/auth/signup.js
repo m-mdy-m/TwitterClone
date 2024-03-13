@@ -3,7 +3,7 @@ const Xprz = require("xprz");
 const path = require("path");
 const { Package } = new Xprz();
 const { bcryptjs } = new Package();
-const User = $read("backend/model/User");
+const User = $read("model/User");
 exports.getSignup = (req, { sendFile }) => {
   sendFile(path.join(process.cwd(), "/frontend/html/main.html"));
 };
