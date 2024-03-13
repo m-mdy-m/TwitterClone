@@ -22,4 +22,6 @@ export function MobileNavigation({ isAuth }) {
      </a>
     </div>
 `;
-  const template = isAuth ? auth
+  const template = isAuth ? authTemplateMobile : defaultTemplateMobile;
+  return template;
+}
