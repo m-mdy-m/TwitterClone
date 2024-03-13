@@ -7,10 +7,10 @@ new Package().dotenv().setupDot(); // Loading environment variables from '.env' 
 const { use, launch, loadRoutes, useJsonBody, static } =  new App();
 launch(); // Launching the server
 useJsonBody(); // Parsing JSON request bodies
-static("frontend"); // Serving static files from 'frontend' directory
+static("public"); // Serving static files from 'public' directory
 const cookieParser = $install("cookie-parser"); // Installing and using cookie-parser middleware
 use(cookieParser());
-$read("backend/middleware/setup"); // Including setup middleware
-use($read("backend/middleware/user")); // Including user middleware
-$read("backend/utils/database"); // Loading database utility
-loadRoutes("backend/routes"); // Loading routes from the 'routes' directory
+$read("middleware/setup"); // Including setup middleware
+use($read("middleware/user")); // Including user middleware
+$read("utils/database"); // Loading database utility
+loadRoutes("routes"); // Loading routes from the 'routes' directory
