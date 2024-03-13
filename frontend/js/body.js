@@ -1,10 +1,10 @@
-import { HTML } from "./components/html/ScriptTemplate.js";
-
+import { BodyContent } from "./components/Body";
+const isAuth = localStorage.getItem('logged')
 // Define routes and corresponding HTML content
 const routes = {
   "/home": {
-    title: "Home Page",
-    cssPaths: [],
+    profile:'/assets/images/profilePic.png',
+    username : "m__mdy__m",
     scriptPaths: ["nav/nav-mobile.js"],
     isModule: true,
   },
@@ -15,7 +15,7 @@ function handleRouteChange() {
   const path = window.location.pathname;
   const route = routes[path];
   if (route) {
-    document.body.innerHTML = HTML(route);
+    document.body.innerHTML = BodyContent(route);
   } else {
     // Handle unknown routes
     document.body.innerHTML = "Page not found";

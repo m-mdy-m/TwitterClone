@@ -1,5 +1,5 @@
-import { LoginForm, SignupForm } from "./form/FormHandler";
-import { HOME } from "./main/Home.j"
+import { LoginForm, SignupForm } from "./form/FormHandler.js";
+import { HOME } from "./main/Home.js"
 let currentPage = window.location.pathname
 export function mainContent(){
     switch(currentPage){
