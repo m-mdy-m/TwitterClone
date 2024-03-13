@@ -4,7 +4,7 @@ export function CssLinks({ paths }) {
     paths.forEach((path) => {
       template += `<link rel="stylesheet" href="/css/${path}"> `;
     });
-  } else {
+  } else if (typeof paths === 'string') {
     template += `<link rel="stylesheet" href="/css/${paths}"> `;
   }
   return template;

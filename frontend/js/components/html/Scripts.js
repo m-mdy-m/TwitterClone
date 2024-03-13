@@ -8,7 +8,7 @@ export function Scripts(scriptPaths, isModule = false) {
         template += `<script src="/js/${script}"></script>`;
       }
     });
-  } else {
+  } else if (typeof scriptPaths === "string") {
     if (isModule) {
       template += `<script type="module" src="/js/${scriptPaths}"></script>`;
     } else {
