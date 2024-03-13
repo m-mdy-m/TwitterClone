@@ -7,22 +7,17 @@ export async function fetchTweets() {
   try {
     // Make a GET request to fetch tweets
     const response = await axios.get("/tweets");
-    console.log("response=>", response);
     // Check if the request was successful
     if (response.data.success) {
       // Display the fetched tweets
-      console.log("Fetched tweets:", response.data);
       ShowTweets(response);
       // Handle displaying tweets on the UI as needed
     } else {
       // Display error message with error-related color
       msgElm.style.display = "block";
-      console.log("response=>", response);
       displayMessage(msgElm, response.data.error, "#ff6347"); // Error color
-      console.error("Failed to fetch tweets:", response.data.error);
     }
   } catch (error) {
-    console.log("error =>", error);
     // Handle errors
     if (error.response && error.response.data && error.response.data.error) {
       // Display error message returned from the server

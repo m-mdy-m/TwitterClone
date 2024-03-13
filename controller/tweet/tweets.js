@@ -40,11 +40,11 @@ exports.getTweets = async (req, res) => {
   try {
     // Fetch tweets from the database
     const tweets = await PostTweet.find();
-
+    const result = await PostTweet.populate(tweets, {path : 'postedBy' })
     // Send JSON response with success true and tweet data
     res.status(200).json({
       success: true,
-      tweets: tweets,
+      tweets: result,
     });
 
   } catch (error) {
