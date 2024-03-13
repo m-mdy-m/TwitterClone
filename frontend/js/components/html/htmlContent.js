@@ -1,6 +1,6 @@
-import { CssLinks } from "./CssLinks.j";
-import { Scripts } from "./Scripts.j";
-import { TITLE } from "./TITLE.j";
+import { CssLinks } from "./CssLinks.js";
+import { Scripts } from "./Scripts.js";
+import { TITLE } from "./TITLE.js";
 
 export function HTML({ title, cssPaths, scriptPaths, isModule }) {
   return `
