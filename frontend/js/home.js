@@ -2,6 +2,7 @@
 import { fetchTweets } from "./common/helper.js";
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
 import { createTweet } from "./tweets/Post.js";
+console.log('hi');
 fetchTweets()
 const tweetButton = document.getElementById("tweetButton");
 const textarea = document.getElementById("tweetInput");

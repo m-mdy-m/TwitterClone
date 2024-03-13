@@ -6,8 +6,6 @@ const routes = {
     isAuth,
     profile: "/assets/images/profilePic.png",
     username: "m__mdy__m",
-    scriptPaths: ["nav/nav-mobile.js", "home.js"],
-    isModule: true,
   },
 };
 
@@ -25,6 +23,7 @@ function handleRouteChange() {
 
 // Event listener for route changes
 window.addEventListener("popstate", handleRouteChange);
+window.addEventListener("DOMContentLoaded", handleRouteChange);
 
 // Initial route handling
 handleRouteChange();
