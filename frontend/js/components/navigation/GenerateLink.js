@@ -1,4 +1,4 @@
-export function GenerateLink([links]) {
+export function GenerateLink(links) {
   let template = "";
   links.forEach((href) => {
     template += `

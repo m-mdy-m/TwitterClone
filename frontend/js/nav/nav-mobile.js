@@ -1,5 +1,4 @@
 import logout from "../auth/logout.js";
-import { renderNavMenu, renderNavMobile } from "./navigation.js";
 // Function to handle navigation events
 function handleNavigation() {
   const navMobile = document.getElementById("nav-mobile");
@@ -33,11 +32,6 @@ function handleNavigation() {
 // Function to execute components on document load
 function onDocumentLoad() {
   const shouldDisplayWelcomePhoto = localStorage.getItem("showWelcomePhoto");
-  const isAuth = localStorage.getItem("logged");
-
-  // Render navigation menu and mobile navigation
-  renderNavMenu(isAuth);
-  renderNavMobile(isAuth);
 
   // Initialize logout functionality
   const btnLogout = document.querySelector(".logout");
