@@ -1,5 +1,5 @@
 import { displayMessage } from "../auth/validation.js";
-import { AddTweet } from "../tweets/tweetHandlers.js";
+import { AddTweet, ShowTweets } from "../tweets/tweetHandlers.js";
 const msgElm = document.getElementById("msgElm");
 
 // Function to fetch tweets from the server
@@ -12,7 +12,7 @@ export async function fetchTweets() {
     if (response.data.success) {
       // Display the fetched tweets
       console.log("Fetched tweets:", response.data);
-      Show;
+      ShowTweets(response);
       // Handle displaying tweets on the UI as needed
     } else {
       // Display error message with error-related color
