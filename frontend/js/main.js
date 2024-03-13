@@ -1,13 +1,29 @@
-// Importing handlers from a separate file
-import { fetchTweets } from "./common/helper.js";
-import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
-import { createTweet } from "./tweets/Post.js";
-fetchTweets()
-const tweetButton = document.getElementById("tweetButton");
-const textarea = document.getElementById("tweetInput");
-// Get references to the textarea and the icon element
-tweetButton.addEventListener("click", () => createTweet(updateCharCount({ target: textarea })));
-// Add event listeners to handle focus and blur events
-textarea.addEventListener("focus", hideIconOnFocus);
-textarea.addEventListener("blur", showIconOnBlur);
-textarea.addEventListener('input',updateCharCount)
+import { HTML } from "./components/html/htmlContent.js";
+
+// Define routes and corresponding HTML content
+const routes = {
+  "/home": {
+    title: "Home Page",
+    cssPaths: ["home.css"],
+    scriptPaths: ["home.js"],
+    isModule: true,
+  },
+};
+
+// Function to handle route changes
+function handleRouteChange() {
+  const path = window.location.pathname;
+  const route = routes[path];
+  if (route) {
+    document.body.innerHTML = HTML(route);
+  } else {
+    // Handle unknown routes
+    document.body.innerHTML = "Page not found";
+  }
+}
+
+// Event listener for route changes
+window.addEventListener("popstate", handleRouteChange);
+
+// Initial route handling
+handleRouteChange();
