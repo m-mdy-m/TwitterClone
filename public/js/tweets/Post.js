@@ -1,9 +1,8 @@
 import { displayMessage } from "../auth/validation.js";
 import getCSRFToken from "../common/getCSRFToken.js";
-import Tweet from "../components/Tweet.js";
+import { AddTweet } from "./add-tweet.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
-const wrapper = document.getElementById("wrapperTweet");
 // Function to create a tweet
 export async function createTweet(val) {
   // If the tweet data is valid
@@ -34,20 +33,11 @@ export async function createTweet(val) {
       };
       // Send a POST request to create the tweet with CSRF token included in the request body
       const response = await axios.post("/tweets", data, header);
-      const responseData = response.data;
       if (response.data.success) {
-        const tweetData = responseData.data;
-        const content = tweetData.content
-        const { username, profilePic } = tweetData.postedBy;
-        // Create the tweet template
-        const tweetTemplate = Tweet({ username, content, profile: profilePic });
-
-        // Append the tweet template to the wrapper element
-        wrapper.insertAdjacentHTML("beforeend", tweetTemplate);
-        document.getElementById('tweetInput').value = ''
+        AddTweet(response);
         console.log("Tweet created:", response);
       } else {
-        displayMessage(msgElm, responseData.error, "ffd700");
+        displayMessage(msgElm, response.data.error, "ffd700");
       }
     } catch (error) {
       console.log("error =>", error);
