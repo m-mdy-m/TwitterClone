@@ -1,5 +1,5 @@
-import { StoryBox } from "./StoryBox";
-import { UserStory } from "./UserStory";
+import { StoryBox } from "./StoryBox.js";
+import { UserStory } from "./UserStory.js";
 
 export function WrapperStory({ username, profilePic }) {
   return `
