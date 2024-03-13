@@ -5,7 +5,7 @@ function setupPage() {
   content.innerHTML = ContentSection({
     username: "m__mdy__m",
     profileStory: "/assets/icon/nav/user.svg",
-    profilePic: '"/assets/images/profilePic.png"',
+    profilePic: '/assets/images/profilePic.png',
   });
 }
 
