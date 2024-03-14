@@ -14,3 +14,4 @@ export function BodyContent({ isAuth, profile, username,classMain,classMsgError 
 </div>
 `;
 }
+// 6000 commit !
