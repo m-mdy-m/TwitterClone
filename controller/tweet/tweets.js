@@ -40,8 +40,9 @@ exports.postTweet = async (req, { getJsonHandler }) => {
 };
 exports.getTweets = async (req, res) => {
   try {
-    // Fetch tweets from the database
-    const tweets = await PostTweet.find();
+    // Fetch tweets from the database and sort them in descending order of createdAt
+    const tweets = await PostTweet.find().sort({createdAt:-1})
+    // Populate the 'postedBy' field to include user details in the post
     const result = await PostTweet.populate(tweets, {path : 'postedBy' })
     // Send JSON response with success true and tweet data
     res.status(200).json({
