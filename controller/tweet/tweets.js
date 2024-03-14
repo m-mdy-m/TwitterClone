@@ -17,7 +17,7 @@ exports.postTweet = async (req, { getJsonHandler }) => {
   }
   // Check if req.user is missing; return an error response if so
   if (!req.user) {
-    return authRequired("Authentication required. Please log in to access this resource.");
+    return authRequired("Authentication is required. Please sign in to tweet.");
   }
     // Construct the data object for tweet creation
     const data = {
