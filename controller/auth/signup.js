@@ -5,7 +5,7 @@ const { Package } = new Xprz();
 const { bcryptjs } = new Package();
 const User = $read("model/User");
 exports.getSignup = (req, { sendFile }) => {
-  sendFile(path.join(process.cwd(), "/views/auth/signup.html"));
+  sendFile(path.join(process.cwd(), "/public/views/auth/signup.html"));
 };
 exports.postSignup = async (req, { getJsonHandler, status }) => {
   const { getBody } = req;

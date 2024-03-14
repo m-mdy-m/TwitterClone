@@ -7,6 +7,16 @@ const routes = {
     profile: "/assets/images/profilePic.png",
     username: "m__mdy__m",
   },
+  "/auth/signup": {
+    isAuth,
+    profile: "/assets/images/profilePic.png",
+    username: "m__mdy__m",
+  },
+  "/auth/login": {
+    isAuth,
+    profile: "/assets/images/profilePic.png",
+    username: "m__mdy__m",
+  },
 };
 const path = window.location.pathname;
 const route = routes[path];
