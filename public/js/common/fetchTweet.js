@@ -30,3 +30,11 @@ export async function fetchTweets() {
     }
   }
 }
+export async function fetchLike(data){
+  try {
+    const response = await axios.put('/api/like',{data})
+    console.log('response');
+  } catch (error) {
+    console.log('error =>',error);
+  }
+}

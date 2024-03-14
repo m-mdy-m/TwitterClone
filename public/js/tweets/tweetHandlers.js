@@ -1,4 +1,5 @@
 import Tweet from "../components/Tweet.js";
+import { handleClick } from "./Like.js";
 const wrapper = document.getElementById("wrapperTweet");
 
 // Function to add a single tweet to the UI
@@ -117,4 +118,12 @@ function getCurrentTimeFormatted(time) {
     // Concatenate the formatted date and time with a separator
     return `${formattedDate} • ${formattedTime}`;
   }
+}
+// Attaches click event listeners to all elements with the class "icons".
+export function iconsHandler() {
+  // Select all elements with the class "icons"
+  document.querySelectorAll(".icons").forEach((icon) => {
+    // Attach a click event listener to each icon
+    icon.addEventListener("click", handleClick);
+  });
 }

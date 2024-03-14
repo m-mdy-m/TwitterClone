@@ -63,23 +63,7 @@ export function validateTweet(tweet) {
   // If all checks pass, the tweet is considered valid
   return { valid: true, value: value };
 }
-
-// Attaches click event listeners to all elements with the class "icons".
-export function iconsHandler() {
-  // Select all elements with the class "icons"
-  document.querySelectorAll(".icons").forEach((icon) => {
-    // Attach a click event listener to each icon
-    icon.addEventListener("click", handleClick);
-  });
-}
-
-// Handles the click event on icons.
-export function handleClick(event) {
-  const el = event.target;
-  const id = getId(el);
-  console.log("id", id);
-}
 // get Id Tweet from element
-function getId(el) {
+export function getId(el) {
   return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
 }

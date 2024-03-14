@@ -1,8 +1,9 @@
 // Importing handlers from a separate file
 import { fetchTweets } from "./common/fetchTweet.js";
-import { hideIconOnFocus, iconsHandler, showIconOnBlur, updateCharCount } from "./common/handlers.js";
+import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
 import { createTweet } from "./tweets/Post.js";
 import { onDocumentLoad } from "./nav/navigation-handler.js";
+import { iconsHandler } from "./tweets/tweetHandlers.js";
 // Execute onDocumentLoad function when the document is loaded
 document.addEventListener("DOMContentLoaded", async ()=>{
     onDocumentLoad()

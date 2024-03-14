@@ -1,5 +1,8 @@
-import getCSRFToken from "../common/getCSRFToken.تس";
+const { getId } = require("../common/handlers");
 
-export async function fetchApi() {
-  const csrf = await getCSRFToken();
+// Handles the click event on icons.
+export function handleClick(event) {
+  const el = event.target;
+  const id = getId(el);
+  console.log("id", id);
 }
