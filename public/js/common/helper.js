@@ -36,12 +36,17 @@ export async function fetchTweets() {
     }
   }
 }
-export function handlerClickIcon(id){
-  console.log('id =>',id);
+export function handlerClickIcon(e){
+  const icons = ['likeIcon']
+  const clickedElement  = e.target
+   // Check if the clicked element has a class or id to identify it
+   if (icons.includes(clickedElement.id)) {
+    const targetIndex = icons.indexOf(clickedElement.id);
+    const target = icons[targetIndex];
+    console.log('clickedElement >', clickedElement);
+    console.log('target >', target);
+  }
 }
 
 
-document.addEventListener('click',(e)=>{
-  const target = e.target
-  console.log('target=>',target);
-})
+document.addEventListener('click',handlerClickIcon)
