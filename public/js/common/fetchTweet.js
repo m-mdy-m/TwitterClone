@@ -33,22 +33,26 @@ export async function fetchTweets() {
     }
   }
 }
-export async function fetchCreateTweet(data){
-  const header = await getCSRFHeader()
-  const response = await axios.post('/api/create',data,header)
+// Fetch CSRF header and send a POST request to create a tweet
+export async function fetchCreateTweet(data) {
+  const header = await getCSRFHeader();
+  // Send POST request to create tweet with CSRF header
+  const response = await axios.post("/api/create", data, header);
+  // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
     AddTweet(response);
     console.log("Tweet created:", response);
   } else {
+    // If tweet creation fails, display error message
     displayMessage(msgElm, response.data.error, "ffd700");
   }
 }
-export async function fetchLike(){
+export async function fetchLike() {
   try {
-    const header = await getCSRFHeader()
-    const response = await axios.put('/api/like',{},header)
-    console.log('response',response);
+    const header = await getCSRFHeader();
+    const response = await axios.put("/api/like", {}, header);
+    console.log("response", response);
   } catch (error) {
-    console.log('error =>',error);
+    console.log("error =>", error);
   }
 }
