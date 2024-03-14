@@ -15,13 +15,15 @@ exports.postTweet = async (req, { getJsonHandler }) => {
   if (!content) {
     return badRequest("Tweet content is missing.");
   }
-
-  // Construct the data object for tweet creation
-  const data = {
-    content: content,
-    postedBy: req.user._id, // Assuming req.user contains the ID of the user posting the tweet
-  };
-
+  // Check if req.user is missing; return an error response if so
+  if (!req.user) {
+    return badRequest("User information is missing. Please login.");
+  }
+    // Construct the data object for tweet creation
+    const data = {
+      content: content,
+      postedBy: req.user._id, // Assuming req.user contains the ID of the user posting the tweet
+    };
   try {
     // Create the tweet and wait for the operation to complete
     const post = await PostTweet.create(data);
