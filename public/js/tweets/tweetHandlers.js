@@ -11,7 +11,7 @@ export function AddTweet(response) {
   const tweetTemplate = renderTweet(tweetData);
 
   // Append the rendered tweet template to the wrapper element
-  appendTweet(tweetTemplate);
+  appendTweet('afterbegin',tweetTemplate);
 
   // Clear the tweet input field after adding the tweet
   clearTweetInput();
@@ -30,7 +30,7 @@ export function ShowTweets(response) {
     const tweetTemplate = renderTweet(tweet);
 
     // Append the rendered tweet template to the wrapper element
-    appendTweet(tweetTemplate);
+    appendTweet('beforeend',tweetTemplate);
   });
 
   // Clear the tweet input field after showing tweets
@@ -56,9 +56,9 @@ function renderTweet(tweet) {
 }
 
 // Function to append a tweet template to the UI
-function appendTweet(tweetTemplate) {
+function appendTweet(position,tweetTemplate) {
   // Append the tweet template HTML to the wrapper element
-  wrapper.insertAdjacentHTML("beforeend", tweetTemplate);
+  wrapper.insertAdjacentHTML(position, tweetTemplate);
 }
 
 // Function to clear the tweet input field
