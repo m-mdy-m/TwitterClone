@@ -30,10 +30,3 @@ export async function fetchTweets() {
     }
   }
 }
-
-
-export function handleIconClick() {
-  const icons = document.querySelectorAll('.icons')
-  console.log('icons : ',icons);
-}
-handleIconClick()

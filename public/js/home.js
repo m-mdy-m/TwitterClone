@@ -1,11 +1,13 @@
 // Importing handlers from a separate file
-import { fetchTweets } from "./common/helper.js";
+import { fetchTweets } from "./common/fetchTweet.js";
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
 import { createTweet } from "./tweets/Post.js";
 import { onDocumentLoad } from "./nav/navigation-handler.js";
-fetchTweets()
 // Execute onDocumentLoad function when the document is loaded
-document.addEventListener("DOMContentLoaded", onDocumentLoad);
+document.addEventListener("DOMContentLoaded", ()=>{
+    onDocumentLoad()
+    fetchTweets()
+});
 const tweetButton = document.getElementById("tweetButton");
 const textarea = document.getElementById("tweetInput");
 // Get references to the textarea and the icon element

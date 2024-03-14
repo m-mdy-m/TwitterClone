@@ -796,33 +796,9 @@
 
 /* Context menu container */
 
-.context-menu {
-  position: absolute;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  padding: 5px 0;
-  z-index: 1000;
-  /* Ensure it's on top of other content */
-  display: none;
-  /* Initially hidden */
-}
-
 /* Context menu items */
 
-.context-menu-item {
-  padding: 8px 15px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #333333;
-}
-
 /* Hover effect on context menu items */
-
-.context-menu-item:hover {
-  background-color: #f0f0f0;
-}
 
 .hover\:rotate-45:hover {
   --tw-rotate: 45deg;
