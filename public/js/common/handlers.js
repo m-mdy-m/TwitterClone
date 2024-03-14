@@ -63,3 +63,9 @@ export function validateTweet(tweet) {
   // If all checks pass, the tweet is considered valid
   return { valid: true,value : value };
 }
+
+
+export function iconsHandler(){
+  const icons = document.querySelectorAll('.icons')
+  console.log('icons =>',icons);
+}
