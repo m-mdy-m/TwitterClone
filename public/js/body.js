@@ -6,19 +6,19 @@ const routes = {
     isAuth,
     profile: "/assets/images/profilePic.png",
     username: "m__mdy__m",
-    ClassMain : "grid grid-cols-main"
+    classMain: "grid grid-cols-main",
   },
   "/auth/signup": {
     isAuth,
     profile: "/assets/images/profilePic.png",
     username: "m__mdy__m",
-    classMain : 'flex justify-center items-center'
+    classMain: "flex justify-center items-center",
   },
   "/auth/login": {
     isAuth,
     profile: "/assets/images/profilePic.png",
     username: "m__mdy__m",
-    classMain : 'flex justify-center items-center'
+    classMain: "flex justify-center items-center",
   },
 };
 const path = window.location.pathname;
