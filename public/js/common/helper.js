@@ -36,3 +36,12 @@ export async function fetchTweets() {
     }
   }
 }
+export function handlerClickIcon(id){
+  console.log('id =>',id);
+}
+
+
+document.addEventListener('click',(e)=>{
+  const target = e.target
+  console.log('target=>',target);
+})
