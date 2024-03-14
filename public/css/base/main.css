@@ -773,10 +773,10 @@
 
 /* For Firefox */
 
-/* {
-    scrollbar-width: thin;
-    scrollbar-color: #35374b transparent;
-  } */
+*{
+  scrollbar-width: thin;
+  scrollbar-color: #35374b transparent;
+}
 
 /* For Chrome, Edge, and Safari */
 
