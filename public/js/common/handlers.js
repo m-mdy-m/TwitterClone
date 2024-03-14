@@ -75,7 +75,11 @@ export function iconsHandler() {
 
 // Handles the click event on icons.
 function handleClick(event) {
-  // Get the clicked icon
-  const clickedIcon = event.target;
-  console.log("Clicked icon :", clickedIcon);
+  const el = event.target;
+  const id = getId(el);
+  console.log("id", id);
+}
+// get Id Tweet from element
+function getId(el) {
+  return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
 }
