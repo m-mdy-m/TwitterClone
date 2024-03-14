@@ -1,5 +1,6 @@
 import { displayMessage } from "../auth/validation.js";
 import { ShowTweets } from "../tweets/tweetHandlers.js";
+import getCSRFToken from "./getCSRFToken.js";
 const msgElm = document.getElementById("msgElm");
 // Function to fetch tweets from the server
 export async function fetchTweets() {
@@ -30,10 +31,16 @@ export async function fetchTweets() {
     }
   }
 }
-export async function fetchLike(data){
+export async function fetchLike(){
   try {
-    const response = await axios.put('/api/like',{data})
-    console.log('response');
+    const csrfToken = await getCSRFToken()
+    const header ={
+      headers: {
+        "X-CSRF-Token": csrfToken,
+      },
+    }
+    const response = await axios.put('/api/like',{},header)
+    console.log('response',response);
   } catch (error) {
     console.log('error =>',error);
   }
