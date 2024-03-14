@@ -44,11 +44,9 @@ export async function createTweet(val) {
       // Handle errors
       if (error.response && error.response.data && error.response.data.error) {
         // Display error message returned from the server
-        msgElm.style.display = "block";
         displayMessage(msgElm, error.response.data.error, "#ffd700");
       } else {
         // Display a generic error message for other errors
-        msgElm.style.display = "block";
         displayMessage(
           msgElm,
           "An unexpected error occurred while creating the tweet. Please try again later.",
@@ -58,7 +56,6 @@ export async function createTweet(val) {
     }
   } else {
     // If the tweet data is invalid, display the error message
-    msgElm.style.display = "block";
     displayMessage(msgElm, val.message, "#FF0000");
   }
 }
