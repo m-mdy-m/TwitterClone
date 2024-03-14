@@ -30,13 +30,10 @@ export async function fetchTweets() {
     }
   }
 }
-export function setId() {
-  return arguments;
-}
 
-export function handlerClickIcon(e) {
-  const id = setId();
-  console.log("id =>", id);
-}
 
-document.addEventListener("click", handlerClickIcon);
+export function handleIconClick() {
+  const icons = document.querySelectorAll('.icons')
+  console.log('icons : ',icons);
+}
+handleIconClick()
