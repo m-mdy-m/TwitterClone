@@ -12,30 +12,35 @@ exports.getLogin = (req, { sendFile }) => {
  * email : mahdimamashli1383@gmail.com
  * password : Asd24242@4
  */
-exports.postLogin = async (req, { status }) => {
+exports.postLogin = async (req, { status,getJsonHandler }) => {
   const { getBody } = req;
   const body = getBody();
-  const username = body.username;
-  const email = body.email;
-  const password = body.password;
-  const user = await User.findOne({ username: username, email: email });
-  if (!user) {
-    return status(200).json({
-      success: false,
-      message: "User not found. Please login or register.",
-    });
-  }
-  const passwordMatches = await bcryptjs().compare(password, user.password);
-  if (!passwordMatches) {
-    return status(200).json({
-      success: false,
-      message: "Incorrect password. Please try again.",
-    });
-  }
-  req.session.user = user;
+  const { username, email, password } = body;
+  const { badRequest,notFound,internalServerError } = getJsonHandler()
+  try {
+    // Validate if username or email is provided
+    if (!username && !email) {
+      return badRequest('Username or email is required for login.')
+    } // Find user by username and email
+    const user = await User.findOne({ username: username, email: email });
 
-  return status(200).json({
-    success: true,
-    message: "Logged in successfully.",
-  });
+    // Check if user exists
+    if (!user) {
+      return notFound('User not found. Please register to create an account.')
+    }
+    // Compare password hashes
+    const passwordMatches = await bcryptjs().compare(password, user.password);
+    if (!passwordMatches) {
+      return status(401).json({ success: false, error: 'Incorrect password. Please try again.' });
+    }
+    // Set user session
+    req.session.user = user;
+    // Send success response
+    return status(200).json({
+      success: true,
+      message: "Logged in successfully.",
+    });
+  } catch (error) {
+    internalServerError('Internal server error. Please try again later.' )
+  }
 };
