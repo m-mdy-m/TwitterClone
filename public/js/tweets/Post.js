@@ -1,5 +1,5 @@
 import { displayMessage } from "../auth/validation.js";
-import getCSRFToken from "../common/getCSRFToken.js";
+import { CsrfToken } from "../common/handlers.js";
 import { AddTweet } from "./tweetHandlers.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
@@ -12,23 +12,13 @@ export async function createTweet(val) {
     msgElm.style.display = "none";
     // Send a POST request to create the tweet
     try {
-      // Fetch CSRF token
-      const csrfToken = await getCSRFToken();
-      if (!csrfToken) {
-        msgElm.style.display = "block";
-        displayMessage(
-          msgElm,
-          "Unable to create tweet. CSRF token is missing or invalid.",
-          "#ff6347"
-        );
-        return;
-      }
+      const Token = await CsrfToken()
       const data = {
         tweet: val.value,
       };
       const header = {
         headers: {
-          "X-CSRF-Token": csrfToken,
+          "X-CSRF-Token": Token,
         },
       };
       // Send a POST request to create the tweet with CSRF token included in the request body

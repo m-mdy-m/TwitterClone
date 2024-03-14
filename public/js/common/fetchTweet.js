@@ -31,6 +31,15 @@ export async function fetchTweets() {
     }
   }
 }
+
+export async function fetchCreateTweet(data){
+  const response = 
+}
+
+
+
+
+
 export async function fetchLike(){
   try {
     const csrfToken = await getCSRFToken()

@@ -1,7 +1,11 @@
+import { displayMessage } from "../auth/validation.js";
+import getCSRFToken from "./getCSRFToken.js";
+
 // DOM elements
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
 const maxLength = 300;
+const msgElm = document.getElementById("msgElm");
 /**
  * Updates the character count display and validates the tweet length.
  * Adjusts styles based on the length and validation status.
@@ -66,4 +70,18 @@ export function validateTweet(tweet) {
 // get Id Tweet from element
 export function getId(el) {
   return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
+}
+export async function CsrfToken(){
+  // Fetch CSRF token
+  const csrfToken = await getCSRFToken();
+  if (!csrfToken) {
+    msgElm.style.display = "block";
+    displayMessage(
+      msgElm,
+      "Unable to create tweet. CSRF token is missing or invalid.",
+      "#ff6347"
+    );
+    return;
+  }
+  return csrfToken
 }
