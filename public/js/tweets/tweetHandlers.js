@@ -40,7 +40,7 @@ export function ShowTweets(response) {
 function renderTweet(tweet) {
   // Extract relevant data from the tweet object
   const { postedBy, content, createdAt } = tweet;
-  const { username, profilePic } = postedBy;
+  const { username, profilePic,_id } = postedBy;
   // Format the creation time of the tweet
   const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
 
@@ -50,6 +50,7 @@ function renderTweet(tweet) {
     profile: profilePic,
     content,
     createdAt: formattedCreatedAt,
+    id:_id,
   });
 }
 

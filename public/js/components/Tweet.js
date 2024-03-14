@@ -1,10 +1,16 @@
-import { UserInfo } from './tweet/Userinfo.js';
-import { PostContent } from './tweet/PostContent.js';
-import { ActionButtons } from './tweet/Action.btn.js';
+import { UserInfo } from "./tweet/Userinfo.js";
+import { PostContent } from "./tweet/PostContent.js";
+import { ActionButtons } from "./tweet/Action.btn.js";
 
-function Tweet({ username, content, profile= "/assets/images/profilePic.png",createdAt }) {
+function Tweet({
+  username,
+  content,
+  profile = "/assets/images/profilePic.png",
+  createdAt,
+  id,
+}) {
   return `
-    <div class="w-full min-h-28 h-auto my-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 pb-2 pt-6">
+    <div class="w-full min-h-28 h-auto my-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 pb-2 pt-6" data-id="${id}">
       <div class="flex justify-between items-center">
         ${UserInfo({ username, profile, createdAt })}
         <div class="flex justify-center items-center w-8 h-8 transition-transform cursor-pointer transform hover:scale-110">
@@ -14,7 +20,7 @@ function Tweet({ username, content, profile= "/assets/images/profilePic.png",cre
         </div>
       </div>
       <div class="min-h-auto w-full flex justify-between items-center flex-col pb-3 pr-2">
-        ${PostContent({content})}
+        ${PostContent({ content })}
         ${ActionButtons()}
       </div>
     </div>
