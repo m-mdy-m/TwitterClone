@@ -36,7 +36,8 @@ export async function handleSubmit(e, submitUrl) {
       handleServerError(error);
     }
   }else{
-    console.log('hi');
+     // If validation count is less than 3, display error message
+     handleNotSuccess({ message: "Please complete the form correctly." });
   }
 }
 // Function to handle unsuccessful form submission

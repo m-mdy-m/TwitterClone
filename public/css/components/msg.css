@@ -14,7 +14,6 @@
   position: fixed;
   top: 2rem;
   left: 50%;
-  transform: translateX(-50%);
   margin: auto;
   padding: 16px;
   border-radius: 8px;

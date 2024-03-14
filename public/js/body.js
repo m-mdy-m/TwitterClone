@@ -7,18 +7,21 @@ const routes = {
     profile: "/assets/images/profilePic.png",
     username: "m__mdy__m",
     classMain: "grid grid-cols-main",
+    classMsgError : "absolute top-4 left-[25%]"
   },
   "/auth/signup": {
     isAuth,
     profile: "/assets/images/profilePic.png",
     username: "m__mdy__m",
     classMain: "flex justify-center items-center",
+    classMsgError : "absolute top-4 left-[50%]"
   },
   "/auth/login": {
     isAuth,
     profile: "/assets/images/profilePic.png",
     username: "m__mdy__m",
     classMain: "flex justify-center items-center",
+    classMsgError : "absolute top-4 left-[50%]"
   },
 };
 const path = window.location.pathname;
