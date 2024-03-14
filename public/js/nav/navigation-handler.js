@@ -30,7 +30,7 @@ function handleNavigation() {
   });
 }
 // Function to execute components on document load
-function onDocumentLoad() {
+export function onDocumentLoad() {
   const shouldDisplayWelcomePhoto = localStorage.getItem("showWelcomePhoto");
 
   // Initialize logout functionality
@@ -70,5 +70,4 @@ function onDocumentLoad() {
   });
 }
 
-// Execute onDocumentLoad function when the document is loaded
-document.addEventListener("DOMContentLoaded", onDocumentLoad);
+
