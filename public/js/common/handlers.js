@@ -64,13 +64,18 @@ export function validateTweet(tweet) {
   return { valid: true, value: value };
 }
 
+// Attaches click event listeners to all elements with the class "icons".
 export function iconsHandler() {
+  // Select all elements with the class "icons"
   document.querySelectorAll(".icons").forEach((icon) => {
+    // Attach a click event listener to each icon
     icon.addEventListener("click", handleClick);
   });
 }
 
-function handleClick(e) {
-  const clickedIconId = e.target;
-  console.log("Clicked icon ID:", clickedIconId);
+// Handles the click event on icons.
+function handleClick(event) {
+  // Get the clicked icon
+  const clickedIcon = event.target;
+  console.log("Clicked icon :", clickedIcon);
 }
