@@ -6,7 +6,7 @@ exports.postTweet = async (req, { getJsonHandler }) => {
   const body = req.getBody();
 
   // Extract JSON handling functions from the response object
-  const { badRequest, created, internalServerError } = getJsonHandler();
+  const { badRequest, created, internalServerError,authRequired } = getJsonHandler();
 
   // Extract the tweet content from the request body
   const content = body.tweet;
@@ -17,7 +17,7 @@ exports.postTweet = async (req, { getJsonHandler }) => {
   }
   // Check if req.user is missing; return an error response if so
   if (!req.user) {
-    return badRequest("User information is missing. Please login.");
+    return authRequired("Authentication required. Please log in to access this resource.");
   }
     // Construct the data object for tweet creation
     const data = {
