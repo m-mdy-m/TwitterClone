@@ -87,12 +87,19 @@ function handleServerError(error) {
 }
 // Function to display messages
 export function displayMessage(element, message, color) {
+  element.style.display = 'block';
   // Set background color of message element
   element.style.background = color;
   // Set opacity of message element
   element.style.opacity = 1;
   // Set message content of message element
   element.innerHTML = message;
+  setTimeout(() => {
+    element.style.opacity = 0;
+    setTimeout(() => {
+      element.style.display = 'none';
+    }, 1000);
+  }, 5000);
   return;
 }
 
