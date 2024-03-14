@@ -2,6 +2,10 @@
   pointer-events: none;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -1104,6 +1108,10 @@
 }
 
 @media (min-width: 900px) {
+  .tablet\:fixed {
+    position: fixed;
+  }
+
   .tablet\:relative {
     position: relative;
   }
