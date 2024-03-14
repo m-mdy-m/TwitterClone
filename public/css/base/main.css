@@ -2,20 +2,12 @@
   pointer-events: none;
 }
 
-.fixed {
-  position: fixed;
-}
-
 .absolute {
   position: absolute;
 }
 
 .relative {
   position: relative;
-}
-
-.bottom-0 {
-  bottom: 0px;
 }
 
 .bottom-1 {
@@ -32,6 +24,10 @@
 
 .left-\[25\%\] {
   left: 25%;
+}
+
+.left-\[50\%\] {
+  left: 50%;
 }
 
 .right-0 {
@@ -60,10 +56,6 @@
 
 .top-6 {
   top: 1.5rem;
-}
-
-.left-\[50\%\] {
-  left: 50%;
 }
 
 .z-10 {
@@ -105,10 +97,6 @@
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
 }
 
 .block {
@@ -153,10 +141,6 @@
 
 .h-full {
   height: 100%;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .min-h-28 {
@@ -449,10 +433,6 @@
   padding: 0.25rem;
 }
 
-.p-4 {
-  padding: 1rem;
-}
-
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -491,16 +471,6 @@
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .py-7 {
@@ -607,11 +577,6 @@
   color: rgb(196 196 196 / var(--tw-text-opacity));
 }
 
-.text-blue-400 {
-  --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity));
-}
-
 .text-blue-600 {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
@@ -635,10 +600,6 @@
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.underline {
-  text-decoration-line: underline;
 }
 
 .opacity-0 {
@@ -806,8 +767,31 @@
 
 @keyframes opacity {
   50% {
-    opacity: .5;
+    opacity: 0.5;
   }
+}
+
+/* For Firefox */
+
+/* {
+    scrollbar-width: thin;
+    scrollbar-color: #35374b transparent;
+  } */
+
+/* For Chrome, Edge, and Safari */
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 20px;
+  border: 3px solid transparent;
 }
 
 .hover\:rotate-45:hover {
@@ -876,14 +860,14 @@
   --tw-gradient-to: #7e22ce var(--tw-gradient-to-position);
 }
 
-.hover\:text-gray-100:hover {
-  --tw-text-opacity: 1;
-  color: rgb(243 244 246 / var(--tw-text-opacity));
-}
-
 .hover\:text-blue-800:hover {
   --tw-text-opacity: 1;
   color: rgb(30 64 175 / var(--tw-text-opacity));
+}
+
+.hover\:text-gray-100:hover {
+  --tw-text-opacity: 1;
+  color: rgb(243 244 246 / var(--tw-text-opacity));
 }
 
 .focus\:border-blue-500:focus {
@@ -1100,18 +1084,7 @@
   }
 }
 
-@media (min-width: 768px) {
-  .md\:text-xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-}
-
 @media (min-width: 900px) {
-  .tablet\:fixed {
-    position: fixed;
-  }
-
   .tablet\:relative {
     position: relative;
   }
