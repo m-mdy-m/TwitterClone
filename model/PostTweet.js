@@ -8,8 +8,12 @@ const PostTweet = new Schema(
     postedBy : {
         type : Schema.ObjectId,
         ref : "User",
-        pinned : Boolean,
-    }
+    },
+    pinned : Boolean,
+    likes:[{
+      type : Schema.ObjectId,
+      ref : "User",
+  }]
   },
   { timestamps: true }
 );
