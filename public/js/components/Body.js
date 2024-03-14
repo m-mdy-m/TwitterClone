@@ -3,13 +3,6 @@ import { mainContent } from "./mainContent.js";
 
 export function BodyContent({ isAuth, profile, username,classMain,classMsgError }) {
   return `
-  <!-- Context menu container -->
-  <div id="contextMenu" class="context-menu">
-  <div class="context-menu-item" onclick="window.history.back();">Back</div>
-  <div class="context-menu-item" onclick="window.history.forward();">Forward</div>
-  <div class="context-menu-item" onclick="window.location.reload();">Reload</div>
-  <div class="context-menu-item" onclick="openDevTools();">Inspect</div>
-</div>
   <div class="container mobile:m-0 tablet:px-4 h-full  grid mobile:grid-cols-1 tablet:grid-cols-container">
     <header class="flex flex-col items-center tablet:h-auto justify-start mobile:pl-2 mobile:py-1 tablet:m-4 mobile:absolute tablet:relative">
     ${Header({ isAuth, profile, username })}    

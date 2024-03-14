@@ -36,29 +36,3 @@ export async function fetchTweets() {
     }
   }
 }
-
-function contextHandler(e) {
-  e.preventDefault();
-  if (contextMenu.style.display === "none") {
-    contextMenu.style.left = event.pageX + "px";
-    contextMenu.style.top = event.pageY + "px";
-    contextMenu.style.display = "block";
-  } else {
-    contextMenu.style.left = event.pageX + "px";
-    contextMenu.style.top = event.pageY + "px";
-  }
-}
-function hiddenContext() {
-  contextMenu.style.display = 'none'
-}
-
-function keyDownHandler(event) {
-  if (event.keyCode === 27)
-    contextMenu.style.display = 'none'
-}
-function openDevTools() {
-  window.electron.ipcRenderer.send('open-dev-tools');
-}
-document.body.addEventListener('contextmenu', contextHandler)
-document.body.addEventListener('click', hiddenContext)
-document.body.addEventListener('keydown', keyDownHandler);
