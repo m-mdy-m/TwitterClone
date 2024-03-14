@@ -41,9 +41,9 @@
     }
   }
   /* For Firefox */
-  *{
+  * {
     scrollbar-width: thin;
-    scrollbar-color: #4a4a4a  transparent;
+    scrollbar-color: #4a4a4a transparent;
   }
 
   /* For Chrome, Edge, and Safari */
@@ -52,12 +52,36 @@
   }
 
   *::-webkit-scrollbar-track {
-    background: transparent; 
+    background: transparent;
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: transparent; 
+    background-color: transparent;
     border-radius: 20px;
     border: 3px solid transparent;
+  }
+  /* Context menu container */
+  .context-menu {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 5px 0;
+    z-index: 1000; /* Ensure it's on top of other content */
+    display: none; /* Initially hidden */
+  }
+
+  /* Context menu items */
+  .context-menu-item {
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333333;
+  }
+
+  /* Hover effect on context menu items */
+  .context-menu-item:hover {
+    background-color: #f0f0f0;
   }
 }
