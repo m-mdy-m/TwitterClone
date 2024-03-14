@@ -12,42 +12,30 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
   const { created, validationFailed, internalServerError } = getJsonHandler();
   const body = getBody();
   try {
-    const username = body.username;
-    const email = body.email;
-    const password = body.password;
-    const hashedPassword = await bcryptjs().hash(password);
-    const passwordConf = password === body.passwordConf;
-    if (
-      isUsername(body.username) &&
-      isEmail(body.email) &&
-      isPassword(body.password) &&
-      passwordConf
-    ) {
-      let existingUser  = await User.findOne({$or : [{username : username}, {email : email}]});
-      if (existingUser ) {
-        // If user exists, send user information to the client
-        return status(200).json({
-          success: false,
-          message: "User already exists",
-        });
-      } else {
+    // Extract user input from request body
+    const { username, email, password, passwordConf } = body;
+    // Validate user input
+    if (!isUsername(username) || !isEmail(email) || !isPassword(password) || password !== passwordConf) {
+      return validationFailed({ message: 'Invalid input. Please check your username, email, and password.' });
+    }
+    
+      // Check if user already exists
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existingUser) {
+      return status(409).json({ success: false, message: 'User already exists.' });
+    } else {
+        // Hash the password securely
+        const hashedPassword = await bcryptjs().hash(password, 10);
         const newUser  = await User.create({
           username: username,
           email: email,
           password: hashedPassword,
         });
         req.session.user = newUser ;
-        created(newUser );
+        // Send success response
+        return created(newUser);
       }
-    } else {
-      // Validation failed
-      validationFailed({
-        username: body.username,
-        email: body.email,
-        password: body.password,
-        passwordConf: body.passwordConf,
-      });
-    }
+    
   } catch (error) {
     // Handle other errors (e.g., database error)
     internalServerError(error.message);
