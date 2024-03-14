@@ -22,7 +22,7 @@ export function updateCharCount(e) {
   } else {
     charCount.style.color = "rgb(107, 114, 128)";
     textarea.style.cssText = "border-color: #343435;";
-    return { valid: validation.valid,value:validation.value };
+    return { valid: validation.valid, value: validation.value };
   }
 }
 
@@ -61,11 +61,14 @@ export function validateTweet(tweet) {
     };
   }
   // If all checks pass, the tweet is considered valid
-  return { valid: true,value : value };
+  return { valid: true, value: value };
 }
 
-
-export function iconsHandler(){
-  const icons = document.querySelectorAll('.icons')
-  console.log('icons =>',icons);
+export function iconsHandler() {
+  document.querySelectorAll(".icons").forEach((icon) => {
+    icon.addEventListener("click", (e) => {
+      const t = e.target;
+      console.log("=>", t);
+    });
+  });
 }
