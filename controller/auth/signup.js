@@ -23,21 +23,21 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
       isPassword(body.password) &&
       passwordConf
     ) {
-      let user = await User.findOne({$or : [{username : username}, {email : email}]});
-      if (user) {
+      let existingUser  = await User.findOne({$or : [{username : username}, {email : email}]});
+      if (existingUser ) {
         // If user exists, send user information to the client
         return status(200).json({
           success: false,
           message: "User already exists",
         });
       } else {
-        const result = await User.create({
+        const newUser  = await User.create({
           username: username,
           email: email,
           password: hashedPassword,
         });
-        req.session.user = result;
-        created(result);
+        req.session.user = newUser ;
+        created(newUser );
       }
     } else {
       // Validation failed
@@ -49,8 +49,7 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
       });
     }
   } catch (error) {
-    console.log("error=>", error.message);
     // Handle other errors (e.g., database error)
-    internalServerError("An error occurred while processing your request.");
+    internalServerError(error.message);
   }
 };
