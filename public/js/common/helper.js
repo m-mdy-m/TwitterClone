@@ -1,9 +1,6 @@
 import { displayMessage } from "../auth/validation.js";
 import { ShowTweets } from "../tweets/tweetHandlers.js";
 const msgElm = document.getElementById("msgElm");
-// Get a reference to the context menu
-const contextMenu = document.getElementById("contextMenu");
-
 // Function to fetch tweets from the server
 export async function fetchTweets() {
   try {
@@ -16,18 +13,15 @@ export async function fetchTweets() {
       // Handle displaying tweets on the UI as needed
     } else {
       // Display error message with error-related color
-      msgElm.style.display = "block";
       displayMessage(msgElm, response.data.error, "#ff6347"); // Error color
     }
   } catch (error) {
     // Handle errors
     if (error.response && error.response.data && error.response.data.error) {
       // Display error message returned from the server
-      msgElm.style.display = "block";
       displayMessage(msgElm, error.response.data.error, "#ffd700");
     } else {
       // Display a generic error message for other errors
-      msgElm.style.display = "block";
       displayMessage(
         msgElm,
         "An unexpected error occurred while creating the tweet. Please try again later.",
@@ -36,17 +30,13 @@ export async function fetchTweets() {
     }
   }
 }
-export function handlerClickIcon(e){
-  const icons = ['likeIcon']
-  const clickedElement  = e.target
-   // Check if the clicked element has a class or id to identify it
-   if (icons.includes(clickedElement.id)) {
-    const targetIndex = icons.indexOf(clickedElement.id);
-    const target = icons[targetIndex];
-    console.log('clickedElement >', clickedElement);
-    console.log('target >', target);
-  }
+export function setId() {
+  return arguments;
 }
 
+export function handlerClickIcon(e) {
+  const id = setId();
+  console.log("id =>", id);
+}
 
-document.addEventListener('click',handlerClickIcon)
+document.addEventListener("click", handlerClickIcon);
