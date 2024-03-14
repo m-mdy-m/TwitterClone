@@ -74,7 +74,7 @@ export function iconsHandler() {
 }
 
 // Handles the click event on icons.
-function handleClick(event) {
+export function handleClick(event) {
   const el = event.target;
   const id = getId(el);
   console.log("id", id);
