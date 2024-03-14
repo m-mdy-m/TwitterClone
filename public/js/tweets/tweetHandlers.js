@@ -80,22 +80,37 @@ function getCurrentTimeFormatted(time) {
   const minute = 60;
   const hour = minute * 60;
   const day = hour * 24;
-  const month = day * 30; // Approximate
+  const month = day * 30;
+  const year = month * 12;
 
   // Determine the appropriate past tense based on the time difference
   if (secondsDifference < minute) {
     return "just now";
   } else if (secondsDifference < hour) {
     const minutes = Math.floor(secondsDifference / minute);
-    return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
   } else if (secondsDifference < day) {
     const hours = Math.floor(secondsDifference / hour);
-    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
   } else if (secondsDifference < month) {
     const days = Math.floor(secondsDifference / day);
-    return `${days} day${days > 1 ? 's' : ''} ago`;
-  } else {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  } else if (secondsDifference < year) {
     const months = Math.floor(secondsDifference / month);
-    return `${months} month${months > 1 ? 's' : ''} ago`;
+    return `${months} month${months > 1 ? "s" : ""} ago`;
+  } else {
+    // Format the date and time components separately
+    const formattedDate = createdAt.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    const formattedTime = createdAt.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+
+    // Concatenate the formatted date and time with a separator
+    return `${formattedDate} • ${formattedTime}`;
   }
 }
