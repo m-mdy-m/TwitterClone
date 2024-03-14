@@ -1,7 +1,7 @@
-export function AuthLink({ text,link, href, className }) {
+export function AuthLink({ text,link, href }) {
   return `
-    <p class="text-xl mt-4">
-      ${text} <a href="${href}" class="${className}">${link}</a>
+    <p class="text-xl mt-4 text-gray-80">
+      ${text} <a href="${href}" class="text-blue-400">${link}</a>
     </p>
   `;
 }
