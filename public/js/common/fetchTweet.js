@@ -5,7 +5,7 @@ const msgElm = document.getElementById("msgElm");
 export async function fetchTweets() {
   try {
     // Make a GET request to fetch tweets
-    const response = await axios.get("/tweets");
+    const response = await axios.get("/api/tweets");
     // Check if the request was successful
     if (response.data.success) {
       // Display the fetched tweets

@@ -32,7 +32,7 @@ export async function createTweet(val) {
         },
       };
       // Send a POST request to create the tweet with CSRF token included in the request body
-      const response = await axios.post("/tweets", data, header);
+      const response = await axios.post("/api/create", data, header);
       if (response.data.success) {
         AddTweet(response);
         console.log("Tweet created:", response);
