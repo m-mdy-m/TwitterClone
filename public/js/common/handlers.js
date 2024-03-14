@@ -66,9 +66,11 @@ export function validateTweet(tweet) {
 
 export function iconsHandler() {
   document.querySelectorAll(".icons").forEach((icon) => {
-    icon.addEventListener("click", (e) => {
-      const t = e.target;
-      console.log("=>", t);
-    });
+    icon.addEventListener("click", handleClick);
   });
+}
+
+function handleClick(e) {
+  const clickedIconId = e.target;
+  console.log("Clicked icon ID:", clickedIconId);
 }
