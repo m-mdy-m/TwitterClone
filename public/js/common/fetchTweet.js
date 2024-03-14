@@ -1,7 +1,5 @@
-import axios from "axios";
 import { displayMessage } from "../auth/validation.js";
 import { AddTweet, ShowTweets } from "../tweets/tweetHandlers.js";
-import getCSRFToken from "./getCSRFToken.js";
 import { getCSRFHeader } from "./handlers.js";
 const msgElm = document.getElementById("msgElm");
 // Function to fetch tweets from the server
@@ -41,7 +39,6 @@ export async function fetchCreateTweet(data) {
   // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
     AddTweet(response);
-    console.log("Tweet created:", response);
   } else {
     // If tweet creation fails, display error message
     displayMessage(msgElm, response.data.error, "ffd700");
