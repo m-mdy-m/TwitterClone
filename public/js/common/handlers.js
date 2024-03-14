@@ -71,7 +71,7 @@ export function validateTweet(tweet) {
 export function getId(el) {
   return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
 }
-export async function CsrfToken(){
+export async function getCSRFHeader(){
   // Fetch CSRF token
   const csrfToken = await getCSRFToken();
   if (!csrfToken) {
@@ -83,5 +83,10 @@ export async function CsrfToken(){
     );
     return;
   }
-  return csrfToken
+  const header = {
+    headers: {
+      "X-CSRF-Token": csrfToken,
+    },
+  };
+  return header
 }

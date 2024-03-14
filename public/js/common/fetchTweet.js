@@ -1,6 +1,8 @@
+import axios from "axios";
 import { displayMessage } from "../auth/validation.js";
-import { ShowTweets } from "../tweets/tweetHandlers.js";
+import { AddTweet, ShowTweets } from "../tweets/tweetHandlers.js";
 import getCSRFToken from "./getCSRFToken.js";
+import { getCSRFHeader } from "./handlers.js";
 const msgElm = document.getElementById("msgElm");
 // Function to fetch tweets from the server
 export async function fetchTweets() {
@@ -31,23 +33,19 @@ export async function fetchTweets() {
     }
   }
 }
-
 export async function fetchCreateTweet(data){
-  const response = 
+  const header = await getCSRFHeader()
+  const response = await axios.post('/api/create',data,header)
+  if (response.data.success) {
+    AddTweet(response);
+    console.log("Tweet created:", response);
+  } else {
+    displayMessage(msgElm, response.data.error, "ffd700");
+  }
 }
-
-
-
-
-
 export async function fetchLike(){
   try {
-    const csrfToken = await getCSRFToken()
-    const header ={
-      headers: {
-        "X-CSRF-Token": csrfToken,
-      },
-    }
+    const header = await getCSRFHeader()
     const response = await axios.put('/api/like',{},header)
     console.log('response',response);
   } catch (error) {

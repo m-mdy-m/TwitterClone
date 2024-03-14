@@ -1,6 +1,5 @@
 import { displayMessage } from "../auth/validation.js";
-import { CsrfToken } from "../common/handlers.js";
-import { AddTweet } from "./tweetHandlers.js";
+import { fetchCreateTweet } from "../common/fetchTweet.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
 // Function to create a tweet
@@ -12,23 +11,11 @@ export async function createTweet(val) {
     msgElm.style.display = "none";
     // Send a POST request to create the tweet
     try {
-      const Token = await CsrfToken()
       const data = {
         tweet: val.value,
       };
-      const header = {
-        headers: {
-          "X-CSRF-Token": Token,
-        },
-      };
-      // Send a POST request to create the tweet with CSRF token included in the request body
-      const response = await axios.post("/api/create", data, header);
-      if (response.data.success) {
-        AddTweet(response);
-        console.log("Tweet created:", response);
-      } else {
-        displayMessage(msgElm, response.data.error, "ffd700");
-      }
+      /// fetch and send data to server
+      fetchCreateTweet(data)
     } catch (error) {
       console.log("error =>", error);
       // Handle errors
