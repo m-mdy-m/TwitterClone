@@ -50,7 +50,7 @@ export async function fetchLike(id) {
   try {
     const header = await getCSRFHeader();
     const response = await axios.put(`/api/like/${id}`, {}, header);
-    re
+    console.log('response=>',response);
   } catch (error) {
     console.log("error =>", error);
   }

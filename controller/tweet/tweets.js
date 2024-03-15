@@ -61,7 +61,7 @@ exports.getTweets = async (req, res) => {
 };
 
 exports.putLike = async (req, { status, getJsonHandler }) => {
-  const { success } = getJsonHandler();
+  const { updated } = getJsonHandler();
   const id = req.param("id");
   const user = req.user;
   const tweet = PostTweet.findById(id);
@@ -71,10 +71,8 @@ exports.putLike = async (req, { status, getJsonHandler }) => {
   req.session.user = await User.findByIdAndUpdate(user, updateQuery, {
     new: true,
   });
-  const insertTweet = await PostTweet.findByIdAndUpdate(id, query, {
+  const updatedTweet  = await PostTweet.findByIdAndUpdate(id, query, {
     new: true,
   });
-  console.log("req.session.user =>", req.session.user);
-  console.log("insertTweet =>", insertTweet);
-  success("Operation successful");
+  updated(updatedTweet);
 };
