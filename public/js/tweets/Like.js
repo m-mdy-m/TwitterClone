@@ -5,6 +5,5 @@ import { getId } from "../common/handlers.js"
 export function handleClick(event) {
   const el = event.target;
   const id = getId(el);
-  console.log("id", id);
-  fetchLike()
+  fetchLike(id)
 }

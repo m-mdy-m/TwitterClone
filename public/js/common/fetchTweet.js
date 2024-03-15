@@ -45,10 +45,10 @@ export async function fetchCreateTweet(data) {
     displayMessage(msgElm, response.data.error, "ffd700");
   }
 }
-export async function fetchLike() {
+export async function fetchLike(id) {
   try {
     const header = await getCSRFHeader();
-    const response = await axios.put("/api/like", {}, header);
+    const response = await axios.put(`/api/like/${id}`, {}, header);
     console.log("response", response);
   } catch (error) {
     console.log("error =>", error);
