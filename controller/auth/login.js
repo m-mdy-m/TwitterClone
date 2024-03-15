@@ -33,7 +33,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       if (isSameUser) {
         return status(409).json({
           success: false,
-          message: "You are already logged in.",
+          message: "You are already logged in as this user. If you wish to log in as a different user, please logout first.",
         });
       }
     }
