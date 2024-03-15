@@ -31,7 +31,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       const isSameUser = req.user._id.toString() === foundUser._id.toString();
       // If it's the same user, return a response indicating they're already logged in
       if (isSameUser) {
-        return status(200).json({
+        return status(409).json({
           success: false,
           message: "You are already logged in.",
         });
