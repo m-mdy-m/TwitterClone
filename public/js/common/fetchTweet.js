@@ -57,11 +57,7 @@ export async function fetchLike(id) {
     const response = await axios.put(`/api/like/${id}`, {}, header);
     const countLike = response.data.data.likes.length;
     return countLike;
-    return;
   } catch (error) {
     console.log("error =>", error);
   }
-}
-export async function getStatusTweet() {
-  
 }
