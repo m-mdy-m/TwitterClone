@@ -6,7 +6,8 @@ exports.postTweet = async (req, { getJsonHandler }) => {
   const body = req.getBody();
 
   // Extract JSON handling functions from the response object
-  const { badRequest, created, internalServerError,authRequired } = getJsonHandler();
+  const { badRequest, created, internalServerError, authRequired } =
+    getJsonHandler();
 
   // Extract the tweet content from the request body
   const content = body.tweet;
@@ -19,11 +20,11 @@ exports.postTweet = async (req, { getJsonHandler }) => {
   if (!req.user) {
     return authRequired("Authentication is required. Please sign in to tweet.");
   }
-    // Construct the data object for tweet creation
-    const data = {
-      content: content,
-      postedBy: req.user._id, // Assuming req.user contains the ID of the user posting the tweet
-    };
+  // Construct the data object for tweet creation
+  const data = {
+    content: content,
+    postedBy: req.user._id, // Assuming req.user contains the ID of the user posting the tweet
+  };
   try {
     // Create the tweet and wait for the operation to complete
     const post = await PostTweet.create(data);
@@ -41,15 +42,14 @@ exports.postTweet = async (req, { getJsonHandler }) => {
 exports.getTweets = async (req, res) => {
   try {
     // Fetch tweets from the database and sort them in descending order of createdAt
-    const tweets = await PostTweet.find().sort({createdAt:-1})
+    const tweets = await PostTweet.find().sort({ createdAt: -1 });
     // Populate the 'postedBy' field to include user details in the post
-    const result = await PostTweet.populate(tweets, {path : 'postedBy' })
+    const result = await PostTweet.populate(tweets, { path: "postedBy" });
     // Send JSON response with success true and tweet data
     res.status(200).json({
       success: true,
       tweets: result,
     });
-
   } catch (error) {
     // If an error occurs, send an error response
     res.status(500).json({
@@ -57,4 +57,21 @@ exports.getTweets = async (req, res) => {
       error: "Failed to fetch tweets",
     });
   }
+};
+
+exports.putLike = async (req, { status }) => {
+  const id = req.param("id");
+  const user = req.user;
+  const isLikePost = user.likes && user.likes.includes(id);
+  const option = isLikePost ? "$pull" : "$addToSet";
+  // Use computed property names to dynamically set the update operation
+  const updateQuery = { [option]: { likes: id } };
+
+  console.log('user =>',user);
+  console.log('isLikePost =>',isLikePost);
+  console.log('option =>',option);
+  console.log('updateQuery =>',updateQuery);
+
+  const insertLike = await PostTweet.findByIdAndUpdate(id, updateQuery);
+  status(200).json({ message: "hi" });
 };

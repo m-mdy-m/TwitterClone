@@ -1,6 +1,6 @@
 const Xprz = require("xprz");
 const { Route } = new Xprz();
-const { postTweet, getTweets } = $read("controller/tweet/tweets");
+const { postTweet, getTweets,putLike } = $read("controller/tweet/tweets");
 const router = new Route();
 // Grouping API routes under the "/api" prefix
 router.group("/api", (r) => {
@@ -11,13 +11,6 @@ router.group("/api", (r) => {
   r.setRoute("/tweets").get(getTweets);
 
   // Defining a PUT route for liking a tweet
-  r.setRoute("/like/:id").put((req, { status }) => {
-    const id = req.param("id");
-    const user = req.user;
-    console.log("id=>", id);
-    console.log("user=>", user);
-    // Responding with a JSON message
-    status(200).json({ message: "hi" });
-  });
+  r.setRoute("/like/:id").put(putLike);
 });
 module.exports = router;
