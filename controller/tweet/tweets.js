@@ -68,11 +68,10 @@ exports.putLike = async (req, { status, getJsonHandler }) => {
   const isLike = isIdLiked([tweet, user], id);
   const option = isLike ? "$pull" : "$addToSet";
   const { query, updateQuery } = createQueries(option, user.id, id);
-  req.session.user = await User.findByIdAndUpdate(user, updateQuery, {
-    new: true,
-  });
-  const updatedTweet  = await PostTweet.findByIdAndUpdate(id, query, {
-    new: true,
-  });
+  const [updatedUser, updatedTweet] = await Promise.all([
+    User.findByIdAndUpdate(user, updateQuery, { new: true }),
+    PostTweet.findByIdAndUpdate(id, query, { new: true })
+  ]);
+  req.session.user = updatedUser;
   updated(updatedTweet);
 };
