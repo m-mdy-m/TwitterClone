@@ -11,8 +11,9 @@ export function AddTweet(response) {
   const tweetTemplate = renderTweet(tweetData);
 
   // Append the rendered tweet template to the wrapper element
-  appendTweet('afterbegin',tweetTemplate);
+  appendTweet("afterbegin", tweetTemplate);
 
+  iconsHandler();
   // Clear the tweet input field after adding the tweet
   clearTweetInput();
 }
@@ -30,10 +31,8 @@ export function ShowTweets(response) {
     const tweetTemplate = renderTweet(tweet);
 
     // Append the rendered tweet template to the wrapper element
-    appendTweet('beforeend',tweetTemplate);
-    iconsHandler()
+    appendTweet("beforeend", tweetTemplate);
   });
-
   // Clear the tweet input field after showing tweets
   clearTweetInput();
 }
@@ -42,7 +41,7 @@ export function ShowTweets(response) {
 function renderTweet(tweet) {
   // Extract relevant data from the tweet object
   const { postedBy, content, createdAt } = tweet;
-  const { username, profilePic,_id } = postedBy;
+  const { username, profilePic, _id } = postedBy;
   // Format the creation time of the tweet
   const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
 
@@ -52,12 +51,12 @@ function renderTweet(tweet) {
     profile: profilePic,
     content,
     createdAt: formattedCreatedAt,
-    id:_id,
+    id: _id,
   });
 }
 
 // Function to append a tweet template to the UI
-function appendTweet(position,tweetTemplate) {
+function appendTweet(position, tweetTemplate) {
   // Append the tweet template HTML to the wrapper element
   wrapper.insertAdjacentHTML(position, tweetTemplate);
 }
