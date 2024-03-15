@@ -1,6 +1,6 @@
 const PostTweet = require("../../model/PostTweet");
 const User = require("../../model/User");
-const { isLiked } = require("../../utils/helperFunc");
+const { isIdLiked } = require("../../utils/helperFunc");
 // Controller function to handle POST request to create a tweet
 exports.postTweet = async (req, { getJsonHandler }) => {
   // Extract the request body
@@ -65,12 +65,9 @@ exports.putLike = async (req, { status, getJsonHandler }) => {
   const id = req.param("id");
   const user = req.user;
   const tweet = PostTweet.findById(id)
-  // const isLikePost = tweet.likes && tweet.likes.includes(id);
-  // const isLiked = user.likes && user.likes.includes(id);
-  const is = isLiked()
+  const isLike = isIdLiked([tweet,user],id)
   const option = isLike ? "$pull" : "$addToSet";
-  const options = isLikePost ? "$pull" : "$addToSet";
-  const query = { [options] : {likes : user.id}}
+  const query = { [option] : {likes : user.id}}
   const updateQuery = { [option]: { likes: id } };
   req.session.user = await User.findByIdAndUpdate(user, updateQuery, {new: true});
   const insertTweet = await PostTweet.findByIdAndUpdate(id, query, {new: true});
