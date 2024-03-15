@@ -65,11 +65,7 @@ exports.putLike = async (req, { status }) => {
   const user = req.user;
   const isLikePost = user.likes && user.likes.includes(id);
   const option = isLikePost ? "$pull" : "$addToSet";
-  console.log('isLikePost=>',isLikePost);
-  console.log('option=>',option);
-  // Use computed property names to dynamically set the update operation
   const updateQuery = { [option]: { likes: id } };
   req.session.user = await User.findByIdAndUpdate(user, updateQuery,{new:true});
-  console.log("Updated user =>", req.session.user);
   status(200).json({ message: "hi" });
 };
