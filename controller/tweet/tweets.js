@@ -1,4 +1,5 @@
 const PostTweet = require("../../model/PostTweet");
+const User = require("../../model/User");
 
 // Controller function to handle POST request to create a tweet
 exports.postTweet = async (req, { getJsonHandler }) => {
@@ -70,9 +71,11 @@ exports.putLike = async (req, { status }) => {
   console.log("isLikePost =>", isLikePost);
   console.log("option =>", option);
   console.log("updateQuery =>", updateQuery);
-  const insertLike = await PostTweet.findByIdAndUpdate(id, updateQuery);
-  console.log("user =>", user);
-  console.log("Updated user =>", req.session.user);
+  const foundUser = await User.findById(id)
+  console.log('found=>',foundUser)
+  // const insertLike = await PostTweet.findByIdAndUpdate(id, updateQuery);
+  // console.log("user =>", user);
+  // console.log("Updated user =>", req.session.user);
   // console.log('insertLike =>',insertLike);
   status(200).json({ message: "hi" });
 };
