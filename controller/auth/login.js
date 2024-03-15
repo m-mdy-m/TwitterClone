@@ -25,11 +25,17 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       return badRequest("Username or email is required for login.");
     } // Find user by username and email
     const user = await User.findOne({ username: username, email: email });
-    if( req.user._id.toString() === user._id.toString()){
+    // Check if the request already has a user logged in
+    if (req.user) {
+      // Check if the found user matches the logged-in user
+      const isSameUser = req.user._id.toString() === foundUser._id.toString();
+      // If it's the same user, return a response indicating they're already logged in
+      if (isSameUser) {
         return status(200).json({
           success: false,
           message: "You are already logged in.",
         });
+      }
     }
     // Check if user exists
     if (!user) {
@@ -51,6 +57,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       message: "Logged in successfully.",
     });
   } catch (error) {
+    console.log("error =>", error);
     internalServerError("Internal server error. Please try again later.");
   }
 };

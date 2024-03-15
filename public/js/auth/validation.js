@@ -32,6 +32,7 @@ export async function handleSubmit(e, submitUrl) {
         handleNotSuccess(response.data);
       }
     } catch (error) {
+      console.log('error =>',error);
       // Handle any errors that occur during the form submission process
       handleServerError(error);
     }

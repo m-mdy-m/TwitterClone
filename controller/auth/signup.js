@@ -24,7 +24,7 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
       // Check if user already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
-      return status(409).json({ success: false, message: 'User already exists.' });
+      return status(409).json({ success: false, message: 'You are already exists.' });
     } else {
         // Hash the password securely
         const hashedPassword = await bcryptjs().hash(password, 10);
