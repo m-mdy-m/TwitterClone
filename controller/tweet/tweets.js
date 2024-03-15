@@ -64,13 +64,17 @@ exports.putLike = async (req, { status, getJsonHandler }) => {
   const { success } = getJsonHandler();
   const id = req.param("id");
   const user = req.user;
-  const tweet = PostTweet.findById(id)
-  const isLike = isIdLiked([tweet,user],id)
+  const tweet = PostTweet.findById(id);
+  const isLike = isIdLiked([tweet, user], id);
   const option = isLike ? "$pull" : "$addToSet";
   const { query, updateQuery } = createQueries(option, user.id, id);
-  req.session.user = await User.findByIdAndUpdate(user, updateQuery, {new: true});
-  const insertTweet = await PostTweet.findByIdAndUpdate(id, query, {new: true});
-  console.log('req.session.user =>',req.session.user)
-  console.log('insertTweet =>',insertTweet)
+  req.session.user = await User.findByIdAndUpdate(user, updateQuery, {
+    new: true,
+  });
+  const insertTweet = await PostTweet.findByIdAndUpdate(id, query, {
+    new: true,
+  });
+  console.log("req.session.user =>", req.session.user);
+  console.log("insertTweet =>", insertTweet);
   success("Operation successful");
 };
