@@ -1,6 +1,8 @@
+import { getStatusTweet } from "../../common/fetchTweet.js";
 import { Icon } from "./Icon.js";
 const styleIcon ='w-5 h-5'
 export function ActionButtons() {
+  const {like,ReTweet} = getStatusTweet()
   return `
       <div class="flex w-full justify-start items-center pt-3 px-2 text-white [&>*]:cursor-pointer">
          ${Icon({src:'nav/chat-comment.svg',alt: 'Comment',className:'flex items-center',styleIcon , id: 'commentIcon',})}

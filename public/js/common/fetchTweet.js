@@ -51,8 +51,11 @@ export async function fetchLike(id) {
     const header = await getCSRFHeader();
     const response = await axios.put(`/api/like/${id}`, {}, header);
     const countLike = response.data.data.likes.length
-    console.log('countLike=>',countLike);
+    return 
   } catch (error) {
     console.log("error =>", error);
   }
+}
+export function getStatusTweet(){
+  
 }
