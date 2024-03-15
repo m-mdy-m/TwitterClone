@@ -70,6 +70,7 @@ exports.putLike = async (req, { status, getJsonHandler }) => {
   const { query, updateQuery } = createQueries(option, user.id, id);
   req.session.user = await User.findByIdAndUpdate(user, updateQuery, {new: true});
   const insertTweet = await PostTweet.findByIdAndUpdate(id, query, {new: true});
-  console.log('tweet =>',insertTweet)
+  console.log('req.session.user =>',req.session.user)
+  console.log('insertTweet =>',insertTweet)
   success("Operation successful");
 };
