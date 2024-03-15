@@ -38,7 +38,6 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
       }
     
   } catch (error) {
-    console.log('error =>',error);
     // Handle other errors (e.g., database error)
     internalServerError(error.message);
   }
