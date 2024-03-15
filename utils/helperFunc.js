@@ -11,4 +11,10 @@ function isIdLiked(array = [], id) {
   }
   return false; // If not found, return false after checking all elements
 }
-module.exports = {isIdLiked,isLikesInclude}
+const createQueries = (option, userId, tweetId) => {
+    const query = { [option]: { likes: userId } };
+    const updateQuery = { [option]: { likes: tweetId } };
+    return { query, updateQuery };
+  };
+
+module.exports = {isIdLiked,isLikesInclude,createQueries}
