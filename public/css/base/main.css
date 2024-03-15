@@ -70,6 +70,34 @@
   right: -2rem;
 }
 
+.right-8 {
+  right: 2rem;
+}
+
+.-right-2 {
+  right: -0.5rem;
+}
+
+.-right-4 {
+  right: -1rem;
+}
+
+.-right-32 {
+  right: -8rem;
+}
+
+.-right-3 {
+  right: -0.75rem;
+}
+
+.-bottom-0 {
+  bottom: -0px;
+}
+
+.-bottom-2 {
+  bottom: -0.5rem;
+}
+
 .z-10 {
   z-index: 10;
 }
