@@ -1,5 +1,5 @@
 import { displayMessage } from "../auth/validation.js";
-import { AddTweet, ShowTweets, iconsHandler } from "../tweets/tweetHandlers.js";
+import { AddTweet, ShowTweets, attachIconClickListeners } from "../tweets/tweetHandlers.js";
 import { getCSRFHeader } from "./handlers.js";
 const msgElm = document.getElementById("msgElm");
 // Function to fetch tweets from the server
@@ -12,7 +12,7 @@ export async function fetchTweets() {
       // Display the fetched tweets
       ShowTweets(response);
       // Handle displaying tweets on the UI as needed
-      iconsHandler()
+      attachIconClickListeners()
     } else {
       // Display error message with error-related color
       displayMessage(msgElm, response.data.error, "#ff6347"); // Error color

@@ -13,7 +13,7 @@ export function AddTweet(response) {
   // Append the rendered tweet template to the wrapper element
   appendTweet("afterbegin", tweetTemplate);
 
-  iconsHandler();
+  attachIconClickListeners();
   // Clear the tweet input field after adding the tweet
   clearTweetInput();
 }
@@ -120,7 +120,7 @@ function getCurrentTimeFormatted(time) {
   }
 }
 // Attaches click event listeners to all elements with the class "icons".
-export function iconsHandler() {
+export function attachIconClickListeners() {
   // Select all elements with the class "icons"
   document.querySelectorAll(".icons").forEach((icon) => {
     // Attach a click event listener to each icon
