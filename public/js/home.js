@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     textarea.addEventListener("blur", showIconOnBlur);
     textarea.addEventListener('input',updateCharCount)
     await fetchTweets()
-    iconsHandler()
 });
 
 
