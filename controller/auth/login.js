@@ -25,7 +25,12 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       return badRequest("Username or email is required for login.");
     } // Find user by username and email
     const user = await User.findOne({ username: username, email: email });
-
+    if( req.user._id.toString() === user._id.toString()){
+        return status(200).json({
+          success: false,
+          message: "You are already logged in.",
+        });
+    }
     // Check if user exists
     if (!user) {
       return notFound("User not found. Please register to create an account.");
