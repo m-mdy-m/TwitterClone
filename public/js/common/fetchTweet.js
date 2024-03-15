@@ -1,5 +1,9 @@
 import { displayMessage } from "../auth/validation.js";
-import { AddTweet, ShowTweets, attachIconClickListeners } from "../tweets/tweetHandlers.js";
+import {
+  AddTweet,
+  ShowTweets,
+  attachIconClickListeners,
+} from "../tweets/tweetHandlers.js";
 import { getCSRFHeader } from "./handlers.js";
 const msgElm = document.getElementById("msgElm");
 // Function to fetch tweets from the server
@@ -12,12 +16,13 @@ export async function fetchTweets() {
       // Display the fetched tweets
       ShowTweets(response);
       // Handle displaying tweets on the UI as needed
-      attachIconClickListeners()
+      attachIconClickListeners();
     } else {
       // Display error message with error-related color
       displayMessage(msgElm, response.data.error, "#ff6347"); // Error color
     }
   } catch (error) {
+    console.log("error +>", error);
     // Handle errors
     if (error.response && error.response.data && error.response.data.error) {
       // Display error message returned from the server
@@ -50,12 +55,13 @@ export async function fetchLike(id) {
   try {
     const header = await getCSRFHeader();
     const response = await axios.put(`/api/like/${id}`, {}, header);
-    const countLike = response.data.data.likes.length
-    return 
+    const countLike = response.data.data.likes.length;
+    return countLike;
+    return;
   } catch (error) {
     console.log("error =>", error);
   }
 }
-export function getStatusTweet(){
+export async function getStatusTweet() {
   
 }
