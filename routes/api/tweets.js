@@ -11,8 +11,11 @@ router.group("/api", (r) => {
   r.setRoute("/tweets").get(getTweets);
 
   // Defining a PUT route for liking a tweet
-  r.setRoute("/like/:id").put(({param}, { status }) => {
-    console.log(param("id"));
+  r.setRoute("/like/:id").put((req, { status }) => {
+    const id = req.param("id")
+    const user = req.user
+    console.log("id=>",id)
+    console.log("user=>",user)
     // Responding with a JSON message
     status(200).json({ message: "hi" });
   });
