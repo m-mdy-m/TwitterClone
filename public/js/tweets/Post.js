@@ -17,7 +17,6 @@ export async function createTweet(val) {
       /// fetch and send data to server
       fetchCreateTweet(data)
     } catch (error) {
-      console.log("error =>", error);
       // Handle errors
       if (error.response && error.response.data && error.response.data.error) {
         // Display error message returned from the server

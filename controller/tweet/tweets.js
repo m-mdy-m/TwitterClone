@@ -63,19 +63,14 @@ exports.getTweets = async (req, res) => {
 exports.putLike = async (req, { status }) => {
   const id = req.param("id");
   const user = req.user;
+  console.log('like =>',user.likes)
   const isLikePost = user.likes && user.likes.includes(id);
   const option = isLikePost ? "$pull" : "$addToSet";
+  console.log('isLikePost=>',isLikePost);
+  console.log('option=>',option);
   // Use computed property names to dynamically set the update operation
   const updateQuery = { [option]: { likes: id } };
-  console.log("user =>", user);
-  console.log("isLikePost =>", isLikePost);
-  console.log("option =>", option);
-  console.log("updateQuery =>", updateQuery);
-  const foundUser = await User.findById(id)
-  console.log('found=>',foundUser)
-  // const insertLike = await PostTweet.findByIdAndUpdate(id, updateQuery);
-  // console.log("user =>", user);
-  // console.log("Updated user =>", req.session.user);
-  // console.log('insertLike =>',insertLike);
+  req.session.user = await User.findByIdAndUpdate(id, updateQuery,{new:true});
+  console.log("Updated user =>", req.session.user);
   status(200).json({ message: "hi" });
 };
