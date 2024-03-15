@@ -12,10 +12,10 @@ router.group("/api", (r) => {
 
   // Defining a PUT route for liking a tweet
   r.setRoute("/like/:id").put((req, { status }) => {
-    const id = req.param("id")
-    const user = req.user
-    console.log("id=>",id)
-    console.log("user=>",user)
+    const id = req.param("id");
+    const user = req.user;
+    console.log("id=>", id);
+    console.log("user=>", user);
     // Responding with a JSON message
     status(200).json({ message: "hi" });
   });

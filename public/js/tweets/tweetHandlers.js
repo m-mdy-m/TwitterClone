@@ -31,6 +31,7 @@ export function ShowTweets(response) {
 
     // Append the rendered tweet template to the wrapper element
     appendTweet('beforeend',tweetTemplate);
+    iconsHandler()
   });
 
   // Clear the tweet input field after showing tweets

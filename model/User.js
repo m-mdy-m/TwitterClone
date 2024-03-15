@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   },
   profilePic: {
     type: String,
-    default: "",
+    default: "/assets/images/profilePic.png",
   },
   likes:[{
     type : Schema.ObjectId,
