@@ -70,9 +70,9 @@ exports.putLike = async (req, { status }) => {
   console.log("isLikePost =>", isLikePost);
   console.log("option =>", option);
   console.log("updateQuery =>", updateQuery);
-
-  req.user = await PostTweet.findByIdAndUpdate(id, updateQuery, { new: true });
+  const insertLike = await PostTweet.findByIdAndUpdate(id, updateQuery);
   console.log("user =>", user);
+  console.log("Updated user =>", req.session.user);
   // console.log('insertLike =>',insertLike);
   status(200).json({ message: "hi" });
 };
