@@ -12,10 +12,9 @@ exports.getSignup = (req, { sendFile }) => {
 exports.postSignup = async (req, { getJsonHandler, status }) => {
   const { getBody } = req;
   const { created, validationFailed, internalServerError } = getJsonHandler();
-  const body = getBody();
   try {
     // Extract user input from request body
-    const { username, email, password, passwordConf } = body;
+    const { username, email, password, passwordConf } = getBody();;
     // Validate user input
     if (!isUsername(username) || !isEmail(email) || !isPassword(password) || password !== passwordConf) {
       return validationFailed({ message: 'Invalid input. Please check your username, email, and password.' });

@@ -16,8 +16,7 @@ exports.getLogin = (req, { sendFile }) => {
 // Controller function to handle login form submission
 exports.postLogin = async (req, { status, getJsonHandler }) => {
   const { getBody } = req;
-  const body = getBody();
-  const { username, email, password } = body;
+  const { username, email, password } = getBody();
   const { badRequest, notFound, internalServerError } = getJsonHandler();
   try {
     // Validate if username or email is provided
