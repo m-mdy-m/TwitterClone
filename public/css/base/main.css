@@ -58,6 +58,18 @@
   top: 1.5rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
+.-right-0 {
+  right: -0px;
+}
+
+.-right-8 {
+  right: -2rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -457,6 +469,10 @@
   padding: 0.25rem;
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -584,6 +600,10 @@
   font-size: 8px;
 }
 
+.text-\[5px\] {
+  font-size: 5px;
+}
+
 .font-semibold {
   font-weight: 600;
 }
@@ -628,6 +648,19 @@
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#\] {
+  color: #;
+}
+
+.text-\[\#5c6065\] {
+  --tw-text-opacity: 1;
+  color: rgb(92 96 101 / var(--tw-text-opacity));
+}
+
+.text-\[\] {
+  color: ;
 }
 
 .opacity-0 {
