@@ -66,12 +66,13 @@ exports.putLike = async (req, { status }) => {
   const option = isLikePost ? "$pull" : "$addToSet";
   // Use computed property names to dynamically set the update operation
   const updateQuery = { [option]: { likes: id } };
+  console.log("user =>", user);
+  console.log("isLikePost =>", isLikePost);
+  console.log("option =>", option);
+  console.log("updateQuery =>", updateQuery);
 
-  console.log('user =>',user);
-  console.log('isLikePost =>',isLikePost);
-  console.log('option =>',option);
-  console.log('updateQuery =>',updateQuery);
-
-  const insertLike = await PostTweet.findByIdAndUpdate(id, updateQuery);
+  req.user = await PostTweet.findByIdAndUpdate(id, updateQuery, { new: true });
+  console.log("user =>", user);
+  // console.log('insertLike =>',insertLike);
   status(200).json({ message: "hi" });
 };
