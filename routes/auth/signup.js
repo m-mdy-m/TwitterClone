@@ -1,4 +1,4 @@
-const { Route } = $read("utils/helper");
+const { Route } = $read("utils/HelperXprz");
 const { getSignup, postSignup } = $read("controller/auth/signup");
 const route = new Route();
 // Grouping authentication-related routes under the "/auth" prefix

@@ -1,4 +1,4 @@
-const { Route } = $read("utils/helper");
+const { Route } = $read("utils/HelperXprz");
 // Importing the getLogin and postLogin functions from the login controller
 const { getLogin, postLogin } = $read("controller/auth/login");
 const route = new Route();
