@@ -1,5 +1,5 @@
 import { Icon } from "./Icon.js";
-const styleIcon ='w-4 h-4'
+const styleIcon ='w-5 h-5'
 export function ActionButtons(countLike,countReTweet) {
   return `
       <div class="flex w-full justify-start items-center pt-3 px-2 text-white [&>*]:cursor-pointer">
