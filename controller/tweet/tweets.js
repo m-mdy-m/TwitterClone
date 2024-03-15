@@ -68,7 +68,7 @@ exports.putLike = async (req, { status, getJsonHandler }) => {
   const option = isLikePost ? "$pull" : "$addToSet";
   const updateQuery = { [option]: { likes: id } };
   req.session.user = await User.findByIdAndUpdate(user, updateQuery, {new: true});
-  const insertTweet = await PostTweet.findById(id)
+  const insertTweet = await PostTweet.findByIdAndUpdate(id, { [option]: { likes: user.id } });
   console.log('tweet =>',insertTweet)
   success("Operation successful");
 };
