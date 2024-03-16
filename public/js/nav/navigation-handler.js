@@ -1,4 +1,5 @@
 import {attachLogoutHandler} from "../auth/logout.js";
+import { clearWelcomePhotoFlag, showWelcome } from "../utils/utils.js";
 // Function to handle navigation events
 function handleNavigation() {
   const navMobile = document.getElementById("nav-mobile");
@@ -30,8 +31,8 @@ function handleNavigation() {
   });
 }
 // Function to execute components on document load
-export function onDocumentLoad() {
-  const shouldDisplayWelcomePhoto = localStorage.getItem("showWelcomePhoto");
+export function initializeComponentsNavigation() {
+  const showWelcomePhotoFlag = showWelcome()
 
   // Initialize logout functionality
   const btnLogout = document.querySelector(".logout");
@@ -41,13 +42,13 @@ export function onDocumentLoad() {
   handleNavigation();
 
   // Optionally display welcome photo
-  if (shouldDisplayWelcomePhoto) {
+  if (showWelcomePhotoFlag) {
     document.querySelectorAll(".welcome-user").forEach((el) => {
       el.style.display = "block";
     });
     // Optionally, set an expiry for the flag after 10 minutes
     setTimeout(() => {
-      localStorage.removeItem("showWelcomePhoto");
+      clearWelcomePhotoFlag()
       document.querySelectorAll(".welcome-user").forEach((el) => {
         el.style.display = "none";
       });

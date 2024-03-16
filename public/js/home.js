@@ -2,12 +2,12 @@ import { formHandler } from "./auth/formHandler.js";
 import { isAuth } from "./common/Storage.js";
 import { fetchTweets } from "./common/fetchTweet.js";
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
-import { onDocumentLoad } from "./nav/navigation-handler.js";
+import { initializeComponentsNavigation } from "./nav/navigation-handler.js";
 import { createTweet } from "./tweets/Post.js";
 import { getPath } from "./utils/utils.js";
 const path = getPath();
 document.addEventListener("DOMContentLoaded", async ()=>{
-    onDocumentLoad()
+    initializeComponentsNavigation()
     // Check if the user is authenticated and the tweet button exists
     if (isAuth()) {
         const tweetButton = document.getElementById("tweetButton");
