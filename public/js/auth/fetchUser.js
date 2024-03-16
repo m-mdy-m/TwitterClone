@@ -1,5 +1,6 @@
 // Function to handle form submission
 import {displayMessage, getCSRFHeader} from "../common/handlers.js";
+import { BodyContent } from "../components/Body.js";
 import { InfoUser } from "../components/navigation/InfoUser.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
@@ -17,6 +18,7 @@ export async function handleSubmit(e, submitUrl) {
       const requestData = Object.fromEntries(formData.entries());
       // Send form data to the server via POST request
       const response = await axios.post(submitUrl, requestData, headers);
+      console.log('response =>',response)
       // Handle server response based on success or failure
       if (response.data.success) {
         // If the server indicates success, handle accordingly

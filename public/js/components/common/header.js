@@ -1,7 +1,7 @@
 import { HeaderNavigation } from "../navigation/header.js";
 import { MobileNavigation } from "../navigation/mobile.js";
 
-export default function Header({ isAuth, profile, username}) {
+export default function Header({ isAuth=false, profile='/assets/images/profilePic.png', username="m__mdy__m"}={}) {
   return `
             <!-- Icon Navigation -->
             <div id="iconNavigation" class="mobile:absolute top-4 left-4 tablet:hidden">
