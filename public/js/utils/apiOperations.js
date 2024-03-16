@@ -63,7 +63,7 @@ export async function getTweets() {
   }
 }
 // Fetch CSRF header and send a POST request to create a tweet
-export async function createTweet(data) {
+export async function tweetCreation(data) {
   // Get CSRF header
   const header = await getCSRFHeader();
   // Send POST request to create tweet with CSRF header

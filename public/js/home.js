@@ -1,6 +1,7 @@
 const { formHandler } = require("./auth/formHandler");
 const { initializeComponentsNavigation } = require("./nav/navigation-handler");
-const { getTweets, createTweet } = require("./utils/apiOperations");
+const { createTweet } = require("./tweets/Post");
+const { getTweets } = require("./utils/apiOperations");
 const { updateCharCount, hideIconOnFocus, showIconOnBlur } = require("./utils/helper");
 const { getPath, isAuth } = require("./utils/utils");
 

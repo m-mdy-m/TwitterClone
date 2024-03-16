@@ -1,7 +1,9 @@
-import { fetchCreateTweet } from "../common/fetchTweet.js";
-import { displayMessage } from "../common/handlers.js";
+import { tweetCreation } from "../utils/apiOperations";
+import { showMessage } from "../utils/helper";
+import { getMsgElement } from "../utils/utils";
+
 // Get the message element from the DOM
-const msgElm = document.getElementById("msgElm");
+const msgElm = getMsgElement()
 // Function to create a tweet
 export async function createTweet(val) {
   // If the tweet data is valid
@@ -15,15 +17,15 @@ export async function createTweet(val) {
         tweet: val.value,
       };
       /// fetch and send data to server
-      fetchCreateTweet(data);
+      tweetCreation(data);
     } catch (error) {
       // Handle errors
       if (error.response && error.response.data && error.response.data.error) {
         // Display error message returned from the server
-        displayMessage(msgElm, error.response.data.error, "#ffd700");
+        showMessage(msgElm, error.response.data.error, "#ffd700");
       } else {
         // Display a generic error message for other errors
-        displayMessage(
+        showMessage(
           msgElm,
           "An unexpected error occurred while creating the tweet. Please try again later.",
           "#cc0000"
@@ -32,6 +34,6 @@ export async function createTweet(val) {
     }
   } else {
     // If the tweet data is invalid, display the error message
-    displayMessage(msgElm, val.message, "#FF0000");
+    showMessage(msgElm, val.message, "#FF0000");
   }
 }
