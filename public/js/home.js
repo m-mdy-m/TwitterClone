@@ -22,10 +22,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
             textarea.addEventListener('input', updateCharCount);
         }
         const header = document.querySelector('header')
-        console.log('header=>',header);
         const {username,profilePic} = await getUserInfo()
-        console.log('username=>',username);
-        console.log('profilePic=>',profilePic);
         header.innerHTML = Header({profile:profilePic,username})
     }
     // Fetch tweets if the path is not /auth/signup or /auth/login
