@@ -67,18 +67,20 @@ export async function getUserInfo(){
 // Function to fetch tweets from the API
 export async function getTweets() {
   try {
-    // Make a GET request to fetch tweets
-    const response = await axios.get("/api/tweets");
-    const info = await getUserInfo()
+    // Make asynchronous calls to fetch tweets and user information in parallel
+    const [tweetsResponse, userInfo] = await Promise.all([
+      axios.get("/api/tweets"),
+      getUserInfo(),
+    ]);
     // Check if the request was successful
-    if (response.data.success) {
+    if (tweetsResponse.data.success) {
       // Display the fetched tweets
-      ShowTweets(response,info);
+      ShowTweets(tweetsResponse,userInfo);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {
       // Display error message with error-related color
-      showMessage(msgElm, response.data.error, "#ff6347"); // Error color
+      showMessage(msgElm, tweetsResponse.data.error, "#ff6347"); // Error color
     }
   } catch (error) {
     // Handle errors
@@ -97,14 +99,14 @@ export async function getTweets() {
 }
 // Function to create a tweet
 export async function tweetCreation(data) {
-  // Get CSRF header
-  const header = await getCSRFHeader();
-  // Send POST request to create tweet with CSRF header
-  const response = await axios.post("/api/create", data, header);
-  const info = await getUserInfo()
+    // Make asynchronous calls to get the CSRF header and user information in parallel
+    const [header, userInfo] = await Promise.all([getCSRFHeader(), getUserInfo()]);
+
+    // Send a POST request to create a tweet with the obtained CSRF header
+    const response = await axios.post("/api/create", data, header);
     // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
-    AddTweet(response,info);
+    AddTweet(response,userInfo);
   } else {
     // If tweet creation fails, display error message
     showMessage(msgElm, response.data.error, "ffd700");
