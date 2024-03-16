@@ -8,7 +8,6 @@ import { getPath, isAuth } from "./utils/utils.js"
 
 const path = getPath();
 document.addEventListener("DOMContentLoaded", async ()=>{
-    initializeComponentsNavigation()
     // Check if the user is authenticated and the tweet button exists
     if (isAuth()) {
         const tweetButton = document.getElementById("tweetButton");
@@ -24,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
         const header = document.querySelector('header')
         const {username,profilePic} = await getUserInfo()
         header.innerHTML = Header({profile:profilePic,username})
+        initializeComponentsNavigation()
     }
     // Fetch tweets if the path is not /auth/signup or /auth/login
     if (!['/auth/signup', '/auth/login'].includes(path)) {

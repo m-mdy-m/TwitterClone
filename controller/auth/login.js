@@ -2,7 +2,7 @@ const Xprz = require("xprz");
 const path = require("path");
 
 const { Package } = new Xprz();
-const { bcryptjs } = new Package();
+const { bcryptjs,jwt } = new Package();
 const User = $read("model/User");
 // Controller function to render the login page
 exports.getLogin = (req, { sendFile }) => {
@@ -36,6 +36,8 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       return badRequest("Username or email is required for login.");
     } // Find user by username and email
     const user = await User.findOne({ username: username, email: email });
+
+
     // Check if the request already has a user logged in
     if (req.user) {
       // Check if the found user matches the logged-in user
@@ -60,10 +62,12 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
         error: "Incorrect password. Please try again.",
       });
     }
+    const token = jwt().jwtSign({userId:user._id},process.env.JWT_SECRET)
+    req.session.token = token
     // Set user session
     req.session.user = user;
     // Send success response
-    return updated(user);
+    return updated({token,user});
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }

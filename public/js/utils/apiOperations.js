@@ -40,6 +40,7 @@ export async function authenticateUser(url, requestData, header, form) {
 export async function logoutUser(header) {
   // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
   const logoutResponse = await axios.post("/auth/logout", {}, header);
+  console.log('logoutResponse =>',logoutResponse);
   // Check if the logout request is successful
   if (logoutResponse.status === 200 && logoutResponse.data.success) {
     // Redirect the user to the login page
