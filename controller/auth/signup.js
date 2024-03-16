@@ -2,7 +2,7 @@ const { isPassword, isEmail, isUsername } = require("vfyjs");
 const Xprz = require("xprz");
 const path = require("path");
 const { Package } = new Xprz();
-const { bcryptjs } = new Package();
+const { bcryptjs, jwt  } = new Package();
 const User = $read("model/User");
 // Controller function to render the signup page
 exports.getSignup = (req, { sendFile }) => {
@@ -32,9 +32,11 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
           email: email,
           password: hashedPassword,
         });
-        req.session.user = newUser ;
+        // Generate JWT token with user information
+        const token = jwt().jwtSign({userId: newUser._id,username : newUser.username,email:newUser.email}, process.env.JWT_SECRET)
+        req.session.user = token ;
         // Send success response
-        return created({username:newUser.username});
+        return created({token});
       }
     
   } catch (error) {

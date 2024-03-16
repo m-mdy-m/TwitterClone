@@ -25,7 +25,7 @@ export async function authenticateUser(url, requestData, header, form) {
   // Handle server response based on success or failure
   if (response.data.success) {
     const user = response.data.data;
-    saveToken(user.token)
+    saveToken(user.token); // Save token to cookie
     // If the server indicates success, handle accordingly
     handleSuccess(form, response.data.message);
     // Set the 'showWelcomePhoto' flag to 'true' in localStorage
@@ -40,7 +40,7 @@ export async function authenticateUser(url, requestData, header, form) {
 export async function logoutUser(header) {
   // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
   const logoutResponse = await axios.post("/auth/logout", {}, header);
-  console.log('logoutResponse =>',logoutResponse);
+  console.log("logoutResponse =>", logoutResponse);
   // Check if the logout request is successful
   if (logoutResponse.status === 200 && logoutResponse.data.success) {
     // Redirect the user to the login page
@@ -48,7 +48,7 @@ export async function logoutUser(header) {
     // Clear localStorage flags
     clearWelcomePhotoFlag();
     clearAuth();
-    removeToken()
+    removeToken();
   } else {
     // If the logout process fails, display an error message
     const message = logoutResponse.data.message;

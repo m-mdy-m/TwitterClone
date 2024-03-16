@@ -62,12 +62,11 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       });
     }
     // If authentication is successful, generate a JWT token
-    const token = jwt().jwtSign({ userId: user._id }, process.env.JWT_SECRET);
+    const token = jwt().jwtSign({ user:user }, process.env.JWT_SECRET);
     // Set user session
     req.session.token = token;
-    req.session.user = user;
     // Send success response
-    return updated({ token, user });
+    return updated({ token });
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
