@@ -1,4 +1,6 @@
 import Header from "../components/common/header.js";
+import { showMessage } from "../utils/helper.js";
+import { getMsgElement } from "../utils/utils.js";
 import getCSRFToken from "./getCSRFToken.js";
 // DOM elements
 const charCount = document.getElementById("charCount");
@@ -53,10 +55,7 @@ export function validateTweet(tweet) {
   // If all checks pass, the tweet is considered valid
   return { valid: true, value: value };
 }
-// get Id Tweet from element
-export function getId(el) {
-  return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
-}
+
 export async function getCSRFHeader() {
   // Fetch CSRF token
   const csrfToken = await getCSRFToken();

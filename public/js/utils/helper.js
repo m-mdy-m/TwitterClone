@@ -88,3 +88,7 @@ export function showIconOnBlur(e) {
   iconElement.style.opacity = 1;
   iconElement.style.zIndex = 1;
 }
+// get Id Tweet from element
+export function getId(el) {
+  return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
+}
