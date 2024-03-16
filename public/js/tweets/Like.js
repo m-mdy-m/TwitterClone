@@ -1,5 +1,5 @@
-import { toggleLike } from "../utils/apiOperations";
-import { getId } from "../utils/helper";
+import { toggleLike } from "../utils/apiOperations.js";
+import { getId } from "../utils/helper.js";
 
 export async function handleClick(event) {
   const elm = event.target;
