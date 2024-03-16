@@ -1,6 +1,23 @@
-import {AddTweet,ShowTweets,attachIconClickListeners,} from "../tweets/tweetHandlers.js";
-import {getCSRFHeader,handleNotSuccess,handleSuccess,showMessage,} from "./helper.js";
-import {clearAuth,clearWelcomePhotoFlag,getMsgElement,getUsernameFromCookie,removeUsernameCookie,saveUsernameInCookie,setItem,} from "./utils.js";
+import {
+  AddTweet,
+  ShowTweets,
+  attachIconClickListeners,
+} from "../tweets/tweetHandlers.js";
+import {
+  getCSRFHeader,
+  handleNotSuccess,
+  handleSuccess,
+  showMessage,
+} from "./helper.js";
+import {
+  clearAuth,
+  clearWelcomePhotoFlag,
+  getMsgElement,
+  getUsernameFromCookie,
+  removeUsernameCookie,
+  saveUsernameInCookie,
+  setItem,
+} from "./utils.js";
 const msgElm = getMsgElement();
 // Function to Signup or Login user
 export async function authenticateUser(url, requestData, header, form) {
@@ -8,7 +25,7 @@ export async function authenticateUser(url, requestData, header, form) {
   // Handle server response based on success or failure
   if (response.data.success) {
     const user = response.data.data;
-    saveUsernameInCookie(user.username)
+    saveUsernameInCookie(user.username);
     // If the server indicates success, handle accordingly
     handleSuccess(form, response.data.message);
     // Set the 'showWelcomePhoto' flag to 'true' in localStorage
@@ -30,7 +47,7 @@ export async function logoutUser(header) {
     // Clear localStorage flags
     clearWelcomePhotoFlag();
     clearAuth();
-    removeUsernameCookie()
+    removeUsernameCookie();
   } else {
     // If the logout process fails, display an error message
     const message = logoutResponse.data.message;
@@ -42,24 +59,27 @@ export async function logoutUser(header) {
  * Retrieves user information based on the username obtained from the cookie.
  * @returns {Promise<object>} A Promise that resolves to an object containing user information.
  */
-export async function getUserInfo(){
+export async function getUserInfo() {
   try {
     // Get the username from the cookie
     const username = getUsernameFromCookie();
-    if(!username){
-      showMessage(msgElm,'Username not found in the cookie', '#FF6347')
+    if (!username) {
+      showMessage(msgElm, "Username not found in the cookie", "#FF6347");
     }
     // Make a GET request to fetch user information
     const response = await axios.get(`/api/user/${username}`);
-
     // Extract relevant data from the response
     const { email, likes, profilePic } = response.data.data;
 
     // Return user information
-    return { email, likes, profilePic,username };
+    return { email, likes, profilePic, username };
   } catch (error) {
     // Handle errors
-    showMessage(msgElm,'Failed to fetch user data. Please try again later.', '#FF6347')
+    showMessage(
+      msgElm,
+      "Failed to fetch user data. Please try again later.",
+      "#FF6347"
+    );
   }
 }
 
@@ -74,7 +94,7 @@ export async function getTweets() {
     // Check if the request was successful
     if (tweetsResponse.data.success) {
       // Display the fetched tweets
-      ShowTweets(tweetsResponse,userInfo);
+      ShowTweets(tweetsResponse, userInfo);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {
@@ -98,14 +118,17 @@ export async function getTweets() {
 }
 // Function to create a tweet
 export async function tweetCreation(data) {
-    // Make asynchronous calls to get the CSRF header and user information in parallel
-    const [header, userInfo] = await Promise.all([getCSRFHeader(), getUserInfo()]);
+  // Make asynchronous calls to get the CSRF header and user information in parallel
+  const [header, userInfo] = await Promise.all([
+    getCSRFHeader(),
+    getUserInfo(),
+  ]);
 
-    // Send a POST request to create a tweet with the obtained CSRF header
-    const response = await axios.post("/api/create", data, header);
-    // If tweet creation is successful, add the tweet and log the response
+  // Send a POST request to create a tweet with the obtained CSRF header
+  const response = await axios.post("/api/create", data, header);
+  // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
-    AddTweet(response,userInfo);
+    AddTweet(response, userInfo);
   } else {
     // If tweet creation fails, display error message
     showMessage(msgElm, response.data.error, "ffd700");
@@ -114,12 +137,12 @@ export async function tweetCreation(data) {
 // Function to toggle like on a tweet
 export async function toggleLike(id) {
   try {
-      const header = await getCSRFHeader();
-      const response = await axios.put(`/api/like/${id}`, {}, header);
-      console.log("response =>", response);
-      const countLike = response.data.data.likes.length;
-      return countLike;
+    const header = await getCSRFHeader();
+    const response = await axios.put(`/api/like/${id}`, {}, header);
+    console.log("response =>", response);
+    const countLike = response.data.data.likes.length;
+    return countLike;
   } catch (error) {
-      console.log("error =>", error);
+    console.log("error =>", error);
   }
 }
