@@ -1,6 +1,6 @@
 import { isAuth } from "../../utils/utils.js";
-import { HeaderNavigation } from "../navigation/header.js";
-import { MobileNavigation } from "../navigation/mobile.js";
+import { Menu } from "../navigation/menu.js";
+import { InformationUser } from "../navigation/InformationUser.js";
 export default function Header({  profile='/assets/images/profilePic.png', username="m__mdy__m",}={}) {
   return `
             <!-- Icon Navigation -->
@@ -16,7 +16,7 @@ export default function Header({  profile='/assets/images/profilePic.png', usern
                         <path d="M6.34311 14.8284C5.56206 15.6094 5.56206 16.8758 6.34311 17.6568C7.12416 18.4379 8.39049 18.4379 9.17154 17.6568L12 14.8284L14.8284 17.6568C15.6094 18.4379 16.8758 18.4379 17.6568 17.6568C18.4379 16.8758 18.4379 15.6094 17.6568 14.8284L14.8284 12L17.6568 9.17154C18.4379 8.39049 18.4379 7.12416 17.6568 6.34311C16.8758 5.56206 15.6094 5.56206 14.8284 6.34311L12 9.17154L9.17154 6.34311C8.39049 5.56206 7.12416 5.56206 6.34311 6.34311C5.56206 7.12416 5.56206 8.39049 6.34311 9.17154L9.17154 12L6.34311 14.8284Z" fill="#fff"/>
                     </svg>
                 </div>
-                ${MobileNavigation({ isAuth:isAuth(), profile, username})}
+                ${InformationUser({ isAuth:isAuth(), profile, username})}
                 <!-- Navigation Menu -->
                 <nav id="nav-menu" class="relative flex w-full mt-4 h-full flex-col tablet:space-y-4 mobile:space-y-6 smallTb:space-y-3 tablet:p-0 smallTb:p-2 mobile:p-0 mobile:rounded-lg tablet:rounded-none mobile:shadow-lg tablet:shadow-none mobile:justify-start mobile:items-start">
                     <img src="/assets/icon/profile-utils/clip-342.png" alt="clip-342" class="absolute top-0 hidden left-0 opacity-30 welcome-user">
@@ -25,7 +25,7 @@ export default function Header({  profile='/assets/images/profilePic.png', usern
                         <img src="/assets/icon/nav/home.svg" alt="home" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
                         <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">home</h2>
                     </a>
-                    ${HeaderNavigation({ isAuth:isAuth() })}
+                    ${Menu({ isAuth:isAuth() })}
                 </nav>
             </div>
     `;

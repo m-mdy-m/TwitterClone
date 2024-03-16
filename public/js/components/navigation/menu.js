@@ -1,6 +1,6 @@
 import { GenerateLink } from "./gen/link.js";
 
-export function HeaderNavigation({ isAuth }) {
+export function Menu({ isAuth }) {
   const links = ["notifications", "messages", "setting"];
   const authTemplateMenu = `
     ${GenerateLink(links)}
