@@ -1,13 +1,25 @@
+// Utility function to get the current path of the window
 export const getPath = () => window.location.pathname;
-export const getMsgElement = () => document.getElementById("msgElm");
-export const isAuth = () => localStorage.getItem("logged");
-export const showWelcome = () => localStorage.getItem("showWelcomePhoto");
-export const clearAuth = () => localStorage.removeItem("logged");
-export const setItem = (key,value)=> localStorage.setItem(key,value)
-export const clearWelcomePhotoFlag = () =>
-  localStorage.removeItem("showWelcomePhoto");
 
-// Function to calculate the number of likes for the tweet
+// Utility function to get the message element by ID
+export const getMsgElement = () => document.getElementById("msgElm");
+
+// Utility function to check if the user is authenticated
+export const isAuth = () => localStorage.getItem("logged");
+
+// Utility function to check if the welcome photo should be shown
+export const showWelcome = () => localStorage.getItem("showWelcomePhoto");
+
+// Utility function to clear the authentication flag from localStorage
+export const clearAuth = () => localStorage.removeItem("logged");
+
+// Utility function to set an item in localStorage
+export const setItem = (key, value) => localStorage.setItem(key, value);
+
+// Utility function to clear the welcome photo flag from localStorage
+export const clearWelcomePhotoFlag = () => localStorage.removeItem("showWelcomePhoto");
+
+// Function to calculate the number of likes for a tweet
 export const calculateLikeCount = (tweet) =>
   tweet.likes.length > 0 ? tweet.likes.length : "";
 
@@ -63,13 +75,13 @@ export function getCurrentTimeFormatted(time) {
     return `${formattedDate} • ${formattedTime}`;
   }
 }
+// Function to fetch the CSRF token from the server
 export default async function getCSRFToken() {
-    try {
-      const response = await axios.get("/get-csrf-token");
-      return response.data.csrfToken;
-    } catch (error) {
-      console.error("Error fetching CSRF token:", error);
-      return null;
-    }
+  try {
+    const response = await axios.get("/get-csrf-token");
+    return response.data.csrfToken;
+  } catch (error) {
+    console.error("Error fetching CSRF token:", error);
+    return null;
   }
-  
+}
