@@ -121,6 +121,8 @@ export async function tweetCreation(data) {
     getCSRFHeader(),
     getUserInfo(),
   ]);
+  console.log('header=>',header);
+  console.log('userInfo=>',userInfo);
   // Send a POST request to create a tweet with the obtained CSRF header
   const response = await axios.post("/api/create", data, header);
   // If tweet creation is successful, add the tweet and log the response
