@@ -107,20 +107,31 @@ export function removeToken() {
  * @returns {string|null} The value of the token cookie, or null if the cookie is not found.
  */
 export function getToken() {
-  // Get all cookies
-  const cookies = document.cookie;
-  // Split the cookies string into an array of individual cookies
-  const cookieArray = cookies.split("; ");
-  // Iterate through the array to find the token cookie
-  for (const cookie of cookieArray) {
-      // Split each cookie into its name and value
-      const [name, value] = cookie.split("=");
-      // Check if the cookie is the token cookie
-      if (name === "token") {
-          // Return the value of the token cookie
-          return value;
-      }
+  // Extracts the value of the specified cookie by its name
+  return getCookieValue("token");
+}
+
+/**
+ * Parses the document cookies to find the value of a specific cookie by its name.
+ * @param {string} cookieName - The name of the cookie to retrieve.
+ * @returns {string|null} The value of the specified cookie, or null if the cookie is not found.
+ */
+export function getCookieValue(cookieName) {
+  // Splits the document cookies string into individual cookies
+  const cookies = document.cookie.split("; ");
+  
+  // Iterates through each cookie to find the one with the specified name
+  for (const cookie of cookies) {
+    // Splits each cookie into its name and value parts
+    const [name, value] = cookie.split("=");
+    
+    // Checks if the current cookie's name matches the specified cookie name
+    if (name === cookieName) {
+      // Returns the value of the matched cookie
+      return value;
+    }
   }
-  // If the token cookie is not found, return null
+  
+  // Returns null if the specified cookie is not found
   return null;
 }

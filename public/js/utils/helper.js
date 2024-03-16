@@ -1,4 +1,4 @@
-import getCSRFToken, { getMsgElement } from "./utils.js";
+import getCSRFToken, { getMsgElement, getToken } from "./utils.js";
 
 const msgElm = getMsgElement()
 const iconElement = document.getElementById("icon-tweet");
@@ -99,8 +99,10 @@ export function getId(el) {
   return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
 }
 export async function getCSRFHeader() {
-  // Fetch CSRF token
+  // Fetch CSRF token asynchronously
   const csrfToken = await getCSRFToken();
+  
+  // If CSRF token is missing or invalid, display an error message and return early
   if (!csrfToken) {
     msgElm.style.display = "block";
     showMessage(
@@ -110,13 +112,23 @@ export async function getCSRFHeader() {
     );
     return;
   }
+  
+  // Retrieve JWT token
+  const token = getToken();
+  
+  
+  // Construct headers object including CSRF token and JWT token
   const header = {
     headers: {
       "X-CSRF-Token": csrfToken,
+      Authorization: `Bearer ${token}`
     },
   };
+  
+  // Return the constructed headers object
   return header;
 }
+
 /**
  * Updates the character count display and validates the tweet length.
  * Adjusts styles based on the length and validation status.

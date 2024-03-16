@@ -36,7 +36,6 @@ export function initializeComponentsNavigation() {
 
   // Initialize logout functionality
   const btnLogout = document.querySelector(".logout");
-  console.log('btnLogout=>',btnLogout);
   attachLogoutHandler(btnLogout);
 
   // Handle navigation events
