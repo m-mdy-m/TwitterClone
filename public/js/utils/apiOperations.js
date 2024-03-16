@@ -1,6 +1,6 @@
 import {AddTweet,ShowTweets,attachIconClickListeners,} from "../tweets/tweetHandlers.js";
 import {getCSRFHeader,handleNotSuccess,handleSuccess,showMessage,} from "./helper.js";
-import {clearAuth,clearWelcomePhotoFlag,getMsgElement,getUsernameFromCookie,getUsernameFromCookie,removeUsernameCookie,saveUsernameInCookie,setItem,} from "./utils.js";
+import {clearAuth,clearWelcomePhotoFlag,getMsgElement,getUsernameFromCookie,removeUsernameCookie,saveUsernameInCookie,setItem,} from "./utils.js";
 const msgElm = getMsgElement();
 // Function to Signup or Login user
 export async function authenticateUser(url, requestData, header, form) {
