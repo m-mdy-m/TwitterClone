@@ -1,9 +1,11 @@
+import { formHandler } from "./auth/formHandler.js";
 import { isAuth } from "./common/Storage.js";
 import { fetchTweets } from "./common/fetchTweet.js";
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
 import { onDocumentLoad } from "./nav/navigation-handler.js";
 import { createTweet } from "./tweets/Post.js";
-const path = window.location.pathname
+import { getPath } from "./utils/utils.js";
+const path = getPath();
 document.addEventListener("DOMContentLoaded", async ()=>{
     onDocumentLoad()
     // Check if the user is authenticated and the tweet button exists
@@ -22,6 +24,9 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     // Fetch tweets if the path is not /auth/signup or /auth/login
     if (!['/auth/signup', '/auth/login'].includes(path)) {
         await fetchTweets();
+    }else{
+        const form = document.getElementById("registerForm");
+        formHandler(form,path)
     }
 });
 
