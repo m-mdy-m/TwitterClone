@@ -14,8 +14,8 @@ import {
   clearWelcomePhotoFlag,
   getMsgElement,
   getUsernameFromCookie,
-  removeUsernameCookie,
-  saveUsernameInCookie,
+  removeToken,
+  saveToken,
   setItem,
 } from "./utils.js";
 const msgElm = getMsgElement();
@@ -25,7 +25,7 @@ export async function authenticateUser(url, requestData, header, form) {
   // Handle server response based on success or failure
   if (response.data.success) {
     const user = response.data.data;
-    saveUsernameInCookie(user.username);
+    saveToken(user.token)
     // If the server indicates success, handle accordingly
     handleSuccess(form, response.data.message);
     // Set the 'showWelcomePhoto' flag to 'true' in localStorage
@@ -48,7 +48,7 @@ export async function logoutUser(header) {
     // Clear localStorage flags
     clearWelcomePhotoFlag();
     clearAuth();
-    removeUsernameCookie();
+    removeToken()
   } else {
     // If the logout process fails, display an error message
     const message = logoutResponse.data.message;
