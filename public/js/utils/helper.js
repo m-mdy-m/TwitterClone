@@ -98,7 +98,7 @@ export function showIconOnBlur(e) {
 export function getId(el) {
   return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
 }
-export async function getCSRFHeader() {
+export async function getAuthHeaders() {
   // Fetch CSRF token asynchronously
   const csrfToken = await getCSRFToken();
   
