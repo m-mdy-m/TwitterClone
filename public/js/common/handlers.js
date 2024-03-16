@@ -1,3 +1,4 @@
+import Header from "../components/common/header.js";
 import getCSRFToken from "./getCSRFToken.js";
 
 // DOM elements
@@ -104,5 +105,17 @@ export function displayMessage(element, message, color) {
       element.style.display = "none";
     }, 1000);
   }, 5000);
+  return;
+}
+
+export function upHeader(user) {
+  console.log("user =>", user);
+  const header = document.querySelector("header");
+  if (user) {
+    header.innerHTML = Header({
+      profile: user.profilePic,
+      username: user.username,
+    });
+  }
   return;
 }
