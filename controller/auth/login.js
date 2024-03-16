@@ -23,7 +23,7 @@ exports.getLogin = (req, { sendFile }) => {
 exports.postLogin = async (req, { status, getJsonHandler }) => {
   const { getBody } = req;
   const { username, email, password } = getBody();
-  const { badRequest, notFound, internalServerError } = getJsonHandler();
+  const { badRequest, notFound, internalServerError,updated } = getJsonHandler();
   try {
     // Validate if username or email is provided
     if (!username && !email) {
@@ -57,10 +57,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
     // Set user session
     req.session.user = user;
     // Send success response
-    return status(200).json({
-      success: true,
-      message: "Logged in successfully.",
-    });
+    return updated(user)
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
