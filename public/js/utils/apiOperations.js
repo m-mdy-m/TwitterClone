@@ -1,6 +1,6 @@
 import {AddTweet,ShowTweets,attachIconClickListeners,} from "../tweets/tweetHandlers.js";
 import {getCSRFHeader,handleNotSuccess,handleSuccess,showMessage,} from "./helper.js";
-import {clearAuth,clearWelcomePhotoFlag,getMsgElement,setItem,} from "./utils.js";
+import {clearAuth,clearWelcomePhotoFlag,getMsgElement,saveUsernameInCookie,setItem,} from "./utils.js";
 const msgElm = getMsgElement();
 // Function to Signup or Login user
 export async function authenticateUser(url, requestData, header, form) {
@@ -8,6 +8,8 @@ export async function authenticateUser(url, requestData, header, form) {
   // Handle server response based on success or failure
   if (response.data.success) {
     const user = response.data.data;
+    console.log('user =>',user)
+    // saveUsernameInCookie(user.username)
     // If the server indicates success, handle accordingly
     handleSuccess(form, response.data.message);
     // Set the 'showWelcomePhoto' flag to 'true' in localStorage
