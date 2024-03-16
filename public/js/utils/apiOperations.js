@@ -23,7 +23,6 @@ const msgElm = getMsgElement();
 export async function authenticateUser(url, requestData, header, form) {
   const response = await axios.post(url, requestData, header);
   // Handle server response based on success or failure
-  console.log('response=>',response);
   if (response.data.success) {
     const user = response.data.data;
     saveUsernameInCookie(user.username);

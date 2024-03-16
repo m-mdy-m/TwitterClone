@@ -88,39 +88,39 @@ export default async function getCSRFToken() {
 
 
 /**
- * Saves the username in a cookie.
- * @param {string} username - The username to be saved in the cookie.
+ * Saves the token in a cookie.
+ * @param {string} token - The token to be saved in the cookie.
  */
-export function saveUsernameInCookie(username) {
-    // Set the username in a cookie
-    document.cookie = `username=${username}; path=/`;
+export function saveToken(token) {
+  // Set the token in a cookie
+  document.cookie = `token=${token}; path=/;`;
 }
 /**
- * Removes the username cookie.
+ * Removes the token cookie.
  */
-export function removeUsernameCookie() {
+export function removeToken() {
     // Set the expiration date to a past time
-    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 /**
- * Retrieves the value of the username cookie.
- * @returns {string|null} The value of the username cookie, or null if the cookie is not found.
+ * Retrieves the value of the token cookie.
+ * @returns {string|null} The value of the token cookie, or null if the cookie is not found.
  */
-export function getUsernameFromCookie() {
+export function getToken() {
   // Get all cookies
   const cookies = document.cookie;
   // Split the cookies string into an array of individual cookies
   const cookieArray = cookies.split("; ");
-  // Iterate through the array to find the username cookie
+  // Iterate through the array to find the token cookie
   for (const cookie of cookieArray) {
       // Split each cookie into its name and value
       const [name, value] = cookie.split("=");
-      // Check if the cookie is the username cookie
-      if (name === "username") {
-          // Return the value of the username cookie
+      // Check if the cookie is the token cookie
+      if (name === "token") {
+          // Return the value of the token cookie
           return value;
       }
   }
-  // If the username cookie is not found, return null
+  // If the token cookie is not found, return null
   return null;
 }
