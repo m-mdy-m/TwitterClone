@@ -1,13 +1,13 @@
+import { isAuth } from "./common/Storage.js";
 import { fetchTweets } from "./common/fetchTweet.js";
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
 import { onDocumentLoad } from "./nav/navigation-handler.js";
 import { createTweet } from "./tweets/Post.js";
-const isAuth = localStorage.getItem('logged')
 const path = window.location.pathname
 document.addEventListener("DOMContentLoaded", async ()=>{
     onDocumentLoad()
     // Check if the user is authenticated and the tweet button exists
-    if (isAuth) {
+    if (isAuth()) {
         const tweetButton = document.getElementById("tweetButton");
         if (tweetButton) {
             const textarea = document.getElementById("tweetInput");
