@@ -1,7 +1,8 @@
 import { formHandler } from "./auth/formHandler.js"
+import { BodyContent } from "./components/Body.js"
 import { initializeComponentsNavigation } from "./nav/navigation-handler.js"
 import { createTweet } from "./tweets/Post.js"
-import { getTweets } from "./utils/apiOperations.js"
+import { getTweets, getUserInfo } from "./utils/apiOperations.js"
 import { updateCharCount, hideIconOnFocus, showIconOnBlur } from "./utils/helper.js"
 import { getPath, isAuth } from "./utils/utils.js"
 
