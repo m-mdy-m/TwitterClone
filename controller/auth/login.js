@@ -62,9 +62,10 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
         error: "Incorrect password. Please try again.",
       });
     }
+    // If authentication is successful, generate a JWT token
     const token = jwt().jwtSign({userId:user._id},process.env.JWT_SECRET)
-    req.session.token = token
     // Set user session
+    req.session.token = token
     req.session.user = user;
     // Send success response
     return updated({token,user});
