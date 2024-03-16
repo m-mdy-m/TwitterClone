@@ -2,7 +2,6 @@ import { HeaderNavigation } from "../navigation/header.js";
 import { MobileNavigation } from "../navigation/mobile.js";
 const isAuth = localStorage.getItem("logged");
 export default function Header({  profile='/assets/images/profilePic.png', username="m__mdy__m",id=''}={}) {
-        console.log('id header =>',id);
   return `
             <!-- Icon Navigation -->
             <div id="iconNavigation" class="mobile:absolute top-4 left-4 tablet:hidden">

@@ -91,7 +91,7 @@ export async function getCSRFHeader() {
 }
 // Function to display messages
 export function displayMessage(element, message, color) {
-  element.style.display = 'block';
+  element.style.display = "block";
   // Set background color of message element
   element.style.background = color;
   // Set opacity of message element
@@ -101,7 +101,7 @@ export function displayMessage(element, message, color) {
   setTimeout(() => {
     element.style.opacity = 0;
     setTimeout(() => {
-      element.style.display = 'none';
+      element.style.display = "none";
     }, 1000);
   }, 5000);
   return;
