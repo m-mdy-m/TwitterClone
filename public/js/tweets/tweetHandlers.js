@@ -43,7 +43,7 @@ function renderTweet(tweet) {
   const { postedBy, content, createdAt, _id, likes } = tweet;
   const { username, profilePic} = postedBy;
   // Calculate the number of likes for the tweet
-  const likeCount = likes.length;
+  const likeCount = likes.length > 0 ? likes.length : "";
 
   // Determine if the current user has liked the tweet
   const currentUserLikedTweet = likes.some(like => like === _id);
