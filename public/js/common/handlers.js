@@ -1,10 +1,9 @@
 import Header from "../components/common/header.js";
 import getCSRFToken from "./getCSRFToken.js";
 // DOM elements
-const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
 const maxLength = 300;
-const msgElm = document.getElementById("msgElm");
+const msgElm = getMsgElement()
 /**
  * Updates the character count display and validates the tweet length.
  * Adjusts styles based on the length and validation status.
@@ -29,19 +28,7 @@ export function updateCharCount(e) {
   }
 }
 
-// Function to hide the icon when textarea is focused
-export function hideIconOnFocus(e) {
-  const textarea = e.target;
-  iconElement.style.opacity = 0;
-  iconElement.style.zIndex = -10;
-}
 
-// Function to show the icon when textarea loses focus
-export function showIconOnBlur(e) {
-  const textarea = e.target;
-  iconElement.style.opacity = 1;
-  iconElement.style.zIndex = 1;
-}
 /**
  * Validates the tweet, checking for empty, excessive length, and other criteria.
  * Returns an object with the validity status and an error message if applicable.

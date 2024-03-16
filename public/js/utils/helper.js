@@ -1,4 +1,7 @@
-const msgElm = document.getElementById("msgElm");
+import { getMsgElement } from "./utils";
+
+const msgElm = getMsgElement()
+const iconElement = document.getElementById("icon-tweet");
 // Function to handle unsuccessful form submission
 export function handleNotSuccess(data) {
   // Add error message styling to message element
@@ -71,4 +74,17 @@ export function showMessage(element, message, color) {
     }, 1000);
   }, 5000);
   return;
+}
+// Function to hide the icon when textarea is focused
+export function hideIconOnFocus(e) {
+  const textarea = e.target;
+  iconElement.style.opacity = 0;
+  iconElement.style.zIndex = -10;
+}
+
+// Function to show the icon when textarea loses focus
+export function showIconOnBlur(e) {
+  const textarea = e.target;
+  iconElement.style.opacity = 1;
+  iconElement.style.zIndex = 1;
 }
