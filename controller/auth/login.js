@@ -12,6 +12,12 @@ exports.getLogin = (req, { sendFile }) => {
  *  username : Ads242sxz
  * email : mahdimamashli1383@gmail.com
  * password : Asd24242@4
+ * 
+ * : user 2 
+ * 
+ * username : "Mahdi1383"
+ * email : sdma@gmail.com
+ * password : Mdy_mmshly1383
  */
 // Controller function to handle login form submission
 exports.postLogin = async (req, { status, getJsonHandler }) => {

@@ -16,7 +16,6 @@ export async function handleSubmit(e, submitUrl) {
       const requestData = Object.fromEntries(formData.entries());
       // Send form data to the server via POST request
       const response = await axios.post(submitUrl, requestData, headers);
-      console.log('response =>',response)
       // Handle server response based on success or failure
       if (response.data.success) {
         // If the server indicates success, handle accordingly

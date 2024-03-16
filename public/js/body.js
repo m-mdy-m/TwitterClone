@@ -6,6 +6,8 @@ const routes = {
     classMsgError: "absolute top-4 left-[25%]",
     height: "full",
   },
+  "/auth/signup": {},
+  "/auth/login": {},
 };
 const path = window.location.pathname;
 const route = routes[path];
