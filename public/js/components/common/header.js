@@ -1,4 +1,4 @@
-import { isAuth } from "../../common/Storage.js";
+import { isAuth } from "../../utils/utils.js";
 import { HeaderNavigation } from "../navigation/header.js";
 import { MobileNavigation } from "../navigation/mobile.js";
 export default function Header({  profile='/assets/images/profilePic.png', username="m__mdy__m",}={}) {
@@ -25,7 +25,7 @@ export default function Header({  profile='/assets/images/profilePic.png', usern
                         <img src="/assets/icon/nav/home.svg" alt="home" class="tablet:images__icons-nav mobile:w-7 mobile:h-7 smallTb:w-8 smallTb:h-8">
                         <h2 class="text-lg font-semibold text-white capitalize mobile:text-base smallTb:text-lg">home</h2>
                     </a>
-                    ${HeaderNavigation({ isAuth })}
+                    ${HeaderNavigation({ isAuth:isAuth() })}
                 </nav>
             </div>
     `;

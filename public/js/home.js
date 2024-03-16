@@ -1,9 +1,9 @@
-const { formHandler } = require("./auth/formHandler");
-const { initializeComponentsNavigation } = require("./nav/navigation-handler");
-const { createTweet } = require("./tweets/Post");
-const { getTweets } = require("./utils/apiOperations");
-const { updateCharCount, hideIconOnFocus, showIconOnBlur } = require("./utils/helper");
-const { getPath, isAuth } = require("./utils/utils");
+import { formHandler } from "./auth/formHandler.js"
+import { initializeComponentsNavigation } from "./nav/navigation-handler.js"
+import { createTweet } from "./tweets/Post.js"
+import { getTweets } from "./utils/apiOperations.js"
+import { updateCharCount, hideIconOnFocus, showIconOnBlur } from "./utils/helper.js"
+import { getPath, isAuth } from "./utils/utils.js"
 
 const path = getPath();
 document.addEventListener("DOMContentLoaded", async ()=>{
