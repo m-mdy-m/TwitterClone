@@ -35,33 +35,34 @@ export async function logoutUser(header) {
       showMessage(msgElm, message, "#944E63");
   }
 }
+// Function to fetch tweets from the API
 export async function getTweets() {
   try {
-    // Make a GET request to fetch tweets
-    const response = await axios.get("/api/tweets");
-    // Check if the request was successful
-    if (response.data.success) {
-      // Display the fetched tweets
-      ShowTweets(response);
-      // Handle displaying tweets on the UI as needed
-      attachIconClickListeners();
-    } else {
-      // Display error message with error-related color
-      showMessage(msgElm, response.data.error, "#ff6347"); // Error color
-    }
+      // Make a GET request to fetch tweets
+      const response = await axios.get("/api/tweets");
+      // Check if the request was successful
+      if (response.data.success) {
+          // Display the fetched tweets
+          ShowTweets(response);
+          // Handle displaying tweets on the UI as needed
+          attachIconClickListeners();
+      } else {
+          // Display error message with error-related color
+          showMessage(msgElm, response.data.error, "#ff6347"); // Error color
+      }
   } catch (error) {
-    // Handle errors
-    if (error.response && error.response.data && error.response.data.error) {
-      // Display error message returned from the server
-      showMessage(msgElm, error.response.data.error, "#ffd700");
-    } else {
-      // Display a generic error message for other errors
-      showMessage(
-        msgElm,
-        "An unexpected error occurred while creating the tweet. Please try again later.",
-        "#cc0000"
-      );
-    }
+      // Handle errors
+      if (error.response && error.response.data && error.response.data.error) {
+          // Display error message returned from the server
+          showMessage(msgElm, error.response.data.error, "#ffd700");
+      } else {
+          // Display a generic error message for other errors
+          showMessage(
+              msgElm,
+              "An unexpected error occurred while creating the tweet. Please try again later.",
+              "#cc0000"
+          );
+      }
   }
 }
 // Fetch CSRF header and send a POST request to create a tweet
