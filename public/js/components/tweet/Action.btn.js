@@ -1,8 +1,6 @@
 import { Icon } from "./Icon.js";
 const styleIcon ='w-5 h-5'
-export function ActionButtons({ likeCount = null, retweetCount = null }) {
-   console.log('likeCount=>',likeCount);
-   console.log('retweetCount=>',retweetCount);
+export function ActionButtons( likeCount='', retweetCount='' ) {
   return `
       <div class="flex w-full justify-start items-center pt-3 px-2 text-white [&>*]:cursor-pointer">
          ${Icon({src:'nav/chat-comment.svg',alt: 'Comment',className:'flex items-center',styleIcon , id: 'commentIcon',})}

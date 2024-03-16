@@ -4,7 +4,8 @@ import { ActionButtons } from "../components/tweet/Action.btn.js";
 
 // Handles the click event on icons.
 export async function handleClick(event) {
-  const id = getId(event.target);
+  const elm = event.target
+  const id = getId(elm);
   const count = await fetchLike(id);
-  ActionButtons({likeCount:count});
-}
+  console.log('elm +>',elm);
+} 
