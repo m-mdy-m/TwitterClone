@@ -92,3 +92,22 @@ export function showIconOnBlur(e) {
 export function getId(el) {
   return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
 }
+export async function getCSRFHeader() {
+  // Fetch CSRF token
+  const csrfToken = await getCSRFToken();
+  if (!csrfToken) {
+    msgElm.style.display = "block";
+    showMessage(
+      msgElm,
+      "Unable to create tweet. CSRF token is missing or invalid.",
+      "#ff6347"
+    );
+    return;
+  }
+  const header = {
+    headers: {
+      "X-CSRF-Token": csrfToken,
+    },
+  };
+  return header;
+}

@@ -55,34 +55,3 @@ export function validateTweet(tweet) {
   // If all checks pass, the tweet is considered valid
   return { valid: true, value: value };
 }
-
-export async function getCSRFHeader() {
-  // Fetch CSRF token
-  const csrfToken = await getCSRFToken();
-  if (!csrfToken) {
-    msgElm.style.display = "block";
-    showMessage(
-      msgElm,
-      "Unable to create tweet. CSRF token is missing or invalid.",
-      "#ff6347"
-    );
-    return;
-  }
-  const header = {
-    headers: {
-      "X-CSRF-Token": csrfToken,
-    },
-  };
-  return header;
-}
-export function upHeader(user) {
-  console.log("user =>", user);
-  const header = document.querySelector("header");
-  if (user) {
-    header.innerHTML = Header({
-      profile: user.profilePic,
-      username: user.username,
-    });
-  }
-  return;
-}
