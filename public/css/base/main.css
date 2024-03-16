@@ -580,6 +580,10 @@
   line-height: 1rem;
 }
 
+.text-\[10px\] {
+  font-size: 10px;
+}
+
 .font-semibold {
   font-weight: 600;
 }
