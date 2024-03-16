@@ -21,7 +21,6 @@ export async function fetchTweets() {
       displayMessage(msgElm, response.data.error, "#ff6347"); // Error color
     }
   } catch (error) {
-    console.log("error +>", error);
     // Handle errors
     if (error.response && error.response.data && error.response.data.error) {
       // Display error message returned from the server
