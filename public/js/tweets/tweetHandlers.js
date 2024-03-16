@@ -9,12 +9,12 @@ import { handleClick } from "./Like.js";
 const wrapper = document.getElementById("wrapperTweet");
 
 // Function to add a single tweet to the UI
-export function AddTweet(response) {
+export async function AddTweet(response) {
   // Extract tweet data from the response
   const tweetData = response.data.data;
-
+  const userInfo = await getUserInfo()
   // Render the tweet template
-  const tweetTemplate = renderTweet(tweetData);
+  const tweetTemplate = renderTweet(tweetData,userInfo);
 
   // Append the rendered tweet template to the wrapper element
   appendTweet("afterbegin", tweetTemplate);
@@ -50,11 +50,8 @@ function renderTweet(tweet,userInfo) {
   const { username, profilePic } = postedBy;
   const {  likes } = userInfo
   try {
-    console.log('userInfo=>',userInfo);
-    console.log('likes=>',likes);
     // console.log("response =>",response)
     const isLiked = likes.some((like) => like === _id);
-    console.log('isLiked=>',isLiked);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
