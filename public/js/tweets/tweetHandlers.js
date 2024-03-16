@@ -28,8 +28,8 @@ export function ShowTweets(response) {
   tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   // Iterate over each tweet and render its template
-  tweets.forEach((tweet) => {
-    const tweetTemplate = renderTweet(tweet);
+  tweets.forEach( async (tweet) => {
+    const tweetTemplate = await renderTweet(tweet);
 
     // Append the rendered tweet template to the wrapper element
     appendTweet("beforeend", tweetTemplate);
@@ -53,7 +53,6 @@ async function renderTweet(tweet) {
   const likeIcon = isLiked ?  "nav/heart-full.svg": "nav/heart-null.svg"
   // console.log('likeIcon=>',likeIcon);
   const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-
   // Render the tweet template with formatted creation time
   return Tweet({
     username,

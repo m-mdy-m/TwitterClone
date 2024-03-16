@@ -5,7 +5,7 @@ import { ActionButtons } from "./tweet/Action.btn.js";
 function Tweet({
   username,
   content,
-  profile = "/assets/images/profilePic.png",
+  profile,
   createdAt,
   id,
   retweetCount,

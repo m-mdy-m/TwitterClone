@@ -43,7 +43,6 @@ export async function getTweets() {
   try {
     // Make a GET request to fetch tweets
     const response = await axios.get("/api/tweets");
-    console.log('=>',response);
     // Check if the request was successful
     if (response.data.success) {
       // Display the fetched tweets
