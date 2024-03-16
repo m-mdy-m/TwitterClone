@@ -65,7 +65,7 @@ export async function getUser(){
 }
 
 // Function to fetch tweets from the API
-export async function getTweets() {
+export async function getUserInfo() {
   try {
     // Make a GET request to fetch tweets
     const response = await axios.get("/api/tweets");
