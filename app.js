@@ -11,6 +11,5 @@ static("public"); // Serving static files from 'public' directory
 const cookieParser = $install("cookie-parser"); // Installing and using cookie-parser middleware
 use(cookieParser());
 $read("middleware/setup"); // Including setup middleware
-use($read("middleware/user")); // Including user middleware
 $read("utils/database"); // Loading database utility
 loadRoutes("routes"); // Loading routes from the 'routes' directory
