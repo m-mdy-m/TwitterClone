@@ -1,7 +1,5 @@
 // Import the displayMessage function from the validation module
-import {getCSRFHeader} from "../common/handlers.js";
-import { displayMessage } from "./validation.js";
-
+import { displayMessage, getCSRFHeader } from "../common/handlers.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
 
@@ -11,10 +9,10 @@ async function handler(e) {
   e.preventDefault();
 
   try {
-    const header = await getCSRFHeader()
+    const header = await getCSRFHeader();
     // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
     const response = await axios.post("/auth/logout", {}, header);
-    console.log('response =>',response);
+    console.log("response =>", response);
     // Check if the response is successful
     if (response.status === 200 && response.data.success) {
       // Redirect the user to the login page

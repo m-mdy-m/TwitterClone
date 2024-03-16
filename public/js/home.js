@@ -2,7 +2,6 @@ import { fetchTweets } from "./common/fetchTweet.js";
 import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
 import { onDocumentLoad } from "./nav/navigation-handler.js";
 import { createTweet } from "./tweets/Post.js";
-import { attachIconClickListeners } from "./tweets/tweetHandlers.js";
 document.addEventListener("DOMContentLoaded", async ()=>{
     onDocumentLoad()
     const tweetButton = document.getElementById("tweetButton");

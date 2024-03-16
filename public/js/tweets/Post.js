@@ -1,5 +1,5 @@
-import { displayMessage } from "../auth/validation.js";
 import { fetchCreateTweet } from "../common/fetchTweet.js";
+import { displayMessage } from "../common/handlers.js";
 // Get the message element from the DOM
 const msgElm = document.getElementById("msgElm");
 // Function to create a tweet
@@ -15,7 +15,7 @@ export async function createTweet(val) {
         tweet: val.value,
       };
       /// fetch and send data to server
-      fetchCreateTweet(data)
+      fetchCreateTweet(data);
     } catch (error) {
       // Handle errors
       if (error.response && error.response.data && error.response.data.error) {

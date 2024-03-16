@@ -1,5 +1,5 @@
 // Function to handle form submission
-import {getCSRFHeader} from "../common/handlers.js";
+import {displayMessage, getCSRFHeader} from "../common/handlers.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
@@ -80,23 +80,6 @@ function handleServerError(error) {
   }
   // Display error message to the user
   displayMessage(msgElm, errorMessage, "#fc6736");
-}
-// Function to display messages
-export function displayMessage(element, message, color) {
-  element.style.display = 'block';
-  // Set background color of message element
-  element.style.background = color;
-  // Set opacity of message element
-  element.style.opacity = 1;
-  // Set message content of message element
-  element.innerHTML = message;
-  setTimeout(() => {
-    element.style.opacity = 0;
-    setTimeout(() => {
-      element.style.display = 'none';
-    }, 1000);
-  }, 5000);
-  return;
 }
 
 // Function to update form values based on server response

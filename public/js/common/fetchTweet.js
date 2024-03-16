@@ -1,10 +1,9 @@
-import { displayMessage } from "../auth/validation.js";
 import {
   AddTweet,
   ShowTweets,
   attachIconClickListeners,
 } from "../tweets/tweetHandlers.js";
-import { getCSRFHeader } from "./handlers.js";
+import { displayMessage, getCSRFHeader } from "./handlers.js";
 const msgElm = document.getElementById("msgElm");
 // Function to fetch tweets from the server
 export async function fetchTweets() {
@@ -55,7 +54,7 @@ export async function fetchLike(id) {
   try {
     const header = await getCSRFHeader();
     const response = await axios.put(`/api/like/${id}`, {}, header);
-    console.log('response =>',response);
+    console.log("response =>", response);
     const countLike = response.data.data.likes.length;
     return countLike;
   } catch (error) {
