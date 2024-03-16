@@ -34,7 +34,7 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
         });
         req.session.user = newUser ;
         // Send success response
-        return created(newUser);
+        return created({username:newUser.username,email:newUser.email});
       }
     
   } catch (error) {
