@@ -1,6 +1,6 @@
 import {AddTweet,ShowTweets,attachIconClickListeners,} from "../tweets/tweetHandlers.js";
 import {getCSRFHeader,handleNotSuccess,handleSuccess,showMessage,} from "./helper.js";
-import {clearAuth,clearWelcomePhotoFlag,getMsgElement,removeUsernameCookie,saveUsernameInCookie,setItem,} from "./utils.js";
+import {clearAuth,clearWelcomePhotoFlag,getMsgElement,getUsernameFromCookie,getUsernameFromCookie,removeUsernameCookie,saveUsernameInCookie,setItem,} from "./utils.js";
 const msgElm = getMsgElement();
 // Function to Signup or Login user
 export async function authenticateUser(url, requestData, header, form) {
@@ -38,6 +38,32 @@ export async function logoutUser(header) {
     showMessage(msgElm, message, "#944E63");
   }
 }
+
+/**
+ * Retrieves user information based on the username obtained from the cookie.
+ * @returns {Promise<object>} A Promise that resolves to an object containing user information.
+ */
+export async function getUser(){
+  try {
+    // Get the username from the cookie
+    const username = getUsernameFromCookie();
+    if(!username){
+      showMessage(msgElm,'Username not found in the cookie', '#FF6347')
+    }
+    // Make a GET request to fetch user information
+    const response = await axios.get(`/api/user/${username}`);
+
+    // Extract relevant data from the response
+    const { email, likes, profilePic } = response.data.data;
+
+    // Return user information
+    return { email, likes, profilePic };
+  } catch (error) {
+    // Handle errors
+    showMessage(msgElm,'Failed to fetch user data. Please try again later.', '#FF6347')
+  }
+}
+
 // Function to fetch tweets from the API
 export async function getTweets() {
   try {

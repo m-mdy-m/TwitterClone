@@ -1,5 +1,9 @@
 import Tweet from "../components/Tweet.js";
-import { calculateLikeCount, getCurrentTimeFormatted, getUsernameFromCookie } from "../utils/utils.js";
+import {
+  calculateLikeCount,
+  getCurrentTimeFormatted,
+  getUsernameFromCookie,
+} from "../utils/utils.js";
 import { handleClick } from "./Like.js";
 const wrapper = document.getElementById("wrapperTweet");
 
@@ -41,31 +45,35 @@ export function ShowTweets(response) {
 // Function to render a single tweet template
 function renderTweet(tweet) {
   // Extract relevant data from the tweet object
-  const { postedBy, content, createdAt, _id,likes } = tweet;
-  const { username, profilePic} = postedBy;
-  const usernameCookie = getUsernameFromCookie()
-  axios.get(`/api/user/${usernameCookie}`).then((result)=>{
-    console.log('res =>',result)
-  })
-  // console.log("response =>",response)
-  const isLiked = likes.some(like => like === _id)
-  // Calculate the number of likes for the tweet
-  const likeCount = calculateLikeCount(tweet)
-  // Gather all necessary data
-  const likeIcon = isLiked ?  "nav/heart-full.svg": "nav/heart-null.svg"
-  // console.log('likeIcon=>',likeIcon);
-  const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-  // Render the tweet template with formatted creation time
-  return Tweet({
-    username,
-    profile: profilePic,
-    content,
-    createdAt: formattedCreatedAt,
-    id: _id,
-    likeCount,
-    srcLikeIcon:likeIcon,
-    retweetCount: "",
-  });
+  const { postedBy, content, createdAt, _id, likes } = tweet;
+  const { username, profilePic } = postedBy;
+  const usernameCookie = getUsernameFromCookie();
+  try {
+    // console.log("response =>",response)
+    const isLiked = likes.some((like) => like === _id);
+    // Calculate the number of likes for the tweet
+    const likeCount = calculateLikeCount(tweet);
+    // Gather all necessary data
+    const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
+    // console.log('likeIcon=>',likeIcon);
+    const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
+    // Render the tweet template with formatted creation time
+    return Tweet({
+      username,
+      profile: profilePic,
+      content,
+      createdAt: formattedCreatedAt,
+      id: _id,
+      likeCount,
+      srcLikeIcon: likeIcon,
+      retweetCount: "",
+    });
+  } catch (error) {
+    // Handle any errors that occur during the asynchronous operation
+    console.error('Error fetching user data:', error);
+    // Return null or handle the error in another appropriate way
+    return null;
+  }
 }
 
 // Function to append a tweet template to the UI
@@ -79,7 +87,6 @@ function clearTweetInput() {
   // Clear the value of the tweet input field
   document.getElementById("tweetInput").value = "";
 }
-
 
 // Attaches click event listeners to all elements with the class "icons".
 export function attachIconClickListeners() {
