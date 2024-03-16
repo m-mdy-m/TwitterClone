@@ -28,8 +28,8 @@ export function ShowTweets(response) {
   tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   // Iterate over each tweet and render its template
-  tweets.forEach( async (tweet) => {
-    const tweetTemplate = await renderTweet(tweet);
+  tweets.forEach((tweet) => {
+    const tweetTemplate = renderTweet(tweet);
 
     // Append the rendered tweet template to the wrapper element
     appendTweet("beforeend", tweetTemplate);
@@ -39,12 +39,14 @@ export function ShowTweets(response) {
 }
 
 // Function to render a single tweet template
-async function renderTweet(tweet) {
+function renderTweet(tweet) {
   // Extract relevant data from the tweet object
   const { postedBy, content, createdAt, _id,likes } = tweet;
   const { username, profilePic} = postedBy;
-  // const usernameCookie = getUsernameFromCookie()
-  // const response = await axios.get(`/api/user/${usernameCookie}`)
+  const usernameCookie = getUsernameFromCookie()
+  axios.get(`/api/user/${usernameCookie}`).then((result)=>{
+    console.log('res =>',result)
+  })
   // console.log("response =>",response)
   const isLiked = likes.some(like => like === _id)
   // Calculate the number of likes for the tweet
