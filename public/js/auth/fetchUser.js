@@ -1,5 +1,6 @@
 // Function to handle form submission
 import {displayMessage, getCSRFHeader} from "../common/handlers.js";
+import { InfoUser } from "../components/navigation/InfoUser.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
