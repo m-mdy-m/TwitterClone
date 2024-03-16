@@ -1,5 +1,5 @@
 import Tweet from "../components/Tweet.js";
-import { calculateLikeCount, getCurrentTimeFormatted } from "../utils/utils.js";
+import { calculateLikeCount, getCurrentTimeFormatted, getUsernameFromCookie } from "../utils/utils.js";
 import { handleClick } from "./Like.js";
 const wrapper = document.getElementById("wrapperTweet");
 
@@ -43,6 +43,7 @@ function renderTweet(tweet) {
   // Extract relevant data from the tweet object
   const { postedBy, content, createdAt, _id,likes } = tweet;
   const { username, profilePic} = postedBy;
+  const usernameCookie = getUsernameFromCookie()
   const isLiked = likes.some(like => like === _id)
   // Calculate the number of likes for the tweet
   const likeCount = calculateLikeCount(tweet)
