@@ -1,9 +1,7 @@
 import Tweet from "../components/Tweet.js";
-import { getUserInfo } from "../utils/apiOperations.js";
 import {
   calculateLikeCount,
   getCurrentTimeFormatted,
-  getUsernameFromCookie,
 } from "../utils/utils.js";
 import { handleClick } from "./Like.js";
 const wrapper = document.getElementById("wrapperTweet");
