@@ -1,6 +1,6 @@
 import {AddTweet,ShowTweets,attachIconClickListeners,} from "../tweets/tweetHandlers.js";
 import {getCSRFHeader,handleNotSuccess,handleSuccess,showMessage,} from "./helper.js";
-import {clearAuth,clearWelcomePhotoFlag,getMsgElement,saveUsernameInCookie,setItem,} from "./utils.js";
+import {clearAuth,clearWelcomePhotoFlag,getMsgElement,removeUsernameCookie,saveUsernameInCookie,setItem,} from "./utils.js";
 const msgElm = getMsgElement();
 // Function to Signup or Login user
 export async function authenticateUser(url, requestData, header, form) {
@@ -9,7 +9,7 @@ export async function authenticateUser(url, requestData, header, form) {
   if (response.data.success) {
     const user = response.data.data;
     console.log('user =>',user)
-    // saveUsernameInCookie(user.username)
+    saveUsernameInCookie(user.username)
     // If the server indicates success, handle accordingly
     handleSuccess(form, response.data.message);
     // Set the 'showWelcomePhoto' flag to 'true' in localStorage
@@ -31,6 +31,7 @@ export async function logoutUser(header) {
     // Clear localStorage flags
     clearWelcomePhotoFlag();
     clearAuth();
+    removeUsernameCookie()
   } else {
     // If the logout process fails, display an error message
     const message = logoutResponse.data.message;
