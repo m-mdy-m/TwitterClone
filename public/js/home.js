@@ -1,10 +1,9 @@
-import { formHandler } from "./auth/formHandler.js";
-import { isAuth } from "./common/Storage.js";
-import { fetchTweets } from "./common/fetchTweet.js";
-import { hideIconOnFocus, showIconOnBlur, updateCharCount } from "./common/handlers.js";
-import { initializeComponentsNavigation } from "./nav/navigation-handler.js";
-import { createTweet } from "./tweets/Post.js";
-import { getPath } from "./utils/utils.js";
+const { formHandler } = require("./auth/formHandler");
+const { initializeComponentsNavigation } = require("./nav/navigation-handler");
+const { getTweets, createTweet } = require("./utils/apiOperations");
+const { updateCharCount, hideIconOnFocus, showIconOnBlur } = require("./utils/helper");
+const { getPath, isAuth } = require("./utils/utils");
+
 const path = getPath();
 document.addEventListener("DOMContentLoaded", async ()=>{
     initializeComponentsNavigation()
@@ -23,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     }
     // Fetch tweets if the path is not /auth/signup or /auth/login
     if (!['/auth/signup', '/auth/login'].includes(path)) {
-        await fetchTweets();
+        await getTweets();
     }else{
         const form = document.getElementById("registerForm");
         formHandler(form,path)

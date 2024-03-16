@@ -1,10 +1,11 @@
-import { fetchLike } from "../common/fetchTweet.js";
-import { getId } from "../common/handlers.js";
+import { toggleLike } from "../utils/apiOperations";
+import { getId } from "../utils/helper";
+
 export async function handleClick(event) {
   const elm = event.target;
   try {
     const id = getId(elm);
-    const count = await fetchLike(id);
+    const count = await toggleLike(id);
     // Update the like button based on the fetched count
     const pTag = elm.nextElementSibling;
     if (count > 0) {

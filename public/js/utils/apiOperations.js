@@ -1,7 +1,7 @@
-import { handleNotSuccess, handleSuccess } from "./helper";
+import { getCSRFHeader, handleNotSuccess, handleSuccess, showMessage } from "./helper";
 import { clearAuth,clearWelcomePhotoFlag, getMsgElement } from "./utils";
 const msgElm = getMsgElement()
-export async function authenticateUser(url,requestData,header){
+export async function authenticateUser(url,requestData,header,form){
     const response = await axios.post(url, requestData, header);
     // Handle server response based on success or failure
     if (response.data.success) {
@@ -44,16 +44,16 @@ export async function getTweets() {
       attachIconClickListeners();
     } else {
       // Display error message with error-related color
-      displayMessage(msgElm, response.data.error, "#ff6347"); // Error color
+      showMessage(msgElm, response.data.error, "#ff6347"); // Error color
     }
   } catch (error) {
     // Handle errors
     if (error.response && error.response.data && error.response.data.error) {
       // Display error message returned from the server
-      displayMessage(msgElm, error.response.data.error, "#ffd700");
+      showMessage(msgElm, error.response.data.error, "#ffd700");
     } else {
       // Display a generic error message for other errors
-      displayMessage(
+      showMessage(
         msgElm,
         "An unexpected error occurred while creating the tweet. Please try again later.",
         "#cc0000"
@@ -72,7 +72,7 @@ export async function createTweet(data) {
     AddTweet(response);
   } else {
     // If tweet creation fails, display error message
-    displayMessage(msgElm, response.data.error, "ffd700");
+    showMessage(msgElm, response.data.error, "ffd700");
   }
 }
 export async function toggleLike(id) {
