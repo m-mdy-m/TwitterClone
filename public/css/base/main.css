@@ -14,8 +14,8 @@
   bottom: -0.25rem;
 }
 
-.-right-2 {
-  right: -0.5rem;
+.-right-1 {
+  right: -0.25rem;
 }
 
 .bottom-1 {
@@ -64,14 +64,6 @@
 
 .top-6 {
   top: 1.5rem;
-}
-
-.-right-0 {
-  right: -0px;
-}
-
-.-right-1 {
-  right: -0.25rem;
 }
 
 .z-10 {
@@ -551,8 +543,8 @@
   line-height: 2.25rem;
 }
 
-.text-\[8px\] {
-  font-size: 8px;
+.text-\[10px\] {
+  font-size: 10px;
 }
 
 .text-base {
@@ -578,10 +570,6 @@
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-\[10px\] {
-  font-size: 10px;
 }
 
 .font-semibold {
@@ -633,10 +621,6 @@
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-\[\] {
-  color: ;
 }
 
 .opacity-0 {
@@ -836,6 +820,28 @@
 /* Context menu items */
 
 /* Hover effect on context menu items */
+
+/* Define the CSS animation */
+
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Apply the animation to the heart icon */
+
+.heart-icon {
+  animation: likeAnimation 0.5s ease;
+}
 
 .hover\:rotate-45:hover {
   --tw-rotate: 45deg;
