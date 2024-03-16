@@ -84,4 +84,21 @@
   .context-menu-item:hover {
     background-color: #f0f0f0;
   }
+  /* Define the CSS animation */
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Apply the animation to the heart icon */
+.heart-icon {
+  animation: likeAnimation 0.5s ease;
+}
 }

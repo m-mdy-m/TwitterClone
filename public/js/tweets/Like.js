@@ -15,6 +15,10 @@ export async function handleClick(event) {
       pTag.innerHTML = null;
       elm.src = "/assets/icon/nav/heart-null.svg";
     }
+    // Add animation if the count is greater than 0 (first time like)
+    if (count === 1) {
+      elm.classList.add('heart-icon');
+    }
   } catch (error) {
     // Handle fetch error
     console.error("Error fetching like count:", error);
