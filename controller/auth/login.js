@@ -6,7 +6,7 @@ const { bcryptjs } = new Package();
 const User = $read("model/User");
 // Controller function to render the login page
 exports.getLogin = (req, { sendFile }) => {
-  sendFile(path.join(process.cwd(), "/public/views/home.html"));
+  sendFile(path.join(process.cwd(), "/public/views/main.html"));
 };
 /**
  *  username : Ads242sxz

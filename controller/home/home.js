@@ -3,7 +3,7 @@ const path = require("path");
 exports.getHome = async (req, { status, sendFile }) => {
   try {
     // Send the HTML file for the home page to the client
-    sendFile(path.join(process.cwd(), "/public/views/home.html"));
+    sendFile(path.join(process.cwd(), "/public/views/main.html"));
   } catch (error) {
     // If an error occurs while sending the file, send an error response
     status(500).json({
