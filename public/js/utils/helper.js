@@ -115,8 +115,16 @@ export async function getCSRFHeader() {
   
   // Retrieve JWT token
   const token = getToken();
-  
-  
+  // If JWT token is missing, display an error message and return early
+  if (!token) {
+    msgElm.style.display = "block";
+    showMessage(
+      msgElm,
+      "JWT token is missing.", 
+      "#ff6347" 
+    );
+    return;
+  }
   // Construct headers object including CSRF token and JWT token
   const header = {
     headers: {
