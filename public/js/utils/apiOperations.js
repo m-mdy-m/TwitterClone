@@ -63,7 +63,9 @@ export async function logoutUser(header) {
 export async function getUserInfo() {
   try {
     // Make a GET request to fetch user information
-    const response = await axios.get('/user-info');
+    const header = await getAuthHeaders()
+    console.log('header=>',header);
+    const response = await axios.get('/user-info',{},header);
     console.log('response=>',response);
     // Extract relevant data from the response
     const { email, likes, profilePic,username } = response.data.data;
@@ -84,9 +86,10 @@ export async function getUserInfo() {
 // Function to fetch tweets from the API
 export async function getTweets() {
   try {
+    const header = await getAuthHeaders()
     // Make asynchronous calls to fetch tweets and user information in parallel
     const [tweetsResponse, userInfo] = await Promise.all([
-      axios.get("/api/tweets"),
+      axios.get("/api/tweets",{},header),
       getUserInfo(),
     ]);
     // Check if the request was successful
