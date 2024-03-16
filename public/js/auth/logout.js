@@ -1,7 +1,8 @@
 import { clearAuth, clearWelcomeMsg } from "../common/Storage.js";
 import { showMessage, getCSRFHeader } from "../common/handlers.js";
+import { getMsgElement } from "../utils/utils.js";
 // Get the message element from the DOM
-const msgElm = document.getElementById("msgElm");
+const msgElm = getMsgElement()
 
 // Define an asynchronous function to handle the logout process
 async function logoutHandler(e) {
@@ -34,11 +35,10 @@ async function logoutHandler(e) {
 }
 
 // Function to attach the logout handler to a button element
-function logout(button) {
+export function attachLogoutHandler(button) {
   if (button) {
     // Add a click event listener to the button that triggers the logout handler
     button.addEventListener("click", logoutHandler);
   }
 }
 // Export the logout function to make it accessible to other modules
-export default logout;

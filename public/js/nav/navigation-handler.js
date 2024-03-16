@@ -1,4 +1,4 @@
-import logout from "../auth/logout.js";
+import {attachLogoutHandler} from "../auth/logout.js";
 // Function to handle navigation events
 function handleNavigation() {
   const navMobile = document.getElementById("nav-mobile");
@@ -35,7 +35,7 @@ export function onDocumentLoad() {
 
   // Initialize logout functionality
   const btnLogout = document.querySelector(".logout");
-  logout(btnLogout);
+  attachLogoutHandler(btnLogout);
 
   // Handle navigation events
   handleNavigation();
