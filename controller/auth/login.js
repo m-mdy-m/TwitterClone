@@ -62,7 +62,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       });
     }
     // If authentication is successful, generate a JWT token
-    const token = jwt().jwtSign({ user:user }, process.env.JWT_SECRET);
+    const token = jwt().jwtSign({ user: user }, process.env.JWT_SECRET);
     // Set user session
     req.session.token = token;
     // Send success response
