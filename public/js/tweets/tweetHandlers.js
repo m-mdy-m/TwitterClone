@@ -40,10 +40,10 @@ export function ShowTweets(response) {
 // Function to render a single tweet template
 function renderTweet(tweet) {
   // Extract relevant data from the tweet object
-  const { postedBy, content, createdAt, _id, likes } = tweet;
-  const { username, profilePic} = postedBy;
+  const { postedBy, content, createdAt, _id } = tweet;
+  const { username, profilePic,likes} = postedBy;
   // Calculate the number of likes for the tweet
-  const likeCount = likes.length > 0 ? likes.length : "";
+  const likeCount = tweet.likes.length > 0 ? tweet.likes.length : "";
 
   // Determine if the current user has liked the tweet
   const currentUserLikedTweet = likes.some(like => like === _id);

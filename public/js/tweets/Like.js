@@ -5,7 +5,6 @@ export async function handleClick(event) {
   try {
     const id = getId(elm);
     const count = await fetchLike(id);
-
     // Update the like button based on the fetched count
     const pTag = elm.nextElementSibling;
     if (count > 0) {
