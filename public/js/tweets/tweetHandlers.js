@@ -42,12 +42,15 @@ function renderTweet(tweet) {
   // Extract relevant data from the tweet object
   const { postedBy, content, createdAt, _id, likes } = tweet;
   const { username, profilePic} = postedBy;
-  let likeCount = likes.length;
-  let iconLike = 'nav/heart-null.svg'
-  const userLikeTweet =postedBy.likes.includes(_id)
-  if (userLikeTweet) {
-    iconLike = 'nav/heart-full.svg'
-  }
+  // Calculate the number of likes for the tweet
+  const likeCount = likes.length;
+
+  // Determine if the current user has liked the tweet
+  const currentUserLikedTweet = likes.some(like => like === _id);
+
+  // Set the like icon based on whether the current user has liked the tweet
+  const likeIcon = currentUserLikedTweet ? 'nav/heart-full.svg' : 'nav/heart-null.svg';
+
   // Format the creation time of the tweet
   const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
 
@@ -59,7 +62,7 @@ function renderTweet(tweet) {
     createdAt: formattedCreatedAt,
     id: _id,
     likeCount,
-    srcLikeIcon:'',
+    srcLikeIcon:likeIcon,
     retweetCount: "",
   });
 }
