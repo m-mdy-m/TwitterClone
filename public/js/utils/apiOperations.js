@@ -8,7 +8,6 @@ export async function authenticateUser(url, requestData, header, form) {
   // Handle server response based on success or failure
   if (response.data.success) {
     const user = response.data.data;
-    console.log('user =>',user)
     saveUsernameInCookie(user.username)
     // If the server indicates success, handle accordingly
     handleSuccess(form, response.data.message);
