@@ -1,6 +1,6 @@
 import { AddTweet, ShowTweets, attachIconClickListeners } from "../tweets/tweetHandlers";
 import { getCSRFHeader, handleNotSuccess, handleSuccess, showMessage } from "./helper";
-import { clearAuth,clearWelcomePhotoFlag, getMsgElement } from "./utils";
+import { clearAuth,clearWelcomePhotoFlag, getMsgElement, setItem } from "./utils";
 const msgElm = getMsgElement()
 export async function authenticateUser(url,requestData,header,form){
     const response = await axios.post(url, requestData, header);
@@ -10,8 +10,8 @@ export async function authenticateUser(url,requestData,header,form){
       // If the server indicates success, handle accordingly
       handleSuccess(form,response.data.message);
       // Set the 'showWelcomePhoto' flag to 'true' in localStorage
-      localStorage.setItem("showWelcomePhoto", response.data.success);
-      localStorage.setItem("logged", response.data.success);
+      setItem("showWelcomePhoto", response.data.success)
+      setItem("logged", response.data.success)
     } else {
       // If the server indicates failure, handle accordingly
       handleNotSuccess(response.data);
