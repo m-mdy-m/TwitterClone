@@ -85,3 +85,13 @@ export default async function getCSRFToken() {
     return null;
   }
 }
+
+
+/**
+ * Saves the username in a cookie.
+ * @param {string} username - The username to be saved in the cookie.
+ */
+export function saveUsernameInCookie(username) {
+    // Set the username in a cookie
+    document.cookie = `username=${username}; path=/`;
+}
