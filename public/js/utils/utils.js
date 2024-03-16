@@ -95,3 +95,10 @@ export function saveUsernameInCookie(username) {
     // Set the username in a cookie
     document.cookie = `username=${username}; path=/`;
 }
+/**
+ * Removes the username cookie.
+ */
+export function removeUsernameCookie() {
+    // Set the expiration date to a past time
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
