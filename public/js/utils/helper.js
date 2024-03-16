@@ -1,4 +1,4 @@
-import getCSRFToken, { getMsgElement } from "./utils";
+import getCSRFToken, { getMsgElement } from "./utils.js";
 
 const msgElm = getMsgElement()
 const iconElement = document.getElementById("icon-tweet");

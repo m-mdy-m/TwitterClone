@@ -1,6 +1,6 @@
-import { tweetCreation } from "../utils/apiOperations";
-import { showMessage } from "../utils/helper";
-import { getMsgElement } from "../utils/utils";
+import { tweetCreation } from "../utils/apiOperations.js";
+import { showMessage } from "../utils/helper.js";
+import { getMsgElement } from "../utils/utils.js";
 
 // Get the message element from the DOM
 const msgElm = getMsgElement()

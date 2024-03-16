@@ -1,6 +1,7 @@
-import { showMessage, getCSRFHeader } from "../common/handlers.js";
 import { logoutUser } from "../utils/apiOperations.js";
+import { getCSRFHeader, showMessage } from "../utils/helper.js";
 import { getMsgElement } from "../utils/utils.js";
+
 // Get the message element from the DOM
 const msgElm = getMsgElement()
 
