@@ -2,35 +2,37 @@ import { AddTweet, ShowTweets, attachIconClickListeners } from "../tweets/tweetH
 import { getCSRFHeader, handleNotSuccess, handleSuccess, showMessage } from "./helper";
 import { clearAuth,clearWelcomePhotoFlag, getMsgElement, setItem } from "./utils";
 const msgElm = getMsgElement()
-export async function authenticateUser(url,requestData,header,form){
-    const response = await axios.post(url, requestData, header);
-    // Handle server response based on success or failure
-    if (response.data.success) {
-      const user = response.data.data
+// Function to Signup or Login user
+export async function authenticateUser(url, requestData, header, form) {
+  const response = await axios.post(url, requestData, header);
+  // Handle server response based on success or failure
+  if (response.data.success) {
+      const user = response.data.data;
       // If the server indicates success, handle accordingly
-      handleSuccess(form,response.data.message);
+      handleSuccess(form, response.data.message);
       // Set the 'showWelcomePhoto' flag to 'true' in localStorage
-      setItem("showWelcomePhoto", response.data.success)
-      setItem("logged", response.data.success)
-    } else {
+      setItem("showWelcomePhoto", response.data.success);
+      setItem("logged", response.data.success);
+  } else {
       // If the server indicates failure, handle accordingly
       handleNotSuccess(response.data);
-    }
+  }
 }
-export async function logoutUser(header){
+// Function to handle user logout
+export async function logoutUser(header) {
   // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
   const logoutResponse = await axios.post("/auth/logout", {}, header);
   // Check if the logout request is successful
   if (logoutResponse.status === 200 && logoutResponse.data.success) {
-    // Redirect the user to the login page
-    window.location.href = "/auth/login";
-    // Clear localStorage flags
-    clearWelcomePhotoFlag();
-    clearAuth();
+      // Redirect the user to the login page
+      window.location.href = "/auth/login";
+      // Clear localStorage flags
+      clearWelcomePhotoFlag();
+      clearAuth();
   } else {
-    // If the logout process fails, display an error message
-    const message = logoutResponse.data.message;
-    showMessage(msgElm, message, "#944E63");
+      // If the logout process fails, display an error message
+      const message = logoutResponse.data.message;
+      showMessage(msgElm, message, "#944E63");
   }
 }
 export async function getTweets() {
