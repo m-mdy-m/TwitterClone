@@ -1,5 +1,6 @@
 import Tweet from "../components/Tweet.js";
 import { handleClick } from "./Like.js";
+import { calculateLikeCount, getCurrentTimeFormatted, setLikeIcon } from "./helpers.js";
 const wrapper = document.getElementById("wrapperTweet");
 
 // Function to add a single tweet to the UI
@@ -43,15 +44,9 @@ function renderTweet(tweet) {
   const { postedBy, content, createdAt, _id } = tweet;
   const { username, profilePic,likes} = postedBy;
   // Calculate the number of likes for the tweet
-  const likeCount = tweet.likes.length > 0 ? tweet.likes.length : "";
-
-  // Determine if the current user has liked the tweet
-  const currentUserLikedTweet = likes.some(like => like === _id);
-
-  // Set the like icon based on whether the current user has liked the tweet
-  const likeIcon = currentUserLikedTweet ? 'nav/heart-full.svg' : 'nav/heart-null.svg';
-
-  // Format the creation time of the tweet
+  const likeCount = calculateLikeCount(tweet)
+  // Gather all necessary data
+  const likeIcon = setLikeIcon(likes,_id);
   const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
 
   // Render the tweet template with formatted creation time
@@ -79,58 +74,7 @@ function clearTweetInput() {
   document.getElementById("tweetInput").value = "";
 }
 
-// Function to format the creation time of the tweet
-function getCurrentTimeFormatted(time) {
-  // Create a Date object from the provided time
-  const createdAt = new Date(time);
 
-  // Get the current time
-  const currentTime = new Date();
-
-  // Calculate the time difference in milliseconds
-  const timeDifference = currentTime - createdAt;
-
-  // Convert the time difference from milliseconds to seconds
-  const secondsDifference = Math.floor(timeDifference / 1000);
-
-  // Define time units in seconds
-  const minute = 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-  const month = day * 30;
-  const year = month * 12;
-
-  // Determine the appropriate past tense based on the time difference
-  if (secondsDifference < minute) {
-    return "just now";
-  } else if (secondsDifference < hour) {
-    const minutes = Math.floor(secondsDifference / minute);
-    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-  } else if (secondsDifference < day) {
-    const hours = Math.floor(secondsDifference / hour);
-    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
-  } else if (secondsDifference < month) {
-    const days = Math.floor(secondsDifference / day);
-    return `${days} day${days > 1 ? "s" : ""} ago`;
-  } else if (secondsDifference < year) {
-    const months = Math.floor(secondsDifference / month);
-    return `${months} month${months > 1 ? "s" : ""} ago`;
-  } else {
-    // Format the date and time components separately
-    const formattedDate = createdAt.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-    const formattedTime = createdAt.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-    });
-
-    // Concatenate the formatted date and time with a separator
-    return `${formattedDate} • ${formattedTime}`;
-  }
-}
 // Attaches click event listeners to all elements with the class "icons".
 export function attachIconClickListeners() {
   // Select all elements with the class "icons"
