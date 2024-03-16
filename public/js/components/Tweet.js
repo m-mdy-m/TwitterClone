@@ -8,6 +8,8 @@ function Tweet({
   profile = "/assets/images/profilePic.png",
   createdAt,
   id,
+  retweetCount,
+  likeCount,
 }) {
   return `
     <div class="w-full min-h-28 h-auto my-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 pt-6" data-id="${id}">

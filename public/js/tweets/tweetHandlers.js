@@ -20,6 +20,7 @@ export function AddTweet(response) {
 
 // Function to show multiple tweets in the UI
 export function ShowTweets(response) {
+  console.log('response =>',response);
   // Extract tweets array from the response
   let tweets = response.data.tweets;
 
