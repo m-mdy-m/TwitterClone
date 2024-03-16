@@ -18,6 +18,8 @@ export async function handleClick(event) {
     // Add animation if the count is greater than 0 (first time like)
     if (count === 1) {
       elm.classList.add('heart-icon');
+    }else{
+      elm.classList.remove('heart-icon');
     }
   } catch (error) {
     // Handle fetch error
