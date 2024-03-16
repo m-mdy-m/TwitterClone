@@ -6,7 +6,7 @@ const { bcryptjs } = new Package();
 const User = $read("model/User");
 // Controller function to render the signup page
 exports.getSignup = (req, { sendFile }) => {
-  sendFile(path.join(process.cwd(), "/public/views/auth/signup.html"));
+  sendFile(path.join(process.cwd(), "/public/views/home.html"));
 };
 // Controller function to handle signup form submission
 exports.postSignup = async (req, { getJsonHandler, status }) => {
