@@ -98,6 +98,12 @@ export function showIconOnBlur(e) {
 export function getId(el) {
   return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
 }
+
+/**
+ * Asynchronously fetches the CSRF token and constructs headers object including CSRF token and JWT token.
+ * Displays error messages if CSRF token or JWT token is missing or invalid.
+ * @returns {Object} Headers object including CSRF token and JWT token.
+ */
 export async function getAuthHeaders() {
   // Fetch CSRF token asynchronously
   const csrfToken = await getCSRFToken();
