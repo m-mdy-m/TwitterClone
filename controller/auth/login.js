@@ -32,7 +32,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       if (isSameUser) {
         return status(409).json({
           success: false,
-          message: "You are already logged in as this user. If you wish to log in as a different user, please logout first.",
+          error: "You are already logged, please logout first.",
         });
       }
     }
@@ -56,7 +56,6 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       message: "Logged in successfully.",
     });
   } catch (error) {
-    console.log("error =>", error);
     internalServerError("Internal server error. Please try again later.");
   }
 };

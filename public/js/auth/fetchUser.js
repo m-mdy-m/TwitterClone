@@ -1,7 +1,5 @@
 // Function to handle form submission
 import {displayMessage, getCSRFHeader} from "../common/handlers.js";
-import { BodyContent } from "../components/Body.js";
-import { InfoUser } from "../components/navigation/InfoUser.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 const msgElm = document.getElementById("msgElm");
@@ -23,6 +21,7 @@ export async function handleSubmit(e, submitUrl) {
       if (response.data.success) {
         // If the server indicates success, handle accordingly
         handleSuccess(response.data.message);
+        // Header({isAuth:response.data.success,})
         // Set the 'showWelcomePhoto' flag to 'true' in localStorage
         localStorage.setItem("showWelcomePhoto", response.data.success);
         localStorage.setItem("logged", response.data.success);

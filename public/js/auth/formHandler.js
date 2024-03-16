@@ -1,4 +1,4 @@
-import { handleSubmit } from "./validation.js";
+import { handleSubmit } from "./fetchUser.js";
 let submitUrl;
 function getUrl(url) {
   submitUrl = url;
