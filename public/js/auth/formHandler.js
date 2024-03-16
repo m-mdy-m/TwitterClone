@@ -1,11 +1,14 @@
 import { handleSubmit } from "./fetchUser.js";
-let submitUrl;
-function getUrl(url) {
-  submitUrl = url;
+
+// Define form handler function
+function formHandler(form, submitUrl) {
+  // Add event listener to the form
+  form.addEventListener("submit", (event) => {
+    // Prevent default form submission
+    event.preventDefault();
+    // Pass the form submission event and submit URL to the submit handler
+    handleSubmit(event, submitUrl);
+  });
 }
-// Define a wrapper function to dynamically pass the submit URL to handleSubmit
-function formHandler(event) {
-  // Replace 'submitUrl' with the dynamic URL you want to use
-  return handleSubmit(event, submitUrl);
-}
-export { formHandler, getUrl };
+
+export { formHandler };
