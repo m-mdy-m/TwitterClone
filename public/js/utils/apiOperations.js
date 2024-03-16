@@ -56,7 +56,7 @@ export async function getUserInfo(){
     const { email, likes, profilePic } = response.data.data;
 
     // Return user information
-    return { email, likes, profilePic };
+    return { email, likes, profilePic,username };
   } catch (error) {
     // Handle errors
     showMessage(msgElm,'Failed to fetch user data. Please try again later.', '#FF6347')
