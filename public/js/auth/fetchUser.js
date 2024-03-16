@@ -1,6 +1,7 @@
 // Function to handle form submission
-import { getCSRFHeader, upHeader} from "../common/handlers.js";
-import { handleNotSuccess, handleServerError, handleSuccess } from "../utils/helper.js";
+import { getCSRFHeader} from "../common/handlers.js";
+import {authenticateUser  } from "../utils/apiOperations.js";
+import { handleNotSuccess, handleServerError, } from "../utils/helper.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 handleFormValidation();
@@ -15,20 +16,7 @@ export async function handleSubmit(e, submitUrl) {
       // Convert form data to object
       const requestData = Object.fromEntries(formData.entries());
       // Send form data to the server via POST request
-      const response = await axios.post(submitUrl, requestData, headers);
-      // Handle server response based on success or failure
-      if (response.data.success) {
-        const user = response.data.data
-        // If the server indicates success, handle accordingly
-        handleSuccess(form,response.data.message);
-        // Set the 'showWelcomePhoto' flag to 'true' in localStorage
-        localStorage.setItem("showWelcomePhoto", response.data.success);
-        localStorage.setItem("logged", response.data.success);
-        upHeader(user)
-      } else {
-        // If the server indicates failure, handle accordingly
-        handleNotSuccess(response.data);
-      }
+      authenticateUser(submitUrl,requestData,headers)
     } catch (error) {
       // Handle any errors that occur during the form submission process
       handleServerError(form,error);

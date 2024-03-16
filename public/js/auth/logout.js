@@ -11,20 +11,7 @@ async function logoutHandler(e) {
 
   try {
     const header = await getCSRFHeader();
-    // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
-    const logoutResponse = await axios.post("/auth/logout", {}, header);
-    // Check if the logout request is successful
-    if (logoutResponse.status === 200 && logoutResponse.data.success) {
-      // Redirect the user to the login page
-      window.location.href = "/auth/login";
-      // Clear localStorage flags
-      clearWelcomeMsg();
-      clearAuth();
-    } else {
-      // If the logout process fails, display an error message
-      const message = logoutResponse.data.message;
-      showMessage(msgElm, message, "#944E63");
-    }
+    
   } catch (error) {
     // If an error occurs during the logout process, display an error message
     const errorMessage = error.response
