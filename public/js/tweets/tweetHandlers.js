@@ -39,11 +39,13 @@ export function ShowTweets(response) {
 }
 
 // Function to render a single tweet template
-function renderTweet(tweet) {
+async function renderTweet(tweet) {
   // Extract relevant data from the tweet object
   const { postedBy, content, createdAt, _id,likes } = tweet;
   const { username, profilePic} = postedBy;
-  const usernameCookie = getUsernameFromCookie()
+  // const usernameCookie = getUsernameFromCookie()
+  // const response = await axios.get(`/api/user/${usernameCookie}`)
+  // console.log("response =>",response)
   const isLiked = likes.some(like => like === _id)
   // Calculate the number of likes for the tweet
   const likeCount = calculateLikeCount(tweet)
