@@ -1,4 +1,5 @@
 import Tweet from "../components/Tweet.js";
+import { getUserInfo } from "../utils/apiOperations.js";
 import {
   calculateLikeCount,
   getCurrentTimeFormatted,
@@ -24,16 +25,16 @@ export function AddTweet(response) {
 }
 
 // Function to show multiple tweets in the UI
-export function ShowTweets(response) {
+export async function ShowTweets(response) {
   // Extract tweets array from the response
   let tweets = response.data.tweets;
-
+  const userInfo = await getUserInfo()
   // Sort the tweets array by createdAt in descending order (newest to oldest)
   tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   // Iterate over each tweet and render its template
   tweets.forEach((tweet) => {
-    const tweetTemplate = renderTweet(tweet);
+    const tweetTemplate = renderTweet(tweet,userInfo);
 
     // Append the rendered tweet template to the wrapper element
     appendTweet("beforeend", tweetTemplate);
@@ -43,14 +44,17 @@ export function ShowTweets(response) {
 }
 
 // Function to render a single tweet template
-function renderTweet(tweet) {
+function renderTweet(tweet,userInfo) {
   // Extract relevant data from the tweet object
-  const { postedBy, content, createdAt, _id, likes } = tweet;
+  const { postedBy, content, createdAt, _id } = tweet;
   const { username, profilePic } = postedBy;
-  const usernameCookie = getUsernameFromCookie();
+  const {  likes } = userInfo
   try {
+    console.log('userInfo=>',userInfo);
+    console.log('likes=>',likes);
     // console.log("response =>",response)
     const isLiked = likes.some((like) => like === _id);
+    console.log('isLiked=>',isLiked);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data

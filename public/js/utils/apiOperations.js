@@ -43,7 +43,7 @@ export async function logoutUser(header) {
  * Retrieves user information based on the username obtained from the cookie.
  * @returns {Promise<object>} A Promise that resolves to an object containing user information.
  */
-export async function getUser(){
+export async function getUserInfo(){
   try {
     // Get the username from the cookie
     const username = getUsernameFromCookie();
@@ -65,7 +65,7 @@ export async function getUser(){
 }
 
 // Function to fetch tweets from the API
-export async function getUserInfo() {
+export async function getTweets() {
   try {
     // Make a GET request to fetch tweets
     const response = await axios.get("/api/tweets");
