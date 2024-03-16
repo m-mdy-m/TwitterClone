@@ -1,6 +1,6 @@
 import Tweet from "../components/Tweet.js";
 import { handleClick } from "./Like.js";
-import { calculateLikeCount, getCurrentTimeFormatted, setLikeIcon } from "./helpers.js";
+import { calculateLikeCount, getCurrentTimeFormatted } from "./helpers.js";
 const wrapper = document.getElementById("wrapperTweet");
 
 // Function to add a single tweet to the UI
@@ -41,12 +41,14 @@ export function ShowTweets(response) {
 // Function to render a single tweet template
 function renderTweet(tweet) {
   // Extract relevant data from the tweet object
-  const { postedBy, content, createdAt, _id } = tweet;
-  const { username, profilePic,likes} = postedBy;
+  const { postedBy, content, createdAt, _id,likes } = tweet;
+  const { username, profilePic} = postedBy;
+  const isLiked = likes.some(like => like === _id)
   // Calculate the number of likes for the tweet
   const likeCount = calculateLikeCount(tweet)
   // Gather all necessary data
-  const likeIcon = setLikeIcon(likes,_id);
+  const likeIcon = isLiked ?  "nav/heart-full.svg": "nav/heart-null.svg"
+  // console.log('likeIcon=>',likeIcon);
   const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
 
   // Render the tweet template with formatted creation time

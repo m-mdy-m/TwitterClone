@@ -2,15 +2,6 @@
 export const calculateLikeCount = (tweet) =>
   tweet.likes.length > 0 ? tweet.likes.length : "";
 
-// Function to determine if the current user has liked the tweet
-const currentUserLikedTweet = (likes, TweetId) => likes.includes(TweetId);
-
-// Function to set the like icon based on whether the current user has liked the tweet
-export const setLikeIcon = (likes, TweetId) =>
-  currentUserLikedTweet(likes, TweetId)
-    ? "nav/heart-full.svg"
-    : "nav/heart-null.svg";
-
 // Function to format the creation time of the tweet
 export function getCurrentTimeFormatted(time) {
     // Create a Date object from the provided time
