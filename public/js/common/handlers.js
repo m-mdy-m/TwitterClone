@@ -1,6 +1,5 @@
 import Header from "../components/common/header.js";
 import getCSRFToken from "./getCSRFToken.js";
-
 // DOM elements
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
@@ -76,7 +75,7 @@ export async function getCSRFHeader() {
   const csrfToken = await getCSRFToken();
   if (!csrfToken) {
     msgElm.style.display = "block";
-    displayMessage(
+    showMessage(
       msgElm,
       "Unable to create tweet. CSRF token is missing or invalid.",
       "#ff6347"
@@ -90,24 +89,6 @@ export async function getCSRFHeader() {
   };
   return header;
 }
-// Function to display messages
-export function displayMessage(element, message, color) {
-  element.style.display = "block";
-  // Set background color of message element
-  element.style.background = color;
-  // Set opacity of message element
-  element.style.opacity = 1;
-  // Set message content of message element
-  element.innerHTML = message;
-  setTimeout(() => {
-    element.style.opacity = 0;
-    setTimeout(() => {
-      element.style.display = "none";
-    }, 1000);
-  }, 5000);
-  return;
-}
-
 export function upHeader(user) {
   console.log("user =>", user);
   const header = document.querySelector("header");

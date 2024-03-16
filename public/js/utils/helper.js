@@ -9,7 +9,7 @@ export function handleNotSuccess(data) {
   showMessage(msgElm, message, "#944E63");
 }
 // Function to handle successful form submission
-export function handleSuccess(form,message) {
+export function handleSuccess(form, message) {
   // Reset the form to clear input fields
   form.reset();
   // Add success message styling to message element
@@ -20,7 +20,7 @@ export function handleSuccess(form,message) {
   window.location.href = "/home";
 }
 // Function to handle server errors
-export function handleServerError(form,error) {
+export function handleServerError(form, error) {
   // Add error message styling to message element
   msgElm.classList.add("msg-errors");
   // Clear previous error messages
@@ -35,7 +35,7 @@ export function handleServerError(form,error) {
     const formData = error.response.data.validationErrors;
     // Update form values based on server response data, if available
     if (formData) {
-      updateFormValues(form,formData);
+      updateFormValues(form, formData);
     }
   } else if (error.request) {
     // Handle cases where no response is received from the server
@@ -45,14 +45,30 @@ export function handleServerError(form,error) {
   showMessage(msgElm, errorMessage, "#fc6736");
 }
 // Function to update form values based on server response
-export function updateFormValues(form,formData) {
-    // Iterate over form data entries
-    for (const [name, value] of Object.entries(formData)) {
-      // Find input element with matching name attribute
-      const input = form.querySelector(`[name="${name}"]`);
-      // If input element exists, update its value
-      if (input) {
-        input.value = value;
-      }
+export function updateFormValues(form, formData) {
+  // Iterate over form data entries
+  for (const [name, value] of Object.entries(formData)) {
+    // Find input element with matching name attribute
+    const input = form.querySelector(`[name="${name}"]`);
+    // If input element exists, update its value
+    if (input) {
+      input.value = value;
     }
   }
+}
+export function showMessage(element, message, color) {
+  element.style.display = "block";
+  // Set background color of message element
+  element.style.background = color;
+  // Set opacity of message element
+  element.style.opacity = 1;
+  // Set message content of message element
+  element.innerHTML = message;
+  setTimeout(() => {
+    element.style.opacity = 0;
+    setTimeout(() => {
+      element.style.display = "none";
+    }, 1000);
+  }, 5000);
+  return;
+}

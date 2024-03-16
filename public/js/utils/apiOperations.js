@@ -1,5 +1,6 @@
 import { handleNotSuccess, handleSuccess } from "./helper";
-
+import { clearAuth,clearWelcomePhotoFlag, getMsgElement } from "./utils";
+const msgElm = getMsgElement()
 export async function authenticateUser(url,requestData,header){
     const response = await axios.post(url, requestData, header);
     // Handle server response based on success or failure
@@ -15,7 +16,7 @@ export async function authenticateUser(url,requestData,header){
       handleNotSuccess(response.data);
     }
 }
-export async function logout(header){
+export async function logoutUser(header){
   // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
   const logoutResponse = await axios.post("/auth/logout", {}, header);
   // Check if the logout request is successful
@@ -23,7 +24,7 @@ export async function logout(header){
     // Redirect the user to the login page
     window.location.href = "/auth/login";
     // Clear localStorage flags
-    clearWelcomeMsg();
+    clearWelcomePhotoFlag();
     clearAuth();
   } else {
     // If the logout process fails, display an error message

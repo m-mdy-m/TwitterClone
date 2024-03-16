@@ -1,5 +1,5 @@
-import { clearAuth, clearWelcomeMsg } from "../common/Storage.js";
 import { showMessage, getCSRFHeader } from "../common/handlers.js";
+import { logoutUser } from "../utils/apiOperations.js";
 import { getMsgElement } from "../utils/utils.js";
 // Get the message element from the DOM
 const msgElm = getMsgElement()
@@ -11,7 +11,7 @@ async function logoutHandler(e) {
 
   try {
     const header = await getCSRFHeader();
-    
+    logoutUser(header)
   } catch (error) {
     // If an error occurs during the logout process, display an error message
     const errorMessage = error.response
