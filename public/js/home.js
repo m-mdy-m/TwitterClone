@@ -1,8 +1,8 @@
 import { formHandler } from "./auth/formHandler.js"
-import Header from "./components/common/header.js"
+// import Header from "./components/common/header.js"
 import { initializeComponentsNavigation } from "./nav/navigation-handler.js"
 import { createTweet } from "./tweets/Post.js"
-import { getTweets, getUserInfo } from "./utils/apiOperations.js"
+import { getTweets } from "./utils/apiOperations.js"
 import { updateCharCount, hideIconOnFocus, showIconOnBlur } from "./utils/helper.js"
 import { getPath, isAuth } from "./utils/utils.js"
 
@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", async ()=>{
             textarea.addEventListener("blur", showIconOnBlur);
             textarea.addEventListener('input', updateCharCount);
         }
-        const header = document.querySelector('header')
-        const {username,profilePic} = await getUserInfo()
-        header.innerHTML = Header({profile:profilePic,username})
+        // const header = document.querySelector('header')
+        // const {username,profilePic} = await getUserInfo()
+        // header.innerHTML = Header({profile:profilePic,username})
         initializeComponentsNavigation()
     }
     // Fetch tweets if the path is not /auth/signup or /auth/login

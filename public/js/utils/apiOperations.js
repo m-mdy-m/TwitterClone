@@ -13,7 +13,6 @@ import {
   clearAuth,
   clearWelcomePhotoFlag,
   getMsgElement,
-  getUsernameFromCookie,
   removeToken,
   saveToken,
   setItem,
@@ -22,10 +21,11 @@ const msgElm = getMsgElement();
 // Function to Signup or Login user
 export async function authenticateUser(url, requestData, header, form) {
   const response = await axios.post(url, requestData, header);
+  console.log('response=>',response);
   // Handle server response based on success or failure
   if (response.data.success) {
-    const user = response.data.data;
-    saveToken(user.token); // Save token to cookie
+    const token = response.data.data.token;
+    saveToken(token); // Save token to cookie
     // If the server indicates success, handle accordingly
     handleSuccess(form, response.data.message);
     // Set the 'showWelcomePhoto' flag to 'true' in localStorage
@@ -62,19 +62,16 @@ export async function logoutUser(header) {
  */
 export async function getUserInfo() {
   try {
-    // Get the username from the cookie
-    const username = getUsernameFromCookie();
-    if (!username) {
-      showMessage(msgElm, "Username not found in the cookie", "#FF6347");
-    }
     // Make a GET request to fetch user information
-    const response = await axios.get(`/api/user/${username}`);
+    const response = await axios.get('/user-info');
+    console.log('response=>',response);
     // Extract relevant data from the response
-    const { email, likes, profilePic } = response.data.data;
+    const { email, likes, profilePic,username } = response.data.data;
 
     // Return user information
     return { email, likes, profilePic, username };
   } catch (error) {
+    console.log('error =>',error);
     // Handle errors
     showMessage(
       msgElm,
@@ -124,7 +121,6 @@ export async function tweetCreation(data) {
     getCSRFHeader(),
     getUserInfo(),
   ]);
-
   // Send a POST request to create a tweet with the obtained CSRF header
   const response = await axios.post("/api/create", data, header);
   // If tweet creation is successful, add the tweet and log the response
