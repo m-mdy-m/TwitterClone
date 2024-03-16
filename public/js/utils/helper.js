@@ -62,6 +62,8 @@ export function updateFormValues(form, formData) {
     }
   }
 }
+
+// Function to show a message with a specified color
 export function showMessage(element, message, color) {
   element.style.display = "block";
   // Set background color of message element
@@ -78,6 +80,7 @@ export function showMessage(element, message, color) {
   }, 5000);
   return;
 }
+
 // Function to hide the icon when textarea is focused
 export function hideIconOnFocus(e) {
   const textarea = e.target;
