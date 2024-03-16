@@ -1,6 +1,6 @@
 import Tweet from "../components/Tweet.js";
+import { calculateLikeCount, getCurrentTimeFormatted } from "../utils/utils.js";
 import { handleClick } from "./Like.js";
-import { calculateLikeCount, getCurrentTimeFormatted } from "./helpers.js";
 const wrapper = document.getElementById("wrapperTweet");
 
 // Function to add a single tweet to the UI

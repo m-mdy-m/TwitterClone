@@ -1,7 +1,6 @@
 // Function to handle form submission
-import { getCSRFHeader} from "../common/handlers.js";
 import {authenticateUser  } from "../utils/apiOperations.js";
-import { handleNotSuccess, handleServerError } from "../utils/helper.js";
+import { getCSRFHeader, handleNotSuccess, handleServerError } from "../utils/helper.js";
 import { handleFormValidation, validationCount } from "./utils.js";
 const form = document.getElementById("registerForm");
 handleFormValidation();
