@@ -10,6 +10,7 @@ function Tweet({
   id,
   retweetCount,
   likeCount,
+  srcLikeIcon
 }) {
   return `
     <div class="w-full min-h-28 h-auto my-4 rounded-2xl grid grid-rows-readTweet bg-[#111010] px-4 pt-6" data-id="${id}">
@@ -23,7 +24,7 @@ function Tweet({
       </div>
       <div class="min-h-auto w-full flex justify-between items-center flex-col pb-3 pr-2">
         ${PostContent({ content })}
-        ${ActionButtons()}
+        ${ActionButtons({likeCount,retweetCount,srcLikeIcon})}
       </div>
     </div>
   `;

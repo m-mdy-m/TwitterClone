@@ -20,7 +20,6 @@ export function AddTweet(response) {
 
 // Function to show multiple tweets in the UI
 export function ShowTweets(response) {
-  console.log('response =>',response);
   // Extract tweets array from the response
   let tweets = response.data.tweets;
 
@@ -41,8 +40,14 @@ export function ShowTweets(response) {
 // Function to render a single tweet template
 function renderTweet(tweet) {
   // Extract relevant data from the tweet object
-  const { postedBy, content, createdAt,_id } = tweet;
-  const { username, profilePic,  } = postedBy;
+  const { postedBy, content, createdAt, _id, likes } = tweet;
+  const { username, profilePic} = postedBy;
+  let likeCount = likes.length;
+  let iconLike = 'nav/heart-null.svg'
+  const userLikeTweet =postedBy.likes.includes(_id)
+  if (userLikeTweet) {
+    iconLike = 'nav/heart-full.svg'
+  }
   // Format the creation time of the tweet
   const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
 
@@ -53,6 +58,9 @@ function renderTweet(tweet) {
     content,
     createdAt: formattedCreatedAt,
     id: _id,
+    likeCount,
+    srcLikeIcon:'',
+    retweetCount: "",
   });
 }
 
