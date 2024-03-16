@@ -102,3 +102,25 @@ export function removeUsernameCookie() {
     // Set the expiration date to a past time
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
+/**
+ * Retrieves the value of the username cookie.
+ * @returns {string|null} The value of the username cookie, or null if the cookie is not found.
+ */
+export function getUsernameFromCookie() {
+  // Get all cookies
+  const cookies = document.cookie;
+  // Split the cookies string into an array of individual cookies
+  const cookieArray = cookies.split("; ");
+  // Iterate through the array to find the username cookie
+  for (const cookie of cookieArray) {
+      // Split each cookie into its name and value
+      const [name, value] = cookie.split("=");
+      // Check if the cookie is the username cookie
+      if (name === "username") {
+          // Return the value of the username cookie
+          return value;
+      }
+  }
+  // If the username cookie is not found, return null
+  return null;
+}
