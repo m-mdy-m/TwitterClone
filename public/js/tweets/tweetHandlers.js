@@ -9,10 +9,9 @@ import { handleClick } from "./Like.js";
 const wrapper = document.getElementById("wrapperTweet");
 
 // Function to add a single tweet to the UI
-export async function AddTweet(response) {
+export function AddTweet(response,userInfo) {
   // Extract tweet data from the response
   const tweetData = response.data.data;
-  const userInfo = await getUserInfo()
   // Render the tweet template
   const tweetTemplate = renderTweet(tweetData,userInfo);
 
@@ -25,10 +24,9 @@ export async function AddTweet(response) {
 }
 
 // Function to show multiple tweets in the UI
-export async function ShowTweets(response) {
+export function ShowTweets(response,userInfo) {
   // Extract tweets array from the response
   let tweets = response.data.tweets;
-  const userInfo = await getUserInfo()
   // Sort the tweets array by createdAt in descending order (newest to oldest)
   tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
@@ -50,7 +48,6 @@ function renderTweet(tweet,userInfo) {
   const { username, profilePic } = postedBy;
   const {  likes } = userInfo
   try {
-    // console.log("response =>",response)
     const isLiked = likes.some((like) => like === _id);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);

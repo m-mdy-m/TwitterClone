@@ -69,10 +69,11 @@ export async function getTweets() {
   try {
     // Make a GET request to fetch tweets
     const response = await axios.get("/api/tweets");
+    const info = await getUserInfo()
     // Check if the request was successful
     if (response.data.success) {
       // Display the fetched tweets
-      ShowTweets(response);
+      ShowTweets(response,info);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {
@@ -100,9 +101,10 @@ export async function tweetCreation(data) {
   const header = await getCSRFHeader();
   // Send POST request to create tweet with CSRF header
   const response = await axios.post("/api/create", data, header);
-  // If tweet creation is successful, add the tweet and log the response
+  const info = await getUserInfo()
+    // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
-    AddTweet(response);
+    AddTweet(response,info);
   } else {
     // If tweet creation fails, display error message
     showMessage(msgElm, response.data.error, "ffd700");
