@@ -6,6 +6,7 @@ import {
 import {
   getAuthHeaders,
   handleNotSuccess,
+  handleServerError,
   handleSuccess,
   showMessage,
 } from "./helper.js";
@@ -20,19 +21,25 @@ import {
 const msgElm = getMsgElement();
 // Function to Signup or Login user
 export async function authenticateUser(url, requestData, header, form) {
-  const response = await axios.post(url, requestData, header);
-  // Handle server response based on success or failure
-  if (response.data.success) {
-    const token = response.data.data.token;
-    saveToken(token); // Save token to cookie
-    // If the server indicates success, handle accordingly
-    handleSuccess(form, response.data.message);
-    // Set the 'showWelcomePhoto' flag to 'true' in localStorage
-    setItem("showWelcomePhoto", response.data.success);
-    setItem("logged", response.data.success);
-  } else {
-    // If the server indicates failure, handle accordingly
-    handleNotSuccess(response.data);
+  try {
+    const response = await axios.post(url, requestData, header);
+    console.log('response Auth =>',response);
+    // Handle server response based on success or failure
+    if (response.data.success) {
+      const token = response.data.data.token;
+      saveToken(token); // Save token to cookie
+      // If the server indicates success, handle accordingly
+      handleSuccess(form, response.data.message);
+      // Set the 'showWelcomePhoto' flag to 'true' in localStorage
+      setItem("showWelcomePhoto", response.data.success);
+      setItem("logged", response.data.success);
+    } else {
+      // If the server indicates failure, handle accordingly
+      handleNotSuccess(response.data);
+    }
+    
+  } catch (error) {
+    handleServerError(form,error)
   }
 }
 // Function to handle user logout

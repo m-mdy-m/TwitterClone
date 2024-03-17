@@ -10,7 +10,7 @@ export function handleNotSuccess(data) {
   // Add error message styling to message element
   msgElm.classList.add("msg-errors");
   // Extract error message from server response data
-  const message = data.message;
+  const message = data.message || data.error;
   // Display error message to the user
   showMessage(msgElm, message, "#944E63");
 }

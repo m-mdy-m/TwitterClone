@@ -2,7 +2,6 @@ exports.findUser = async (req, { status, getJsonHandler }) => {
   const { notFound,internalServerError } = getJsonHandler();
   try {
     const user =req.user
-    console.log('user =>',user);
     if (!user) {
       // If user is not found, send a 404 Not Found response
       return notFound("User not found");

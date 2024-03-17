@@ -44,7 +44,16 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
         password: hashedPassword,
       });
       // Generate JWT token with user information
-      const token = jwt().jwtSign(newUser, process.env.JWT_SECRET);
+      const token = jwt().jwtSign(
+        {
+          username: newUser.username,
+          userId: newUser._id,
+          email: newUser.email,
+          profilePic: newUser.profilePic,
+          likes: newUser.likes,
+        },
+        process.env.JWT_SECRET
+      );
       req.session.token = token;
       // Send success response
       return created({ token });
