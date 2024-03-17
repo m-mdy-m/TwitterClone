@@ -23,7 +23,6 @@ const msgElm = getMsgElement();
 export async function authenticateUser(url, requestData, header, form) {
   try {
     const response = await axios.post(url, requestData, header);
-    console.log("response Auth =>", response);
     // Handle server response based on success or failure
     if (response.data.success) {
       const token = response.data.data.token;

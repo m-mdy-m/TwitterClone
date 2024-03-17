@@ -47,9 +47,6 @@ function renderTweet(tweet,userInfo) {
   const {  likes } = userInfo
   try {
     const isLiked = likes.some((like) => like === _id);
-    console.log('isLiked=>',isLiked);
-    console.log('_id=>',_id);
-    console.log('likes=>',likes);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
