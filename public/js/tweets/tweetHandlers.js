@@ -1,10 +1,13 @@
 import Tweet from "../components/Tweet.js";
+import { showMessage } from "../utils/helper.js";
 import {
   calculateLikeCount,
   getCurrentTimeFormatted,
+  getMsgElement,
 } from "../utils/utils.js";
 import { handleClick } from "./Like.js";
 const wrapper = document.getElementById("wrapperTweet");
+const msgELm = getMsgElement()
 
 // Function to add a single tweet to the UI
 export function AddTweet(response,userInfo) {
@@ -41,11 +44,15 @@ export function ShowTweets(response,userInfo) {
 
 // Function to render a single tweet template
 function renderTweet(tweet,userInfo) {
+  // Ensure the tweet and user information are provided
+  if (!tweet || !userInfo) {
+    showMessage(msgELm, 'Error: Invalid tweet or user information.', '#ff6347');
+  }
+  try {
   // Extract relevant data from the tweet object
   const { postedBy, content, createdAt, _id } = tweet;
   const { username, profilePic } = postedBy;
   const {  likes } = userInfo
-  try {
     const isLiked = likes.some((like) => like === _id);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
@@ -66,7 +73,7 @@ function renderTweet(tweet,userInfo) {
     });
   } catch (error) {
     // Handle any errors that occur during the asynchronous operation
-    console.error('Error fetching user data:', error);
+    showMessage(msgELm, 'Error rendering tweet. Please try again.', '#ff6347');
     // Return null or handle the error in another appropriate way
     return null;
   }
