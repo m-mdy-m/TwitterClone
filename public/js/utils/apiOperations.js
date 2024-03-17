@@ -154,7 +154,7 @@ export async function toggleLike(id) {
       saveToken(response.data.data.token);
       
       // Get updated count of likes
-      const countLike = response.data.data.likes;
+      const countLike = response.data.data.likes.length;
       return countLike;
     } else {
       // Show error message with appropriate color

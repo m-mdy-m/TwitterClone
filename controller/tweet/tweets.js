@@ -118,7 +118,7 @@ exports.putLike = async (req, { getJsonHandler,getCookieHandler }) => {
     req.session.token = token;
     
     // Return a success response with the updated number of likes
-    return updated({ token,likes:updatedTweet.likes.length });
+    return updated({ token,likes:updatedTweet.likes });
   } catch (error) {
     // Handle any internal server errors
     internalServerError('Internal server error. Please try again later.');

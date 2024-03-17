@@ -1,4 +1,4 @@
-import { toggleLike } from "../utils/apiOperations.js";
+import { getUserInfo, toggleLike } from "../utils/apiOperations.js";
 import { getId } from "../utils/helper.js";
 
 export async function handleClick(event) {
@@ -6,17 +6,25 @@ export async function handleClick(event) {
   try {
     const id = getId(elm);
     const count = await toggleLike(id);
-    console.log('id=>',id);
-    console.log('count=>',count);
-    // Update the like button based on the fetched count
-    const pTag = elm.nextElementSibling;
-    if (count > 0) {
-      pTag.innerHTML = count;
-      elm.src = "/assets/icon/nav/heart-full.svg";
-    } else {
-      pTag.innerHTML = null;
-      elm.src = "/assets/icon/nav/heart-null.svg";
+    const user = await getUserInfo();
+    const isLikedUser = user.likes.some((like) => like === id);
+    // Construct the updated HTML content based on the like count and user's like status
+    let htmlContent = '';
+    if(isLikedUser){
+      htmlContent = count
+      elm.src = "/assets/icon/nav/heart-full.svg"
+    }else{
+      if (count > 0) {
+        htmlContent = count;
+        elm.src = "/assets/icon/nav/heart-null.svg";
+      } else {
+        htmlContent = null;
+      }
     }
+    // Get the sibling paragraph tag for count display
+    const pTag = elm.nextElementSibling;
+    // Update the HTML content of the sibling paragraph tag
+    pTag.innerHTML = htmlContent;
     // Add animation if the count is greater than 0 (first time like)
     if (count === 1) {
       elm.classList.add("heart-icon");

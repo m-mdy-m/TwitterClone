@@ -7,7 +7,6 @@ import {
   updateCharCount,
   hideIconOnFocus,
   showIconOnBlur,
-  handleKeyDown,
 } from "./utils/helper.js";
 import { getPath, isAuth } from "./utils/utils.js";
 
