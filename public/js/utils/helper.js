@@ -137,22 +137,35 @@ export async function getAuthHeaders() {
  * Adjusts styles based on the length and validation status.
  */
 export function updateCharCount(e) {
-  const tweet = e.target.value;
-  const validation = validateTweet(tweet);
-  let currentLength = e.target.value.length;
-  const textarea = e.target;
-  charCount.textContent = `${currentLength}/${maxLength}`;
-  // Change color if exceeding maximum limit
-  if (currentLength > maxLength) {
-    charCount.style.color = "red";
-    textarea.style.cssText = "border-color:red;";
-    return { valid: validation.valid, message: validation.message };
-  } else if (!validation.valid) {
-    return { valid: validation.valid, message: validation.message };
-  } else {
-    charCount.style.color = "rgb(107, 114, 128)";
-    textarea.style.cssText = "border-color: #343435;";
-    return { valid: validation.valid, value: validation.value };
+  try {
+    const tweet = e.target.value;
+    const validation = validateTweet(tweet);
+    let currentLength = e.target.value.length;
+    const textarea = e.target;
+
+    // Update the character count display
+    charCount.textContent = `${currentLength}/${maxLength}`;
+
+    // Change color and adjust styles based on tweet length and validation
+    if (currentLength > maxLength) {
+      charCount.style.color = "red";
+      textarea.style.cssText = "border-color: red;";
+      // Return validation status and message
+      return { valid: validation.valid, message: validation.message };
+    } else if (!validation.valid) {
+      // Return validation status and message if tweet is invalid
+      return { valid: validation.valid, message: validation.message };
+    } else {
+      charCount.style.color = "rgb(107, 114, 128)";
+      textarea.style.cssText = "border-color: #343435;";
+      // Return validation status and validated tweet value
+      return { valid: validation.valid, value: validation.value };
+    }
+  } catch (error) {
+    // Display a generic error message for updating character count
+    showMessage(msgElm, 'Error updating character count. Please try again.', '#ff6347');
+    // Return validation status indicating an error
+    return { valid: false, message: "Error updating character count." };
   }
 }
 /**
