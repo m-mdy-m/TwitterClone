@@ -52,7 +52,7 @@ export async function handleClick(event) {
     showMessage(
       msgElm,
       "Sorry, we couldn't process your like at the moment. Please try again later.",
-      "#FF0000"
+      "#B71C1C"
     );
   }
 }
