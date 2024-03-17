@@ -146,8 +146,22 @@ export async function sendRequest(url, data = {}) {
 
     return response;
   } catch (error) {
-    // Display error message
-    showMessage(msgElm, 'An error occurred while processing your request. Please try again later.', '#ff6347');
+    console.error('Error in sendRequest:', error);
+    let errorMessage = "An unexpected error occurred. Please try again.";
+    let color = "#ff6347"; 
+    if (error.response) {
+      // Server responded with an error status code
+      errorMessage = "The server encountered an error. Please try again later.";
+      color = "#ff0000"; // Red color for server errors
+    } else if (error.request) {
+      // Request was made but no response was received
+      errorMessage = "No response received from the server. Please try again.";
+      color = "#ffa500"; // Orange color for network errors
+    } else {
+      // Error occurred while setting up the request
+      errorMessage = "Error setting up the request. Please try again.";
+    }
+    showMessage(msgElm, errorMessage, color);
   }
 }
 
@@ -171,20 +185,11 @@ export async function toggleLike(id) {
       return countLike;
     } else {
       // Show error message with appropriate color
-      showMessage(msgElm, "Failed to toggle like. Please try again.", "#ff6347");
+      showMessage(msgElm, "Failed to toggle like. Please try again.", "#b22222");
     }
   } catch (error) {
-    // Check different types of errors and display appropriate messages
-    if (error.response) {
-      // Server responded with an error status code
-      showMessage(msgElm, "Server responded with an error. Please try again.", "#ff6347");
-    } else if (error.request) {
-      // Request was made but no response was received
-      showMessage(msgElm, "No response received from server. Please try again.", "#ff6347");
-    } else {
-      // Error occurred while setting up the request
-      showMessage(msgElm, "Error setting up the request. Please try again.", "#ff6347");
-    }
+    // If an unexpected error occurs, show a general error message
+    showMessage(msgElm, 'An unexpected error occurred. Please try again.', '#ff6347'); 
   }
 }
 
