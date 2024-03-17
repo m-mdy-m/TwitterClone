@@ -140,9 +140,8 @@ export async function sendRequest(url, data = {}) {
   try {
     // Get authorization headers
     const headers = await getAuthHeaders();
-  
     // Send request with authorization headers
-    const response = await axios.put(`/api/${url}`, data, { headers });
+    const response = await axios.put(`/api/${url}`, data,headers);
 
     return response;
   } catch (error) {
