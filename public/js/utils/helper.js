@@ -148,10 +148,10 @@ export function updateCharCount(e) {
     // Check if the Enter key is pressed (keyCode 13 for Enter key)
     if (e.keyCode === 13 && !event.shiftKey) {
         // Call adjustStyles to handle Enter key press event
-        adjustStyles(currentLength, maxLength, charCount, textarea, validation);
+        return  adjustStyles(currentLength, maxLength, charCount, textarea, validation);
     }
      // Call adjustStyles to handle Enter key press event
-     adjustStyles(currentLength, maxLength, charCount, textarea, validation);
+     return  adjustStyles(currentLength, maxLength, charCount, textarea, validation);
   } catch (error) {
     // Display a generic error message for updating character count
     showMessage(msgElm, 'Error updating character count. Please try again.', '#ff6347');
