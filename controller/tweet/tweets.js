@@ -32,7 +32,6 @@ exports.postTweet = async (req, { getJsonHandler }) => {
 
     // Populate the 'postedBy' field to include user details in the post
     const result = await PostTweet.populate(post, { path: "postedBy" });
-    console.log('result =>',result);
     // Send a successful response with the created post
     created(result);
   } catch (error) {
@@ -44,10 +43,8 @@ exports.getTweets = async (req, res) => {
   try {
     // Fetch tweets from the database and sort them in descending order of createdAt
     const tweets = await PostTweet.find().sort({ createdAt: -1 });
-    console.log('tweets =>',tweets);
     // Populate the 'postedBy' field to include user details in the post
     const result = await PostTweet.populate(tweets, { path: "postedBy" });
-    console.log('result =>',result);
     // Send JSON response with success true and tweet data
     res.status(200).json({
       success: true,

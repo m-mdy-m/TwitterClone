@@ -71,7 +71,6 @@ export async function getUserInfo() {
     // Return user information
     return { email, likes, profilePic, username };
   } catch (error) {
-    console.log("error =>", error);
     // Handle errors
     showMessage(
       msgElm,
