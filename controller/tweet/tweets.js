@@ -68,9 +68,9 @@ exports.putLike = async (req, {  getJsonHandler }) => {
     const id = req.param("id");
     const user = req.user;
     const tweet = await PostTweet.findById(id);
-    console.log('+>',tweet);
+    console.log('user>',user);
+    console.log('tweet+>',tweet);
     const isLike = isIdLiked([tweet, user], id);
-    console.log('isLike+>',isLike);
     const option = isLike ? "$pull" : "$addToSet";
     console.log('option=>',option);
     const { query, updateQuery } = createQueries(option, user.userId, id);
