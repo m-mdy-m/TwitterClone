@@ -135,6 +135,17 @@ export async function tweetCreation(data) {
     showMessage(msgElm, response.data.error, "ffd700");
   }
 }
+
+export async function sendRequest(url, data = {}) {
+  // Get authorization headers
+  const header = await getAuthHeaders();
+  
+  // Send request with authorization headers
+  const response = await axion.put(`/api/${url}`,data,header)
+
+  return response;
+}
+
 /**
  * Toggles the like status of a tweet.
  * @param {string} id - The ID of the tweet to toggle the like status for.
@@ -142,11 +153,8 @@ export async function tweetCreation(data) {
  */
 export async function toggleLike(id) {
   try {
-    // Get authorization headers
-    const header = await getAuthHeaders();
-    
     // Send request to toggle like status
-    const response = await axios.put(`/api/like/${id}`, {}, header);
+    const response = await sendRequest(`like/${id}`)
 
     // Check if request was successful
     if (response.data.success) {
@@ -175,3 +183,12 @@ export async function toggleLike(id) {
   }
 }
 
+export async function toggleRetweet(id){
+  try {
+     // Send request to toggle like status
+     const response = await sendRequest(`retweet/${id}`)
+     console.log('response retweet =>',response)
+  } catch (error) {
+    console.log('error +>',error);
+  }
+}

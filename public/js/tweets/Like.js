@@ -1,4 +1,4 @@
-import { getUserInfo, toggleLike } from "../utils/apiOperations.js";
+import { getUserInfo, toggleLike, toggleRetweet } from "../utils/apiOperations.js";
 import { getId, showMessage } from "../utils/helper.js";
 import { getMsgElement } from "../utils/utils.js";
 const msgElm = getMsgElement();
@@ -18,6 +18,7 @@ export async function handleClick(event) {
         const count = await toggleLike(id);
         updateUI(elm, count, id);
       } else if (currentClick === 'retweetIcon') {
+        const count = await toggleRetweet(id);
         console.log('Retweet icon clicked');
         // Handle retweet logic
       } else if (currentClick === 'shareIcon') {
