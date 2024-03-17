@@ -5,7 +5,16 @@ export const getPath = () => window.location.pathname;
 export const getMsgElement = () => document.getElementById("msgElm");
 
 // Utility function to check if the user is authenticated
-export const isAuth = () => localStorage.getItem("logged");
+export const isAuth = () => {
+  const token = getToken();
+  const logged = localStorage.getItem("logged");
+  // Check if both token and logged flag are present
+  if (token && logged) {
+    return true; // User is authenticated
+  } else {
+    return false; // User is not authenticated
+  }
+};
 
 // Utility function to check if the welcome photo should be shown
 export const showWelcome = () => localStorage.getItem("showWelcomePhoto");
@@ -17,7 +26,8 @@ export const clearAuth = () => localStorage.removeItem("logged");
 export const setItem = (key, value) => localStorage.setItem(key, value);
 
 // Utility function to clear the welcome photo flag from localStorage
-export const clearWelcomePhotoFlag = () => localStorage.removeItem("showWelcomePhoto");
+export const clearWelcomePhotoFlag = () =>
+  localStorage.removeItem("showWelcomePhoto");
 
 // Function to calculate the number of likes for a tweet
 export const calculateLikeCount = (tweet) =>
@@ -86,7 +96,6 @@ export default async function getCSRFToken() {
   }
 }
 
-
 /**
  * Saves the token in a cookie.
  * @param {string} token - The token to be saved in the cookie.
@@ -99,8 +108,8 @@ export function saveToken(token) {
  * Removes the token cookie.
  */
 export function removeToken() {
-    // Set the expiration date to a past time
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  // Set the expiration date to a past time
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 /**
  * Retrieves the value of the token cookie.
@@ -119,19 +128,19 @@ export function getToken() {
 export function getCookieValue(cookieName) {
   // Splits the document cookies string into individual cookies
   const cookies = document.cookie.split("; ");
-  
+
   // Iterates through each cookie to find the one with the specified name
   for (const cookie of cookies) {
     // Splits each cookie into its name and value parts
     const [name, value] = cookie.split("=");
-    
+
     // Checks if the current cookie's name matches the specified cookie name
     if (name === cookieName) {
       // Returns the value of the matched cookie
       return value;
     }
   }
-  
+
   // Returns null if the specified cookie is not found
   return null;
 }

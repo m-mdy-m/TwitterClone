@@ -6,16 +6,22 @@ const msgElm = getMsgElement();
 // Function to handle the click event
 export async function handleClick(event) {
   const elm = event.target;
-  console.log('elm +>',elm);
+  const idIcons = ['likeIcon','retweetIcon','shareIcon','commentIcon']
+  const currentClick = elm.id
+  console.log('currentClick=>',currentClick)
   try {
     // Get the ID of the element
     const id = getId(elm);
-
     // Toggle the like and get the updated count
-    const count = await toggleLike(id);
-
-    // Update the UI based on the updated count and user's like status
-    updateUI(elm, count, id);
+    if(currentClick.includes(idIcons)){
+      console.log('is ok')
+      const count = await toggleLike(id);
+      
+      // Update the UI based on the updated count and user's like status
+      updateUI(elm, count, id);
+    }else{
+      console.log('hi')
+    }
   } catch (error) {
     // Handle errors gracefully
     handleError(elm);

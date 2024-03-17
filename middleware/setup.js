@@ -1,5 +1,4 @@
 const Xprz = require("xprz");
-
 const {Package } = new Xprz();
 const { session, connectMongoDbSession, csrf } = new Package();
 
