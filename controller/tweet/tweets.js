@@ -1,5 +1,8 @@
+const Xprz = require("xprz");
 const PostTweet = require("../../model/PostTweet");
 const User = require("../../model/User");
+const { Package } = new Xprz();
+const { jwt } = new Package();
 const { isIdLiked, createQueries } = require("../../utils/helperFunc");
 // Controller function to handle POST request to create a tweet
 exports.postTweet = async (req, { getJsonHandler }) => {
@@ -69,8 +72,9 @@ exports.putLike = async (req, { status, getJsonHandler }) => {
   const { query, updateQuery } = createQueries(option, user.id, id);
   const [updatedUser, updatedTweet] = await Promise.all([
     User.findByIdAndUpdate(user, updateQuery, { new: true }),
-    PostTweet.findByIdAndUpdate(id, query, { new: true })
+    PostTweet.findByIdAndUpdate(id, query, { new: true }),
   ]);
-  req.session.user = updatedUser;
-  updated(updatedTweet);
+  const token = jwt().jwtSign({ user: updatedUser }, process.env.JWT_SECRET);
+  req.session.token = token;
+  return updated({token});
 };
