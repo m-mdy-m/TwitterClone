@@ -15,8 +15,7 @@ export async function handleClick(event) {
     const count = await toggleLike(id);
 
     // Update the UI based on the updated count and user's like status
-    updateUI(elm, count,id);
-
+    updateUI(elm, count, id);
   } catch (error) {
     // Handle errors gracefully
     handleError(elm);
@@ -24,7 +23,7 @@ export async function handleClick(event) {
 }
 
 // Function to update UI based on like count and user's like status
-async function updateUI(elm, count,id) {
+async function updateUI(elm, count, id) {
   // Get user information
   const user = await getUserInfo();
 
@@ -32,7 +31,7 @@ async function updateUI(elm, count,id) {
   const isLikedUser = user.likes.includes(id);
 
   // Construct the updated HTML content based on the like count and user's like status
-  let htmlContent = '';
+  let htmlContent = "";
 
   if (isLikedUser) {
     htmlContent = count;
@@ -53,7 +52,7 @@ async function updateUI(elm, count,id) {
   pTag.innerHTML = htmlContent;
 
   // Add or remove animation based on like count
-  if (count === 1) {
+  if (count <= 1) {
     elm.classList.add("heart-icon");
   } else {
     elm.classList.remove("heart-icon");
@@ -71,4 +70,3 @@ function handleError(elm) {
     "#B71C1C"
   );
 }
-
