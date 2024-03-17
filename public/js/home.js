@@ -26,7 +26,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       textarea.addEventListener("focus", hideIconOnFocus);
       textarea.addEventListener("blur", showIconOnBlur);
       textarea.addEventListener("input", updateCharCount);
-      textarea.addEventListener("keydown", createTweet(updateCharCount({target:textarea})));
+      textarea.addEventListener("keydown", (event) => {
+        if (event.keyCode === 13 && !event.shiftKey) {
+          createTweet(updateCharCount(event));
+        } else {
+          updateCharCount(event);
+        }
+      });
     }
     const header = document.querySelector("header");
     const { username, profilePic } = await getUserInfo();
