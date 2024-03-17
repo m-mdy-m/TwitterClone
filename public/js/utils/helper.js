@@ -107,7 +107,7 @@ export function getId(el) {
 export async function getAuthHeaders() {
   // Fetch CSRF token asynchronously
   const csrfToken = await getCSRFToken();
-  
+  console.log('csrfToken=>',csrfToken);
   // If CSRF token is missing or invalid, display an error message and return early
   if (!csrfToken) {
     msgElm.style.display = "block";
@@ -121,16 +121,6 @@ export async function getAuthHeaders() {
   
   // Retrieve JWT token
   const token = getToken();
-  // If JWT token is missing, display an error message and return early
-  if (!token) {
-    msgElm.style.display = "block";
-    showMessage(
-      msgElm,
-      "JWT token is missing.", 
-      "#ff6347" 
-    );
-    return;
-  }
   // Construct headers object including CSRF token and JWT token
   const header = {
     headers: {
