@@ -66,7 +66,7 @@ exports.putLike = async (req, { getJsonHandler }) => {
   try {
     const { updated } = getJsonHandler();
     const id = req.param("id");
-    const user = req.session.user
+    const user = req.user
     console.log('user =>',user)
     const tweet = await PostTweet.findById(id);
     const isLike = isIdLiked([tweet, user], id);
@@ -76,8 +76,17 @@ exports.putLike = async (req, { getJsonHandler }) => {
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
       PostTweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
-    // Update session with updated user information
-    return updated({ likes: updateTweet.likes });
+    
+    const token = jwt().jwtSign({
+      username: updatedUser.username,
+      userId: updatedUser._id,
+      email: updatedUser.email,
+      profilePic: updatedUser.profilePic,
+      likes: updatedUser.likes,
+    }, process.env.JWT_SECRET);   
+    // Set user session
+    req.session.token = token;
+    return updated({ token,TweetInfo:updateTweet });
   } catch (error) {
     console.log("error =>", error);
   }
