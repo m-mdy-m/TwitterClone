@@ -63,9 +63,10 @@ exports.getTweets = async (req, res) => {
   }
 };
 
-exports.putLike = async (req, { getJsonHandler }) => {
+exports.putLike = async (req, { getJsonHandler,getCookieHandler }) => {
   // Destructure the error handling functions from getJsonHandler
   const { updated, badRequest, authRequired, notFound, internalServerError } = getJsonHandler();
+  const { }  = getCookieHandler()
   
   try {
     // Extract the tweet ID from the request parameters
@@ -117,7 +118,7 @@ exports.putLike = async (req, { getJsonHandler }) => {
     req.session.token = token;
     
     // Return a success response with the updated number of likes
-    return updated({ likes: updatedTweet.likes.length });
+    return updated({ token,likes:updatedTweet.likes.length });
   } catch (error) {
     // Handle any internal server errors
     internalServerError('Internal server error. Please try again later.');

@@ -23,7 +23,7 @@ const msgElm = getMsgElement();
 export async function authenticateUser(url, requestData, header, form) {
   try {
     const response = await axios.post(url, requestData, header);
-    console.log('response Auth =>',response);
+    console.log("response Auth =>", response);
     // Handle server response based on success or failure
     if (response.data.success) {
       const token = response.data.data.token;
@@ -37,9 +37,8 @@ export async function authenticateUser(url, requestData, header, form) {
       // If the server indicates failure, handle accordingly
       handleNotSuccess(response.data);
     }
-    
   } catch (error) {
-    handleServerError(form,error)
+    handleServerError(form, error);
   }
 }
 // Function to handle user logout
@@ -137,15 +136,43 @@ export async function tweetCreation(data) {
     showMessage(msgElm, response.data.error, "ffd700");
   }
 }
-// Function to toggle like on a tweet
+/**
+ * Toggles the like status of a tweet.
+ * @param {string} id - The ID of the tweet to toggle the like status for.
+ * @returns {number} - The updated count of likes for the tweet.
+ */
 export async function toggleLike(id) {
   try {
+    // Get authorization headers
     const header = await getAuthHeaders();
+    
+    // Send request to toggle like status
     const response = await axios.put(`/api/like/${id}`, {}, header);
-    saveToken(response.data.data.token)
-    const countLike = response.data.data.TweetInfo.likes.length;
-    return countLike;
+
+    // Check if request was successful
+    if (response.data.success) {
+      // Save updated token
+      saveToken(response.data.data.token);
+      
+      // Get updated count of likes
+      const countLike = response.data.data.likes;
+      return countLike;
+    } else {
+      // Show error message with appropriate color
+      showMessage(msgElm, "Failed to toggle like. Please try again.", "#ff6347");
+    }
   } catch (error) {
-    console.log("error =>", error);
+    // Check different types of errors and display appropriate messages
+    if (error.response) {
+      // Server responded with an error status code
+      showMessage(msgElm, "Server responded with an error. Please try again.", "#ff6347");
+    } else if (error.request) {
+      // Request was made but no response was received
+      showMessage(msgElm, "No response received from server. Please try again.", "#ff6347");
+    } else {
+      // Error occurred while setting up the request
+      showMessage(msgElm, "Error setting up the request. Please try again.", "#ff6347");
+    }
   }
 }
+
