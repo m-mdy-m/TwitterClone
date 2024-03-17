@@ -11,4 +11,12 @@ exports.ensureAuthenticated = (req, res, next) => {
   }
   return res.status(401).redirect("/auth/login");
 };
-exports.verifyToken = jwt().jwtAuthenticate(process.env.JWT_SECRET);
+/**
+ * Middleware to verify JWT token extracted from cookies.
+ */
+exports.verifyToken = (req, res, nxt) => {
+  const token = req.cookies.token;
+  req.headers.authorization = `Bearer ${token}`;
+  jwt().jwtAuthenticate(process.env.JWT_SECRET)(req, res, nxt);
+};
+

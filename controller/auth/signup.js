@@ -35,8 +35,6 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
         // Generate JWT token with user information
         const token = jwt().jwtSign({userId: newUser._id,username : newUser.username,email:newUser.email}, process.env.JWT_SECRET)
         req.session.token = token;
-        // Include JWT token in Authorization header
-        req.headers.authorization = `Bearer ${token}`;
         // Send success response
         return created({token});
       }
