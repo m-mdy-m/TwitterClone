@@ -107,7 +107,6 @@ export function getId(el) {
 export async function getAuthHeaders() {
   // Fetch CSRF token asynchronously
   const csrfToken = await getCSRFToken();
-  console.log('csrfToken=>',csrfToken);
   // If CSRF token is missing or invalid, display an error message and return early
   if (!csrfToken) {
     msgElm.style.display = "block";

@@ -66,20 +66,19 @@ export async function getUserInfo() {
     const header = await getAuthHeaders()
     console.log('header=>',header);
     const response = await axios.get('/user-info',{},header);
-    console.log('response=>',response);
     // Extract relevant data from the response
     const { email, likes, profilePic,username } = response.data.data;
 
     // Return user information
     return { email, likes, profilePic, username };
   } catch (error) {
-    console.log('error =>',error);
     // Handle errors
     showMessage(
       msgElm,
       "Failed to fetch user data. Please try again later.",
       "#FF6347"
     );
+    throw error; // Re-throw the error to handle it elsewhere if needed
   }
 }
 
