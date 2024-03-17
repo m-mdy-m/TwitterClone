@@ -32,7 +32,7 @@ exports.postTweet = async (req, { getJsonHandler }) => {
 
     // Populate the 'postedBy' field to include user details in the post
     const result = await PostTweet.populate(post, { path: "postedBy" });
-
+    console.log('result =>',result);
     // Send a successful response with the created post
     created(result);
   } catch (error) {
