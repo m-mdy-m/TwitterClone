@@ -52,7 +52,8 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
           profile: newUser.profilePic,
           likes: newUser.likes,
         },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET,
+        
       );
       req.session.token = token;
       // Send success response
