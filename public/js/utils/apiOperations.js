@@ -21,7 +21,7 @@ const msgElm = getMsgElement();
 // Function to Signup or Login user
 export async function authenticateUser(url, requestData, header, form) {
   const response = await axios.post(url, requestData, header);
-  console.log('response=>',response);
+  console.log("response=>", response);
   // Handle server response based on success or failure
   if (response.data.success) {
     const token = response.data.data.token;
@@ -63,15 +63,16 @@ export async function logoutUser(header) {
 export async function getUserInfo() {
   try {
     // Make a GET request to fetch user information
-    const header = await getAuthHeaders()
-    console.log('header=>',header);
-    const response = await axios.get('/user-info',{},header);
+    const header = await getAuthHeaders();
+    const response = await axios.get("/user-info", {}, header);
+    console.log("response=>", response);
     // Extract relevant data from the response
-    const { email, likes, profilePic,username } = response.data.data;
+    const { email, likes, profilePic, username } = response.data.data;
 
     // Return user information
     return { email, likes, profilePic, username };
   } catch (error) {
+    console.log("error =>", error);
     // Handle errors
     showMessage(
       msgElm,
@@ -85,10 +86,10 @@ export async function getUserInfo() {
 // Function to fetch tweets from the API
 export async function getTweets() {
   try {
-    const header = await getAuthHeaders()
+    const header = await getAuthHeaders();
     // Make asynchronous calls to fetch tweets and user information in parallel
     const [tweetsResponse, userInfo] = await Promise.all([
-      axios.get("/api/tweets",{},header),
+      axios.get("/api/tweets", {}, header),
       getUserInfo(),
     ]);
     // Check if the request was successful
