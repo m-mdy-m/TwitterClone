@@ -13,7 +13,7 @@ export async function handleClick(event) {
     // Get the ID of the element
     const id = getId(elm);
     // Toggle the like and get the updated count
-    if(currentClick.includes(idIcons)){
+    if(idIcons.includes(currentClick)){
       console.log('is ok')
       const count = await toggleLike(id);
       
