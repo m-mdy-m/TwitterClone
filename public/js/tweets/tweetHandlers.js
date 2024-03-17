@@ -7,14 +7,14 @@ import {
 } from "../utils/utils.js";
 import { handleClick } from "./Like.js";
 const wrapper = document.getElementById("wrapperTweet");
-const msgELm = getMsgElement()
+const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
-export function AddTweet(response,userInfo) {
+export function AddTweet(response, userInfo) {
   // Extract tweet data from the response
   const tweetData = response.data.data;
   // Render the tweet template
-  const tweetTemplate = renderTweet(tweetData,userInfo);
+  const tweetTemplate = renderTweet(tweetData, userInfo);
 
   // Append the rendered tweet template to the wrapper element
   appendTweet("afterbegin", tweetTemplate);
@@ -25,34 +25,45 @@ export function AddTweet(response,userInfo) {
 }
 
 // Function to show multiple tweets in the UI
-export function ShowTweets(response,userInfo) {
-  // Extract tweets array from the response
-  let tweets = response.data.tweets;
-  // Sort the tweets array by createdAt in descending order (newest to oldest)
-  tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+export function ShowTweets(response, userInfo) {
+  try {
+    // Ensure the response contains tweet data
+    if (!response || !response.data || !response.data.tweets) {
+      // Display an error message if the response data is invalid
+      showMessage(msgELm, "Error: Invalid response data.", "#ff6347");
+      return;
+    }
+    // Extract tweets array from the response
+    let tweets = response.data.tweets;
+    // Sort the tweets array by createdAt in descending order (newest to oldest)
+    tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  // Iterate over each tweet and render its template
-  tweets.forEach((tweet) => {
-    const tweetTemplate = renderTweet(tweet,userInfo);
+    // Iterate over each tweet and render its template
+    tweets.forEach((tweet) => {
+      const tweetTemplate = renderTweet(tweet, userInfo);
 
-    // Append the rendered tweet template to the wrapper element
-    appendTweet("beforeend", tweetTemplate);
-  });
-  // Clear the tweet input field after showing tweets
-  clearTweetInput();
+      // Append the rendered tweet template to the wrapper element
+      appendTweet("beforeend", tweetTemplate);
+    });
+    // Clear the tweet input field after showing tweets
+    clearTweetInput();
+  } catch (error) {
+    // Display a generic error message for showing tweets failure
+    showMessage(msgELm, "Error showing tweets. Please try again.", "#ff6347");
+  }
 }
 
 // Function to render a single tweet template
-function renderTweet(tweet,userInfo) {
+function renderTweet(tweet, userInfo) {
   // Ensure the tweet and user information are provided
   if (!tweet || !userInfo) {
-    showMessage(msgELm, 'Error: Invalid tweet or user information.', '#ff6347');
+    showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
   }
   try {
-  // Extract relevant data from the tweet object
-  const { postedBy, content, createdAt, _id } = tweet;
-  const { username, profilePic } = postedBy;
-  const {  likes } = userInfo
+    // Extract relevant data from the tweet object
+    const { postedBy, content, createdAt, _id } = tweet;
+    const { username, profilePic } = postedBy;
+    const { likes } = userInfo;
     const isLiked = likes.some((like) => like === _id);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
@@ -73,7 +84,7 @@ function renderTweet(tweet,userInfo) {
     });
   } catch (error) {
     // Handle any errors that occur during the asynchronous operation
-    showMessage(msgELm, 'Error rendering tweet. Please try again.', '#ff6347');
+    showMessage(msgELm, "Error rendering tweet. Please try again.", "#ff6347");
     // Return null or handle the error in another appropriate way
     return null;
   }
