@@ -137,8 +137,8 @@ export async function toggleLike(id) {
   try {
     const header = await getAuthHeaders();
     const response = await axios.put(`/api/like/${id}`, {}, header);
-    console.log("response =>", response);
-    const countLike = response.data.data.likes.length;
+    console.log("response toggleLike=>", response);
+    const countLike = response.data.tweets.length;
     return countLike;
   } catch (error) {
     console.log("error =>", error);

@@ -63,18 +63,32 @@ exports.getTweets = async (req, res) => {
 };
 
 exports.putLike = async (req, { status, getJsonHandler }) => {
-  const { updated } = getJsonHandler();
-  const id = req.param("id");
-  const user = req.user;
-  const tweet = PostTweet.findById(id);
-  const isLike = isIdLiked([tweet, user], id);
-  const option = isLike ? "$pull" : "$addToSet";
-  const { query, updateQuery } = createQueries(option, user.id, id);
-  const [updatedUser, updatedTweet] = await Promise.all([
-    User.findByIdAndUpdate(user, updateQuery, { new: true }),
-    PostTweet.findByIdAndUpdate(id, query, { new: true }),
-  ]);
-  const token = jwt().jwtSign({ user: updatedUser }, process.env.JWT_SECRET);
-  req.session.token = token;
-  return updated({token});
+  try {
+    const { updated } = getJsonHandler();
+    const id = req.param("id");
+    const user = req.user;
+    const tweet = PostTweet.findById(id);
+    const isLike = isIdLiked([tweet, user], id);
+    const option = isLike ? "$pull" : "$addToSet";
+    const { query, updateQuery } = createQueries(option, user.userId, id);
+    const [updatedUser] = await Promise.all([
+      User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
+      PostTweet.findByIdAndUpdate(id, query, { new: true }),
+    ]);
+    console.log("updatedUser=>", updatedUser);
+    const token = jwt().jwtSign(
+      {
+        userId: updatedUser._id,
+        username: updatedUser.username,
+        email: updatedUser.email,
+        profile: updatedUser.profilePic,
+        likes: updatedUser.likes,
+      },
+      process.env.JWT_SECRET
+    );
+    req.session.token = token;
+    return updated({ token });
+  } catch (error) {
+    console.log("error =>", error);
+  }
 };
