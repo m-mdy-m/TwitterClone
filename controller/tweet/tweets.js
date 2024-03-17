@@ -4,7 +4,7 @@ const User = require("../../model/User");
 const { Package } = new Xprz();
 const { jwt } = new Package();
 const { isIdLiked, createQueries } = require("../../utils/helperFunc");
-const generateAuthToken = $read("utils/generateAuthTokenn");
+const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet
 exports.postTweet = async (req, { getJsonHandler }) => {
   // Extract the request body
@@ -64,24 +64,36 @@ exports.getTweets = async (req, res) => {
 };
 
 exports.putLike = async (req, { getJsonHandler }) => {
+  const { updated, badRequest, authRequired, notFound, internalServerError } =
+    getJsonHandler();
   try {
-    const { updated } = getJsonHandler();
     const id = req.param("id");
-    const user = req.user
+    if (!id) {
+      return badRequest("Invalid request. Please provide a valid tweet ID.");
+    }
+    const user = req.user;
+    if (!user) {
+      return authRequired(
+        "Authentication required. Please log in to perform this action."
+      );
+    }
     const tweet = await PostTweet.findById(id);
+    if (!tweet) {
+      return notFound("Tweet not found. Please provide a valid tweet ID.");
+    }
     const isLike = isIdLiked([tweet, user], id);
     const option = isLike ? "$pull" : "$addToSet";
     const { query, updateQuery } = createQueries(option, user.userId, id);
-    const [updatedUser,updateTweet] = await Promise.all([
+    const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
       PostTweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
-    
-    const token = generateAuthToken()  
+
+    const token = generateAuthToken(updatedUser);
     // Set user session
     req.session.token = token;
-    return updated({ token,TweetInfo:updateTweet });
+    return updated({ likes: updatedTweet.likes.length });
   } catch (error) {
-    console.log("error =>", error);
+    internalServerError('Internal server error. Please try again later.');
   }
 };

@@ -1,6 +1,7 @@
 const { isPassword, isEmail, isUsername } = require("vfyjs");
 const Xprz = require("xprz");
 const path = require("path");
+const generateAuthToken = $read("utils/generateAuthToken");
 const { Package } = new Xprz();
 const { bcryptjs, jwt } = new Package();
 const User = $read("model/User");
@@ -44,16 +45,7 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
         password: hashedPassword,
       });
       // Generate JWT token with user information
-      const token = jwt().jwtSign(
-        {
-          username: newUser.username,
-          userId: newUser._id,
-          email: newUser.email,
-          profilePic: newUser.profilePic,
-          likes: newUser.likes,
-        },
-        process.env.JWT_SECRET
-      );
+      const token = generateAuthToken(newUser)
       req.session.token = token;
       // Send success response
       return created({ token });
