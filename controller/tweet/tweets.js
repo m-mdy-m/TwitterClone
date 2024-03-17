@@ -67,6 +67,7 @@ exports.putLike = async (req, { getJsonHandler }) => {
     const { updated } = getJsonHandler();
     const id = req.param("id");
     const user = req.session.user
+    console.log('user =>',user)
     const tweet = await PostTweet.findById(id);
     const isLike = isIdLiked([tweet, user], id);
     const option = isLike ? "$pull" : "$addToSet";
@@ -75,7 +76,6 @@ exports.putLike = async (req, { getJsonHandler }) => {
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
       PostTweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
-    console.log('=>',updatedUser)
     // Generate JWT token with user information
     const token = jwt().jwtSign(
       {
