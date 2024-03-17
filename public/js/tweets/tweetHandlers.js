@@ -115,9 +115,23 @@ function clearTweetInput() {
 
 // Attaches click event listeners to all elements with the class "icons".
 export function attachIconClickListeners() {
-  // Select all elements with the class "icons"
-  document.querySelectorAll(".icons").forEach((icon) => {
+  try {
+    // Select all elements with the class "icons"
+    const icons = document.querySelectorAll(".icons");
+    
+    // Check if any icons are found
+    if (!icons || icons.length === 0) {
+      // Display an error message if no icons are found
+      showMessage(msgELm, 'No icons found.', '#ff6347');
+      return;
+    }
+
     // Attach a click event listener to each icon
-    icon.addEventListener("click", handleClick);
-  });
+    icons.forEach((icon) => {
+      icon.addEventListener("click", handleClick);
+    });
+  } catch (error) {
+    // Display a generic error message for attaching icon click listeners
+    showMessage(msgELm, 'Error attaching icon click listeners. Please try again.', '#ff6347');
+  }
 }
