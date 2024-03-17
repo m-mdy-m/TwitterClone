@@ -90,7 +90,7 @@ exports.putLike = async (req, { getJsonHandler }) => {
       process.env.JWT_SECRET
     );
     // Update session with updated user information
-    req.session.user = updatedUser;
+    req.user = updatedUser;
     req.session.token = token
     console.log("updatedUser>", updatedUser);
     console.log("updateTweet+>", updateTweet);
