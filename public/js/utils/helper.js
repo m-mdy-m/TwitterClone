@@ -145,22 +145,13 @@ export function updateCharCount(e) {
 
     // Update the character count display
     charCount.textContent = `${currentLength}/${maxLength}`;
-
-    // Change color and adjust styles based on tweet length and validation
-    if (currentLength > maxLength) {
-      charCount.style.color = "red";
-      textarea.style.cssText = "border-color: red;";
-      // Return validation status and message
-      return { valid: validation.valid, message: validation.message };
-    } else if (!validation.valid) {
-      // Return validation status and message if tweet is invalid
-      return { valid: validation.valid, message: validation.message };
-    } else {
-      charCount.style.color = "rgb(107, 114, 128)";
-      textarea.style.cssText = "border-color: #343435;";
-      // Return validation status and validated tweet value
-      return { valid: validation.valid, value: validation.value };
+    // Check if the Enter key is pressed (keyCode 13 for Enter key)
+    if (e.keyCode === 13 && !event.shiftKey) {
+        // Call adjustStyles to handle Enter key press event
+        adjustStyles(currentLength, maxLength, charCount, textarea, validation);
     }
+     // Call adjustStyles to handle Enter key press event
+     adjustStyles(currentLength, maxLength, charCount, textarea, validation);
   } catch (error) {
     // Display a generic error message for updating character count
     showMessage(msgElm, 'Error updating character count. Please try again.', '#ff6347');
@@ -191,4 +182,29 @@ export function validateTweet(tweet) {
   }
   // If all checks pass, the tweet is considered valid
   return { valid: true, value: value };
+}
+/**
+ * Adjusts the color and styles of the character count display based on tweet length and validation.
+ * @param {number} currentLength - The current length of the tweet.
+ * @param {number} maxLength - The maximum allowed length for the tweet.
+ * @param {HTMLElement} charCount - The element displaying the character count.
+ * @param {HTMLElement} textarea - The textarea element for the tweet.
+ * @param {Object} validation - The validation result object containing validity status and message.
+ */
+function adjustStyles(currentLength, maxLength, charCount, textarea, validation) {
+  // Change color and adjust styles based on tweet length and validation
+  if (currentLength > maxLength) {
+    charCount.style.color = "red";
+    textarea.style.cssText = "border-color: red;";
+    // Return validation status and message
+    return { valid: validation.valid, message: validation.message };
+  } else if (!validation.valid) {
+    // Return validation status and message if tweet is invalid
+    return { valid: validation.valid, message: validation.message };
+  } else {
+    charCount.style.color = "rgb(107, 114, 128)";
+    textarea.style.cssText = "border-color: #343435;";
+    // Return validation status and validated tweet value
+    return { valid: validation.valid, value: validation.value };
+  }
 }
