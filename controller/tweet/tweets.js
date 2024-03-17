@@ -66,18 +66,16 @@ exports.putLike = async (req, { getJsonHandler }) => {
   try {
     const { updated } = getJsonHandler();
     const id = req.param("id");
-    const user = req.user;
+    const user = req.session.user
     const tweet = await PostTweet.findById(id);
-    console.log("user>", user);
-    console.log("tweet+>", tweet);
     const isLike = isIdLiked([tweet, user], id);
     const option = isLike ? "$pull" : "$addToSet";
-    console.log("option=>", option);
     const { query, updateQuery } = createQueries(option, user.userId, id);
     const [updatedUser,updateTweet] = await Promise.all([
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
       PostTweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
+    console.log('=>',updatedUser)
     // Generate JWT token with user information
     const token = jwt().jwtSign(
       {
@@ -90,10 +88,8 @@ exports.putLike = async (req, { getJsonHandler }) => {
       process.env.JWT_SECRET
     );
     // Update session with updated user information
-    req.user = updatedUser;
+    req.session.user = updatedUser;
     req.session.token = token
-    console.log("updatedUser>", updatedUser);
-    console.log("updateTweet+>", updateTweet);
     return updated({ likes: updateTweet.likes });
   } catch (error) {
     console.log("error =>", error);
