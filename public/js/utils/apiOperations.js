@@ -137,13 +137,18 @@ export async function tweetCreation(data) {
 }
 
 export async function sendRequest(url, data = {}) {
-  // Get authorization headers
-  const header = await getAuthHeaders();
+  try {
+    // Get authorization headers
+    const headers = await getAuthHeaders();
   
-  // Send request with authorization headers
-  const response = await axion.put(`/api/${url}`,data,header)
+    // Send request with authorization headers
+    const response = await axios.put(`/api/${url}`, data, { headers });
 
-  return response;
+    return response;
+  } catch (error) {
+    // Display error message
+    showMessage(msgElm, 'An error occurred while processing your request. Please try again later.', '#ff6347');
+  }
 }
 
 /**
