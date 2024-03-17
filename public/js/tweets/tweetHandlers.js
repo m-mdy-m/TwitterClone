@@ -11,17 +11,28 @@ const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
 export function AddTweet(response, userInfo) {
-  // Extract tweet data from the response
-  const tweetData = response.data.data;
-  // Render the tweet template
-  const tweetTemplate = renderTweet(tweetData, userInfo);
+  try {
+    // Ensure the response contains tweet data
+    if (!response || !response.data || !response.data.data) {
+      // Display an error message if the response data is invalid
+      showMessage(msgELm, "Error: Invalid response data.", "#ff6347");
+      return;
+    }
+    // Extract tweet data from the response
+    const tweetData = response.data.data;
+    // Render the tweet template
+    const tweetTemplate = renderTweet(tweetData, userInfo);
 
-  // Append the rendered tweet template to the wrapper element
-  appendTweet("afterbegin", tweetTemplate);
+    // Append the rendered tweet template to the wrapper element
+    appendTweet("afterbegin", tweetTemplate);
 
-  attachIconClickListeners();
-  // Clear the tweet input field after adding the tweet
-  clearTweetInput();
+    attachIconClickListeners();
+    // Clear the tweet input field after adding the tweet
+    clearTweetInput();
+  } catch (error) {
+    // Display a generic error message for adding tweet failure
+    showMessage(msgELm, 'Error adding tweet. Please try again.', '#ff6347');
+  }
 }
 
 // Function to show multiple tweets in the UI
