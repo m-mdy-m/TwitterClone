@@ -64,36 +64,62 @@ exports.getTweets = async (req, res) => {
 };
 
 exports.putLike = async (req, { getJsonHandler }) => {
-  const { updated, badRequest, authRequired, notFound, internalServerError } =
-    getJsonHandler();
+  // Destructure the error handling functions from getJsonHandler
+  const { updated, badRequest, authRequired, notFound, internalServerError } = getJsonHandler();
+  
   try {
+    // Extract the tweet ID from the request parameters
     const id = req.param("id");
+    
+    // Check if the tweet ID is missing
     if (!id) {
-      return badRequest("Invalid request. Please provide a valid tweet ID.");
+      // Return a bad request error with a clear message
+      return badRequest('Invalid request. Please provide a valid tweet ID.');
     }
+    
+    // Extract the user information from the request
     const user = req.user;
+    
+    // Check if the user is authenticated
     if (!user) {
-      return authRequired(
-        "Authentication required. Please log in to perform this action."
-      );
+      // Return an authentication required error with a clear message
+      return authRequired('Authentication required. Please log in to perform this action.');
     }
+    
+    // Find the tweet by its ID
     const tweet = await PostTweet.findById(id);
+    
+    // Check if the tweet exists
     if (!tweet) {
-      return notFound("Tweet not found. Please provide a valid tweet ID.");
+      // Return a not found error with a clear message
+      return notFound('Tweet not found. Please provide a valid tweet ID.');
     }
+    
+    // Determine if the user has already liked or unliked the tweet
     const isLike = isIdLiked([tweet, user], id);
+    
+    // Determine whether to add or remove the like based on the current state
     const option = isLike ? "$pull" : "$addToSet";
+    
+    // Create the update queries for the user and the tweet
     const { query, updateQuery } = createQueries(option, user.userId, id);
+    
+    // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
       PostTweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
-
+    
+    // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
-    // Set user session
+    
+    // Set the new JWT token in the session
     req.session.token = token;
+    
+    // Return a success response with the updated number of likes
     return updated({ likes: updatedTweet.likes.length });
   } catch (error) {
+    // Handle any internal server errors
     internalServerError('Internal server error. Please try again later.');
   }
 };
