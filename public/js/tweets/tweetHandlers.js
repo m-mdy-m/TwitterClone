@@ -42,7 +42,7 @@ export function ShowTweets(response,userInfo) {
 
 // Function to render a single tweet template
 function renderTweet(tweet,userInfo) {
-  console.log('tweet =>',tweet);
+  console.log('userInfo =>',userInfo);
   // Extract relevant data from the tweet object
   const { postedBy, content, createdAt, _id } = tweet;
   const { username, profilePic } = postedBy;

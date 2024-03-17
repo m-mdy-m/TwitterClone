@@ -24,7 +24,7 @@ exports.postTweet = async (req, { getJsonHandler }) => {
   // Construct the data object for tweet creation
   const data = {
     content: content,
-    postedBy: req.user._id, // Assuming req.user contains the ID of the user posting the tweet
+    postedBy: req.user.userId, // Assuming req.user contains the ID of the user posting the tweet
   };
   try {
     // Create the tweet and wait for the operation to complete
@@ -44,8 +44,10 @@ exports.getTweets = async (req, res) => {
   try {
     // Fetch tweets from the database and sort them in descending order of createdAt
     const tweets = await PostTweet.find().sort({ createdAt: -1 });
+    console.log('tweets =>',tweets);
     // Populate the 'postedBy' field to include user details in the post
     const result = await PostTweet.populate(tweets, { path: "postedBy" });
+    console.log('result =>',result);
     // Send JSON response with success true and tweet data
     res.status(200).json({
       success: true,
