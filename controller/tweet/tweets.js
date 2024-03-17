@@ -62,14 +62,17 @@ exports.getTweets = async (req, res) => {
   }
 };
 
-exports.putLike = async (req, { status, getJsonHandler }) => {
+exports.putLike = async (req, {  getJsonHandler }) => {
   try {
     const { updated } = getJsonHandler();
     const id = req.param("id");
     const user = req.user;
-    const tweet = PostTweet.findById(id);
+    const tweet = await PostTweet.findById(id);
+    console.log('+>',tweet);
     const isLike = isIdLiked([tweet, user], id);
+    console.log('isLike+>',isLike);
     const option = isLike ? "$pull" : "$addToSet";
+    console.log('option=>',option);
     const { query, updateQuery } = createQueries(option, user.userId, id);
     const [updatedUser] = await Promise.all([
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),

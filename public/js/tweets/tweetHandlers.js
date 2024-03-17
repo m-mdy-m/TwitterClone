@@ -23,7 +23,6 @@ export function AddTweet(response,userInfo) {
 
 // Function to show multiple tweets in the UI
 export function ShowTweets(response,userInfo) {
-  console.log('response =>',response);
   // Extract tweets array from the response
   let tweets = response.data.tweets;
   // Sort the tweets array by createdAt in descending order (newest to oldest)
