@@ -4,6 +4,7 @@ const User = require("../../model/User");
 const { Package } = new Xprz();
 const { jwt } = new Package();
 const { isIdLiked, createQueries } = require("../../utils/helperFunc");
+const generateAuthToken = $read("utils/generateAuthTokenn");
 // Controller function to handle POST request to create a tweet
 exports.postTweet = async (req, { getJsonHandler }) => {
   // Extract the request body
@@ -67,7 +68,6 @@ exports.putLike = async (req, { getJsonHandler }) => {
     const { updated } = getJsonHandler();
     const id = req.param("id");
     const user = req.user
-    console.log('user =>',user)
     const tweet = await PostTweet.findById(id);
     const isLike = isIdLiked([tweet, user], id);
     const option = isLike ? "$pull" : "$addToSet";
@@ -77,13 +77,7 @@ exports.putLike = async (req, { getJsonHandler }) => {
       PostTweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
     
-    const token = jwt().jwtSign({
-      username: updatedUser.username,
-      userId: updatedUser._id,
-      email: updatedUser.email,
-      profilePic: updatedUser.profilePic,
-      likes: updatedUser.likes,
-    }, process.env.JWT_SECRET);   
+    const token = generateAuthToken()  
     // Set user session
     req.session.token = token;
     return updated({ token,TweetInfo:updateTweet });

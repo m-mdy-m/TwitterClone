@@ -1,8 +1,9 @@
 const Xprz = require("xprz");
 const path = require("path");
+const generateAuthToken = $read("utils/generateAuthToken");
 
 const { Package } = new Xprz();
-const { bcryptjs, jwt } = new Package();
+const { bcryptjs } = new Package();
 const User = $read("model/User");
 // Controller function to render the login page
 exports.getLogin = (req, { sendFile }) => {
@@ -62,13 +63,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       });
     }
     // If authentication is successful, generate a JWT token
-    const token = jwt().jwtSign({
-      username: user.username,
-      userId: user._id,
-      email: user.email,
-      profilePic: user.profilePic,
-      likes: user.likes,
-    }, process.env.JWT_SECRET);
+    const token = generateAuthToken()
     // Set user session
     req.session.token = token;
     // Send success response
