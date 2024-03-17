@@ -63,7 +63,7 @@ exports.getTweets = async (req, res) => {
   }
 };
 
-exports.putLike = async (req, { getJsonHandler,getCookieHandler }) => {
+exports.likeTweet = async (req, { getJsonHandler,getCookieHandler }) => {
   // Destructure the error handling functions from getJsonHandler
   const { updated, badRequest, authRequired, notFound, internalServerError } = getJsonHandler();
   const { }  = getCookieHandler()
@@ -124,3 +124,9 @@ exports.putLike = async (req, { getJsonHandler,getCookieHandler }) => {
     internalServerError('Internal server error. Please try again later.');
   }
 };
+
+
+
+exports.retweet =(req,res)=>{
+    console.log('hi')
+}
