@@ -16,6 +16,8 @@ exports.ensureAuthenticated = (req, res, next) => {
  */
 exports.verifyToken = (req, res, nxt) => {
   const token = req.cookies.token;
+  const a = jwt().isTokenExpired(token)
+  console.log('a=>',a)
   req.headers.authorization = `Bearer ${token}`;
   jwt().jwtAuthenticate(process.env.JWT_SECRET)(req, res, nxt);
 };

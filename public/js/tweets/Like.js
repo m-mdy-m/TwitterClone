@@ -6,7 +6,7 @@ const msgElm = getMsgElement();
 // Function to handle the click event
 export async function handleClick(event) {
   const elm = event.target;
-
+  console.log('elm +>',elm);
   try {
     // Get the ID of the element
     const id = getId(elm);
