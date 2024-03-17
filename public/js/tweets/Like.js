@@ -3,7 +3,6 @@ import { getId, showMessage } from "../utils/helper.js";
 import { getMsgElement } from "../utils/utils.js";
 const msgElm = getMsgElement();
 // Function to handle the click event
-// Function to handle the click event
 export async function handleClick(event) {
   const elm = event.target;
   const idIcons = ["likeIcon", "retweetIcon", "shareIcon", "commentIcon"];
@@ -28,9 +27,6 @@ export async function handleClick(event) {
         console.log('Comment icon clicked');
         // Handle comment logic
       }
-    } else {
-      console.log('Other element clicked');
-      // Handle other element click
     }
   } catch (error) {
     // Handle errors gracefully
