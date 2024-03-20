@@ -12,4 +12,4 @@ class Database {
 }
 
 // Export an instance of the Database class
-module.exports =Database;
+module.exports =Database.connect();
