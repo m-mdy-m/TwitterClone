@@ -1,9 +1,6 @@
-const Xprz = require("xprz");
+const  { bcryptjs } = require("xprz").Package()
 const path = require("path");
 const generateAuthToken = $read("utils/generateAuthToken");
-
-const { Package } = new Xprz();
-const { bcryptjs } = new Package();
 const User = $read("model/User");
 // Controller function to render the login page
 exports.getLogin = (req, { sendFile }) => {

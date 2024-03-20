@@ -1,6 +1,4 @@
-const Xprz = require("xprz");
-const { Package } = new Xprz();
-const { jwt } = new Package();
+const { jwt } = require("xprz").Package()
 function generateAuthToken(user) {
   try {
     // Extract user information
