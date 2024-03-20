@@ -1,6 +1,6 @@
 const { bcryptjs } = require("xprz").Package();
 const path = require("path");
-const { validateAuth } = require("../../utils/validation");
+const { validateAuth } = $read("utils/validation");
 const generateAuthToken = $read("utils/generateAuthToken");
 const User = $read("model/User");
 // Controller function to render the signup page
