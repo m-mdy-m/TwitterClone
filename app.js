@@ -1,15 +1,13 @@
-// Importing the Xprz framework module
-const Xprz = require("xprz");
-// Creating a new instance of the Xprz framework
+const Xprz = require('xprz')
+
 const { App, Package } = new Xprz();
-new Package().dotenv().setupDot(); // Loading environment variables from '.env' file
-// Destructuring commonly used methods from the App instance
+new Package().dotenv().setupDot(); 
 const { use, launch, loadRoutes, useJsonBody, static } = new App();
-launch(); // Launching the server
-useJsonBody(); // Parsing JSON request bodies
-static("public"); // Serving static files from 'public' directory
-const cookieParser = $install("cookie-parser"); // Installing and using cookie-parser middleware
+launch();
+useJsonBody(); 
+static("public");
+const cookieParser = $install("cookie-parser");
 use(cookieParser());
-$read("middleware/setup"); // Including setup middleware
-$read("utils/database"); // Loading database utility
-loadRoutes("routes"); // Loading routes from the 'routes' directory
+$read("middleware/setup");
+$read("utils/database"); 
+loadRoutes("routes");
