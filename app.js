@@ -1,8 +1,6 @@
 const Xprz = require("xprz");
-
-const { App, Package } = new Xprz();
-new Package().dotenv().setupDot();
-const { use, launch, loadRoutes, useJsonBody, static } = new App();
+Xprz.Package().dotenv().setupDot();
+const { use, launch, loadRoutes, useJsonBody, static } = Xprz.App();
 launch();
 useJsonBody();
 static("public");
