@@ -1,8 +1,5 @@
-const Xprz = require("xprz");
 const PostTweet = require("../../model/PostTweet");
 const User = require("../../model/User");
-const { Package } = new Xprz();
-const { jwt } = new Package();
 const { isIdLiked, createQueries } = require("../../utils/helperFunc");
 const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet

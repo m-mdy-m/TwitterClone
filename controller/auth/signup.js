@@ -1,9 +1,7 @@
 const { isPassword, isEmail, isUsername } = require("vfyjs");
-const Xprz = require("xprz");
+const { bcryptjs } = require("xprz").Package()
 const path = require("path");
 const generateAuthToken = $read("utils/generateAuthToken");
-const { Package } = new Xprz();
-const { bcryptjs, jwt } = new Package();
 const User = $read("model/User");
 // Controller function to render the signup page
 exports.getSignup = (req, { sendFile }) => {
