@@ -1,3 +1,4 @@
+// Define a function to validate authentication input
 function validateAuth(req, validationFailed) {
   // Define validation rules
   const rules = {
@@ -6,7 +7,10 @@ function validateAuth(req, validationFailed) {
     password: "password",
     passwordConf: "same:password",
   };
+
+  // Verify user input against defined rules
   const errors = req.verifyBody(rules);
+
   // If there are validation errors, respond with failure
   if (Object.keys(errors).length > 0) {
     validationFailed({ errors });
@@ -15,4 +19,6 @@ function validateAuth(req, validationFailed) {
 
   return true; // Return true to indicate validation success
 }
-module.exports = {validateAuth}
+
+// Export the validateAuth function for reuse in other modules
+module.exports = { validateAuth };
