@@ -5,10 +5,10 @@ const route = new Route();
 // Grouping authentication-related routes under the "/auth" prefix
 route.group("/auth", (r) => {
   // Defining a GET route for login page and a POST route for login action
-  r.setRoute("/login").get(getLogin).post(postLogin);
+  r.route("/login").get(getLogin).post(postLogin);
 
   // Defining a POST route for logout action
-  r.setRoute("/logout").post((req, { getJsonHandler }) => {
+  r.route("/logout").post((req, { getJsonHandler }) => {
     // Destructuring getJsonHandler function from the second parameter
     const { success, error } = getJsonHandler();
 
