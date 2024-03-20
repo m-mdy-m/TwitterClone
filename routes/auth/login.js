@@ -1,7 +1,7 @@
-const { Route } = $read("utils/HelperXprz");
+const route = require('xprz').Route()
+
 // Importing the getLogin and postLogin functions from the login controller
 const { getLogin, postLogin } = $read("controller/auth/login");
-const route = new Route();
 // Grouping authentication-related routes under the "/auth" prefix
 route.group("/auth", (r) => {
   // Defining a GET route for login page and a POST route for login action
