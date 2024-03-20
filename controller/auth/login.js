@@ -1,4 +1,4 @@
-const  { bcryptjs } = require("xprz").Package()
+const { bcryptjs } = require("xprz").Package();
 const path = require("path");
 const generateAuthToken = $read("utils/generateAuthToken");
 const User = $read("model/User");
@@ -60,7 +60,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       });
     }
     // If authentication is successful, generate a JWT token
-    const token = generateAuthToken(user)
+    const token = generateAuthToken(user);
     // Set user session
     req.session.token = token;
     // Send success response

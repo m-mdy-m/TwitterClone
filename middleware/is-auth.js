@@ -13,8 +13,8 @@ exports.ensureAuthenticated = (req, res, next) => {
  */
 exports.verifyToken = (req, res, nxt) => {
   const token = req.cookies.token;
-  if(jwt().isTokenExpired(token)){
-    res.redirect('/auth/login')
+  if(!jwt().isTokenExpired(token)){
+    return res.status(401).redirect("/auth/login");
   }
   req.headers.authorization = `Bearer ${token}`;
   jwt().jwtAuthenticate(process.env.JWT_SECRET)(req, res, nxt);
