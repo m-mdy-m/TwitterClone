@@ -1,4 +1,3 @@
-const { isPassword, isEmail, isUsername } = require("vfyjs");
 const { bcryptjs } = require("xprz").Package();
 const path = require("path");
 const generateAuthToken = $read("utils/generateAuthToken");
