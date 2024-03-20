@@ -60,10 +60,9 @@ exports.getTweets = async (req, res) => {
   }
 };
 
-exports.likeTweet = async (req, { getJsonHandler,getCookieHandler }) => {
+exports.likeTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
   const { updated, badRequest, authRequired, notFound, internalServerError } = getJsonHandler();
-  const { }  = getCookieHandler()
   
   try {
     // Extract the tweet ID from the request parameters

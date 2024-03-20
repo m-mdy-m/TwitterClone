@@ -1,5 +1,5 @@
 const { isPassword, isEmail, isUsername } = require("vfyjs");
-const { bcryptjs } = require("xprz").Package()
+const { bcryptjs } = require("xprz").Package();
 const path = require("path");
 const generateAuthToken = $read("utils/generateAuthToken");
 const User = $read("model/User");
@@ -9,25 +9,22 @@ exports.getSignup = (req, { sendFile }) => {
 };
 // Controller function to handle signup form submission
 exports.postSignup = async (req, { getJsonHandler, status }) => {
-  const { getBody } = req;
+  const { getBody, verifyBody } = req;
   const { created, validationFailed, internalServerError } = getJsonHandler();
   try {
     // Extract user input from request body
-    const { username, email, password, passwordConf } = getBody();
+    const { username, email, password } = getBody();
+    const rule = {
+      username: "username",
+      email: "email",
+      password: "password",
+      passwordConf: "same:password",
+    };
     // Validate user input
-    if (
-      !isUsername(username) ||
-      !isEmail(email) ||
-      !isPassword(password) ||
-      password !== passwordConf
-    ) {
-      return validationFailed({
-        message:
-          "Invalid input. Please check your username, email, and password.",
-      });
+    const errors = verifyBody(rule);
+    if (!Object.keys(errors).length === 0) {
+      validationFailed({ errors });
     }
-
-    // Check if user already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
       return status(409).json({
@@ -43,7 +40,7 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
         password: hashedPassword,
       });
       // Generate JWT token with user information
-      const token = generateAuthToken(newUser)
+      const token = generateAuthToken(newUser);
       req.session.token = token;
       // Send success response
       return created({ token });
