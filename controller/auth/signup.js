@@ -13,31 +13,39 @@ exports.postSignup = async (req, { getJsonHandler, status }) => {
   try {
     // Extract user input from request body
     const { username, email, password } = getBody();
-    const rule = {
+    // Define validation rules
+    const rules = {
       username: "username",
       email: "email",
       password: "password",
       passwordConf: "same:password",
     };
     // Validate user input
-    const errors = verifyBody(rule);
-    if (!Object.keys(errors).length === 0) {
-      validationFailed({ errors });
+    const errors = verifyBody(rules);
+    // If there are validation errors, respond with failure
+    if (Object.keys(errors).length > 0) {
+      return validationFailed({ errors });
     }
+    // Check if user already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    
+    // If user already exists, respond with conflict error
     if (existingUser) {
       return status(409).json({
         success: false,
-        error: "You are already exists.",
+        error: "User already exists.",
       });
     } else {
       // Hash the password securely
       const hashedPassword = await bcryptjs().hash(password, 10);
+      
+      // Create a new user with hashed password
       const newUser = await User.create({
         username: username,
         email: email,
         password: hashedPassword,
       });
+      
       // Generate JWT token with user information
       const token = generateAuthToken(newUser);
       req.session.token = token;
