@@ -16,14 +16,15 @@ const PostTweet = new Schema(
         ref: "User",
       },
     ],
-    retweetUser: [
+    retweeters: [
       {
         type: Schema.ObjectId,
         ref: "User",
       },
     ],
-    retweetData: {
+    originalTweet: {
       type: Schema.ObjectId,
+      ref: "Tweet",
     },
   },
   { timestamps: true }

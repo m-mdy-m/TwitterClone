@@ -138,13 +138,13 @@ exports.retweet = async (req, { getJsonHandler }) => {
     // try and delete retweet
     const deletePost = await PostTweet.findOneAndDelete({
       postedBy: id,
-      retweetData: userId,
+      originalTweet: userId,
     });
     const tweet = await PostTweet.findById(id)
     console.log("deletePost=>", deletePost);
     const option = deletePost ? "$pull" : "$addToSet";
     if (!deletePost) {
-      await PostTweet.create({ postedBy: userId, retweetData: id,content:tweet.content });
+      await PostTweet.create({ postedBy: userId, originalTweet: id,content:tweet.content });
     }
     // Create the update queries for the user and the tweet
     const { query, updateQuery } = generateTweetQueries(
