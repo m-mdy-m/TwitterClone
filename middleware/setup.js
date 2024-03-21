@@ -14,7 +14,7 @@ const options = {
   saveUninitialized: false,
   store: store,
   cookie: {
-    maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days in milliseconds
+    maxAge: 60 * 1000, // 1h in milliseconds
   },
 };
 
