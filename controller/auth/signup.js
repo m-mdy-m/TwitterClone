@@ -5,7 +5,7 @@ const generateAuthToken = $read("utils/generateAuthToken");
 const User = $read("model/User");
 // Controller function to render the signup page
 exports.getSignup = (req, { sendFile }) => {
-  sendFile(path.join(process.cwd(), "/public/views/main.html"));
+  sendFile(path.join(process.cwd(), "/public/main.html"));
 };
 // Controller function to handle signup form submission
 exports.postSignup = async (req, { getJsonHandler, status }) => {

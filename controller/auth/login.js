@@ -4,7 +4,7 @@ const generateAuthToken = $read("utils/generateAuthToken");
 const User = $read("model/User");
 // Controller function to render the login page
 exports.getLogin = (req, { sendFile }) => {
-  sendFile(path.join(process.cwd(), "/public/views/main.html"));
+  sendFile(path.join(process.cwd(), "/public/main.html"));
 };
 /**
  *  username : Ads242sxz
