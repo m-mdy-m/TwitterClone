@@ -123,6 +123,11 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 
 
 
-exports.retweet =(req,res)=>{
-    console.log('hi')
+exports.retweet =(req,{getJsonHandler})=>{
+  const  { updated, badRequest, authRequired, notFound, internalServerError }= getJsonHandler()
+  try {
+    const id = req.param('id')
+  } catch (error) {
+    
+  }
 }
