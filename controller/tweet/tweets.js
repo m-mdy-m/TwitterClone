@@ -143,6 +143,14 @@ exports.retweet = async (req, { getJsonHandler }) => {
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
       PostTweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
+    // Generate a new JWT token with updated user information
+    const token = generateAuthToken(updatedUser);
+
+    // Set the new JWT token in the session
+    req.session.token = token;
+  
+    // Return a success response with the updated number of likes
+    return updated({ token, likes: updatedTweet.likes });
   } catch (error) {
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
