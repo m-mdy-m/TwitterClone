@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const PostTweet = require("../../model/PostTweet");
 const User = require("../../model/User");
 const { isIdLiked, generateTweetQueries } = require("../../utils/helperFunc");
@@ -135,9 +135,11 @@ exports.retweet = async (req, { getJsonHandler }) => {
   try {
     const id = req.param("id");
     const userId = req.user.userId;
+    const a = new mongoose.Types.ObjectId(userId);
+    console.log("a=>", a);
     // try and delete retweet
-    const user = await PostTweet.findById({ postedBy: userId });
-    console.log("user=>", user);
+    const tweet = await PostTweet.findById(id);
+    console.log("tweet=>", tweet);
     // const deletePost = await PostTweet.findByIdAndDelete({
     //   postedBy: id,
     //   retweetData: userId,
