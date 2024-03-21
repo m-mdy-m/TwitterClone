@@ -28,9 +28,18 @@ const generateTweetQueries = (operation, userId, tweetId, featureType = 'likes')
 
   return { query, updateQuery };
 };
+/**
+ * Clears all cookies present in the request by setting their expiration time to a past date.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 function clearAllCookies(req, res) {
+  // Retrieve all cookies from the request
   const cookies = req.cookies;
+  
+  // Iterate over each cookie
   for (const cookieName in cookies) {
+    // Clear the cookie by setting its expiration time to a past date
     res.clearCookie(cookieName);
   }
 }
