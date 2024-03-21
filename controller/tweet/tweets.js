@@ -1,6 +1,6 @@
 const PostTweet = require("../../model/PostTweet");
 const User = require("../../model/User");
-const { isIdLiked, createQueries } = require("../../utils/helperFunc");
+const { isIdLiked, generateTweetQueries } = require("../../utils/helperFunc");
 const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet
 exports.postTweet = async (req, { getJsonHandler }) => {
@@ -102,7 +102,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     const option = isLike ? "$pull" : "$addToSet";
 
     // Create the update queries for the user and the tweet
-    const { query, updateQuery } = createQueries(option, user.userId, id);
+    const { query, updateQuery } = generateTweetQueries(option, user.userId, id);
 
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
@@ -136,6 +136,8 @@ exports.retweet = async (req, { getJsonHandler }) => {
     if (!deletePost) {
       await PostTweet.create({postedBy :user.userId,retweetData:id })
     }
+     // Create the update queries for the user and the tweet
+     const { query, updateQuery } = generateTweetQueries(option, user.userId, id,'retweets');
     
   } catch (error) {
     // Handle any internal server errors
