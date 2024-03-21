@@ -150,8 +150,9 @@ exports.retweet = async (req, { getJsonHandler }) => {
     req.session.token = token;
   
     // Return a success response with the updated number of likes
-    return updated({ token, likes: updatedTweet.likes });
+    return updated({ token, retweet: updatedTweet });
   } catch (error) {
+    console.log('error=>',error);
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
   }
