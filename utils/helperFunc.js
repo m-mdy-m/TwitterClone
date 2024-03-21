@@ -19,12 +19,12 @@ function isIdLiked(array = [], id) {
  * @param {string} [tweetInfo='likes'] - The type of information related to the tweet (default: 'likes').
  * @returns {object} An object containing the generated query and updateQuery.
  */
-const generateTweetQueries = (operation, userId, tweetId, featureType = 'likes') => {
+const generateTweetQueries = (operation, userId, tweetId, featureTypeTweet = 'likes',featureTypeUser='likes') => {
   // Constructing query to associate user with tweet based on the operation and tweet information
-  const query = { [operation]: { [featureType]: userId } };
+  const query = { [operation]: { [featureTypeTweet]: userId } };
 
   // Constructing update query to perform operation on tweet based on tweet information
-  const updateQuery = { [operation]: { [featureType]: tweetId } };
+  const updateQuery = { [operation]: { [featureTypeUser]: tweetId } };
 
   return { query, updateQuery };
 };

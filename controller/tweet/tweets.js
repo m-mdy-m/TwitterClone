@@ -151,7 +151,8 @@ exports.retweet = async (req, { getJsonHandler }) => {
       option,
       userId,
       id,
-      "retweets"
+      'retweeters',
+      "retweets",
     );
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
