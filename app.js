@@ -6,7 +6,8 @@ const rateLimit = $install("express-rate-limit");
 Xprz.Package().dotenv().setupDot();
 
 // Destructure required functions from Xprz App module
-const { use, launch, loadRoutes, useJsonBody, static } = Xprz.App();
+const { use, launch, loadRoutes, useJsonBody, static, setErrorHandler } =
+  Xprz.App();
 
 // Launch the application
 launch();
@@ -42,3 +43,11 @@ const rateLimiter = rateLimit(rateLimitOptions);
 
 // Apply the rate-limiting middleware to the application
 use(rateLimiter);
+
+setErrorHandler((err, req, res, nxt) => {
+  if (err instanceof rateLimiter.RateLimitError) {
+    res.status(429).json({ error: err.message });
+  } else {
+    nxt(err);
+  }
+});
