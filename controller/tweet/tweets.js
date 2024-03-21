@@ -138,7 +138,11 @@ exports.retweet = async (req, { getJsonHandler }) => {
     }
      // Create the update queries for the user and the tweet
      const { query, updateQuery } = generateTweetQueries(option, user.userId, id,'retweets');
-    
+    // Execute the update operations on the user and the tweet
+    const [updatedUser, updatedTweet] = await Promise.all([
+      User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
+      PostTweet.findByIdAndUpdate(id, query, { new: true }),
+    ]);
   } catch (error) {
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
