@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const PostTweet = require("../../model/PostTweet");
 const User = require("../../model/User");
 const { isIdLiked, generateTweetQueries } = require("../../utils/helperFunc");
@@ -133,14 +134,14 @@ exports.retweet = async (req, { getJsonHandler }) => {
     getJsonHandler();
   try {
     const id = req.param("id");
-    const userId = req.user.userId
-    console.log("userId=>", userId);
+    const userId = req.user.userId;
     // try and delete retweet
-    const deletePost = await PostTweet.findByIdAndDelete({
-      postedBy: userId.toString(),
-      retweetData: id.toString(),
-    });
-    console.log("deletePost=>", deletePost);
+    const user = await PostTweet.findById({ postedBy: userId });
+    console.log("user=>", user);
+    // const deletePost = await PostTweet.findByIdAndDelete({
+    //   postedBy: id,
+    //   retweetData: userId,
+    // });
     const option = deletePost ? "$pull" : "$addToSet";
     if (!deletePost) {
       await PostTweet.create({ postedBy: userId, retweetData: id });

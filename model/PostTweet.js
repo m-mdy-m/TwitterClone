@@ -24,7 +24,6 @@ const PostTweet = new Schema(
     ],
     retweetData: {
       type: Schema.ObjectId,
-      ref: "Tweet",
     },
   },
   { timestamps: true }
