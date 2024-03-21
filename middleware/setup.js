@@ -1,5 +1,5 @@
 const Xprz = require("xprz");
-const{ session, connectMongoDbSession, csrf }  = Xprz.Package();
+const { session, connectMongoDbSession, csrf } = Xprz.Package();
 
 // Connect to MongoDB session store using the provided URI and specify the collection name
 const store = connectMongoDbSession({
@@ -14,7 +14,7 @@ const options = {
   saveUninitialized: false,
   store: store,
   cookie: {
-    maxAge: 60 * 1000, // 1h in milliseconds
+    maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
   },
 };
 

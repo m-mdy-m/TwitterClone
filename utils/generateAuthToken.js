@@ -1,4 +1,4 @@
-const { jwt } = require("xprz").Package()
+const { jwt } = require("xprz").Package();
 function generateAuthToken(user) {
   try {
     // Extract user information
@@ -14,7 +14,7 @@ function generateAuthToken(user) {
         likes,
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' } 
+      { expiresIn: "1d" }
     );
 
     return token;
@@ -23,6 +23,6 @@ function generateAuthToken(user) {
     console.error("Error generating JWT token:", error);
     return null; // Or throw an error based on your error handling strategy
   }
-  }
-  
-  module.exports = generateAuthToken;
+}
+
+module.exports = generateAuthToken;
