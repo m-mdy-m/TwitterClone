@@ -38,7 +38,10 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
       return badRequest("Username or email is required for login.");
     } // Find user by username and email
     const user = await User.findOne({ username: username, email: email });
-
+    // Check if user exists
+    if (!user) {
+      return notFound("Please register to create an account.");
+    }
     // Check if the request already has a user logged in
     if (req.user) {
       // Check if the found user matches the logged-in user
@@ -51,10 +54,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
         });
       }
     }
-    // Check if user exists
-    if (!user) {
-      return notFound("User not found. Please register to create an account.");
-    }
+    
     // Compare password hashes
     const passwordMatches = await bcryptjs().compare(password, user.password);
     if (!passwordMatches) {

@@ -20,15 +20,18 @@ function validateInput(input, errorMessageElement) {
     switch (name) {
       case "username":
         isValid = vfyjs.isUsername(input);
+        console.log('isUsername =>',isValid);
         incrementValidations(isValid);
         break;
       case "email":
         isValid = vfyjs.isEmail(input);
+        console.log('isEmail =>',isValid);
         incrementValidations(isValid);
         break;
       case "password":
         passwordField = input.value;
         isValid = vfyjs.isPassword(input);
+        console.log('=isPassword >',isValid);
         incrementValidations(isValid);
         break;
       case "passwordConf":

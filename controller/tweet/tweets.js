@@ -4,7 +4,7 @@ const User = $read("model/User");
 const { isIdLiked, generateTweetQueries } = $read("utils/helperFunc");
 const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet
-exports.Tweet = async (req, { getJsonHandler }) => {
+exports.create = async (req, { getJsonHandler }) => {
   // Extract the request body
   const body = req.getBody();
 
