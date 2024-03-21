@@ -42,7 +42,6 @@ async function updateUI(elm, count, id) {
 
   // Check if the user has liked the item
   const isLikedUser = user.likes.includes(id);
-
   // Construct the updated HTML content based on the like count and user's like status
   let htmlContent = "";
 
@@ -50,12 +49,8 @@ async function updateUI(elm, count, id) {
     htmlContent = count;
     elm.src = "/assets/icon/nav/heart-full.svg";
   } else {
-    if (count > 0) {
-      htmlContent = count;
-      elm.src = "/assets/icon/nav/heart-null.svg";
-    } else {
-      htmlContent = null;
-    }
+    count > 0 ? htmlContent = count : htmlContent = null;
+    elm.src = "/assets/icon/nav/heart-null.svg";
   }
 
   // Get the sibling paragraph tag for count display
