@@ -135,18 +135,16 @@ exports.retweet = async (req, { getJsonHandler }) => {
   try {
     const id = req.param("id");
     const userId = req.user.userId;
-    const a = new mongoose.Types.ObjectId(userId);
-    console.log("a=>", a);
     // try and delete retweet
-    const tweet = await PostTweet.findById(id);
-    console.log("tweet=>", tweet);
-    // const deletePost = await PostTweet.findByIdAndDelete({
-    //   postedBy: id,
-    //   retweetData: userId,
-    // });
+    const deletePost = await PostTweet.findOneAndDelete({
+      postedBy: id,
+      retweetData: userId,
+    });
+    const tweet = await PostTweet.findById(id)
+    console.log("deletePost=>", deletePost);
     const option = deletePost ? "$pull" : "$addToSet";
     if (!deletePost) {
-      await PostTweet.create({ postedBy: userId, retweetData: id });
+      await PostTweet.create({ postedBy: userId, retweetData: id,content:tweet.content });
     }
     // Create the update queries for the user and the tweet
     const { query, updateQuery } = generateTweetQueries(
