@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const PostTweet = require("../../model/PostTweet");
-const User = require("../../model/User");
-const { isIdLiked, generateTweetQueries } = require("../../utils/helperFunc");
+const PostTweet = $read("model/PostTweet");
+const ReTweet = $read("model/ReTweet");
+const User = $read("model/User");
+const { isIdLiked, generateTweetQueries } = $read("utils/helperFunc");
 const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet
 exports.postTweet = async (req, { getJsonHandler }) => {
