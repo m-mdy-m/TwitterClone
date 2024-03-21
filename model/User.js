@@ -24,6 +24,11 @@ const UserSchema = new Schema({
   likes:[{
     type : Schema.ObjectId,
     ref : "Tweet",
-}]
+}],
+  retweets:[{
+    type : Schema.ObjectId,
+    ref : "Tweet",
+}],
+
 },{timestamps : true});
 module.exports = model("User", UserSchema);

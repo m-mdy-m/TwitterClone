@@ -150,5 +150,6 @@ exports.retweet = async (req, { getJsonHandler }) => {
       // Return a not found error with a clear message
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
+    const retweetPost = isRetweet()
   } catch (error) {}
 };

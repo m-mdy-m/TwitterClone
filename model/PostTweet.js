@@ -5,15 +5,27 @@ const PostTweet = new Schema(
       type: String,
       trim: true,
     },
-    postedBy : {
-        type : Schema.ObjectId,
-        ref : "User",
+    postedBy: {
+      type: Schema.ObjectId,
+      ref: "User",
     },
-    pinned : Boolean,
-    likes:[{
-      type : Schema.ObjectId,
-      ref : "User",
-  }]
+    pinned: Boolean,
+    likes: [
+      {
+        type: Schema.ObjectId,
+        ref: "User",
+      },
+    ],
+    retweetUser: [
+      {
+        type: Schema.ObjectId,
+        ref: "User",
+      },
+    ],
+    retweetData: {
+      type: Schema.ObjectId,
+      ref: "Tweet",
+    },
   },
   { timestamps: true }
 );
