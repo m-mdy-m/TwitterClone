@@ -136,7 +136,7 @@ export async function tweetCreation(data) {
   }
 }
 
-export async function sendRequest(url, data = {}) {
+export async function sendRequestPut(url, data = {}) {
   try {
     // Get authorization headers
     const headers = await getAuthHeaders();
@@ -172,7 +172,7 @@ export async function sendRequest(url, data = {}) {
 export async function toggleLike(id) {
   try {
     // Send request to toggle like status
-    const response = await sendRequest(`like/${id}`)
+    const response = await sendRequestPut(`like/${id}`)
 
     // Check if request was successful
     if (response.data.success) {
@@ -195,7 +195,8 @@ export async function toggleLike(id) {
 export async function toggleRetweet(id){
   try {
      // Send request to toggle like status
-     const response = await sendRequest(`retweet/${id}`)
+    const headers = await getAuthHeaders();
+    const response = await axios.post(`/api/retweet/${id}`,{},headers)
      console.log('response retweet =>',response)
   } catch (error) {
     console.log('error +>',error);
