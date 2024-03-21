@@ -133,7 +133,9 @@ exports.retweet = async (req, { getJsonHandler }) => {
     // try and delete retweet
     const deletePost = await PostTweet.findByIdAndDelete({postedBy : user.userId,retweetData:id })
     const option = deletePost ? "$pull":'$addToSet'
-
+    if (!deletePost) {
+      await PostTweet.create({postedBy :user.userId,retweetData:id })
+    }
     // Check if the tweet ID is missing
     if (!id) {
       // Return a bad request error with a clear message
