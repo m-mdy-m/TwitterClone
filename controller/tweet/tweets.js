@@ -102,7 +102,11 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     const option = isLike ? "$pull" : "$addToSet";
 
     // Create the update queries for the user and the tweet
-    const { query, updateQuery } = generateTweetQueries(option, user.userId, id);
+    const { query, updateQuery } = generateTweetQueries(
+      option,
+      user.userId,
+      id
+    );
 
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
@@ -130,16 +134,24 @@ exports.retweet = async (req, { getJsonHandler }) => {
   try {
     const id = req.param("id");
     const user = req.user;
+    console.log("user=>", user);
     // try and delete retweet
-    const deletePost = await PostTweet.findByIdAndDelete({postedBy : user.userId,retweetData:id })
-    console.log('user=>',user);
-    console.log('deletePost=>',deletePost);
-    const option = deletePost ? "$pull":'$addToSet'
+    const deletePost = await PostTweet.findByIdAndDelete({
+      postedBy: user.userId,
+      retweetData: id,
+    });
+    console.log("deletePost=>", deletePost);
+    const option = deletePost ? "$pull" : "$addToSet";
     if (!deletePost) {
-      await PostTweet.create({postedBy :user.userId,retweetData:id })
+      await PostTweet.create({ postedBy: user.userId, retweetData: id });
     }
-     // Create the update queries for the user and the tweet
-     const { query, updateQuery } = generateTweetQueries(option, user.userId, id,'retweets');
+    // Create the update queries for the user and the tweet
+    const { query, updateQuery } = generateTweetQueries(
+      option,
+      user.userId,
+      id,
+      "retweets"
+    );
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
@@ -150,11 +162,11 @@ exports.retweet = async (req, { getJsonHandler }) => {
 
     // Set the new JWT token in the session
     req.session.token = token;
-  
+
     // Return a success response with the updated number of likes
     return updated({ token, retweet: updatedTweet });
   } catch (error) {
-    console.log('error=>',error);
+    console.log("error=>", error);
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
   }
