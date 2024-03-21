@@ -199,6 +199,12 @@ export async function toggleRetweet(id){
     const response = await axios.post(`/api/retweet/${id}`,{},headers)
      console.log('response retweet =>',response)
   } catch (error) {
-    console.log('error +>',error);
+    if (error instanceof Error && error.message === 'Request failed') {
+      // Handle rate limit exceeded error
+      alert('Too many requests from this IP, please try again later.');
+    } else {
+      // Handle other errors
+      console.error('Error:', error);
+    }
   }
 }
