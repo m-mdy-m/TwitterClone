@@ -17,4 +17,9 @@ const createQueries = (option, userId, tweetId) => {
   return { query, updateQuery };
 };
 
+const createQueriesRetweet=() =>{
+
+}
+
+
 module.exports = { isIdLiked, isLikesInclude, createQueries };

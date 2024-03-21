@@ -136,27 +136,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     if (!deletePost) {
       await PostTweet.create({postedBy :user.userId,retweetData:id })
     }
-    // Check if the tweet ID is missing
-    if (!id) {
-      // Return a bad request error with a clear message
-      return badRequest("Invalid request. Please provide a valid tweet ID.");
-    }
-    // Check if the user is authenticated
-    if (!user) {
-      // Return an authentication required error with a clear message
-      return authRequired(
-        "Authentication required. Please log in to perform this action."
-      );
-    }
-    // Find the tweet by its ID
-    const tweet = await PostTweet.findById(id);
-
-    // Check if the tweet exists
-    if (!tweet) {
-      // Return a not found error with a clear message
-      return notFound("Tweet not found. Please provide a valid tweet ID.");
-    }
-    const retweetPost = isRetweet()
+    
   } catch (error) {
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
