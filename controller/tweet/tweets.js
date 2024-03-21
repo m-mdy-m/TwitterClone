@@ -1,10 +1,10 @@
-const PostTweet = $read("model/PostTweet");
+const Tweet = $read("model/Tweet");
 const ReTweet = $read("model/ReTweet");
 const User = $read("model/User");
 const { isIdLiked, generateTweetQueries } = $read("utils/helperFunc");
 const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet
-exports.postTweet = async (req, { getJsonHandler }) => {
+exports.Tweet = async (req, { getJsonHandler }) => {
   // Extract the request body
   const body = req.getBody();
 
@@ -30,10 +30,10 @@ exports.postTweet = async (req, { getJsonHandler }) => {
   };
   try {
     // Create the tweet and wait for the operation to complete
-    const post = await PostTweet.create(data);
+    const post = await Tweet.create(data);
 
     // Populate the 'postedBy' field to include user details in the post
-    const result = await PostTweet.populate(post, { path: "postedBy" });
+    const result = await Tweet.populate(post, { path: "postedBy" });
     // Send a successful response with the created post
     created(result);
   } catch (error) {
@@ -44,9 +44,9 @@ exports.postTweet = async (req, { getJsonHandler }) => {
 exports.getTweets = async (req, res) => {
   try {
     // Fetch tweets from the database and sort them in descending order of createdAt
-    const tweets = await PostTweet.find().sort({ createdAt: -1 });
+    const tweets = await Tweet.find().sort({ createdAt: -1 });
     // Populate the 'postedBy' field to include user details in the post
-    const result = await PostTweet.populate(tweets, { path: "postedBy" });
+    const result = await Tweet.populate(tweets, { path: "postedBy" });
     // Send JSON response with success true and tweet data
     res.status(200).json({
       success: true,
@@ -88,7 +88,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     }
 
     // Find the tweet by its ID
-    const tweet = await PostTweet.findById(id);
+    const tweet = await Tweet.findById(id);
 
     // Check if the tweet exists
     if (!tweet) {
@@ -112,7 +112,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
-      PostTweet.findByIdAndUpdate(id, query, { new: true }),
+      Tweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
 
     // Generate a new JWT token with updated user information
@@ -137,15 +137,15 @@ exports.retweet = async (req, { getJsonHandler }) => {
     const userId = req.user.userId;
     const content = req.body.content
     // try and delete retweet
-    const deletePost = await PostTweet.findOneAndDelete({
+    const deletePost = await Tweet.findOneAndDelete({
       postedBy: id,
       originalTweet: userId,
     });
-    const tweet = await PostTweet.findById(id)
+    const tweet = await Tweet.findById(id)
     console.log("deletePost=>", deletePost);
     const option = deletePost ? "$pull" : "$addToSet";
     if (!deletePost) {
-      await PostTweet.create({ postedBy: userId, originalTweet: id,content:'tweet.content' });
+      await Tweet.create({ postedBy: userId, originalTweet: id,content:'tweet.content' });
     }
     // Create the update queries for the user and the tweet
     const { query, updateQuery } = generateTweetQueries(
@@ -158,7 +158,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, updateQuery, { new: true }),
-      PostTweet.findByIdAndUpdate(id, query, { new: true }),
+      Tweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
