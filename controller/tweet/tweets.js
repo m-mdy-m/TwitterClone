@@ -135,6 +135,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
   try {
     const id = req.param("id");
     const userId = req.user.userId;
+    const content = req.body.content
     // try and delete retweet
     const deletePost = await PostTweet.findOneAndDelete({
       postedBy: id,

@@ -7,7 +7,7 @@ const RetweetSchema = new Schema(
       type: Schema.ObjectId,
       ref: "Tweet",
     },
-    additionalContent: {
+    content: {
       type: String,
       trim: true,
     },
