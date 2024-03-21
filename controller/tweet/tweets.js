@@ -133,28 +133,28 @@ exports.retweet = async (req, { getJsonHandler }) => {
     getJsonHandler();
   try {
     const id = req.param("id");
-    const user = req.user;
-    console.log("user=>", user);
+    const userId = req.user.userId
+    console.log("userId=>", userId);
     // try and delete retweet
     const deletePost = await PostTweet.findByIdAndDelete({
-      postedBy: user.userId,
-      retweetData: id,
+      postedBy: userId.toString(),
+      retweetData: id.toString(),
     });
     console.log("deletePost=>", deletePost);
     const option = deletePost ? "$pull" : "$addToSet";
     if (!deletePost) {
-      await PostTweet.create({ postedBy: user.userId, retweetData: id });
+      await PostTweet.create({ postedBy: userId, retweetData: id });
     }
     // Create the update queries for the user and the tweet
     const { query, updateQuery } = generateTweetQueries(
       option,
-      user.userId,
+      userId,
       id,
       "retweets"
     );
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
-      User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
+      User.findByIdAndUpdate(userId, updateQuery, { new: true }),
       PostTweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
     // Generate a new JWT token with updated user information
