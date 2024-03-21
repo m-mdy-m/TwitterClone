@@ -137,37 +137,37 @@ exports.retweet = async (req, { getJsonHandler }) => {
     const userId = req.user.userId;
     const content = req.body.content
     // try and delete retweet
-    const deletePost = await Tweet.findOneAndDelete({
-      postedBy: id,
-      originalTweet: userId,
-    });
     const tweet = await Tweet.findById(id)
-    console.log("deletePost=>", deletePost);
-    const option = deletePost ? "$pull" : "$addToSet";
-    if (!deletePost) {
-      await Tweet.create({ postedBy: userId, originalTweet: id,content:'tweet.content' });
-    }
-    // Create the update queries for the user and the tweet
-    const { query, updateQuery } = generateTweetQueries(
-      option,
-      userId,
-      id,
-      'retweeters',
-      "retweets",
-    );
-    // Execute the update operations on the user and the tweet
-    const [updatedUser, updatedTweet] = await Promise.all([
-      User.findByIdAndUpdate(userId, updateQuery, { new: true }),
-      Tweet.findByIdAndUpdate(id, query, { new: true }),
-    ]);
-    // Generate a new JWT token with updated user information
-    const token = generateAuthToken(updatedUser);
+    console.log('tweet =>',tweet);
+    // const deletePost = await Tweet.findOneAndDelete({
+    //   postedBy: id,
+    //   originalTweet: userId,
+    // });
+    // const option = deletePost ? "$pull" : "$addToSet";
+    // if (!deletePost) {
+    //   await Tweet.create({ postedBy: userId, originalTweet: id,content:'tweet.content' });
+    // }
+    // // Create the update queries for the user and the tweet
+    // const { query, updateQuery } = generateTweetQueries(
+    //   option,
+    //   userId,
+    //   id,
+    //   'retweeters',
+    //   "retweets",
+    // );
+    // // Execute the update operations on the user and the tweet
+    // const [updatedUser, updatedTweet] = await Promise.all([
+    //   User.findByIdAndUpdate(userId, updateQuery, { new: true }),
+    //   Tweet.findByIdAndUpdate(id, query, { new: true }),
+    // ]);
+    // // Generate a new JWT token with updated user information
+    // const token = generateAuthToken(updatedUser);
 
-    // Set the new JWT token in the session
-    req.session.token = token;
+    // // Set the new JWT token in the session
+    // req.session.token = token;
 
-    // Return a success response with the updated number of likes
-    return updated({ token, retweet: updatedTweet });
+    // // Return a success response with the updated number of likes
+    // return updated({ token, retweet: updatedTweet });
   } catch (error) {
     console.log("error=>", error);
     // Handle any internal server errors
