@@ -15,6 +15,6 @@ route.group("/api", (r) => {
 
   // Defining a PUT route for liking a tweet
   r.route("/like/:id").put(likeTweet);
-  r.route("/retweet/:id").put(retweet);
+  r.route("/retweet/:id").post(retweet);
 });
 module.exports = route;
