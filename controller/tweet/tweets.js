@@ -129,12 +129,16 @@ exports.retweet = async (req, { getJsonHandler }) => {
     getJsonHandler();
   try {
     const id = req.param("id");
+    const user = req.user;
+    // try and delete retweet
+    const deletePost = await PostTweet.findByIdAndDelete({postedBy : user.userId,retweetData:id })
+
+
     // Check if the tweet ID is missing
     if (!id) {
       // Return a bad request error with a clear message
       return badRequest("Invalid request. Please provide a valid tweet ID.");
     }
-    const user = req.user;
     // Check if the user is authenticated
     if (!user) {
       // Return an authentication required error with a clear message
@@ -151,5 +155,8 @@ exports.retweet = async (req, { getJsonHandler }) => {
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
     const retweetPost = isRetweet()
-  } catch (error) {}
+  } catch (error) {
+    // Handle any internal server errors
+    internalServerError("Internal server error. Please try again later.");
+  }
 };
