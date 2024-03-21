@@ -28,5 +28,10 @@ const generateTweetQueries = (operation, userId, tweetId, featureType = 'likes')
 
   return { query, updateQuery };
 };
-
-module.exports = { isIdLiked, isLikesInclude, generateTweetQueries };
+function clearAllCookies(req, res) {
+  const cookies = req.cookies;
+  for (const cookieName in cookies) {
+    res.clearCookie(cookieName);
+  }
+}
+module.exports = { isIdLiked, isLikesInclude, generateTweetQueries,clearAllCookies };
