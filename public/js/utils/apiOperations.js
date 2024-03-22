@@ -219,14 +219,12 @@ export async function toggleRetweet(id) {
     if (response.data.success) {
       // Save updated token
       saveToken(response.data.data.token);
-      // Get updated count of likes
-      const countRetweet = response.data.data.retweet.retweeters.length    ;
-      return countRetweet;
+      return response.data.data.retweet ;
     }else{
       // Show error message with appropriate color
       showMessage(
         msgElm,
-        "Failed to toggle like. Please try again.",
+        "Failed to toggle Retweet. Please try again.",
         "#b22222"
       );
     }

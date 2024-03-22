@@ -128,7 +128,6 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 
 exports.retweet = async (req, { getJsonHandler }) => {
   const {
-    updated,
     badRequest,
     created,
     authRequired,
@@ -138,6 +137,13 @@ exports.retweet = async (req, { getJsonHandler }) => {
   try {
     const id = req.param("id");
     const userId = req.user.userId;
+    // Check if the user is authenticated
+    if (!userId) {
+      // Return an authentication required error with a clear message
+      return authRequired(
+        "Authentication required. Please log in to perform this action."
+      );
+    }
     const content = req.body.content;
     const tweet = await Tweet.findById(id);
 
