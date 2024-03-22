@@ -11,7 +11,11 @@ import {
 import { getPath, isAuth } from "./utils/utils.js";
 
 const path = getPath();
+// Show loader when the page is loading
+const loader = document.getElementById("loader");
+loader.style.display = "block";
 document.addEventListener("DOMContentLoaded", async () => {
+  loader.style.display = "none";
   // Check if the user is authenticated and the tweet button exists
   if (isAuth()) {
     const tweetButton = document.getElementById("tweetButton");

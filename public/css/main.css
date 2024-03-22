@@ -85,20 +85,28 @@
     background-color: #f0f0f0;
   }
   /* Define the CSS animation */
-@keyframes likeAnimation {
-  0% {
-    transform: scale(1);
+  @keyframes likeAnimation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 
-/* Apply the animation to the heart icon */
-.heart-icon {
-  animation: likeAnimation 0.3s ease;
-}
+  /* Apply the animation to the heart icon */
+  .heart-icon {
+    animation: likeAnimation 0.3s ease;
+  }
+  #loader{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: none;
+  }
 }
