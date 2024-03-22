@@ -71,13 +71,17 @@ function renderTweet(tweet, userInfo) {
   }
   try {
     // Extract relevant data from the tweet object
-    const { postedBy, content, createdAt, _id,likes } = tweet;
+    const { postedBy, content, createdAt, _id,likes,originalTweet } = tweet;
     const { username, profilePic } = postedBy;
     const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
-    // console.log('tweet =>',tweet);
+    if(!originalTweet){
+      console.log('tweet =>',tweet);
+      // const parentTweet = originalTweet
+      // console.log('parentTweet=>',parentTweet)
+    }
     // console.log('_id =>',_id);
-    console.log('isLiked =>',isLiked);
+    // console.log('isLiked =>',isLiked);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
