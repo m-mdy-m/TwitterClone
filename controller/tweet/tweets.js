@@ -158,6 +158,27 @@ exports.retweet = async (req, { getJsonHandler }) => {
     if (existingRetweet) {
       return badRequest("You have already retweeted this tweet.");
     }
+    // Function to propagate likes to the original tweets in the chain
+    const propagateLikes = async (tweetId) => {
+      const originalTweet = await Tweet.findById(tweetId);
+      if (!originalTweet) {
+        return; // Original tweet not found
+      }
+
+      // Add user to likes of the original tweet
+      originalTweet.likes.addToSet(userId);
+      await originalTweet.save();
+
+      // Recursively propagate likes to the original tweet's original tweet
+      if (originalTweet.originalTweet) {
+        await propagateLikes(originalTweet.originalTweet);
+      }
+    };
+
+    // Propagate likes to the original tweets in the chain
+    await propagateLikes(id);
+
+    // Create the retweet
     const retweet = await Tweet.create({
       originalTweet: id,
       postedBy: userId,
