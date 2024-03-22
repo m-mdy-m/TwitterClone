@@ -36,7 +36,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.0",
     "nodemon": "^3.1.0",
-    "vfyjs": "^2.0.2",
+    "vfyjs": "^2.0.3",
     "xprz": "^2.0.3"
   },
   "devDependencies": {
