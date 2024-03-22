@@ -3,7 +3,7 @@ import { mainContent } from "./mainContent.js";
 export function BodyContent({classMain='flex justify-center items-center',classMsgError='absolute top-4 left-[50%]',height='screen'}={}) {
   return `
   <div id="loader">
-      <img src="/assets/loading/90-ring-with-bg.svg" alt="loader">
+      <img src="/assets/loading/bouncing-ball.svg" alt="loader">
   </div>
   <div class="container mobile:m-0 tablet:px-4 h-${height}  grid mobile:grid-cols-1 tablet:grid-cols-container">
     <header class="flex flex-col items-center tablet:h-auto justify-start mobile:pl-2 mobile:py-1 tablet:m-4 mobile:absolute tablet:relative">
