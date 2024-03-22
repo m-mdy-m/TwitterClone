@@ -32,14 +32,15 @@ export async function authenticateUser(url, requestData, header, form,btn,oldVal
       // Set the 'showWelcomePhoto' flag to 'true' in localStorage
       setItem("showWelcomePhoto", response.data.success);
       setItem("logged", response.data.success);
-      btn.innerHTML = oldValue
     } else {
       // If the server indicates failure, handle accordingly
       handleNotSuccess(response.data);
-      btn.innerHTML = oldValue
     }
   } catch (error) {
-    handleServerError(form, error);
+      handleServerError(form, error);
+  } finally {
+    // Restore button text
+    btn.innerHTML = oldValue;
   }
 }
 // Function to handle user logout
