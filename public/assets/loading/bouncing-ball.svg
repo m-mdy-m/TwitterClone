@@ -37,22 +37,24 @@
       <path d="M0,-30 C-15,-15 -15,15 0,30" fill="none" stroke="url(#gradient2)" stroke-width="5">
         <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="-360 0 0" dur="3s" repeatCount="indefinite"/>
       </path>
-      <!-- Bubbles -->
-      <circle cx="4" cy="12" r="2" fill="#64B5F6">
-        <animateMotion dur="2s" repeatCount="indefinite" rotate="auto">
-          <mpath href="#path1"/>
-        </animateMotion>
-      </circle>
-      <circle cx="20" cy="12" r="2" fill="#FF8A65">
-        <animateMotion dur="2s" repeatCount="indefinite" rotate="auto">
-          <mpath href="#path2"/>
-        </animateMotion>
-      </circle>
+        <!-- Bubbles -->
+        <circle cx="20" cy="12" r="2" fill="#64B5F6">
+          <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 20 12" to="360 20 12" dur="5s" repeatCount="indefinite"/>
+          <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#path1"/>
+          </animateMotion>
+        </circle>
+        <circle cx="20" cy="12" r="2" fill="#FF8A65">
+          <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 20 12" to="-360 20 12" dur="5s" repeatCount="indefinite"/>
+          <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#path2"/>
+          </animateMotion>
+        </circle>
     </g>
   </g>
-  <!-- Paths for Bubble Movement -->
-  <path id="path1" d="M4,12 Q12,4 20,12 Q12,20 4,12" fill="none"/>
-  <path id="path2" d="M20,12 Q12,4 4,12 Q12,20 20,12" fill="none"/>
+    <!-- Paths for Bubble Movement -->
+    <path id="path1" d="M4,12 Q12,4 20,12 Q12,20 4,12" fill="none"/>
+    <path id="path2" d="M20,12 Q12,4 4,12 Q12,20 20,12" fill="none"/>
   <!-- Text -->
   <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="18" fill="#333">Loading...</text>
 </svg>
