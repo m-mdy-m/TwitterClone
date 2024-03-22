@@ -22,6 +22,10 @@ const TweetSchema  = new Schema(
         ref: "User",
       },
     ],
+    originalTweet: {
+      type: Schema.ObjectId,
+      ref: "Tweet",
+    },
   },
   { timestamps: true }
 );

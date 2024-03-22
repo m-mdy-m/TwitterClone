@@ -4,18 +4,16 @@ const { isIdLiked, generateTweetQueries } = $read("utils/helperFunc");
 const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet
 exports.create = async (req, { getJsonHandler }) => {
-  // Extract the request body
-  const body = req.getBody();
+  // Extract the tweet content from the request body
+
+  const { tweet } = req.getBody();
 
   // Extract JSON handling functions from the response object
   const { badRequest, created, internalServerError, authRequired } =
     getJsonHandler();
 
-  // Extract the tweet content from the request body
-  const content = body.tweet;
-
   // Check if the tweet content is missing; return a bad request response if so
-  if (!content) {
+  if (!tweet) {
     return badRequest("Tweet content is missing.");
   }
   // Check if req.user is missing; return an error response if so
@@ -24,7 +22,7 @@ exports.create = async (req, { getJsonHandler }) => {
   }
   // Construct the data object for tweet creation
   const data = {
-    content: content,
+    content: tweet,
     postedBy: req.user.userId, // Assuming req.user contains the ID of the user posting the tweet
   };
   try {
@@ -134,45 +132,39 @@ exports.retweet = async (req, { getJsonHandler }) => {
   try {
     const id = req.param("id");
     const userId = req.user.userId;
-    const content = req.body.content
-    // try and delete retweet
-    const tweet = await Tweet.findOne({
-      _id: id,
-      postedBy: userId,
-    })
+    const content = req.body.content;
+    const tweet = await Tweet.findById(id);
+
     if (!tweet) {
       return notFound("Tweet not found.");
     }
-     // Check if the user has already retweeted this tweet
-     const existingRetweet = await Tweet.findOne({
+    const existingRetweet = await Tweet.findOne({
       originalTweet: id,
       postedBy: userId,
     });
+
     if (existingRetweet) {
       return badRequest("You have already retweeted this tweet.");
     }
-    // Create the retweet
-    const retweet = await Retweet.create({
+    const retweet = await Tweet.create({
       originalTweet: id,
       postedBy: userId,
+      content: content,
     });
-
 
     // Create the update queries for the user and the tweet
     const { query, updateQuery } = generateTweetQueries(
-      '$addToSet',
+      "$addToSet",
       userId,
       id,
-      'retweeters',
-      "retweets",
+      "retweeters",
+      "retweets"
     );
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, updateQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
-    console.log('updatedUser=>',updatedUser);
-    console.log('updatedTweet=>',updatedTweet);
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
 
