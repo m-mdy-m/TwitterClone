@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const PostTweet = new Schema(
+const TweetSchema  = new Schema(
   {
     content: {
       type: String,
@@ -9,7 +9,10 @@ const PostTweet = new Schema(
       type: Schema.ObjectId,
       ref: "User",
     },
-    pinned: Boolean,
+    pinned: {
+      type: Boolean,
+      default: false, // Default value added
+    },
     likes: [
       {
         type: Schema.ObjectId,
@@ -25,4 +28,4 @@ const PostTweet = new Schema(
   },
   { timestamps: true }
 );
-module.exports = model("Tweet", PostTweet);
+module.exports = model("Tweet", TweetSchema );

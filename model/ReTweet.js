@@ -15,7 +15,10 @@ const RetweetSchema = new Schema(
       type: Schema.ObjectId,
       ref: "User",
     },
-    pinned: Boolean,
+    pinned: {
+      type: Boolean,
+      default: false, // Default value added
+    },
     likes: [
       {
         type: Schema.ObjectId,
@@ -27,6 +30,4 @@ const RetweetSchema = new Schema(
 );
 
 // Create and export the Retweet model based on the schema
-const Retweet = model("Retweet", RetweetSchema);
-
-module.exports = Retweet;
+module.exports = model("Retweet", RetweetSchema);
