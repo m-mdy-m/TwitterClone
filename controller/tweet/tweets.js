@@ -149,7 +149,9 @@ exports.retweet = async (req, { getJsonHandler }) => {
     const retweet = await Tweet.create({
       originalTweet: id,
       postedBy: userId,
-      content: content,
+      content: content?? tweet.content,
+      likes : tweet.likes,
+      retweeters:tweet.retweeters,
     });
 
     // Create the update queries for the user and the tweet
@@ -165,6 +167,8 @@ exports.retweet = async (req, { getJsonHandler }) => {
       User.findByIdAndUpdate(userId, updateQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
+    retweet.retweeters.push(updatedTweet.retweeters)
+    await retweet.save();
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
 
