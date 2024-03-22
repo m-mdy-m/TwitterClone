@@ -94,13 +94,15 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       // Return a not found error with a clear message
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
-    handlerRetweets(tweet);
-    const { newUser, newQuery } = getOriginTweet(tweet, user.userId);
+    // handlerRetweets(tweet);
+    // const { newUser, newQuery } = getOriginTweet(tweet, user.userId);
     // Determine if the user has already liked or unliked the tweet
+    console.log('user=>',user);
+    // console.log('tweet=>',tweet);
     const userLiked = user.likedTweets.includes(id)
     const TweetLiked = tweet.likes.includes(id)
-    console.log('userLiked=>',userLiked);
-    console.log('TweetLiked=>',TweetLiked);
+    // console.log('userLiked=>',userLiked);
+    // console.log('TweetLiked=>',TweetLiked);
     // Determine whether to add or remove the like based on the current state
     const option = (userLiked && TweetLiked) ? "$pull" : "$addToSet";
 
