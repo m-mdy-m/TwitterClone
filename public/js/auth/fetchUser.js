@@ -1,7 +1,7 @@
 // Function to handle form submission
 import {authenticateUser  } from "../utils/apiOperations.js";
 import { getAuthHeaders, handleNotSuccess, handleServerError } from "../utils/helper.js";
-import { handleFormValidation, validationCount } from "./utils.js";
+import { handleFormValidation, validationCount } from "./validation.js";
 const form = document.getElementById("registerForm");
 handleFormValidation();
 export async function handleSubmit(e, submitUrl) {

@@ -20,18 +20,15 @@ function validateInput(input, errorMessageElement) {
     switch (name) {
       case "username":
         isValid = vfyjs.isUsername(input);
-        console.log('isUsername =>',isValid);
         incrementValidations(isValid);
         break;
       case "email":
         isValid = vfyjs.isEmail(input);
-        console.log('isEmail =>',isValid);
         incrementValidations(isValid);
         break;
       case "password":
         passwordField = input.value;
         isValid = vfyjs.isPassword(input);
-        console.log('=isPassword >',isValid);
         incrementValidations(isValid);
         break;
       case "passwordConf":
@@ -48,15 +45,10 @@ function validateInput(input, errorMessageElement) {
         break;
     }
   } catch (error) {
-    errorMessage = error.message;
+    errorMessage = error;
   }
   // Handle error message and background color
-  handleErrorMessage(
-    name,
-    errorMessage,
-    input,
-    errorMessageElement,
-  );
+  handleErrorMessage(name, errorMessage, input, errorMessageElement);
 }
 // Function to increment validation count
 function incrementValidations(isValid) {
