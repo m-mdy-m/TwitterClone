@@ -8,6 +8,12 @@ export async function handleSubmit(e, submitUrl) {
   e.preventDefault();
   // Ensure that form validation count meets the required threshold
   if (validationCount >= 3) {
+    const button = e.submitter
+    const oldValue = button.innerHTML
+    const img = document.createElement('img')
+    img.src = '/assets/loading/gooey-balls.svg'
+    button.innerHTML =''
+    button.appendChild(img)
     try {
       const headers  = await getAuthHeaders()
       // Collect form data
@@ -16,6 +22,8 @@ export async function handleSubmit(e, submitUrl) {
       const requestData = Object.fromEntries(formData.entries());
       // Send form data to the server via POST request
       authenticateUser(submitUrl,requestData,headers,form)
+      // button.appendChild(img)
+      button.innerHTML = oldValue
     } catch (error) {
       // Handle any errors that occur during the form submission process
       handleServerError(form,error);
