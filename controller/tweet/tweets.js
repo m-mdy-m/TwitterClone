@@ -111,6 +111,10 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
+    if(updatedTweet.originalTweet){
+      const originalTweet = await Tweet.findById(updatedTweet.originalTweet)
+      
+    }
 
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
