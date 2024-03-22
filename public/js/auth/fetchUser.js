@@ -22,7 +22,6 @@ export async function handleSubmit(e, submitUrl) {
       const requestData = Object.fromEntries(formData.entries());
       // Send form data to the server via POST request
       authenticateUser(submitUrl,requestData,headers,form)
-      // button.appendChild(img)
       button.innerHTML = oldValue
     } catch (error) {
       // Handle any errors that occur during the form submission process

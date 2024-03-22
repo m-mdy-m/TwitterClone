@@ -1,1 +1,22 @@
-<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><filter id="spinner-gF00"><feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="y"/><feColorMatrix in="y" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 18 -7" result="z"/><feBlend in="SourceGraphic" in2="z"/></filter></defs><g filter="url(#spinner-gF00)"><circle cx="4" cy="12" r="3"><animate attributeName="cx" calcMode="spline" dur="0.75s" values="4;9;4" keySplines=".56,.52,.17,.98;.56,.52,.17,.98" repeatCount="indefinite"/><animate attributeName="r" calcMode="spline" dur="0.75s" values="3;8;3" keySplines=".56,.52,.17,.98;.56,.52,.17,.98" repeatCount="indefinite"/></circle><circle cx="15" cy="12" r="8"><animate attributeName="cx" calcMode="spline" dur="0.75s" values="15;20;15" keySplines=".56,.52,.17,.98;.56,.52,.17,.98" repeatCount="indefinite"/><animate attributeName="r" calcMode="spline" dur="0.75s" values="8;3;8" keySplines=".56,.52,.17,.98;.56,.52,.17,.98" repeatCount="indefinite"/></circle></g></svg>
+<svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="spinner-filter" x="0" y="0" width="100%" height="100%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0
+                                                      0 1 0 0 0
+                                                      0 0 1 0 0
+                                                      0 0 0 18 -7" result="coloredBlur"/>
+      <feBlend in="SourceGraphic" in2="coloredBlur"/>
+    </filter>
+  </defs>
+  <g filter="url(#spinner-filter)">
+    <circle cx="12" cy="12" r="3" fill="#4CAF50">
+      <animate attributeName="cx" calcMode="spline" dur="0.75s" values="12;6;12" keySplines=".58,.42,.44,.99;.58,.42,.44,.99" repeatCount="indefinite"/>
+      <animate attributeName="r" calcMode="spline" dur="0.75s" values="3;6;3" keySplines=".58,.42,.44,.99;.58,.42,.44,.99" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="12" cy="12" r="8" fill="#2196F3">
+      <animate attributeName="cx" calcMode="spline" dur="0.75s" values="12;18;12" keySplines=".58,.42,.44,.99;.58,.42,.44,.99" repeatCount="indefinite"/>
+      <animate attributeName="r" calcMode="spline" dur="0.75s" values="8;3;8" keySplines=".58,.42,.44,.99;.58,.42,.44,.99" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>
