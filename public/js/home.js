@@ -14,7 +14,7 @@ const path = getPath();
 // Show loader when the page is loading
 const loader = document.getElementById("loader");
 document.addEventListener("DOMContentLoaded", async () => {
-  loader.style.display = "none";
+  // loader.style.display = "none";
   // Check if the user is authenticated and the tweet button exists
   if (isAuth()) {
     const tweetButton = document.getElementById("tweetButton");
