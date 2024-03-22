@@ -20,7 +20,7 @@ import {
 } from "./utils.js";
 const msgElm = getMsgElement();
 // Function to Signup or Login user
-export async function authenticateUser(url, requestData, header, form) {
+export async function authenticateUser(url, requestData, header, form,btn,oldValue) {
   try {
     const response = await axios.post(url, requestData, header);
     // Handle server response based on success or failure
@@ -32,9 +32,11 @@ export async function authenticateUser(url, requestData, header, form) {
       // Set the 'showWelcomePhoto' flag to 'true' in localStorage
       setItem("showWelcomePhoto", response.data.success);
       setItem("logged", response.data.success);
+      btn.innerHTML = oldValue
     } else {
       // If the server indicates failure, handle accordingly
       handleNotSuccess(response.data);
+      btn.innerHTML = oldValue
     }
   } catch (error) {
     handleServerError(form, error);
