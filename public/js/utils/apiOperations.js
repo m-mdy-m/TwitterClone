@@ -231,12 +231,20 @@ export async function toggleRetweet(id) {
       );
     }
   } catch (error) {
-    if (error instanceof Error && error.message === "Request failed") {
-      // Handle rate limit exceeded error
-      alert("Too many requests from this IP, please try again later.");
+    let errorMessage = "An unexpected error occurred. Please try again.";
+    let color = "#ff6347";
+    if (error.response.data.error) {
+      // Server responded with an error status code
+      errorMessage = error.response.data.error;
+      color = "#ff0000"; // Red color for server errors
+    } else if (error.request) {
+      // Request was made but no response was received
+      errorMessage = "No response received from the server. Please try again.";
+      color = "#ffa500"; // Orange color for network errors
     } else {
-      // Handle other errors
-      console.error("Error:", error);
+      // Error occurred while setting up the request
+      errorMessage = "Error setting up the request. Please try again.";
     }
+    showMessage(msgElm, errorMessage, color);
   }
 }
