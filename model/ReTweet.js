@@ -15,10 +15,10 @@ const RetweetSchema = new Schema(
       type: Schema.ObjectId,
       ref: "User",
     },
-    pinned: {
-      type: Boolean,
-      default: false, // Default value added
-    },
+    retweeters:[{
+      
+    }],
+    pinned: Boolean,
     likes: [
       {
         type: Schema.ObjectId,
