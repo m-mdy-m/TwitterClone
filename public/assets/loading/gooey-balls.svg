@@ -11,12 +11,12 @@
   </defs>
   <g filter="url(#spinner-filter)">
     <circle cx="12" cy="12" r="3" fill="#4CAF50">
-      <animate attributeName="cx" calcMode="spline" dur="0.75s" values="12;6;12" keySplines=".58,.42,.44,.99;.58,.42,.44,.99" repeatCount="indefinite"/>
-      <animate attributeName="r" calcMode="spline" dur="0.75s" values="3;6;3" keySplines=".58,.42,.44,.99;.58,.42,.44,.99" repeatCount="indefinite"/>
+      <animate attributeName="cx" calcMode="spline" dur="1s" values="12;6;12" keySplines="0.2 0.8 0.2 0.8;0.2 0.8 0.2 0.8" repeatCount="indefinite"/>
+      <animate attributeName="r" calcMode="spline" dur="1s" values="3;6;3" keySplines="0.2 0.8 0.2 0.8;0.2 0.8 0.2 0.8" repeatCount="indefinite"/>
     </circle>
     <circle cx="12" cy="12" r="8" fill="#2196F3">
-      <animate attributeName="cx" calcMode="spline" dur="0.75s" values="12;18;12" keySplines=".58,.42,.44,.99;.58,.42,.44,.99" repeatCount="indefinite"/>
-      <animate attributeName="r" calcMode="spline" dur="0.75s" values="8;3;8" keySplines=".58,.42,.44,.99;.58,.42,.44,.99" repeatCount="indefinite"/>
+      <animate attributeName="cx" calcMode="spline" dur="1s" values="12;18;12" keySplines="0.2 0.8 0.2 0.8;0.2 0.8 0.2 0.8" repeatCount="indefinite"/>
+      <animate attributeName="r" calcMode="spline" dur="1s" values="8;3;8" keySplines="0.2 0.8 0.2 0.8;0.2 0.8 0.2 0.8" repeatCount="indefinite"/>
     </circle>
   </g>
 </svg>
