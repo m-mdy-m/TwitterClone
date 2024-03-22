@@ -17,18 +17,19 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      unique: true,
     },
     profilePic: {
       type: String,
       default: "/assets/images/profilePic.png",
     },
-    likes: [
+    likedTweets: [
       {
         type: Schema.ObjectId,
         ref: "Tweet",
       },
     ],
-    retweets: [
+    likedTweets: [
       {
         type: Schema.ObjectId,
         ref: "Tweet",

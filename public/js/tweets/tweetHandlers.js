@@ -75,7 +75,9 @@ function renderTweet(tweet, userInfo) {
     const { username, profilePic } = author;
     const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
-    if(!originalTweet){
+      console.log('author =>',author.username);
+      console.log('author =>',author.profilePic);
+      if(!originalTweet){
       console.log('tweet =>',tweet);
       // const parentTweet = originalTweet
       // console.log('parentTweet=>',parentTweet)
@@ -100,6 +102,7 @@ function renderTweet(tweet, userInfo) {
       retweetCount: "",
     });
   } catch (error) {
+    console.log(error);
     // Handle any errors that occur during the asynchronous operation
     showMessage(msgELm, "Error rendering tweet. Please try again.", "#ff6347");
     // Return null or handle the error in another appropriate way
