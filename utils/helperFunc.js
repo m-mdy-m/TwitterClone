@@ -1,8 +1,9 @@
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
-// Function to check if a given element's likes array includes a specific id
-function isLikesInclude(elm, id) {
-  return elm.likes && elm.likes.includes(id);
+// Function to check if a given element's likes array includes a specific ID
+function isLikesInclude(element, id) {
+  const { likes, likedTweets } = element;
+  return (likes && likes.includes(id)) || (likedTweets && likedTweets.includes(id));
 }
 // Function to check if any element in the array has the specified id in its likes array
 function isIdLiked(array = [], id) {

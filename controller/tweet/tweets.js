@@ -97,14 +97,12 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // handlerRetweets(tweet);
     // const { newUser, newQuery } = getOriginTweet(tweet, user.userId);
     // Determine if the user has already liked or unliked the tweet
-    console.log('user=>',user);
+    console.log("user=>", user);
     // console.log('tweet=>',tweet);
-    const userLiked = user.likedTweets.includes(id)
-    const TweetLiked = tweet.likes.includes(id)
-    // console.log('userLiked=>',userLiked);
-    // console.log('TweetLiked=>',TweetLiked);
+    const isLiked = isIdLiked([user, tweet], id);
+    console.log("isLiked=>", isLiked);
     // Determine whether to add or remove the like based on the current state
-    const option = (userLiked && TweetLiked) ? "$pull" : "$addToSet";
+    const option = isLiked ? "$pull" : "$addToSet";
 
     // Create the update queries for the user and the tweet
     const { query, updateQuery } = generateTweetQueries(
