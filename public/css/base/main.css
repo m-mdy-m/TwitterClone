@@ -2,6 +2,10 @@
   pointer-events: none;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -64,6 +68,10 @@
 
 .top-6 {
   top: 1.5rem;
+}
+
+.left-\[40\%\] {
+  left: 40%;
 }
 
 .z-10 {

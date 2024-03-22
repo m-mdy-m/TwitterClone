@@ -3,7 +3,7 @@ import { BodyContent } from "./components/Body.js";
 const routes = {
   "/home": {
     classMain: "grid grid-cols-main",
-    classMsgError: "fixed top-4 left-[25%]",
+    classMsgError: "fixed top-4 left-[40%]",
     height: "full",
   },
   "/auth/signup": {},
