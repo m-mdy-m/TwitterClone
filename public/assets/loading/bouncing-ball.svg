@@ -1,29 +1,58 @@
 <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="gradient1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-      <stop offset="0%" stop-color="#FFC371"/>
-      <stop offset="100%" stop-color="#FF5F6D"/>
-    </radialGradient>
-    <radialGradient id="gradient2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-      <stop offset="0%" stop-color="#2D9CDB"/>
-      <stop offset="100%" stop-color="#49CBE9"/>
-    </radialGradient>
+    <!-- Filters -->
+    <filter id="spinner-filter" x="0" y="0" width="100%" height="100%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0
+                                                      0 1 0 0 0
+                                                      0 0 1 0 0
+                                                      0 0 0 18 -7" result="coloredBlur"/>
+      <feBlend in="SourceGraphic" in2="coloredBlur"/>
+    </filter>
+    <!-- Gradients -->
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#FF5722"/>
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E91E63"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </linearGradient>
   </defs>
-  <!-- Outer Circle -->
-  <circle cx="100" cy="100" r="90" fill="none" stroke="url(#gradient1)" stroke-width="10"/>
-  <!-- Inner Circle -->
-  <circle cx="100" cy="100" r="70" fill="none" stroke="url(#gradient2)" stroke-width="10"/>
+  <!-- Outer Ring -->
+  <circle cx="100" cy="100" r="40" fill="none" stroke="url(#gradient1)" stroke-width="10">
+    <animate attributeName="r" calcMode="spline" dur="3s" values="77;82;77" keySplines="0.5 0.2 0.5 0.8;0.5 0.2 0.5 0.8" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Inner Ring -->
+  <circle cx="100" cy="100" r="20" fill="none" stroke="url(#gradient2)" stroke-width="10">
+    <animate attributeName="r" calcMode="spline" dur="3s" values="58;66;58" keySplines="0.5 0.2 0.5 0.8;0.5 0.2 0.5 0.8" repeatCount="indefinite"/>
+  </circle>
   <!-- Spiral Animation -->
   <g transform="translate(100, 100)">
-    <g>
-      <path d="M0,-30 C15,-15 15,15 0,30" fill="none" stroke="#FF5F6D" stroke-width="8">
+    <g filter="url(#spinner-filter)">
+      <path d="M0,-30 C15,-15 15,15 0,30" fill="none" stroke="url(#gradient1)" stroke-width="5">
         <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="360 0 0" dur="2s" repeatCount="indefinite"/>
       </path>
-      <path d="M0,-30 C-15,-15 -15,15 0,30" fill="none" stroke="#2D9CDB" stroke-width="8">
-        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="360 0 0" dur="3s" repeatCount="indefinite"/>
+      <path d="M0,-30 C-15,-15 -15,15 0,30" fill="none" stroke="url(#gradient2)" stroke-width="5">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="-360 0 0" dur="3s" repeatCount="indefinite"/>
       </path>
+      <!-- Bubbles -->
+      <circle cx="4" cy="12" r="2" fill="#64B5F6">
+        <animateMotion dur="2s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#path1"/>
+        </animateMotion>
+      </circle>
+      <circle cx="20" cy="12" r="2" fill="#FF8A65">
+        <animateMotion dur="2s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#path2"/>
+        </animateMotion>
+      </circle>
     </g>
   </g>
+  <!-- Paths for Bubble Movement -->
+  <path id="path1" d="M4,12 Q12,4 20,12 Q12,20 4,12" fill="none"/>
+  <path id="path2" d="M20,12 Q12,4 4,12 Q12,20 20,12" fill="none"/>
   <!-- Text -->
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="24" fill="#333">Loading...</text>
+  <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="18" fill="#333">Loading...</text>
 </svg>
