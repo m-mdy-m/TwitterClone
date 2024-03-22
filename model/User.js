@@ -29,7 +29,7 @@ const UserSchema = new Schema(
         ref: "Tweet",
       },
     ],
-    likedTweets: [
+    retweetedTweets: [
       {
         type: Schema.ObjectId,
         ref: "Tweet",
