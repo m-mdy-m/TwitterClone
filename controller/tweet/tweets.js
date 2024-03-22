@@ -97,7 +97,6 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // handlerRetweets(tweet);
     // const { newUser, newQuery } = getOriginTweet(tweet, user.userId);
     // Determine if the user has already liked or unliked the tweet
-    console.log("user=>", user);
     // console.log('tweet=>',tweet);
     const isLiked = isIdLiked([user, tweet], id);
     console.log("isLiked=>", isLiked);

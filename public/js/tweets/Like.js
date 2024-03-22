@@ -39,9 +39,9 @@ export async function handleClick(event) {
 async function updateUI(elm, count, id) {
   // Get user information
   const user = await getUserInfo();
-
+  console.log('user=>',user);
   // Check if the user has liked the item
-  const isLikedUser = user.likes.includes(id);
+  const isLikedUser = user.likedTweets.includes(id);
   // Construct the updated HTML content based on the like count and user's like status
   let htmlContent = "";
 
