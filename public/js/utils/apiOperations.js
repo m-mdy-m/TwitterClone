@@ -78,11 +78,8 @@ export async function getUserInfo() {
     // Make a GET request to fetch user information
     const header = await getAuthHeaders();
     const response = await axios.get("/user-info", {}, header);
-    // Extract relevant data from the response
-    const { email, likes, profilePic, username } = response.data.data;
-
     // Return user information
-    return { email, likes, profilePic, username };
+    return response.data.data;
   } catch (error) {
     // Handle errors
     showMessage(

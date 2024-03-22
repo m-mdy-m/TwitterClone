@@ -9,12 +9,7 @@ exports.findUser = async (req, { status, getJsonHandler }) => {
     // If user is found, send the user object as a JSON response
     status(200).json({
       success: true,
-      data: {
-        likes: user.likes,
-        username: user.username,
-        profilePic: user.profilePic,
-        email: user.email,
-      },
+      data: user,
     });
   } catch (error) {
     // Send a 500 Internal Server Error response with a generic error message

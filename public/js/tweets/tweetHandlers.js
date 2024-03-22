@@ -48,7 +48,6 @@ export function ShowTweets(response, userInfo) {
     let tweets = response.data.tweets;
     // Sort the tweets array by createdAt in descending order (newest to oldest)
     tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
     // Iterate over each tweet and render its template
     tweets.forEach((tweet) => {
       const tweetTemplate = renderTweet(tweet, userInfo);
@@ -72,10 +71,13 @@ function renderTweet(tweet, userInfo) {
   }
   try {
     // Extract relevant data from the tweet object
-    const { postedBy, content, createdAt, _id } = tweet;
+    const { postedBy, content, createdAt, _id,likes } = tweet;
     const { username, profilePic } = postedBy;
-    const { likes } = userInfo;
-    const isLiked = likes.some((like) => like === _id);
+    const { userId } = userInfo;
+    const isLiked = likes.some((like) => like === userId);
+    // console.log('tweet =>',tweet);
+    // console.log('_id =>',_id);
+    console.log('isLiked =>',isLiked);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
