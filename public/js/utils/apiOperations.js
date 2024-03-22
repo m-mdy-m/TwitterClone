@@ -20,7 +20,14 @@ import {
 } from "./utils.js";
 const msgElm = getMsgElement();
 // Function to Signup or Login user
-export async function authenticateUser(url, requestData, header, form,btn,oldValue) {
+export async function authenticateUser(
+  url,
+  requestData,
+  header,
+  form,
+  btn,
+  oldValue
+) {
   try {
     const response = await axios.post(url, requestData, header);
     // Handle server response based on success or failure
@@ -37,7 +44,7 @@ export async function authenticateUser(url, requestData, header, form,btn,oldVal
       handleNotSuccess(response.data);
     }
   } catch (error) {
-      handleServerError(form, error);
+    handleServerError(form, error);
   } finally {
     // Restore button text
     btn.innerHTML = oldValue;
@@ -144,13 +151,13 @@ export async function sendRequestPut(url, data = {}) {
     // Get authorization headers
     const headers = await getAuthHeaders();
     // Send request with authorization headers
-    const response = await axios.put(`/api/${url}`, data,headers);
+    const response = await axios.put(`/api/${url}`, data, headers);
 
     return response;
   } catch (error) {
-    console.error('Error in sendRequest:', error);
+    console.error("Error in sendRequest:", error);
     let errorMessage = "An unexpected error occurred. Please try again.";
-    let color = "#ff6347"; 
+    let color = "#ff6347";
     if (error.response) {
       // Server responded with an error status code
       errorMessage = "The server encountered an error. Please try again later.";
@@ -175,42 +182,61 @@ export async function sendRequestPut(url, data = {}) {
 export async function toggleLike(id) {
   try {
     // Send request to toggle like status
-    const response = await sendRequestPut(`like/${id}`)
+    const response = await sendRequestPut(`like/${id}`);
 
     // Check if request was successful
     if (response.data.success) {
       // Save updated token
       saveToken(response.data.data.token);
-      
+
       // Get updated count of likes
       const countLike = response.data.data.likes.length;
       return countLike;
     } else {
       // Show error message with appropriate color
-      showMessage(msgElm, "Failed to toggle like. Please try again.", "#b22222");
+      showMessage(
+        msgElm,
+        "Failed to toggle like. Please try again.",
+        "#b22222"
+      );
     }
   } catch (error) {
     // If an unexpected error occurs, show a general error message
-    showMessage(msgElm, 'An unexpected error occurred. Please try again.', '#ff6347'); 
+    showMessage(
+      msgElm,
+      "An unexpected error occurred. Please try again.",
+      "#ff6347"
+    );
   }
 }
 
-export async function toggleRetweet(id){
+export async function toggleRetweet(id) {
   try {
-     // Send request to toggle like status
+    // Send request to toggle like status
     const headers = await getAuthHeaders();
-    const response = await axios.post(`/api/retweet/${id}`,{},headers)
-    console.log('response=>',response);
+    const response = await axios.post(`/api/retweet/${id}`, {}, headers);
+    console.log("response=>", response);
     if (response.data.success) {
-      
+      // Save updated token
+      saveToken(response.data.data.token);
+      // Get updated count of likes
+      const countRetweet = response.data.data.retweet.retweeters.length    ;
+      return countRetweet;
+    }else{
+      // Show error message with appropriate color
+      showMessage(
+        msgElm,
+        "Failed to toggle like. Please try again.",
+        "#b22222"
+      );
     }
   } catch (error) {
-    if (error instanceof Error && error.message === 'Request failed') {
+    if (error instanceof Error && error.message === "Request failed") {
       // Handle rate limit exceeded error
-      alert('Too many requests from this IP, please try again later.');
+      alert("Too many requests from this IP, please try again later.");
     } else {
       // Handle other errors
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   }
 }

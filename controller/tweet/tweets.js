@@ -127,8 +127,14 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 };
 
 exports.retweet = async (req, { getJsonHandler }) => {
-  const { updated, badRequest,created, authRequired, notFound, internalServerError } =
-    getJsonHandler();
+  const {
+    updated,
+    badRequest,
+    created,
+    authRequired,
+    notFound,
+    internalServerError,
+  } = getJsonHandler();
   try {
     const id = req.param("id");
     const userId = req.user.userId;
@@ -150,11 +156,17 @@ exports.retweet = async (req, { getJsonHandler }) => {
       originalTweet: id,
       postedBy: userId,
       content: content || tweet.content,
-      likes : tweet.likes,
-      retweeters:tweet.retweeters,
+      likes: tweet.likes,
+      retweeters: tweet.retweeters,
     });
 
-    const { query, updateQuery } = generateTweetQueries("$addToSet", userId, id,  "retweeters","retweets");
+    const { query, updateQuery } = generateTweetQueries(
+      "$addToSet",
+      userId,
+      id,
+      "retweeters",
+      "retweets"
+    );
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, updateQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, query, { new: true }),
@@ -166,7 +178,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     req.session.token = token;
 
     // Return a success response with the updated number of likes
-    return created({ retweet: updatedTweet });
+    return created({ retweet:updatedTweet,token:token });
   } catch (error) {
     console.log("error=>", error);
     // Handle any internal server errors
