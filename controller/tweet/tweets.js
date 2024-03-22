@@ -25,14 +25,14 @@ exports.create = async (req, { getJsonHandler }) => {
   // Construct the data object for tweet creation
   const data = {
     content: tweet,
-    postedBy: req.user.userId, // Assuming req.user contains the ID of the user posting the tweet
+    author: req.user.userId, // Assuming req.user contains the ID of the user posting the tweet
   };
   try {
     // Create the tweet and wait for the operation to complete
     const post = await Tweet.create(data);
 
-    // Populate the 'postedBy' field to include user details in the post
-    const result = await Tweet.populate(post, { path: "postedBy" });
+    // Populate the 'author' field to include user details in the post
+    const result = await Tweet.populate(post, { path: "author" });
     // Send a successful response with the created post
     created(result);
   } catch (error) {
@@ -44,8 +44,8 @@ exports.getTweets = async (req, res) => {
   try {
     // Fetch tweets from the database and sort them in descending order of createdAt
     const tweets = await Tweet.find().sort({ createdAt: -1 });
-    // Populate the 'postedBy' field to include user details in the post
-    const result = await Tweet.populate(tweets, { path: "postedBy" });
+    // Populate the 'author' field to include user details in the post
+    const result = await Tweet.populate(tweets, { path: "author" });
     // Send JSON response with success true and tweet data
     res.status(200).json({
       success: true,
@@ -94,8 +94,8 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       // Return a not found error with a clear message
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
-    handlerRetweets(tweet)
-    const { newUser,newQuery } = getOriginTweet(tweet,user.userId)
+    handlerRetweets(tweet);
+    const { newUser, newQuery } = getOriginTweet(tweet, user.userId);
     // Determine if the user has already liked or unliked the tweet
     const isLike = isIdLiked([tweet, user], id);
 
@@ -149,7 +149,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     }
     const existingRetweet = await Tweet.findOne({
       originalTweet: id,
-      postedBy: userId,
+      author: userId,
     });
 
     if (existingRetweet) {
@@ -157,7 +157,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     }
     const retweet = await Tweet.create({
       originalTweet: id,
-      postedBy: userId,
+      author: userId,
       content: content || tweet.content,
       likes: tweet.likes,
       retweeters: tweet.retweeters,

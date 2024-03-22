@@ -71,8 +71,8 @@ function renderTweet(tweet, userInfo) {
   }
   try {
     // Extract relevant data from the tweet object
-    const { postedBy, content, createdAt, _id,likes,originalTweet } = tweet;
-    const { username, profilePic } = postedBy;
+    const { author, content, createdAt, _id,likes,originalTweet } = tweet;
+    const { username, profilePic } = author;
     const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
     if(!originalTweet){
