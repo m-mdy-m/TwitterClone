@@ -1,3 +1,5 @@
+const { getOriginTweet, handlerRetweets } = require("../../utils/helperFunc");
+
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
 const { isIdLiked, generateTweetQueries } = $read("utils/helperFunc");
@@ -92,28 +94,8 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       // Return a not found error with a clear message
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
-    // Determine if the tweet is a retweet
-    if (tweet.originalTweet) {
-      // If it's a retweet, find the original tweet
-      const originalTweet = await Tweet.findById(tweet.originalTweet);
-      console.log('originalTweet=>',originalTweet);
-      // Check if the original tweet exists
-      if (!originalTweet) {
-        // Return a not found error with a clear message
-        return notFound("Original tweet not found.");
-      }
-
-      // Check if the user has liked the original tweet
-      const isOriginalTweetLiked = isIdLiked([originalTweet, user], originalTweet._id);
-      console.log('isOriginalTweetLiked=>',isOriginalTweetLiked);
-
-      const option = isOriginalTweetLiked ? "$pull" : "$addToSet";
-      // If the user has liked the original tweet, remove the like
-      if (isOriginalTweetLiked) {
-        // Remove the like from the original tweet
-        await Tweet.findByIdAndUpdate(originalTweet._id, { [option]: { likes: user.userId } });
-      }
-    }
+    handlerRetweets(tweet)
+    const { newUser,newQuery } = getOriginTweet(tweet,user.userId)
     // Determine if the user has already liked or unliked the tweet
     const isLike = isIdLiked([tweet, user], id);
 
@@ -132,10 +114,6 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       User.findByIdAndUpdate(user.userId, updateQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
-    if (updatedTweet.originalTweet) {
-      const originalTweet = await Tweet.findById(updatedTweet.originalTweet);
-    }
-
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
 

@@ -1,32 +1,34 @@
 const { Schema, model } = require("mongoose");
-const TweetSchema  = new Schema(
+
+const tweetSchema = new Schema(
   {
     content: {
       type: String,
       trim: true,
     },
-    postedBy: {
-      type: Schema.ObjectId,
+    author: {
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     pinned: Boolean,
     likes: [
       {
-        type: Schema.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
     ],
     retweeters: [
       {
-        type: Schema.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
     ],
-    originalTweet: {
-      type: Schema.ObjectId,
+    retweetedFrom: {
+      type: Schema.Types.ObjectId,
       ref: "Tweet",
     },
   },
   { timestamps: true }
 );
-module.exports = model("Tweet", TweetSchema );
+
+module.exports = model("Tweet", tweetSchema);

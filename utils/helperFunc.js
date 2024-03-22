@@ -1,3 +1,5 @@
+const Tweet = $read("model/Tweet");
+const User = $read("model/User");
 // Function to check if a given element's likes array includes a specific id
 function isLikesInclude(elm, id) {
   return elm.likes && elm.likes.includes(id);
@@ -43,4 +45,47 @@ function clearAllCookies(req, res) {
     res.clearCookie(cookieName);
   }
 }
-module.exports = { isIdLiked, isLikesInclude, generateTweetQueries,clearAllCookies };
+
+async function getOriginTweet(tweet,userId,callback){
+  try {
+    const original = tweet.originalTweet
+    // If it's a retweet, find the original tweet
+    const originalTweet = await Tweet.findById(original);
+  
+    // Check if the user has liked the original tweet
+    const isOriginalTweetLiked = originalTweet.likes.includes(userId);
+  
+    const option = isOriginalTweetLiked ? "$pull" : "$addToSet";
+    // If the user has liked the original tweet, remove the like
+    const { query, updateQuery } = generateTweetQueries(
+      option,
+      userId,
+      originalTweet._id
+    );
+  
+    // Execute the update operations on the user and the tweet
+    const [updatedUser, updatedTweet] = await Promise.all([
+      User.findByIdAndUpdate(userId, updateQuery, { new: true }),
+      Tweet.findByIdAndUpdate(original._id, query, { new: true }),
+    ]);
+    if (updatedTweet.originalTweet) {
+      callback(updatedTweet)
+    }
+    return { updatedUser,updatedTweet}
+  } catch (error) {
+    
+  }
+}
+const getIdRetweets = async (retweeters)=> {
+  for (const id of retweeters) {
+    const tweet = await User.findById(id)
+    console.log('tweet =>',tweet);
+  }
+}
+async function handlerRetweets(tweet){
+  const retweeters = tweet.retweeters
+  const tweets = await getIdRetweets(retweeters)
+  console.log('tweets=>',tweets);
+}
+
+module.exports = { isIdLiked, isLikesInclude, generateTweetQueries,clearAllCookies ,getOriginTweet,handlerRetweets};
