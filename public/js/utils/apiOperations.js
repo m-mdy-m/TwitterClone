@@ -130,7 +130,6 @@ export async function tweetCreation(data) {
   ]);
   // Send a POST request to create a tweet with the obtained CSRF header
   const response = await axios.post("/api/create", data, header);
-  console.log('response =>',response);
   // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
     AddTweet(response, userInfo);
@@ -201,7 +200,10 @@ export async function toggleRetweet(id){
      // Send request to toggle like status
     const headers = await getAuthHeaders();
     const response = await axios.post(`/api/retweet/${id}`,{},headers)
-     console.log('response retweet =>',response)
+    console.log('response=>',response);
+    if (response.data.success) {
+      
+    }
   } catch (error) {
     if (error instanceof Error && error.message === 'Request failed') {
       // Handle rate limit exceeded error

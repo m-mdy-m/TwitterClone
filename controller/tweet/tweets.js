@@ -127,7 +127,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 };
 
 exports.retweet = async (req, { getJsonHandler }) => {
-  const { updated, badRequest, authRequired, notFound, internalServerError } =
+  const { updated, badRequest,created, authRequired, notFound, internalServerError } =
     getJsonHandler();
   try {
     const id = req.param("id");
@@ -149,26 +149,16 @@ exports.retweet = async (req, { getJsonHandler }) => {
     const retweet = await Tweet.create({
       originalTweet: id,
       postedBy: userId,
-      content: content?? tweet.content,
+      content: content || tweet.content,
       likes : tweet.likes,
       retweeters:tweet.retweeters,
     });
 
-    // Create the update queries for the user and the tweet
-    const { query, updateQuery } = generateTweetQueries(
-      "$addToSet",
-      userId,
-      id,
-      "retweeters",
-      "retweets"
-    );
-    // Execute the update operations on the user and the tweet
+    const { query, updateQuery } = generateTweetQueries("$addToSet", userId, id,  "retweeters","retweets");
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, updateQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, query, { new: true }),
     ]);
-    retweet.retweeters.push(updatedTweet.retweeters)
-    await retweet.save();
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
 
@@ -176,7 +166,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     req.session.token = token;
 
     // Return a success response with the updated number of likes
-    return updated({ token, retweet: updatedTweet });
+    return created({ retweet: updatedTweet });
   } catch (error) {
     console.log("error=>", error);
     // Handle any internal server errors
