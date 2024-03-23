@@ -83,14 +83,9 @@ async function handleRetweet(tweet, userId, option) {
     const updatedTweet = await Tweet.findByIdAndUpdate(originalTweet._id, TweetQuery, { new: true });
 
     // If the original tweet still exists, recursively invoke handleRetweet
-    let optionUser;
     if (updatedTweet.originalTweet) {
       await handleRetweet(updatedTweet, userId, option);
       return;
-    }
-    if (!updatedTweet.originalTweet) {
-      const TweetLikeUser = updatedTweet.likes.includes(userId)
-      optionUser =TweetLikeUser ? "$pull" : "$addToSet";
     }
 
     if (updatedTweet.retweets && updatedTweet.retweets.length>0) {
@@ -98,7 +93,7 @@ async function handleRetweet(tweet, userId, option) {
       return;
     }
     // Return the updated user and tweet
-    return { updatedTweet,optionUser };
+    return { updatedTweet };
   } catch (error) {
     // Handle any errors
     console.error("Error getting original tweet:", error);
