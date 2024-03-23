@@ -74,20 +74,13 @@ async function handleRetweet(tweet, userId, option) {
       await updateRetweetLikes(tweet, option, userId); // Updating likes directly on the tweet
       return;
     }
-    // Generate queries for updating user and original tweet based on the operation
-    // Update the original tweet with the user's ID (for tracking likes on original tweet)
-    const updatedTweet = await Tweet.findByIdAndUpdate(originalTweetId._id, TweetQuery, { new: true });
-
-    // If the original tweet still exists, recursively invoke handleRetweet
-    if (updatedTweet.originalTweet) {
-      return await handleRetweet(updatedTweet, userId, option);
+    const parent = await getParentTweet(tweet,TweetQuery)
+    const children = await getAllChildren(parent);
+    if (parent.retweets && parent.retweets.length>0) {
+      const {  updatedRetweets, updatedOriginalTweet}= await updateRetweetLikes(tweet, option, userId);
+      return {  updatedRetweets, updatedOriginalTweet }
     }
-
-    if (updatedTweet.retweets && updatedTweet.retweets.length>0) {
-      const updatedRetweets= await updateRetweetLikes(tweet, option, userId);
-      return updatedRetweets
-    }
-    return updatedTweet
+    return parent
   } catch (error) {
     // Handle any errors
     console.error("Error getting original tweet:", error);
@@ -95,6 +88,42 @@ async function handleRetweet(tweet, userId, option) {
   }
 }
 
+
+async function getParentTweet(tweet,query){
+  const originalTweetId = tweet.originalTweet;
+    // Update the original tweet with the user's ID (for tracking likes on original tweet)
+    const updatedTweet = await Tweet.findByIdAndUpdate(originalTweetId._id, query, { new: true });
+
+    // If the original tweet still exists, recursively invoke handleRetweet
+    if (updatedTweet.originalTweet) {
+      return await getParentTweet(updatedTweet, query);
+    }
+    return updatedTweet
+}
+
+async function getAllChildren(parentTweet) {
+  try {
+    const children = [];
+
+    // Recursive function to find children of a tweet
+    async function findChildren(tweet) {
+      const childTweets = await Tweet.find({ originalTweet: tweet._id });
+
+      for (const child of childTweets) {
+        children.push(child);
+        await findChildren(child);
+      }
+    }
+
+    // Start searching for children from the parent tweet
+    await findChildren(parentTweet);
+
+    return children;
+  } catch (error) {
+    console.error("Error getting children tweets:", error);
+    throw new Error("Failed to get children tweets.");
+  }
+}
 
 /**
  * Updates the likes on retweeted tweets and the original tweet based on the provided option.
@@ -135,7 +164,7 @@ async function updateRetweetLikes(originalTweet, option, userId) {
      if (updatedRetweets && updatedRetweets.retweets && updatedRetweets.retweets.length > 0) {
        await updateRetweetLikes(updatedRetweets, option, userId);
      }
-     return {  updatedRetweets, updatedOriginalTweet };
+     return {  updatedRetweets, updatedOriginalTweet};
   } catch (error) {
     // Handle any errors
     console.error("Error updating retweet likes:", error);
@@ -148,4 +177,5 @@ module.exports = {
   generateTweetQueries,
   clearAllCookies,
   handleRetweet,
+  getParentTweet,
 };
