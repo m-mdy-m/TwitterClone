@@ -101,7 +101,6 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // Determine whether to add or remove the like based on the current state
     const option = isLiked ? "$pull" : "$addToSet";
     getOriginTweet(tweet, user.userId,option);
-
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(
       option,
@@ -118,7 +117,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     const token = generateAuthToken(newUser);
 
     // console.log("updatedUser=>", updatedUser);
-    console.log("newTweet=>", newTweet);
+    // console.log("newTweet=>", newTweet);
     // Set the new JWT token in the session
     req.session.token = token;
 
@@ -174,16 +173,12 @@ exports.retweet = async (req, { getJsonHandler }) => {
       "retweeters",
       "retweetedTweets"
     );
-    console.log('UserQuery=>',UserQuery);
-    console.log('TweetQuery=>',TweetQuery);
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
     ]);
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
-    console.log('updatedUser=>',updatedUser);
-    console.log('updatedTweet=>',updatedTweet);
 
     // Set the new JWT token in the session
     req.session.token = token;

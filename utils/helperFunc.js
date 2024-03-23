@@ -25,13 +25,23 @@ function isIdLiked(array = [], id) {
  * @param {string} featureTypeUser - Feature type for user ('likedTweets' by default).
  * @returns {object} - Object containing query and updateQuery for MongoDB.
  */
-const generateTweetQueries = (operation, userId, tweetId,isRetweet,retweetId ,featureTypeTweet = "likes",featureTypeUser = "likedTweets") => {
+const generateTweetQueries = (
+  operation,
+  userId,
+  tweetId,
+  isRetweet,
+  retweetId,
+  featureTypeTweet = "likes",
+  featureTypeUser = "likedTweets"
+) => {
   // Construct query to associate user with tweet based on the operation and tweet information
-  const UserQuery = { [operation]: { [featureTypeTweet]: userId,'retweets': retweetId } };
+  let UserQuery = { [operation]: { [featureTypeTweet]: userId } };
   // Construct update query to perform operation on tweet based on tweet information
-  let TweetQuery = { [operation]: { [featureTypeUser]: tweetId } };
+  const TweetQuery = { [operation]: { [featureTypeUser]: tweetId } };
   if (isRetweet) {
-    TweetQuery = { [operation]: { [featureTypeUser]: tweetId} };
+    UserQuery = {
+      [operation]: { [featureTypeTweet]: userId, retweets: retweetId },
+    };
   }
 
   return { UserQuery, TweetQuery };
@@ -52,42 +62,67 @@ function clearAllCookies(req, res) {
   }
 }
 
-async function getOriginTweet(tweet, userId,option, callback) {
+async function getOriginTweet(tweet, userId, option, callback) {
   try {
     const original = tweet.originalTweet;
     if (!original) {
-      return;
+      getRetweets(tweet, option, userId);
     }
     // If it's a retweet, find the original tweet
     const originalTweet = await Tweet.findById(original);
+    // console.log('originalTweet=>',originalTweet);
     // If the user has liked the original tweet, remove the like
-    const { query, updateQuery } = generateTweetQueries(
+    const { UserQuery, TweetQuery } = generateTweetQueries(
       option,
       userId,
       originalTweet._id
     );
-
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
-      User.findByIdAndUpdate(userId, updateQuery, { new: true }),
-      Tweet.findByIdAndUpdate(original._id, query, { new: true }),
+      User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
+      Tweet.findByIdAndUpdate(original._id, UserQuery, { new: true }),
     ]);
+    // console.log('updatedUser=>',updatedUser);
+    // console.log('updatedTweet=>',updatedTweet);
     if (updatedTweet.originalTweet) {
       callback(updatedTweet);
     }
     return { updatedUser, updatedTweet };
   } catch (error) {}
 }
-const getIdRetweets = async (retweeters) => {
-  for (const id of retweeters) {
-    const tweet = await User.findById(id);
-    console.log("tweet =>", tweet);
+
+async function getRetweets(original, option, userId, callback) {
+  const retweets = original.retweets;
+  console.log("retweets=>", retweets);
+  for (const id of retweets) {
+    const tweet = await Tweet.findById(id);
+    console.log("tweet=>", tweet);
+    const s = tweet.originalTweet.toString() === original._id.toString();
+    if (s) {
+      const { UserQuery, TweetQuery } = generateTweetQueries(
+        option,
+        userId,
+        original._id
+      );
+      // Execute the update operations on the user and the tweet
+      const [updatedUser, updatedTweet] = await Promise.all([
+        User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
+        Tweet.findByIdAndUpdate(original._id, UserQuery, { new: true }),
+      ]);
+      console.log("updatedUser=>", updatedUser);
+      console.log("updatedTweet=>", updatedTweet);
+      if (updatedTweet.originalTweet) {
+        callback(updatedTweet);
+      }
+    }
   }
-};
-async function handlerRetweets(tweet) {
-  const retweeters = tweet.retweeters;
-  const tweets = await getIdRetweets(retweeters);
-  console.log("tweets=>", tweets);
 }
 
-module.exports = { isIdLiked, isLikesInclude, generateTweetQueries, clearAllCookies, getOriginTweet,  handlerRetweets,};
+module.exports = {
+  isIdLiked,
+  isLikesInclude,
+  generateTweetQueries,
+  clearAllCookies,
+  getOriginTweet,
+  getRetweets,
+};
