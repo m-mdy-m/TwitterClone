@@ -75,11 +75,16 @@ async function handleRetweet(tweet, userId, option) {
     }
     // Find the original tweet
     const originalTweet = await Tweet.findById(originalTweetId);
+    // Generate queries for updating user and original tweet based on the operation
+    const UserQuery = { [option]: { "likedTweets": originalTweet._id } };
+    const TweetQuery = { [option]: { "likes": userId } };
 
-    const UserQuery = { [option]: { "likes": userId } };
-    const TweetQuery = { [option]: { 'likedTweets': originalTweet._id } };
-    // Execute the update operations on the user and the tweet
-    const updatedTweet = await Tweet.findByIdAndUpdate(originalTweet._id, UserQuery, { new: true }) 
+    // Update the user's liked posts with the original tweet ID
+    await User.findByIdAndUpdate(userId, UserQuery, { new: true });
+
+    // Update the original tweet with the user's ID (for tracking likes on original tweet)
+    const updatedTweet = await Tweet.findByIdAndUpdate(originalTweet._id, TweetQuery, { new: true });
+
     // If the original tweet still exists, recursively invoke handleRetweet
     if (updatedTweet.originalTweet) {
       await handleRetweet(updatedTweet, userId, option);
@@ -90,7 +95,7 @@ async function handleRetweet(tweet, userId, option) {
       return;
     }
     // Return the updated user and tweet
-    return {  updatedTweet };
+    return { updatedTweet };
   } catch (error) {
     // Handle any errors
     console.error("Error getting original tweet:", error);
