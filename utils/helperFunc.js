@@ -85,15 +85,15 @@ async function handleRetweet(tweet, userId, option) {
     // If the original tweet still exists, recursively invoke handleRetweet
     if (updatedTweet.originalTweet) {
       await handleRetweet(updatedTweet, userId, option);
-      return;
+      return 
     }
 
     if (updatedTweet.retweets && updatedTweet.retweets.length>0) {
       await updateRetweetLikes(tweet, option, userId); // Updating likes directly on the tweet
-      return;
+      return updatedTweet;
     }
-    // Return the updated user and tweet
-    return { updatedTweet };
+    console.log('updatedTweet :',updatedTweet);
+    return updatedTweet;
   } catch (error) {
     // Handle any errors
     console.error("Error getting original tweet:", error);

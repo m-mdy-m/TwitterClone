@@ -101,36 +101,29 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
     // Determine if the user has already liked or unliked the tweet
-    console.log('tweet.likes=>',tweet.likes);
-    const TweetLikeUser = tweet.likes.includes(user.userId)
+    console.log("tweet.likes=>", tweet.likes);
+    const tweetLikedByUser = tweet.likes.includes(user.userId);
     // Determine whether to add or remove the like based on the current state
 
     // Handle retweet logic (if applicable) and update likes accordingly
-    const option =TweetLikeUser ? "$pull" : "$addToSet";
-    const { updatedTweet } = handleRetweet(
-      tweet,
-      user.userId,
-      option
-    );
+    const option = tweetLikedByUser ? "$pull" : "$addToSet";
+    const updatedTweet =await new Promise(handleRetweet(tweet, user.userId, option))
+    console.log(" updatedTweet  =>",  updatedTweet  );
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(
       option,
       user.userId,
       id
     );
-    let newUser, newTweet;
-    if (updatedTweet) {
-      newTweet = await Tweet.findByIdAndUpdate(id, UserQuery, { new: true });
-    } else {
+    let 
       [newUser, newTweet] = await Promise.all([
         User.findByIdAndUpdate(user.userId, TweetQuery, { new: true }),
         Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
       ]);
-    }
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(newUser);
 
-    console.log('tweet.likes=>',tweet.likes);
+    console.log("tweet.likes=>", tweet.likes);
     // Set the new JWT token in the session
     req.session.token = token;
 
