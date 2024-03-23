@@ -25,11 +25,14 @@ function isIdLiked(array = [], id) {
  * @param {string} featureTypeUser - Feature type for user ('likedTweets' by default).
  * @returns {object} - Object containing query and updateQuery for MongoDB.
  */
-const generateTweetQueries = (operation, userId, tweetId, featureTypeTweet = "likes",featureTypeUser = "likedTweets") => {
+const generateTweetQueries = (operation, userId, tweetId,isRetweet,retweetId ,featureTypeTweet = "likes",featureTypeUser = "likedTweets") => {
   // Construct query to associate user with tweet based on the operation and tweet information
-  const UserQuery = { [operation]: { [featureTypeTweet]: userId } };
+  const UserQuery = { [operation]: { [featureTypeTweet]: userId,'retweets': retweetId } };
   // Construct update query to perform operation on tweet based on tweet information
-  const TweetQuery = { [operation]: { [featureTypeUser]: tweetId } };
+  let TweetQuery = { [operation]: { [featureTypeUser]: tweetId } };
+  if (isRetweet) {
+    TweetQuery = { [operation]: { [featureTypeUser]: tweetId} };
+  }
 
   return { UserQuery, TweetQuery };
 };

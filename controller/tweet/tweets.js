@@ -103,7 +103,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     getOriginTweet(tweet, user.userId,option);
 
     // Create the update queries for the user and the tweet
-    const { UserQuery, TweetQuery,retweetQuery } = generateTweetQueries(
+    const { UserQuery, TweetQuery } = generateTweetQueries(
       option,
       user.userId,
       id
@@ -165,22 +165,25 @@ exports.retweet = async (req, { getJsonHandler }) => {
       retweeters: tweet.retweeters,
     });
     
-    const { query, updateQuery } = generateTweetQueries(
+    const { UserQuery, TweetQuery } = generateTweetQueries(
       "$addToSet",
       userId,
       id,
+      true,
+      retweet._id,
       "retweeters",
       "retweetedTweets"
     );
+    console.log('UserQuery=>',UserQuery);
+    console.log('TweetQuery=>',TweetQuery);
     const [updatedUser, updatedTweet] = await Promise.all([
-      User.findByIdAndUpdate(userId, updateQuery, { new: true }),
-      Tweet.findByIdAndUpdate(id, query, { new: true }),
+      User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
+      Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
     ]);
-    // Add the ID of the retweeted post to the retweets array in the tweet document
-    updatedTweet.retweets.push(retweet._id);
-    await updatedTweet.save();
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
+    console.log('updatedUser=>',updatedUser);
+    console.log('updatedTweet=>',updatedTweet);
 
     // Set the new JWT token in the session
     req.session.token = token;
