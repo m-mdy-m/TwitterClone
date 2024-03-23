@@ -89,8 +89,7 @@ async function handleRetweet(tweet, userId, option) {
     }
     if(!updatedTweet.originalTweet){
       const updateQueryUser = { [option]: { "likedTweets": updatedTweet._id } };
-      const updatedUser = await User.findByIdAndUpdate(userId, updateQueryUser, { new: true });
-      return { updatedTweet,updatedUser };
+      const s = await User.findByIdAndUpdate(originalTweet._id, TweetQuery, { new: true });
     }
     // Return the updated user and tweet
     return { updatedTweet };
