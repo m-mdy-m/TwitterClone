@@ -91,16 +91,16 @@ async function handleRetweet(tweet, userId, option) {
       userId,
       originalTweet._id
     );
-
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, TweetQuery, { new: true }), // Update user
       Tweet.findByIdAndUpdate(originalTweet._id, UserQuery, { new: true }) // Update original tweet
     ]);
-
+    console.log('updatedUser=>',updatedUser);
+    console.log('updatedTweet=>',updatedTweet);
     // If the original tweet still exists, recursively invoke handleRetweet
     if (updatedTweet.originalTweet) {
-      handleRetweet(updatedTweet, userId, option);
+      await handleRetweet(updatedTweet, userId, option);
     }
 
     // Return the updated user and tweet
