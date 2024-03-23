@@ -98,9 +98,9 @@ async function handleRetweet(tweet, userId, option) {
       Tweet.findByIdAndUpdate(originalTweet._id, UserQuery, { new: true }) // Update original tweet
     ]);
 
-    // If the original tweet still exists, invoke the callback with the updated tweet
+    // If the original tweet still exists, recursively invoke handleRetweet
     if (updatedTweet.originalTweet) {
-      handleRetweet(updatedTweet,userId,option)
+      handleRetweet(updatedTweet, userId, option);
     }
 
     // Return the updated user and tweet
@@ -145,11 +145,13 @@ async function updateRetweetLikes(originalTweet, option, userId) {
       }
     }
 
-    // Update likes on the original tweet
-    const [nextTweet,original ] =  await Promise.all(retweetPromises);
-    if (nextTweet && nextTweet.retweets &&nextTweet.retweets.length>0 ) {
-      updateRetweetLikes(nextTweet,option,userId)
-    }
+     // Update likes on the retweeted tweets and the original tweet
+     const [updatedRetweets, updatedOriginalTweet] = await Promise.all(retweetPromises);
+
+     // If there are still retweeted tweets, recursively call updateRetweetLikes
+     if (updatedRetweets && updatedRetweets.retweets && updatedRetweets.retweets.length > 0) {
+       await updateRetweetLikes(updatedRetweets, option, userId);
+     }
   } catch (error) {
     // Handle any errors
     console.error("Error updating retweet likes:", error);
