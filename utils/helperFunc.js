@@ -64,6 +64,7 @@ function clearAllCookies(req, res) {
 
 /**
  * Retrieves the original tweet if the given tweet is a retweet, updates likes accordingly, and invokes a callback.
+ * If the tweet is not a retweet, it directly updates the likes on the tweet itself.
  * @param {Object} tweet - The tweet object.
  * @param {string} userId - The ID of the user performing the action.
  * @param {string} option - The operation option ('$addToSet', '$pull', etc.).
@@ -72,11 +73,12 @@ function clearAllCookies(req, res) {
  */
 async function handleRetweet(tweet, userId, option, callback) {
   try {
+    // Retrieve the ID of the original tweet, if it's a retweet
     const originalTweetId = tweet.originalTweet;
 
     // If it's not a retweet, update likes directly and return
     if (!originalTweetId) {
-      await updateRetweetLikes(tweet, option, userId);
+      await updateRetweetLikes(tweet, option, userId); // Updating likes directly on the tweet
       return;
     }
 
@@ -92,8 +94,8 @@ async function handleRetweet(tweet, userId, option, callback) {
 
     // Execute the update operations on the user and the tweet
     const [updatedUser, updatedTweet] = await Promise.all([
-      User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
-      Tweet.findByIdAndUpdate(originalTweet._id, UserQuery, { new: true }),
+      User.findByIdAndUpdate(userId, TweetQuery, { new: true }), // Update user
+      Tweet.findByIdAndUpdate(originalTweet._id, UserQuery, { new: true }) // Update original tweet
     ]);
 
     // If the original tweet still exists, invoke the callback with the updated tweet
@@ -101,6 +103,7 @@ async function handleRetweet(tweet, userId, option, callback) {
       if (callback) callback(updatedTweet); // Invoking callback if provided
     }
 
+    // Return the updated user and tweet
     return { updatedUser, updatedTweet };
   } catch (error) {
     // Handle any errors
@@ -109,36 +112,41 @@ async function handleRetweet(tweet, userId, option, callback) {
   }
 }
 
+
 /**
- * Update likes on retweeted tweets and original tweet.
+ * Updates the likes on retweeted tweets and the original tweet based on the provided option.
  * @param {Object} originalTweet - The original tweet object.
  * @param {string} option - The operation option ('$addToSet', '$pull', etc.).
  * @param {string} userId - The ID of the user liking the tweet.
+ * @returns {Promise<void>} - A promise that resolves once the likes are updated.
  */
 async function updateRetweetLikes(originalTweet, option, userId) {
   try {
+    // Extract retweet IDs from the original tweet
     const retweetIds = originalTweet.retweets;
-    if (retweetIds.length > 0) {
-      for (const retweetId of retweetIds) {
-        // Find the retweeted tweet
-        const retweetedTweet = await Tweet.findById(retweetId);
 
-        // Check if the retweeted tweet corresponds to the original tweet
-        if (
-          retweetedTweet.originalTweet.toString() ===
-          originalTweet._id.toString()
-        ) {
-          // Construct query to update likes based on the operation and user ID
-          const query = { [option]: { likes: userId } };
+    // Construct the query for updating likes
+    const query = { [option]: { likes: userId } };
 
-          // Update likes on both retweeted tweet and original tweet
-          await Promise.all([
-            Tweet.findByIdAndUpdate(retweetedTweet._id, query, { new: true }),
-            Tweet.findByIdAndUpdate(originalTweet._id, query, { new: true }),
-          ]);
-        }
+    // Array to hold promises for updating retweeted tweets and the original tweet
+    const retweetPromises = [];
+
+    // Iterate over retweet IDs
+    for (const retweetId of retweetIds) {
+      // Find the retweeted tweet
+      const retweetedTweet = await Tweet.findById(retweetId);
+
+      // Check if the retweeted tweet corresponds to the original tweet
+      if (retweetedTweet.originalTweet.toString() === originalTweet._id.toString()) {
+        // Update likes on the retweeted tweet
+        retweetPromises.push(Tweet.findByIdAndUpdate(retweetId, query, { new: true }));
+        // Also update likes on the original tweet
+        retweetPromises.push(Tweet.findByIdAndUpdate(originalTweet._id, query, { new: true }));
       }
     }
+
+    // Update likes on the original tweet
+    await Promise.all(retweetPromises);
   } catch (error) {
     // Handle any errors
     console.error("Error updating retweet likes:", error);
