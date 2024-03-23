@@ -101,21 +101,21 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
     // Determine if the user has already liked or unliked the tweet
-    let TweetLikeUser = tweet.likes.includes(user.userId)
+    const TweetLikeUser = tweet.likes.includes(user.userId)
     // Determine whether to add or remove the like based on the current state
 
     // Handle retweet logic (if applicable) and update likes accordingly
-    const option =TweetLikeUser ? "$pull" : "$addToSet";
-    const { updatedTweet } = handleRetweet(
+    const baseOPtion =TweetLikeUser ? "$pull" : "$addToSet";
+    const { updatedTweet,optionUser } = handleRetweet(
       tweet,
       user.userId,
-      option
+      baseOPtion
     );
-    const isLIkes = updatedTweet.likes.includes(user.userId)
-    const newOption =isLIkes ? "$pull" : "$addToSet";
+    const option = optionUser?? baseOPtion
+    console.log('option=>',option);
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(
-      newOption,
+      option,
       user.userId,
       id
     );
