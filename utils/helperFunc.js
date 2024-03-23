@@ -57,7 +57,7 @@ function clearAllCookies(req, res) {
   }
 }
 
-async function getOriginTweet(tweet, userId, callback) {
+async function getOriginTweet(tweet, userId,option, callback) {
   try {
     const original = tweet.originalTweet;
     if (!original) {
@@ -65,11 +65,6 @@ async function getOriginTweet(tweet, userId, callback) {
     }
     // If it's a retweet, find the original tweet
     const originalTweet = await Tweet.findById(original);
-
-    // Check if the user has liked the original tweet
-    const isOriginalTweetLiked = originalTweet.likes.includes(userId);
-
-    const option = isOriginalTweetLiked ? "$pull" : "$addToSet";
     // If the user has liked the original tweet, remove the like
     const { query, updateQuery } = generateTweetQueries(
       option,

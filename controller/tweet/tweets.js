@@ -95,13 +95,12 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
     // handlerRetweets(tweet);
-    getOriginTweet(tweet, user.userId);
     // Determine if the user has already liked or unliked the tweet
     // console.log('tweet=>',tweet);
     const isLiked = isIdLiked([user, tweet], id);
-    console.log("isLiked=>", isLiked);
     // Determine whether to add or remove the like based on the current state
     const option = isLiked ? "$pull" : "$addToSet";
+    getOriginTweet(tweet, user.userId,option);
 
     // Create the update queries for the user and the tweet
     const { query, updateQuery } = generateTweetQueries(
@@ -118,6 +117,8 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);
 
+    // console.log("updatedUser=>", updatedUser);
+    console.log("updatedTweet=>", updatedTweet);
     // Set the new JWT token in the session
     req.session.token = token;
 
