@@ -1,4 +1,4 @@
-const { getOriginTweet, handlerRetweets } = require("../../utils/helperFunc");
+const { handleRetweet } = require("../../utils/helperFunc");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
@@ -100,7 +100,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     const isLiked = isIdLiked([user, tweet], id);
     // Determine whether to add or remove the like based on the current state
     const option = isLiked ? "$pull" : "$addToSet";
-    getOriginTweet(tweet, user.userId,option);
+    handleRetweet(tweet, user.userId,option);
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(
       option,
