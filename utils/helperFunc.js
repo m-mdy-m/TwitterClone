@@ -95,8 +95,6 @@ async function handleRetweet(tweet, userId, option) {
       User.findByIdAndUpdate(userId, TweetQuery, { new: true }), // Update user
       Tweet.findByIdAndUpdate(originalTweet._id, UserQuery, { new: true }) // Update original tweet
     ]);
-    console.log('updatedUser=>',updatedUser);
-    console.log('updatedTweet=>',updatedTweet);
     // If the original tweet still exists, recursively invoke handleRetweet
     if (updatedTweet.originalTweet) {
       await handleRetweet(updatedTweet, userId, option);
