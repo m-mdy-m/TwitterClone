@@ -95,7 +95,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
     // handlerRetweets(tweet);
-    // const { newUser, newQuery } = getOriginTweet(tweet, user.userId);
+    getOriginTweet(tweet, user.userId);
     // Determine if the user has already liked or unliked the tweet
     // console.log('tweet=>',tweet);
     const isLiked = isIdLiked([user, tweet], id);
@@ -163,13 +163,13 @@ exports.retweet = async (req, { getJsonHandler }) => {
       likes: tweet.likes,
       retweeters: tweet.retweeters,
     });
-
+    
     const { query, updateQuery } = generateTweetQueries(
       "$addToSet",
       userId,
       id,
       "retweeters",
-      "retweets"
+      "retweetedTweets"
     );
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, updateQuery, { new: true }),
