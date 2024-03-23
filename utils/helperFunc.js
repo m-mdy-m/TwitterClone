@@ -147,8 +147,7 @@ async function updateRetweetLikes(originalTweet, option, userId) {
 
     // Update likes on the original tweet
     const [nextTweet,original ] =  await Promise.all(retweetPromises);
-    if (nextTweet.retweets.length >0) {
-      console.log('nextTweet=>',nextTweet);
+    if (nextTweet && nextTweet.retweets &&nextTweet.retweets.length>0 ) {
       updateRetweetLikes(nextTweet,option,userId)
     }
   } catch (error) {
