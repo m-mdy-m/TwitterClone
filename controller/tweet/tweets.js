@@ -108,7 +108,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     const option = isLiked ? "$pull" : "$addToSet";
 
     // Handle retweet logic (if applicable) and update likes accordingly
-    handleRetweet(tweet, user.userId, option);
+    const { updatedUser } = handleRetweet(tweet, user.userId, option);
 
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(
@@ -116,12 +116,16 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       user.userId,
       id
     );
-
+    let newUser, newTweet;
     // Execute the update operations on the user and the tweet
-    const [newUser, newTweet] = await Promise.all([
-      User.findByIdAndUpdate(user.userId, TweetQuery, { new: true }),
-      Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
-    ]);
+    if (updatedUser) {
+      newTweet = await Tweet.findByIdAndUpdate(id, UserQuery, { new: true });
+    } else {
+      [newUser, newTweet] = await Promise.all([
+        User.findByIdAndUpdate(user.userId, TweetQuery, { new: true }),
+        Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
+      ]);
+    }
 
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(newUser);
@@ -171,7 +175,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
       likes: tweet.likes,
       retweeters: tweet.retweeters,
     });
-    
+
     const { UserQuery, TweetQuery } = generateTweetQueries(
       "$addToSet",
       userId,

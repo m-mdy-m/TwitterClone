@@ -71,7 +71,7 @@ function clearAllCookies(req, res) {
  * @param {function} callback - The callback function to be invoked with the updated tweet.
  * @returns {Object} - Object containing the updated user and tweet.
  */
-async function handleRetweet(tweet, userId, option, callback) {
+async function handleRetweet(tweet, userId, option) {
   try {
     // Retrieve the ID of the original tweet, if it's a retweet
     const originalTweetId = tweet.originalTweet;
@@ -100,7 +100,7 @@ async function handleRetweet(tweet, userId, option, callback) {
 
     // If the original tweet still exists, invoke the callback with the updated tweet
     if (updatedTweet.originalTweet) {
-      if (callback) callback(updatedTweet); // Invoking callback if provided
+      handleRetweet(updatedTweet,userId,option)
     }
 
     // Return the updated user and tweet
@@ -146,7 +146,11 @@ async function updateRetweetLikes(originalTweet, option, userId) {
     }
 
     // Update likes on the original tweet
-    await Promise.all(retweetPromises);
+    const [nextTweet,original ] =  await Promise.all(retweetPromises);
+    if (nextTweet.retweets.length >0) {
+      console.log('nextTweet=>',nextTweet);
+      updateRetweetLikes(nextTweet,option,userId)
+    }
   } catch (error) {
     // Handle any errors
     console.error("Error updating retweet likes:", error);
