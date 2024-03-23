@@ -100,12 +100,10 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       // Return a not found error with a clear message
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
-
     // Determine if the user has already liked or unliked the tweet
-    const isLiked = isIdLiked([user, tweet], id);
-
+    const TweetLikeUser = tweet.likes.includes(user.userId)
     // Determine whether to add or remove the like based on the current state
-    const option = isLiked ? "$pull" : "$addToSet";
+    const option =TweetLikeUser ? "$pull" : "$addToSet";
 
     // Handle retweet logic (if applicable) and update likes accordingly
     const { updatedTweet } = handleRetweet(
@@ -129,7 +127,6 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
         Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
       ]);
     }
-
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(newUser);
 
