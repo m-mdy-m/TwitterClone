@@ -67,7 +67,7 @@ async function handleRetweet(tweet, userId, option) {
   try {
     // Retrieve the ID of the original tweet, if it's a retweet
     const originalTweetId = tweet.originalTweet;
-
+    const TweetQuery = { [option]: { "likes": userId } };
     // If it's not a retweet, update likes directly and return
     if (!originalTweetId) {
       await updateRetweetLikes(tweet, option, userId); // Updating likes directly on the tweet
@@ -75,27 +75,31 @@ async function handleRetweet(tweet, userId, option) {
     }
     // Find the original tweet
     const originalTweet = await Tweet.findById(originalTweetId);
+    while(originalTweet){
+      const updatedTweet = await Tweet.findByIdAndUpdate(originalTweet._id, TweetQuery, { new: true });
+      let parent
+      if (updatedTweet.originalTweet) {
+        await handleRetweet(updatedTweet, userId, option);
+      }else if(updatedTweet.retweets && updatedTweet.retweets.length>0){
+        parent = updatedTweet
+        console.log('parent =>',parent);
+        await updateRetweetLikes(tweet, option, userId);
+      }
+    }
     // Generate queries for updating user and original tweet based on the operation
-    const TweetQuery = { [option]: { "likes": userId } };
 
-    // Update the user's liked posts with the original tweet ID
-    // Update the original tweet with the user's ID (for tracking likes on original tweet)
-    const updatedTweet = await Tweet.findByIdAndUpdate(originalTweet._id, TweetQuery, { new: true });
+    // // Update the user's liked posts with the original tweet ID
+    // // Update the original tweet with the user's ID (for tracking likes on original tweet)
+    // const updatedTweet = await Tweet.findByIdAndUpdate(originalTweet._id, TweetQuery, { new: true });
 
-    // If the original tweet still exists, recursively invoke handleRetweet
-    if (updatedTweet.originalTweet) {
-      await handleRetweet(updatedTweet, userId, option);
-    }
+    // // If the original tweet still exists, recursively invoke handleRetweet
+    // if (updatedTweet.originalTweet) {
+    //   await handleRetweet(updatedTweet, userId, option);
+    // }
 
-    if (updatedTweet.retweets && updatedTweet.retweets.length>0) {
-      // console.log('updatedTweet =>',updatedTweet);
-      const {updatedRetweets, updatedOriginalTweet} =  await updateRetweetLikes(tweet, option, userId);
-      console.log('updatedRetweets=>',updatedRetweets);
-      console.log('updatedOriginalTweet=>',updatedOriginalTweet);
-      // if (updatedTweet.originalTweet) {
-      //   await handleRetweet(updatedTweet, userId, option);
-      // }
-    }
+    // if (updatedTweet.retweets && updatedTweet.retweets.length>0) {
+    //    await updateRetweetLikes(tweet, option, userId);
+    // }
   } catch (error) {
     // Handle any errors
     console.error("Error getting original tweet:", error);
@@ -141,9 +145,8 @@ async function updateRetweetLikes(originalTweet, option, userId) {
 
      // If there are still retweeted tweets, recursively call updateRetweetLikes
      if (updatedRetweets && updatedRetweets.retweets && updatedRetweets.retweets.length > 0) {
-       return await updateRetweetLikes(updatedRetweets, option, userId);
+       await updateRetweetLikes(updatedRetweets, option, userId);
      }
-     return {updatedRetweets, updatedOriginalTweet}
   } catch (error) {
     // Handle any errors
     console.error("Error updating retweet likes:", error);
