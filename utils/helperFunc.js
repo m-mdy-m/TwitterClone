@@ -93,26 +93,17 @@ async function getOriginTweet(tweet, userId, option, callback) {
 
 async function getRetweets(original, option, userId, callback) {
   const retweets = original.retweets;
-  console.log("retweets=>", retweets);
-  for (const id of retweets) {
-    const tweet = await Tweet.findById(id);
-    console.log("tweet=>", tweet);
-    const s = tweet.originalTweet.toString() === original._id.toString();
-    if (s) {
-      const { UserQuery, TweetQuery } = generateTweetQueries(
-        option,
-        userId,
-        original._id
-      );
-      // Execute the update operations on the user and the tweet
-      const [updatedUser, updatedTweet] = await Promise.all([
-        User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
-        Tweet.findByIdAndUpdate(original._id, UserQuery, { new: true }),
-      ]);
-      console.log("updatedUser=>", updatedUser);
-      console.log("updatedTweet=>", updatedTweet);
-      if (updatedTweet.originalTweet) {
-        callback(updatedTweet);
+  if (retweets.length > 0) {
+    for (const id of retweets) {
+      const tweet = await Tweet.findById(id);
+      if (tweet.originalTweet.toString() === original._id.toString()) {
+        const queryTweet = { [option] : {likes: userId}}
+        // Execute the update operations on the user and the tweet
+        const updatedTweet = await Promise.all([Tweet.findByIdAndUpdate(tweet._id, queryTweet, { new: true }),Tweet.findByIdAndUpdate(original._id, queryTweet, { new: true })])
+        console.log("updatedTweet=>", updatedTweet);
+        // if (updatedTweet.originalTweet) {
+        //   callback(updatedTweet);
+        // }
       }
     }
   }
