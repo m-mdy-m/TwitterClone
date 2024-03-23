@@ -19,6 +19,7 @@ export async function handleClick(event) {
         updateUI(elm, count, id);
       } else if (currentClick === 'retweetIcon') {
         const count = await toggleRetweet(id);
+        cl
         console.log('Retweet icon clicked');
         // Handle retweet logic
       } else if (currentClick === 'shareIcon') {

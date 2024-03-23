@@ -19,15 +19,10 @@ import {
   setItem,
 } from "./utils.js";
 const msgElm = getMsgElement();
+
+
 // Function to Signup or Login user
-export async function authenticateUser(
-  url,
-  requestData,
-  header,
-  form,
-  btn,
-  oldValue
-) {
+export async function authenticateUser(url,requestData,header,form,btn,oldValue) {
   try {
     const response = await axios.post(url, requestData, header);
     // Handle server response based on success or failure

@@ -75,15 +75,8 @@ function renderTweet(tweet, userInfo) {
     const { username, profilePic } = author;
     const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
-      console.log('author =>',author.username);
-      console.log('author =>',author.profilePic);
-      if(!originalTweet){
       console.log('tweet =>',tweet);
-      // const parentTweet = originalTweet
-      // console.log('parentTweet=>',parentTweet)
-    }
-    // console.log('_id =>',_id);
-    // console.log('isLiked =>',isLiked);
+      console.log('userInfo =>',userInfo);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
