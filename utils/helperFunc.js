@@ -84,9 +84,10 @@ async function handleRetweet(tweet, userId, option) {
     }
 
     if (updatedTweet.retweets && updatedTweet.retweets.length>0) {
-      const {  updatedRetweets, updatedOriginalTweet }= await updateRetweetLikes(tweet, option, userId);
-      return {  updatedRetweets, updatedOriginalTweet }
+      const updatedRetweets= await updateRetweetLikes(tweet, option, userId);
+      return updatedRetweets
     }
+    return updatedTweet
   } catch (error) {
     // Handle any errors
     console.error("Error getting original tweet:", error);
