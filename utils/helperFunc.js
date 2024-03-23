@@ -25,15 +25,7 @@ function isIdLiked(array = [], id) {
  * @param {string} featureTypeUser - Feature type for user ('likedTweets' by default).
  * @returns {object} - Object containing query and updateQuery for MongoDB.
  */
-const generateTweetQueries = (
-  operation,
-  userId,
-  tweetId,
-  isRetweet,
-  retweetId,
-  featureTypeTweet = "likes",
-  featureTypeUser = "likedTweets"
-) => {
+const generateTweetQueries = (operation,userId,tweetId,isRetweet,retweetId,featureTypeTweet = "likes", featureTypeUser = "likedTweets") => {
   // Construct query to associate user with tweet based on the operation and tweet information
   let UserQuery = { [operation]: { [featureTypeTweet]: userId } };
   // Construct update query to perform operation on tweet based on tweet information
@@ -84,17 +76,10 @@ async function handleRetweet(tweet, userId, option) {
     // Find the original tweet
     const originalTweet = await Tweet.findById(originalTweetId);
 
-    // Generate queries for updating tweet and user based on the operation
-    const { UserQuery, TweetQuery } = generateTweetQueries(
-      option,
-      userId,
-      originalTweet._id
-    );
+    const UserQuery = { [option]: { "likes": userId } };
+    const TweetQuery = { [option]: { 'likedTweets': originalTweet._id } };
     // Execute the update operations on the user and the tweet
-    const [updatedUser, updatedTweet] = await Promise.all([
-      User.findByIdAndUpdate(userId, TweetQuery, { new: true }), // Update user
-      Tweet.findByIdAndUpdate(originalTweet._id, UserQuery, { new: true }) // Update original tweet
-    ]);
+    const updatedTweet = await Tweet.findByIdAndUpdate(originalTweet._id, UserQuery, { new: true }) 
     // If the original tweet still exists, recursively invoke handleRetweet
     if (updatedTweet.originalTweet) {
       await handleRetweet(updatedTweet, userId, option);
@@ -105,7 +90,7 @@ async function handleRetweet(tweet, userId, option) {
       return;
     }
     // Return the updated user and tweet
-    return { updatedUser, updatedTweet };
+    return {  updatedTweet };
   } catch (error) {
     // Handle any errors
     console.error("Error getting original tweet:", error);
