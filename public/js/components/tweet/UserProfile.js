@@ -2,8 +2,8 @@ import { Profile } from "../common/Profile.js";
 
 export function UserProfile({ username, profile, className }) {
   return `
-  <div class="container__profile-users flex">
-      <div class="flex justify-center items-center absolute top-2 left-0 ml-2 opacity-0 user-retweeted">
+  <div class="container__profile-users flex ">
+      <div class="flex justify-center items-center absolute top-0 left-1  opacity-0 user-retweeted">
           <a href="#" class="hover:underline text-[#fff] text-[8px] flex items-center">@m__mdy__m</a>
       </div>
         <img src="/assets/icon/nav/retweeted.svg" alt="" class="w-8 h-8 absolute hover:-z-10">
