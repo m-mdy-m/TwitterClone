@@ -14,7 +14,7 @@ function Tweet({
   retweetuser,
 }) {
   return `
-    <div class="w-full min-h-28 h-auto my-4 rounded-2xl relative grid grid-rows-readTweet bg-[#111010] px-4 pt-6" data-id="${id}">
+    <div class="w-full min-h-28 h-auto my-4 rounded-lg relative grid grid-rows-readTweet bg-[#111010] px-3 pt-4" data-id="${id}">
       <div class="flex justify-between items-center">
         ${UserInfo({ username, profile, createdAt })}
         <div class="flex justify-center items-center w-8 h-8 transition-transform cursor-pointer transform hover:scale-110">
