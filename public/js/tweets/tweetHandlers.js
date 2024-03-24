@@ -1,4 +1,5 @@
 import Tweet from "../components/Tweet.js";
+import { getRetweetInfo } from "../utils/apiOperations.js";
 import { showMessage } from "../utils/helper.js";
 import {
   calculateLikeCount,
@@ -10,10 +11,10 @@ const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
-export function AddTweet(tweetData, userInfo) {
+export async function AddTweet(tweetData, userInfo) {
   try {
     // Render the tweet template
-    const tweetTemplate = renderTweet(tweetData, userInfo);
+    const tweetTemplate = await renderTweet(tweetData, userInfo);
 
     // Append the rendered tweet template to the wrapper element
     appendTweet("afterbegin", tweetTemplate);
@@ -28,7 +29,7 @@ export function AddTweet(tweetData, userInfo) {
 }
 
 // Function to show multiple tweets in the UI
-export function ShowTweets(response, userInfo) {
+export async function ShowTweets(response, userInfo) {
   try {
     // Ensure the response contains tweet data
     if (!response || !response.data || !response.data.tweets) {
@@ -41,8 +42,8 @@ export function ShowTweets(response, userInfo) {
     // Sort the tweets array by createdAt in descending order (newest to oldest)
     tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     // Iterate over each tweet and render its template
-    tweets.forEach((tweet) => {
-      const tweetTemplate = renderTweet(tweet, userInfo);
+    await tweets.forEach(async (tweet) => {
+      const tweetTemplate = await renderTweet(tweet, userInfo);
 
       // Append the rendered tweet template to the wrapper element
       appendTweet("beforeend", tweetTemplate);
@@ -56,7 +57,7 @@ export function ShowTweets(response, userInfo) {
 }
 
 // Function to render a single tweet template
-function renderTweet(tweet, userInfo) {
+async  function renderTweet(tweet, userInfo) {
   // Ensure the tweet and user information are provided
   if (!tweet || !userInfo) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
@@ -65,13 +66,14 @@ function renderTweet(tweet, userInfo) {
     // Extract relevant data from the tweet object
     const { author, content, createdAt, _id, likes,retweets } = tweet;
     const { username, profilePic } = author;
-    const { userId, retweetedTweets } = userInfo;
+    const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
-    console.log("tweet =>", tweet);
-    console.log("userInfo =>", userInfo);
-    const isRetweeted = retweets.some((retweet) => retweet === _id);
-    // console.log('tweet =>',tweet);
-    // console.log('userInfo =>',userInfo);
+    // console.log("tweet =>", tweet);
+    // console.log("userInfo =>", userInfo);
+    const isRetweeted = await retweets.some(async retweet => {
+      const tweet = await getRetweetInfo(retweet)
+      return tweet.originalTweet === retweet
+    });
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
