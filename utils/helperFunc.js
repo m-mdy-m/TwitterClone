@@ -63,8 +63,7 @@ function clearAllCookies(req, res) {
  * @param {function} callback - The callback function to be invoked with the updated tweet.
  * @returns {Object} - Object containing the updated user and tweet.
  */
-async function handleRetweet(tweet, userId, option,getJsonHandler) {
-  const { } = getJsonHandler()
+async function handleRetweet(tweet, userId, option,internalServerError) {
   try {
     // Retrieve the ID of the original tweet, if it's a retweet
     const TweetQuery = { [option]: { "likes": userId } };
@@ -81,9 +80,9 @@ async function handleRetweet(tweet, userId, option,getJsonHandler) {
     // If the parent tweet is not a retweet, return it
     return parent;
   } catch (error) {
-    // Handle any errors
-    console.error("Error getting original tweet:", error);
-    throw new Error("Failed to get original tweet.");
+     // Handle any errors
+     console.error("Error getting original tweet:", error);
+     internalServerError("Failed to get original tweet.");
   }
 }
 
