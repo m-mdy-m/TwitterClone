@@ -166,12 +166,12 @@
     animation: fadeAndScaleOut 0.5s ease forwards;
     transform-origin: center;
   }
-  .profile-user:hover img{
+  .profile-user:hover .icon-retweet{
     opacity : 0
     
   }
-  .profile-user:not(:hover) img{
+  .profile-user:not(:hover) .icon-retweet{
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 1s ease;
   }
 }
