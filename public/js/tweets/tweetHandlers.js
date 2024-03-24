@@ -1,5 +1,4 @@
 import Tweet from "../components/Tweet.js";
-import { getRetweetInfo } from "../utils/apiOperations.js";
 import { showMessage } from "../utils/helper.js";
 import {
   calculateLikeCount,
@@ -68,7 +67,8 @@ export function ShowTweets(response, userInfo) {
     const { username, profilePic } = author;
     const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
-    const isRetweeted = tweet.isRetweeted? tweet.isRetweeted:false
+    console.log('tweet =>',tweet)
+    const isRetweeted = tweet.originalTweet? true:false
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
@@ -83,12 +83,12 @@ export function ShowTweets(response, userInfo) {
       return Tweet({
         username:userInfo.username,
         profile: userInfo.profilePic,
-        content : "retweeted ",
+        content : content + ' retweeted : '+ userInfo.username +' original :'+tweet.originalTweet,
         createdAt: formattedCreatedAt,
         id: _id,
         likeCount,
         srcLikeIcon: likeIcon,
-        retweetCount: tweet.retweeters.length,
+        retweetCount: tweet.retweeters.length >0? tweet.retweeters.length:'',
         retweetedUsername: userInfo.username,
         isRetweeted: className,
         srcRetweetIcon: retweetedIcon,

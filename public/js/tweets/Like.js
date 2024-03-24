@@ -76,6 +76,7 @@ async function updatedUiRetweeted(infoTweetRetweeted){
       return {tweet , isRetweeted:true}
     }
   })
+  console.log('newTweetRetweeted=>',newTweetRetweeted);
   AddTweet(newTweetRetweeted,currentUser)
 }
 
