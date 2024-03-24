@@ -44,6 +44,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Fetch tweets if the path is not /auth/signup or /auth/login
   if (!["/auth/signup", "/auth/login"].includes(path)) {
     await getTweets();
+    const profileUsers = document.querySelectorAll(".profile-users");
+    profileUsers.forEach((elm) => {
+      console.log("elm =>", elm);
+      elm.addEventListener("mouseenter",(e)=>{
+        console.log('e.target ',e.target);
+      });
+    });
   } else {
     const form = document.getElementById("registerForm");
     formHandler(form, path);
