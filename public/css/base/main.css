@@ -866,18 +866,6 @@
   }
 }
 
-@keyframes raindrop {
-  0% {
-    transform: translateY(+20px) scale(0.2);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
-
 /* Apply the animation to the heart icon */
 
 .heart-icon {
@@ -903,16 +891,45 @@
   height: auto;
 }
 
+@keyframes showID {
+  0% {
+    transform: translateY(20px) scale(0.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes hiddenId {
+  0% {
+    transform: translateY(-20px) scale(0.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
 .user-retweeted {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
-.user-retweeted.visible {
+.user-retweeted.visibleId {
   opacity: 1;
-  animation: raindrop 0.5s ease forwards;
+  animation: showID 0.5s ease forwards;
   transform-origin: center;
-  background-color: red;
+}
+
+.user-retweeted.hiddenId{
+  opacity: 0;
+  animation: hiddenId 0.5s ease forwards;
+  transform-origin: center;
 }
 
 .hover\:-z-10:hover {
