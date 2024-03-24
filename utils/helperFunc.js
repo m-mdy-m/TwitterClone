@@ -106,27 +106,28 @@ async function updateRetweetLikes(originalTweet, option, userId) {
     const retweetPromises = [];
 
     // Iterate over retweet IDs
-    for (const retweetId of retweetIds) {
+    for (const currentTweetId of retweetIds) {
       // Find the retweeted tweet
-      const retweetedTweet = await Tweet.findById(retweetId);
+      const currentTweet = await Tweet.findById(currentTweetId);
 
       // Check if the retweeted tweet corresponds to the original tweet
-      if (retweetedTweet.originalTweet.toString() === originalTweet._id.toString()) {
+      if (currentTweet.originalTweet.toString() === originalTweet._id.toString()) {
         // Update likes on the retweeted tweet
-        retweetPromises.push(Tweet.findByIdAndUpdate(retweetId, query, { new: true }));
+        retweetPromises.push(Tweet.findByIdAndUpdate(currentTweet._id, query, { new: true }));
         // Also update likes on the original tweet
         retweetPromises.push(Tweet.findByIdAndUpdate(originalTweet._id, query, { new: true }));
       }
     }
 
      // Update likes on the retweeted tweets and the original tweet
-     const [updatedRetweets, updatedOriginalTweet] = await Promise.all(retweetPromises);
-
+     const [currentTweet, original] = await Promise.all(retweetPromises);
+    console.log('currentTweet=>',currentTweet);
+    console.log('original=>',original);
      // If there are still retweeted tweets, recursively call updateRetweetLikes
-     if (updatedRetweets && updatedRetweets.retweets && updatedRetweets.retweets.length > 0) {
-       await updateRetweetLikes(updatedRetweets, option, userId);
+     if (currentTweet && currentTweet.retweets && currentTweet.retweets.length > 0) {
+       await updateRetweetLikes(currentTweet, option, userId);
      }
-     return {  updatedRetweets, updatedOriginalTweet};
+     return {  currentTweet, original};
   } catch (error) {
     // Handle any errors
     console.error("Error updating retweet likes:", error);
