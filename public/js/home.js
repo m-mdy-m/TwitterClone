@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         setTimeout(() => {
           userRetweeted.classList.remove("visibleId");
           userRetweeted.classList.add("hiddenId");
-        }, 1000);
+        }, 1500);
       });
     });
   } else {

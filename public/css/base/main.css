@@ -887,7 +887,7 @@
   height: auto;
 }
 
-@keyframes showID {
+@keyframes fadeAndScaleIn {
   0% {
     transform: translateY(20px) scale(0.2);
     opacity: 0;
@@ -899,7 +899,7 @@
   }
 }
 
-@keyframes hiddenId {
+@keyframes fadeAndScaleOut {
   0% {
     transform: translateY(0) scale(1);
     opacity: 1;
@@ -918,13 +918,48 @@
 
 .user-retweeted.visibleId {
   opacity: 1;
-  animation: showID 0.5s ease forwards;
+  animation: fadeAndScaleIn 0.5s ease forwards;
   transform-origin: center;
 }
 
-.user-retweeted.hiddenId{
+.user-retweeted.visibleId::before,
+  .user-retweeted.visibleId::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ff7f50;
+  border-radius: 50%;
+  animation: pulse 1s ease infinite alternate;
+}
+
+.user-retweeted.visibleId::before {
+  top: 0;
+  left: 0%;
+  transform: translateX(-50%);
+}
+
+.user-retweeted.visibleId::after {
+  bottom: 0;
+  right: 0%;
+  transform: translateX(-50%);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.user-retweeted.hiddenId {
   opacity: 0;
-  animation: hiddenId 0.5s ease forwards;
+  animation: fadeAndScaleOut 0.5s ease forwards;
   transform-origin: center;
 }
 
