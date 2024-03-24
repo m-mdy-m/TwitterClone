@@ -66,20 +66,19 @@ function clearAllCookies(req, res) {
 async function handleRetweet(tweet, userId, option) {
   try {
     // Retrieve the ID of the original tweet, if it's a retweet
-    const originalTweetId = tweet.originalTweet;
     const TweetQuery = { [option]: { "likes": userId } };
-
-    // If it's not a retweet, update likes directly and return
-    if (!originalTweetId) {
-      await updateRetweetLikes(tweet, option, userId); // Updating likes directly on the tweet
-      return;
+    
+    // Find the parent tweet and all its children
+    const parent = await getParentTweet(tweet, TweetQuery);
+    const children = await getAllChildren(parent);
+    
+    // If the parent tweet has retweets, update likes recursively
+    if (parent.retweets && parent.retweets.length > 0) {
+      return await updateRetweetLikes(tweet, children, option, userId);
     }
-    const parent = await getParentTweet(tweet,TweetQuery)
-    const children = await getAllChildren(parent)
-    if (parent.retweets && parent.retweets.length>0) {
-      return await updateRetweetLikes(tweet,children, option, userId);
-    }
-    return parent
+    
+    // If the parent tweet is not a retweet, return it
+    return parent;
   } catch (error) {
     // Handle any errors
     console.error("Error getting original tweet:", error);
@@ -108,6 +107,7 @@ async function updateRetweetLikes(currentTweet, children, option, userId) {
     if (children && children.length > 0) {
       // Update likes on each child tweet
       const childPromises = children.map(async child => {
+        // Recursively update likes on the child tweet
         return updateRetweetLikes(child, null, option, userId);
       });
 
@@ -115,6 +115,7 @@ async function updateRetweetLikes(currentTweet, children, option, userId) {
       await Promise.all(childPromises);
     }
 
+    // Return the updated current tweet
     return updatedCurrentTweet;
   } catch (error) {
     // Handle any errors
@@ -122,29 +123,47 @@ async function updateRetweetLikes(currentTweet, children, option, userId) {
     throw new Error("Failed to update retweet likes.");
   }
 }
+/**
+ * Recursively retrieves the parent tweet of a given tweet, updating likes accordingly.
+ * If the given tweet is already the original tweet, updates likes directly.
+ * @param {Object} tweet - The tweet object or its ID.
+ * @param {Object} query - The update query for updating likes.
+ * @returns {Object} - The updated parent tweet.
+ */
+async function getParentTweet(tweet, query) {
+  // Determine the ID of the original tweet
+  const originalTweetId = tweet.originalTweet ?? tweet;
 
-async function getParentTweet(tweet,query){
-  const originalTweetId = tweet.originalTweet;
-    // Update the original tweet with the user's ID (for tracking likes on original tweet)
-    const updatedTweet = await Tweet.findByIdAndUpdate(originalTweetId._id, query, { new: true });
+  // Update the original tweet with the provided query to track likes
+  const updatedTweet = await Tweet.findByIdAndUpdate(originalTweetId._id, query, { new: true });
 
-    // If the original tweet still exists, recursively invoke handleRetweet
-    if (updatedTweet.originalTweet) {
-      return await getParentTweet(updatedTweet, query);
-    }
-    return updatedTweet
+  // If the original tweet still exists, recursively find its parent tweet
+  if (updatedTweet.originalTweet) {
+    return await getParentTweet(updatedTweet, query);
+  }
+
+  // Return the updated parent tweet
+  return updatedTweet;
 }
 
+/**
+ * Recursively retrieves all children tweets of a parent tweet.
+ * @param {Object} parentTweet - The parent tweet object.
+ * @returns {Array} - Array containing all children tweets.
+ */
 async function getAllChildren(parentTweet) {
   try {
     const children = [];
 
     // Recursive function to find children of a tweet
     async function findChildren(tweet) {
+      // Find all tweets with the current tweet as the original tweet
       const childTweets = await Tweet.find({ originalTweet: tweet._id });
 
+      // Iterate over child tweets and add them to the children array
       for (const child of childTweets) {
         children.push(child);
+        // Recursively find children of the current child tweet
         await findChildren(child);
       }
     }
@@ -152,6 +171,7 @@ async function getAllChildren(parentTweet) {
     // Start searching for children from the parent tweet
     await findChildren(parentTweet);
 
+    // Return the array containing all children tweets
     return children;
   } catch (error) {
     console.error("Error getting children tweets:", error);

@@ -105,10 +105,8 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 
     // Determine whether to add or remove the like based on the current state
     const option = tweetLikedByUser ? "$pull" : "$addToSet";
-    if(tweet.retweets.length>0){
     const parentTweetId = await handleRetweet(tweet, user.userId, option);
-    id = parentTweetId
-    }
+    id = parentTweetId._id
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(
       option,
