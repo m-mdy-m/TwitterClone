@@ -19,16 +19,19 @@ exports.findUser = async (req, { status, getJsonHandler }) => {
   }
 };
 
-exports.findTweet= async(req,{getJsonHandler})=>{
+exports.findTweet = async (req, { getJsonHandler }) => {
+  const { notFound, success, internalServerError } = getJsonHandler();
   try {
-  const { notFound, internalServerError } = getJsonHandler();
-    const id = req.param('id')
+    const id = req.param('id');
     if (!id) {
-      return notFound('tweet not found')
+      return notFound('Tweet ID is required.');
     }
-    const tweet = await Tweet.findById(id)
-    
+    const tweet = await Tweet.findById(id);
+    if (!tweet) {
+      return notFound('Tweet not found.');
+    }
+    success('Tweet found successfully.', tweet);
   } catch (error) {
-    
+    internalServerError('An error occurred while processing your request. Please try again later.');
   }
 }

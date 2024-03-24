@@ -86,6 +86,21 @@ export async function getUserInfo() {
   }
 }
 
+export async function getRetweetInfo(id){
+  try {
+    const header = await getAuthHeaders()
+    const response  = await axios.get(`/tweet-info/${id}`,{},header)
+    return response.data.data
+  } catch (error) {
+    // Handle errors
+    showMessage(
+      msgElm,
+      "Failed to fetch retweet data. Please try again later.",
+      "#FF6347"
+    );
+    throw error; // Re-throw the error to handle it elsewhere if needed
+  }
+}
 // Function to fetch tweets from the API
 export async function getTweets() {
   try {
@@ -206,7 +221,6 @@ export async function toggleRetweet(id) {
     // Send request to toggle like status
     const headers = await getAuthHeaders();
     const response = await axios.post(`/api/retweet/${id}`, {}, headers);
-    console.log("response=>", response);
     if (response.data.success) {
       // Save updated token
       saveToken(response.data.data.token);
