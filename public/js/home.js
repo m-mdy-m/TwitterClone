@@ -45,14 +45,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!["/auth/signup", "/auth/login"].includes(path)) {
     await getTweets();
     document.querySelectorAll(".container__profile-users").forEach((elm) => {
-      const profile = elm.querySelector('.profile-user')
-      const userRetweeted = elm.querySelector('.user-retweeted')
-      profile.addEventListener('mouseenter',()=>{
-        userRetweeted.style.opacity = '1'
-      })
-      profile.addEventListener('mouseleave',()=>{
-        userRetweeted.style.opacity = '.5'
-      }
+      const profile = elm.querySelector(".profile-user");
+      const userRetweeted = elm.querySelector(".user-retweeted");
+      let timeout;
+
+      profile.addEventListener("mouseenter", () => {
+        userRetweeted.classList.add("visible");
+      });
+     
+
+      profile.addEventListener("mouseleave", () => {
+        clearTimeout(timeout); 
+        timeout = setTimeout(() => {
+          userRetweeted.classList.remove("visible");
+        }, 1000);
+      });
     });
   } else {
     const form = document.getElementById("registerForm");
