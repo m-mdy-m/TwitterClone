@@ -75,10 +75,8 @@ async function handleRetweet(tweet, userId, option) {
       return;
     }
     const parent = await getParentTweet(tweet,TweetQuery)
-    const children = await getAllChildren(parent); // Retrieve all children of the parent
     if (parent.retweets && parent.retweets.length>0) {
-      const {  updatedRetweets, updatedOriginalTweet}= await updateRetweetLikes(tweet, option, userId);
-      return {  updatedRetweets, updatedOriginalTweet }
+      return await updateRetweetLikes(tweet, option, userId);
     }
     return parent
   } catch (error) {
