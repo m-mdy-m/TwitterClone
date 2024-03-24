@@ -23,7 +23,7 @@ export function AddTweet(tweetData, userInfo) {
     clearTweetInput();
   } catch (error) {
     // Display a generic error message for adding tweet failure
-    showMessage(msgELm, 'Error adding tweet. Please try again.', '#ff6347');
+    showMessage(msgELm, "Error adding tweet. Please try again.", "#ff6347");
   }
 }
 
@@ -63,24 +63,40 @@ function renderTweet(tweet, userInfo) {
   }
   try {
     // Extract relevant data from the tweet object
-    const { author, content, createdAt, _id,likes } = tweet;
+    const { author, content, createdAt, _id, likes } = tweet;
     const { username, profilePic } = author;
-    const { userId ,retweetedTweets} = userInfo;
+    const { userId, retweetedTweets } = userInfo;
     const isLiked = likes.some((like) => like === userId);
-    console.log('tweet =>',tweet);
-    console.log('userInfo =>',userInfo);
-    const isRetweeted = retweetedTweets.some((retweet)=> retweet === _id)
-    console.log('isRetweeted =>',isRetweeted);
+    console.log("tweet =>", tweet);
+    console.log("userInfo =>", userInfo);
+    const isRetweeted = retweetedTweets.some((retweet) => retweet === _id);
     // console.log('tweet =>',tweet);
     // console.log('userInfo =>',userInfo);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
-    const retweetedIcon = isRetweeted ? 'nav/retweeted-icon.svg' : 'nav/ReTweet.svg'
-    let className = isRetweeted ?? 'flex'
+    const retweetedIcon = isRetweeted
+      ? "nav/retweeted-icon.svg"
+      : "nav/ReTweet.svg";
+    let className = isRetweeted ? "flex" : "hidden";
     // console.log('likeIcon=>',likeIcon);
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
+    if (isRetweeted) {
+      return Tweet({
+        username:userInfo.username,
+        profile: userInfo.profilePic,
+        content,
+        createdAt: formattedCreatedAt,
+        id: _id,
+        likeCount,
+        srcLikeIcon: likeIcon,
+        retweetCount: tweet.retweeters.length,
+        retweetedUsername: userInfo.username,
+        isRetweeted: className,
+        srcRetweetIcon: retweetedIcon,
+      });
+    }
     // Render the tweet template with formatted creation time
     return Tweet({
       username,
@@ -91,9 +107,9 @@ function renderTweet(tweet, userInfo) {
       likeCount,
       srcLikeIcon: likeIcon,
       retweetCount: "",
-      retweetedUsername:'',
-      isRetweeted:className,
-      srcRetweetIcon:retweetedIcon
+      retweetedUsername: "",
+      isRetweeted: className,
+      srcRetweetIcon: retweetedIcon,
     });
   } catch (error) {
     console.log(error);
@@ -121,11 +137,11 @@ export function attachIconClickListeners() {
   try {
     // Select all elements with the class "icons"
     const icons = document.querySelectorAll(".icons");
-    
+
     // Check if any icons are found
     if (!icons || icons.length === 0) {
       // Display an error message if no icons are found
-      showMessage(msgELm, 'No icons found.', '#ff6347');
+      showMessage(msgELm, "No icons found.", "#ff6347");
       return;
     }
 
@@ -135,6 +151,10 @@ export function attachIconClickListeners() {
     });
   } catch (error) {
     // Display a generic error message for attaching icon click listeners
-    showMessage(msgELm, 'Error attaching icon click listeners. Please try again.', '#ff6347');
+    showMessage(
+      msgELm,
+      "Error attaching icon click listeners. Please try again.",
+      "#ff6347"
+    );
   }
 }
