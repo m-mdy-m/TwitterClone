@@ -2,7 +2,7 @@ const { handleRetweet } = require("../../utils/helperFunc");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
-const { isIdLiked, generateTweetQueries } = $read("utils/helperFunc");
+const { generateTweetQueries } = $read("utils/helperFunc");
 const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet
 exports.create = async (req, { getJsonHandler }) => {
@@ -112,7 +112,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     id = parentTweet._id;
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(option, user.userId, id);
-
+    // console.log('id=>',id);
     // Update user and tweet documents
     let [newUser, newTweet] = await Promise.all([
       User.findByIdAndUpdate(user.userId, TweetQuery, { new: true }),
@@ -121,7 +121,6 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(newUser);
-
     // Set the new JWT token in the session
     req.session.token = token;
     // Return a success response with the updated number of likes

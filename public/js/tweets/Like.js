@@ -16,11 +16,11 @@ export async function handleClick(event) {
       if (currentClick === 'likeIcon') {
         console.log('Like icon clicked');
         const count = await toggleLike(id);
-        updateUI(elm, count, id);
+        updateUILiked(elm, count, id);
       } else if (currentClick === 'retweetIcon') {
-        const infoTweet = await toggleRetweet(id);
-        console.log('infoTweet=>',infoTweet);
-        console.log('Retweet icon clicked');
+        const infoTweetRetweeted = await toggleRetweet(id);
+        console.log('infoTweetRetweeted=>',infoTweetRetweeted);
+        updatedUiRetweeted(infoTweetRetweeted)
         // Handle retweet logic
       } else if (currentClick === 'shareIcon') {
         console.log('Share icon clicked');
@@ -37,7 +37,7 @@ export async function handleClick(event) {
 }
 
 // Function to update UI based on like count and user's like status
-async function updateUI(elm, count, id) {
+async function updateUILiked(elm, count, id) {
   // Get user information
   const user = await getUserInfo();
   console.log('user=>',user);
@@ -67,6 +67,12 @@ async function updateUI(elm, count, id) {
     elm.classList.remove("heart-icon");
   }
 }
+
+
+async function updatedUiRetweeted(elm, count, id){
+
+}
+
 
 // Function to handle errors gracefully
 function handleError(elm) {

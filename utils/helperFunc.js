@@ -71,12 +71,10 @@ async function handleRetweet(tweet, userId, option,internalServerError) {
     // Find the parent tweet and all its children
     const parent = await getParentTweet(tweet, TweetQuery);
     const children = await getAllChildren(parent);
-    
     // If the parent tweet has retweets, update likes recursively
     if (parent.retweets && parent.retweets.length > 0) {
-      return await updateRetweetLikes(tweet, children, option, userId),internalServerError;
+      return await updateRetweetLikes(tweet, children, option, userId);
     }
-    
     // If the parent tweet is not a retweet, return it
     return parent;
   } catch (error) {
