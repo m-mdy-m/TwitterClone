@@ -1,9 +1,9 @@
 import { UserProfile } from "./UserProfile.js";
 
-export function UserInfo({ username, profile, createdAt }) {
+export function UserInfo({ username, profile, createdAt,isRetweeted,retweetedUsername }) {
   return `
       <div class="flex justify-start items-center">
-         ${UserProfile({username:username,profile:profile,className : "w-8 h-8"})} 
+         ${UserProfile({username:username,profile:profile,className : "w-8 h-8",isRetweeted,retweetedUsername})} 
           <div class="flex justify-center flex-col items-center h-full px-2">
               <div class="flex justify-start w-full items-center relative">
                 <h2 class="username font-Aktiv__regular text-xs text-white">${username}</h2>

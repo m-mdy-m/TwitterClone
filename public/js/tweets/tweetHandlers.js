@@ -77,6 +77,8 @@ function renderTweet(tweet, userInfo) {
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
+    const retweetedIcon = isRetweeted ? 'nav/retweeted-icon.svg' : 'nav/ReTweet.svg'
+    let className = isRetweeted ?? 'flex'
     // console.log('likeIcon=>',likeIcon);
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     // Render the tweet template with formatted creation time
@@ -89,6 +91,9 @@ function renderTweet(tweet, userInfo) {
       likeCount,
       srcLikeIcon: likeIcon,
       retweetCount: "",
+      retweetedUsername:'',
+      isRetweeted:className,
+      srcRetweetIcon:retweetedIcon
     });
   } catch (error) {
     console.log(error);
