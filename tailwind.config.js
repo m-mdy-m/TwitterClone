@@ -23,7 +23,7 @@ module.exports = {
       gridTemplateRows: {
         home: "20% minmax(80% ,1fr)",
         tweet: "60% minmax(40%,1fr)",
-        readTweet : "minmax(25%,1fr) 85%",
+        readTweet : "minmax(20%,1fr) 80%",
       },
       backgroundColor: {
         body: "#131314",

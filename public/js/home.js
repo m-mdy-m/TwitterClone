@@ -52,8 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       })
       profile.addEventListener('mouseleave',()=>{
         userRetweeted.style.opacity = '.5'
-      })
-    
+      }
     });
   } else {
     const form = document.getElementById("registerForm");
