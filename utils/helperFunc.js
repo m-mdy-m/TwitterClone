@@ -63,7 +63,8 @@ function clearAllCookies(req, res) {
  * @param {function} callback - The callback function to be invoked with the updated tweet.
  * @returns {Object} - Object containing the updated user and tweet.
  */
-async function handleRetweet(tweet, userId, option) {
+async function handleRetweet(tweet, userId, option,getJsonHandler) {
+  const { } = getJsonHandler()
   try {
     // Retrieve the ID of the original tweet, if it's a retweet
     const TweetQuery = { [option]: { "likes": userId } };

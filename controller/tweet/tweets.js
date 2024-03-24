@@ -105,24 +105,25 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 
     // Determine whether to add or remove the like based on the current state
     const option = tweetLikedByUser ? "$pull" : "$addToSet";
-    const parentTweetId = await handleRetweet(tweet, user.userId, option);
-    id = parentTweetId._id
+    // Update likes on the tweet and its parent (if it's a retweet)
+    const parentTweet = await handleRetweet(tweet, user.userId, option,getJsonHandler);
+
+    // Use the parent tweet ID if it's a retweet
+    id = parentTweet._id;
     // Create the update queries for the user and the tweet
-    const { UserQuery, TweetQuery } = generateTweetQueries(
-      option,
-      user.userId,
-      id
-    );
+    const { UserQuery, TweetQuery } = generateTweetQueries(option, user.userId, id);
+
+    // Update user and tweet documents
     let [newUser, newTweet] = await Promise.all([
       User.findByIdAndUpdate(user.userId, TweetQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
     ]);
+
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(newUser);
 
     // Set the new JWT token in the session
     req.session.token = token;
-
     // Return a success response with the updated number of likes
     return updated({ token, likes: newTweet.likes });
   } catch (error) {
