@@ -45,7 +45,7 @@ export function ShowTweets(response, userInfo) {
       const tweetTemplate = renderTweet(tweet, userInfo);
 
       // Append the rendered tweet template to the wrapper element
-      appendTweet("beforeend", tweetTemplate);
+      appendTweet("afterbegin", tweetTemplate);
     });
     // Clear the tweet input field after showing tweets
     clearTweetInput();
@@ -86,7 +86,7 @@ function renderTweet(tweet, userInfo) {
       return Tweet({
         username:userInfo.username,
         profile: userInfo.profilePic,
-        content,
+        content : "retweeted ",
         createdAt: formattedCreatedAt,
         id: _id,
         likeCount,
