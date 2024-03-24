@@ -1,6 +1,7 @@
 import { getUserInfo, toggleLike, toggleRetweet } from "../utils/apiOperations.js";
 import { getId, showMessage } from "../utils/helper.js";
 import { getMsgElement } from "../utils/utils.js";
+import { AddTweet } from "./tweetHandlers.js";
 const msgElm = getMsgElement();
 // Function to handle the click event
 export async function handleClick(event) {
@@ -67,7 +68,10 @@ async function updateUILiked(elm, count, id) {
 }
 
 
-async function updatedUiRetweeted(elm, count, id){
+async function updatedUiRetweeted(infoTweetRetweeted){
+  const currentUser = await getUserInfo();
+  console.log('currentUser=>',currentUser);
+  AddTweet(infoTweetRetweeted,currentUser)
 
 }
 

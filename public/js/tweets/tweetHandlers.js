@@ -10,16 +10,8 @@ const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
-export function AddTweet(response, userInfo) {
+export function AddTweet(tweetData, userInfo) {
   try {
-    // Ensure the response contains tweet data
-    if (!response || !response.data || !response.data.data) {
-      // Display an error message if the response data is invalid
-      showMessage(msgELm, "Error: Invalid response data.", "#ff6347");
-      return;
-    }
-    // Extract tweet data from the response
-    const tweetData = response.data.data;
     // Render the tweet template
     const tweetTemplate = renderTweet(tweetData, userInfo);
 
@@ -71,12 +63,16 @@ function renderTweet(tweet, userInfo) {
   }
   try {
     // Extract relevant data from the tweet object
-    const { author, content, createdAt, _id,likes,originalTweet } = tweet;
+    const { author, content, createdAt, _id,likes } = tweet;
     const { username, profilePic } = author;
-    const { userId } = userInfo;
+    const { userId ,retweetedTweets} = userInfo;
     const isLiked = likes.some((like) => like === userId);
-      // console.log('tweet =>',tweet);
-      // console.log('userInfo =>',userInfo);
+    console.log('tweet =>',tweet);
+    console.log('userInfo =>',userInfo);
+    const isRetweeted = retweetedTweets.some((retweet)=> retweet === _id)
+    console.log('isRetweeted =>',isRetweeted);
+    // console.log('tweet =>',tweet);
+    // console.log('userInfo =>',userInfo);
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
