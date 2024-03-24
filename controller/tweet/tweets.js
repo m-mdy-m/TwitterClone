@@ -109,7 +109,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // Handle retweet logic (if applicable) and update likes accordingly
     const option = tweetLikedByUser ? "$pull" : "$addToSet";
     // console.log('option=>',option);
-    const {  updatedRetweets, updatedOriginalTweet } = await handleRetweet(tweet, user.userId, option)
+    const up = await handleRetweet(tweet, user.userId, option)
     // console.log(' updatedRetweets =>', updatedRetweets );
     // console.log(' updatedOriginalTweet =>', updatedOriginalTweet );
     // Create the update queries for the user and the tweet

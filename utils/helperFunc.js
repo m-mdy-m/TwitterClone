@@ -65,11 +65,20 @@ function clearAllCookies(req, res) {
  */
 async function handleRetweet(tweet, userId, option) {
   try {
+    // Retrieve the ID of the original tweet, if it's a retweet
+    const originalTweetId = tweet.originalTweet;
     const TweetQuery = { [option]: { "likes": userId } };
+
+    // If it's not a retweet, update likes directly and return
+    if (!originalTweetId) {
+      await updateRetweetLikes(tweet, option, userId); // Updating likes directly on the tweet
+      return;
+    }
     const parent = await getParentTweet(tweet,TweetQuery)
-    const children = await getAllChildren(parent);
-    if (children) {
-      await updateRetweetLikes(children,parent, option, userId);
+    const children = await getAllChildren(parent); // Retrieve all children of the parent
+    if (parent.retweets && parent.retweets.length>0) {
+      const {  updatedRetweets, updatedOriginalTweet}= await updateRetweetLikes(tweet, option, userId);
+      return {  updatedRetweets, updatedOriginalTweet }
     }
     return parent
   } catch (error) {
@@ -80,8 +89,55 @@ async function handleRetweet(tweet, userId, option) {
 }
 
 
+/**
+ * Updates the likes on retweeted tweets and the original tweet based on the provided option.
+ * @param {Object} originalTweet - The original tweet object.
+ * @param {string} option - The operation option ('$addToSet', '$pull', etc.).
+ * @param {string} userId - The ID of the user liking the tweet.
+ * @returns {Promise<void>} - A promise that resolves once the likes are updated.
+ */
+async function updateRetweetLikes(originalTweet, option, userId) {
+  try {
+    // Extract retweet IDs from the original tweet
+    const retweetIds = originalTweet.retweets;
+
+    // Construct the query for updating likes
+    const query = { [option]: { likes: userId } };
+
+    // Array to hold promises for updating retweeted tweets and the original tweet
+    const retweetPromises = [];
+
+    // Iterate over retweet IDs
+    for (const retweetId of retweetIds) {
+      // Find the retweeted tweet
+      const retweetedTweet = await Tweet.findById(retweetId);
+
+      // Check if the retweeted tweet corresponds to the original tweet
+      if (retweetedTweet.originalTweet.toString() === originalTweet._id.toString()) {
+        // Update likes on the retweeted tweet
+        retweetPromises.push(Tweet.findByIdAndUpdate(retweetId, query, { new: true }));
+        // Also update likes on the original tweet
+        retweetPromises.push(Tweet.findByIdAndUpdate(originalTweet._id, query, { new: true }));
+      }
+    }
+
+     // Update likes on the retweeted tweets and the original tweet
+     const [updatedRetweets, updatedOriginalTweet] = await Promise.all(retweetPromises);
+
+     // If there are still retweeted tweets, recursively call updateRetweetLikes
+     if (updatedRetweets && updatedRetweets.retweets && updatedRetweets.retweets.length > 0) {
+       await updateRetweetLikes(updatedRetweets, option, userId);
+     }
+     return {  updatedRetweets, updatedOriginalTweet};
+  } catch (error) {
+    // Handle any errors
+    console.error("Error updating retweet likes:", error);
+    throw new Error("Failed to update retweet likes.");
+  }
+}
+
 async function getParentTweet(tweet,query){
-  const originalTweetId = tweet.originalTweet ??tweet ;
+  const originalTweetId = tweet.originalTweet;
     // Update the original tweet with the user's ID (for tracking likes on original tweet)
     const updatedTweet = await Tweet.findByIdAndUpdate(originalTweetId._id, query, { new: true });
 
@@ -89,7 +145,7 @@ async function getParentTweet(tweet,query){
     if (updatedTweet.originalTweet) {
       return await getParentTweet(updatedTweet, query);
     }
-  return updatedTweet
+    return updatedTweet
 }
 
 async function getAllChildren(parentTweet) {
@@ -113,49 +169,6 @@ async function getAllChildren(parentTweet) {
   } catch (error) {
     console.error("Error getting children tweets:", error);
     throw new Error("Failed to get children tweets.");
-  }
-}
-
-/**
- * Updates the likes on retweeted tweets and the original tweet based on the provided option.
- * @param {Object} originalTweet - The original tweet object.
- * @param {string} option - The operation option ('$addToSet', '$pull', etc.).
- * @param {string} userId - The ID of the user liking the tweet.
- * @returns {Promise<void>} - A promise that resolves once the likes are updated.
- */
-async function updateRetweetLikes(children,parent, option, userId) {
-  try {
-    const query = { [option]: { likes: userId } };
-    const retweetPromises = [];
-    for (const child of children) {
-      const retweetIds = child.retweets
-     // Iterate over retweet IDs of the child tweet
-     for (const retweetId of retweetIds) {
-      // Find the retweeted tweet
-      const retweetedTweet = await Tweet.findById(retweetId);
-
-      // Check if the retweeted tweet corresponds to the parent tweet
-      if (retweetedTweet.originalTweet.toString() === parent._id.toString()) {
-        // Update likes on the retweeted tweet
-        retweetPromises.push(Tweet.findByIdAndUpdate(retweetId, query, { new: true }));
-        // Also update likes on the parent tweet
-        retweetPromises.push(Tweet.findByIdAndUpdate(parent._id, query, { new: true }));
-      }
-    }
-    }
-    // Update likes on the retweeted tweets and the child tweets
-    const [updatedRetweets, updatedChildren] = await Promise.all(retweetPromises);
-      
-    // If there are still retweeted tweets, recursively call updateRetweetLikes
-    if (updatedRetweets && updatedRetweets.retweets && updatedRetweets.retweets.length > 0) {
-      await updateRetweetLikes(updatedChildren, option, userId);
-    }
-    
-    return { updatedRetweets, updatedChildren };
-  } catch (error) {
-    // Handle any errors
-    console.error("Error updating retweet likes:", error);
-    throw new Error("Failed to update retweet likes.");
   }
 }
 module.exports = {
