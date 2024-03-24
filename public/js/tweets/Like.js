@@ -14,7 +14,6 @@ export async function handleClick(event) {
     if (idIcons.includes(currentClick)) {
       // Check which icon was clicked
       if (currentClick === 'likeIcon') {
-        console.log('Like icon clicked');
         const count = await toggleLike(id);
         updateUILiked(elm, count, id);
       } else if (currentClick === 'retweetIcon') {
@@ -40,7 +39,6 @@ export async function handleClick(event) {
 async function updateUILiked(elm, count, id) {
   // Get user information
   const user = await getUserInfo();
-  console.log('user=>',user);
   // Check if the user has liked the item
   const isLikedUser = user.likedTweets.includes(id);
   // Construct the updated HTML content based on the like count and user's like status
