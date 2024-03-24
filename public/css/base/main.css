@@ -926,21 +926,21 @@
   .user-retweeted.visibleId::after {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: #ff7f50;
-  border-radius: 50%;
+  width: 200px;
+  height: 10px;
   animation: pulse 1s ease infinite alternate;
 }
 
 .user-retweeted.visibleId::before {
   top: 0;
+  background-color: #fff;
   left: 0%;
   transform: translateX(-50%);
 }
 
 .user-retweeted.visibleId::after {
   bottom: 0;
+  background-color: #ccc;
   right: 0%;
   transform: translateX(-50%);
 }
