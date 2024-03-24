@@ -121,8 +121,6 @@ async function updateRetweetLikes(originalTweet, option, userId) {
 
      // Update likes on the retweeted tweets and the original tweet
      const [currentTweet, original] = await Promise.all(retweetPromises);
-    console.log('currentTweet=>',currentTweet);
-    console.log('original=>',original);
      // If there are still retweeted tweets, recursively call updateRetweetLikes
      if (currentTweet && currentTweet.retweets && currentTweet.retweets.length > 0) {
        await updateRetweetLikes(currentTweet, option, userId);
