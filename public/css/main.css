@@ -149,30 +149,7 @@
     animation: fadeAndScaleIn 0.5s ease forwards;
     transform-origin: center;
   }
-  
-  .user-retweeted.visibleId::before,
-  .user-retweeted.visibleId::after {
-    content: '';
-    position: absolute;
-    width: 200px;
-    height: 10px;
-    animation: pulse 1s ease infinite alternate; 
-  }
-  
-  .user-retweeted.visibleId::before {
-    top: 0;
-    background-color: #fff; 
-    left: 0%;
-    transform: translateX(-50%);
-  }
-  
-  .user-retweeted.visibleId::after {
-    bottom: 0;
-    background-color: #ccc; 
-    right: 0%;
-    transform: translateX(-50%);
-  }
-  
+
   @keyframes pulse {
     0% {
       transform: scale(1);
