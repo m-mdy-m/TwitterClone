@@ -73,7 +73,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 
   try {
     // Extract the tweet ID from the request parameters
-    const id = req.param("id");
+    let id = req.param("id");
 
     // Check if the tweet ID is missing
     if (!id) {
@@ -101,25 +101,24 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       return notFound("Tweet not found. Please provide a valid tweet ID.");
     }
     // Determine if the user has already liked or unliked the tweet
-    // console.log('tweet=>',tweet.likes);
     const tweetLikedByUser = tweet.likes.includes(user.userId);
 
     // Determine whether to add or remove the like based on the current state
-
-    // Handle retweet logic (if applicable) and update likes accordingly
     const option = tweetLikedByUser ? "$pull" : "$addToSet";
-     await handleRetweet(tweet, user.userId, option)
+    if(tweet.retweets.length>0){
+    const parentTweetId = await handleRetweet(tweet, user.userId, option);
+    id = parentTweetId
+    }
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(
       option,
       user.userId,
       id
     );
-    let 
-      [newUser, newTweet] = await Promise.all([
-        User.findByIdAndUpdate(user.userId, TweetQuery, { new: true }),
-        Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
-      ]);
+    let [newUser, newTweet] = await Promise.all([
+      User.findByIdAndUpdate(user.userId, TweetQuery, { new: true }),
+      Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
+    ]);
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(newUser);
 
@@ -129,7 +128,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // Return a success response with the updated number of likes
     return updated({ token, likes: newTweet.likes });
   } catch (error) {
-    console.log('error=>',error);
+    console.log("error=>", error);
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
   }
