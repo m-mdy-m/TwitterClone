@@ -1,4 +1,4 @@
-import { getUserInfo, toggleLike, toggleRetweet } from "../utils/apiOperations.js";
+import { getRetweetInfo, getUserInfo, toggleLike, toggleRetweet } from "../utils/apiOperations.js";
 import { getId, showMessage } from "../utils/helper.js";
 import { getMsgElement } from "../utils/utils.js";
 import { AddTweet } from "./tweetHandlers.js";
@@ -19,7 +19,7 @@ export async function handleClick(event) {
         updateUILiked(elm, count, id);
       } else if (currentClick === 'retweetIcon') {
         const infoTweetRetweeted = await toggleRetweet(id);
-        console.log('infoTweetRetweeted=>',infoTweetRetweeted);
+        // console.log('infoTweetRetweeted=>',infoTweetRetweeted);
         updatedUiRetweeted(infoTweetRetweeted)
         // Handle retweet logic
       } else if (currentClick === 'shareIcon') {
@@ -70,9 +70,13 @@ async function updateUILiked(elm, count, id) {
 
 async function updatedUiRetweeted(infoTweetRetweeted){
   const currentUser = await getUserInfo();
-  console.log('currentUser=>',currentUser);
-  AddTweet(infoTweetRetweeted,currentUser)
-
+  const newTweetRetweeted =await infoTweetRetweeted.retweets.forEach(async (tweets)=>{
+    const tweet = await getRetweetInfo(tweets)
+    if (tweet.originalTweet === infoTweetRetweeted._id) {
+      return {tweet , isRetweeted:true}
+    }
+  })
+  AddTweet(newTweetRetweeted,currentUser)
 }
 
 

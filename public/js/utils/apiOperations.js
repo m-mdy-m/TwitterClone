@@ -113,7 +113,7 @@ export async function getTweets() {
     // Check if the request was successful
     if (tweetsResponse.data.success) {
       // Display the fetched tweets
-      await ShowTweets(tweetsResponse, userInfo);
+      ShowTweets(tweetsResponse, userInfo);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {
@@ -146,7 +146,7 @@ export async function tweetCreation(data) {
   const response = await axios.post("/api/create", data, header);
   // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
-    await AddTweet(response.data.data, userInfo);
+    AddTweet(response.data.data, userInfo);
   } else {
     // If tweet creation fails, display error message
     showMessage(msgElm, response.data.error, "ffd700");
