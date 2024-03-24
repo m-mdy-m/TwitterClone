@@ -45,7 +45,7 @@ export function ShowTweets(response, userInfo) {
       const tweetTemplate = renderTweet(tweet, userInfo);
 
       // Append the rendered tweet template to the wrapper element
-      appendTweet("afterbegin", tweetTemplate);
+      appendTweet("beforeend", tweetTemplate);
     });
     // Clear the tweet input field after showing tweets
     clearTweetInput();
@@ -63,13 +63,13 @@ function renderTweet(tweet, userInfo) {
   }
   try {
     // Extract relevant data from the tweet object
-    const { author, content, createdAt, _id, likes } = tweet;
+    const { author, content, createdAt, _id, likes,retweets } = tweet;
     const { username, profilePic } = author;
     const { userId, retweetedTweets } = userInfo;
     const isLiked = likes.some((like) => like === userId);
     console.log("tweet =>", tweet);
     console.log("userInfo =>", userInfo);
-    const isRetweeted = retweetedTweets.some((retweet) => retweet === _id);
+    const isRetweeted = retweets.some((retweet) => retweet === _id);
     // console.log('tweet =>',tweet);
     // console.log('userInfo =>',userInfo);
     // Calculate the number of likes for the tweet

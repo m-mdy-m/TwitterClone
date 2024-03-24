@@ -1,3 +1,5 @@
+const Tweet = require("../../model/Tweet");
+
 exports.findUser = async (req, { status, getJsonHandler }) => {
   const { notFound, internalServerError } = getJsonHandler();
   try {
@@ -16,3 +18,17 @@ exports.findUser = async (req, { status, getJsonHandler }) => {
     internalServerError("Something went wrong. Please try again later.");
   }
 };
+
+exports.findTweet= async(req,{getJsonHandler})=>{
+  try {
+  const { notFound, internalServerError } = getJsonHandler();
+    const id = req.param('id')
+    if (!id) {
+      return notFound('tweet not found')
+    }
+    const tweet = await Tweet.findById(id)
+    
+  } catch (error) {
+    
+  }
+}
