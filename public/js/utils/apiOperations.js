@@ -78,7 +78,6 @@ export async function getUserInfo(id = "") {
   try {
     // Make a GET request to fetch user information
     const header = await getAuthHeaders();
-    console.log('id=>',id);
     const url = id ? `/user-info?id=${id}` : "/user-info";
     let response = await axios.get(url, {}, header);
     // Return user information

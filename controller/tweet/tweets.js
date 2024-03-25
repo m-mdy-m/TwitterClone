@@ -187,8 +187,9 @@ exports.retweet = async (req, { getJsonHandler }) => {
     // Set the new JWT token in the session
     req.session.token = token;
 
+    const result = await Tweet.populate(updatedTweet, { path: "author" });
     // Return a success response with the updated number of likes
-    return created({ retweet: updatedTweet, token: token });
+    return created({ retweet: result, token: token });
   } catch (error) {
     console.log("error=>", error);
     // Handle any internal server errors
