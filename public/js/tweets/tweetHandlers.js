@@ -65,53 +65,25 @@ function renderTweet(tweet, userInfo, author = '') {
     const { userId } = userInfo;
     const isLiked = likes.includes(userId);
     let isRetweeted = (retweeters.includes(userId) && author);
-    console.log('retweeters.includes(userId)=>',retweeters.includes(userId));
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
     const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
     const retweetCount = retweeters.length !==0 ? retweeters.length : '' ;
-    console.log('retweetCount)=>',retweetCount);
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-    // console.log('author :',author);
-    if(tweet.originalTweet) {
-      return Tweet({
-        username: tweetAuthor.username,
-        profile: tweetAuthor.profilePic,
-        content,
-        createdAt: formattedCreatedAt,
-        id: _id,
-        likeCount: calculateLikeCount(tweet),
-        srcLikeIcon: likeIcon,
-        retweetedUsername: author.username,
-        retweetCount,
-        isRetweeted: "flex",
-        srcRetweetIcon: retweetedIcon,
-      });
-    }else if (isRetweeted) {
-      return Tweet({
-        username: tweetAuthor.username,
-        profile: tweetAuthor.profilePic,
-        content,
-        createdAt: formattedCreatedAt,
-        id: _id,
-        likeCount: calculateLikeCount(tweet),
-        srcLikeIcon: likeIcon,
-        retweetCount,
-        srcRetweetIcon: retweetedIcon,
-      });
-    }else{
-      return Tweet({
-        username: tweetAuthor.username,
-        profile: tweetAuthor.profilePic,
-        content,
-        createdAt: formattedCreatedAt,
-        id: _id,
-        likeCount: calculateLikeCount(tweet),
-        srcLikeIcon: likeIcon,
-        retweetCount,
-        srcRetweetIcon: retweetedIcon,
-      });
+    const classname =  (retweeters.length>0  && author)? 'flex' : 'hidden'
+    let  tweetContent = {
+      username: tweetAuthor.username,
+      profile: tweetAuthor.profilePic,
+      content,
+      createdAt: formattedCreatedAt,
+      id: _id,
+      likeCount: calculateLikeCount(tweet),
+      srcLikeIcon: likeIcon,
+      retweetedUsername: author.username,
+      retweetCount,
+      isRetweeted: classname,
+      srcRetweetIcon: retweetedIcon,
     }
-    
+    return Tweet(tweetContent)
     
   } catch (error) {
     console.log(error);
