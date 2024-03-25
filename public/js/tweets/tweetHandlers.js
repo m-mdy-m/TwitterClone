@@ -13,6 +13,7 @@ const msgELm = getMsgElement();
 export function AddTweet(tweetData, userInfo) {
   try {
     // Render the tweet template
+    console.log();
     const tweetTemplate = renderTweet(tweetData, userInfo);
 
     // Append the rendered tweet template to the wrapper element
@@ -67,7 +68,6 @@ export function ShowTweets(response, userInfo) {
     const { username, profilePic } = author;
     const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
-    console.log('tweet =>',tweet)
     const isRetweeted = tweet.originalTweet? true:false
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
@@ -83,7 +83,7 @@ export function ShowTweets(response, userInfo) {
       return Tweet({
         username:userInfo.username,
         profile: userInfo.profilePic,
-        content : content + ' retweeted : '+ userInfo.username +' original :'+tweet.originalTweet,
+        content : content + ' retweeted : '+ userInfo.username +' original :'+tweet.originalTweet +' _id : '+ tweet._id,
         createdAt: formattedCreatedAt,
         id: _id,
         likeCount,
