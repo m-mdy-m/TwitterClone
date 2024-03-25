@@ -113,20 +113,35 @@ export async function getTweets() {
   try {
     const header = await getAuthHeaders();
     // Make asynchronous calls to fetch tweets and user information in parallel
-    const [tweetsResponse, userInfo] = await Promise.all([
-      axios.get("/api/tweets", {}, header),
-      getUserInfo(),
-    ]);
-    let author
+    const tweetsResponse = await axios.get("/api/tweets", { headers: header });
+
+    let author;
     // Check if the request was successful
     if (tweetsResponse.data.success) {
-        console.log('tweetsResponse.originalTweet=>',tweetsResponse.originalTweet);
-      if (tweetsResponse.originalTweet) {
-        const parentTweet = await getRetweetInfo(tweetsResponse.originalTweet)
-        author = await getUserInfo(parentTweet.author)
+      const tweets = tweetsResponse.data.tweets;
+      const parentTweets = [];
+
+      for (const tweet of tweets) {
+        if (tweet.originalTweet) {
+          parentTweets.push(tweet.originalTweet);
+        }
       }
+      const parentTweetAuthors = await Promise.all(
+        parentTweets.map(async (parentTweet) => {
+          const parentTweetInfo = await getRetweetInfo(parentTweet);
+          return parentTweetInfo.author;
+        })
+      );
+      const authorIds = parentTweetAuthors.filter((authorId) => authorId); // Remove undefined entries
+      const authors = await Promise.all(
+        authorIds.map(async (authorId) => {
+          return await getUserInfo(authorId);
+        })
+      );
+      console.log("authors=>", authors);
+      const userInfo = await getUserInfo();
       // Display the fetched tweets
-      ShowTweets(tweetsResponse, userInfo,author);
+      ShowTweets(tweetsResponse, userInfo, author);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {
