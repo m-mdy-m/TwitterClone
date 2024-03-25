@@ -73,13 +73,18 @@ async function updateUILiked(elm, count, id) {
 }
 
 async function updatedUiRetweeted(infoTweetRetweeted) {
-  await infoTweetRetweeted.retweets.forEach(async (tweets) => {
-    const tweet = await getRetweetInfo(tweets);
-    if (tweet.originalTweet === infoTweetRetweeted._id) {
-      const [current,author] = await Promise.all([await getUserInfo(), await getUserInfo(infoTweetRetweeted.author)])
-      return AddTweet(tweet, current,author,infoTweetRetweeted);
-    }
-  });
+  try {
+    console.log('infoTweetRetweeted=>',infoTweetRetweeted);
+    await infoTweetRetweeted.retweets.forEach(async (tweets) => {
+      const tweet = await getRetweetInfo(tweets);
+      if (tweet.originalTweet === infoTweetRetweeted._id) {
+        const [current,author] = await Promise.all([await getUserInfo(), await getUserInfo(infoTweetRetweeted.author)])
+        return AddTweet(tweet, current,author,infoTweetRetweeted);
+      }
+    });
+  } catch (error) {
+    
+  }
 }
 
 // Function to handle errors gracefully
