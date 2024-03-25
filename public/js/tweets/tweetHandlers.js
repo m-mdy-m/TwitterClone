@@ -66,10 +66,11 @@ function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
     const isLiked = likes.includes(userId);
     let isRetweeted =(originalTweet? originalTweet.retweeters.includes(userId): (retweeters.includes(userId) ) && author);
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
-    const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
+    const retweetedIcon = isRetweeted? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
     const retweetCount = originalTweet ? (originalTweet.retweeters && originalTweet.retweeters.length > 0 ? originalTweet.retweeters.length : '') : (retweeters && retweeters.length > 0 ? retweeters.length : '');
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     const classname =  (author && tweet.originalTweet)? 'flex' : 'hidden'
+    console.log("classname : ",classname)
     console.log("originalTweet : ",originalTweet)
     // console.log('originalTweet=>',originalTweet);
     // console.log('tweet=>',tweet);
@@ -78,14 +79,14 @@ function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
     // console.log('retweetedIcon=>',retweetedIcon);
     // console.log('author=>',author);
     let  tweetContent = {
-      username: tweetAuthor.username,
+      username: originalTweet ? (originalTweet.author.username):tweetAuthor.username,
       profile: tweetAuthor.profilePic ,
       content,
       createdAt: formattedCreatedAt,
       id: _id,
       likeCount: calculateLikeCount(tweet),
       srcLikeIcon: likeIcon,
-      retweetedUsername: author.username,
+      retweetedUsername: originalTweet ? (originalTweet.author.username):author.username,
       retweetCount,
       isRetweeted: classname,
       srcRetweetIcon: retweetedIcon,
