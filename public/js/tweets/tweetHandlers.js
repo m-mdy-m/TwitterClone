@@ -69,7 +69,7 @@ function renderTweet(tweet, userInfo, author = '') {
     const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
     const retweetCount = retweeters.length !==0 ? retweeters.length : '' ;
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-    const classname =  (retweeters.length>0  && author)? 'flex' : 'hidden'
+    const classname =  (author && tweet.originalTweet)? 'flex' : 'hidden'
     let  tweetContent = {
       username: tweetAuthor.username,
       profile: tweetAuthor.profilePic,
