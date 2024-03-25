@@ -41,7 +41,7 @@ export function ShowTweets(response, userInfo,author='') {
     tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     // Iterate over each tweet and render its template
     tweets.forEach((tweet) => {
-      const tweetTemplate = renderTweet(tweet, userInfo);
+      const tweetTemplate = renderTweet(tweet, userInfo,author);
 
       // Append the rendered tweet template to the wrapper element
       appendTweet("beforeend", tweetTemplate);
@@ -74,7 +74,6 @@ export function ShowTweets(response, userInfo,author='') {
       ? "nav/retweeted-icon.svg"
       : "nav/ReTweet.svg";
     let className = isRetweeted ? "flex" : "hidden";
-    console.log('author=>',author);
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     if (isRetweeted) {
       return Tweet({
