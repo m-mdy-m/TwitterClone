@@ -141,8 +141,9 @@ export async function getTweets() {
         authors.forEach((author) => {
           ShowTweets(tweetsResponse, userInfo, author);
         });
+      }else{
+        ShowTweets(tweetsResponse, userInfo);
       }
-      ShowTweets(tweetsResponse, userInfo);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {

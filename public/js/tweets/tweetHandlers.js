@@ -61,18 +61,20 @@ function renderTweet(tweet, userInfo, author = '') {
   }
 
   try {
-    const { content, createdAt, _id, likes, author: tweetAuthor, retweeters ,isRetweeted} = tweet;
+    const { content, createdAt, _id, likes, author: tweetAuthor, retweeters } = tweet;
     const { userId } = userInfo;
     const isLiked = likes.includes(userId);
-    const isRetweet = retweeters.length > 0 && !isRetweeted ;
-    console.log('isRetweet=>',isRetweet);
+    const isRetweeted = retweeters.length > 0 && author;
+    console.log('author :',author);
+    console.log('tweet :',tweet);
+    console.log('isRetweeted :',isRetweeted);
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
-    const retweetedIcon = isRetweet ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
-    const retweetCount = isRetweet ? retweeters.length : '';
+    const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
+    const retweetCount = isRetweeted ? retweeters.length : '';
 
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
 
-    if (isRetweet) {
+    if (isRetweeted) {
       return Tweet({
         username: tweetAuthor.username,
         profile: tweetAuthor.profilePic,
@@ -84,7 +86,7 @@ function renderTweet(tweet, userInfo, author = '') {
         retweetCount,
         srcRetweetIcon: retweetedIcon,
       });
-    } else {
+    } else if(tweet.originalTweet) {
       return Tweet({
         username: userInfo.username,
         profile: userInfo.profilePic,
@@ -96,6 +98,18 @@ function renderTweet(tweet, userInfo, author = '') {
         retweetCount,
         retweetedUsername: author.username,
         isRetweeted: "flex",
+        srcRetweetIcon: retweetedIcon,
+      });
+    }else{
+      return Tweet({
+        username: tweetAuthor.username,
+        profile: tweetAuthor.profilePic,
+        content,
+        createdAt: formattedCreatedAt,
+        id: _id,
+        likeCount: calculateLikeCount(tweet),
+        srcLikeIcon: likeIcon,
+        retweetCount,
         srcRetweetIcon: retweetedIcon,
       });
     }
