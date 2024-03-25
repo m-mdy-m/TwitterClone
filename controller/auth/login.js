@@ -54,7 +54,7 @@ exports.postLogin = async (req, { status, getJsonHandler }) => {
         });
       }
     }
-    
+
     // Compare password hashes
     const passwordMatches = await bcryptjs().compare(password, user.password);
     if (!passwordMatches) {
