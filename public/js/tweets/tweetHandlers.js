@@ -75,12 +75,12 @@ function renderTweet(tweet, userInfo, author = '',newRetweeted=false) {
     const retweetCount = isRetweeted ? retweeters.length : '';
 
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-    console.log('newRetweeted :',newRetweeted);
-    console.log('author :',author);
-    console.log('retweetedIcon :',retweetedIcon);
-    console.log('tweetAuthor :',tweetAuthor);
-    console.log('retweetCount :',retweetCount);
-    console.log('isRetweeted :',isRetweeted);
+    // console.log('newRetweeted :',newRetweeted);
+    // console.log('author :',author);
+    // console.log('retweetedIcon :',retweetedIcon);
+    // console.log('tweetAuthor :',tweetAuthor);
+    // console.log('retweetCount :',retweetCount);
+    // console.log('isRetweeted :',isRetweeted);
     if (isRetweeted) {
       return Tweet({
         username: tweetAuthor.username,
