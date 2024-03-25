@@ -27,7 +27,7 @@ export function AddTweet(tweetData, userInfo,authorData='') {
 }
 
 // Function to show multiple tweets in the UI
-export function ShowTweets(response, userInfo) {
+export function ShowTweets(response, userInfo,author='') {
   try {
     // Ensure the response contains tweet data
     if (!response || !response.data || !response.data.tweets) {
@@ -77,6 +77,7 @@ export function ShowTweets(response, userInfo) {
     // console.log('likeIcon=>',likeIcon);
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     if (isRetweeted) {
+      console.log('author=>',author);
       return Tweet({
         username:userInfo.username,
         profile: userInfo.profilePic,

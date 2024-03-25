@@ -4,7 +4,6 @@ exports.findUser = async (req, { status, getJsonHandler }) => {
   const { notFound, internalServerError } = getJsonHandler();
   try {
     const id = req.getQueryParam("id");
-    console.log("id=>", id);
     if (id) {
       const user = await User.findById(id);
       if (!user) {
