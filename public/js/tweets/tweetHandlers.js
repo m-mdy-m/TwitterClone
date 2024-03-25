@@ -54,65 +54,58 @@ export function ShowTweets(response, userInfo,author='') {
   }
 }
 
-// Function to render a single tweet template
- function renderTweet(tweet, userInfo,author='') {
-  // Ensure the tweet and user information are provided
+function renderTweet(tweet, userInfo, author = '') {
   if (!tweet || !userInfo) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
+    return null;
   }
+
   try {
-    // Extract relevant data from the tweet object
-    const {  content, createdAt, _id, likes } = tweet;
+    const { content, createdAt, _id, likes, author: tweetAuthor, retweeters ,isRetweeted} = tweet;
     const { userId } = userInfo;
-    const isLiked = likes.some((like) => like === userId);
-    const isRetweeted = tweet.retweeters.length > 0? true:false
-    // Calculate the number of likes for the tweet
-    const likeCount = calculateLikeCount(tweet);
-    // Gather all necessary data
+    const isLiked = likes.includes(userId);
+    const isRetweet = retweeters.length > 0 && !isRetweeted ;
+    console.log('isRetweet=>',isRetweet);
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
-    const retweetedIcon = isRetweeted
-      ? "nav/retweeted-icon.svg"
-      : "nav/ReTweet.svg";
-    let className = isRetweeted ? "flex" : "hidden";
+    const retweetedIcon = isRetweet ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
+    const retweetCount = isRetweet ? retweeters.length : '';
+
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-    const { username, profilePic } = tweet.author;
-    if (isRetweeted) {
+
+    if (isRetweet) {
       return Tweet({
-        username,
-        profile: profilePic,
+        username: tweetAuthor.username,
+        profile: tweetAuthor.profilePic,
         content,
         createdAt: formattedCreatedAt,
         id: _id,
-        likeCount,
+        likeCount: calculateLikeCount(tweet),
         srcLikeIcon: likeIcon,
-        // retweetedUsername: ,
-        retweetCount: tweet.retweeters.length >0? tweet.retweeters.length:'',
-        // isRetweeted: className,
+        retweetCount,
+        srcRetweetIcon: retweetedIcon,
+      });
+    } else {
+      return Tweet({
+        username: userInfo.username,
+        profile: userInfo.profilePic,
+        content: `${content} retweeted by: ${userInfo.username} original: ${tweet.originalTweet} _id: ${_id}`,
+        createdAt: formattedCreatedAt,
+        id: _id,
+        likeCount: calculateLikeCount(tweet),
+        srcLikeIcon: likeIcon,
+        retweetCount,
+        retweetedUsername: author.username,
+        isRetweeted: "flex",
         srcRetweetIcon: retweetedIcon,
       });
     }
-    // Render the tweet template with formatted creation time
-    return Tweet({
-      username:userInfo.username,
-      profile: userInfo.profilePic,
-      content : content + ' retweeted : '+ userInfo.username +' original :'+tweet.originalTweet +' _id : '+ tweet._id,
-      createdAt: formattedCreatedAt,
-      id: _id,
-      likeCount,
-      srcLikeIcon: likeIcon,
-      retweetCount: tweet.retweeters.length >0? tweet.retweeters.length:'',
-      retweetedUsername: author.username,
-      isRetweeted: "flex" ,
-      srcRetweetIcon: retweetedIcon,
-    });
   } catch (error) {
     console.log(error);
-    // Handle any errors that occur during the asynchronous operation
     showMessage(msgELm, "Error rendering tweet. Please try again.", "#ff6347");
-    // Return null or handle the error in another appropriate way
     return null;
   }
 }
+
 
 // Function to append a tweet template to the UI
 function appendTweet(position, tweetTemplate) {

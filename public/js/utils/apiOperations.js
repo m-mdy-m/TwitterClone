@@ -117,6 +117,7 @@ export async function getTweets() {
 
     // Check if the request was successful
     if (tweetsResponse.data.success) {
+      const userInfo = await getUserInfo();
       const tweets = tweetsResponse.data.tweets;
       const parentTweets = [];
 
@@ -125,21 +126,23 @@ export async function getTweets() {
           parentTweets.push(tweet.originalTweet);
         }
       }
-      const authorIds = await Promise.all(
-        parentTweets.map(async (parentTweet) => {
-          const parentTweetInfo = await getRetweetInfo(parentTweet);
-          return parentTweetInfo.author;
-        })
-      );
-      const authors = await Promise.all(
-        authorIds.map(async (authorId) => {
-          return await getUserInfo(authorId);
-        })
-      );
-      const userInfo = await getUserInfo();
-      authors.forEach((author) => {
-        ShowTweets(tweetsResponse, userInfo, author);
-      });
+      if(parentTweets){
+        const authorIds = await Promise.all(
+          parentTweets.map(async (parentTweet) => {
+            const parentTweetInfo = await getRetweetInfo(parentTweet);
+            return parentTweetInfo.author;
+          })
+        );
+        const authors = await Promise.all(
+          authorIds.map(async (authorId) => {
+            return await getUserInfo(authorId);
+          })
+        );
+        authors.forEach((author) => {
+          ShowTweets(tweetsResponse, userInfo, author);
+        });
+      }
+      ShowTweets(tweetsResponse, userInfo);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {

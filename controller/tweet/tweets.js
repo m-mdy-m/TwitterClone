@@ -165,6 +165,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
       content: content || tweet.content,
       likes: tweet.likes,
       retweeters: tweet.retweeters,
+      isRetweeted:true,
     });
 
     const { UserQuery, TweetQuery } = generateTweetQueries(
