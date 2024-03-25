@@ -15,7 +15,7 @@ export function AddTweet(tweetData, userInfo,authorData='',originalTweet=null) {
     // Render the tweet template
     const tweetTemplate = renderTweet(tweetData, userInfo,authorData,originalTweet);
     // Append the rendered tweet template to the wrapper element
-    appendTweet("afterbegin", tweetTemplate);
+    appendTweet("beforeend", tweetTemplate);
 
     attachIconClickListeners();
     // Clear the tweet input field after adding the tweet
@@ -70,14 +70,14 @@ function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
     const retweetCount = originalTweet ? (originalTweet.retweeters && originalTweet.retweeters.length > 0 ? originalTweet.retweeters.length : '') : (retweeters && retweeters.length > 0 ? retweeters.length : '');
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     const classname =  (author && tweet.originalTweet)? 'flex' : 'hidden'
-    console.log("classname : ",classname)
-    console.log("originalTweet : ",originalTweet)
     // console.log('originalTweet=>',originalTweet);
     // console.log('tweet=>',tweet);
     // console.log('retweeters=>',retweeters);
     // console.log('retweetCount=>',retweetCount);
     // console.log('retweetedIcon=>',retweetedIcon);
     // console.log('author=>',author);
+    const a = originalTweet ? (originalTweet.author.username):author.username
+    console.log('a=>',a);
     let  tweetContent = {
       username: originalTweet ? (originalTweet.author.username):tweetAuthor.username,
       profile: tweetAuthor.profilePic ,
