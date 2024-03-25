@@ -70,9 +70,14 @@ function renderTweet(tweet, userInfo, author = '') {
     const retweetCount = retweeters.length !==0 ? retweeters.length : '' ;
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     const classname =  (author && tweet.originalTweet)? 'flex' : 'hidden'
+    console.log('tweet=>',tweet);
+    console.log('retweeters=>',retweeters);
+    console.log('retweetCount=>',retweetCount);
+    console.log('retweetedIcon=>',retweetedIcon);
+    console.log('author=>',author);
     let  tweetContent = {
       username: tweetAuthor.username,
-      profile: tweetAuthor.profilePic,
+      profile: tweetAuthor.profilePic ,
       content,
       createdAt: formattedCreatedAt,
       id: _id,

@@ -43,7 +43,8 @@ exports.findTweet = async (req, { getJsonHandler }) => {
     if (!tweet) {
       return notFound("Tweet not found.");
     }
-    success("Tweet found successfully.", tweet);
+    const result = await Tweet.populate(tweet, { path: "author" });
+    success("Tweet found successfully.", result);
   } catch (error) {
     internalServerError(
       "An error occurred while processing your request. Please try again later."
