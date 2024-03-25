@@ -126,11 +126,10 @@ export async function getTweets() {
           parentTweets.push(tweet.originalTweet);
         }
       }
-      let user;
+      let user
       if (parentTweets) {
         const authorIds = await Promise.all(
           parentTweets.map(async (parentTweet) => {
-            console.log("parentTweet=>", parentTweet);
             const parentTweetInfo = await getRetweetInfo(parentTweet);
             return parentTweetInfo.author;
           })
@@ -141,10 +140,10 @@ export async function getTweets() {
           })
         );
         authors.forEach((author) => {
-          user = author;
+          user=author
         });
       }
-      ShowTweets(tweetsResponse, userInfo, user);
+        ShowTweets(tweetsResponse, userInfo,user);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {

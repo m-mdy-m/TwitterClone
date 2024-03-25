@@ -77,7 +77,7 @@ async function updatedUiRetweeted(infoTweetRetweeted) {
     const tweet = await getRetweetInfo(tweets);
     if (tweet.originalTweet === infoTweetRetweeted._id) {
       const [current,author] = await Promise.all([await getUserInfo(), await getUserInfo(infoTweetRetweeted.author)])
-      return AddTweet(tweet, current,author,true);
+      return AddTweet(tweet, current,author);
     }
   });
 }

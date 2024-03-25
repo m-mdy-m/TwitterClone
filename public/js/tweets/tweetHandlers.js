@@ -10,10 +10,10 @@ const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
-export function AddTweet(tweetData, userInfo,authorData='',newRetweeted=false) {
+export function AddTweet(tweetData, userInfo,authorData='') {
   try {
     // Render the tweet template
-    const tweetTemplate = renderTweet(tweetData, userInfo,authorData,newRetweeted);
+    const tweetTemplate = renderTweet(tweetData, userInfo,authorData);
     // Append the rendered tweet template to the wrapper element
     appendTweet("afterbegin", tweetTemplate);
 
@@ -54,7 +54,7 @@ export function ShowTweets(response, userInfo,author='') {
   }
 }
 
-function renderTweet(tweet, userInfo, author = '',newRetweeted=false) {
+function renderTweet(tweet, userInfo, author = '') {
   if (!tweet || !userInfo) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
     return null;
@@ -64,35 +64,15 @@ function renderTweet(tweet, userInfo, author = '',newRetweeted=false) {
     const { content, createdAt, _id, likes, author: tweetAuthor, retweeters } = tweet;
     const { userId } = userInfo;
     const isLiked = likes.includes(userId);
-    let isRetweeted;
-    if(newRetweeted){
-      isRetweeted = newRetweeted
-    }else{
-      isRetweeted = (retweeters.length > 0 && author);
-    }
+    let isRetweeted = (retweeters.includes(userId) && author);
+    console.log('retweeters.includes(userId)=>',retweeters.includes(userId));
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
     const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
-    const retweetCount = isRetweeted ? retweeters.length : '';
-
+    const retweetCount = retweeters.length !==0 ? retweeters.length : '' ;
+    console.log('retweetCount)=>',retweetCount);
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-    console.log('newRetweeted :',newRetweeted);
-    console.log('author :',author);
-    console.log('retweetedIcon :',retweetedIcon);
-    console.log('retweetCount :',retweetCount);
-    console.log('isRetweeted :',isRetweeted);
-    if (isRetweeted) {
-      return Tweet({
-        username: tweetAuthor.username,
-        profile: tweetAuthor.profilePic,
-        content,
-        createdAt: formattedCreatedAt,
-        id: _id,
-        likeCount: calculateLikeCount(tweet),
-        srcLikeIcon: likeIcon,
-        retweetCount,
-        srcRetweetIcon: retweetedIcon,
-      });
-    } else if(tweet.originalTweet) {
+    // console.log('author :',author);
+    if(tweet.originalTweet) {
       return Tweet({
         username: userInfo.username,
         profile: userInfo.profilePic,
@@ -101,9 +81,21 @@ function renderTweet(tweet, userInfo, author = '',newRetweeted=false) {
         id: _id,
         likeCount: calculateLikeCount(tweet),
         srcLikeIcon: likeIcon,
-        retweetCount,
         retweetedUsername: author.username,
+        retweetCount,
         isRetweeted: "flex",
+        srcRetweetIcon: retweetedIcon,
+      });
+    }else if (isRetweeted) {
+      return Tweet({
+        username: tweetAuthor.username,
+        profile: tweetAuthor.profilePic,
+        content,
+        createdAt: formattedCreatedAt,
+        id: _id,
+        likeCount: calculateLikeCount(tweet),
+        srcLikeIcon: likeIcon,
+        retweetCount,
         srcRetweetIcon: retweetedIcon,
       });
     }else{
@@ -119,6 +111,8 @@ function renderTweet(tweet, userInfo, author = '',newRetweeted=false) {
         srcRetweetIcon: retweetedIcon,
       });
     }
+    
+    
   } catch (error) {
     console.log(error);
     showMessage(msgELm, "Error rendering tweet. Please try again.", "#ff6347");
