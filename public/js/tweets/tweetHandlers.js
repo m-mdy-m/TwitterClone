@@ -10,10 +10,10 @@ const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
-export function AddTweet(tweetData, userInfo,authorData='') {
+export function AddTweet(tweetData, userInfo,authorData='',originalTweet=null) {
   try {
     // Render the tweet template
-    const tweetTemplate = renderTweet(tweetData, userInfo,authorData);
+    const tweetTemplate = renderTweet(tweetData, userInfo,authorData,originalTweet);
     // Append the rendered tweet template to the wrapper element
     appendTweet("afterbegin", tweetTemplate);
 
@@ -54,7 +54,7 @@ export function ShowTweets(response, userInfo,author='') {
   }
 }
 
-function renderTweet(tweet, userInfo, author = '') {
+function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
   if (!tweet || !userInfo) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
     return null;
@@ -64,17 +64,18 @@ function renderTweet(tweet, userInfo, author = '') {
     const { content, createdAt, _id, likes, author: tweetAuthor, retweeters } = tweet;
     const { userId } = userInfo;
     const isLiked = likes.includes(userId);
-    let isRetweeted = (retweeters.includes(userId) && author);
+    let isRetweeted =(originalTweet? originalTweet.retweeters.includes(userId): (retweeters.includes(userId) ) && author);
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
     const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
-    const retweetCount = retweeters.length !==0 ? retweeters.length : '' ;
+    const retweetCount = originalTweet ? (originalTweet.retweeters && originalTweet.retweeters.length > 0 ? originalTweet.retweeters.length : '') : (retweeters && retweeters.length > 0 ? retweeters.length : '');
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     const classname =  (author && tweet.originalTweet)? 'flex' : 'hidden'
-    console.log('tweet=>',tweet);
-    console.log('retweeters=>',retweeters);
+    // console.log('originalTweet=>',originalTweet);
+    // console.log('tweet=>',tweet);
+    // console.log('retweeters=>',retweeters);
     console.log('retweetCount=>',retweetCount);
-    console.log('retweetedIcon=>',retweetedIcon);
-    console.log('author=>',author);
+    // console.log('retweetedIcon=>',retweetedIcon);
+    // console.log('author=>',author);
     let  tweetContent = {
       username: tweetAuthor.username,
       profile: tweetAuthor.profilePic ,
