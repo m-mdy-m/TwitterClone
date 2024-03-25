@@ -117,10 +117,16 @@ export async function getTweets() {
       axios.get("/api/tweets", {}, header),
       getUserInfo(),
     ]);
+    let author
     // Check if the request was successful
     if (tweetsResponse.data.success) {
+        console.log('tweetsResponse.originalTweet=>',tweetsResponse.originalTweet);
+      if (tweetsResponse.originalTweet) {
+        const parentTweet = await getRetweetInfo(tweetsResponse.originalTweet)
+        author = await getUserInfo(parentTweet.author)
+      }
       // Display the fetched tweets
-      ShowTweets(tweetsResponse, userInfo);
+      ShowTweets(tweetsResponse, userInfo,author);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {

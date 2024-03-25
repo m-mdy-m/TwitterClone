@@ -74,10 +74,9 @@ export function ShowTweets(response, userInfo,author='') {
       ? "nav/retweeted-icon.svg"
       : "nav/ReTweet.svg";
     let className = isRetweeted ? "flex" : "hidden";
-    // console.log('likeIcon=>',likeIcon);
+    console.log('author=>',author);
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     if (isRetweeted) {
-      console.log('author=>',author);
       return Tweet({
         username:userInfo.username,
         profile: userInfo.profilePic,
