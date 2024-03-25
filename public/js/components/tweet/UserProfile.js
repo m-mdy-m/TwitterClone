@@ -1,6 +1,7 @@
 import { Profile } from "../common/Profile.js";
 
-export function UserProfile({ username, profile, className,retweetedUsername='',isRetweeted='hidden' }) {
+export function UserProfile({ username, profile, className,retweetedUsername,isRetweeted='hidden' }) {
+  console.log('retweetedUsername=>',retweetedUsername);
   return `
   <div class="container__profile-users flex ">
       <div class="justify-center items-center absolute top-2 left-[4px] ${isRetweeted} user-retweeted">
