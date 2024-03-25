@@ -1,15 +1,28 @@
 const Tweet = require("../../model/Tweet");
-
+const User = require('../../model/User')
 exports.findUser = async (req, { status, getJsonHandler }) => {
   const { notFound, internalServerError } = getJsonHandler();
   try {
+    const id = req.param('id')
+    if(id){
+      const user = await User.findById(id)
+      if (!user) {
+        // If user is not found, send a 404 Not Found response
+        return notFound("User not found");
+      }
+      // If user is found, send the user object as a JSON response
+      return status(200).json({
+        success: true,
+        data: user,
+      });
+    }
     const user = req.user;
     if (!user) {
       // If user is not found, send a 404 Not Found response
       return notFound("User not found");
     }
     // If user is found, send the user object as a JSON response
-    status(200).json({
+    return status(200).json({
       success: true,
       data: user,
     });

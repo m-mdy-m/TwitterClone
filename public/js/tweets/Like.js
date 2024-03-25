@@ -1,4 +1,9 @@
-import { getRetweetInfo, getUserInfo, toggleLike, toggleRetweet } from "../utils/apiOperations.js";
+import {
+  getRetweetInfo,
+  getUserInfo,
+  toggleLike,
+  toggleRetweet,
+} from "../utils/apiOperations.js";
 import { getId, showMessage } from "../utils/helper.js";
 import { getMsgElement } from "../utils/utils.js";
 import { AddTweet } from "./tweetHandlers.js";
@@ -14,19 +19,19 @@ export async function handleClick(event) {
     // Toggle the like and get the updated count
     if (idIcons.includes(currentClick)) {
       // Check which icon was clicked
-      if (currentClick === 'likeIcon') {
+      if (currentClick === "likeIcon") {
         const count = await toggleLike(id);
         updateUILiked(elm, count, id);
-      } else if (currentClick === 'retweetIcon') {
+      } else if (currentClick === "retweetIcon") {
         const infoTweetRetweeted = await toggleRetweet(id);
         // console.log('infoTweetRetweeted=>',infoTweetRetweeted);
-        updatedUiRetweeted(infoTweetRetweeted)
+        updatedUiRetweeted(infoTweetRetweeted);
         // Handle retweet logic
-      } else if (currentClick === 'shareIcon') {
-        console.log('Share icon clicked');
+      } else if (currentClick === "shareIcon") {
+        console.log("Share icon clicked");
         // Handle share logic
-      } else if (currentClick === 'commentIcon') {
-        console.log('Comment icon clicked');
+      } else if (currentClick === "commentIcon") {
+        console.log("Comment icon clicked");
         // Handle comment logic
       }
     }
@@ -49,7 +54,7 @@ async function updateUILiked(elm, count, id) {
     htmlContent = count;
     elm.src = "/assets/icon/nav/heart-full.svg";
   } else {
-    count > 0 ? htmlContent = count : htmlContent = null;
+    count > 0 ? (htmlContent = count) : (htmlContent = null);
     elm.src = "/assets/icon/nav/heart-null.svg";
   }
 
@@ -67,17 +72,16 @@ async function updateUILiked(elm, count, id) {
   }
 }
 
-
-async function updatedUiRetweeted(infoTweetRetweeted){
-  await infoTweetRetweeted.retweets.forEach(async (tweets)=>{
-    const tweet = await getRetweetInfo(tweets)
+async function updatedUiRetweeted(infoTweetRetweeted) {
+  await infoTweetRetweeted.retweets.forEach(async (tweets) => {
+    const tweet = await getRetweetInfo(tweets);
     if (tweet.originalTweet === infoTweetRetweeted._id) {
-       const currentUser = await getUserInfo();
-      AddTweet(tweet,currentUser)
+      const author = await getUserInfo(infoTweetRetweeted.author);
+      console.log("author=>", author);
+      AddTweet(tweet, currentUser);
     }
-  })
+  });
 }
-
 
 // Function to handle errors gracefully
 function handleError(elm) {

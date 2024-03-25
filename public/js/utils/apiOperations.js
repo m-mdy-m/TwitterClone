@@ -68,11 +68,12 @@ export async function logoutUser(header) {
  * Retrieves user information based on the username obtained from the cookie.
  * @returns {Promise<object>} A Promise that resolves to an object containing user information.
  */
-export async function getUserInfo() {
+export async function getUserInfo(id='') {
   try {
     // Make a GET request to fetch user information
     const header = await getAuthHeaders();
-    const response = await axios.get("/user-info", {}, header);
+    const url = id?`/user-info/${id}` :'/user-info'
+    let response =await axios.get(url, {}, header);
     // Return user information
     return response.data.data;
   } catch (error) {
