@@ -65,7 +65,7 @@ export function ShowTweets(response, userInfo,author='') {
     const {  content, createdAt, _id, likes } = tweet;
     const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
-    const isRetweeted = tweet.originalTweet? true:false
+    const isRetweeted = tweet.retweeters.length > 0? true:false
     // Calculate the number of likes for the tweet
     const likeCount = calculateLikeCount(tweet);
     // Gather all necessary data
@@ -75,34 +75,34 @@ export function ShowTweets(response, userInfo,author='') {
       : "nav/ReTweet.svg";
     let className = isRetweeted ? "flex" : "hidden";
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
+    const { username, profilePic } = tweet.author;
     if (isRetweeted) {
       return Tweet({
-        username:userInfo.username,
-        profile: userInfo.profilePic,
-        content : content + ' retweeted : '+ userInfo.username +' original :'+tweet.originalTweet +' _id : '+ tweet._id,
+        username,
+        profile: profilePic,
+        content,
         createdAt: formattedCreatedAt,
         id: _id,
         likeCount,
         srcLikeIcon: likeIcon,
+        // retweetedUsername: ,
         retweetCount: tweet.retweeters.length >0? tweet.retweeters.length:'',
-        retweetedUsername: author.username,
-        isRetweeted: className,
+        // isRetweeted: className,
         srcRetweetIcon: retweetedIcon,
       });
     }
-    const { username, profilePic } = tweet.author;
     // Render the tweet template with formatted creation time
     return Tweet({
-      username,
-      profile: profilePic,
-      content,
+      username:userInfo.username,
+      profile: userInfo.profilePic,
+      content : content + ' retweeted : '+ userInfo.username +' original :'+tweet.originalTweet +' _id : '+ tweet._id,
       createdAt: formattedCreatedAt,
       id: _id,
       likeCount,
       srcLikeIcon: likeIcon,
-      retweetCount: "",
-      retweetedUsername: "",
-      isRetweeted: className,
+      retweetCount: tweet.retweeters.length >0? tweet.retweeters.length:'',
+      retweetedUsername: author.username,
+      isRetweeted: "flex" ,
       srcRetweetIcon: retweetedIcon,
     });
   } catch (error) {
