@@ -278,6 +278,6 @@ export async function toggleRetweet(id) {
       // Error occurred while setting up the request
       errorMessage = "Error setting up the request. Please try again.";
     }
-    showMessage(msgElm, errorMessage, color);
+    return showMessage(msgElm, errorMessage, color);
   }
 }

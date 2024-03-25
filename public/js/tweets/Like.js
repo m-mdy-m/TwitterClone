@@ -24,8 +24,7 @@ export async function handleClick(event) {
         updateUILiked(elm, count, id);
       } else if (currentClick === "retweetIcon") {
         const infoTweetRetweeted = await toggleRetweet(id);
-        // console.log('infoTweetRetweeted=>',infoTweetRetweeted);
-        updatedUiRetweeted(infoTweetRetweeted);
+        if(infoTweetRetweeted) return updatedUiRetweeted(infoTweetRetweeted);
         // Handle retweet logic
       } else if (currentClick === "shareIcon") {
         console.log("Share icon clicked");
