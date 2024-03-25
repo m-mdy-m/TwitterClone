@@ -10,10 +10,10 @@ const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
-export function AddTweet(tweetData, userInfo,authorData='') {
+export function AddTweet(tweetData, userInfo,authorData='',newRetweeted=false) {
   try {
     // Render the tweet template
-    const tweetTemplate = renderTweet(tweetData, userInfo,authorData);
+    const tweetTemplate = renderTweet(tweetData, userInfo,authorData,newRetweeted);
     // Append the rendered tweet template to the wrapper element
     appendTweet("afterbegin", tweetTemplate);
 
@@ -54,7 +54,7 @@ export function ShowTweets(response, userInfo,author='') {
   }
 }
 
-function renderTweet(tweet, userInfo, author = '') {
+function renderTweet(tweet, userInfo, author = '',newRetweeted=false) {
   if (!tweet || !userInfo) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
     return null;
@@ -64,12 +64,19 @@ function renderTweet(tweet, userInfo, author = '') {
     const { content, createdAt, _id, likes, author: tweetAuthor, retweeters } = tweet;
     const { userId } = userInfo;
     const isLiked = likes.includes(userId);
-    const isRetweeted = retweeters.length > 0 && author;
+    let isRetweeted;
+    if(newRetweeted){
+      isRetweeted = newRetweeted
+    }else{
+      isRetweeted = (retweeters.length > 0 && author);
+    }
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
     const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
     const retweetCount = isRetweeted ? retweeters.length : '';
 
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
+    console.log('newRetweeted :',newRetweeted);
+    console.log('author :',author);
     console.log('retweetedIcon :',retweetedIcon);
     console.log('retweetCount :',retweetCount);
     console.log('isRetweeted :',isRetweeted);
