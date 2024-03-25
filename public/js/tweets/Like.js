@@ -69,17 +69,13 @@ async function updateUILiked(elm, count, id) {
 
 
 async function updatedUiRetweeted(infoTweetRetweeted){
-  const currentUser = await getUserInfo();
-  console.log('infoTweetRetweeted=>',infoTweetRetweeted);
-  const newTweetRetweeted =await infoTweetRetweeted.retweets.forEach(async (tweets)=>{
+  await infoTweetRetweeted.retweets.forEach(async (tweets)=>{
     const tweet = await getRetweetInfo(tweets)
-    console.log('tweet=>',tweet);
     if (tweet.originalTweet === infoTweetRetweeted._id) {
-      return {tweet , isRetweeted:true}
+       const currentUser = await getUserInfo();
+      AddTweet(tweet,currentUser)
     }
   })
-  // console.log('newTweetRetweeted=>',newTweetRetweeted);
-  AddTweet(newTweetRetweeted,currentUser)
 }
 
 

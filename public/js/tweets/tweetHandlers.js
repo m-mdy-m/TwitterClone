@@ -13,9 +13,9 @@ const msgELm = getMsgElement();
 export function AddTweet(tweetData, userInfo) {
   try {
     // Render the tweet template
-    console.log();
+    console.log('tweetData=>',tweetData);
+    console.log('userInfo=>',userInfo);
     const tweetTemplate = renderTweet(tweetData, userInfo);
-
     // Append the rendered tweet template to the wrapper element
     appendTweet("afterbegin", tweetTemplate);
 
@@ -64,8 +64,7 @@ export function ShowTweets(response, userInfo) {
   }
   try {
     // Extract relevant data from the tweet object
-    const { author, content, createdAt, _id, likes } = tweet;
-    const { username, profilePic } = author;
+    const {  content, createdAt, _id, likes } = tweet;
     const { userId } = userInfo;
     const isLiked = likes.some((like) => like === userId);
     const isRetweeted = tweet.originalTweet? true:false
@@ -94,6 +93,7 @@ export function ShowTweets(response, userInfo) {
         srcRetweetIcon: retweetedIcon,
       });
     }
+    const { username, profilePic } = tweet.author;
     // Render the tweet template with formatted creation time
     return Tweet({
       username,
