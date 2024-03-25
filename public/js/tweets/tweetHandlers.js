@@ -15,7 +15,7 @@ export function AddTweet(tweetData, userInfo,authorData='',originalTweet=null) {
     // Render the tweet template
     const tweetTemplate = renderTweet(tweetData, userInfo,authorData,originalTweet);
     // Append the rendered tweet template to the wrapper element
-    appendTweet("beforeend", tweetTemplate);
+    appendTweet("beforebegin", tweetTemplate);
 
     attachIconClickListeners();
     // Clear the tweet input field after adding the tweet
