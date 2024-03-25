@@ -74,9 +74,9 @@ function renderTweet(tweet, userInfo, author = '') {
     // console.log('author :',author);
     if(tweet.originalTweet) {
       return Tweet({
-        username: userInfo.username,
-        profile: userInfo.profilePic,
-        content: `${content} retweeted by: ${userInfo.username} original: ${tweet.originalTweet} _id: ${_id}`,
+        username: tweetAuthor.username,
+        profile: tweetAuthor.profilePic,
+        content,
         createdAt: formattedCreatedAt,
         id: _id,
         likeCount: calculateLikeCount(tweet),
