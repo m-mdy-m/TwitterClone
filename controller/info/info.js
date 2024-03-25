@@ -3,7 +3,8 @@ const User = require('../../model/User')
 exports.findUser = async (req, { status, getJsonHandler }) => {
   const { notFound, internalServerError } = getJsonHandler();
   try {
-    const id = req.param('id')
+    const id = req.query('id')
+    console.log('id=>',id);
     if(id){
       const user = await User.findById(id)
       if (!user) {

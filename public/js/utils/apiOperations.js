@@ -20,9 +20,15 @@ import {
 } from "./utils.js";
 const msgElm = getMsgElement();
 
-
 // Function to Signup or Login user
-export async function authenticateUser(url,requestData,header,form,btn,oldValue) {
+export async function authenticateUser(
+  url,
+  requestData,
+  header,
+  form,
+  btn,
+  oldValue
+) {
   try {
     const response = await axios.post(url, requestData, header);
     // Handle server response based on success or failure
@@ -68,12 +74,13 @@ export async function logoutUser(header) {
  * Retrieves user information based on the username obtained from the cookie.
  * @returns {Promise<object>} A Promise that resolves to an object containing user information.
  */
-export async function getUserInfo(id='') {
+export async function getUserInfo(id = "") {
   try {
     // Make a GET request to fetch user information
     const header = await getAuthHeaders();
-    const url = id?`/user-info/${id}` :'/user-info'
-    let response =await axios.get(url, {}, header);
+    const url = id ? `/user-info?id=${id}` : "/user-info";
+    console.log("url=>", url);
+    let response = await axios.get(url, {}, header);
     // Return user information
     return response.data.data;
   } catch (error) {
@@ -87,11 +94,11 @@ export async function getUserInfo(id='') {
   }
 }
 
-export async function getRetweetInfo(id){
+export async function getRetweetInfo(id) {
   try {
-    const header = await getAuthHeaders()
-    const response  = await axios.get(`/tweet-info/${id}`,{},header)
-    return response.data.data
+    const header = await getAuthHeaders();
+    const response = await axios.get(`/tweet-info/${id}`, {}, header);
+    return response.data.data;
   } catch (error) {
     // Handle errors
     showMessage(
@@ -225,8 +232,8 @@ export async function toggleRetweet(id) {
     if (response.data.success) {
       // Save updated token
       saveToken(response.data.data.token);
-      return response.data.data.retweet ;
-    }else{
+      return response.data.data.retweet;
+    } else {
       // Show error message with appropriate color
       showMessage(
         msgElm,
