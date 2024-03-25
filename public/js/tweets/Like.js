@@ -76,9 +76,10 @@ async function updatedUiRetweeted(infoTweetRetweeted) {
   await infoTweetRetweeted.retweets.forEach(async (tweets) => {
     const tweet = await getRetweetInfo(tweets);
     if (tweet.originalTweet === infoTweetRetweeted._id) {
-      const author = await getUserInfo(infoTweetRetweeted.author);
-      console.log("author=>", author);
-      AddTweet(tweet, currentUser);
+      const [author,currentUser] = await Promise.all([getUserInfo(infoTweetRetweeted.author),getUserInfo()]);
+      console.log('author=>',author);
+      console.log('currentUser=>',currentUser);
+      AddTweet(tweet, currentUserssss,);
     }
   });
 }

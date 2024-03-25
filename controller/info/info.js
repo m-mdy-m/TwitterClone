@@ -1,5 +1,5 @@
 const Tweet = require("../../model/Tweet");
-const User = require('../../model/User')
+const User = require("../../model/User");
 exports.findUser = async (req, { status, getJsonHandler }) => {
   const { notFound, internalServerError } = getJsonHandler();
   try {
@@ -19,16 +19,15 @@ exports.findUser = async (req, { status, getJsonHandler }) => {
   }
 };
 
-
-exports.findUserById = async (req,{status, getJsonHandler})=>{
+exports.findUserById = async (req, { status, getJsonHandler }) => {
   const { notFound, internalServerError } = getJsonHandler();
   try {
-    const id = req.getQueryParam('id');
+    const id = req.getQueryParam("id");
     if (!id) {
       // If user is not found, send a 404 Not Found response
       return notFound("User not found");
     }
-    const user = await User.findById(id)
+    const user = await User.findById(id);
     if (!user) {
       // If user is not found, send a 404 Not Found response
       return notFound("User not found");
@@ -42,22 +41,23 @@ exports.findUserById = async (req,{status, getJsonHandler})=>{
     // Send a 500 Internal Server Error response with a generic error message
     internalServerError("Something went wrong. Please try again later.");
   }
-}
-
+};
 
 exports.findTweet = async (req, { getJsonHandler }) => {
   const { notFound, success, internalServerError } = getJsonHandler();
   try {
-    const id = req.param('id');
+    const id = req.param("id");
     if (!id) {
-      return notFound('Tweet ID is required.');
+      return notFound("Tweet ID is required.");
     }
     const tweet = await Tweet.findById(id);
     if (!tweet) {
-      return notFound('Tweet not found.');
+      return notFound("Tweet not found.");
     }
-    success('Tweet found successfully.', tweet);
+    success("Tweet found successfully.", tweet);
   } catch (error) {
-    internalServerError('An error occurred while processing your request. Please try again later.');
+    internalServerError(
+      "An error occurred while processing your request. Please try again later."
+    );
   }
-}
+};

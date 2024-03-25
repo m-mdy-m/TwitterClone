@@ -10,12 +10,10 @@ const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
-export function AddTweet(tweetData, userInfo) {
+export function AddTweet(tweetData, userInfo,authorData='') {
   try {
     // Render the tweet template
-    console.log('tweetData=>',tweetData);
-    console.log('userInfo=>',userInfo);
-    const tweetTemplate = renderTweet(tweetData, userInfo);
+    const tweetTemplate = renderTweet(tweetData, userInfo,authorData);
     // Append the rendered tweet template to the wrapper element
     appendTweet("afterbegin", tweetTemplate);
 
@@ -57,7 +55,7 @@ export function ShowTweets(response, userInfo) {
 }
 
 // Function to render a single tweet template
- function renderTweet(tweet, userInfo) {
+ function renderTweet(tweet, userInfo,author='') {
   // Ensure the tweet and user information are provided
   if (!tweet || !userInfo) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
@@ -88,7 +86,7 @@ export function ShowTweets(response, userInfo) {
         likeCount,
         srcLikeIcon: likeIcon,
         retweetCount: tweet.retweeters.length >0? tweet.retweeters.length:'',
-        retweetedUsername: userInfo.username,
+        retweetedUsername: author.username,
         isRetweeted: className,
         srcRetweetIcon: retweetedIcon,
       });
