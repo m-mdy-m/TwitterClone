@@ -65,15 +65,14 @@ function renderTweet(tweet, userInfo, author = '') {
     const { userId } = userInfo;
     const isLiked = likes.includes(userId);
     const isRetweeted = retweeters.length > 0 && author;
-    console.log('author :',author);
-    console.log('tweet :',tweet);
-    console.log('isRetweeted :',isRetweeted);
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
     const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
     const retweetCount = isRetweeted ? retweeters.length : '';
 
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-
+    console.log('retweetedIcon :',retweetedIcon);
+    console.log('retweetCount :',retweetCount);
+    console.log('isRetweeted :',isRetweeted);
     if (isRetweeted) {
       return Tweet({
         username: tweetAuthor.username,

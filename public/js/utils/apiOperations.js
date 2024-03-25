@@ -126,9 +126,10 @@ export async function getTweets() {
           parentTweets.push(tweet.originalTweet);
         }
       }
-      if(parentTweets){
+      if (parentTweets) {
         const authorIds = await Promise.all(
           parentTweets.map(async (parentTweet) => {
+            console.log("parentTweet=>", parentTweet);
             const parentTweetInfo = await getRetweetInfo(parentTweet);
             return parentTweetInfo.author;
           })
@@ -141,7 +142,7 @@ export async function getTweets() {
         authors.forEach((author) => {
           ShowTweets(tweetsResponse, userInfo, author);
         });
-      }else{
+      } else {
         ShowTweets(tweetsResponse, userInfo);
       }
       // Handle displaying tweets on the UI as needed
