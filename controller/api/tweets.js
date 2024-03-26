@@ -76,15 +76,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     const {tweet,tweetId} = await findTweetParam(req,getJsonHandler)
     let id =tweetId
     // Extract the user information from the request
-    const user = req.user;
-
-    // Check if the user is authenticated
-    if (!user) {
-      // Return an authentication required error with a clear message
-      return authRequired(
-        "Authentication required. Please log in to perform this action."
-      );
-    }
+    const user = registerUser(req,getJsonHandler)
 
     const tweetLikedByUser = tweet.likes.includes(user.userId);
 
