@@ -207,16 +207,9 @@ exports.retweet = async (req, { getJsonHandler }) => {
 
 exports.bookmarkTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
-  const { updated, authRequired, internalServerError } =getJsonHandler();
+  const { updated, internalServerError } =getJsonHandler();
   try {
    const {tweetId, currentUser} = await findTweetAndCurrentUser(req,getJsonHandler)
-    // Check if the user is authenticated
-    if (!currentUser) {
-      // Return an authentication required error with a clear message
-      return authRequired(
-        "Authentication required. Please log in to perform this action."
-      );
-    }
     const isAlreadyBookmarked = currentUser.bookmarked.includes(tweetId);
     if (isAlreadyBookmarked) {
       // Remove the tweet ID from bookmarks
