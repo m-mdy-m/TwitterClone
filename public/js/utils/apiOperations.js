@@ -126,7 +126,7 @@ export async function getTweets() {
           parentTweets.push(tweet.originalTweet);
         }
       }
-      let user
+      let user;
       if (parentTweets) {
         const authorIds = await Promise.all(
           parentTweets.map(async (parentTweet) => {
@@ -140,10 +140,10 @@ export async function getTweets() {
           })
         );
         authors.forEach((author) => {
-          user=author
+          user = author;
         });
       }
-        ShowTweets(tweetsResponse, userInfo,user);
+      ShowTweets(tweetsResponse, userInfo, user);
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {
@@ -272,7 +272,7 @@ export async function toggleRetweet(id) {
       color = "#ff0000"; // Red color for server errors
     } else if (error.request) {
       // Request was made but no response was received
-      errorMessage = "No response received from the server. Please try again.";
+      errorMessage = "Network Error. Please check your internet connection.";
       color = "#ffa500"; // Orange color for network errors
     } else {
       // Error occurred while setting up the request
@@ -281,36 +281,32 @@ export async function toggleRetweet(id) {
     return showMessage(msgElm, errorMessage, color);
   }
 }
-export async function toggleBookmark(id){
+export async function toggleBookmark(id) {
   try {
     const response = await sendRequestPut(`bookmark/${id}`);
-    if(response.data.success){
-      saveToken(response.data.data.token)
-      return response.data.data.isBookmarked
-    }else{
+    if (response.data.success) {
+      saveToken(response.data.data.token);
+      return response.data.data.isBookmarked;
+    } else {
       // Show error message with appropriate color
-      showMessage(
-        msgElm,
-        "write error message",
-        "#b22222"
-      );
+      showMessage(msgElm, "write error message", "#b22222");
     }
   } catch (error) {
-    let errorMessage = "ss";
-    let color = "#ff6347";
-    if (error.response.data.error) {
+    let errorMessage = "";
+    let color = "";
+    if (error.response) {
       // Server responded with an error status code
-      errorMessage = error.response.data.error;
-      color = "#ff0000"; // Red color for server errors
+      errorMessage = error.response.data.error || "Server Error";
+      color = "#E63946"; // Red color for server errors
     } else if (error.request) {
       // Request was made but no response was received
-      errorMessage = "s";
-      color = "#ffa500"; // Orange color for network errors
+      errorMessage = "Network Error. Please check your internet connection.";
+      color = "#F1FAEE"; // Light green color for network errors
     } else {
       // Error occurred while setting up the request
-      errorMessage = "s";
+      errorMessage = "Unexpected Error. Please try again later.";
+      color = "#F9C74F"; // Yellow color for unexpected errors
     }
-    return showMessage(msgElm, errorMessage, color);
+    showMessage(msgElm, errorMessage, color);
   }
-
 }
