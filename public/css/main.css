@@ -148,6 +148,7 @@
     opacity: 1;
     animation: fadeAndScaleIn 0.5s ease forwards;
     transform-origin: center;
+    @apply top-2 w-auto h-4
   }
 
   @keyframes pulse {
@@ -165,6 +166,7 @@
     opacity: 0;
     animation: fadeAndScaleOut 0.5s ease forwards;
     transform-origin: center;
+    @apply top-6 w-0 h-0
   }
   .profile-user:hover .icon-retweet{
     opacity : 0
