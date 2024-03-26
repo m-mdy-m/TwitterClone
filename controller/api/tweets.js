@@ -1,4 +1,5 @@
-const { handleRetweet, findTweetAndCurrentUser, findTweetParam, registerUser } = require("../../utils/helperFunc");
+const TweetUserManager = require("../../utils/helper");
+const { handleRetweet} = require("../../utils/helperFunc");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
@@ -72,11 +73,13 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     getJsonHandler();
 
   try {
+    const tweetManager = new TweetUserManager(req,getJsonHandler)
     // Extract the tweet ID from the request parameters
-    const {tweet,tweetId} = await findTweetParam(req,getJsonHandler)
+    const {tweet,tweetId} = await tweetManager.findTweetParam()
+    
     let id =tweetId
     // Extract the user information from the request
-    const userId = registerUser(req,getJsonHandler).userId
+    const userId = tweetManager.registerUser().userId
 
     const tweetLikedByUser = tweet.likes.includes(userId);
 
@@ -118,11 +121,11 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 };
 
 exports.retweet = async (req, { getJsonHandler }) => {
-  const { badRequest, created,internalServerError } =
-    getJsonHandler();
+  const { badRequest, created,internalServerError } = getJsonHandler();
   try {
-    const {tweet,tweetId} = await findTweetParam(req,getJsonHandler)
-    const userId = registerUser(req,getJsonHandler).userId
+    const tweetManager = new TweetUserManager(req,getJsonHandler)
+    const {tweet,tweetId} = await tweetManager.findTweetParam()
+    const userId = tweetManager.registerUser().userId
     const content = req.body.content;
     const existingRetweet = await Tweet.findOne({
       originalTweet: tweetId,
@@ -173,7 +176,8 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
   const { updated, internalServerError } =getJsonHandler();
   try {
-   const {tweetId, user} = await findTweetAndCurrentUser(req,getJsonHandler)
+    const tweetManager = new TweetUserManager(req,getJsonHandler)
+    const {tweetId, user} = await tweetManager.findTweetAndCurrentUser()
     const isAlreadyBookmarked = user.bookmarked.includes(tweetId);
     if (isAlreadyBookmarked) {
       // Remove the tweet ID from bookmarks

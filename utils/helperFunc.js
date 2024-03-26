@@ -1,5 +1,4 @@
 const Tweet = $read("model/Tweet");
-const User = $read("model/User");
 // Function to check if a given element's likes array includes a specific ID
 function isLikesInclude(element, id) {
   const { likes, likedTweets } = element;
@@ -191,116 +190,6 @@ async function getAllChildren(parentTweet) {
     throw new Error("Failed to get children tweets.");
   }
 }
-
-/**
- * Finds the tweet and current user.
- * @param {Object} req - The request object.
- * @param {Function} getJsonHandler - Function to get JSON error handlers.
- * @returns {Object} An object containing the found tweet, current user, and tweet ID.
- */
-async function findTweetAndCurrentUser(req, getJsonHandler) {
-  // Find tweet and tweet ID
-  const { tweet, tweetId } = await findTweetParam(req, getJsonHandler);
-  
-  // Find current user
-  const { user } = await findCurrentUser(req, getJsonHandler);
-  
-  // Return the found tweet and current user
-  return { tweet, user, tweetId };
-}
-
-async function findTweetParam(req, getJsonHandler) {
-  // Destructure error handling functions
-  const { badRequest, notFound, internalServerError } = getJsonHandler();
-
-  try {
-    // Extract tweet ID from request parameters
-    const tweetId = req.param("id");
-
-    // Check if the tweet ID is missing or invalid
-    if (!tweetId) {
-      return badRequest("Invalid request. Please provide a valid tweet ID.");
-    }
-
-    // Find the tweet by ID
-    const tweet = await Tweet.findById(tweetId);
-
-    // If the tweet is not found, return appropriate error message
-    if (!tweet) {
-      return notFound("Tweet not found.");
-    }
-
-    // Return the found tweet and its ID
-    return { tweet, tweetId };
-  } catch (error) {
-    // Handle internal server errors
-    console.error("Error in findTweet function:", error);
-    return internalServerError(
-      "Internal server error. Please try again later."
-    );
-  }
-}
-/**
- * Registers a user based on the provided request object.
- * @param {Object} req - The request object containing user information.
- * @param {Function} getJsonHandler - Function to get JSON error handlers.
- * @returns {Object} The registered user object or an error message.
- */
-function registerUser(req, getJsonHandler) {
-  // Destructure the error handling functions from getJsonHandler
-  const { authRequired,internalServerError } = getJsonHandler();
-
-  try {
-    // Extract the user information from the request
-    const user = req.user;
-    // Check if the user is authenticated
-    if (!user) {
-      // Return an authentication required error with a clear message
-      return authRequired(
-        "Authentication required. Please log in to perform this action."
-      );
-    }
-
-    // Return the registered user object
-    return user;
-  } catch (error) {
-    // Handle any unexpected errors
-    console.error("Error in registerUser function:", error);
-    return internalServerError(
-      "Internal server error. Please try again later."
-    );
-  }
-}
-
-/**
- * Finds a user by their ID.
- * @param {Object} req - The request object.
- * @param {Function} getJsonHandler - Function to get JSON error handlers.
- * @returns {Object} The found user or an error message.
- */
-async function findCurrentUser(req, getJsonHandler) {
-  const { internalServerError,notFound } = getJsonHandler();
-
-  try {
-    const userId = registerUser(req,getJsonHandler).userId
-
-    // Find the user by their ID
-    const user = await User.findById(userId);
-
-    // Check if the user exists
-    if (!user) {
-      return notFound("User not found.");
-    }
-
-    // Return the found user
-    return {user,userId};
-  } catch (error) {
-    // Log any unexpected errors
-    console.error("Error in findUser function:", error);
-    // Return a generic internal server error message
-    return internalServerError("Internal server error. Please try again later.");
-  }
-}
 module.exports = {
   isIdLiked,
   isLikesInclude,
@@ -308,8 +197,4 @@ module.exports = {
   clearAllCookies,
   handleRetweet,
   getParentTweet,
-  findTweetAndCurrentUser,
-  findTweetParam,
-  registerUser,
-  findCurrentUser
 };
