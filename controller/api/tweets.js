@@ -68,7 +68,7 @@ exports.getTweets = async (req, res) => {
  */
 exports.likeTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
-  const { updated, badRequest, authRequired, notFound, internalServerError } =
+  const { updated, internalServerError } =
     getJsonHandler();
 
   try {
@@ -119,7 +119,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 };
 
 exports.retweet = async (req, { getJsonHandler }) => {
-  const { badRequest, created, authRequired, notFound, internalServerError } =
+  const { badRequest, created,internalServerError } =
     getJsonHandler();
   try {
     const {tweet,tweetId} = await findTweetParam(req,getJsonHandler)
