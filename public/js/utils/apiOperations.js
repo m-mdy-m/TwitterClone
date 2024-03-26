@@ -8,6 +8,7 @@ import {
   handleNotSuccess,
   handleServerError,
   handleSuccess,
+  showErrorMessage,
   showMessage,
 } from "./helper.js";
 import {
@@ -99,13 +100,7 @@ export async function getRetweetInfo(id) {
     const response = await axios.get(`/tweet-info/${id}`, {}, header);
     return response.data.data;
   } catch (error) {
-    // Handle errors
-    showMessage(
-      msgElm,
-      "Failed to fetch retweet data. Please try again later.",
-      "#FF6347"
-    );
-    throw error; // Re-throw the error to handle it elsewhere if needed
+    showErrorMessage(error,"Failed to fetch retweet data. Please try again later.")
   }
 }
 // Function to fetch tweets from the API
@@ -151,18 +146,7 @@ export async function getTweets() {
       showMessage(msgElm, tweetsResponse.data.error, "#ff6347"); // Error color
     }
   } catch (error) {
-    // Handle errors
-    if (error.response && error.response.data && error.response.data.error) {
-      // Display error message returned from the server
-      showMessage(msgElm, error.response.data.error, "#ffd700");
-    } else {
-      // Display a generic error message for other errors
-      showMessage(
-        msgElm,
-        "An unexpected error occurred while creating the tweet. Please try again later.",
-        "#cc0000"
-      );
-    }
+    showErrorMessage(error,"An unexpected error occurred while creating the tweet. Please try again later.")
   }
 }
 // Function to create a tweet
@@ -183,31 +167,17 @@ export async function tweetCreation(data) {
   }
 }
 
-export async function sendRequestPut(url, data = {}) {
+export async function sendRequest(url,request='put', data = {}) {
   try {
     // Get authorization headers
     const headers = await getAuthHeaders();
+    console.log('header =>',headers);
     // Send request with authorization headers
-    const response = await axios.put(`/api/${url}`, data, headers);
+    const response = await axios[request](`/api/${url}`, data, headers);
 
     return response;
   } catch (error) {
-    console.error("Error in sendRequest:", error);
-    let errorMessage = "An unexpected error occurred. Please try again.";
-    let color = "#ff6347";
-    if (error.response) {
-      // Server responded with an error status code
-      errorMessage = "The server encountered an error. Please try again later.";
-      color = "#ff0000"; // Red color for server errors
-    } else if (error.request) {
-      // Request was made but no response was received
-      errorMessage = "No response received from the server. Please try again.";
-      color = "#ffa500"; // Orange color for network errors
-    } else {
-      // Error occurred while setting up the request
-      errorMessage = "Error setting up the request. Please try again.";
-    }
-    showMessage(msgElm, errorMessage, color);
+    showErrorMessage(error)
   }
 }
 
@@ -219,7 +189,7 @@ export async function sendRequestPut(url, data = {}) {
 export async function toggleLike(id) {
   try {
     // Send request to toggle like status
-    const response = await sendRequestPut(`like/${id}`);
+    const response = await sendRequest(`like/${id}`);
     // Check if request was successful
     if (response.data.success) {
       // Save updated token
@@ -237,12 +207,7 @@ export async function toggleLike(id) {
       );
     }
   } catch (error) {
-    // If an unexpected error occurs, show a general error message
-    showMessage(
-      msgElm,
-      "An unexpected error occurred. Please try again.",
-      "#ff6347"
-    );
+    showErrorMessage(error)
   }
 }
 
@@ -264,26 +229,12 @@ export async function toggleRetweet(id) {
       );
     }
   } catch (error) {
-    let errorMessage = "An unexpected error occurred. Please try again.";
-    let color = "#ff6347";
-    if (error.response.data.error) {
-      // Server responded with an error status code
-      errorMessage = error.response.data.error;
-      color = "#ff0000"; // Red color for server errors
-    } else if (error.request) {
-      // Request was made but no response was received
-      errorMessage = "Network Error. Please check your internet connection.";
-      color = "#ffa500"; // Orange color for network errors
-    } else {
-      // Error occurred while setting up the request
-      errorMessage = "Error setting up the request. Please try again.";
-    }
-    return showMessage(msgElm, errorMessage, color);
+    showErrorMessage(error)
   }
 }
 export async function toggleBookmark(id) {
   try {
-    const response = await sendRequestPut(`bookmark/${id}`);
+    const response = await sendRequest(`bookmark/${id}`);
     if (response.data.success) {
       saveToken(response.data.data.token);
       return response.data.data.isBookmarked;
@@ -296,21 +247,17 @@ export async function toggleBookmark(id) {
       );
     }
   } catch (error) {
-    let errorMessage = "";
-    let color = "";
-    if (error.response) {
-      // Server responded with an error status code
-      errorMessage = error.response.data.error || "Server Error";
-      color = "#E63946"; // Red color for server errors
-    } else if (error.request) {
-      // Request was made but no response was received
-      errorMessage = "Network Error. Please check your internet connection.";
-      color = "#F1FAEE"; // Light green color for network errors
-    } else {
-      // Error occurred while setting up the request
-      errorMessage = "Unexpected Error. Please try again later.";
-      color = "#F9C74F"; // Yellow color for unexpected errors
-    }
-    showMessage(msgElm, errorMessage, color);
+    showErrorMessage(error)
+  }
+}
+
+
+export async function toggleDeleteTweet(id) {
+  try {
+    const response = await sendRequest(`deleteTweet/${id}`,'delete');
+    console.log('response =>', response);
+    // Handle success, if needed
+  } catch (error) {
+    showErrorMessage(error)
   }
 }

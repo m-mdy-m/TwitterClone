@@ -1,4 +1,4 @@
-import { toggleBookmark } from "../utils/apiOperations.js";
+import { toggleBookmark, toggleDeleteTweet } from "../utils/apiOperations.js";
 
 export function showUserRetweeted() {
   document.querySelectorAll(".container__profile-users").forEach((elm) => {
@@ -30,6 +30,9 @@ export function listMenuTweet() {
       bookmarked.style.display = `${isBookmarked?'block':'none'} `
       bookmarkIcon.style.color = `${isBookmarked?  'rgb(96 165 250 )' :  'rgb(156 163 175 )'}`
     });
-    // const deleteIcon = icon.querySelector(".deleteIcon");
+    icon.querySelector(".deleteIcon").addEventListener('click', async()=>{
+      const deleteTweet = await toggleDeleteTweet(tweetId)
+      console.log('deleteTweet :',deleteTweet);
+    })
   });
 }

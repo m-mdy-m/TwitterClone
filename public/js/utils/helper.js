@@ -1,6 +1,6 @@
 import getCSRFToken, { getMsgElement, getToken } from "./utils.js";
 
-const msgElm = getMsgElement()
+const msgElm = getMsgElement();
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
 const maxLength = 300;
@@ -117,17 +117,17 @@ export async function getAuthHeaders() {
     );
     return;
   }
-  
+
   // Retrieve JWT token
   const token = getToken();
   // Construct headers object including CSRF token and JWT token
   const header = {
     headers: {
       "X-CSRF-Token": csrfToken,
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
   };
-  
+
   // Return the constructed headers object
   return header;
 }
@@ -147,14 +147,30 @@ export function updateCharCount(e) {
     charCount.textContent = `${currentLength}/${maxLength}`;
     // Check if the Enter key is pressed (keyCode 13 for Enter key)
     if (e.keyCode === 13 && !event.shiftKey) {
-        // Call adjustStyles to handle Enter key press event
-        return  adjustStyles(currentLength, maxLength, charCount, textarea, validation);
+      // Call adjustStyles to handle Enter key press event
+      return adjustStyles(
+        currentLength,
+        maxLength,
+        charCount,
+        textarea,
+        validation
+      );
     }
-     // Call adjustStyles to handle Enter key press event
-     return  adjustStyles(currentLength, maxLength, charCount, textarea, validation);
+    // Call adjustStyles to handle Enter key press event
+    return adjustStyles(
+      currentLength,
+      maxLength,
+      charCount,
+      textarea,
+      validation
+    );
   } catch (error) {
     // Display a generic error message for updating character count
-    showMessage(msgElm, 'Error updating character count. Please try again.', '#ff6347');
+    showMessage(
+      msgElm,
+      "Error updating character count. Please try again.",
+      "#ff6347"
+    );
     // Return validation status indicating an error
     return { valid: false, message: "Error updating character count." };
   }
@@ -191,7 +207,13 @@ export function validateTweet(tweet) {
  * @param {HTMLElement} textarea - The textarea element for the tweet.
  * @param {Object} validation - The validation result object containing validity status and message.
  */
-function adjustStyles(currentLength, maxLength, charCount, textarea, validation) {
+function adjustStyles(
+  currentLength,
+  maxLength,
+  charCount,
+  textarea,
+  validation
+) {
   // Change color and adjust styles based on tweet length and validation
   if (currentLength > maxLength) {
     charCount.style.color = "red";
@@ -207,4 +229,23 @@ function adjustStyles(currentLength, maxLength, charCount, textarea, validation)
     // Return validation status and validated tweet value
     return { valid: validation.valid, value: validation.value };
   }
+}
+export function showErrorMessage(error,msg=error.response.data.error) {
+  let errorMessage = "An unexpected error occurred. Please try again.";
+  let color = "#ff6347"; // Default color for unexpected errors
+
+  if (error.response) {
+    // Server responded with an error status code
+    errorMessage =  msg || "Internal Server Error";
+    color = "#ff0000"; // Red color for server errors
+  } else if (error.request) {
+    // Request was made but no response was received
+    errorMessage = "Network Error: No response received from the server.";
+    color = "#f39c12"; // Orange color for network errors
+  } else {
+    // Error occurred while setting up the request
+    errorMessage = "Error: Request setup failed. Please try again.";
+    color = "#3498db"; // Blue color for other errors
+  }
+  return showMessage(msgElm, errorMessage, color);
 }
