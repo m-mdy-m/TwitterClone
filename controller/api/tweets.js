@@ -190,7 +190,6 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
     req.session.token = token;
     return updated({ isBookmarked:isBookmarked, token: token });
   } catch (error) {
-    console.log('error =>',error)
     internalServerError("Internal server error. Please try again later.");
   }
 };
