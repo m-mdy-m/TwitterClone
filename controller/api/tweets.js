@@ -1,4 +1,4 @@
-const { handleRetweet, findTweetAndCurrentUser } = require("../../utils/helperFunc");
+const { handleRetweet, findTweetAndCurrentUser, findTweet } = require("../../utils/helperFunc");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
@@ -145,7 +145,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
   const { badRequest, created, authRequired, notFound, internalServerError } =
     getJsonHandler();
   try {
-    const id = req.param("id");
+    const {tweet,tweetId} = await findTweet(req,getJsonHandler)
     const userId = req.user.userId;
     // Check if the user is authenticated
     if (!userId) {
@@ -155,13 +155,8 @@ exports.retweet = async (req, { getJsonHandler }) => {
       );
     }
     const content = req.body.content;
-    const tweet = await Tweet.findById(id);
-
-    if (!tweet) {
-      return notFound("Tweet not found.");
-    }
     const existingRetweet = await Tweet.findOne({
-      originalTweet: id,
+      originalTweet: tweetId,
       author: userId,
     });
 
@@ -169,7 +164,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
       return badRequest("You have already retweeted this tweet.");
     }
     const retweet = await Tweet.create({
-      originalTweet: id,
+      originalTweet: tweetId,
       author: userId,
       content: content || tweet.content,
       likes: tweet.likes,
@@ -180,7 +175,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     const { UserQuery, TweetQuery } = generateTweetQueries(
       "$addToSet",
       userId,
-      id,
+      tweetId,
       true,
       retweet._id,
       "retweeters",
@@ -188,7 +183,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     );
     const [updatedUser, updatedTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
-      Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
+      Tweet.findByIdAndUpdate(tweetId, UserQuery, { new: true }),
     ]);
     // Generate a new JWT token with updated user information
     const token = generateAuthToken(updatedUser);

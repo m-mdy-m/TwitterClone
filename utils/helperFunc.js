@@ -25,7 +25,15 @@ function isIdLiked(array = [], id) {
  * @param {string} featureTypeUser - Feature type for user ('likedTweets' by default).
  * @returns {object} - Object containing query and updateQuery for MongoDB.
  */
-const generateTweetQueries = (operation,userId,tweetId,isRetweet,retweetId,featureTypeTweet = "likes", featureTypeUser = "likedTweets") => {
+const generateTweetQueries = (
+  operation,
+  userId,
+  tweetId,
+  isRetweet,
+  retweetId,
+  featureTypeTweet = "likes",
+  featureTypeUser = "likedTweets"
+) => {
   // Construct query to associate user with tweet based on the operation and tweet information
   let UserQuery = { [operation]: { [featureTypeTweet]: userId } };
   // Construct update query to perform operation on tweet based on tweet information
@@ -63,11 +71,11 @@ function clearAllCookies(req, res) {
  * @param {function} callback - The callback function to be invoked with the updated tweet.
  * @returns {Object} - Object containing the updated user and tweet.
  */
-async function handleRetweet(tweet, userId, option,internalServerError) {
+async function handleRetweet(tweet, userId, option, internalServerError) {
   try {
     // Retrieve the ID of the original tweet, if it's a retweet
-    const TweetQuery = { [option]: { "likes": userId } };
-    
+    const TweetQuery = { [option]: { likes: userId } };
+
     // Find the parent tweet and all its children
     const parent = await getParentTweet(tweet, TweetQuery);
     const children = await getAllChildren(parent);
@@ -78,12 +86,11 @@ async function handleRetweet(tweet, userId, option,internalServerError) {
     // If the parent tweet is not a retweet, return it
     return parent;
   } catch (error) {
-     // Handle any errors
-     console.error("Error getting original tweet:", error);
-     internalServerError("Failed to get original tweet.");
+    // Handle any errors
+    console.error("Error getting original tweet:", error);
+    internalServerError("Failed to get original tweet.");
   }
 }
-
 
 /**
  * Updates the likes on retweeted tweets and the original tweet based on the provided option.
@@ -99,12 +106,16 @@ async function updateRetweetLikes(currentTweet, children, option, userId) {
     const query = { [option]: { likes: userId } };
 
     // Update likes on the current tweet
-    const updatedCurrentTweet = await Tweet.findByIdAndUpdate(currentTweet._id, query, { new: true });
+    const updatedCurrentTweet = await Tweet.findByIdAndUpdate(
+      currentTweet._id,
+      query,
+      { new: true }
+    );
 
     // If the current tweet has children, recursively update likes on them
     if (children && children.length > 0) {
       // Update likes on each child tweet
-      const childPromises = children.map(async child => {
+      const childPromises = children.map(async (child) => {
         // Recursively update likes on the child tweet
         return updateRetweetLikes(child, null, option, userId);
       });
@@ -133,7 +144,11 @@ async function getParentTweet(tweet, query) {
   const originalTweetId = tweet.originalTweet ?? tweet;
 
   // Update the original tweet with the provided query to track likes
-  const updatedTweet = await Tweet.findByIdAndUpdate(originalTweetId._id, query, { new: true });
+  const updatedTweet = await Tweet.findByIdAndUpdate(
+    originalTweetId._id,
+    query,
+    { new: true }
+  );
 
   // If the original tweet still exists, recursively find its parent tweet
   if (updatedTweet.originalTweet) {
@@ -178,10 +193,11 @@ async function getAllChildren(parentTweet) {
 }
 
 async function findTweetAndCurrentUser(req, getJsonHandler) {
-  const { badRequest, authRequired, notFound,internalServerError } = getJsonHandler();
+  const { badRequest, authRequired, notFound, internalServerError } =
+    getJsonHandler();
 
   try {
-    const tweetId = req.param('id');
+    const tweetId = req.param("id");
 
     // Check if the tweet ID is missing
     if (!tweetId) {
@@ -192,13 +208,15 @@ async function findTweetAndCurrentUser(req, getJsonHandler) {
 
     // Check if the user is authenticated
     if (!user) {
-      return authRequired("Authentication required. Please log in to perform this action.");
+      return authRequired(
+        "Authentication required. Please log in to perform this action."
+      );
     }
 
     // Fetch the tweet and the current user asynchronously
     const [tweet, currentUser] = await Promise.all([
       Tweet.findById(tweetId),
-      User.findById(user.userId)
+      User.findById(user.userId),
     ]);
 
     // Check if both tweet and current user exist
@@ -207,11 +225,45 @@ async function findTweetAndCurrentUser(req, getJsonHandler) {
     }
 
     // Return the found tweet and current user
-    return { tweet, currentUser,tweetId };
+    return { tweet, currentUser, tweetId };
   } catch (error) {
     // Handle any unexpected errors
     console.error("Error in foundTweetAndUser function:", error);
-    return internalServerError("Internal server error. Please try again later.");
+    return internalServerError(
+      "Internal server error. Please try again later."
+    );
+  }
+}
+
+async function findTweet(req, getJsonHandler) {
+  // Destructure error handling functions
+  const { badRequest, notFound, internalServerError } = getJsonHandler();
+
+  try {
+    // Extract tweet ID from request parameters
+    const tweetId = req.param("id");
+
+    // Check if the tweet ID is missing or invalid
+    if (!tweetId) {
+      return badRequest("Invalid request. Please provide a valid tweet ID.");
+    }
+
+    // Find the tweet by ID
+    const tweet = await Tweet.findById(tweetId);
+
+    // If the tweet is not found, return appropriate error message
+    if (!tweet) {
+      return notFound("Tweet not found.");
+    }
+
+    // Return the found tweet and its ID
+    return { tweet, tweetId };
+  } catch (error) {
+    // Handle internal server errors
+    console.error("Error in findTweet function:", error);
+    return internalServerError(
+      "Internal server error. Please try again later."
+    );
   }
 }
 
@@ -222,5 +274,6 @@ module.exports = {
   clearAllCookies,
   handleRetweet,
   getParentTweet,
-  findTweetAndCurrentUser
+  findTweetAndCurrentUser,
+  findTweet,
 };
