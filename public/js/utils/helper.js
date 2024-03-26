@@ -236,11 +236,10 @@ export function showErrorMessage(error,msg=error.response.data.error) {
 
   if (error.response) {
     // Server responded with an error status code
-    errorMessage =  msg || "Internal Server Error";
-    color = "#ff0000"; // Red color for server errors
+    errorMessage =  msg || "Oops! Something went wrong on our end. Please try again later.";
   } else if (error.request) {
     // Request was made but no response was received
-    errorMessage = "Network Error: No response received from the server.";
+    errorMessage = "Network Error: No response received from the server. Please check your internet connection.";
     color = "#f39c12"; // Orange color for network errors
   } else {
     // Error occurred while setting up the request

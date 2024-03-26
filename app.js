@@ -23,6 +23,16 @@ use(cookieParser());
 // Load setup middleware
 $read("middleware/setup");
 
+use((err,req,res,nxt)=>{
+  if (err.code === 'EBADCSRFTOKEN') {
+    // CSRF token validation failed
+    res.status(403).json({ error: 'Invalid CSRF token' });
+  } else {
+    // Other errors
+    nxt(err);
+  }
+})
+
 // Connect to the database
 $read("utils/database");
 

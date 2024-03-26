@@ -248,7 +248,7 @@ export async function toggleBookmark(id) {
 
 export async function toggleDeleteTweet(id) {
   try {
-    const response = await sendRequest(`deleteTweet/${id}`,'delete');
+    const response = await axios.delete(`/api/deleteTweet/${id}`)
     console.log('response =>', response);
     // Handle success, if needed
   } catch (error) {
