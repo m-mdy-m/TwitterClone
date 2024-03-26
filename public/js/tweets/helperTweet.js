@@ -27,9 +27,8 @@ export function listMenuTweet() {
     const bookmarkIcon = icon.querySelector(".bookmarkIcon");
     bookmarkIcon.addEventListener("click", async () => {
       const isBookmarked = await toggleBookmark(tweetId)
-      console.log('isBookmarked : ',isBookmarked)
       bookmarked.style.display = `${isBookmarked?'block':'none'} `
-      bookmarkIcon.style.cssText = `${isBookmarked} > `
+      bookmarkIcon.style.color = `${isBookmarked?  'rgb(96 165 250 )' :  'rgb(156 163 175 )'}`
     });
     // const deleteIcon = icon.querySelector(".deleteIcon");
   });

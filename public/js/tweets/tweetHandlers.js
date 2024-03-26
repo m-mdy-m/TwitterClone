@@ -84,7 +84,7 @@ function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
       isRetweeted: classname,
       srcRetweetIcon: retweetedIcon,
       isBookmarked:tweetBookmarked?'block':'hidden',
-      bookmarkIcon : tweetBookmarked ? 'text-gray-400 hover:text-blue-400' : 'text-blue-400'
+      bookmarkIcon : tweetBookmarked ? 'text-blue-400 ' : 'text-gray-400 hover:text-blue-400'
     }
     return Tweet(tweetContent)
     
