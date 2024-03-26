@@ -125,6 +125,7 @@ export async function getAuthHeaders() {
     headers: {
       "X-CSRF-Token": csrfToken,
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
     },
   };
 
@@ -230,13 +231,13 @@ function adjustStyles(
     return { valid: validation.valid, value: validation.value };
   }
 }
-export function showErrorMessage(error,msg=error.response.data.error) {
+export function showErrorMessage(error,msg=undefined) {
   let errorMessage = "An unexpected error occurred. Please try again.";
   let color = "#ff6347"; // Default color for unexpected errors
 
   if (error.response) {
     // Server responded with an error status code
-    errorMessage =  msg || "Oops! Something went wrong on our end. Please try again later.";
+    errorMessage =  (msg??error.response.data.error) || "Oops! Something went wrong on our end. Please try again later.";
   } else if (error.request) {
     // Request was made but no response was received
     errorMessage = "Network Error: No response received from the server. Please check your internet connection.";
