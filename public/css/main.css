@@ -148,7 +148,7 @@
     opacity: 1;
     animation: fadeAndScaleIn 0.5s ease forwards;
     transform-origin: center;
-    @apply top-2 w-auto h-4
+    @apply top-2 h-4
   }
 
   @keyframes pulse {
@@ -164,9 +164,9 @@
 
   .user-retweeted.hiddenId {
     opacity: 0;
-    animation: fadeAndScaleOut 0.5s ease forwards;
+    animation: fadeAndScaleOut 0.1s ease forwards;
     transform-origin: center;
-    @apply top-6 w-0 h-0
+    @apply top-6 h-0
   }
   .profile-user:hover .icon-retweet{
     opacity : 0
