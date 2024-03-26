@@ -166,8 +166,9 @@ export async function sendRequest(url,request='put', data = {}) {
     // Get authorization headers
     const headers = await getAuthHeaders();
     // console.log('header =>',headers);
+    console.log(`headers :${headers}`);
     console.log(`/api/${url}`);
-    console.log(' axios[request](`/api/${url}`, data, headers)', axios[request](`/api/${url}`, data, headers));
+    console.log(' axios[request]', axios[request]);
     // Send request with authorization headers
     const response = await axios[request](`/api/${url}`, data, headers);
 
