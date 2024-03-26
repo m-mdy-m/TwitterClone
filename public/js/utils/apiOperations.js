@@ -289,7 +289,11 @@ export async function toggleBookmark(id) {
       return response.data.data.isBookmarked;
     } else {
       // Show error message with appropriate color
-      showMessage(msgElm, "write error message", "#b22222");
+      showMessage(
+        msgElm,
+        "Failed to toggle bookmark status. Please try again later.",
+        "#FF5733"
+      );
     }
   } catch (error) {
     let errorMessage = "";
