@@ -2,6 +2,7 @@ import { formHandler } from "./auth/formHandler.js";
 import Header from "./components/common/header.js";
 import { initializeComponentsNavigation } from "./nav/navigation-handler.js";
 import { createTweet } from "./tweets/Post.js";
+import { showUserRetweeted } from "./tweets/helperTweet.js";
 import { getTweets, getUserInfo } from "./utils/apiOperations.js";
 import {
   updateCharCount,
@@ -44,23 +45,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Fetch tweets if the path is not /auth/signup or /auth/login
   if (!["/auth/signup", "/auth/login"].includes(path)) {
     await getTweets();
-    document.querySelectorAll(".container__profile-users").forEach((elm) => {
-      const profile = elm.querySelector(".profile-user");
-      const userRetweeted = elm.querySelector(".user-retweeted");
-
-      profile.addEventListener("mouseenter", () => {
-        userRetweeted.classList.remove("hiddenId");
-        userRetweeted.classList.add("visibleId");
-      });
-     
-
-      profile.addEventListener("mouseleave", () => {
-        setTimeout(() => {
-          userRetweeted.classList.remove("visibleId");
-          userRetweeted.classList.add("hiddenId");
-        }, 1500);
-      });
-    });
+    showUserRetweeted()
+    
   } else {
     const form = document.getElementById("registerForm");
     formHandler(form, path);
