@@ -233,7 +233,7 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
 
 exports.deleteTweet = async (req,{getJsonHandler})=>{
   // Destructure the error handling functions from getJsonHandler
-  const { updated, badRequest, authRequired, notFound, internalServerError } = getJsonHandler();
+  const { internalServerError } = getJsonHandler();
   try {
     const { tweet, currentUser,tweetId} = await findTweetAndCurrentUser(req,getJsonHandler)
   } catch (error) {
