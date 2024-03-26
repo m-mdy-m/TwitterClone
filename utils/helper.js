@@ -32,7 +32,6 @@ class TweetUserManager{
 
           // Find the tweet by ID
           const tweet = await Tweet.findById(tweetId);
-d
           // If the tweet is not found, return appropriate error message
           if (!tweet) {
             return this.notFound("Tweet not found.");
