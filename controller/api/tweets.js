@@ -1,4 +1,4 @@
-const { handleRetweet, findTweetAndCurrentUser, findTweet } = require("../../utils/helperFunc");
+const { handleRetweet, findTweetAndCurrentUser, findTweet, registerUser } = require("../../utils/helperFunc");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
@@ -73,14 +73,8 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 
   try {
     // Extract the tweet ID from the request parameters
-    let id = req.param("id");
-
-    // Check if the tweet ID is missing
-    if (!id) {
-      // Return a bad request error with a clear message
-      return badRequest("Invalid request. Please provide a valid tweet ID.");
-    }
-
+    const {tweet,tweetId} = await findTweet(req,getJsonHandler)
+    let id =tweetId
     // Extract the user information from the request
     const user = req.user;
 
@@ -92,15 +86,6 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       );
     }
 
-    // Find the tweet by its ID
-    const tweet = await Tweet.findById(id);
-
-    // Check if the tweet exists
-    if (!tweet) {
-      // Return a not found error with a clear message
-      return notFound("Tweet not found. Please provide a valid tweet ID.");
-    }
-    // Determine if the user has already liked or unliked the tweet
     const tweetLikedByUser = tweet.likes.includes(user.userId);
 
     // Determine whether to add or remove the like based on the current state
@@ -146,14 +131,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
     getJsonHandler();
   try {
     const {tweet,tweetId} = await findTweet(req,getJsonHandler)
-    const userId = req.user.userId;
-    // Check if the user is authenticated
-    if (!userId) {
-      // Return an authentication required error with a clear message
-      return authRequired(
-        "Authentication required. Please log in to perform this action."
-      );
-    }
+    const userId = registerUser(req,getJsonHandler).userId
     const content = req.body.content;
     const existingRetweet = await Tweet.findOne({
       originalTweet: tweetId,

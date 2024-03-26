@@ -266,7 +266,50 @@ async function findTweet(req, getJsonHandler) {
     );
   }
 }
+/**
+ * Registers a user based on the provided request object.
+ * @param {Object} req - The request object containing user information.
+ * @param {Function} getJsonHandler - Function to get JSON error handlers.
+ * @returns {Object} The registered user object or an error message.
+ */
+function registerUser(req, getJsonHandler) {
+  // Destructure the error handling functions from getJsonHandler
+  const { authRequired,internalServerError } = getJsonHandler();
 
+  try {
+    // Extract the user information from the request
+    const user = req.user;
+
+    // Check if the user is authenticated
+    if (!user) {
+      // Return an authentication required error with a clear message
+      return authRequired(
+        "Authentication required. Please log in to perform this action."
+      );
+    }
+
+    // Return the registered user object
+    return user;
+  } catch (error) {
+    // Handle any unexpected errors
+    console.error("Error in registerUser function:", error);
+    return internalServerError(
+      "Internal server error. Please try again later."
+    );
+  }
+}
+
+async function findUser(req,getJsonHandler){
+  const { internalServerError } = getJsonHandler();
+  try {
+    const userId = registerUser(req,getJsonHandler).userId
+    return await User.findById(userId)
+  } catch (error) {
+    return internalServerError(
+      "Internal server error. Please try again later."
+    );
+  }
+}
 module.exports = {
   isIdLiked,
   isLikesInclude,
@@ -276,4 +319,5 @@ module.exports = {
   getParentTweet,
   findTweetAndCurrentUser,
   findTweet,
+  registerUser,findUser
 };
