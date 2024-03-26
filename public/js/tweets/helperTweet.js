@@ -27,7 +27,6 @@ export function listMenuTweet() {
     icon.querySelector(".bookmarkIcon").addEventListener("click", async () => {
       const isBookmarked = await toggleBookmark(tweetId)
       console.log('isBookmarked : ',isBookmarked)
-      console.log('bookmarked : ',bookmarked)
       bookmarked.style.display = `${isBookmarked?'block':'none'} `
     });
     // const deleteIcon = icon.querySelector(".deleteIcon");
