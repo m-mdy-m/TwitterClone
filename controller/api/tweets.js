@@ -98,7 +98,6 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       userId,
       id
     );
-    // console.log('id=>',id);
     // Update user and tweet documents
     let [newUser, newTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
