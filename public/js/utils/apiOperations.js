@@ -286,7 +286,6 @@ export async function toggleBookmark(id) {
     const response = await sendRequestPut(`bookmark/${id}`);
     if (response.data.success) {
       saveToken(response.data.data.token);
-      console.log('response ;',response);
       return response.data.data.isBookmarked;
     } else {
       // Show error message with appropriate color
