@@ -2,7 +2,7 @@ import { formHandler } from "./auth/formHandler.js";
 import Header from "./components/common/header.js";
 import { initializeComponentsNavigation } from "./nav/navigation-handler.js";
 import { createTweet } from "./tweets/Post.js";
-import { showUserRetweeted } from "./tweets/helperTweet.js";
+import { listMenuTweet, showUserRetweeted } from "./tweets/helperTweet.js";
 import { getTweets, getUserInfo } from "./utils/apiOperations.js";
 import {
   updateCharCount,
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!["/auth/signup", "/auth/login"].includes(path)) {
     await getTweets();
     showUserRetweeted()
-    
+    listMenuTweet()
   } else {
     const form = document.getElementById("registerForm");
     formHandler(form, path);
