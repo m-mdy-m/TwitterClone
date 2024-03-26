@@ -26,7 +26,7 @@ $read("middleware/setup");
 use((err,req,res,nxt)=>{
   if (err.code === 'EBADCSRFTOKEN') {
     // CSRF token validation failed
-    res.status(403).json({ error: 'Invalid CSRF token' });
+    res.status(403).json({ error: 'CSRF token validation failed. Please refresh the page and try again.'  });
   } else {
     // Other errors
     nxt(err);

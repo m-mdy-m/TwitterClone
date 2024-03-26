@@ -17,6 +17,7 @@ route.group("/api", (r) => {
   r.route("/retweet/:id").post(retweet);
   // Defining a PUt route for bookmark a tweet
   r.route('/bookmark/:id').put(bookmarkTweet)
+  // Defining a DELETE route for deleting a tweet
   r.route('/deleteTweet/:id').del(deleteTweet)
 });
 module.exports = route;
