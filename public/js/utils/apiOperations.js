@@ -281,3 +281,12 @@ export async function toggleRetweet(id) {
     return showMessage(msgElm, errorMessage, color);
   }
 }
+export async function toggleBookmark(id){
+  try {
+    const response = await sendRequestPut(`bookmark/${id}`);
+    console.log('response =>',response);
+  } catch (error) {
+    console.log('errror =>',error)
+  }
+
+}

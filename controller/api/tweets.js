@@ -196,3 +196,8 @@ exports.retweet = async (req, { getJsonHandler }) => {
     internalServerError("Internal server error. Please try again later.");
   }
 };
+
+
+exports.bookmarkTweet = (req,res)=>{
+  console.log('hi')
+}

@@ -78,6 +78,14 @@
   top: 1.5rem;
 }
 
+.left-1 {
+  left: 0.25rem;
+}
+
+.top-1 {
+  top: 0.25rem;
+}
+
 .-z-10 {
   z-index: -10;
 }
@@ -171,6 +179,10 @@
   height: 100%;
 }
 
+.h-4 {
+  height: 1rem;
+}
+
 .min-h-28 {
   min-height: 7rem;
 }
@@ -213,6 +225,10 @@
 
 .w-full {
   width: 100%;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .-translate-y-1\/2 {
