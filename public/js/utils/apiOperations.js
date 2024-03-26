@@ -284,9 +284,33 @@ export async function toggleRetweet(id) {
 export async function toggleBookmark(id){
   try {
     const response = await sendRequestPut(`bookmark/${id}`);
-    console.log('response =>',response);
+    if(response.data.success){
+      saveToken(response.data.data.token)
+      return response.data.data.isBookmarked
+    }else{
+      // Show error message with appropriate color
+      showMessage(
+        msgElm,
+        "write error message",
+        "#b22222"
+      );
+    }
   } catch (error) {
-    console.log('errror =>',error)
+    let errorMessage = "ss";
+    let color = "#ff6347";
+    if (error.response.data.error) {
+      // Server responded with an error status code
+      errorMessage = error.response.data.error;
+      color = "#ff0000"; // Red color for server errors
+    } else if (error.request) {
+      // Request was made but no response was received
+      errorMessage = "s";
+      color = "#ffa500"; // Orange color for network errors
+    } else {
+      // Error occurred while setting up the request
+      errorMessage = "s";
+    }
+    return showMessage(msgElm, errorMessage, color);
   }
 
 }

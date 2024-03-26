@@ -245,8 +245,7 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
     const token = generateAuthToken(user);
     // Set the new JWT token in the session
     req.session.token = token;
-    return updated("Tweet bookmarked successfully.");
-    return;
+    return updated("Tweet bookmarked successfully.",{isBookmarked:isAlreadyBookmarked, token : token});
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
