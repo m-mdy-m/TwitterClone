@@ -106,12 +106,21 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // Determine whether to add or remove the like based on the current state
     const option = tweetLikedByUser ? "$pull" : "$addToSet";
     // Update likes on the tweet and its parent (if it's a retweet)
-    const parentTweet = await handleRetweet(tweet, user.userId, option,internalServerError);
+    const parentTweet = await handleRetweet(
+      tweet,
+      user.userId,
+      option,
+      internalServerError
+    );
 
     // Use the parent tweet ID if it's a retweet
     id = parentTweet._id;
     // Create the update queries for the user and the tweet
-    const { UserQuery, TweetQuery } = generateTweetQueries(option, user.userId, id);
+    const { UserQuery, TweetQuery } = generateTweetQueries(
+      option,
+      user.userId,
+      id
+    );
     // console.log('id=>',id);
     // Update user and tweet documents
     let [newUser, newTweet] = await Promise.all([
@@ -165,7 +174,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
       content: content || tweet.content,
       likes: tweet.likes,
       retweeters: tweet.retweeters,
-      isRetweeted:true,
+      isRetweeted: true,
     });
 
     const { UserQuery, TweetQuery } = generateTweetQueries(
@@ -197,7 +206,26 @@ exports.retweet = async (req, { getJsonHandler }) => {
   }
 };
 
-
-exports.bookmarkTweet = (req,res)=>{
-  console.log('hi')
-}
+exports.bookmarkTweet = (req, { getJsonHandler }) => {
+  // Destructure the error handling functions from getJsonHandler
+  const { updated, badRequest, authRequired, notFound, internalServerError } =
+    getJsonHandler();
+  try {
+    const id = req.param("id");
+    // Check if the tweet ID is missing
+    if (!id) {
+      // Return a bad request error with a clear message
+      return badRequest("Invalid request. Please provide a valid tweet ID.");
+    }
+    const userId = req.user.userId
+    // Check if the user is authenticated
+    if (!userId) {
+      // Return an authentication required error with a clear message
+      return authRequired(
+        "Authentication required. Please log in to perform this action."
+      );
+    }
+  } catch (error) {
+    internalServerError("Internal server error. Please try again later.");
+  }
+};

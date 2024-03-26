@@ -21,9 +21,13 @@ export function showUserRetweeted() {
 
 export function listMenuTweet() {
   document.querySelectorAll(".list__menu-tweet").forEach((icon) => {
+    const tweet = icon.parentNode.parentNode.parentNode
+    const tweetId = tweet.getAttribute('data-id')
+    const bookmarked= tweet.querySelector('.bookmarked')
     icon.querySelector(".bookmarkIcon").addEventListener("click", async () => {
-      const fetchApi = await toggleBookmark()
-      console.log('fetch +>',fetchApi);
+      const fetchApi = await toggleBookmark(tweetId)
+      console.log('bookmarked : ',bookmarked)
+      bookmarked.style.display = 'block'
     });
     // const deleteIcon = icon.querySelector(".deleteIcon");
   });
