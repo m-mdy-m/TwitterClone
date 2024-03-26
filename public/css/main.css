@@ -177,7 +177,7 @@
     transition: opacity 1s ease;
   }
   .list__menu-icon:hover .list__menu-tweet{
-    @apply w-56 opacity-100 transition-all delay-150 z-10
+    @apply w-32 opacity-100 transition-all delay-150 z-10
   }
   .list__menu-icon:hover .list__menu-icon-svg{
     display: none;

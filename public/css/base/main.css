@@ -1000,7 +1000,7 @@
 
 .list__menu-icon:hover .list__menu-tweet {
   z-index: 10;
-  width: 14rem;
+  width: 8rem;
   opacity: 1;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
