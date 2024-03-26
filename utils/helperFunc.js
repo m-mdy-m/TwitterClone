@@ -177,7 +177,7 @@ async function getAllChildren(parentTweet) {
   }
 }
 
-async function foundTweetAndUser(req, getJsonHandler) {
+async function findTweetAndCurrentUser(req, getJsonHandler) {
   const { badRequest, authRequired, notFound,internalServerError } = getJsonHandler();
 
   try {
@@ -207,7 +207,7 @@ async function foundTweetAndUser(req, getJsonHandler) {
     }
 
     // Return the found tweet and current user
-    return { tweet, currentUser };
+    return { tweet, currentUser,tweetId };
   } catch (error) {
     // Handle any unexpected errors
     console.error("Error in foundTweetAndUser function:", error);
@@ -222,5 +222,5 @@ module.exports = {
   clearAllCookies,
   handleRetweet,
   getParentTweet,
-  foundTweetAndUser
+  findTweetAndCurrentUser
 };

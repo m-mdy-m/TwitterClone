@@ -1,4 +1,4 @@
-const { handleRetweet } = require("../../utils/helperFunc");
+const { handleRetweet, findTweetAndCurrentUser } = require("../../utils/helperFunc");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
@@ -207,43 +207,28 @@ exports.retweet = async (req, { getJsonHandler }) => {
 
 exports.bookmarkTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
-  const { updated, badRequest, authRequired, notFound, internalServerError } =
-    getJsonHandler();
+  const { updated, authRequired, internalServerError } =getJsonHandler();
   try {
-    const tweetId = req.param("id");
-    // Check if the tweet ID is missing
-    if (!tweetId) {
-      // Return a bad request error with a clear message
-      return badRequest("Invalid request. Please provide a valid tweet ID.");
-    }
-    const userId = req.user.userId;
+   const {tweetId, currentUser} = await findTweetAndCurrentUser(req,getJsonHandler)
     // Check if the user is authenticated
-    if (!userId) {
+    if (!currentUser) {
       // Return an authentication required error with a clear message
       return authRequired(
         "Authentication required. Please log in to perform this action."
       );
     }
-    const user = await User.findById(userId);
-    // Check if the user is authenticated
-    if (!user) {
-      // Return an authentication required error with a clear message
-      return authRequired(
-        "Authentication required. Please log in to perform this action."
-      );
-    }
-    const isAlreadyBookmarked = user.bookmarked.includes(tweetId);
+    const isAlreadyBookmarked = currentUser.bookmarked.includes(tweetId);
     if (isAlreadyBookmarked) {
       // Remove the tweet ID from bookmarks
-      user.bookmarked = user.bookmarked.filter((id) => id.toString() !== tweetId.toString());
+      currentUser.bookmarked = currentUser.bookmarked.filter((id) => id.toString() !== tweetId.toString());
     } else {
       // Add the tweet ID to bookmarks
-      user.bookmarked.push(tweetId);
+      currentUser.bookmarked.push(tweetId);
     }
-    await user.save();
-    // Generate a new JWT token with updated user information
-    const isBookmarked = user.bookmarked.includes(tweetId);
-    const token = generateAuthToken(user);
+    await currentUser.save();
+    // Generate a new JWT token with updated currentUser information
+    const isBookmarked = currentUser.bookmarked.includes(tweetId);
+    const token = generateAuthToken(currentUser);
     // Set the new JWT token in the session
     req.session.token = token;
     return updated({ isBookmarked:isBookmarked, token: token });
