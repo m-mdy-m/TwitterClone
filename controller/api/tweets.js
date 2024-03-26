@@ -251,3 +251,14 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
     internalServerError("Internal server error. Please try again later.");
   }
 };
+
+
+exports.deleteTweet = (req,{getJsonHandler})=>{
+  // Destructure the error handling functions from getJsonHandler
+  const { updated, badRequest, authRequired, notFound, internalServerError } = getJsonHandler();
+  try {
+    
+  } catch (error) {
+    internalServerError("Internal server error. Please try again later.");
+  }
+}
