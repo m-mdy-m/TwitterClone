@@ -192,50 +192,24 @@ async function getAllChildren(parentTweet) {
   }
 }
 
+/**
+ * Finds the tweet and current user.
+ * @param {Object} req - The request object.
+ * @param {Function} getJsonHandler - Function to get JSON error handlers.
+ * @returns {Object} An object containing the found tweet, current user, and tweet ID.
+ */
 async function findTweetAndCurrentUser(req, getJsonHandler) {
-  const { badRequest, authRequired, notFound, internalServerError } =
-    getJsonHandler();
-
-  try {
-    const tweetId = req.param("id");
-
-    // Check if the tweet ID is missing
-    if (!tweetId) {
-      return badRequest("Invalid request. Please provide a valid tweet ID.");
-    }
-
-    const user = req.user;
-
-    // Check if the user is authenticated
-    if (!user) {
-      return authRequired(
-        "Authentication required. Please log in to perform this action."
-      );
-    }
-
-    // Fetch the tweet and the current user asynchronously
-    const [tweet, currentUser] = await Promise.all([
-      Tweet.findById(tweetId),
-      User.findById(user.userId),
-    ]);
-
-    // Check if both tweet and current user exist
-    if (!tweet || !currentUser) {
-      return notFound("Tweet or user not found.");
-    }
-
-    // Return the found tweet and current user
-    return { tweet, currentUser, tweetId };
-  } catch (error) {
-    // Handle any unexpected errors
-    console.error("Error in foundTweetAndUser function:", error);
-    return internalServerError(
-      "Internal server error. Please try again later."
-    );
-  }
+  // Find tweet and tweet ID
+  const { tweet, tweetId } = await findTweetParam(req, getJsonHandler);
+  
+  // Find current user
+  const { currentUser } = await findCurrentUser(req, getJsonHandler);
+  
+  // Return the found tweet and current user
+  return { tweet, currentUser, tweetId };
 }
 
-async function findTweet(req, getJsonHandler) {
+async function findTweetParam(req, getJsonHandler) {
   // Destructure error handling functions
   const { badRequest, notFound, internalServerError } = getJsonHandler();
 
@@ -279,7 +253,6 @@ function registerUser(req, getJsonHandler) {
   try {
     // Extract the user information from the request
     const user = req.user;
-
     // Check if the user is authenticated
     if (!user) {
       // Return an authentication required error with a clear message
@@ -305,28 +278,22 @@ function registerUser(req, getJsonHandler) {
  * @param {Function} getJsonHandler - Function to get JSON error handlers.
  * @returns {Object} The found user or an error message.
  */
-async function findUser(req, getJsonHandler) {
-  const { internalServerError } = getJsonHandler();
+async function findCurrentUser(req, getJsonHandler) {
+  const { internalServerError,notFound } = getJsonHandler();
 
   try {
-    // Extract the user ID from the request
-    const userId = req.user.userId;
-
-    // Check if the user ID is missing
-    if (!userId) {
-      return internalServerError("User ID is missing in the request.");
-    }
+    const userId = registerUser(req,getJsonHandler).userId
 
     // Find the user by their ID
     const user = await User.findById(userId);
 
     // Check if the user exists
     if (!user) {
-      return internalServerError("User not found.");
+      return notFound("User not found.");
     }
 
     // Return the found user
-    return user;
+    return {user,userId};
   } catch (error) {
     // Log any unexpected errors
     console.error("Error in findUser function:", error);
@@ -342,6 +309,6 @@ module.exports = {
   handleRetweet,
   getParentTweet,
   findTweetAndCurrentUser,
-  findTweet,
-  registerUser,findUser
+  findTweetParam,
+  registerUser,findCurrentUser
 };

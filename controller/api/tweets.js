@@ -1,4 +1,4 @@
-const { handleRetweet, findTweetAndCurrentUser, findTweet, registerUser } = require("../../utils/helperFunc");
+const { handleRetweet, findTweetAndCurrentUser, findTweetParam, registerUser } = require("../../utils/helperFunc");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
@@ -73,7 +73,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 
   try {
     // Extract the tweet ID from the request parameters
-    const {tweet,tweetId} = await findTweet(req,getJsonHandler)
+    const {tweet,tweetId} = await findTweetParam(req,getJsonHandler)
     let id =tweetId
     // Extract the user information from the request
     const user = req.user;
@@ -130,7 +130,7 @@ exports.retweet = async (req, { getJsonHandler }) => {
   const { badRequest, created, authRequired, notFound, internalServerError } =
     getJsonHandler();
   try {
-    const {tweet,tweetId} = await findTweet(req,getJsonHandler)
+    const {tweet,tweetId} = await findTweetParam(req,getJsonHandler)
     const userId = registerUser(req,getJsonHandler).userId
     const content = req.body.content;
     const existingRetweet = await Tweet.findOne({
