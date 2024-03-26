@@ -200,24 +200,23 @@ exports.retweet = async (req, { getJsonHandler }) => {
     // Return a success response with the updated number of likes
     return created({ retweet: result, token: token });
   } catch (error) {
-    console.log("error=>", error);
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
   }
 };
 
-exports.bookmarkTweet = (req, { getJsonHandler }) => {
+exports.bookmarkTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
   const { updated, badRequest, authRequired, notFound, internalServerError } =
     getJsonHandler();
   try {
-    const id = req.param("id");
+    const tweetId = req.param("id");
     // Check if the tweet ID is missing
-    if (!id) {
+    if (!tweetId) {
       // Return a bad request error with a clear message
       return badRequest("Invalid request. Please provide a valid tweet ID.");
     }
-    const userId = req.user.userId
+    const userId = req.user.userId;
     // Check if the user is authenticated
     if (!userId) {
       // Return an authentication required error with a clear message
@@ -225,6 +224,29 @@ exports.bookmarkTweet = (req, { getJsonHandler }) => {
         "Authentication required. Please log in to perform this action."
       );
     }
+    const user = await User.findById(userId);
+    // Check if the user is authenticated
+    if (!user) {
+      // Return an authentication required error with a clear message
+      return authRequired(
+        "Authentication required. Please log in to perform this action."
+      );
+    }
+    const isAlreadyBookmarked = user.bookmarked.includes(tweetId);
+    if (isAlreadyBookmarked) {
+      // Remove the tweet ID from bookmarks
+      user.bookmarked = user.bookmarked.filter(id => id !== tweetId);
+    } else {
+      // Add the tweet ID to bookmarks
+      user.bookmarked.push(tweetId);
+    }
+    await user.save();
+    // Generate a new JWT token with updated user information
+    const token = generateAuthToken(user);
+    // Set the new JWT token in the session
+    req.session.token = token;
+    return updated("Tweet bookmarked successfully.");
+    return;
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
