@@ -35,6 +35,12 @@ const UserSchema = new Schema(
         ref: "Tweet",
       },
     ],
+    bookmark: [
+      {
+        type: Schema.ObjectId,
+        ref: "Tweet",
+      },
+    ],
   },
   { timestamps: true }
 );
