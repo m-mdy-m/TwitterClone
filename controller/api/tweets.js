@@ -253,11 +253,33 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
 };
 
 
-exports.deleteTweet = (req,{getJsonHandler})=>{
+exports.deleteTweet = async (req,{getJsonHandler})=>{
   // Destructure the error handling functions from getJsonHandler
   const { updated, badRequest, authRequired, notFound, internalServerError } = getJsonHandler();
   try {
-    
+    const tweetId = req.param("id");
+    // Check if the tweet ID is missing
+    if (!tweetId) {
+      // Return a bad request error with a clear message
+      return badRequest("Invalid request. Please provide a valid tweet ID.");
+    }
+    const tweet = await Tweet.findById(tweetId);
+    const userId = req.user.userId;
+    // Check if the user is authenticated
+    if (!userId) {
+      // Return an authentication required error with a clear message
+      return authRequired(
+        "Authentication required. Please log in to perform this action."
+      );
+    }
+    const user = await User.findById(userId);
+    // Check if the user is authenticated
+    if (!user) {
+      // Return an authentication required error with a clear message
+      return authRequired(
+        "Authentication required. Please log in to perform this action."
+      );
+    }
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }

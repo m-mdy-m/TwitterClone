@@ -176,6 +176,45 @@ async function getAllChildren(parentTweet) {
     throw new Error("Failed to get children tweets.");
   }
 }
+
+async function foundTweetAndUser(req, getJsonHandler) {
+  const { badRequest, authRequired, notFound,internalServerError } = getJsonHandler();
+
+  try {
+    const tweetId = req.param('id');
+
+    // Check if the tweet ID is missing
+    if (!tweetId) {
+      return badRequest("Invalid request. Please provide a valid tweet ID.");
+    }
+
+    const user = req.user;
+
+    // Check if the user is authenticated
+    if (!user) {
+      return authRequired("Authentication required. Please log in to perform this action.");
+    }
+
+    // Fetch the tweet and the current user asynchronously
+    const [tweet, currentUser] = await Promise.all([
+      Tweet.findById(tweetId),
+      User.findById(user.userId)
+    ]);
+
+    // Check if both tweet and current user exist
+    if (!tweet || !currentUser) {
+      return notFound("Tweet or user not found.");
+    }
+
+    // Return the found tweet and current user
+    return { tweet, currentUser };
+  } catch (error) {
+    // Handle any unexpected errors
+    console.error("Error in foundTweetAndUser function:", error);
+    return internalServerError("Internal server error. Please try again later.");
+  }
+}
+
 module.exports = {
   isIdLiked,
   isLikesInclude,
@@ -183,4 +222,5 @@ module.exports = {
   clearAllCookies,
   handleRetweet,
   getParentTweet,
+  foundTweetAndUser
 };
