@@ -12,25 +12,37 @@ function Tweet({
   likeCount,
   srcLikeIcon,
   srcRetweetIcon,
-  retweetedUsername,isRetweeted
+  retweetedUsername,
+  isRetweeted,
 }) {
   return `
     <div class="w-full min-h-28 h-auto my-4 rounded-lg relative grid grid-rows-readTweet bg-[#111010] px-3 pt-6" data-id="${id}">
       <div class="flex justify-between items-center">
-        ${UserInfo({ username, profile, createdAt ,isRetweeted,retweetedUsername})}
-        <div class="flex justify-center items-center w-8 h-8 transition-transform cursor-pointer relative transform hover:scale-110">
-          <div class="advance__menu-icon flex justify-evenly bg-red-700 w-full px-4 h-full absolute right-10 -z-10 hover:w-56 p-1 rounded-lg transition-all">
-            <img src="/assets/icon/twwets/bookmark.svg" alt="bookmark">           
-            <img src="/assets/icon/twwets/trash.svg" alt="trash">           
-          </div>
-          <svg class="hover:animate-pulse" width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        ${UserInfo({
+          username,
+          profile,
+          createdAt,
+          isRetweeted,
+          retweetedUsername,
+        })}
+        <div class="flex justify-center items-center  list__menu-icon w-8 h-8 transition-transform cursor-pointer relative transform hover:scale-110">
+        <div class="flex justify-evenly bg-gradient-to-br from-red-600 to-red-800 px-4 absolute right-0 -z-10 p-1 rounded-lg transition-all">
+            <img src="/assets/icon/tweets/bookmark.svg" alt="bookmark" class="hover:scale-105 cursor-pointer" >
+            <img src="/assets/icon/tweets/trash.svg" alt="trash" class="hover:scale-105 cursor-pointer" >           
+         </div>
+          <svg class="hover:animate-pulse list__menu-icon-svg"  width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 12.25C5.5 12.9404 6.05964 13.5 6.75 13.5C7.44036 13.5 8 12.9404 8 12.25C8 11.5596 7.44036 11 6.75 11C6.05964 11 5.5 11.5596 5.5 12.25ZM11.75 13.5C11.0596 13.5 10.5 12.9404 10.5 12.25C10.5 11.5596 11.0596 11 11.75 11C12.4404 11 13 11.5596 13 12.25C13 12.9404 12.4404 13.5 11.75 13.5ZM16.75 13.5C16.0596 13.5 15.5 12.9404 15.5 12.25C15.5 11.5596 16.0596 11 16.75 11C17.4404 11 18 11.5596 18 12.25C18 12.9404 17.4404 13.5 16.75 13.5Z" fill="#e3e3e3"/>
           </svg>
         </div>
       </div>
       <div class="min-h-auto w-full flex justify-between items-center flex-col pb-3 pr-2">
         ${PostContent({ content })}
-        ${ActionButtons({ likeCount, retweetCount, srcLikeIcon,srcRetweetIcon })}
+        ${ActionButtons({
+          likeCount,
+          retweetCount,
+          srcLikeIcon,
+          srcRetweetIcon,
+        })}
       </div>
     </div>
   `;

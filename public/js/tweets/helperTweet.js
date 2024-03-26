@@ -17,3 +17,12 @@ export function showUserRetweeted(){
         });
       });
 }
+
+export function listMenuTweet(){
+  document.querySelectorAll('.list__menu-icon').forEach((icon)=>{
+    icon.addEventListener('mouseenter',()=>{
+      const menu = icon.querySelector('.list__menu-tweet')
+      menu.style.cssText = 'width : 14rem'
+    })
+  })
+}

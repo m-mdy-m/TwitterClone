@@ -174,4 +174,16 @@
     opacity: 1;
     transition: opacity 1s ease;
   }
+  .list__menu-icon:hover .list__menu-tweet{
+    @apply w-56 opacity-100 transition-all delay-150 z-10
+  }
+  .list__menu-icon:hover .list__menu-icon-svg{
+    display: none;
+  }
+  .list__menu-icon:not(:hover) .list__menu-tweet{
+    @apply w-0 opacity-0 transition-all delay-200 -z-10
+  }
+  .list__menu-icon:not(:hover) .list__menu-icon-svg{
+    display: block;
+  }
 }
