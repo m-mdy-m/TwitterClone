@@ -232,24 +232,21 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
         "Authentication required. Please log in to perform this action."
       );
     }
-    console.log('req.user =>',req.user)
-    console.log('user =>',user)
     const isAlreadyBookmarked = user.bookmarked.includes(tweetId);
-    console.log('isAlreadyBookmarked =>',isAlreadyBookmarked)
     if (isAlreadyBookmarked) {
       // Remove the tweet ID from bookmarks
-      user.bookmarked = user.bookmarked.filter((id) => id !== tweetId);
+      user.bookmarked = user.bookmarked.filter((id) => id.toString() !== tweetId.toString());
     } else {
       // Add the tweet ID to bookmarks
       user.bookmarked.push(tweetId);
     }
-    console.log('book =>',user.bookmarked)
     await user.save();
     // Generate a new JWT token with updated user information
+    const isBookmarked = user.bookmarked.includes(tweetId);
     const token = generateAuthToken(user);
     // Set the new JWT token in the session
     req.session.token = token;
-    return updated({ isBookmarked: isAlreadyBookmarked, token: token });
+    return updated({ isBookmarked:isBookmarked, token: token });
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }

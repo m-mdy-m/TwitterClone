@@ -24,10 +24,12 @@ export function listMenuTweet() {
     const tweet = icon.parentNode.parentNode.parentNode
     const tweetId = tweet.getAttribute('data-id')
     const bookmarked= tweet.querySelector('.bookmarked')
-    icon.querySelector(".bookmarkIcon").addEventListener("click", async () => {
+    const bookmarkIcon = icon.querySelector(".bookmarkIcon");
+    bookmarkIcon.addEventListener("click", async () => {
       const isBookmarked = await toggleBookmark(tweetId)
       console.log('isBookmarked : ',isBookmarked)
       bookmarked.style.display = `${isBookmarked?'block':'none'} `
+      bookmarkIcon.style.cssText = `${isBookmarked} > `
     });
     // const deleteIcon = icon.querySelector(".deleteIcon");
   });

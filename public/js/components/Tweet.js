@@ -12,12 +12,14 @@ function Tweet({
   likeCount,
   srcLikeIcon,
   srcRetweetIcon,
-  retweetedUsername,isRetweeted
+  retweetedUsername,isRetweeted,
+  isBookmarked,
+  bookmarkIcon,
 }) {
   return `
     <div class="w-full min-h-28 h-auto my-4 rounded-lg relative grid grid-rows-readTweet bg-[#111010] px-3 pt-6" data-id="${id}">
       <!-- Bookmarked Tweet  -->
-      <svg class="bookmarked w-4 h-4 top-1 left-1 hidden absolute text-blue-400 transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="bookmarked w-4 h-4 top-1 left-1 ${isBookmarked} absolute text-blue-400 transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path fill-rule="evenodd" clip-rule="evenodd" d="M4 7.75V18C4 19.6481 5.88153 20.5889 7.2 19.6L10.8 16.9C11.5111 16.3667 12.4889 16.3667 13.2 16.9L16.8 19.6C18.1185 20.5889 20 19.6481 20 18V7.75H4ZM4 6.25H20V4C20 2.89543 19.1046 2 18 2H6C4.89543 2 4 2.89543 4 4V6.25Z" fill="currentColor"/>
       </svg>
       <div class="flex justify-between items-center">
@@ -25,7 +27,7 @@ function Tweet({
         <div class="flex justify-center items-center  list__menu-icon w-8 h-8 transition-transform cursor-pointer relative transform hover:scale-110">
            <div class="list__menu-tweet cursor-default [&>*]:cursor-pointer flex justify-evenly bg-gray-800 px-4 absolute right-0 -z-10 p-1 rounded-r-md rounded-l-xl transition-all">
                <!-- Bookmark Icon -->
-               <svg class="bookmarkIcon w-6 h-6 text-gray-400 hover:text-blue-400 transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <svg class="bookmarkIcon w-6 h-6 ${bookmarkIcon} transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 7.75V18C4 19.6481 5.88153 20.5889 7.2 19.6L10.8 16.9C11.5111 16.3667 12.4889 16.3667 13.2 16.9L16.8 19.6C18.1185 20.5889 20 19.6481 20 18V7.75H4ZM4 6.25H20V4C20 2.89543 19.1046 2 18 2H6C4.89543 2 4 2.89543 4 4V6.25Z" fill="currentColor"/>
                </svg>
                <!-- Delete tweet icon -->

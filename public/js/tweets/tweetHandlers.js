@@ -70,6 +70,7 @@ function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
     const retweetCount = originalTweet ? (originalTweet.retweeters && originalTweet.retweeters.length > 0 ? originalTweet.retweeters.length : '') : (retweeters && retweeters.length > 0 ? retweeters.length : '');
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     const classname =  (author && tweet.originalTweet)? 'flex' : 'hidden'
+    const tweetBookmarked  =userInfo.bookmarked.includes(_id)
     let  tweetContent = {
       username: originalTweet ? (originalTweet.author.username):tweetAuthor.username,
       profile: tweetAuthor.profilePic ,
@@ -82,6 +83,8 @@ function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
       retweetCount,
       isRetweeted: classname,
       srcRetweetIcon: retweetedIcon,
+      isBookmarked:tweetBookmarked?'block':'hidden',
+      bookmarkIcon : tweetBookmarked ? 'text-gray-400 hover:text-blue-400' : 'text-blue-400'
     }
     return Tweet(tweetContent)
     
