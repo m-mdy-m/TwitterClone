@@ -84,13 +84,7 @@ export async function getUserInfo(id = "") {
     // Return user information
     return response.data.data;
   } catch (error) {
-    // Handle errors
-    showMessage(
-      msgElm,
-      "Failed to fetch user data. Please try again later.",
-      "#FF6347"
-    );
-    throw error; // Re-throw the error to handle it elsewhere if needed
+    showErrorMessage(error,"Failed to fetch user data. Please try again later.")
   }
 }
 
