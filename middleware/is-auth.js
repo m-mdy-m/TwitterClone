@@ -17,7 +17,6 @@ exports.ensureAuthenticated = (req, res, next) => {
 exports.verifyToken = (req, res, nxt) => {
   const token = req.cookies.token;
     if (!token || token==='undefined'|| jwt().isTokenExpired(token)) {
-    console.log('token :'+token)
     // Clear all cookies
     clearAllCookies(req, res);
     return res.status(401).redirect("/auth/login");
