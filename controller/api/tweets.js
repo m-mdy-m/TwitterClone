@@ -76,16 +76,16 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     const {tweet,tweetId} = await findTweetParam(req,getJsonHandler)
     let id =tweetId
     // Extract the user information from the request
-    const user = registerUser(req,getJsonHandler)
+    const userId = registerUser(req,getJsonHandler).userId
 
-    const tweetLikedByUser = tweet.likes.includes(user.userId);
+    const tweetLikedByUser = tweet.likes.includes(userId);
 
     // Determine whether to add or remove the like based on the current state
     const option = tweetLikedByUser ? "$pull" : "$addToSet";
     // Update likes on the tweet and its parent (if it's a retweet)
     const parentTweet = await handleRetweet(
       tweet,
-      user.userId,
+      userId,
       option,
       internalServerError
     );
@@ -95,13 +95,13 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(
       option,
-      user.userId,
+      userId,
       id
     );
     // console.log('id=>',id);
     // Update user and tweet documents
     let [newUser, newTweet] = await Promise.all([
-      User.findByIdAndUpdate(user.userId, TweetQuery, { new: true }),
+      User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
     ]);
 
