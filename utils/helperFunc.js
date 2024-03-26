@@ -299,15 +299,39 @@ function registerUser(req, getJsonHandler) {
   }
 }
 
-async function findUser(req,getJsonHandler){
+/**
+ * Finds a user by their ID.
+ * @param {Object} req - The request object.
+ * @param {Function} getJsonHandler - Function to get JSON error handlers.
+ * @returns {Object} The found user or an error message.
+ */
+async function findUser(req, getJsonHandler) {
   const { internalServerError } = getJsonHandler();
+
   try {
-    const userId = registerUser(req,getJsonHandler).userId
-    return await User.findById(userId)
+    // Extract the user ID from the request
+    const userId = req.user.userId;
+
+    // Check if the user ID is missing
+    if (!userId) {
+      return internalServerError("User ID is missing in the request.");
+    }
+
+    // Find the user by their ID
+    const user = await User.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return internalServerError("User not found.");
+    }
+
+    // Return the found user
+    return user;
   } catch (error) {
-    return internalServerError(
-      "Internal server error. Please try again later."
-    );
+    // Log any unexpected errors
+    console.error("Error in findUser function:", error);
+    // Return a generic internal server error message
+    return internalServerError("Internal server error. Please try again later.");
   }
 }
 module.exports = {
