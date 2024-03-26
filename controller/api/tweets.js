@@ -173,23 +173,24 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
   const { updated, internalServerError } =getJsonHandler();
   try {
-   const {tweetId, currentUser} = await findTweetAndCurrentUser(req,getJsonHandler)
-    const isAlreadyBookmarked = currentUser.bookmarked.includes(tweetId);
+   const {tweetId, user} = await findTweetAndCurrentUser(req,getJsonHandler)
+    const isAlreadyBookmarked = user.bookmarked.includes(tweetId);
     if (isAlreadyBookmarked) {
       // Remove the tweet ID from bookmarks
-      currentUser.bookmarked = currentUser.bookmarked.filter((id) => id.toString() !== tweetId.toString());
+      user.bookmarked = user.bookmarked.filter((id) => id.toString() !== tweetId.toString());
     } else {
       // Add the tweet ID to bookmarks
-      currentUser.bookmarked.push(tweetId);
+      user.bookmarked.push(tweetId);
     }
-    await currentUser.save();
-    // Generate a new JWT token with updated currentUser information
-    const isBookmarked = currentUser.bookmarked.includes(tweetId);
-    const token = generateAuthToken(currentUser);
+    await user.save();
+    // Generate a new JWT token with updated user information
+    const isBookmarked = user.bookmarked.includes(tweetId);
+    const token = generateAuthToken(user);
     // Set the new JWT token in the session
     req.session.token = token;
     return updated({ isBookmarked:isBookmarked, token: token });
   } catch (error) {
+    console.log('error =>',error)
     internalServerError("Internal server error. Please try again later.");
   }
 };

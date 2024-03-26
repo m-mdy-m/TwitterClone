@@ -203,10 +203,10 @@ async function findTweetAndCurrentUser(req, getJsonHandler) {
   const { tweet, tweetId } = await findTweetParam(req, getJsonHandler);
   
   // Find current user
-  const { currentUser } = await findCurrentUser(req, getJsonHandler);
+  const { user } = await findCurrentUser(req, getJsonHandler);
   
   // Return the found tweet and current user
-  return { tweet, currentUser, tweetId };
+  return { tweet, user, tweetId };
 }
 
 async function findTweetParam(req, getJsonHandler) {
@@ -310,5 +310,6 @@ module.exports = {
   getParentTweet,
   findTweetAndCurrentUser,
   findTweetParam,
-  registerUser,findCurrentUser
+  registerUser,
+  findCurrentUser
 };
