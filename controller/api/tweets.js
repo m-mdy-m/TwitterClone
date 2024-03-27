@@ -213,7 +213,8 @@ exports.deleteTweet = async (req,{getJsonHandler})=>{
       { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
     );
     if (isDeleted.ok && isDeletedInUser.ok) {
-      return deleted({tweetId:tweetId})
+      const token = tweetManager.saveUSer(user)
+      return deleted({tweetId:tweetId,token:token})
     }else{
       internalServerError("Failed to delete the tweet.");
     }

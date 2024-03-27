@@ -250,6 +250,7 @@ export async function toggleDeleteTweet(id) {
     const headers = await getAuthHeaders();
     const response =await axios.delete(`/api/deleteTweet/${id}`,headers)
     console.log('response =>', response);
+    return response.data.data.tweetId
     // Handle success, if needed
   } catch (error) {
     showErrorMessage(error);

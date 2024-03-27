@@ -25,5 +25,4 @@ function generateAuthToken(user) {
     return null; // Or throw an error based on your error handling strategy
   }
 }
-
 module.exports = generateAuthToken;
