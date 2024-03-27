@@ -247,12 +247,19 @@ export async function toggleBookmark(id) {
 
 export async function toggleDeleteTweet(id) {
   try {
+    // Retrieve authentication headers
     const headers = await getAuthHeaders();
-    const response =await axios.delete(`/api/deleteTweet/${id}`,headers)
-    console.log('response =>', response);
-    return response.data.data.tweetId
-    // Handle success, if needed
+
+    // Send a DELETE request to the server to delete the tweet with the provided ID
+    const response = await axios.delete(`/api/deleteTweet/${id}`, headers);
+
+    // Save the authentication token received from the server's response
+    saveToken(response.data.data.token);
+
+    // Return the ID of the deleted tweet
+    return response.data.data.tweetId;
   } catch (error) {
+    // Display an error message if an error occurs during the deletion process
     showErrorMessage(error);
   }
 }

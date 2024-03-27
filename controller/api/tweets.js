@@ -192,15 +192,15 @@ exports.deleteTweet = async (req,{getJsonHandler})=>{
     const tweetManager = new TweetUserManager(req,getJsonHandler)
     const {  user,tweetId} = await tweetManager.findTweetAndCurrentUser()
     // Delete the tweet from the tweets collection
-    const isDeleted = await Tweet.deleteOne({ _id: tweetId });
+    const deleteResult = await Tweet.deleteOne({ _id: tweetId });
     
     // Remove the tweet reference from the user's likedTweets, retweetedTweets, and bookmarked arrays
-    const isDeletedInUser = await User.updateOne(
+    const updateResult = await User.updateOne(
       { _id: user._id },
       { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
     );
-    if (isDeleted.ok && isDeletedInUser.ok) {
-      return deleted({tweetId:tweetId,token:tweetManager.saveUSer(user)})
+    if (deleteResult.deletedCount === 1 && updateResult.modifiedCount === 1) {
+      return deleted({tweetId:tweetId,token:tweetManager.saveUser(user)})
     }else{
       internalServerError("Failed to delete the tweet.");
     }
