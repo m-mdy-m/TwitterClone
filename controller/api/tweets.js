@@ -107,12 +107,8 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
       Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
     ]);
 
-    // Generate a new JWT token with updated user information
-    const token = generateAuthToken(newUser);
-    // Set the new JWT token in the session
-    req.session.token = token;
     // Return a success response with the updated number of likes
-    return updated({ token, likes: newTweet.likes });
+    return updated({ token:tweetManager.saveUser(newUser), likes: newTweet.likes });
   } catch (error) {
     console.log("error=>", error);
     // Handle any internal server errors
@@ -157,15 +153,9 @@ exports.retweet = async (req, { getJsonHandler }) => {
       User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
       Tweet.findByIdAndUpdate(tweetId, UserQuery, { new: true }),
     ]);
-    // Generate a new JWT token with updated user information
-    const token = generateAuthToken(updatedUser);
-
-    // Set the new JWT token in the session
-    req.session.token = token;
-
     const result = await Tweet.populate(updatedTweet, { path: "author" });
     // Return a success response with the updated number of likes
-    return created({ retweet: result, token: token });
+    return created({ retweet: result, token: tweetManager.saveUser(updatedUser) });
   } catch (error) {
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
@@ -189,10 +179,7 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
     await user.save();
     // Generate a new JWT token with updated user information
     const isBookmarked = user.bookmarked.includes(tweetId);
-    const token = generateAuthToken(user);
-    // Set the new JWT token in the session
-    req.session.token = token;
-    return updated({ isBookmarked:isBookmarked, token: token });
+    return updated({ isBookmarked:isBookmarked, token: tweetManager.saveUser(user) });
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
@@ -213,8 +200,7 @@ exports.deleteTweet = async (req,{getJsonHandler})=>{
       { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
     );
     if (isDeleted.ok && isDeletedInUser.ok) {
-      const token = tweetManager.saveUSer(user)
-      return deleted({tweetId:tweetId,token:token})
+      return deleted({tweetId:tweetId,token:tweetManager.saveUSer(user)})
     }else{
       internalServerError("Failed to delete the tweet.");
     }
