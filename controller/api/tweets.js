@@ -200,10 +200,10 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
 
 
 exports.deleteTweet = async (req,{getJsonHandler})=>{
-  const { internalServerError } = getJsonHandler();
+  const { internalServerError ,deleted} = getJsonHandler();
   try {
     const tweetManager = new TweetUserManager(req,getJsonHandler)
-    const { tweet, user,tweetId} = await tweetManager.findTweetAndCurrentUser()
+    const {  user,tweetId} = await tweetManager.findTweetAndCurrentUser()
     // Delete the tweet from the tweets collection
     const isDeleted = await Tweet.deleteOne({ _id: tweetId });
     
@@ -212,6 +212,11 @@ exports.deleteTweet = async (req,{getJsonHandler})=>{
       { _id: user._id },
       { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
     );
+    if (isDeleted.ok && isDeletedInUser.ok) {
+      return deleted({tweetId:tweetId})
+    }else{
+      internalServerError("Failed to delete the tweet.");
+    }
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
