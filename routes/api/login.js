@@ -1,14 +1,10 @@
 const route = require('xprz').Route()
-const Clint = require('../../utils/TwitterApi')
+const clint = require('../../utils/TwitterApi')
 
 route.route('/api/auth/twitter').get(async(req,{redirect})=>{
-    const authLink  = await Clint.generateAuthLink('/auth/twitter',)
-    console.log("authLink  =>", authLink);
+    const { oauth_token}  = await clint.generateAuthLink()
+    const authLink = `https://api.twitter.com/oauth/authenticate?oauth_token=${oauth_token}`;
+    // Redirect the user to the authentication link
+    return redirect(authLink);
 })
-
-route.route('/auth/twitter').get(async(req,res)=>{
-    console.log('hi');
-    res.send('auth is work')
-})
-
 module.exports = route
