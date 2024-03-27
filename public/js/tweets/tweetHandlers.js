@@ -75,39 +75,18 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
     return null;
   }
   try {
-    const {
-      content,
-      createdAt,
-      _id,
-      likes,
-      author: tweetAuthor,
-      retweeters,
-    } = tweet;
+    const { content, createdAt, _id,likes,author: tweetAuthor, retweeters, } = tweet;
     const { userId } = userInfo;
     const isLiked = likes.includes(userId);
-    let isRetweeted = originalTweet
-      ? originalTweet.retweeters.includes(userId)
-      : retweeters.includes(userId) && author;
+    let isRetweeted = originalTweet? originalTweet.retweeters.includes(userId): retweeters.includes(userId) && author;
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
-    const retweetedIcon = isRetweeted
-      ? "nav/retweeted-icon.svg"
-      : "nav/ReTweet.svg";
-    const retweetCount = originalTweet
-      ? originalTweet.retweeters && originalTweet.retweeters.length > 0
-        ? originalTweet.retweeters.length
-        : ""
-      : retweeters && retweeters.length > 0
-      ? retweeters.length
-      : "";
+    const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg": "nav/ReTweet.svg";
+    const retweetCount = originalTweet ? originalTweet.retweeters && originalTweet.retweeters.length > 0 ? originalTweet.retweeters.length: "": retweeters && retweeters.length > 0? retweeters.length: "";
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
     const classname = author && tweet.originalTweet ? "flex" : "hidden";
     const tweetBookmarked = userInfo.bookmarked.includes(_id);
-    console.log("userInfo=>", userInfo);
-    console.log("tweet=>", tweet);
     let tweetContent = {
-      username: originalTweet
-        ? originalTweet.author.username
-        : tweetAuthor.username,
+      username: originalTweet ? originalTweet.author.username : tweetAuthor.username,
       profile: tweetAuthor.profilePic,
       content,
       createdAt: formattedCreatedAt,
