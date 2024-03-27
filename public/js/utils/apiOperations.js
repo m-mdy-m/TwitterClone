@@ -84,7 +84,10 @@ export async function getUserInfo(id = "") {
     // Return user information
     return response.data.data;
   } catch (error) {
-    showErrorMessage(error,"Failed to fetch user data. Please try again later.")
+    showErrorMessage(
+      error,
+      "Failed to fetch user data. Please try again later."
+    );
   }
 }
 
@@ -94,7 +97,10 @@ export async function getRetweetInfo(id) {
     const response = await axios.get(`/tweet-info/${id}`, {}, header);
     return response.data.data;
   } catch (error) {
-    showErrorMessage(error,"Failed to fetch retweet data. Please try again later.")
+    showErrorMessage(
+      error,
+      "Failed to fetch retweet data. Please try again later."
+    );
   }
 }
 // Function to fetch tweets from the API
@@ -140,7 +146,10 @@ export async function getTweets() {
       showMessage(msgElm, tweetsResponse.data.error, "#ff6347"); // Error color
     }
   } catch (error) {
-    showErrorMessage(error,"An unexpected error occurred while creating the tweet. Please try again later.")
+    showErrorMessage(
+      error,
+      "An unexpected error occurred while creating the tweet. Please try again later."
+    );
   }
 }
 // Function to create a tweet
@@ -161,7 +170,7 @@ export async function tweetCreation(data) {
   }
 }
 
-export async function sendRequest(url,request='put', data = {}) {
+export async function sendRequest(url, request = "put", data = {}) {
   try {
     // Get authorization headers
     const headers = await getAuthHeaders();
@@ -170,7 +179,7 @@ export async function sendRequest(url,request='put', data = {}) {
 
     return response;
   } catch (error) {
-    showErrorMessage(error)
+    showErrorMessage(error);
   }
 }
 
@@ -200,7 +209,7 @@ export async function toggleLike(id) {
       );
     }
   } catch (error) {
-    showErrorMessage(error)
+    showErrorMessage(error);
   }
 }
 
@@ -222,14 +231,20 @@ export async function toggleRetweet(id) {
       );
     }
   } catch (error) {
-    showErrorMessage(error)
+    showErrorMessage(error);
   }
 }
 export async function toggleBookmark(id) {
   try {
+    // Send a request to toggle the bookmark status of the tweet with the provided ID
     const response = await sendRequest(`bookmark/${id}`);
+
+    // If the request is successful
     if (response.data.success) {
+      // Save the authentication token received from the server's response
       saveToken(response.data.data.token);
+
+      // Return the updated bookmark status of the tweet
       return response.data.data.isBookmarked;
     } else {
       // Show error message with appropriate color
@@ -240,10 +255,10 @@ export async function toggleBookmark(id) {
       );
     }
   } catch (error) {
-    showErrorMessage(error)
+    // Display an error message if an error occurs during the request
+    showErrorMessage(error);
   }
 }
-
 
 export async function toggleDeleteTweet(id) {
   try {
@@ -252,9 +267,17 @@ export async function toggleDeleteTweet(id) {
 
     // Send a DELETE request to the server to delete the tweet with the provided ID
     const response = await axios.delete(`/api/deleteTweet/${id}`, headers);
-
-    // Save the authentication token received from the server's response
-    saveToken(response.data.data.token);
+    if (response.data.success) {
+      // Save the authentication token received from the server's response
+      saveToken(response.data.data.token);
+    } else {
+      // Show error message with appropriate color
+      showMessage(
+        msgElm,
+        "Failed to toggle Delete Tweet status. Please try again later.",
+        "#FF5733"
+      );
+    }
 
     // Return the ID of the deleted tweet
     return response.data.data.tweetId;

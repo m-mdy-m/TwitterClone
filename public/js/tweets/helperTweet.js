@@ -32,7 +32,10 @@ export function listMenuTweet() {
     });
     icon.querySelector(".deleteIcon").addEventListener('click', async()=>{
       const deleteTweet = await toggleDeleteTweet(tweetId)
-      console.log('deleteTweet :',deleteTweet);
+      if (deleteTweet) {
+        // Remove the tweet from the DOM
+        tweet.remove();
+      }
     })
   });
 }
