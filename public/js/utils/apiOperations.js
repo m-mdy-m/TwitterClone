@@ -91,7 +91,7 @@ export async function getUserInfo(id = "") {
   }
 }
 
-export async function getRetweetInfo(id) {
+export async function getTweetInfo(id) {
   try {
     const header = await getAuthHeaders();
     const response = await axios.get(`/tweet-info/${id}`, {}, header);
@@ -125,7 +125,7 @@ export async function getTweets() {
       if (parentTweets) {
         const authorIds = await Promise.all(
           parentTweets.map(async (parentTweet) => {
-            const parentTweetInfo = await getRetweetInfo(parentTweet);
+            const parentTweetInfo = await getTweetInfo(parentTweet);
             return parentTweetInfo.author;
           })
         );

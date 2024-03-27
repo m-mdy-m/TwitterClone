@@ -1,5 +1,5 @@
 import {
-  getRetweetInfo,
+  getTweetInfo,
   getUserInfo,
   toggleLike,
   toggleRetweet,
@@ -74,7 +74,7 @@ async function updateUILiked(elm, count, id) {
 async function updatedUiRetweeted(infoTweetRetweeted) {
   try {
     await infoTweetRetweeted.retweets.forEach(async (tweets) => {
-      const tweet = await getRetweetInfo(tweets);
+      const tweet = await getTweetInfo(tweets);
       if (tweet.originalTweet === infoTweetRetweeted._id) {
         const current = await getUserInfo()
         return AddTweet(tweet, current,infoTweetRetweeted.author,infoTweetRetweeted);

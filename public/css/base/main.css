@@ -1004,7 +1004,7 @@
 
 .list__menu-icon:hover .list__menu-tweet {
   z-index: 10;
-  width: 8rem;
+  width: auto;
   opacity: 1;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1056,10 +1056,6 @@
     transform: scale(1);
     opacity: 1;
   }
-}
-
-.tweetAnimation {
-  animation: tweetAnimation 0.5s ease-out forwards;
 }
 
 .hover\:-z-10:hover {

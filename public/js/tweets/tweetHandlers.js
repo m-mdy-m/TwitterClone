@@ -11,28 +11,38 @@ const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
 
 // Function to add a single tweet to the UI
-export function AddTweet(tweetData, userInfo,authorData='',originalTweet=null) {
+export function AddTweet(
+  tweetData,
+  userInfo,
+  authorData = "",
+  originalTweet = null
+) {
   try {
     // Render the tweet template
-    const tweetTemplate = renderTweet(tweetData, userInfo,authorData,originalTweet);
+    const tweetTemplate = renderTweet(
+      tweetData,
+      userInfo,
+      authorData,
+      originalTweet
+    );
     // Append the rendered tweet template to the wrapper element
     appendTweet("afterbegin", tweetTemplate);
 
     attachIconClickListeners();
-    showUserRetweeted()
-    listMenuTweet()
-    console.log('tweetTemplate=>',tweetTemplate);
+    showUserRetweeted();
+    listMenuTweet();
+    console.log("tweetTemplate=>", tweetTemplate);
     // Clear the tweet input field after adding the tweet
     clearTweetInput();
   } catch (error) {
-    console.log('error =>',error);
+    console.log("error =>", error);
     // Display a generic error message for adding tweet failure
     showMessage(msgELm, "Error adding tweet. Please try again.", "#ff6347");
   }
 }
 
 // Function to show multiple tweets in the UI
-export function ShowTweets(response, userInfo,author='') {
+export function ShowTweets(response, userInfo, author = "") {
   try {
     // Ensure the response contains tweet data
     if (!response || !response.data || !response.data.tweets) {
@@ -46,7 +56,7 @@ export function ShowTweets(response, userInfo,author='') {
     tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     // Iterate over each tweet and render its template
     tweets.forEach((tweet) => {
-      const tweetTemplate = renderTweet(tweet, userInfo,author);
+      const tweetTemplate = renderTweet(tweet, userInfo, author);
 
       // Append the rendered tweet template to the wrapper element
       appendTweet("beforeend", tweetTemplate);
@@ -59,46 +69,70 @@ export function ShowTweets(response, userInfo,author='') {
   }
 }
 
-function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
+function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
   if (!tweet || !userInfo) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
     return null;
   }
   try {
-    const { content, createdAt, _id, likes, author: tweetAuthor, retweeters } = tweet;
+    const {
+      content,
+      createdAt,
+      _id,
+      likes,
+      author: tweetAuthor,
+      retweeters,
+    } = tweet;
     const { userId } = userInfo;
     const isLiked = likes.includes(userId);
-    let isRetweeted =(originalTweet? originalTweet.retweeters.includes(userId): (retweeters.includes(userId) ) && author);
+    let isRetweeted = originalTweet
+      ? originalTweet.retweeters.includes(userId)
+      : retweeters.includes(userId) && author;
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
-    const retweetedIcon = isRetweeted? "nav/retweeted-icon.svg" : "nav/ReTweet.svg";
-    const retweetCount = originalTweet ? (originalTweet.retweeters && originalTweet.retweeters.length > 0 ? originalTweet.retweeters.length : '') : (retweeters && retweeters.length > 0 ? retweeters.length : '');
+    const retweetedIcon = isRetweeted
+      ? "nav/retweeted-icon.svg"
+      : "nav/ReTweet.svg";
+    const retweetCount = originalTweet
+      ? originalTweet.retweeters && originalTweet.retweeters.length > 0
+        ? originalTweet.retweeters.length
+        : ""
+      : retweeters && retweeters.length > 0
+      ? retweeters.length
+      : "";
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-    const classname =  (author && tweet.originalTweet)? 'flex' : 'hidden'
-    const tweetBookmarked  =userInfo.bookmarked.includes(_id)
-    let  tweetContent = {
-      username: originalTweet ? (originalTweet.author.username):tweetAuthor.username,
-      profile: tweetAuthor.profilePic ,
+    const classname = author && tweet.originalTweet ? "flex" : "hidden";
+    const tweetBookmarked = userInfo.bookmarked.includes(_id);
+    console.log("userInfo=>", userInfo);
+    console.log("tweet=>", tweet);
+    let tweetContent = {
+      username: originalTweet
+        ? originalTweet.author.username
+        : tweetAuthor.username,
+      profile: tweetAuthor.profilePic,
       content,
       createdAt: formattedCreatedAt,
       id: _id,
       likeCount: calculateLikeCount(tweet),
       srcLikeIcon: likeIcon,
-      retweetedUsername: originalTweet ? (originalTweet.author.username):author.username,
+      retweetedUsername: originalTweet
+        ? originalTweet.author.username
+        : author.username,
       retweetCount,
       isRetweeted: classname,
       srcRetweetIcon: retweetedIcon,
-      isBookmarked:tweetBookmarked?'block':'hidden',
-      bookmarkIcon : tweetBookmarked ? 'text-blue-400 ' : 'text-gray-400 hover:text-blue-400'
-    }
-    return Tweet(tweetContent)
-    
+      isBookmarked: tweetBookmarked ? "block" : "hidden",
+      bookmarkIcon: tweetBookmarked
+        ? "text-blue-400 "
+        : "text-gray-400 hover:text-blue-400",
+      showDeleteIcon: tweet.author._id.toString() === userInfo.userId.toString()  ? 'block' : 'hidden',
+    };
+    return Tweet(tweetContent);
   } catch (error) {
     console.log(error);
     showMessage(msgELm, "Error rendering tweet. Please try again.", "#ff6347");
     return null;
   }
 }
-
 
 // Function to append a tweet template to the UI
 function appendTweet(position, tweetTemplate) {
