@@ -36,7 +36,7 @@ export function listMenuTweet() {
        tweet.classList.add('delete-animation');
        setTimeout(() => {
          tweet.remove();
-       }, 1000);
+       }, 1500);
       }
     })
   });

@@ -966,7 +966,7 @@
   animation: fadeAndScaleIn 0.5s ease forwards;
   transform-origin: center;
   top: 0.5rem;
-  height: 1rem
+  height: 1rem;
 }
 
 @keyframes pulse {
@@ -986,14 +986,14 @@
   animation: fadeAndScaleOut 0.1s ease forwards;
   transform-origin: center;
   top: 1.5rem;
-  height: 0px
+  height: 0px;
 }
 
-.profile-user:hover .icon-retweet{
-  opacity : 0
+.profile-user:hover .icon-retweet {
+  opacity: 0;
 }
 
-.profile-user:not(:hover) .icon-retweet{
+.profile-user:not(:hover) .icon-retweet {
   opacity: 1;
   transition: opacity 1s ease;
 }
@@ -1008,7 +1008,7 @@
   transition-delay: 150ms;
 }
 
-.list__menu-icon:hover .list__menu-icon-svg{
+.list__menu-icon:hover .list__menu-icon-svg {
   display: none;
 }
 
@@ -1022,8 +1022,24 @@
   transition-delay: 200ms;
 }
 
-.list__menu-icon:not(:hover) .list__menu-icon-svg{
+.list__menu-icon:not(:hover) .list__menu-icon-svg {
   display: block;
+}
+
+@keyframes deleteAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.delete-animation {
+  animation: deleteAnimation 1s ease forwards;
 }
 
 .hover\:-z-10:hover {

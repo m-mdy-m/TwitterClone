@@ -199,6 +199,6 @@
   }
 
   .delete-animation {
-    animation: deleteAnimation 0.5s ease forwards;
+    animation: deleteAnimation 1s ease forwards;
   }
 }

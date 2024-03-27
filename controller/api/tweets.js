@@ -186,23 +186,36 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
 };
 
 
-exports.deleteTweet = async (req,{getJsonHandler})=>{
-  const { internalServerError ,deleted} = getJsonHandler();
+exports.deleteTweet = async (req, { getJsonHandler }) => {
+  const { internalServerError, deleted } = getJsonHandler();
   try {
-    const tweetManager = new TweetUserManager(req,getJsonHandler)
-    const {  user,tweetId} = await tweetManager.findTweetAndCurrentUser()
+    const tweetManager = new TweetUserManager(req, getJsonHandler);
+    const { user, tweetId } = await tweetManager.findTweetAndCurrentUser();
+
+    // Check if the tweet ID exists in the user's likedTweets, retweetedTweets, or bookmarked arrays
+    const userHasTweet = user.likedTweets.includes(tweetId) || user.retweetedTweets.includes(tweetId) || user.bookmarked.includes(tweetId);
+
     // Delete the tweet from the tweets collection
     const deleteResult = await Tweet.deleteOne({ _id: tweetId });
-    
-    // Remove the tweet reference from the user's likedTweets, retweetedTweets, and bookmarked arrays
-    const updateResult = await User.updateOne(
-      { _id: user._id },
-      { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
-    );
-    if (deleteResult.deletedCount === 1 && updateResult.modifiedCount === 1) {
-      return deleted({token:tweetManager.saveUser(user)})
-    }else{
-      internalServerError("Failed to delete the tweet.");
+
+    if (userHasTweet) {
+      // Remove the tweet reference from the user's likedTweets, retweetedTweets, and bookmarked arrays
+      const updateResult = await User.updateOne(
+        { _id: user._id },
+        { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
+      );
+      if (deleteResult.deletedCount === 1 && updateResult.modifiedCount === 1) {
+        return deleted({ token: tweetManager.saveUser(user) });
+      } else {
+        internalServerError("Failed to delete the tweet.");
+      }
+    } else {
+      // If the user doesn't have the tweet, simply return deleted status
+      if (deleteResult.deletedCount === 1) {
+        return deleted();
+      } else {
+        internalServerError("Failed to delete the tweet.");
+      }
     }
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
