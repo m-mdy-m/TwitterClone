@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Fetch tweets if the path is not /auth/signup or /auth/login
   if (!["/auth/signup", "/auth/login"].includes(path)) {
     await getTweets();
-    showUserRetweeted()
-    listMenuTweet()
+    showUserRetweeted();
+    listMenuTweet();
   } else {
     const form = document.getElementById("registerForm");
     formHandler(form, path);

@@ -267,11 +267,11 @@ export async function toggleDeleteTweet(id) {
 
     // Send a DELETE request to the server to delete the tweet with the provided ID
     const response = await axios.delete(`/api/deleteTweet/${id}`, headers);
-    if (response.data.success) {
-      console.log(response);
+    console.log("response.data.data : ", response.data.data);
+    if (response.data.data.token) {
       // Save the authentication token received from the server's response
-      // saveToken(response.data.data.token);
-    } else {
+      saveToken(response.data.data.token);
+    } else if (!response.data.success) {
       // Show error message with appropriate color
       showMessage(
         msgElm,

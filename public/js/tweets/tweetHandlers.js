@@ -6,6 +6,7 @@ import {
   getMsgElement,
 } from "../utils/utils.js";
 import { handleClick } from "./Like.js";
+import { listMenuTweet, showUserRetweeted } from "./helperTweet.js";
 const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
 
@@ -18,9 +19,13 @@ export function AddTweet(tweetData, userInfo,authorData='',originalTweet=null) {
     appendTweet("afterbegin", tweetTemplate);
 
     attachIconClickListeners();
+    showUserRetweeted()
+    listMenuTweet()
+    console.log('tweetTemplate=>',tweetTemplate);
     // Clear the tweet input field after adding the tweet
     clearTweetInput();
   } catch (error) {
+    console.log('error =>',error);
     // Display a generic error message for adding tweet failure
     showMessage(msgELm, "Error adding tweet. Please try again.", "#ff6347");
   }
@@ -59,7 +64,6 @@ function renderTweet(tweet, userInfo, author = '',originalTweet=null) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
     return null;
   }
-
   try {
     const { content, createdAt, _id, likes, author: tweetAuthor, retweeters } = tweet;
     const { userId } = userInfo;
