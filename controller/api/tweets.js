@@ -189,15 +189,15 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
 exports.deleteTweet = async (req, { getJsonHandler }) => {
   const { internalServerError, deleted } = getJsonHandler();
   try {
+    console.log('te=>');
     const tweetManager = new TweetUserManager(req, getJsonHandler);
-    const { user, tweetId } = await tweetManager.findTweetAndCurrentUser();
-
+    const { user, tweetId,tweet } = await tweetManager.findTweetAndCurrentUser();
+    console.log('tweet=>',tweet);
     // Check if the tweet ID exists in the user's likedTweets, retweetedTweets, or bookmarked arrays
     const userHasTweet = user.likedTweets.includes(tweetId) || user.retweetedTweets.includes(tweetId) || user.bookmarked.includes(tweetId);
 
     // Delete the tweet from the tweets collection
     const deleteResult = await Tweet.deleteOne({ _id: tweetId });
-
     if (userHasTweet) {
       // Remove the tweet reference from the user's likedTweets, retweetedTweets, and bookmarked arrays
       const updateResult = await User.updateOne(
