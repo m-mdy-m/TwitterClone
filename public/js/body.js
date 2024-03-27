@@ -2,15 +2,13 @@ import { BodyContent } from "./components/Body.js";
 // Define routes and corresponding HTML content
 const routes = {
   "/home": {
-    style_main: "grid grid-cols-main bg-[#19191a] border-[#28282a]  rounded-lg border ",
+    style_main:
+      "grid grid-cols-main bg-[#19191a] border-[#28282a]  rounded-lg border ",
     style_error: "fixed top-4 left-[40%]",
     height: "full",
   },
-  "/auth/signup": {
-  },
-  "/auth/login": {
-
-  },
+  "/auth/signup": {},
+  "/auth/login": {},
 };
 const path = window.location.pathname;
 const route = routes[path];
