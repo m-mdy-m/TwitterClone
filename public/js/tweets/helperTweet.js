@@ -1,4 +1,8 @@
-import { getTweetInfo, toggleBookmark, toggleDeleteTweet } from "../utils/apiOperations.js";
+import {
+  getTweetInfo,
+  toggleBookmark,
+  toggleDeleteTweet,
+} from "../utils/apiOperations.js";
 
 // Function to show user retweeted information on mouse hover
 export function showUserRetweeted() {
@@ -30,30 +34,39 @@ export function listMenuTweet() {
   document.querySelectorAll(".list__menu-tweet").forEach((icon) => {
     // Find the tweet element and its ID
     const tweet = icon.parentNode.parentNode.parentNode;
-    const tweetId = tweet.getAttribute('data-id');
-
+    const tweetId = tweet.getAttribute("data-id");
+    icon.addEventListener("mouseenter", () => {
+      icon.classList.add("show-menu-tweet");
+      icon.classList.remove("hidden-menu-tweet");
+    });
+    icon.addEventListener("mouseleave", () => {
+      icon.classList.remove("show-menu-tweet");
+      icon.classList.add("hidden-menu-tweet");
+    });
     // Find the bookmarked status element and bookmark icon
-    const bookmarked = tweet.querySelector('.bookmarked');
+    const bookmarked = tweet.querySelector(".bookmarked");
     const bookmarkIcon = icon.querySelector(".bookmarkIcon");
 
     // Add event listener to the bookmark icon for toggling bookmark status
     bookmarkIcon.addEventListener("click", async () => {
       // Toggle bookmark status of the tweet
       const isBookmarked = await toggleBookmark(tweetId);
-      
+
       // Update bookmark display and icon color based on bookmark status
-      bookmarked.style.display = `${isBookmarked ? 'block' : 'none'}`;
-      bookmarkIcon.style.color = `${isBookmarked ? 'rgb(96 165 250)' : 'rgb(156 163 175)'}`;
+      bookmarked.style.display = `${isBookmarked ? "block" : "none"}`;
+      bookmarkIcon.style.color = `${
+        isBookmarked ? "rgb(96 165 250)" : "rgb(156 163 175)"
+      }`;
     });
 
     // Add event listener to the delete icon for deleting the tweet
-    icon.querySelector(".deleteIcon").addEventListener('click', async () => {
+    icon.querySelector(".deleteIcon").addEventListener("click", async () => {
       // Toggle delete status of the tweet
       const deleteTweet = await toggleDeleteTweet(tweetId);
-      
+
       // If the tweet is deleted, add a delete animation and remove the tweet after a delay
       if (deleteTweet) {
-        tweet.classList.add('delete-animation');
+        tweet.classList.add("delete-animation");
         setTimeout(() => {
           tweet.remove();
         }, 1500);

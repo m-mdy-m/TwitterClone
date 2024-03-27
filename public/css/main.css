@@ -122,10 +122,6 @@
       transform: translateY(20px) scale(0.2);
       opacity: 0;
     }
-    50%{
-      transform: translateY(10px) scale(0.5);
-      opacity: .5;
-    }
     100% {
       transform: translateY(0) scale(1);
       opacity: 1;
@@ -136,10 +132,6 @@
     0% {
       transform: translateY(0) scale(1);
       opacity: 1;
-    }
-    50%{
-      transform: translateY(10px) scale(0.5);
-      opacity: .5;
     }
     100% {
       transform: translateY(20px) scale(0.2);
@@ -169,7 +161,6 @@
       opacity: 0;
     }
   }
-
   .user-retweeted.hiddenId {
     opacity: 0;
     animation: fadeAndScaleOut 0.1s ease forwards;
@@ -183,14 +174,41 @@
     opacity: 1;
     transition: opacity 1s ease;
   }
+  @keyframes ShowListMenu {
+    0% {
+      opacity: 0;
+      transform: translateX(10%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes HiddenListMenu {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    100% {
+      opacity: 0;
+      transform: translateX(20%);
+    }
+  }
+  .show-menu-tweet{
+    animation: ShowListMenu 1s forwards;
+  }
+  .hidden-menu-tweet {
+    animation: HiddenListMenu 0.5s both;
+  }
+  .list__menu-tweet {
+    @apply opacity-0 w-auto transition-all delay-300 -z-10 [&>*]:opacity-0;
+  }
   .list__menu-icon:hover .list__menu-tweet {
-    @apply w-auto opacity-100 transition-all delay-150 z-10;
+    @apply w-auto transition-all z-10 [&>*]:opacity-100;
   }
   .list__menu-icon:hover .list__menu-icon-svg {
     display: none;
-  }
-  .list__menu-icon:not(:hover) .list__menu-tweet {
-    @apply w-0 opacity-0 transition-all delay-200 -z-10;
   }
   .list__menu-icon:not(:hover) .list__menu-icon-svg {
     display: block;
@@ -220,7 +238,7 @@
       opacity: 1;
     }
   }
-  
+
   .tweetAnimation {
     animation: tweetAnimation 0.5s ease-out forwards;
   }
