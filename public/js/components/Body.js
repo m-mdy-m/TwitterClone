@@ -1,6 +1,6 @@
 import Header from "./common/header.js";
 import { mainContent } from "./mainContent.js";
-export function BodyContent({classMain='flex justify-center items-center',classMsgError='absolute top-4 left-[50%]',height='screen'}={}) {
+export function BodyContent({style__main='flex justify-center items-center',style_error='absolute top-4 left-[50%]',height='screen'}={}) {
   return `
   <div id="loader">
       <img src="/assets/loading/bouncing-ball.svg" alt="loader">
@@ -9,8 +9,8 @@ export function BodyContent({classMain='flex justify-center items-center',classM
     <header class="flex flex-col items-center tablet:h-auto justify-start mobile:pl-2 mobile:py-1 tablet:m-4 mobile:absolute tablet:relative">
     ${Header()}    
     </header>
-    <main  class="${classMain} mt-4 mr-4 mb-4 bg-[#19191a] rounded-lg border border-[#28282a] relative">
-    <div id="msgElm" class="${classMsgError} opacity-0 transform text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300 pointer-events-none z-50"></div>
+    <main  class="${style__main} mt-4 mr-4 mb-4 relative">
+    <div id="msgElm" class="${style_error} opacity-0 transform text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300 pointer-events-none z-50"></div>
         ${mainContent()} 
     </main>
   </div>

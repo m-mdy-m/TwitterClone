@@ -2,8 +2,8 @@ import { BodyContent } from "./components/Body.js";
 // Define routes and corresponding HTML content
 const routes = {
   "/home": {
-    classMain: "grid grid-cols-main",
-    classMsgError: "fixed top-4 left-[40%]",
+    style_main: "grid grid-cols-main bg-[#19191a] border-[#28282a]  rounded-lg border ",
+    style_error: "fixed top-4 left-[40%]",
     height: "full",
   },
   "/auth/signup": {},
