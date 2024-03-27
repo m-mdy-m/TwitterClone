@@ -19,25 +19,39 @@ export function showUserRetweeted() {
   });
 }
 
+// Function to handle the list menu of tweets
 export function listMenuTweet() {
   document.querySelectorAll(".list__menu-tweet").forEach((icon) => {
-    const tweet = icon.parentNode.parentNode.parentNode
-    const tweetId = tweet.getAttribute('data-id')
-    const bookmarked= tweet.querySelector('.bookmarked')
+    // Find the tweet element and its ID
+    const tweet = icon.parentNode.parentNode.parentNode;
+    const tweetId = tweet.getAttribute('data-id');
+
+    // Find the bookmarked status element and bookmark icon
+    const bookmarked = tweet.querySelector('.bookmarked');
     const bookmarkIcon = icon.querySelector(".bookmarkIcon");
+
+    // Add event listener to the bookmark icon for toggling bookmark status
     bookmarkIcon.addEventListener("click", async () => {
-      const isBookmarked = await toggleBookmark(tweetId)
-      bookmarked.style.display = `${isBookmarked?'block':'none'} `
-      bookmarkIcon.style.color = `${isBookmarked?  'rgb(96 165 250 )' :  'rgb(156 163 175 )'}`
+      // Toggle bookmark status of the tweet
+      const isBookmarked = await toggleBookmark(tweetId);
+      
+      // Update bookmark display and icon color based on bookmark status
+      bookmarked.style.display = `${isBookmarked ? 'block' : 'none'}`;
+      bookmarkIcon.style.color = `${isBookmarked ? 'rgb(96 165 250)' : 'rgb(156 163 175)'}`;
     });
-    icon.querySelector(".deleteIcon").addEventListener('click', async()=>{
-      const deleteTweet = await toggleDeleteTweet(tweetId)
+
+    // Add event listener to the delete icon for deleting the tweet
+    icon.querySelector(".deleteIcon").addEventListener('click', async () => {
+      // Toggle delete status of the tweet
+      const deleteTweet = await toggleDeleteTweet(tweetId);
+      
+      // If the tweet is deleted, add a delete animation and remove the tweet after a delay
       if (deleteTweet) {
-       tweet.classList.add('delete-animation');
-       setTimeout(() => {
-         tweet.remove();
-       }, 1500);
+        tweet.classList.add('delete-animation');
+        setTimeout(() => {
+          tweet.remove();
+        }, 1500);
       }
-    })
+    });
   });
 }
