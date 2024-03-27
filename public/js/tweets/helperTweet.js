@@ -33,8 +33,10 @@ export function listMenuTweet() {
     icon.querySelector(".deleteIcon").addEventListener('click', async()=>{
       const deleteTweet = await toggleDeleteTweet(tweetId)
       if (deleteTweet) {
-        // Remove the tweet from the DOM
-        tweet.remove();
+       tweet.classList.add('delete-animation');
+       setTimeout(() => {
+         tweet.remove();
+       }, 1000);
       }
     })
   });

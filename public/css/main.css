@@ -148,7 +148,7 @@
     opacity: 1;
     animation: fadeAndScaleIn 0.5s ease forwards;
     transform-origin: center;
-    @apply top-2 h-4
+    @apply top-2 h-4;
   }
 
   @keyframes pulse {
@@ -166,26 +166,39 @@
     opacity: 0;
     animation: fadeAndScaleOut 0.1s ease forwards;
     transform-origin: center;
-    @apply top-6 h-0
+    @apply top-6 h-0;
   }
-  .profile-user:hover .icon-retweet{
-    opacity : 0
-    
+  .profile-user:hover .icon-retweet {
+    opacity: 0;
   }
-  .profile-user:not(:hover) .icon-retweet{
+  .profile-user:not(:hover) .icon-retweet {
     opacity: 1;
     transition: opacity 1s ease;
   }
-  .list__menu-icon:hover .list__menu-tweet{
-    @apply w-32 opacity-100 transition-all delay-150 z-10
+  .list__menu-icon:hover .list__menu-tweet {
+    @apply w-32 opacity-100 transition-all delay-150 z-10;
   }
-  .list__menu-icon:hover .list__menu-icon-svg{
+  .list__menu-icon:hover .list__menu-icon-svg {
     display: none;
   }
-  .list__menu-icon:not(:hover) .list__menu-tweet{
-    @apply w-0 opacity-0 transition-all delay-200 -z-10
+  .list__menu-icon:not(:hover) .list__menu-tweet {
+    @apply w-0 opacity-0 transition-all delay-200 -z-10;
   }
-  .list__menu-icon:not(:hover) .list__menu-icon-svg{
+  .list__menu-icon:not(:hover) .list__menu-icon-svg {
     display: block;
+  }
+  @keyframes deleteAnimation {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  .delete-animation {
+    animation: deleteAnimation 0.5s ease forwards;
   }
 }
