@@ -165,10 +165,6 @@ export async function sendRequest(url,request='put', data = {}) {
   try {
     // Get authorization headers
     const headers = await getAuthHeaders();
-    // console.log('header =>',headers);
-    console.log(`headers`,headers);
-    console.log(`/api/${url}`);
-    console.log(' [request]', [request][0]);
     // Send request with authorization headers
     const response = await axios[request](`/api/${url}`, data, headers);
 
@@ -252,7 +248,7 @@ export async function toggleBookmark(id) {
 export async function toggleDeleteTweet(id) {
   try {
     const headers = await getAuthHeaders();
-    const response = await axios.delete(`/api/deleteTweet/${id}`,headers)
+    const response =await axios.delete(`/api/deleteTweet/${id}`,headers)
     console.log('response =>', response);
     // Handle success, if needed
   } catch (error) {
