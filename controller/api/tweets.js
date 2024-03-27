@@ -197,6 +197,7 @@ exports.deleteTweet = async (req, { getJsonHandler }) => {
     const tweetManager = new TweetUserManager(req, getJsonHandler);
     const { user, tweetId, tweet } =
       await tweetManager.findTweetAndCurrentUser();
+    // Checking if the current user is the author of the tweet
     if (user._id.toString() === tweet.author._id.toString()) {
       // Check if the tweet ID exists in the user's likedTweets, retweetedTweets, or bookmarked arrays
       const userHasTweet =
@@ -218,12 +219,14 @@ exports.deleteTweet = async (req, { getJsonHandler }) => {
             },
           }
         );
+        // If the deletion and update operations were successful, return deleted status
         if (
           deleteResult.deletedCount === 1 &&
           updateResult.modifiedCount === 1
         ) {
           return deleted({ token: tweetManager.saveUser(user) });
         } else {
+          // If deletion or update failed, return internal server error
           internalServerError("Failed to delete the tweet.");
         }
       } else {
@@ -231,14 +234,16 @@ exports.deleteTweet = async (req, { getJsonHandler }) => {
         if (deleteResult.deletedCount === 1) {
           return deleted();
         } else {
+          // If deletion failed, return internal server error
           internalServerError("Failed to delete the tweet.");
         }
       }
     } else {
-      // If the user is not the author of the tweet, send a forbidden status to the client
+      // If the user is not the author of the tweet, send a not found status to the client
       return notFound("Only the author of the tweet can delete it.");
     }
   } catch (error) {
+    // If an error occurs during the process, return internal server error
     internalServerError("Internal server error. Please try again later.");
   }
 };
