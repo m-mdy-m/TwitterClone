@@ -1,24 +1,29 @@
 import { toggleBookmark, toggleDeleteTweet } from "../utils/apiOperations.js";
-
+// Function to show user retweeted information on mouse hover
 export function showUserRetweeted() {
+  // Select all elements with class "container__profile-users"
   document.querySelectorAll(".container__profile-users").forEach((elm) => {
+    // Find profile and user retweeted elements within each container
     const profile = elm.querySelector(".profile-user");
     const userRetweeted = elm.querySelector(".user-retweeted");
 
+    // Add mouseenter event listener to profile element
     profile.addEventListener("mouseenter", () => {
+      // Show user retweeted information by removing hidden class and adding visible class
       userRetweeted.classList.remove("hiddenId");
       userRetweeted.classList.add("visibleId");
     });
 
+    // Add mouseleave event listener to profile element
     profile.addEventListener("mouseleave", () => {
+      // Hide user retweeted information after a delay
       setTimeout(() => {
         userRetweeted.classList.remove("visibleId");
         userRetweeted.classList.add("hiddenId");
-      }, 1500);
+      }, 1500); // Delay of 1500 milliseconds (1.5 seconds)
     });
   });
 }
-
 // Function to handle the list menu of tweets
 export function listMenuTweet() {
   document.querySelectorAll(".list__menu-tweet").forEach((icon) => {
