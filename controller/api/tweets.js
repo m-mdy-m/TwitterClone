@@ -1,5 +1,5 @@
 const TweetUserManager = require("../../utils/helper");
-const { handleRetweet} = require("../../utils/helperFunc");
+const { handleRetweet } = require("../../utils/helperFunc");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
@@ -69,17 +69,16 @@ exports.getTweets = async (req, res) => {
  */
 exports.likeTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
-  const { updated, internalServerError } =
-    getJsonHandler();
+  const { updated, internalServerError } = getJsonHandler();
 
   try {
-    const tweetManager = new TweetUserManager(req,getJsonHandler)
+    const tweetManager = new TweetUserManager(req, getJsonHandler);
     // Extract the tweet ID from the request parameters
-    const {tweet,tweetId} = await tweetManager.findTweetParam()
-    
-    let id =tweetId
+    const { tweet, tweetId } = await tweetManager.findTweetParam();
+
+    let id = tweetId;
     // Extract the user information from the request
-    const userId = tweetManager.registerUser().userId
+    const userId = tweetManager.registerUser().userId;
 
     const tweetLikedByUser = tweet.likes.includes(userId);
 
@@ -96,11 +95,7 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     // Use the parent tweet ID if it's a retweet
     id = parentTweet._id;
     // Create the update queries for the user and the tweet
-    const { UserQuery, TweetQuery } = generateTweetQueries(
-      option,
-      userId,
-      id
-    );
+    const { UserQuery, TweetQuery } = generateTweetQueries(option, userId, id);
     // Update user and tweet documents
     let [newUser, newTweet] = await Promise.all([
       User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
@@ -108,7 +103,10 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
     ]);
 
     // Return a success response with the updated number of likes
-    return updated({ token:tweetManager.saveUser(newUser), likes: newTweet.likes });
+    return updated({
+      token: tweetManager.saveUser(newUser),
+      likes: newTweet.likes,
+    });
   } catch (error) {
     console.log("error=>", error);
     // Handle any internal server errors
@@ -117,11 +115,11 @@ exports.likeTweet = async (req, { getJsonHandler }) => {
 };
 
 exports.retweet = async (req, { getJsonHandler }) => {
-  const { badRequest, created,internalServerError } = getJsonHandler();
+  const { badRequest, created, internalServerError } = getJsonHandler();
   try {
-    const tweetManager = new TweetUserManager(req,getJsonHandler)
-    const {tweet,tweetId} = await tweetManager.findTweetParam()
-    const userId = tweetManager.registerUser().userId
+    const tweetManager = new TweetUserManager(req, getJsonHandler);
+    const { tweet, tweetId } = await tweetManager.findTweetParam();
+    const userId = tweetManager.registerUser().userId;
     const content = req.body.content;
     const existingRetweet = await Tweet.findOne({
       originalTweet: tweetId,
@@ -155,7 +153,10 @@ exports.retweet = async (req, { getJsonHandler }) => {
     ]);
     const result = await Tweet.populate(updatedTweet, { path: "author" });
     // Return a success response with the updated number of likes
-    return created({ retweet: result, token: tweetManager.saveUser(updatedUser) });
+    return created({
+      retweet: result,
+      token: tweetManager.saveUser(updatedUser),
+    });
   } catch (error) {
     // Handle any internal server errors
     internalServerError("Internal server error. Please try again later.");
@@ -164,14 +165,16 @@ exports.retweet = async (req, { getJsonHandler }) => {
 
 exports.bookmarkTweet = async (req, { getJsonHandler }) => {
   // Destructure the error handling functions from getJsonHandler
-  const { updated, internalServerError } =getJsonHandler();
+  const { updated, internalServerError } = getJsonHandler();
   try {
-    const tweetManager = new TweetUserManager(req,getJsonHandler)
-    const {tweetId, user} = await tweetManager.findTweetAndCurrentUser()
+    const tweetManager = new TweetUserManager(req, getJsonHandler);
+    const { tweetId, user } = await tweetManager.findTweetAndCurrentUser();
     const isAlreadyBookmarked = user.bookmarked.includes(tweetId);
     if (isAlreadyBookmarked) {
       // Remove the tweet ID from bookmarks
-      user.bookmarked = user.bookmarked.filter((id) => id.toString() !== tweetId.toString());
+      user.bookmarked = user.bookmarked.filter(
+        (id) => id.toString() !== tweetId.toString()
+      );
     } else {
       // Add the tweet ID to bookmarks
       user.bookmarked.push(tweetId);
@@ -179,45 +182,63 @@ exports.bookmarkTweet = async (req, { getJsonHandler }) => {
     await user.save();
     // Generate a new JWT token with updated user information
     const isBookmarked = user.bookmarked.includes(tweetId);
-    return updated({ isBookmarked:isBookmarked, token: tweetManager.saveUser(user) });
+    return updated({
+      isBookmarked: isBookmarked,
+      token: tweetManager.saveUser(user),
+    });
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
 };
 
-
 exports.deleteTweet = async (req, { getJsonHandler }) => {
-  const { internalServerError, deleted } = getJsonHandler();
+  const { internalServerError, deleted, notFound } = getJsonHandler();
   try {
-    console.log('te=>');
     const tweetManager = new TweetUserManager(req, getJsonHandler);
-    const { user, tweetId,tweet } = await tweetManager.findTweetAndCurrentUser();
-    console.log('tweet=>',tweet);
-    // Check if the tweet ID exists in the user's likedTweets, retweetedTweets, or bookmarked arrays
-    const userHasTweet = user.likedTweets.includes(tweetId) || user.retweetedTweets.includes(tweetId) || user.bookmarked.includes(tweetId);
+    const { user, tweetId, tweet } =
+      await tweetManager.findTweetAndCurrentUser();
+    if (user._id.toString() === tweet.author._id.toString()) {
+      // Check if the tweet ID exists in the user's likedTweets, retweetedTweets, or bookmarked arrays
+      const userHasTweet =
+        user.likedTweets.includes(tweetId) ||
+        user.retweetedTweets.includes(tweetId) ||
+        user.bookmarked.includes(tweetId);
 
-    // Delete the tweet from the tweets collection
-    const deleteResult = await Tweet.deleteOne({ _id: tweetId });
-    if (userHasTweet) {
-      // Remove the tweet reference from the user's likedTweets, retweetedTweets, and bookmarked arrays
-      const updateResult = await User.updateOne(
-        { _id: user._id },
-        { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
-      );
-      if (deleteResult.deletedCount === 1 && updateResult.modifiedCount === 1) {
-        return deleted({ token: tweetManager.saveUser(user) });
+      // Delete the tweet from the tweets collection
+      const deleteResult = await Tweet.deleteOne({ _id: tweetId });
+      if (userHasTweet) {
+        // Remove the tweet reference from the user's likedTweets, retweetedTweets, and bookmarked arrays
+        const updateResult = await User.updateOne(
+          { _id: user._id },
+          {
+            $pull: {
+              likedTweets: tweetId,
+              retweetedTweets: tweetId,
+              bookmarked: tweetId,
+            },
+          }
+        );
+        if (
+          deleteResult.deletedCount === 1 &&
+          updateResult.modifiedCount === 1
+        ) {
+          return deleted({ token: tweetManager.saveUser(user) });
+        } else {
+          internalServerError("Failed to delete the tweet.");
+        }
       } else {
-        internalServerError("Failed to delete the tweet.");
+        // If the user doesn't have the tweet, simply return deleted status
+        if (deleteResult.deletedCount === 1) {
+          return deleted();
+        } else {
+          internalServerError("Failed to delete the tweet.");
+        }
       }
     } else {
-      // If the user doesn't have the tweet, simply return deleted status
-      if (deleteResult.deletedCount === 1) {
-        return deleted();
-      } else {
-        internalServerError("Failed to delete the tweet.");
-      }
+      // If the user is not the author of the tweet, send a forbidden status to the client
+      return notFound("Only the author of the tweet can delete it.");
     }
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
-}
+};

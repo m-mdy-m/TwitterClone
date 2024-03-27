@@ -35,12 +35,12 @@ class TweetUserManager {
       }
 
       // Find the tweet by ID
-      const tweet = await Tweet.findById(tweetId);
+      const tweetClicked = await Tweet.findById(tweetId);
       // If the tweet is not found, return appropriate error message
-      if (!tweet) {
+      if (!tweetClicked) {
         return this.notFound("Tweet not found.");
       }
-
+      const tweet = await Tweet.populate(tweetClicked, "author");
       // Return the found tweet and its ID
       return { tweet, tweetId };
     } catch (error) {
