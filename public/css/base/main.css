@@ -942,6 +942,11 @@
     opacity: 0;
   }
 
+  50%{
+    transform: translateY(10px) scale(0.5);
+    opacity: .5;
+  }
+
   100% {
     transform: translateY(0) scale(1);
     opacity: 1;
@@ -952,6 +957,11 @@
   0% {
     transform: translateY(0) scale(1);
     opacity: 1;
+  }
+
+  50%{
+    transform: translateY(10px) scale(0.5);
+    opacity: .5;
   }
 
   100% {
