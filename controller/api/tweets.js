@@ -200,7 +200,7 @@ exports.deleteTweet = async (req,{getJsonHandler})=>{
       { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
     );
     if (deleteResult.deletedCount === 1 && updateResult.modifiedCount === 1) {
-      return deleted({tweetId:tweetId,token:tweetManager.saveUser(user)})
+      return deleted({token:tweetManager.saveUser(user)})
     }else{
       internalServerError("Failed to delete the tweet.");
     }

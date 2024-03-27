@@ -280,7 +280,7 @@ export async function toggleDeleteTweet(id) {
     }
 
     // Return the ID of the deleted tweet
-    return response.data.data.tweetId;
+    return response.data.success;
   } catch (error) {
     // Display an error message if an error occurs during the deletion process
     showErrorMessage(error);
