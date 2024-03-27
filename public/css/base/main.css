@@ -417,6 +417,11 @@
   background-color: rgb(17 16 16 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#144d6a\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(20 77 106 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#161617\] {
   --tw-bg-opacity: 1;
   background-color: rgb(22 22 23 / var(--tw-bg-opacity));
@@ -450,6 +455,10 @@
 .bg-red-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#ffff\] {
+  background-color: #ffff;
 }
 
 .bg-gradient-to-br {
