@@ -98,17 +98,29 @@ class TweetUserManager {
   /**
    * Saves the user session and generates an authentication token.
    * @param {Object} user - The user object to save.
-   * @returns {string} The authentication token.
+   * @returns {string|null} The authentication token if successful, null if an error occurs.
    */
   saveUser(user) {
-    // Generate authentication token for the user
-    const token = generateAuthToken(user);
+    try {
+      if (!user || typeof user !== "object") {
+        return this.badRequest("Invalid user object provided.");
+      }
 
-    // Save the token in the session
-    this.req.session = token;
+      const token = generateAuthToken(user);
+      if (!token || typeof token !== "string") {
+        return this.internalServerError(
+          "Failed to generate authentication token."
+        );
+      }
 
-    // Return the generated token
-    return token;
+      this.req.session = token;
+      return token;
+    } catch (error) {
+      console.error("Error in saveUser:", error.message);
+      return this.internalServerError(
+        "Internal server error. Please try again later."
+      );
+    }
   }
 }
 module.exports = TweetUserManager;
