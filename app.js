@@ -4,8 +4,7 @@ const Xprz = require("xprz");
 Xprz.Package().dotenv().setupDot();
 
 // Destructure required functions from Xprz App module
-const { use, launch, loadRoutes, useJsonBody, static, setErrorHandler } =
-  Xprz.App();
+const { use, launch, loadRoutes, useJsonBody, static} = Xprz.App();
 
 // Launch the application
 launch();
