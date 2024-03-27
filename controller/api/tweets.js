@@ -203,10 +203,15 @@ exports.deleteTweet = async (req,{getJsonHandler})=>{
   const { internalServerError } = getJsonHandler();
   try {
     const tweetManager = new TweetUserManager(req,getJsonHandler)
-    const { tweet, currentUser,tweetId} = await tweetManager.findTweetAndCurrentUser()
-    console.log('tweet=>',tweet);
-    console.log('currentUser=>',currentUser);
-    console.log('tweetId=>',tweetId);
+    const { tweet, user,tweetId} = await tweetManager.findTweetAndCurrentUser()
+    // Delete the tweet from the tweets collection
+    const isDeleted = await Tweet.deleteOne({ _id: tweetId });
+    
+    // Remove the tweet reference from the user's likedTweets, retweetedTweets, and bookmarked arrays
+    const isDeletedInUser = await User.updateOne(
+      { _id: user._id },
+      { $pull: { likedTweets: tweetId, retweetedTweets: tweetId, bookmarked: tweetId } }
+    );
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
