@@ -3,7 +3,7 @@ import { BodyContent } from "./components/Body.js";
 const routes = {
   "/home": {
     style_main:
-      "grid grid-cols-main bg-[#19191a] border-[#28282a]  rounded-lg border  mt-4 mr-4 mb-4 ",
+      "grid grid-cols-main bg-gradient-main mt-4 mr-4 mb-4 ",
     style_error: "fixed top-4 left-[40%]",
     height: "full",
   },

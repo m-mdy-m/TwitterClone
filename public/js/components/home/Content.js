@@ -4,7 +4,7 @@ import { WrapperStory } from "./WrapperStory.js";
 export function ContentSection({ username, profileStory,profilePic }) {
   return `
     <!-- Wrapper All box story -->
-            <div class="w-full flex justify-start pt-5 px-12">
+            <div class="w-full flex justify-start pt-5 px-12 bg-gradient-story">
                 ${WrapperStory({ username, profilePic:profileStory })}
             </div>
             <!-- Wrapper Posts -->
