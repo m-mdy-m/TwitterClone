@@ -220,6 +220,10 @@
   height: 33.333333%;
 }
 
+.h-4\/6 {
+  height: 66.666667%;
+}
+
 .min-h-28 {
   min-height: 7rem;
 }
@@ -1632,6 +1636,11 @@
   margin-bottom: 0.25rem;
 }
 
+.\[\&\>\*\]\:my-3>* {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 .\[\&\>\*\]\:w-full>* {
   width: 100%;
 }
@@ -1651,4 +1660,12 @@
 
 .\[\&\>\*\]\:opacity-0>* {
   opacity: 0;
+}
+
+.\[\&\>input\]\:p-4>input {
+  padding: 1rem;
+}
+
+.\[\&\>input\]\:p-3>input {
+  padding: 0.75rem;
 }
