@@ -254,4 +254,7 @@
     background-color: #2c713a !important;
     -webkit-box-shadow: 0 0 0 30px #2c713a inset !important;
   }
+  .input-form::placeholder {
+    text-transform: capitalize;
+  }
 }

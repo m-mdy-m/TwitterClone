@@ -83,6 +83,7 @@ function handleInputEvent(event) {
   const input = event.target;
   const errorMessageElement = input.nextElementSibling;
   errorMessageElement.style.background = "transparent";
+  errorMessageElement.style.opacity = "1";
   validateInput(input, errorMessageElement);
 }
 // Function to handle form validation
