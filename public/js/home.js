@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   loader.style.display = "none";
   // Check if the user is authenticated and the tweet button exists
   if (isAuth()) {
-    const btn = document.getElementById("tweetButton")
-    handleTweetTextAreaEvents(btn)
+    handleTweetTextAreaEvents()
     const header = document.querySelector("header");
     const { username, profilePic } = await getUserInfo();
     header.innerHTML = Header({ profile: profilePic, username });

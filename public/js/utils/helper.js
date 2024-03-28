@@ -82,15 +82,13 @@ export function showMessage(element, message, color) {
 }
 
 // Function to hide the icon when textarea is focused
-export function hideIconOnFocus(e) {
-  const textarea = e.target;
+export function hideIconOnFocus() {
   iconElement.style.opacity = 0;
   iconElement.style.zIndex = -10;
 }
 
 // Function to show the icon when textarea loses focus
-export function showIconOnBlur(e) {
-  const textarea = e.target;
+export function showIconOnBlur() {
   iconElement.style.opacity = 1;
   iconElement.style.zIndex = 1;
 }
@@ -125,7 +123,7 @@ export async function getAuthHeaders() {
     headers: {
       "X-CSRF-Token": csrfToken,
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
   };
 
@@ -140,8 +138,8 @@ export async function getAuthHeaders() {
 export function updateCharCount(e) {
   try {
     const tweet = e.target.value;
-    const validation = validateTweet(tweet);
     let currentLength = e.target.value.length;
+    const validation = validateTweet(tweet, currentLength);
     const textarea = e.target;
 
     // Update the character count display
@@ -166,7 +164,7 @@ export function updateCharCount(e) {
       validation
     );
   } catch (error) {
-    console.log('error char count =>',error)
+    console.log("error char count =>", error);
     // Display a generic error message for updating character count
     showMessage(
       msgElm,
@@ -181,9 +179,7 @@ export function updateCharCount(e) {
  * Validates the tweet, checking for empty, excessive length, and other criteria.
  * Returns an object with the validity status and an error message if applicable.
  */
-export function validateTweet(tweet) {
-  const value = tweet.trim();
-  const length = value.length;
+export function validateTweet(tweet, length) {
   // Check if the input is empty
   if (length === 0) {
     return {
@@ -199,7 +195,7 @@ export function validateTweet(tweet) {
     };
   }
   // If all checks pass, the tweet is considered valid
-  return { valid: true, value: value };
+  return { valid: true, value: tweet };
 }
 /**
  * Adjusts the color and styles of the character count display based on tweet length and validation.
@@ -232,16 +228,19 @@ function adjustStyles(
     return { valid: validation.valid, value: validation.value };
   }
 }
-export function showErrorMessage(error,msg=undefined) {
+export function showErrorMessage(error, msg = undefined) {
   let errorMessage = "An unexpected error occurred. Please try again.";
   let color = "#ff6347"; // Default color for unexpected errors
 
   if (error.response) {
     // Server responded with an error status code
-    errorMessage =  (msg??error.response.data.error) || "Oops! Something went wrong on our end. Please try again later.";
+    errorMessage =
+      (msg ?? error.response.data.error) ||
+      "Oops! Something went wrong on our end. Please try again later.";
   } else if (error.request) {
     // Request was made but no response was received
-    errorMessage = "Network Error: No response received from the server. Please check your internet connection.";
+    errorMessage =
+      "Network Error: No response received from the server. Please check your internet connection.";
     color = "#f39c12"; // Orange color for network errors
   } else {
     // Error occurred while setting up the request
@@ -251,26 +250,28 @@ export function showErrorMessage(error,msg=undefined) {
   return showMessage(msgElm, errorMessage, color);
 }
 
-
-export class HelperRenderTweet{
-  constructor(currentUser,tweet,author,originalTweet=undefined) {
-    this._user = currentUser
-    this._tweet = tweet
-    this._author = author
-    this._original = originalTweet
+export class HelperRenderTweet {
+  constructor(currentUser, tweet, author, originalTweet = undefined) {
+    this._user = currentUser;
+    this._tweet = tweet;
+    this._author = author;
+    this._original = originalTweet;
   }
-  get userLikedTweet(){
-    return this._tweet.likes.includes(this._user.userId)
+  get userLikedTweet() {
+    return this._tweet.likes.includes(this._user.userId);
   }
   /** @private */
-  get _isOriginalTweet(){
-    const original =  this._original?this._original:null
-    this._userIsRetweetedOriginal = original.retweeters.includes(this._user.userId)
+  get _isOriginalTweet() {
+    const original = this._original ? this._original : null;
+    this._userIsRetweetedOriginal = original.retweeters.includes(
+      this._user.userId
+    );
   }
 
-  get userRetweeted(){
-    const original = this._userIsRetweetedOriginal
-    original?original:this._tweet.retweeters.includes(this._user.userId) && this._author
-
+  get userRetweeted() {
+    const original = this._userIsRetweetedOriginal;
+    original
+      ? original
+      : this._tweet.retweeters.includes(this._user.userId) && this._author;
   }
 }

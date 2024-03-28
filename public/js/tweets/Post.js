@@ -39,39 +39,28 @@ export async function createTweet(val) {
 }
 
 // Function to handle events related to the tweet text area
-export function handleTweetTextAreaEvents(tweetButton) {
+export function handleTweetTextAreaEvents() {
   // Check if the tweet button exists
-  if (tweetButton) {
     // Get the tweet input element
     const tweetInput = document.getElementById("tweetInput");
-
-    // Event listener for creating a tweet when the button is clicked
-    tweetButton.addEventListener("click", () =>
-      handleTweetButtonClick(tweetInput)
-    );
-
     // Event listeners to handle focus, blur, input, and keydown events on the tweet input
     tweetInput.addEventListener("focus", hideIconOnFocus);
     tweetInput.addEventListener("blur", showIconOnBlur);
     tweetInput.addEventListener("input", updateCharCount);
     tweetInput.addEventListener("keydown", handleKeyDown);
-  }
 }
 
-// Function to handle creating a tweet when the button is clicked
-function handleTweetButtonClick(tweetInput) {
-  // Create a tweet and update character count
-  createTweetAndUpdateCharCount(tweetInput);
-}
 
-// Function to handle keydown event on the tweet input
 function handleKeyDown(event) {
-  // Check if Enter key is pressed without Shift key for creating a tweet
+  // Check if Enter key is pressed without Shift key
   if (event.keyCode === 13 && !event.shiftKey) {
-    // Create a tweet and update character count
-    createTweetAndUpdateCharCount(event);
+    // Prevent the default behavior of Enter key (preventing line break)
+    event.preventDefault();
+    
+    // Call createTweetAndUpdateCharCount directly
+    createTweetAndUpdateCharCount(event.target);
   } else {
-    // Update character count for other key presses
+    // For other key presses, update character count
     updateCharCount(event);
   }
 }

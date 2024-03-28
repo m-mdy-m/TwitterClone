@@ -147,14 +147,6 @@ export function attachIconClickListeners() {
   try {
     // Select all elements with the class "icons"
     const icons = document.querySelectorAll(".icons");
-
-    // Check if any icons are found
-    if (!icons || icons.length === 0) {
-      // Display an error message if no icons are found
-      showMessage(msgELm, "No icons found.", "#ff6347");
-      return;
-    }
-
     // Attach a click event listener to each icon
     icons.forEach((icon) => {
       icon.addEventListener("click", handleClick);
