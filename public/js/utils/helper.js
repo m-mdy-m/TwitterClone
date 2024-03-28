@@ -166,6 +166,7 @@ export function updateCharCount(e) {
       validation
     );
   } catch (error) {
+    console.log('error char count =>',error)
     // Display a generic error message for updating character count
     showMessage(
       msgElm,

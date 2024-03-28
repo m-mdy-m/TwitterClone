@@ -7,6 +7,7 @@ export function UpSection({username,profile}){
     </div>
     <!-- Tweet section -->
     <div class="flex justify-center items-center relative">
+      <input type="text" id="tweetInput" placeholder="What's happening?" class="pr-7 h-auto min-h-12 w-full bg-transparent rounded-l-xl px-1 py-2 border-r-transparent border-l-transparent border-b border-[#161617] text-gray-300 outline-none transition-all focus:outline-none focus:rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
       <!-- Absolute SVG icon -->
       <div id="icon-tweet" class="absolute right-2 top-5 transform -translate-y-1/2 opacity-100 transition-opacity duration-300">
         <svg width="24" height="24" class="h-6 w-6 cursor-pointer animate-opacity" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

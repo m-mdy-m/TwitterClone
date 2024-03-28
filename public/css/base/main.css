@@ -199,6 +199,10 @@
   height: 100%;
 }
 
+.min-h-12 {
+  min-height: 3rem;
+}
+
 .min-h-28 {
   min-height: 7rem;
 }
@@ -209,14 +213,6 @@
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-48 {
-  min-height: 12rem;
-}
-
-.min-h-12 {
-  min-height: 3rem;
 }
 
 .w-10 {
@@ -263,42 +259,6 @@
   width: 100%;
 }
 
-.w-56 {
-  width: 14rem;
-}
-
-.w-80 {
-  width: 20rem;
-}
-
-.w-3\/4 {
-  width: 75%;
-}
-
-.w-28 {
-  width: 7rem;
-}
-
-.w-3 {
-  width: 0.75rem;
-}
-
-.w-3\.5 {
-  width: 0.875rem;
-}
-
-.w-8\/12 {
-  width: 66.666667%;
-}
-
-.w-10\/12 {
-  width: 83.333333%;
-}
-
-.w-11\/12 {
-  width: 91.666667%;
-}
-
 .max-w-full {
   max-width: 100%;
 }
@@ -338,10 +298,6 @@
 
 .grid-cols-tweet {
   grid-template-columns: 10% minmax(90%,1fr);
-}
-
-.grid-rows-readTweet {
-  grid-template-rows: minmax(20%,1fr) 80%;
 }
 
 .flex-col {
@@ -404,20 +360,8 @@
   text-overflow: ellipsis;
 }
 
-.whitespace-normal {
-  white-space: normal;
-}
-
 .whitespace-nowrap {
   white-space: nowrap;
-}
-
-.whitespace-pre-line {
-  white-space: pre-line;
-}
-
-.whitespace-pre-wrap {
-  white-space: pre-wrap;
 }
 
 .break-words {
@@ -438,14 +382,6 @@
 
 .rounded-md {
   border-radius: 0.375rem;
-}
-
-.rounded {
-  border-radius: 0.25rem;
-}
-
-.rounded-xl {
-  border-radius: 0.75rem;
 }
 
 .rounded-l-xl {
@@ -490,6 +426,11 @@
   border-style: none;
 }
 
+.border-\[\#161617\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(22 22 23 / var(--tw-border-opacity));
+}
+
 .border-\[\#252424\] {
   --tw-border-opacity: 1;
   border-color: rgb(37 36 36 / var(--tw-border-opacity));
@@ -520,18 +461,12 @@
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
-.border-\[\#161617\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(22 22 23 / var(--tw-border-opacity));
+.border-l-transparent {
+  border-left-color: transparent;
 }
 
-.border-b-\[\#\] {
-  border-bottom-color: #;
-}
-
-.border-b-\[\#161617\] {
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(22 22 23 / var(--tw-border-opacity));
+.border-r-transparent {
+  border-right-color: transparent;
 }
 
 .bg-\[\#080202\] {
@@ -1364,6 +1299,10 @@
 
 .hover\:underline:hover {
   text-decoration-line: underline;
+}
+
+.focus\:rounded-xl:focus {
+  border-radius: 0.75rem;
 }
 
 .focus\:border-blue-500:focus {
