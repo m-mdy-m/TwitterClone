@@ -19,7 +19,6 @@ module.exports = {
         container: " 25% minmax(75%, 1fr);",
         main: "80% minmax(20% ,1fr)",
         tweet: "10% minmax(90%,1fr)",
-        login : "70% minmax(30%,1fr)",
       },
       gridTemplateRows: {
         home: "20% minmax(80% ,1fr)",

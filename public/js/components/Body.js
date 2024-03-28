@@ -1,6 +1,6 @@
 import Header from "./common/header.js";
 import { mainContent } from "./mainContent.js";
-export function BodyContent({style_main='flex justify-end bg-[#080202]',style_error='absolute top-4 left-[50%]',height='screen'}={}) {
+export function BodyContent({style_main='flex justify-end  bg-[#080202]',style_error='absolute top-4 left-[50%]',height='screen'}={}) {
   return `
   <div id="loader">
       <img src="/assets/loading/bouncing-ball.svg" alt="loader">
