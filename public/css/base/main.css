@@ -131,6 +131,10 @@
   margin-top: 1rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -187,6 +191,10 @@
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .min-h-28 {
   min-height: 7rem;
 }
@@ -233,6 +241,10 @@
 
 .w-full {
   width: 100%;
+}
+
+.max-w-md {
+  max-width: 28rem;
 }
 
 .-translate-y-1\/2 {
@@ -290,6 +302,10 @@
 
 .justify-start {
   justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -412,14 +428,14 @@
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.bg-\[\#080202\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(8 2 2 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#111010\] {
   --tw-bg-opacity: 1;
   background-color: rgb(17 16 16 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#144d6a\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(20 77 106 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#161617\] {
@@ -457,8 +473,8 @@
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#ffff\] {
-  background-color: #ffff;
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
 }
 
 .bg-gradient-to-br {
@@ -515,6 +531,10 @@
 
 .p-1 {
   padding: 0.25rem;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .px-1 {
