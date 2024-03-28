@@ -6,6 +6,10 @@ export function BodyContent({style_main='flex justify-end  bg-[#080202]',style_e
       <img src="/assets/loading/bouncing-ball.svg" alt="loader">
   </div>
   <div class="container mobile:m-0 tablet:px-4 h-${height} min-h-screen  grid mobile:grid-cols-1 tablet:grid-cols-container">
+  <!--  -->
+    <div class="absolute right-0 bottom-0">
+      
+    </div>
     <header class="flex flex-col items-center tablet:h-auto justify-start mobile:pl-2 mobile:py-1 tablet:m-4 mobile:absolute tablet:relative">
     ${Header()}    
     </header>
