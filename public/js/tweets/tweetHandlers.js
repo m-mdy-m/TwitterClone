@@ -69,6 +69,12 @@ export function ShowTweets(response, userInfo, author = "") {
 }
 
 function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
+
+  console.log('tweet:'+tweet);
+  console.log('userInfo:'+userInfo);
+  console.log('author:'+author);
+  console.log('originalTweet:'+originalTweet);
+
   if (!tweet || !userInfo) {
     showMessage(msgELm, "Error: Invalid tweet or user information.", "#ff6347");
     return null;

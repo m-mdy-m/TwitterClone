@@ -249,3 +249,27 @@ export function showErrorMessage(error,msg=undefined) {
   }
   return showMessage(msgElm, errorMessage, color);
 }
+
+
+export class HelperRenderTweet{
+  constructor(currentUser,tweet,author,originalTweet=undefined) {
+    this._user = currentUser
+    this._tweet = tweet
+    this._author = author
+    this._original = originalTweet
+  }
+  get userLikedTweet(){
+    return this._tweet.likes.includes(this._user.userId)
+  }
+  /** @private */
+  get _isOriginalTweet(){
+    const original =  this._original?this._original:null
+    this._userIsRetweetedOriginal = original.retweeters.includes(this._user.userId)
+  }
+
+  get userRetweeted(){
+    const original = this._userIsRetweetedOriginal
+    original?original:this._tweet.retweeters.includes(this._user.userId) && this._author
+
+  }
+}

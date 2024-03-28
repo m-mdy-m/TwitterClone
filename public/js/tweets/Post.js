@@ -51,9 +51,9 @@ export function handleTweetTextAreaEvents(tweetButton) {
     );
 
     // Event listeners to handle focus, blur, input, and keydown events on the tweet input
-    tweetInput.addEventListener("focus", handleFocus);
-    tweetInput.addEventListener("blur", handleBlur);
-    tweetInput.addEventListener("input", handleInput);
+    tweetInput.addEventListener("focus", hideIconOnFocus);
+    tweetInput.addEventListener("blur", showIconOnBlur);
+    tweetInput.addEventListener("input", updateCharCount);
     tweetInput.addEventListener("keydown", handleKeyDown);
   }
 }
@@ -62,24 +62,6 @@ export function handleTweetTextAreaEvents(tweetButton) {
 function handleTweetButtonClick(tweetInput) {
   // Create a tweet and update character count
   createTweetAndUpdateCharCount(tweetInput);
-}
-
-// Function to handle focus event on the tweet input
-function handleFocus() {
-  // Hide icon when input is focused
-  hideIconOnFocus();
-}
-
-// Function to handle blur event on the tweet input
-function handleBlur() {
-  // Show icon when input is blurred
-  showIconOnBlur();
-}
-
-// Function to handle input event on the tweet input
-function handleInput() {
-  // Update character count when input value changes
-  updateCharCount();
 }
 
 // Function to handle keydown event on the tweet input
