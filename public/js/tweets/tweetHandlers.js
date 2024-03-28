@@ -31,7 +31,6 @@ export function AddTweet(
     attachIconClickListeners();
     showUserRetweeted();
     listMenuTweet();
-    console.log("tweetTemplate=>", tweetTemplate);
     // Clear the tweet input field after adding the tweet
     clearTweetInput();
   } catch (error) {
