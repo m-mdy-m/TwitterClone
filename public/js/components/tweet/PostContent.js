@@ -1,10 +1,9 @@
 export function PostContent({ content }) {
-    return `
-      <div class="border-b border-[#252424] py-3 w-full h-full">
-          <div class="flex justify-start items-center text-white text-base font-Aktiv__regular break-words">
-              <p>${content}</p>
-          </div>
-      </div>
-    `;
-  }
-  
+  return `
+    <div class="border-b border-[#252424] flex justify-start items-center py-3 max-w-full break-words">
+        <div class="flex justify-start items-center w-full h-full text-white text-base font-Aktiv__regular ">
+            <p class="w-full">${content}</p>
+        </div>
+    </div>
+  `;
+}

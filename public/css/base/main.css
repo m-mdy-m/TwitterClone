@@ -211,6 +211,10 @@
   min-height: 100vh;
 }
 
+.min-h-48 {
+  min-height: 12rem;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -253,6 +257,46 @@
 
 .w-full {
   width: 100%;
+}
+
+.w-56 {
+  width: 14rem;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.w-3\/4 {
+  width: 75%;
+}
+
+.w-28 {
+  width: 7rem;
+}
+
+.w-3 {
+  width: 0.75rem;
+}
+
+.w-3\.5 {
+  width: 0.875rem;
+}
+
+.w-8\/12 {
+  width: 66.666667%;
+}
+
+.w-10\/12 {
+  width: 83.333333%;
+}
+
+.w-11\/12 {
+  width: 91.666667%;
+}
+
+.max-w-full {
+  max-width: 100%;
 }
 
 .-translate-y-1\/2 {
@@ -298,6 +342,10 @@
 
 .flex-col {
   flex-direction: column;
+}
+
+.items-start {
+  align-items: flex-start;
 }
 
 .items-center {
@@ -352,8 +400,20 @@
   text-overflow: ellipsis;
 }
 
+.whitespace-normal {
+  white-space: normal;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
+}
+
+.whitespace-pre-line {
+  white-space: pre-line;
+}
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
 }
 
 .break-words {
