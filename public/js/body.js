@@ -11,7 +11,7 @@ const routes = {
     
   },
   "/auth/login": {
-    style_container:'',
+    style_main: 'grid grid-cols-login bg-[#080202] border-[#807c7c] border rounded-md'
   },
 };
 const path = window.location.pathname;
