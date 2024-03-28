@@ -27,7 +27,11 @@ export function AddTweet(
     );
     // Append the rendered tweet template to the wrapper element
     appendTweet("afterbegin", tweetTemplate);
-
+    const iconElement = document.getElementById("icon-tweet");
+    const iconImg = document.getElementById("icon-tweet-img");
+    iconElement.style.opacity = 1;
+    iconElement.style.zIndex = 1;
+    iconImg.src = '/assets/icon/twwets/feather.svg'
     attachIconClickListeners();
     showUserRetweeted();
     listMenuTweet();

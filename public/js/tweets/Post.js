@@ -67,6 +67,11 @@ function handleKeyDown(event) {
 
 // Function to create a tweet and update character count
 function createTweetAndUpdateCharCount(eventOrInput) {
+  const iconElement = document.getElementById("icon-tweet");
+  const iconImg = document.getElementById("icon-tweet-img");
+    iconElement.style.opacity = 1;
+  iconElement.style.zIndex = 1;
+  iconImg.src = '/assets/loading/tadpole.svg'
   // Create a tweet and update character count based on the event or input
   createTweet(updateCharCount({ target: eventOrInput }));
 }
