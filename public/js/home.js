@@ -1,14 +1,9 @@
 import { formHandler } from "./auth/formHandler.js";
 import Header from "./components/common/header.js";
 import { initializeComponentsNavigation } from "./nav/navigation-handler.js";
-import { createTweet, handleTweetTextAreaEvents } from "./tweets/Post.js";
+import {  handleTweetTextAreaEvents } from "./tweets/Post.js";
 import { listMenuTweet, showUserRetweeted } from "./tweets/helperTweet.js";
 import { getTweets, getUserInfo } from "./utils/apiOperations.js";
-import {
-  updateCharCount,
-  hideIconOnFocus,
-  showIconOnBlur,
-} from "./utils/helper.js";
 import { getPath, isAuth } from "./utils/utils.js";
 
 const path = getPath();
