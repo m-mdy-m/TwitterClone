@@ -244,4 +244,14 @@
   .tweetAnimation {
     animation: tweetAnimation 0.5s ease-out forwards;
   }
+  .input-form:-webkit-autofill,
+  .input-form:-webkit-autofill:hover,
+  .input-form:-webkit-autofill:focus,
+  .input-form:-webkit-autofill:active,
+  .input-form:-internal-autofill-selected,
+  .input-form:-internal-autofill-previewed {
+    color: #fff;
+    background-color: #2c713a !important;
+    -webkit-box-shadow: 0 0 0 30px #2c713a inset !important;
+  }
 }
