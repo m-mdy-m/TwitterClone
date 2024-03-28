@@ -9,7 +9,7 @@ const store = connectMongoDbSession({
 
 // Define options for session middleware, including session secret and store
 const options = {
-  secret: "ha ha ha", // Replace with a secure secret
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: store,
