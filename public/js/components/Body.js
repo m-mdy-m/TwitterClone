@@ -9,6 +9,9 @@ export function BodyContent({
   <div id="loader">
       <img src="/assets/loading/bouncing-ball.svg" alt="loader">
   </div>
+  <div class="absolute flex justify-center items-center bg-red-700 w-2/3 h-3/5">
+
+  </div>
   <div class="container mobile:m-0 tablet:px-4 h-${height} min-h-screen  grid mobile:grid-cols-1 tablet:grid-cols-container">
     <header class="flex flex-col items-center tablet:h-auto justify-start mobile:pl-2 mobile:py-1 tablet:m-4 mobile:absolute tablet:relative">
     ${Header()}    
