@@ -426,6 +426,11 @@
   border-style: none;
 }
 
+.border-\[\#111010\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(17 16 16 / var(--tw-border-opacity));
+}
+
 .border-\[\#161617\] {
   --tw-border-opacity: 1;
   border-color: rgb(22 22 23 / var(--tw-border-opacity));
@@ -798,6 +803,11 @@
 
 .blur {
   --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.blur-md {
+  --tw-blur: blur(12px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
