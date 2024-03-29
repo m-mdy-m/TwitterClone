@@ -1,6 +1,5 @@
 import Header from "./common/header.js";
 import { mainContent } from "./mainContent.js";
-import { boxTweet } from "./tweet/create/create-box-tweet.js";
 export function BodyContent({
   style_main = "flex justify-end  bg-[#080202]",
   style_error = "absolute top-4 left-[50%]",

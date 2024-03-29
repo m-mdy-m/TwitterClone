@@ -100,7 +100,3 @@ function createTweetAndUpdateCharCount(eventOrInput) {
   createTweet(updateCharCount({ target: eventOrInput }));
 }
 
-export function createTweetBox(e) {
-  
-  return 
-}
