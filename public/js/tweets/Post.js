@@ -58,13 +58,19 @@ export function handleTweetTextAreaEvents() {
   tweetInput.addEventListener("keydown", handleKeyDown);
 }
 
-export function autoResizeHeight(e) {
+export function autoResizeHeight() {
+  const tweetInput = document.getElementById("tweetInput");
   const tweet__box = document.getElementById("tweet__box");
-  if (tweet__box) {
-    tweet__box.style.height = "auto";
-    tweet__box.style.height = (tweet__box.scrollHeight) + "px";
+  
+  if (tweetInput && tweet__box) {
+    tweetInput.style.height = "auto";
+    tweetInput.style.height = (tweetInput.scrollHeight) + "px";
+    
+    const minHeight = tweet__box.height;
+    const maxHeight = 200; 
+    const newHeight = Math.min(Math.max(tweet__box.scrollHeight, minHeight), maxHeight);
+    tweet__box.style.height = newHeight + "px";
   }
-  return;
 }
 
 function handleKeyDown(event) {
