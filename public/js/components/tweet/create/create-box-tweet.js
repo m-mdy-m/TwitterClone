@@ -1,10 +1,18 @@
-
-export function boxTweet(){
+export function boxTweet() {
   return `
-  <div class="grid grid-rows-box_tweet grid-cols-1 justify-center w-full h-full">
-     <div class="bg-red-700 h-full">
-     
-     </div>
+  <div class="flex flex-col justify-center w-full h-full bg-[#111010]">
+      <!-- up section -->
+     <div class="h-1/5 w-full flex justify-evenly items-center">
+       <div class="bg-white rounded-lg p-4">
+           <p class="text-teal-800 font-bold">Draft</p>
+       </div>
+       <div class="bg-yellow-400 rounded-full p-2 ml-4">
+           <!-- Improved Remove Icon Box -->
+           <svg width="24" height="24" class="w-8 h-8 text-teal-800" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M6.34311 14.8284C5.56206 15.6094 5.56206 16.8758 6.34311 17.6568C7.12416 18.4379 8.39049 18.4379 9.17154 17.6568L12 14.8284L14.8284 17.6568C15.6094 18.4379 16.8758 18.4379 17.6568 17.6568C18.4379 16.8758 18.4379 15.6094 17.6568 14.8284L14.8284 12L17.6568 9.17154C18.4379 8.39049 18.4379 7.12416 17.6568 6.34311C16.8758 5.56206 15.6094 5.56206 14.8284 6.34311L12 9.17154L9.17154 6.34311C8.39049 5.56206 7.12416 5.56206 6.34311 6.34311C5.56206 7.12416 5.56206 8.39049 6.34311 9.17154L9.17154 12L6.34311 14.8284Z" fill="#28303F"/>
+           </svg>
+       </div>
+      </div>
      <div class="bg-green-400 h-full">
         
         <div>
@@ -18,6 +26,6 @@ export function boxTweet(){
         </div>
      </div>
   </div>
-    `
+    `;
 }
 // <textarea id="tweetInput" placeholder="What's happening?" class="pr-7 h-auto min-h-full  w-full bg-[#161617] px-1 py-2 border border-[#343435] text-gray-300 rounded-lg outline-none resize-none overflow-hidden"></textarea>

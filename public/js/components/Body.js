@@ -11,7 +11,7 @@ export function BodyContent({
       <img src="/assets/loading/bouncing-ball.svg" alt="loader">
   </div>
     <!-- Create Tweet Box -->
-  <div class="fixed w-full h-screen flex items-center justify-center backdrop-blur-sm z-40">
+  <div class="fixed w-full h-screen flex items-center justify-center backdrop-blur-sm z-10">
     <div class="bg-[#1B2430] w-3/6 h-5/6 z-50 fixed rounded-lg shadow-lg shadow-[#31363F]">
       ${boxTweet()}
     </div>
