@@ -19,7 +19,7 @@ function Tweet({
   showDeleteIcon,
 }) {
   return `
-    <div class="max-w-full min-h-28 h-auto my-4 rounded-lg relative flex flex-col border-2 border-[#111010] px-3 pt-6" data-id="${id}">
+    <div class="max-w-full min-h-28 h-auto my-4 rounded-lg relative flex flex-col border-2 bg-[#11101076] border-t border-[#111010] px-3 pt-6" data-id="${id}">
       <!-- Bookmarked Tweet  -->
       <svg class="bookmarked w-4 h-4 top-1 left-1 ${isBookmarked} absolute text-blue-400 transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path fill-rule="evenodd" clip-rule="evenodd" d="M4 7.75V18C4 19.6481 5.88153 20.5889 7.2 19.6L10.8 16.9C11.5111 16.3667 12.4889 16.3667 13.2 16.9L16.8 19.6C18.1185 20.5889 20 19.6481 20 18V7.75H4ZM4 6.25H20V4C20 2.89543 19.1046 2 18 2H6C4.89543 2 4 2.89543 4 4V6.25Z" fill="currentColor"/>
