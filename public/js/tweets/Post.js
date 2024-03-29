@@ -45,7 +45,6 @@ export async function createTweet(val) {
 
 // Function to handle events related to the tweet text area
 export function handleTweetTextAreaEvents() {
-  // Check if the tweet button exists
   // Get the tweet input element
   const tweetInput = document.getElementById("tweetInput");
   // Event listeners to handle focus, blur, input, and keydown events on the tweet input
@@ -61,14 +60,17 @@ export function handleTweetTextAreaEvents() {
 export function autoResizeHeight() {
   const tweetInput = document.getElementById("tweetInput");
   const tweet__box = document.getElementById("tweet__box");
-  
+
   if (tweetInput && tweet__box) {
     tweetInput.style.height = "auto";
-    tweetInput.style.height = (tweetInput.scrollHeight) + "px";
-    
+    tweetInput.style.height = tweetInput.scrollHeight + "px";
+
     const minHeight = tweet__box.height;
-    const maxHeight = 200; 
-    const newHeight = Math.min(Math.max(tweet__box.scrollHeight, minHeight), maxHeight);
+    const maxHeight = 200;
+    const newHeight = Math.min(
+      Math.max(tweet__box.scrollHeight, minHeight),
+      maxHeight
+    );
     tweet__box.style.height = newHeight + "px";
   }
 }
@@ -78,7 +80,7 @@ function handleKeyDown(event) {
   if (event.keyCode === 13 && !event.shiftKey) {
     // Prevent the default behavior of Enter key (preventing line break)
     event.preventDefault();
-
+    
     // Call createTweetAndUpdateCharCount directly
     createTweetAndUpdateCharCount(event.target);
   } else {
@@ -96,4 +98,9 @@ function createTweetAndUpdateCharCount(eventOrInput) {
   iconImg.src = "/assets/loading/tadpole.svg";
   // Create a tweet and update character count based on the event or input
   createTweet(updateCharCount({ target: eventOrInput }));
+}
+
+export function createTweetBox(e) {
+  
+  return 
 }
