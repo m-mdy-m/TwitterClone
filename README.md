@@ -18,7 +18,7 @@ You need to have the following software installed on your system:
 1. Clone the repository to your local machine:
 
 ```
-git clone https://github.com/m-mdy-m/NexTweet.git
+git clone https://github.com/m-mdy-m/TwitterCone.git
 ```
 
 2. Navigate to the project directory:
