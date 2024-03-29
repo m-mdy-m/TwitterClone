@@ -141,7 +141,6 @@ export function updateCharCount(e) {
     let currentLength = e.target.value.length;
     const validation = validateTweet(tweet, currentLength);
     const textarea = e.target;
-
     // Update the character count display
     charCount.textContent = `${currentLength}/${maxLength}`;
     // Check if the Enter key is pressed (keyCode 13 for Enter key)

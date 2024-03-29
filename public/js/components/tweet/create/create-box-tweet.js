@@ -1,6 +1,6 @@
 export function boxTweet() {
   return `
-    <div class="bg-[#1B2430] w-3/6 h-auto z-50 fixed rounded-lg shadow-lg shadow-[#31363F]">
+    <div class="bg-[#1B2430] w-3/6 h-auto z-50 fixed rounded-lg shadow-lg shadow-[#31363F]" id="tweet__box">
       <div class="flex flex-col justify-center w-full h-auto p-4 rounded-2xl">
           <!-- up section -->
          <div class="h-1/5 w-full flex justify-between items-center">
@@ -15,7 +15,7 @@ export function boxTweet() {
           </div>
          </div>
          <div class="h-auto">
-            <textarea id="tweetInput" placeholder="What's happening?" class="p-3 bg-transparent text-lg h-auto w-full text-gray-300 outline-none resize-none overflow-hidden"></textarea>
+            <textarea id="tweetInput" placeholder="What's happening?" class="p-3 bg-transparent text-lg h-auto w-full text-gray-300 outline-none resize-none overflow-y-hidden"></textarea>
             <!-- Absolute SVG icon -->
             <div id="icon-tweet" class="absolute right-1 bottom-4 transform -translate-y-1/2 opacity-100 transition-opacity duration-300">
                <svg width="24" height="24" class="h-6 w-6 left-0 cursor-pointer animate-opacity" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

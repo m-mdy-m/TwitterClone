@@ -488,6 +488,10 @@
   overflow: hidden;
 }
 
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
 .overflow-ellipsis {
   text-overflow: ellipsis;
 }

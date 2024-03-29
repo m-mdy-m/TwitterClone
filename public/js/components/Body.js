@@ -12,9 +12,7 @@ export function BodyContent({
   </div>
     <!-- Create Tweet Box -->
   <div class="fixed w-full h-screen flex items-center justify-center backdrop-blur-sm z-10">
-    
       ${boxTweet()}
-    
   </div>
   <div class="container mobile:m-0 tablet:px-4 h-${height} min-h-screen  grid mobile:grid-cols-1 tablet:grid-cols-container">
     <header class="flex flex-col items-center tablet:h-auto justify-start mobile:pl-2 mobile:py-1 tablet:m-4 mobile:absolute tablet:relative">
