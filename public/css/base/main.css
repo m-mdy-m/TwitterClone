@@ -170,6 +170,14 @@
   bottom: 10rem;
 }
 
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
+.right-20 {
+  right: 5rem;
+}
+
 .-z-10 {
   z-index: -10;
 }
