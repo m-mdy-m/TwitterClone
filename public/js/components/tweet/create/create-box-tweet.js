@@ -1,6 +1,6 @@
 export function boxTweet() {
   return `
-    <div class="bg-[#1B2430] w-3/6 h-auto z-50 fixed rounded-lg shadow-lg shadow-[#31363F]" id="tweet__box">
+    <div class="bg-[#1B2430] w-3/6 h-auto min-h-40 z-50 fixed rounded-lg shadow-lg shadow-[#31363F]" id="tweet__box">
       <div class="flex flex-col justify-center w-full h-auto p-4 rounded-2xl">
           <!-- up section -->
          <div class="h-1/5 w-full flex justify-between items-center">
