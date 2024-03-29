@@ -1,5 +1,6 @@
 import Header from "./common/header.js";
 import { mainContent } from "./mainContent.js";
+import { boxTweet } from "./tweet/create/create-box-tweet.js";
 export function BodyContent({
   style_main = "flex justify-end  bg-[#080202]",
   style_error = "absolute top-4 left-[50%]",
@@ -11,8 +12,8 @@ export function BodyContent({
   </div>
     <!-- Create Tweet Box -->
   <div class="absolute w-full h-screen flex items-center justify-center backdrop-blur-sm z-40">
-    <div class="bg-[#111010] w-3/6 h-5/6 z-50 absolute rounded-lg shadow-lg shadow-[#31363F]">
-      
+    <div class="bg-[#1B2430] w-3/6 h-5/6 z-50 absolute rounded-lg shadow-lg shadow-[#31363F]">
+      ${boxTweet()}
     </div>
   </div>
   <div class="container mobile:m-0 tablet:px-4 h-${height} min-h-screen  grid mobile:grid-cols-1 tablet:grid-cols-container">

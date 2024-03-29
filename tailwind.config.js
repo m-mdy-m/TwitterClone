@@ -24,6 +24,7 @@ module.exports = {
         home: "20% minmax(80% ,1fr)",
         tweet: "60% minmax(40%,1fr)",
         readTweet : "minmax(20%,1fr) 80%",
+        box_tweet : "20% minmax(80%,1fr)"
       },
       backgroundColor: {
         body: "#131314",
