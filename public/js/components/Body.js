@@ -9,8 +9,9 @@ export function BodyContent({
   <div id="loader">
       <img src="/assets/loading/bouncing-ball.svg" alt="loader">
   </div>
+    <!-- Create Tweet Box -->
   <div class="absolute w-full h-screen flex items-center justify-center backdrop-blur-sm z-40">
-    <div class="bg-[#111010] w-3/5 h-5/6 z-50 absolute rounded-lg shadow-lg">
+    <div class="bg-[#111010] w-3/6 h-5/6 z-50 absolute rounded-lg shadow-lg shadow-[#31363F]">
       
     </div>
   </div>
