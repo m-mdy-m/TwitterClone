@@ -77,13 +77,15 @@ export function listMenuTweet() {
     });
     icon.querySelector(".editIcon").addEventListener("click", async () => {
       const content = tweet.querySelector('#content-tweet')
+      const wrapperContent = content.parentNode
       const updateContent = PostContent({edit_mode:true,content:content.innerHTML})
+      wrapperContent.innerHTML = updateContent
       const tweetInput = document.getElementById("editContent");
       const button = document.getElementById("iconSubmitEdit");
       button.classList.add("show-button-edit");
       button.classList.remove("remove-button-edit");
       tweetInput.focus();
-      editTweetContent(tweetId,button);
+      editTweetContent(tweetId,button,wrapperContent);
     });
   });
 }
@@ -133,15 +135,14 @@ export function autoResizeInput() {
   parent.style.height = newHeight + "px";
 }
 
-export function editTweetContent(tweetId,button) {
+export function editTweetContent(tweetId,button,wrapperContent) {
   const tweetInput = document.getElementById("editContent");
-  tweetInput.addEventListener("input", () => {
-    console.log("typing..");
-    autoResizeInput();
-  });
+  tweetInput.addEventListener("input",autoResizeInput);
   button.addEventListener("click",async () => {
-    const response = await toggleEditTweet(tweetId,tweetInput.value)
+    const updateContent = PostContent({edit_mode:false,content:tweetInput.value})
+    wrapperContent.innerHTML = updateContent
     button.classList.remove("show-button-edit");
     button.classList.add("remove-button-edit");
+    await toggleEditTweet(tweetId,tweetInput.value)
   });
 }
