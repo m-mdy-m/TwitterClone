@@ -72,12 +72,43 @@ export function listMenuTweet() {
           tweet.remove();
         }, 1500);
       }
-
     });
     icon.querySelector(".editIcon").addEventListener("click", async () => {
       // const edited = await toggleEditTweet(tweetId)
       // console.log('edited',edited);
       console.log("clicked");
+      editTweetContent();
     });
+  });
+}
+export function autoResizeInput() {
+  const tweetInput = document.getElementById("editContent");
+  const parent = tweetInput.parentNode.parentNode.parentNode.parentNode;
+  tweetInput.style.height = "auto";
+  tweetInput.style.height = tweetInput.scrollHeight + "px";
+
+  // Calculate the actual height of the parent including padding and borders
+  const parentStyles = window.getComputedStyle(parent);
+  const parentPaddingTop = parseFloat(parentStyles.paddingTop);
+  const parentPaddingBottom = parseFloat(parentStyles.paddingBottom);
+  const parentBorderTop = parseFloat(parentStyles.borderTopWidth);
+  const parentBorderBottom = parseFloat(parentStyles.borderBottomWidth);
+  const parentHeight = parent.clientHeight - parentPaddingTop - parentPaddingBottom - parentBorderTop - parentBorderBottom;
+
+  const minHeight = parentHeight;
+  const maxHeight = parentStyles.height;
+  const newHeight = Math.min(
+    Math.max(tweetInput.scrollHeight + parentPaddingTop + parentPaddingBottom + parentBorderTop + parentBorderBottom, minHeight),
+    maxHeight
+  );
+  // Apply the new height
+  parent.style.height = newHeight + "px";
+}
+
+export function editTweetContent() {
+  const tweetInput = document.getElementById("editContent");
+  tweetInput.addEventListener("input", () => {
+    console.log("typing..");
+    autoResizeInput();
   });
 }
