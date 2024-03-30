@@ -97,10 +97,7 @@ export async function getTweetInfo(id) {
     const response = await axios.get(`/tweet-info/${id}`, {}, header);
     return response.data.data;
   } catch (error) {
-    showErrorMessage(
-      error,
-      "Failed to fetch retweet data. Please try again later."
-    );
+    showErrorMessage(error);
   }
 }
 // Function to fetch tweets from the API
@@ -115,7 +112,6 @@ export async function getTweets() {
       const userInfo = await getUserInfo();
       const tweets = tweetsResponse.data.tweets;
       const parentTweets = [];
-
       for (const tweet of tweets) {
         if (tweet.originalTweet) {
           parentTweets.push(tweet.originalTweet);
@@ -126,11 +122,21 @@ export async function getTweets() {
         const authorIds = await Promise.all(
           parentTweets.map(async (parentTweet) => {
             const parentTweetInfo = await getTweetInfo(parentTweet);
+            if (!parentTweetInfo) {
+              for (const tweet of tweets) {
+                if (tweet.originalTweet === parentTweet) {
+                  return 'Deleted';
+                }
+              }
+            }
             return parentTweetInfo.author;
           })
         );
         const authors = await Promise.all(
           authorIds.map(async (authorId) => {
+            if(authorId === 'Deleted'){
+              return 'Deleted'
+            }
             return await getUserInfo(authorId?._id);
           })
         );
@@ -142,7 +148,6 @@ export async function getTweets() {
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {
-      console.log("error =>", error);
       // Display error message with error-related color
       showMessage(msgElm, tweetsResponse.data.error, "#ff6347"); // Error color
     }

@@ -40,9 +40,6 @@ exports.findTweet = async (req, { getJsonHandler }) => {
       return notFound("Tweet ID is required.");
     }
     const tweet = await Tweet.findById(id);
-    if (!tweet) {
-      return notFound("Tweet not found.");
-    }
     const result = await Tweet.populate(tweet, { path: "author" });
     success("Tweet found successfully.", result);
   } catch (error) {

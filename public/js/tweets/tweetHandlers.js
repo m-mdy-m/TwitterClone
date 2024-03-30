@@ -31,7 +31,7 @@ export function AddTweet(
     const iconImg = document.getElementById("icon-tweet-img");
     iconElement.style.opacity = 1;
     iconElement.style.zIndex = 1;
-    iconImg.src = '/assets/icon/twwets/feather.svg'
+    iconImg.src = "/assets/icon/twwets/feather.svg";
     attachIconClickListeners();
     showUserRetweeted();
     listMenuTweet();
@@ -78,29 +78,48 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
     return null;
   }
   try {
-    /// extract tweet 
-    const { content, createdAt, _id,likes,author: tweetAuthor, retweeters, } = tweet;
+    /// extract tweet
+    const {
+      content,
+      createdAt,
+      _id,
+      likes,
+      author: tweetAuthor,
+      retweeters,
+    } = tweet;
     // extract current user
     const { userId } = userInfo;
     // current user is liked ?
     const isLiked = likes.includes(userId);
-    // if current user retweeted 
-    let isRetweeted = originalTweet? originalTweet.retweeters.includes(userId): retweeters.includes(userId) && author;
+    // if current user retweeted
+    let isRetweeted = originalTweet
+      ? originalTweet.retweeters.includes(userId)
+      : retweeters.includes(userId) && author;
     // icon liked
     const likeIcon = isLiked ? "nav/heart-full.svg" : "nav/heart-null.svg";
     // icon retweeted
-    const retweetedIcon = isRetweeted ? "nav/retweeted-icon.svg": "nav/ReTweet.svg";
-    // count retweeted post 
-    const retweetCount = originalTweet ? originalTweet.retweeters && originalTweet.retweeters.length > 0 ? originalTweet.retweeters.length: "": retweeters && retweeters.length > 0? retweeters.length: "";
-    // time create post 
+    const retweetedIcon = isRetweeted
+      ? "nav/retweeted-icon.svg"
+      : "nav/ReTweet.svg";
+    // count retweeted post
+    const retweetCount = originalTweet
+      ? originalTweet.retweeters && originalTweet.retweeters.length > 0
+        ? originalTweet.retweeters.length
+        : ""
+      : retweeters && retweeters.length > 0
+      ? retweeters.length
+      : "";
+    // time create post
     const formattedCreatedAt = getCurrentTimeFormatted(createdAt);
-    // show or hide icon and username retweeted 
+    // show or hide icon and username retweeted
     const classname = author && tweet.originalTweet ? "flex" : "hidden";
     // user bookmarked tweeted ?
     const tweetBookmarked = userInfo.bookmarked.includes(_id);
     // content tweet
     let tweetContent = {
-      username: originalTweet ? originalTweet.author.username : tweetAuthor.username,
+      username: originalTweet
+        ? originalTweet.author.username
+        : tweetAuthor.username,
       profile: tweetAuthor.profilePic,
       content,
       createdAt: formattedCreatedAt,
@@ -109,7 +128,9 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
       srcLikeIcon: likeIcon,
       retweetedUsername: originalTweet
         ? originalTweet.author.username
-        : author.username,
+        : author.username
+        ? author.username
+        : author,
       retweetCount,
       isRetweeted: classname,
       srcRetweetIcon: retweetedIcon,
@@ -117,13 +138,16 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
       bookmarkIcon: tweetBookmarked
         ? "text-blue-400 "
         : "text-gray-400 hover:text-blue-400",
-      showDeleteIcon: tweet.author._id.toString() === userInfo.userId.toString()  ? 'block' : 'hidden',
-      edited_tweet : tweet.edited ? "block":'hidden'
+      showDeleteIcon:
+        tweet.author._id.toString() === userInfo.userId.toString()
+          ? "block"
+          : "hidden",
+      edited_tweet: tweet.edited ? "block" : "hidden",
     };
     // return Tweet
     return Tweet(tweetContent);
   } catch (error) {
-    console.log('error for render tweet :',error);
+    console.log("error for render tweet :", error);
     showMessage(msgELm, "Error rendering tweet. Please try again.", "#ff6347");
     return null;
   }
