@@ -218,6 +218,7 @@ export async function toggleRetweet(id) {
     // Send request to toggle like status
     const headers = await getAuthHeaders();
     const response = await axios.post(`/api/retweet/${id}`, {}, headers);
+    console.log('response =>',response);
     if (response.data.success) {
       // Save updated token
       saveToken(response.data.data.token);

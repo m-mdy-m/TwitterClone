@@ -88,6 +88,7 @@ async function updatedUiRetweeted(infoTweetRetweeted) {
       }
     }));
   } catch (error) {
+    console.log('error =>',error)
     // Show error message to the user
     showMessage(
       msgElm,
