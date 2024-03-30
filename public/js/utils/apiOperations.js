@@ -288,10 +288,20 @@ export async function toggleDeleteTweet(id) {
 }
 
 
-export async function toggleEditTweet(id){
+export async function toggleEditTweet(id,content){
   try {
-      const response = await sendRequest(`edit/${id}`)
-      console.log('response',response);
+      const response = await sendRequest(`edit/${id}`,'put',{content})
+      if (response.data.data) {
+        // Save the authentication token received from the server's response
+        saveToken(response.data.data.token);
+      } else if (!response.data.success) {
+        // Show error message with appropriate color
+        showMessage(
+          msgElm,
+          "Failed to toggle Delete Tweet status. Please try again later.",
+          "#FF5733"
+        );
+      }
   } catch (error) {
     showErrorMessage(error)
   }

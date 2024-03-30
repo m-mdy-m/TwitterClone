@@ -1,3 +1,4 @@
+import { PostContent } from "../components/tweet/PostContent.js";
 import {
   getTweetInfo,
   toggleBookmark,
@@ -75,17 +76,14 @@ export function listMenuTweet() {
       }
     });
     icon.querySelector(".editIcon").addEventListener("click", async () => {
-     setItem('editModeTweet','true')
-     const tweetInput = document.getElementById("editContent");
-     const button = document.getElementById('iconSubmitEdit')
-     button.classList.add('show-button-edit')
-     button.addEventListener('click',()=>{
-       button.classList.remove('show-button-edit')
-       
-       button.classList.add('remove-button-edit')
-      })
+      const content = tweet.querySelector('#content-tweet')
+      const updateContent = PostContent({edit_mode:true,content:content.innerHTML})
+      const tweetInput = document.getElementById("editContent");
+      const button = document.getElementById("iconSubmitEdit");
+      button.classList.add("show-button-edit");
+      button.classList.remove("remove-button-edit");
       tweetInput.focus();
-      editTweetContent();
+      editTweetContent(tweetId,button);
     });
   });
 }
@@ -135,10 +133,15 @@ export function autoResizeInput() {
   parent.style.height = newHeight + "px";
 }
 
-export function editTweetContent() {
+export function editTweetContent(tweetId,button) {
   const tweetInput = document.getElementById("editContent");
   tweetInput.addEventListener("input", () => {
     console.log("typing..");
     autoResizeInput();
+  });
+  button.addEventListener("click",async () => {
+    const response = await toggleEditTweet(tweetId,tweetInput.value)
+    button.classList.remove("show-button-edit");
+    button.classList.add("remove-button-edit");
   });
 }

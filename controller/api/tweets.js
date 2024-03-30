@@ -247,6 +247,15 @@ exports.deleteTweet = async (req, { getJsonHandler }) => {
     internalServerError("Internal server error. Please try again later.");
   }
 };
-exports.editTweet = (req,res)=>{
-  console.log('edit');
+exports.editTweet = async (req,{getJsonHandler})=>{
+  const {internalServerError } = getJsonHandler()
+  try {
+    const body = req.body
+    console.log('body=>',body);
+    const tweetManager = new TweetUserManager(req, getJsonHandler);
+    const {tweet} = await tweetManager.findTweetParam()
+    console.log('tweet=>',tweet);
+  } catch (error) {
+    internalServerError("Internal server error. Please try again later.")
+  }
 }
