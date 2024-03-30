@@ -83,8 +83,8 @@ export function listMenuTweet() {
         content: content.innerHTML,
       });
       wrapperContent.innerHTML = updateContent;
-      const tweetInput = document.getElementById("editContent");
-      const button = document.getElementById("iconSubmitEdit");
+      const tweetInput = tweet.querySelector("#editContent");
+      const button = tweet.querySelector("#iconSubmitEdit");
       button.classList.add("show-button-edit");
       button.classList.remove("remove-button-edit");
       tweetInput.focus();

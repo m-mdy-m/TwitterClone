@@ -4,7 +4,7 @@ import {
   toggleLike,
   toggleRetweet,
 } from "../utils/apiOperations.js";
-import { getId, showMessage } from "../utils/helper.js";
+import { getId, showErrorMessage, showMessage } from "../utils/helper.js";
 import { getMsgElement } from "../utils/utils.js";
 import { AddTweet } from "./tweetHandlers.js";
 const msgElm = getMsgElement();
@@ -73,15 +73,27 @@ async function updateUILiked(elm, count, id) {
 
 async function updatedUiRetweeted(infoTweetRetweeted) {
   try {
-    await infoTweetRetweeted.retweets.forEach(async (tweets) => {
+    // Iterate through each retweeted tweet
+    await Promise.all(infoTweetRetweeted.retweets.map(async (tweets) => {
+      // Get tweet information
       const tweet = await getTweetInfo(tweets);
+      
+      // Check if the retweeted tweet matches the original tweet
       if (tweet.originalTweet === infoTweetRetweeted._id) {
-        const current = await getUserInfo()
-        return AddTweet(tweet, current,infoTweetRetweeted.author,infoTweetRetweeted);
+        // Get current user information
+        const current = await getUserInfo();
+        
+        // Add retweeted tweet to the UI
+        return AddTweet(tweet, current, infoTweetRetweeted.author, infoTweetRetweeted);
       }
-    });
+    }));
   } catch (error) {
-    console.log('error=>',error);
+    // Show error message to the user
+    showMessage(
+      msgElm,
+      "Sorry, we couldn't process your retweet at the moment. Please try again later.",
+      "#B71C1C"
+    );
   }
 }
 
