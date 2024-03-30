@@ -291,7 +291,7 @@ export async function toggleDeleteTweet(id) {
 export async function toggleEditTweet(id){
   try {
       const response = await sendRequest(`edit/${id}`)
-      console.log('response');
+      console.log('response',response);
   } catch (error) {
     showErrorMessage(error)
   }

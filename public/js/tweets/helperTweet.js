@@ -2,6 +2,7 @@ import {
   getTweetInfo,
   toggleBookmark,
   toggleDeleteTweet,
+  toggleEditTweet,
 } from "../utils/apiOperations.js";
 
 // Function to show user retweeted information on mouse hover
@@ -71,6 +72,12 @@ export function listMenuTweet() {
           tweet.remove();
         }, 1500);
       }
+
+    });
+    icon.querySelector(".editIcon").addEventListener("click", async () => {
+      // const edited = await toggleEditTweet(tweetId)
+      // console.log('edited',edited);
+      console.log("clicked");
     });
   });
 }
