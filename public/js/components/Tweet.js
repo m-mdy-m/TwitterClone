@@ -17,6 +17,7 @@ function Tweet({
   isBookmarked,
   bookmarkIcon,
   showDeleteIcon,
+  edited_tweet
 }) {
   return `
     <div class="max-w-full min-h-20 h-auto my-4 rounded-lg relative flex flex-col border-2 bg-[#11101076] border-t border-[#111010] px-3 pt-6" data-id="${id}">
@@ -54,7 +55,7 @@ function Tweet({
       </div>
       <div class="min-h-auto max-w-full flex justify-center items-start flex-col pb-3 pr-2 relative">
       ${PostContent({ content })}
-      ${ActionButtons({ likeCount, retweetCount, srcLikeIcon, srcRetweetIcon })}
+      ${ActionButtons({ likeCount, retweetCount, srcLikeIcon, srcRetweetIcon,edited_tweet })}
       </div>
     </div>
   `;

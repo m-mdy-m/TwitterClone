@@ -118,6 +118,7 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
         ? "text-blue-400 "
         : "text-gray-400 hover:text-blue-400",
       showDeleteIcon: tweet.author._id.toString() === userInfo.userId.toString()  ? 'block' : 'hidden',
+      edited_tweet : tweet.edited ? "block":'hidden'
     };
     // return Tweet
     return Tweet(tweetContent);
