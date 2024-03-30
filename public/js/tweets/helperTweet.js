@@ -4,6 +4,7 @@ import {
   toggleDeleteTweet,
   toggleEditTweet,
 } from "../utils/apiOperations.js";
+import { setItem } from "../utils/utils.js";
 
 // Function to show user retweeted information on mouse hover
 export function showUserRetweeted() {
@@ -74,12 +75,14 @@ export function listMenuTweet() {
       }
     });
     icon.querySelector(".editIcon").addEventListener("click", async () => {
-      const tweetInput = document.getElementById("editContent");
-      const button = document.getElementById('iconSubmitEdit')
-      button.classList.add('show-button-edit')
-      button.addEventListener('click',()=>{
-        button.classList.remove('show-button-edit')
-        button.classList.add('remove-button-edit')
+     setItem('editModeTweet','true')
+     const tweetInput = document.getElementById("editContent");
+     const button = document.getElementById('iconSubmitEdit')
+     button.classList.add('show-button-edit')
+     button.addEventListener('click',()=>{
+       button.classList.remove('show-button-edit')
+       
+       button.classList.add('remove-button-edit')
       })
       tweetInput.focus();
       editTweetContent();
