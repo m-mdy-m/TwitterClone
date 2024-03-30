@@ -102,6 +102,11 @@
   z-index: 50;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -191,11 +196,6 @@
   height: 100%;
 }
 
-.h-min {
-  height: -moz-min-content;
-  height: min-content;
-}
-
 .min-h-28 {
   min-height: 7rem;
 }
@@ -206,14 +206,6 @@
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-2 {
-  min-height: 0.5rem;
-}
-
-.min-h-20 {
-  min-height: 5rem;
 }
 
 .w-10 {
@@ -541,6 +533,10 @@
   --tw-gradient-to: #4f46e5 var(--tw-gradient-to-position);
 }
 
+.fill-current {
+  fill: currentColor;
+}
+
 .p-0 {
   padding: 0px;
 }
@@ -576,6 +572,11 @@
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .py-2 {
@@ -1200,6 +1201,10 @@
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
+}
+
 .hover\:bg-\[\#232627\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(35 38 39 / var(--tw-bg-opacity));
@@ -1247,6 +1252,11 @@
 .hover\:text-red-500:hover {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.hover\:text-blue-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
@@ -1585,6 +1595,21 @@
 .\[\&\>\*\]\:my-3>* {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
+}
+
+.\[\&\>\*\]\:mx-2>* {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.\[\&\>\*\]\:mx-1>* {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.\[\&\>\*\]\:mx-0\.5>* {
+  margin-left: 0.125rem;
+  margin-right: 0.125rem;
 }
 
 .\[\&\>\*\]\:cursor-pointer>* {
