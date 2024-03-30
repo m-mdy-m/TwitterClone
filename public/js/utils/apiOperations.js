@@ -286,3 +286,13 @@ export async function toggleDeleteTweet(id) {
     showErrorMessage(error);
   }
 }
+
+
+export async function toggleEditTweet(id){
+  try {
+      const response = await sendRequest(`edit/${id}`)
+      console.log('response');
+  } catch (error) {
+    showErrorMessage(error)
+  }
+}

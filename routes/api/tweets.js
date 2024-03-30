@@ -1,7 +1,7 @@
 const route = require("xprz").Route();
 
 const { verifyToken } = $read("middleware/is-auth");
-const { create, getTweets, likeTweet, retweet,bookmarkTweet,deleteTweet } = $read("controller/api/tweets");
+const { create, getTweets, likeTweet, retweet,bookmarkTweet,deleteTweet,editTweet } = $read("controller/api/tweets");
 route.globalMiddleware([verifyToken]);
 // Grouping API routes under the "/api" prefix
 route.group("/api", (r) => {
@@ -19,5 +19,6 @@ route.group("/api", (r) => {
   r.route('/bookmark/:id').put(bookmarkTweet)
   // Defining a DELETE route for deleting a tweet
   r.route('/deleteTweet/:id').del(deleteTweet)
+  r.route('/edit/:id').put(editTweet)
 });
 module.exports = route;

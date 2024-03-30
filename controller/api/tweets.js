@@ -247,3 +247,6 @@ exports.deleteTweet = async (req, { getJsonHandler }) => {
     internalServerError("Internal server error. Please try again later.");
   }
 };
+exports.editTweet = (req,res)=>{
+  console.log('edit');
+}
