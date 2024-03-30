@@ -2,7 +2,7 @@ import { Icon } from "./Icon.js";
 const styleIcon ='w-5 h-5'
 export function ActionButtons({retweetCount,likeCount,srcLikeIcon,srcRetweetIcon,edited_tweet}) {
   return `
-      <div class="flex w-full justify-start items-center pt-3 overflow-hidden px-2 text-white relative [&>*]:cursor-pointer border-t border-[#252424] ">
+      <div class="flex w-full justify-start items-center pt-3 overflow-clip px-2 text-white relative [&>*]:cursor-pointer border-t border-[#252424] ">
           ${Icon({src:'nav/chat-comment.svg',alt: 'Comment',className:'flex items-center',styleIcon , id: 'commentIcon',})}
           ${Icon({src:srcLikeIcon,alt: 'Like',className:'flex items-center',styleIcon , id: 'likeIcon',display:'block',count:likeCount })}
           ${Icon({src:srcRetweetIcon,alt: 'ReTweet',className:'flex items-center',styleIcon , id: 'retweetIcon',display:'block',count:retweetCount })}
@@ -12,7 +12,7 @@ export function ActionButtons({retweetCount,likeCount,srcLikeIcon,srcRetweetIcon
                <span class="z-10">Save Changes</span>
            </button>
          </div>
-         <p class="text-gray-400 text-xs ${edited_tweet} cursor-default">edited</p>
+         <p class="text-gray-400 text-xs ${edited_tweet} !cursor-default">edited</p>
       </div>
     `;
 }

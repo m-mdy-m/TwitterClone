@@ -280,6 +280,10 @@
   cursor: pointer;
 }
 
+.\!cursor-default {
+  cursor: default !important;
+}
+
 .resize-none {
   resize: none;
 }
@@ -352,8 +356,20 @@
   overflow: hidden;
 }
 
+.overflow-clip {
+  overflow: clip;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 .overflow-y-hidden {
   overflow-y: hidden;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .overflow-ellipsis {

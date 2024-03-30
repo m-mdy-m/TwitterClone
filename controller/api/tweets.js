@@ -201,10 +201,9 @@ exports.deleteTweet = async (req, { getJsonHandler }) => {
     if (user._id.toString() === tweet.author._id.toString()) {
       // Check if the tweet ID exists in the user's likedTweets, retweetedTweets, or bookmarked arrays
       const userHasTweet =
-        user.likedTweets.includes(tweetId) ||
-        user.retweetedTweets.includes(tweetId) ||
-        user.bookmarked.includes(tweetId);
-
+      user.likedTweets.includes(tweetId) ||
+      user.retweetedTweets.includes(tweetId) ||
+      user.bookmarked.includes(tweetId);
       // Delete the tweet from the tweets collection
       const deleteResult = await Tweet.deleteOne({ _id: tweetId });
       if (userHasTweet) {

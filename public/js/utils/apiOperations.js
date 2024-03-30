@@ -142,6 +142,7 @@ export async function getTweets() {
       // Handle displaying tweets on the UI as needed
       attachIconClickListeners();
     } else {
+      console.log("error =>", error);
       // Display error message with error-related color
       showMessage(msgElm, tweetsResponse.data.error, "#ff6347"); // Error color
     }
@@ -218,7 +219,7 @@ export async function toggleRetweet(id) {
     // Send request to toggle like status
     const headers = await getAuthHeaders();
     const response = await axios.post(`/api/retweet/${id}`, {}, headers);
-    console.log('response =>',response);
+    console.log("response =>", response);
     if (response.data.success) {
       // Save updated token
       saveToken(response.data.data.token);
