@@ -76,16 +76,19 @@ export function listMenuTweet() {
       }
     });
     icon.querySelector(".editIcon").addEventListener("click", async () => {
-      const content = tweet.querySelector('#content-tweet')
-      const wrapperContent = content.parentNode
-      const updateContent = PostContent({edit_mode:true,content:content.innerHTML})
-      wrapperContent.innerHTML = updateContent
+      const content = tweet.querySelector("#content-tweet");
+      const wrapperContent = content.parentNode;
+      const updateContent = PostContent({
+        edit_mode: true,
+        content: content.innerHTML,
+      });
+      wrapperContent.innerHTML = updateContent;
       const tweetInput = document.getElementById("editContent");
       const button = document.getElementById("iconSubmitEdit");
       button.classList.add("show-button-edit");
       button.classList.remove("remove-button-edit");
       tweetInput.focus();
-      editTweetContent(tweetId,button,wrapperContent);
+      editTweetContent(tweetId, button, wrapperContent);
     });
   });
 }
@@ -135,14 +138,30 @@ export function autoResizeInput() {
   parent.style.height = newHeight + "px";
 }
 
-export function editTweetContent(tweetId,button,wrapperContent) {
+// Function to handle editing of tweet content.
+export function editTweetContent(tweetId, button, wrapperContent) {
+  // Get the tweet input element
   const tweetInput = document.getElementById("editContent");
-  tweetInput.addEventListener("input",autoResizeInput);
-  button.addEventListener("click",async () => {
-    const updateContent = PostContent({edit_mode:false,content:tweetInput.value})
-    wrapperContent.innerHTML = updateContent
+
+  // Add input event listener to automatically resize the input field
+  tweetInput.addEventListener("input", autoResizeInput);
+
+  // Add click event listener to the button
+  button.addEventListener("click", async () => {
+    // Generate updated content based on the input value
+    const updateContent = PostContent({
+      edit_mode: false,
+      content: tweetInput.value,
+    });
+
+    // Update the content wrapper with the updated content
+    wrapperContent.innerHTML = updateContent;
+
+    // Remove the 'show-button-edit' class and add the 'remove-button-edit' class to the button
     button.classList.remove("show-button-edit");
     button.classList.add("remove-button-edit");
-    await toggleEditTweet(tweetId,tweetInput.value)
+
+    // Call the toggleEditTweet function to update the tweet content on the server
+    await toggleEditTweet(tweetId, tweetInput.value);
   });
 }
