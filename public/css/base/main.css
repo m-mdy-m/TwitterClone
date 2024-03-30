@@ -211,6 +211,14 @@
   min-height: 100vh;
 }
 
+.min-h-24 {
+  min-height: 6rem;
+}
+
+.min-h-20 {
+  min-height: 5rem;
+}
+
 .w-10 {
   width: 2.5rem;
 }

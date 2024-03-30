@@ -74,34 +74,55 @@ export function listMenuTweet() {
       }
     });
     icon.querySelector(".editIcon").addEventListener("click", async () => {
-      // const edited = await toggleEditTweet(tweetId)
-      // console.log('edited',edited);
-      console.log("clicked");
+      const tweetInput = document.getElementById("editContent");
+      tweetInput.focus();
       editTweetContent();
     });
   });
 }
+// Function to automatically resize the input field based on its content
 export function autoResizeInput() {
+  // Get the input element and its parent container
   const tweetInput = document.getElementById("editContent");
   const parent = tweetInput.parentNode.parentNode.parentNode.parentNode;
+
+  // Set the input field height to "auto" to allow it to expand based on content
   tweetInput.style.height = "auto";
+
+  // Set the input field height to match its scroll height, effectively resizing it based on content
   tweetInput.style.height = tweetInput.scrollHeight + "px";
 
-  // Calculate the actual height of the parent including padding and borders
+  // Calculate the actual height of the parent container including padding and borders
   const parentStyles = window.getComputedStyle(parent);
   const parentPaddingTop = parseFloat(parentStyles.paddingTop);
   const parentPaddingBottom = parseFloat(parentStyles.paddingBottom);
   const parentBorderTop = parseFloat(parentStyles.borderTopWidth);
   const parentBorderBottom = parseFloat(parentStyles.borderBottomWidth);
-  const parentHeight = parent.clientHeight - parentPaddingTop - parentPaddingBottom - parentBorderTop - parentBorderBottom;
+  const parentHeight =
+    parent.clientHeight -
+    parentPaddingTop -
+    parentPaddingBottom -
+    parentBorderTop -
+    parentBorderBottom;
 
+  // Determine the minimum and maximum allowable heights for the parent container
   const minHeight = parentHeight;
   const maxHeight = parentStyles.height;
+
+  // Calculate the new height for the parent container, ensuring it stays within the min and max height limits
   const newHeight = Math.min(
-    Math.max(tweetInput.scrollHeight + parentPaddingTop + parentPaddingBottom + parentBorderTop + parentBorderBottom, minHeight),
+    Math.max(
+      tweetInput.scrollHeight +
+        parentPaddingTop +
+        parentPaddingBottom +
+        parentBorderTop +
+        parentBorderBottom,
+      minHeight
+    ),
     maxHeight
   );
-  // Apply the new height
+
+  // Apply the new height to the parent container
   parent.style.height = newHeight + "px";
 }
 
