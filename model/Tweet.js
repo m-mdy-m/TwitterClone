@@ -33,6 +33,10 @@ const tweetSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Tweet",
     },
+    edited:{
+      type: Boolean,
+      default:false,
+    },
   },
   { timestamps: true }
 );
