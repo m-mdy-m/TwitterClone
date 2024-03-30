@@ -258,8 +258,15 @@
     text-transform: capitalize;
   }
   .bg-gradient-main {
-    background: rgb(5,65,62);
-background: radial-gradient(circle, rgba(5,65,62,1) 0%, rgba(0,0,0,1) 27%, rgba(0,0,0,1) 53%, rgba(0,0,0,1) 90%, rgba(0,0,0,1) 100%);
+    background: rgb(5, 65, 62);
+    background: radial-gradient(
+      circle,
+      rgba(5, 65, 62, 1) 0%,
+      rgba(0, 0, 0, 1) 27%,
+      rgba(0, 0, 0, 1) 53%,
+      rgba(0, 0, 0, 1) 90%,
+      rgba(0, 0, 0, 1) 100%
+    );
   }
   .bg-gradient-form {
     background: rgb(141, 73, 163);
@@ -269,5 +276,18 @@ background: radial-gradient(circle, rgba(5,65,62,1) 0%, rgba(0,0,0,1) 27%, rgba(
       rgba(2, 1, 3, 1) 74%,
       rgba(0, 0, 0, 1) 100%
     );
+  }
+  @keyframes showButtonEdit {
+    0%{
+      opacity: 0;
+      right: -7rem;
+    }
+    100%{
+      opacity: 1;
+      right: 0;
+    }
+  }
+  .show-button-edit{
+    animation: showButtonEdit 500ms 1s both cubic-bezier(1,-0.27, 0, 1.52);
   }
 }
