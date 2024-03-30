@@ -52,7 +52,7 @@ export function handleTweetTextAreaEvents() {
   tweetInput.addEventListener("blur", showIconOnBlur);
   tweetInput.addEventListener("input", (e) => {
     updateCharCount(e);
-    autoResizeHeight(e);
+    autoResizeHeight();
   });
   tweetInput.addEventListener("keydown", handleKeyDown);
 }
@@ -88,7 +88,6 @@ function handleKeyDown(event) {
     updateCharCount(event);
   }
 }
-
 // Function to create a tweet and update character count
 function createTweetAndUpdateCharCount(eventOrInput) {
   const iconElement = document.getElementById("icon-tweet");
