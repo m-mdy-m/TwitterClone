@@ -75,6 +75,12 @@ export function listMenuTweet() {
     });
     icon.querySelector(".editIcon").addEventListener("click", async () => {
       const tweetInput = document.getElementById("editContent");
+      const button = document.getElementById('iconSubmitEdit')
+      button.classList.add('show-button-edit')
+      button.addEventListener('click',()=>{
+        button.classList.remove('show-button-edit')
+        button.classList.add('remove-button-edit')
+      })
       tweetInput.focus();
       editTweetContent();
     });

@@ -287,7 +287,20 @@
       right: 0;
     }
   }
+  @keyframes hiddenButtonEdit {
+    0%{
+      opacity:1;
+      right:0;
+    }
+    100%{
+      opacity: 0;
+      right: -7rem;
+    }
+  }
   .show-button-edit{
     animation: showButtonEdit 500ms 1s both cubic-bezier(1,-0.27, 0, 1.52);
+  }
+  .remove-button-edit{
+    animation: hiddenButtonEdit 1s both cubic-bezier(1,-0.27, 0, 1.52) ;
   }
 }
