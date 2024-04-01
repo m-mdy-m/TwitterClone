@@ -1,4 +1,4 @@
-const { route, expose, globalMiddleware, group } = require("xprz").Route();
+const { route, expose, mids, group } = require("xprz").Route();
 
 const { verifyToken } = $read("middleware/is-auth");
 const {
@@ -10,7 +10,7 @@ const {
   deleteTweet,
   editTweet,
 } = $read("controller/api/tweets");
-globalMiddleware([verifyToken]);
+mids([verifyToken]);
 // Grouping API routes under the "/api" prefix
 group("/api", (r) => {
   // Defining a POST route for creating a new tweet
