@@ -1,0 +1,46 @@
+.show-nav {
+  width: 80%;
+  height: 100%;
+  display: block !important;
+  transition: all 500ms;
+  left: 0;
+}
+.hide-nav {
+  width: 0;
+  height: 100%;
+  transition: all 2s;
+  left: -20rem;
+}
+@media screen and (min-width: 400px) {
+  .show-nav {
+    width: 60%;
+  }
+}
+@media screen and (min-width: 450px) {
+  .show-nav {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 500px) {
+  .show-nav {
+    width: 45%;
+  }
+}
+@media screen and (min-width: 600px) {
+  .show-nav {
+    width: 40%;
+  }
+}
+@media screen and (min-width: 750px) {
+  .show-nav {
+    width: 30%;
+  }
+}
+@media screen and (min-width: 900px) {
+  .show-nav {
+    position: relative;
+    display: flex;
+    width: 100%;
+    inset: auto;
+  }
+}

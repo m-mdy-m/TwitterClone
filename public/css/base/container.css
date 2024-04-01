@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.bg-body {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}

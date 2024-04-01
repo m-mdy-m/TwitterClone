@@ -1,0 +1,48 @@
+{
+  "name": "twitterclone",
+  "version": "1.0.0",
+  "description": "Twitter Clone: A simple project using vanilla JS & Node.js. Mimics Twitter's functionality. Built with MongoDB, ",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./app.js",
+    "css": "npx tailwindcss -i ./public/css/main.css -o ./public/css/base/main.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-mdy-m/TwitterClone.git"
+  },
+  "keywords": [
+    "nodejs",
+    "nexttweet",
+    "express"
+  ],
+  "author": "mahdi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m-mdy-m/TwitterClone/issues"
+  },
+  "homepage": "https://github.com/m-mdy-m/TwitterClone#readme",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^2.2.0",
+    "cookie-parser": "^1.4.6",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express-rate-limit": "^7.2.0",
+    "express-session": "^1.18.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.0",
+    "nodemon": "^3.1.0",
+    "twitter-api-v2": "^1.16.1",
+    "vfyjs": "^2.0.3",
+    "xprz": "^2.0.9"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  }
+}
