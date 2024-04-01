@@ -4,7 +4,7 @@ function generateAuthToken(user) {
     // Extract user information
     const { _id, username, email, profilePic, likedTweets ,retweetedTweets,bookmarked} = user;
     // Generate JWT token with user information
-    const token = jwt().jwtSign(
+    const token = jwt().signToken(
       {
         userId: _id,
         username,

@@ -1,7 +1,7 @@
 // Import necessary modules
 const Xprz = require("xprz");
 // Initialize Xprz package with dotenv setup
-Xprz.Package().dotenv().setupDot();
+Xprz.Package().dotenv();
 
 // Destructure required functions from Xprz App module
 const { use, useCtx, launch, loadRoutes, bodyParsing, static } = Xprz.App();

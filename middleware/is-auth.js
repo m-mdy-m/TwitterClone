@@ -16,11 +16,11 @@ exports.ensureAuthenticated = (ctx, next) => {
  */
 exports.verifyToken = (ctx, nxt) => {
   const token = ctx.cookies.token;
-  if (!token || token === "undefined" || jwt().isTokenExpired(token)) {
+  if (!token || token === "undefined" || jwt().isExpired(token)) {
     // Clear all cookies
     clearAllCookies(ctx);
     ctx.status(401).redirect("/auth/login");
   }
   ctx.headers.authorization = `Bearer ${token}`;
-  jwt().jwtAuthenticate(process.env.JWT_SECRET)(ctx, nxt);
+  jwt().authenticate(process.env.JWT_SECRET)(ctx, nxt);
 };
