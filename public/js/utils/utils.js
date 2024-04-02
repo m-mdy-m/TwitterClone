@@ -131,14 +131,7 @@ export function saveRefreshToken(refreshToken) {
 
 // Function to retrieve the refresh token from cookies
 export function getRefreshToken() {
-  const cookies = document.cookie.split(";");
-  for (let cookie of cookies) {
-    const [name, value] = cookie.trim().split("=");
-    if (name === "refreshToken") {
-      return value;
-    }
-  }
-  return null;
+  return getCookieValue('refreshToken')
 }
 /**
  * Parses the document cookies to find the value of a specific cookie by its name.

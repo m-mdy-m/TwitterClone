@@ -16,6 +16,8 @@ import {
   clearWelcomePhotoFlag,
   extractToken,
   getMsgElement,
+  getRefreshToken,
+  saveAccessToken,
   setItem,
 } from "./utils.js";
 const msgElm = getMsgElement();
@@ -195,8 +197,32 @@ export async function sendRequest(url, request = "put", data = {}) {
 
 
 export async  function refreshToken(){
+  try {
+    // Fetch the refresh token from storage (e.g., from cookies or local storage)
+    const refreshToken = getRefreshToken(); // Implement this function to retrieve the refresh token
 
+    // Make a POST request to your server's refresh token endpoint
+    const response = await axios.post('/auth/refresh', { refreshToken });
 
+    // Check if the request was successful
+    if (response.data.accessToken) {
+      // If the server returns a new access token, save it
+      const newAccessToken = response.data.accessToken;
+      saveAccessToken(newAccessToken); // Save the new access token using your utility function
+
+      // Optionally, you can also update the expiration time of the access token in your application state
+      // updateAccessTokenExpiration(response.data.expiresIn);
+
+      return true; // Return true to indicate successful token refresh
+    } else {
+      // If the server does not return a new access token, handle the error
+      console.error('Failed to refresh access token:', response.data.message);
+      return false; // Return false to indicate token refresh failure
+    }
+  } catch (error) {
+    console.error('Error refreshing access token:', error.message);
+    return false; // Return false to indicate token refresh failure
+  }
 }
 
 
