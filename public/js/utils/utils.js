@@ -100,7 +100,6 @@ export function clearAuth(){
   // Clear the access token from session storage
   sessionStorage.removeItem('accessToken');
   // Clear the refresh token cookie
-  removeRefreshToken();
 }
 
 export function extractToken(tokens){
@@ -121,7 +120,7 @@ export function getAccessToken() {
 // Function to save the refresh token in an HTTP-only cookie
 export function saveRefreshToken(refreshToken) {
   // Set the refresh token in an HTTP-only cookie with a secure flag
-  document.cookie = `refreshToken=${refreshToken}; path=/;`;
+  document.cookie = `refreshToken=${refreshToken}; path=/; SameSite=Strict; Secure`;
 }
 
 // Function to retrieve the refresh token from cookies
@@ -135,37 +134,6 @@ export function getRefreshToken() {
   }
   return null;
 }
-/**
- * Removes the refresh token cookie.
- */
-export function removeRefreshToken() {
-  // Set the expiration date to a past time to delete the refresh token cookie
-  document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
-/**
- * Saves the token in a cookie.
- * @param {string} token - The token to be saved in the cookie.
- */
-export function saveToken(token) {
-  // Set the token in a cookie
-  document.cookie = `token=${token}; path=/;`;
-}
-/**
- * Removes the token cookie.
- */
-export function removeToken() {
-  // Set the expiration date to a past time
-  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
-/**
- * Retrieves the value of the token cookie.
- * @returns {string|null} The value of the token cookie, or null if the cookie is not found.
- */
-export function getToken() {
-  // Extracts the value of the specified cookie by its name
-  return getCookieValue("token");
-}
-
 /**
  * Parses the document cookies to find the value of a specific cookie by its name.
  * @param {string} cookieName - The name of the cookie to retrieve.

@@ -1,7 +1,7 @@
 const { bcryptjs } = require("xprz").Package();
 const path = require("path");
 const { validateAuth } = $read("utils/validation");
-const generateAuthToken = $read("utils/generateAuthToken");
+const {generateAuthToken} = $read("utils/AuthToken");
 const User = $read("model/User");
 // Controller function to render the signup page
 exports.getSignup = ({ sendFile }) => {
@@ -35,7 +35,7 @@ exports.postSignup = async (ctx) => {
       });
 
       // Generate JWT token with user information
-      const tokens = generateAuthToken(newUser);
+      const tokens = await generateAuthToken(newUser);
       ctx.session.token = tokens.accessToken ;
       // Send success response
       return created({ tokens });

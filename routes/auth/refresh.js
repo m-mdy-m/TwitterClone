@@ -1,7 +1,7 @@
 // routes/auth.js
 const {route,expose }= require('xprz').Route();
 const { jwt } = require('xprz').Package()
-const RefreshToken = $read('model/RefreshToken');
+const UserToken = $read('model/UserToken');
 const { JWT_SECRET } = process.env;
 
 // Endpoint for token refresh
@@ -10,17 +10,17 @@ route('/refresh').post(async (ctx) => {
 
   try {
     // Verify the refresh token
-    const decoded = jwt.verify(refreshToken, JWT_SECRET);
+    const decoded = jwt().verifyToken(refreshToken, JWT_SECRET);
 
     // Check if the refresh token exists in the database
-    const existingToken = await RefreshToken.findOne({ token: refreshToken });
+    const existingToken = await UserToken.findOne({ token: refreshToken });
 
     if (!existingToken) {
       return ctx.status(401).json({ message: 'Invalid refresh token' });
     }
 
     // Generate a new access token
-    const accessToken = jwt.sign({ userId: decoded.userId }, JWT_SECRET, { expiresIn: '1d' });
+    const accessToken = jwt().signToken({ userId: decoded.userId }, JWT_SECRET, { expiresIn: '1d' });
 
     // Send the new access token
     ctx.json({ accessToken });

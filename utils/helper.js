@@ -1,4 +1,4 @@
-const generateAuthToken = require("./AuthToken");
+const {generateAuthToken} = require("./AuthToken");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
@@ -100,13 +100,13 @@ class TweetUserManager {
    * @param {Object} user - The user object to save.
    * @returns {string|null} The authentication token if successful, null if an error occurs.
    */
-  saveUser(user) {
+  async saveUser(user) {
     try {
       if (!user || typeof user !== "object") {
         return this.badRequest("Invalid user object provided.");
       }
 
-      const tokens  = generateAuthToken(user);
+      const tokens  = await generateAuthToken(user);
       if (!tokens || typeof tokens !== "object" || !tokens.accessToken || !tokens.refreshToken) {
         return this.internalServerError(
           "Failed to generate authentication token."
