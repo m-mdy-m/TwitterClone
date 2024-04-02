@@ -213,11 +213,11 @@ export async function sendRequest(url, request = "put", data = {}) {
         return response;
       } else {
         // If token refresh failed, handle the error
-        throw new Error("Failed to refresh access token");
+        showErrorMessage(error)
       }
     } else {
       // Handle other types of errors
-      throw error;
+      showErrorMessage(error)
     }
   }
 }
