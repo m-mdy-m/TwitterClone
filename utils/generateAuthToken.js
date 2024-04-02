@@ -12,7 +12,7 @@ function generateAuthToken(user) {
       bookmarked,
     } = user;
     // Generate JWT token with user information
-    const token = jwt().signToken(
+    const accessToken = jwt().signToken(
       {
         userId: _id,
         username,
@@ -25,8 +25,14 @@ function generateAuthToken(user) {
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
+    // Generate refresh token
+    const refreshToken = jwt().refreshToken(
+      accessToken,
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
 
-    return token;
+    return { accessToken, refreshToken };
   } catch (error) {
     // Handle token generation errors
     console.error("Error generating JWT token:", error);
