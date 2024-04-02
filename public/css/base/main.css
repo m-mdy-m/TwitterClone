@@ -272,16 +272,16 @@
   animation: opacity 3s ease-in infinite;;
 }
 
+.\!cursor-default {
+  cursor: default !important;
+}
+
 .cursor-default {
   cursor: default;
 }
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.\!cursor-default {
-  cursor: default !important;
 }
 
 .resize-none {
@@ -360,16 +360,8 @@
   overflow: clip;
 }
 
-.overflow-x-hidden {
-  overflow-x: hidden;
-}
-
 .overflow-y-hidden {
   overflow-y: hidden;
-}
-
-.overflow-y-scroll {
-  overflow-y: scroll;
 }
 
 .overflow-ellipsis {
@@ -831,6 +823,14 @@
   transition-duration: 150ms;
 }
 
+.delay-150 {
+  transition-delay: 150ms;
+}
+
+.delay-100 {
+  transition-delay: 100ms;
+}
+
 .duration-100 {
   transition-duration: 100ms;
 }
@@ -1271,6 +1271,10 @@
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
+}
+
 .hover\:bg-\[\#232627\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(35 38 39 / var(--tw-bg-opacity));
@@ -1329,8 +1333,28 @@
   text-decoration-line: underline;
 }
 
+.hover\:shadow-lg:hover {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .hover\:contrast-125:hover {
   --tw-contrast: contrast(1.25);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.hover\:contrast-50:hover {
+  --tw-contrast: contrast(.5);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.hover\:contrast-150:hover {
+  --tw-contrast: contrast(1.5);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.hover\:filter:hover {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 

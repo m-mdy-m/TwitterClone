@@ -1,4 +1,5 @@
 import {attachLogoutHandler} from "../auth/logout.js";
+import { getProfileUser } from "../utils/apiOperations.js";
 import { clearWelcomePhotoFlag, showWelcome } from "../utils/utils.js";
 // Function to handle navigation events
 function handleNavigation() {
@@ -40,6 +41,12 @@ export function initializeComponentsNavigation() {
 
   // Handle navigation events
   handleNavigation();
+  const wrapper = document.querySelector('.userProfileWrapper')
+  wrapper.addEventListener('click',async()=>{
+    const username = wrapper.querySelector('.username')
+    const response = await getProfileUser(username.innerHTML)
+    console.log(response);
+  })
 
   // Optionally display welcome photo
   if (showWelcomePhotoFlag) {

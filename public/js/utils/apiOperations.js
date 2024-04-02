@@ -309,3 +309,13 @@ export async function toggleEditTweet(id, content) {
     showErrorMessage(error);
   }
 }
+
+export async function getProfileUser(username){
+  try {
+    const response = await sendRequest(`profile/${username}`,'get')
+    console.log('response : ',response);
+    return response
+  } catch (error) {
+    showErrorMessage(error)
+  }
+}

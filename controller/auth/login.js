@@ -57,7 +57,7 @@ exports.postLogin = async (ctx) => {
     // Compare password hashes
     const passwordMatches = await bcryptjs().compare(password, user.password);
     if (!passwordMatches) {
-      return status(401).json({
+      return ctx.status(401).json({
         success: false,
         error: "Incorrect password. Please try again.",
       });
