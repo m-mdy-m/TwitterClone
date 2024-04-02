@@ -97,17 +97,15 @@ export default async function getCSRFToken() {
  */
 export function clearAuth() {
   localStorage.removeItem("logged");
-  // Clear the access token from session storage
-  sessionStorage.removeItem("accessToken");
   // Clear the refresh token cookie
-  clearRefreshToken();
+  clearAllToken();
 }
 
 // Function to clear the refresh token cookie
-export function clearRefreshToken() {
+export function clearAllToken() {
   // Set the expiration date of the refresh token cookie to a past time
-  document.cookie =
-    "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";
+  document.cookie ="refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";
+  document.cookie ="accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";
 }
 export function extractToken(tokens) {
   saveAccessToken(tokens.accessToken);
@@ -115,12 +113,12 @@ export function extractToken(tokens) {
 }
 // Function to save the access token in session storage
 export function saveAccessToken(accessToken) {
-  sessionStorage.setItem("accessToken", accessToken);
+  document.cookie = `accessToken=${accessToken}; path=/; SameSite=Strict; Secure`;
 }
 
 // Function to retrieve the access token from session storage
 export function getAccessToken() {
-  return sessionStorage.getItem("accessToken");
+  return getCookieValue('accessToken')
 }
 
 // Function to save the refresh token in an HTTP-only cookie
