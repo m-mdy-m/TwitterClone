@@ -32,11 +32,12 @@ async function generateAuthToken(user) {
       process.env.REFRESH_TOKEN_PRIVATE_KEY,
       { expiresIn: "7d" }
     );
-    const userToken = await UserToken.findOne({ userId: user._id });
-    if (userToken) await userToken.remove();
+    // Remove any existing refresh token for the user
+    await UserToken.findOneAndDelete({ userId: _id });
 
-    const existingToken = await UserToken.findOneAndDelete({ userId: _id });
+    // Save the new refresh token in the database
     await new UserToken({ userId: _id, token: refreshToken }).save();
+
     return { accessToken, refreshToken };
   } catch (error) {
     console.error("Error generating JWT token:", error);
