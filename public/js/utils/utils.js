@@ -104,7 +104,7 @@ export function clearAuth() {
 }
 
 // Function to clear the refresh token cookie
-function clearRefreshToken() {
+export function clearRefreshToken() {
   // Set the expiration date of the refresh token cookie to a past time
   document.cookie =
     "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";

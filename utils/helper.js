@@ -1,11 +1,11 @@
-const {generateAuthToken} = require("./AuthToken");
+const { generateAuthToken } = require("./AuthToken");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
 class TweetUserManager {
   constructor(ctx, getJsonHandler) {
     this.req = ctx;
-    this.id = ctx.param('id');
+    this.id = ctx.param("id");
     this.json = getJsonHandler();
     this.badRequest = this.json.badRequest;
     this.notFound = this.json.notFound;
@@ -106,15 +106,20 @@ class TweetUserManager {
         return this.badRequest("Invalid user object provided.");
       }
 
-      const tokens  = await generateAuthToken(user);
-      if (!tokens || typeof tokens !== "object" || !tokens.accessToken || !tokens.refreshToken) {
+      const tokens = await generateAuthToken(user);
+      if (
+        !tokens ||
+        typeof tokens !== "object" ||
+        !tokens.accessToken ||
+        !tokens.refreshToken
+      ) {
         return this.internalServerError(
           "Failed to generate authentication token."
         );
       }
 
-      this.req.session.token = tokens.accessToken ;
-     return tokens ;
+      this.req.session.token = tokens.accessToken;
+      return tokens;
     } catch (error) {
       console.error("Error in saveUser:", error.message);
       return this.internalServerError(

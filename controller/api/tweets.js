@@ -103,7 +103,7 @@ exports.likeTweet = async (ctx) => {
     ]);
     // Return a success response with the updated number of likes
     return updated({
-      token: tweetManager.saveUser(newUser),
+      tokens: await tweetManager.saveUser(newUser),
       likes: newTweet.likes,
     });
   } catch (error) {
@@ -154,7 +154,7 @@ exports.retweet = async (ctx) => {
     // Return a success response with the updated number of likes
     return created({
       retweet: result,
-      token: tweetManager.saveUser(updatedUser),
+      tokens:await tweetManager.saveUser(updatedUser),
     });
   } catch (error) {
     // Handle any internal server errors
@@ -183,7 +183,7 @@ exports.bookmarkTweet = async (ctx) => {
     const isBookmarked = user.bookmarked.includes(tweetId);
     return updated({
       isBookmarked: isBookmarked,
-      token: tweetManager.saveUser(user),
+      tokens:await tweetManager.saveUser(user),
     });
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
@@ -222,7 +222,7 @@ exports.deleteTweet = async (ctx) => {
           deleteResult.deletedCount === 1 &&
           updateResult.modifiedCount === 1
         ) {
-          return deleted({ token: tweetManager.saveUser(user) });
+          return deleted({ tokens:await tweetManager.saveUser(user) });
         } else {
           // If deletion or update failed, return internal server error
           internalServerError("Failed to delete the tweet.");

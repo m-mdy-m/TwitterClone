@@ -15,7 +15,7 @@ exports.ensureAuthenticated = (ctx, next) => {
  * Middleware to verify JWT token extracted from cookies.
  */
 exports.verifyToken = (ctx, nxt) => {
-  const token = ctx.cookies.token;
+  const token = ctx.session.token;
   if (!token || token === "undefined" || jwt().isExpired(token)) {
     // Clear all cookies
     clearAllCookies(ctx);

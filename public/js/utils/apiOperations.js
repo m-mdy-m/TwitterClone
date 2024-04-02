@@ -183,15 +183,42 @@ export async function tweetCreation(data) {
 }
 
 export async function sendRequest(url, request = "put", data = {}) {
+  let headers = await getAuthHeaders();
   try {
     // Get authorization headers
-    const headers = await getAuthHeaders();
+
     // Send request with authorization headers
-    const response = await axios[request](`/api/${url}`, data, headers);
+    const response = await axios({
+      method: request,
+      url: `/api/${url}`,
+      data,
+      headers,
+    });
 
     return response;
   } catch (error) {
-    showErrorMessage(error);
+    // Check if the error is due to an unauthorized (401) response
+    if (error.response && error.response.status === 401) {
+      // Attempt to refresh the access token
+      const success = await refreshToken();
+      if (success) {
+        // If token refresh was successful, retry the original request
+        headers = await getAuthHeaders(); // Get updated authorization headers
+        const response = await axios({
+          method: request,
+          url: `/api/${url}`,
+          data,
+          headers,
+        });
+        return response;
+      } else {
+        // If token refresh failed, handle the error
+        throw new Error("Failed to refresh access token");
+      }
+    } else {
+      // Handle other types of errors
+      throw error;
+    }
   }
 }
 
@@ -243,6 +270,7 @@ export async function toggleLike(id) {
       );
     }
   } catch (error) {
+    console.log("error:", error);
     showErrorMessage(error);
   }
 }
@@ -252,7 +280,6 @@ export async function toggleRetweet(id) {
     // Send request to toggle like status
     const headers = await getAuthHeaders();
     const response = await axios.post(`/api/retweet/${id}`, {}, headers);
-    console.log("response =>", response);
     if (response.data.success) {
       // Save updated token
       extractToken(response.data.data.tokens);
