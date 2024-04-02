@@ -2,7 +2,15 @@ const { jwt } = require("xprz").Package();
 function generateAuthToken(user) {
   try {
     // Extract user information
-    const { _id, username, email, profilePic, likedTweets ,retweetedTweets,bookmarked} = user;
+    const {
+      _id,
+      username,
+      email,
+      profilePic,
+      likedTweets,
+      retweetedTweets,
+      bookmarked,
+    } = user;
     // Generate JWT token with user information
     const token = jwt().signToken(
       {
@@ -12,7 +20,7 @@ function generateAuthToken(user) {
         profilePic,
         likedTweets,
         retweetedTweets,
-        bookmarked
+        bookmarked,
       },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
