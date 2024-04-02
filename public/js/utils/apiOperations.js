@@ -36,7 +36,7 @@ export async function authenticateUser(
     // Handle server response based on success or failure
     if (response.data.success) {
       const tokens = response.data.data.tokens;
-      extractToken(tokens) // Save token to cookie
+      extractToken(tokens); // Save token to cookie
       // If the server indicates success, handle accordingly
       handleSuccess(form, response.data.message);
       // Set the 'showWelcomePhoto' flag to 'true' in localStorage
@@ -195,36 +195,28 @@ export async function sendRequest(url, request = "put", data = {}) {
   }
 }
 
-
-export async  function refreshToken(){
+export async function refreshToken() {
   try {
     // Fetch the refresh token from storage (e.g., from cookies or local storage)
     const refreshToken = getRefreshToken(); // Implement this function to retrieve the refresh token
 
     // Make a POST request to your server's refresh token endpoint
-    const response = await axios.post('/auth/refresh', { refreshToken });
+    const response = await axios.post("/auth/refresh", { refreshToken });
 
     // Check if the request was successful
     if (response.data.accessToken) {
-      // If the server returns a new access token, save it
       const newAccessToken = response.data.accessToken;
       saveAccessToken(newAccessToken); // Save the new access token using your utility function
-
-      // Optionally, you can also update the expiration time of the access token in your application state
-      // updateAccessTokenExpiration(response.data.expiresIn);
-
-      return true; // Return true to indicate successful token refresh
+      return true;
     } else {
       // If the server does not return a new access token, handle the error
-      console.error('Failed to refresh access token:', response.data.message);
+      console.error("Failed to refresh access token:", response.data.message);
       return false; // Return false to indicate token refresh failure
     }
   } catch (error) {
-    console.error('Error refreshing access token:', error.message);
-    return false; // Return false to indicate token refresh failure
+    showErrorMessage(error);
   }
 }
-
 
 /**
  * Toggles the like status of a tweet.
@@ -238,7 +230,7 @@ export async function toggleLike(id) {
     // Check if request was successful
     if (response.data.success) {
       // Save updated token
-      extractToken(response.data.data.tokens) ;
+      extractToken(response.data.data.tokens);
       // Get updated count of likes
       const countLike = response.data.data.likes.length;
       return countLike;
