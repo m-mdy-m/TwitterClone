@@ -35,10 +35,10 @@ exports.postSignup = async (ctx) => {
       });
 
       // Generate JWT token with user information
-      const token = generateAuthToken(newUser);
-      ctx.session.token = token;
+      const tokens = generateAuthToken(newUser);
+      ctx.session.token = tokens.accessToken ;
       // Send success response
-      return created({ token });
+      return created({ tokens });
     }
   } catch (error) {
     // Handle other errors (e.g., database error)

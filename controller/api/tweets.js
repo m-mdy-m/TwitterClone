@@ -4,7 +4,6 @@ const { handleRetweet } = require("../../utils/helperFunc");
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");
 const { generateTweetQueries } = $read("utils/helperFunc");
-const generateAuthToken = $read("utils/generateAuthToken");
 // Controller function to handle POST request to create a tweet
 exports.create = async (ctx) => {
   // Extract the tweet content from the request body

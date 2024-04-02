@@ -106,15 +106,15 @@ class TweetUserManager {
         return this.badRequest("Invalid user object provided.");
       }
 
-      const token = generateAuthToken(user);
-      if (!token || typeof token !== "string") {
+      const tokens  = generateAuthToken(user);
+      if (!tokens || typeof tokens !== "object" || !tokens.accessToken || !tokens.refreshToken) {
         return this.internalServerError(
           "Failed to generate authentication token."
         );
       }
 
-      this.req.session.token = token;
-     return token;
+      this.req.session.token = tokens.accessToken ;
+     return tokens ;
     } catch (error) {
       console.error("Error in saveUser:", error.message);
       return this.internalServerError(

@@ -63,11 +63,11 @@ exports.postLogin = async (ctx) => {
       });
     }
     // If authentication is successful, generate a JWT token
-    const token = generateAuthToken(user);
+    const tokens = generateAuthToken(user);
     // Set user session
-    ctx.session.token = token;
+    ctx.session.token = tokens.accessToken;
     // Send success response
-    return updated({ token });
+    return updated({ tokens });
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
   }
