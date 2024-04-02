@@ -19,9 +19,6 @@ export const isAuth = () => {
 // Utility function to check if the welcome photo should be shown
 export const showWelcome = () => localStorage.getItem("showWelcomePhoto");
 
-// Utility function to clear the authentication flag from localStorage
-export const clearAuth = () => localStorage.removeItem("logged");
-
 // Utility function to set an item in localStorage
 export const setItem = (key, value) => localStorage.setItem(key, value);
 
@@ -95,7 +92,56 @@ export default async function getCSRFToken() {
     return null;
   }
 }
+/**
+ * Clears any authentication-related data.
+ */
+export function clearAuth(){
+  localStorage.removeItem("logged");
+  // Clear the access token from session storage
+  sessionStorage.removeItem('accessToken');
+  // Clear the refresh token cookie
+  removeRefreshToken();
+}
 
+export function extractToken(tokens){
+    console.log(tokens);
+}
+
+
+// Function to save the access token in session storage
+export function saveAccessToken(accessToken) {
+  sessionStorage.setItem('accessToken', accessToken);
+}
+
+// Function to retrieve the access token from session storage
+export function getAccessToken() {
+  return sessionStorage.getItem('accessToken');
+}
+
+// Function to save the refresh token in an HTTP-only cookie
+export function saveRefreshToken(refreshToken) {
+  // Set the refresh token in an HTTP-only cookie with a secure flag
+  document.cookie = `refreshToken=${refreshToken}; path=/;`;
+}
+
+// Function to retrieve the refresh token from cookies
+export function getRefreshToken() {
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === 'refreshToken') {
+      return value;
+    }
+  }
+  return null;
+}
+/**
+ * Removes the refresh token cookie.
+ */
+export function removeRefreshToken() {
+  // Set the expiration date to a past time to delete the refresh token cookie
+  document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
 /**
  * Saves the token in a cookie.
  * @param {string} token - The token to be saved in the cookie.

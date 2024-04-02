@@ -1,6 +1,6 @@
 const { bcryptjs } = require("xprz").Package();
 const path = require("path");
-const generateAuthToken = $read("utils/generateAuthToken");
+const {generateAuthToken} = $read("utils/AuthToken");
 const User = $read("model/User");
 // Controller function to render the login page
 exports.getLogin = ({ sendFile }) => {
@@ -63,12 +63,13 @@ exports.postLogin = async (ctx) => {
       });
     }
     // If authentication is successful, generate a JWT token
-    const tokens = generateAuthToken(user);
+    const tokens = await generateAuthToken(user);
     // Set user session
     ctx.session.token = tokens.accessToken;
     // Send success response
     return updated({ tokens });
   } catch (error) {
+    console.log("error:",error);
     internalServerError("Internal server error. Please try again later.");
   }
 };

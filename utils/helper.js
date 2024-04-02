@@ -1,4 +1,4 @@
-const generateAuthToken = require("./generateAuthToken");
+const generateAuthToken = require("./AuthToken");
 
 const Tweet = $read("model/Tweet");
 const User = $read("model/User");

@@ -34,7 +34,8 @@ export async function authenticateUser(
     const response = await axios.post(url, requestData, header);
     // Handle server response based on success or failure
     if (response.data.success) {
-      const token = response.data.data.token;
+      const tokens = response.data.data.tokens;
+      console.log('tokens:',tokens);
       saveToken(token); // Save token to cookie
       // If the server indicates success, handle accordingly
       handleSuccess(form, response.data.message);
@@ -54,20 +55,27 @@ export async function authenticateUser(
 }
 // Function to handle user logout
 export async function logoutUser(header) {
-  // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
-  const logoutResponse = await axios.post("/auth/logout", {}, header);
-  // Check if the logout request is successful
-  if (logoutResponse.status === 200 && logoutResponse.data.success) {
-    // Redirect the user to the login page
-    window.location.href = "/auth/login";
-    // Clear localStorage flags
-    clearWelcomePhotoFlag();
-    clearAuth();
-    removeToken();
-  } else {
-    // If the logout process fails, display an error message
-    const message = logoutResponse.data.message;
-    showMessage(msgElm, message, "#944E63");
+  try {
+    // Send a POST request to the /auth/logout endpoint with the CSRF token in the headers
+    const logoutResponse = await axios.post("/auth/logout", {}, header);
+
+    // Check if the logout request is successful
+    if (logoutResponse.status === 200 && logoutResponse.data.success) {
+      // Clear any client-side authentication-related data
+      clearWelcomePhotoFlag(); // Assuming this function clears any specific flags
+      clearAuth(); // Assuming this function clears any other authentication-related data
+      removeToken(); // Assuming this function removes the token from cookies or local storage
+
+      // Redirect the user to the login page
+      window.location.href = "/auth/login";
+    } else {
+      // If the logout process fails, display an error message
+      const message = logoutResponse.data.message;
+      showMessage(msgElm, message, "#944E63");
+    }
+  } catch (error) {
+    // Handle any errors that occur during the logout process
+    showMessage(msgElm, "An error occurred during logout.", "#944E63");
   }
 }
 
