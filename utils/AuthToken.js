@@ -24,7 +24,7 @@ async function generateAuthToken(user) {
         bookmarked,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "15m" }
+      { expiresIn: "5m" }
     );
     // Generate refresh token
     const refreshToken = jwt().signToken(

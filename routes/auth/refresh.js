@@ -1,3 +1,5 @@
+const { verifyRefreshToken } = require('../../utils/AuthToken');
+
 // routes/auth.js
 const {route,expose }= require('xprz').Route();
 const { jwt } = require('xprz').Package()
@@ -10,7 +12,7 @@ route('/refresh').prefix('/auth').post(async (ctx) => {
 
   try {
     // Verify the refresh token
-    const decoded = jwt().verifyToken(refreshToken, JWT_SECRET);
+    const decoded = await verifyRefreshToken(refreshToken)
 
     // Check if the refresh token exists in the database
     const existingToken = await UserToken.findOne({ token: refreshToken });
