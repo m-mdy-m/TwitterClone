@@ -47,7 +47,7 @@ exports.postLogin = async (ctx) => {
       const isSameUser = ctx.user._id.toString() === user._id.toString();
       // If it's the same user, return a response indicating they're already logged in
       if (isSameUser) {
-        return status(409).json({
+        return ctx.status(409).json({
           success: false,
           error: "You are already logged, please logout first.",
         });

@@ -3,7 +3,7 @@ const User = require("../../model/User");
 exports.findUser = async (ctx) => {
   const { notFound, internalServerError } = ctx.jsonSender();
   try {
-    const id = ctx.getQueryParam("id");
+    const id = ctx.query("id");
     if (id) {
       const user = await User.findById(id);
       if (!user) {
@@ -11,7 +11,7 @@ exports.findUser = async (ctx) => {
         return notFound("User not found");
       }
       // If user is found, send the user object as a JSON response
-      return status(200).json({
+      return ctx.status(200).json({
         success: true,
         data: user,
       });
@@ -27,6 +27,7 @@ exports.findUser = async (ctx) => {
       data: user,
     });
   } catch (error) {
+    console.log("error:", error);
     // Send a 500 Internal Server Error response with a generic error message
     internalServerError("Something went wrong. Please try again later.");
   }
