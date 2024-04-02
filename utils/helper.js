@@ -4,8 +4,8 @@ const Tweet = $read("model/Tweet");
 const User = $read("model/User");
 class TweetUserManager {
   constructor(ctx, getJsonHandler) {
-    this.req = ctx.req;
-    this.id = this.req.param("id");
+    this.req = ctx;
+    this.id = ctx.param('id');
     this.json = getJsonHandler();
     this.badRequest = this.json.badRequest;
     this.notFound = this.json.notFound;
@@ -113,8 +113,8 @@ class TweetUserManager {
         );
       }
 
-      this.req.session = token;
-      return token;
+      this.req.session.token = token;
+     return token;
     } catch (error) {
       console.error("Error in saveUser:", error.message);
       return this.internalServerError(

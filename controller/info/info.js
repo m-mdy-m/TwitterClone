@@ -17,8 +17,6 @@ exports.findUser = async (ctx) => {
       });
     }
     const user = ctx.user;
-    console.log('ctx.user:',ctx.user);
-    console.log('ctx.req.user',ctx.req.user);
     if (!user) {
       // If user is not found, send a 404 Not Found response
       return notFound("User not found");

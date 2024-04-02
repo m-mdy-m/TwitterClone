@@ -1,3 +1,4 @@
+import { ActionButtons } from "../components/tweet/Action.btn.js";
 import { PostContent } from "../components/tweet/PostContent.js";
 import {
   getTweetInfo,
@@ -85,10 +86,11 @@ export function listMenuTweet() {
       wrapperContent.innerHTML = updateContent;
       const tweetInput = tweet.querySelector("#editContent");
       const button = tweet.querySelector("#iconSubmitEdit");
+      const edited_tweet = tweet.querySelector('.status__mode-edit')
       button.classList.add("show-button-edit");
       button.classList.remove("remove-button-edit");
       tweetInput.focus();
-      editTweetContent(tweetId, button, wrapperContent);
+      editTweetContent(tweetId, button, wrapperContent,edited_tweet);
     });
   });
 }
@@ -139,7 +141,7 @@ export function autoResizeInput() {
 }
 
 // Function to handle editing of tweet content.
-export function editTweetContent(tweetId, button, wrapperContent) {
+export function editTweetContent(tweetId, button, wrapperContent,edited_tweet) {
   // Get the tweet input element
   const tweetInput = document.getElementById("editContent");
 
@@ -156,11 +158,10 @@ export function editTweetContent(tweetId, button, wrapperContent) {
 
     // Update the content wrapper with the updated content
     wrapperContent.innerHTML = updateContent;
-
+    edited_tweet.style.display = 'block'
     // Remove the 'show-button-edit' class and add the 'remove-button-edit' class to the button
     button.classList.remove("show-button-edit");
     button.classList.add("remove-button-edit");
-
     // Call the toggleEditTweet function to update the tweet content on the server
     await toggleEditTweet(tweetId, tweetInput.value);
   });

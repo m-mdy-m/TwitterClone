@@ -102,7 +102,6 @@ exports.likeTweet = async (ctx) => {
       User.findByIdAndUpdate(userId, TweetQuery, { new: true }),
       Tweet.findByIdAndUpdate(id, UserQuery, { new: true }),
     ]);
-
     // Return a success response with the updated number of likes
     return updated({
       token: tweetManager.saveUser(newUser),
@@ -250,7 +249,7 @@ exports.deleteTweet = async (ctx) => {
 exports.editTweet = async (ctx)=>{
   const {internalServerError,updated } = ctx.jsonSender()
   try {
-    const content = ctx.getBodyParam('content')
+    const {content} = ctx.getBody()
     const tweetManager = new TweetUserManager(ctx, ctx.jsonSender);
     const {tweet} = await tweetManager.findTweetParam()
     tweet.content = content
