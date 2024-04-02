@@ -16,28 +16,34 @@ exports.ensureAuthenticated = (ctx, next) => {
  * Middleware to verify JWT token extracted from cookies.
  */
 exports.verifyToken = (ctx, nxt) => {
-  const accessToken = ctx.cookie.accessToken;
-  if (!accessToken || accessToken === "undefined" || jwt().isExpired(accessToken)) {
-    const refreshToken = ctx.cookie.refreshToken
+  const accessToken = ctx.cookies.accessToken;
+  if (
+    !accessToken ||
+    accessToken === "undefined" ||
+    jwt().isExpired(accessToken)
+  ) {
+    const refreshToken = ctx.cookies.refreshToken;
     if (!refreshToken || refreshToken === "undefined") {
-      // Handle case when refreshToken is missing or invalid
-      ctx.status = 401;
-      ctx.body = "Refresh token missing or invalid";
+      ctx.redirect("/auth/login");
       return;
     }
     try {
-      const decoded = jwt().verifyToken(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+      const decoded = jwt().verifyToken(
+        refreshToken,
+        process.env.REFRESH_TOKEN_PRIVATE_KEY
+      );
       // Check if the token is still valid
       if (decoded.exp < Date.now() / 1000) {
         ctx.status = 401;
-        ctx.body = { message: 'Refresh token expired' };
+        ctx.body = { message: "Refresh token expired" };
         return;
       }
       // Here you can perform additional checks on the refresh token payload if needed
-       generateAuthToken(ctx.user).then(newAccessToken=>{
-         ctx.cookie.accessToken = newAccessToken;
-         ctx.headers.authorization = `Bearer ${newAccessToken}`;
-       })
+      generateAuthToken(ctx.user).then((newAccessToken) => {
+        ctx.cookie.accessToken = newAccessToken;
+        ctx.headers.authorization = `Bearer ${newAccessToken}`;
+        nxt();
+      });
     } catch (error) {
       // Handle invalid refresh token
       ctx.status = 401;
