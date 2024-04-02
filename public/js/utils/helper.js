@@ -1,4 +1,4 @@
-import getCSRFToken, { getMsgElement, getToken } from "./utils.js";
+import getCSRFToken, { getMsgElement, getAccessToken } from "./utils.js";
 
 const msgElm = getMsgElement();
 const iconElement = document.getElementById("icon-tweet");
@@ -117,7 +117,7 @@ export async function getAuthHeaders() {
   }
 
   // Retrieve JWT token
-  const token = getToken();
+  const token = getAccessToken();
   // Construct headers object including CSRF token and JWT token
   const header = {
     headers: {

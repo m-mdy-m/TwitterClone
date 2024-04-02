@@ -6,7 +6,7 @@ export const getMsgElement = () => document.getElementById("msgElm");
 
 // Utility function to check if the user is authenticated
 export const isAuth = () => {
-  const token = getToken();
+  const token = getAccessToken();
   const logged = localStorage.getItem("logged");
   // Check if both token and logged flag are present
   if (token && logged) {
@@ -95,26 +95,32 @@ export default async function getCSRFToken() {
 /**
  * Clears any authentication-related data.
  */
-export function clearAuth(){
+export function clearAuth() {
   localStorage.removeItem("logged");
   // Clear the access token from session storage
-  sessionStorage.removeItem('accessToken');
+  sessionStorage.removeItem("accessToken");
   // Clear the refresh token cookie
+  clearRefreshToken();
 }
 
-export function extractToken(tokens){
-    console.log(tokens);
+// Function to clear the refresh token cookie
+function clearRefreshToken() {
+  // Set the expiration date of the refresh token cookie to a past time
+  document.cookie =
+    "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";
 }
-
-
+export function extractToken(tokens) {
+  saveAccessToken(tokens.accessToken);
+  saveRefreshToken(tokens.refreshToken);
+}
 // Function to save the access token in session storage
 export function saveAccessToken(accessToken) {
-  sessionStorage.setItem('accessToken', accessToken);
+  sessionStorage.setItem("accessToken", accessToken);
 }
 
 // Function to retrieve the access token from session storage
 export function getAccessToken() {
-  return sessionStorage.getItem('accessToken');
+  return sessionStorage.getItem("accessToken");
 }
 
 // Function to save the refresh token in an HTTP-only cookie
@@ -125,10 +131,10 @@ export function saveRefreshToken(refreshToken) {
 
 // Function to retrieve the refresh token from cookies
 export function getRefreshToken() {
-  const cookies = document.cookie.split(';');
+  const cookies = document.cookie.split(";");
   for (let cookie of cookies) {
-    const [name, value] = cookie.trim().split('=');
-    if (name === 'refreshToken') {
+    const [name, value] = cookie.trim().split("=");
+    if (name === "refreshToken") {
       return value;
     }
   }

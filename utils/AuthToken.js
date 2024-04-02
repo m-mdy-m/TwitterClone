@@ -27,8 +27,8 @@ async function generateAuthToken(user) {
       { expiresIn: "15m" }
     );
     // Generate refresh token
-    const refreshToken = jwt().refreshToken(
-      accessToken,
+    const refreshToken = jwt().signToken(
+      { userId: _id },
       process.env.REFRESH_TOKEN_PRIVATE_KEY,
       { expiresIn: "7d" }
     );

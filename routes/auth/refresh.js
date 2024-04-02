@@ -5,7 +5,7 @@ const UserToken = $read('model/UserToken');
 const { JWT_SECRET } = process.env;
 
 // Endpoint for token refresh
-route('/refresh').post(async (ctx) => {
+route('/refresh').prefix('/auth').post(async (ctx) => {
   const { refreshToken } = ctx.body;
 
   try {

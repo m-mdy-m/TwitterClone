@@ -14,9 +14,8 @@ import {
 import {
   clearAuth,
   clearWelcomePhotoFlag,
+  extractToken,
   getMsgElement,
-  removeToken,
-  saveToken,
   setItem,
 } from "./utils.js";
 const msgElm = getMsgElement();
@@ -35,8 +34,7 @@ export async function authenticateUser(
     // Handle server response based on success or failure
     if (response.data.success) {
       const tokens = response.data.data.tokens;
-      console.log('tokens:',tokens);
-      saveToken(token); // Save token to cookie
+      extractToken(tokens) // Save token to cookie
       // If the server indicates success, handle accordingly
       handleSuccess(form, response.data.message);
       // Set the 'showWelcomePhoto' flag to 'true' in localStorage
@@ -64,8 +62,6 @@ export async function logoutUser(header) {
       // Clear any client-side authentication-related data
       clearWelcomePhotoFlag(); // Assuming this function clears any specific flags
       clearAuth(); // Assuming this function clears any other authentication-related data
-      removeToken(); // Assuming this function removes the token from cookies or local storage
-
       // Redirect the user to the login page
       window.location.href = "/auth/login";
     } else {
@@ -133,7 +129,7 @@ export async function getTweets() {
             if (!parentTweetInfo) {
               for (const tweet of tweets) {
                 if (tweet.originalTweet === parentTweet) {
-                  return 'Deleted';
+                  return "Deleted";
                 }
               }
             }
@@ -142,8 +138,8 @@ export async function getTweets() {
         );
         const authors = await Promise.all(
           authorIds.map(async (authorId) => {
-            if(authorId === 'Deleted'){
-              return 'Deleted'
+            if (authorId === "Deleted") {
+              return "Deleted";
             }
             return await getUserInfo(authorId?._id);
           })
@@ -197,6 +193,13 @@ export async function sendRequest(url, request = "put", data = {}) {
   }
 }
 
+
+export async  function refreshToken(){
+
+
+}
+
+
 /**
  * Toggles the like status of a tweet.
  * @param {string} id - The ID of the tweet to toggle the like status for.
@@ -209,8 +212,7 @@ export async function toggleLike(id) {
     // Check if request was successful
     if (response.data.success) {
       // Save updated token
-      saveToken(response.data.data.token);
-
+      extractToken(response.data.data.tokens) ;
       // Get updated count of likes
       const countLike = response.data.data.likes.length;
       return countLike;
@@ -235,7 +237,7 @@ export async function toggleRetweet(id) {
     console.log("response =>", response);
     if (response.data.success) {
       // Save updated token
-      saveToken(response.data.data.token);
+      extractToken(response.data.data.tokens);
       return response.data.data.retweet;
     } else {
       // Show error message with appropriate color
@@ -257,7 +259,7 @@ export async function toggleBookmark(id) {
     // If the request is successful
     if (response.data.success) {
       // Save the authentication token received from the server's response
-      saveToken(response.data.data.token);
+      extractToken(response.data.data.tokens);
 
       // Return the updated bookmark status of the tweet
       return response.data.data.isBookmarked;
@@ -284,7 +286,7 @@ export async function toggleDeleteTweet(id) {
     const response = await axios.delete(`/api/deleteTweet/${id}`, headers);
     if (response.data.data) {
       // Save the authentication token received from the server's response
-      saveToken(response.data.data.token);
+      extractToken(response.data.data.tokens);
     } else if (!response.data.success) {
       // Show error message with appropriate color
       showMessage(
@@ -318,12 +320,12 @@ export async function toggleEditTweet(id, content) {
   }
 }
 
-export async function getProfileUser(username){
+export async function getProfileUser(username) {
   try {
-    const response = await sendRequest(`profile/${username}`,'get')
-    console.log('response : ',response);
-    return response
+    const response = await sendRequest(`profile/${username}`, "get");
+    console.log("response : ", response);
+    return response;
   } catch (error) {
-    showErrorMessage(error)
+    showErrorMessage(error);
   }
 }
