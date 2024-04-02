@@ -79,8 +79,18 @@ export async function logoutUser(header) {
       clearAuth(); // Assuming this function clears any other authentication-related data
       // Redirect the user to the login page
       window.location.href = "/auth/login";
+    } else if (logoutResponse.status === 401) {
+      // If the server indicates unauthorized access, try refreshing the token
+      const tokenRefreshed = await refreshToken();
+      if (tokenRefreshed) {
+        // If token refresh is successful, retry the logout process
+        await logoutUser(header);
+      } else {
+        // If token refresh fails, display an error message
+        showMessage(msgElm, "An error occurred during logout.", "#944E63");
+      }
     } else {
-      // If the logout process fails, display an error message
+      // If the logout process fails for other reasons, display an error message
       const message = logoutResponse.data.message;
       showMessage(msgElm, message, "#944E63");
     }
@@ -103,10 +113,22 @@ export async function getUserInfo(id = "") {
     // Return user information
     return response.data.data;
   } catch (error) {
-    showErrorMessage(
-      error,
-      "Failed to fetch user data. Please try again later."
-    );
+    // If the error is due to unauthorized access (status code 401), try refreshing the token
+    if (error.response && error.response.status === 401) {
+      const tokenRefreshed = await refreshToken();
+      if (tokenRefreshed) {
+        // If token refresh is successful, retry the getUserInfo function
+        return await getUserInfo(id);
+      } else {
+        // If token refresh fails, display an error message
+        showErrorMessage(error, "Failed to fetch user data. Please try again later.");
+        return null; // Return null or handle the error as needed
+      }
+    } else {
+      // If the error is not due to unauthorized access, display an error message
+      showErrorMessage(error, "Failed to fetch user data. Please try again later.");
+      return null; // Return null or handle the error as needed
+    }
   }
 }
 
