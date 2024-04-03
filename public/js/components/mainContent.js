@@ -1,3 +1,4 @@
+import { Profile } from "./common/Profile.js";
 import { LoginForm, SignupForm } from "./form/FormHandler.js";
 import { HOME } from "./main/Home.js"
 let currentPage = window.location.pathname
@@ -9,6 +10,8 @@ export function mainContent(){
             return LoginForm()
         case '/auth/signup':
             return SignupForm()
+        case "/profile":
+            return Profile()
         default :
             return ""
     

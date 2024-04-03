@@ -53,9 +53,9 @@ export function initializeComponentsNavigation() {
     }
     try {
       const response = await getProfileUser(username);
-
+      
       if (response.success) {
-        document.body.innerHTML = BodyContent();
+        // Redirect to the profile page if the username matches
         window.location.href = `./profile/${username}`;
       } else {
         // Display an error message or handle the error as needed
@@ -64,6 +64,7 @@ export function initializeComponentsNavigation() {
     } catch (error) {
       console.error("Error:", error);
     }
+    document.body.innerHTML = BodyContent();
   });
 
   // Optionally display welcome photo
