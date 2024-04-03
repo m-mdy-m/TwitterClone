@@ -1,4 +1,5 @@
 import { attachLogoutHandler } from "../auth/logout.js";
+import { BodyContent } from "../components/Body.js";
 import { getProfileUser } from "../utils/apiOperations.js";
 import { clearWelcomePhotoFlag, showWelcome } from "../utils/utils.js";
 // Function to handle navigation events
@@ -43,9 +44,26 @@ export function initializeComponentsNavigation() {
   handleNavigation();
   const wrapper = document.querySelector(".userProfileWrapper");
   wrapper.addEventListener("click", async () => {
-    const username = wrapper.querySelector(".username");
-    const data = await getProfileUser(username.innerHTML);
-    data.success ? (window.location.href = `./profile/${data.data.username}`) : "";
+    const usernameElement = wrapper.querySelector(".username");
+    const username = usernameElement ? usernameElement.innerHTML : null;
+
+    if (!username) {
+      console.error("Username element not found");
+      return;
+    }
+    try {
+      const response = await getProfileUser(username);
+
+      if (response.success) {
+        document.body.innerHTML = BodyContent();
+        window.location.href = `./profile/${username}`;
+      } else {
+        // Display an error message or handle the error as needed
+        console.error("Error:", response.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   });
 
   // Optionally display welcome photo

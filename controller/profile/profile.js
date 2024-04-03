@@ -6,6 +6,13 @@ exports.getProfile = (ctx) => {
   const manager = new TweetUserManager(ctx, ctx.jsonSender);
   const user = manager.registerUser();
   if (user.username === username) {
-    return ctx.jsonSender().success('Operation successful',{username});
+    // If the username matches, send a success response with the username
+    return ctx.jsonSender().success('Operation successful', { username });
+  } else {
+    // If the username does not match, send an error response
+    return ctx.jsonSender().error('Unauthorized', 401);
   }
 };
+exports.ProfileUser = ({sendFile})=>{
+  sendFile(path.join(process.cwd(), "/public/main.html"));
+}
