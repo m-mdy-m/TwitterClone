@@ -1,10 +1,15 @@
 import Header from "./common/header.js";
 import { mainContent } from "./mainContent.js";
-export function BodyContent({
-  style_main = "flex justify-end  bg-[#080202]",
-  style_error = "absolute top-4 left-[50%]",
-  height = "screen",
-} = {}) {
+export function BodyContent() {
+  let style_main = "flex justify-end  bg-[#080202]";
+  let style_error = "flex justify-end  bg-[#080202]";
+  let height = "flex justify-end  bg-[#080202]";
+  const path = window.location.pathname;
+  if (path === "/home") {
+    style_main = "grid grid-cols-main bg-gradient-main mt-4 mr-4 mb-4 ";
+    style_error = "fixed top-4 left-[40%]";
+    height = "full";
+  }
   return `
   <div id="loader">
       <img src="/assets/loading/bouncing-ball.svg" alt="loader">

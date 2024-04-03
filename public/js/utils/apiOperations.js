@@ -285,7 +285,6 @@ export async function toggleLike(id) {
   try {
     // Send request to toggle like status
     const response = await sendRequest(`like/${id}`);
-    console.log("response : ", response);
     // Check if request was successful
     if (response.data.success) {
       // Save updated token
