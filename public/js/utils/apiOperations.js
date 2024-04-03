@@ -121,12 +121,18 @@ export async function getUserInfo(id = "") {
         return await getUserInfo(id);
       } else {
         // If token refresh fails, display an error message
-        showErrorMessage(error, "Failed to fetch user data. Please try again later.");
+        showErrorMessage(
+          error,
+          "Failed to fetch user data. Please try again later."
+        );
         return null; // Return null or handle the error as needed
       }
     } else {
       // If the error is not due to unauthorized access, display an error message
-      showErrorMessage(error, "Failed to fetch user data. Please try again later.");
+      showErrorMessage(
+        error,
+        "Failed to fetch user data. Please try again later."
+      );
       return null; // Return null or handle the error as needed
     }
   }
@@ -223,7 +229,7 @@ export async function sendRequest(url, request = "put", data = {}) {
     // Get authorization headers
 
     // Send request with authorization headers
-    const response = await axios[request](`/api/${url}`,data, headers,);
+    const response = await axios[request](`/api/${url}`, data, headers);
 
     return response;
   } catch (error) {
@@ -234,15 +240,15 @@ export async function sendRequest(url, request = "put", data = {}) {
       if (success) {
         // If token refresh was successful, retry the original request
         headers = await getAuthHeaders(); // Get updated authorization headers
-        const response = await axios[request](`/api/${url}`,data, headers,);
+        const response = await axios[request](`/api/${url}`, data, headers);
         return response;
       } else {
         // If token refresh failed, handle the error
-        showErrorMessage(error)
+        showErrorMessage(error);
       }
     } else {
       // Handle other types of errors
-      showErrorMessage(error)
+      showErrorMessage(error);
     }
   }
 }
@@ -279,7 +285,7 @@ export async function toggleLike(id) {
   try {
     // Send request to toggle like status
     const response = await sendRequest(`like/${id}`);
-    console.log('response : ',response);
+    console.log("response : ", response);
     // Check if request was successful
     if (response.data.success) {
       // Save updated token
@@ -394,8 +400,7 @@ export async function toggleEditTweet(id, content) {
 export async function getProfileUser(username) {
   try {
     const response = await sendRequest(`profile/${username}`, "get");
-    console.log("response : ", response);
-    return response;
+    return response.data;
   } catch (error) {
     showErrorMessage(error);
   }

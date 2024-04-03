@@ -12,6 +12,9 @@ const routes = {
   },
   "/auth/login": {
   },
+  "/profile/":{
+    
+  }
 };
 const path = window.location.pathname;
 const route = routes[path];

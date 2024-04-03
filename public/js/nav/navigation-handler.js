@@ -1,4 +1,4 @@
-import {attachLogoutHandler} from "../auth/logout.js";
+import { attachLogoutHandler } from "../auth/logout.js";
 import { getProfileUser } from "../utils/apiOperations.js";
 import { clearWelcomePhotoFlag, showWelcome } from "../utils/utils.js";
 // Function to handle navigation events
@@ -33,7 +33,7 @@ function handleNavigation() {
 }
 // Function to execute components on document load
 export function initializeComponentsNavigation() {
-  const showWelcomePhotoFlag = showWelcome()
+  const showWelcomePhotoFlag = showWelcome();
 
   // Initialize logout functionality
   const btnLogout = document.querySelector(".logout");
@@ -41,12 +41,12 @@ export function initializeComponentsNavigation() {
 
   // Handle navigation events
   handleNavigation();
-  const wrapper = document.querySelector('.userProfileWrapper')
-  wrapper.addEventListener('click',async()=>{
-    const username = wrapper.querySelector('.username')
-    const response = await getProfileUser(username.innerHTML)
-    console.log(response);
-  })
+  const wrapper = document.querySelector(".userProfileWrapper");
+  wrapper.addEventListener("click", async () => {
+    const username = wrapper.querySelector(".username");
+    const data = await getProfileUser(username.innerHTML);
+    data.success ? (window.location.href = `./profile/${data.data.username}`) : "";
+  });
 
   // Optionally display welcome photo
   if (showWelcomePhotoFlag) {
@@ -55,7 +55,7 @@ export function initializeComponentsNavigation() {
     });
     // Optionally, set an expiry for the flag after 10 minutes
     setTimeout(() => {
-      clearWelcomePhotoFlag()
+      clearWelcomePhotoFlag();
       document.querySelectorAll(".welcome-user").forEach((el) => {
         el.style.display = "none";
       });
@@ -77,5 +77,3 @@ export function initializeComponentsNavigation() {
     }
   });
 }
-
-
