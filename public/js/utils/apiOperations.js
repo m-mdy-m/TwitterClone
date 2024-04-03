@@ -223,12 +223,7 @@ export async function sendRequest(url, request = "put", data = {}) {
     // Get authorization headers
 
     // Send request with authorization headers
-    const response = await axios({
-      method: request,
-      url: `/api/${url}`,
-      data,
-      headers,
-    });
+    const response = await axios[request](`/api/${url}`,data, headers,);
 
     return response;
   } catch (error) {
@@ -239,12 +234,7 @@ export async function sendRequest(url, request = "put", data = {}) {
       if (success) {
         // If token refresh was successful, retry the original request
         headers = await getAuthHeaders(); // Get updated authorization headers
-        const response = await axios({
-          method: request,
-          url: `/api/${url}`,
-          data,
-          headers,
-        });
+        const response = await axios[request](`/api/${url}`,data, headers,);
         return response;
       } else {
         // If token refresh failed, handle the error

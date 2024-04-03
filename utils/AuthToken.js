@@ -50,7 +50,7 @@ async function verifyRefreshToken(refreshToken) {
     // Find user token in the database
     const userToken = await UserToken.findOne({ token: refreshToken });
     if (!userToken) {
-      throw new Error("Invalid refresh token");
+      return 
     }
 
     // Verify refresh token
