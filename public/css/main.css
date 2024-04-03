@@ -268,6 +268,17 @@
       rgba(0, 0, 0, 1) 100%
     );
   }
+  .bg-gradient-profile{
+    background: rgb(101, 25, 4);
+    background: radial-gradient(
+      circle,
+      rgb(101, 25, 4) 0%,
+      rgba(0, 0, 0, 1) 27%,
+      rgba(0, 0, 0, 1) 53%,
+      rgba(0, 0, 0, 1) 90%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
   .bg-gradient-form {
     background: rgb(141, 73, 163);
     background: radial-gradient(
