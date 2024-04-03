@@ -1,5 +1,8 @@
 const Xprz = require("xprz");
-const { generateAuthToken, generateRefreshToken } = require("../utils/AuthToken");
+const {
+  generateAuthToken,
+  generateRefreshToken,
+} = require("../utils/AuthToken");
 const { clearAllCookies } = $read("utils/helperFunc");
 const { jwt } = Xprz.Package();
 // Middleware function to ensure user authentication
@@ -17,15 +20,21 @@ exports.ensureAuthenticated = (ctx, next) => {
  */
 exports.verifyToken = (ctx, nxt) => {
   let accessToken = ctx.cookies.accessToken;
-  if (!accessToken ||accessToken === "undefined" || jwt().isExpired(accessToken) ) {
+  let key = process.env.ACCESS_TOKEN_PRIVATE_KEY;
+  if (
+    !accessToken ||
+    accessToken === "undefined" ||
+    jwt().isExpired(accessToken)
+  ) {
     try {
-      generateRefreshToken(ctx).then((newAccessToken)=>{
+      generateRefreshToken(ctx).then((newAccessToken) => {
         if (newAccessToken) {
           // Set the new access token in session or cookies
           ctx.session.token = newAccessToken;
-          accessToken = newAccessToken
+          accessToken = newAccessToken;
+          key = process.env.REFRESH_TOKEN_PRIVATE_KEY;
         }
-      })
+      });
     } catch (error) {
       console.error("Error refreshing token:", error);
       ctx.redirect("/auth/login");
@@ -33,5 +42,5 @@ exports.verifyToken = (ctx, nxt) => {
     }
   }
   ctx.headers.authorization = `Bearer ${accessToken}`;
-  return jwt().authenticate(process.env.ACCESS_TOKEN_PRIVATE_KEY)(ctx, nxt);
+  return jwt().authenticate(key)(ctx, nxt);
 };
