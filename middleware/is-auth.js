@@ -1,5 +1,5 @@
 const Xprz = require("xprz");
-const { generateAuthToken } = require("../utils/AuthToken");
+const { generateAuthToken, generateRefreshToken } = require("../utils/AuthToken");
 const { clearAllCookies } = $read("utils/helperFunc");
 const { jwt } = Xprz.Package();
 // Middleware function to ensure user authentication
@@ -17,37 +17,25 @@ exports.ensureAuthenticated = (ctx, next) => {
  */
 exports.verifyToken = (ctx, nxt) => {
   const accessToken = ctx.cookies.accessToken;
-  if (
-    !accessToken ||
-    accessToken === "undefined" ||
-    jwt().isExpired(accessToken)
-  ) {
+  if (!accessToken ||accessToken === "undefined" || jwt().isExpired(accessToken) ) {
     const refreshToken = ctx.cookies.refreshToken;
     if (!refreshToken || refreshToken === "undefined") {
       ctx.redirect("/auth/login");
       return;
     }
     try {
-      const decoded = jwt().verifyToken(
-        refreshToken,
-        process.env.REFRESH_TOKEN_PRIVATE_KEY
-      );
-      // Check if the token is still valid
-      if (decoded.exp < Date.now() / 1000) {
-        ctx.status = 401;
-        ctx.body = { message: "Refresh token expired" };
-        return;
-      }
-      // Here you can perform additional checks on the refresh token payload if needed
-      generateAuthToken(ctx.user).then((newAccessToken) => {
-        ctx.cookie.accessToken = newAccessToken;
-        ctx.headers.authorization = `Bearer ${newAccessToken}`;
-        nxt();
-      });
+      generateRefreshToken(ctx).then((newAccessToken)=>{
+        if (newAccessToken) {
+          // Set the new access token in session or cookies
+          ctx.session.token = newAccessToken;
+          ctx.cookies.set('accessToken', newAccessToken);
+          // Proceed with the request
+          return nxt();
+        }
+      })
     } catch (error) {
-      // Handle invalid refresh token
-      ctx.status = 401;
-      ctx.body = "Invalid refresh token";
+      console.error("Error refreshing token:", error);
+      ctx.redirect("/auth/login");
       return;
     }
   }

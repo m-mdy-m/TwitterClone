@@ -23,7 +23,7 @@ async function generateAuthToken(user) {
         retweetedTweets,
         bookmarked,
       },
-      process.env.JWT_SECRET,
+      process.env.ACCESS_TOKEN_PRIVATE_KEY,
       { expiresIn: "5m" }
     );
     // Generate refresh token
@@ -62,4 +62,35 @@ async function verifyRefreshToken(refreshToken) {
   }
 }
 
-module.exports = { generateAuthToken, verifyRefreshToken };
+async function generateRefreshToken(ctx) {
+  try {
+    const accessToken = ctx.cookies.accessToken;
+    if (!accessToken || accessToken === "undefined") {
+      const refreshToken = ctx.cookies.refreshToken;
+      if (!refreshToken || refreshToken === "undefined") {
+        ctx.redirect("/auth/login");
+        return;
+      }
+      const decoded = await verifyRefreshToken(refreshToken); // Verify refresh token
+      if (decoded) {
+        const newAccessToken = generateAccessToken(decoded.userId); // Generate new access token
+        return newAccessToken;
+      }
+    }
+  } catch (error) {
+    console.error("Error generating refresh token:", error);
+    throw error;
+  }
+}
+
+function generateAccessToken(userId) {
+  const accessToken = jwt().signToken(
+    { userId },
+    process.env.ACCESS_TOKEN_PRIVATE_KEY,
+    { expiresIn: "1h" }
+  );
+
+  return accessToken;
+}
+
+module.exports = { generateAuthToken, verifyRefreshToken,generateRefreshToken };
