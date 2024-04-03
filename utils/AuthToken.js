@@ -77,7 +77,7 @@ async function generateRefreshToken(ctx) {
     }
     const decoded = await verifyRefreshToken(refreshToken);
     if (decoded) {
-      const newAccessToken = generateAccessToken(decoded.userId);
+      const newAccessToken = await generateAccessToken(decoded.userId);
       return newAccessToken;
     }
   } catch (error) {
@@ -86,23 +86,22 @@ async function generateRefreshToken(ctx) {
   }
 }
 
-function generateAccessToken(userId) {
-  User.findOne({ _id: userId }).then((user) => {
-    const accessToken = jwt().signToken(
-      {
-        userId: userId,
-        username: user.username,
-        email: user.email,
-        profilePic: user.profilePic,
-        likedTweets: user.likedTweets,
-        retweetedTweets: user.retweetedTweets,
-        bookmarked: user.bookmarked,
-      },
-      process.env.ACCESS_TOKEN_PRIVATE_KEY,
-      { expiresIn: "1h" }
-    );
-    return accessToken;
-  });
+async function generateAccessToken(userId) {
+  const user = await User.findOne({ _id: userId });
+  const accessToken = jwt().signToken(
+    {
+      userId: userId,
+      username: user.username,
+      email: user.email,
+      profilePic: user.profilePic,
+      likedTweets: user.likedTweets,
+      retweetedTweets: user.retweetedTweets,
+      bookmarked: user.bookmarked,
+    },
+    process.env.ACCESS_TOKEN_PRIVATE_KEY,
+    { expiresIn: "1h" }
+  );
+  return accessToken;
 }
 
 module.exports = {
