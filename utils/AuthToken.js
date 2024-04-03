@@ -24,7 +24,7 @@ async function generateAuthToken(user) {
         bookmarked,
       },
       process.env.ACCESS_TOKEN_PRIVATE_KEY,
-      { expiresIn: "5m" }
+      { expiresIn: "2m" }
     );
     // Generate refresh token
     const refreshToken = jwt().signToken(
@@ -68,9 +68,9 @@ async function generateRefreshToken(ctx) {
       ctx.redirect("/auth/login");
       return;
     }
-    const decoded = await verifyRefreshToken(refreshToken); // Verify refresh token
+    const decoded = await verifyRefreshToken(refreshToken);
     if (decoded) {
-      const newAccessToken = generateAccessToken(decoded.userId); // Generate new access token
+      const newAccessToken = generateAccessToken(decoded.userId); 
       return newAccessToken;
     }
   } catch (error) {

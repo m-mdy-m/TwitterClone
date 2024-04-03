@@ -20,27 +20,41 @@ exports.ensureAuthenticated = (ctx, next) => {
  */
 exports.verifyToken = (ctx, nxt) => {
   let accessToken = ctx.cookies.accessToken;
-  let key = process.env.ACCESS_TOKEN_PRIVATE_KEY;
-  if (
-    !accessToken ||
-    accessToken === "undefined" ||
-    jwt().isExpired(accessToken)
-  ) {
+
+  if (!accessToken || accessToken === "undefined") {
+    // If access token is missing or undefined, redirect to login page
+    console.error("Access token missing or undefined");
+    ctx.redirect("/auth/login");
+    return;
+  }
+
+  // Check if the access token is expired
+  if (jwt().isExpired(accessToken)) {
     try {
+      // Generate a new access token using refresh token
       generateRefreshToken(ctx).then((newAccessToken) => {
         if (newAccessToken) {
           // Set the new access token in session or cookies
-          ctx.session.token = newAccessToken;
-          accessToken = newAccessToken;
-          key = process.env.REFRESH_TOKEN_PRIVATE_KEY;
+          ctx.cookies.accessToken = newAccessToken;
+          accessToken = newAccessToken; // Update the access token
+
+          // Set the new access token in the Authorization header for authentication
+          ctx.headers.authorization = `Bearer ${newAccessToken}`;
         }
+
+        // Authenticate using the new access token
+        return jwt().authenticate(process.env.ACCESS_TOKEN_PRIVATE_KEY)(ctx, nxt);
       });
     } catch (error) {
       console.error("Error refreshing token:", error);
       ctx.redirect("/auth/login");
       return;
     }
+  } else {
+    // Access token is valid, set it in the Authorization header for authentication
+    ctx.headers.authorization = `Bearer ${accessToken}`;
+
+    // Authenticate using the access token
+    return jwt().authenticate(process.env.ACCESS_TOKEN_PRIVATE_KEY)(ctx, nxt);
   }
-  ctx.headers.authorization = `Bearer ${accessToken}`;
-  return jwt().authenticate(key)(ctx, nxt);
 };
