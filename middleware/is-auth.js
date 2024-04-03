@@ -23,7 +23,6 @@ exports.verifyToken = (ctx, nxt) => {
 
   if (!accessToken || accessToken === "undefined") {
     // If access token is missing or undefined, redirect to login page
-    console.error("Access token missing or undefined");
     ctx.redirect("/auth/login");
     return;
   }

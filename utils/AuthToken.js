@@ -28,7 +28,7 @@ async function generateAuthToken(user) {
     );
     // Generate refresh token
     const refreshToken = jwt().signToken(
-      { userId: _id },
+      { userId: _id, email, profilePic, bookmarked },
       process.env.REFRESH_TOKEN_PRIVATE_KEY,
       { expiresIn: "7d" }
     );
@@ -46,15 +46,18 @@ async function generateAuthToken(user) {
 }
 async function verifyRefreshToken(refreshToken) {
   try {
-
     // Find user token in the database
     const userToken = await UserToken.findOne({ token: refreshToken });
     if (!userToken) {
-      return 
+      return;
     }
 
-    // Verify refresh token
-    return jwt().verifyToken(refreshToken, process.env.REFRESH_TOKEN_PRIVATE_KEY);
+    const decodedToken = jwt().verifyToken(refreshToken, process.env.REFRESH_TOKEN_PRIVATE_KEY);
+    if (!decodedToken) {
+      throw new Error("Invalid refresh token");
+    }
+
+    return decodedToken;
   } catch (error) {
     console.error("Error verifying refresh token:", error);
     throw error;
@@ -70,7 +73,7 @@ async function generateRefreshToken(ctx) {
     }
     const decoded = await verifyRefreshToken(refreshToken);
     if (decoded) {
-      const newAccessToken = generateAccessToken(decoded.userId); 
+      const newAccessToken = generateAccessToken(decoded.userId);
       return newAccessToken;
     }
   } catch (error) {
@@ -89,4 +92,8 @@ function generateAccessToken(userId) {
   return accessToken;
 }
 
-module.exports = { generateAuthToken, verifyRefreshToken,generateRefreshToken };
+module.exports = {
+  generateAuthToken,
+  verifyRefreshToken,
+  generateRefreshToken,
+};
