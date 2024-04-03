@@ -11,24 +11,6 @@ const UserToken = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  email: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true,
-    ref: "User",
-  },
-  profilePic: {
-    type: String,
-    default: "/assets/images/profilePic.png",
-    ref: "User",
-  },
-  bookmarked: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Tweet",
-    },
-  ],
   createdAt: {
     type: Date,
     default: Date.now,

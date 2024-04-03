@@ -1,5 +1,6 @@
 const { jwt } = require("xprz").Package();
 const UserToken = require("../model/UserToken");
+const User = require("../model/User");
 async function generateAuthToken(user) {
   try {
     // Extract user information
@@ -28,7 +29,7 @@ async function generateAuthToken(user) {
     );
     // Generate refresh token
     const refreshToken = jwt().signToken(
-      { userId: _id, email, profilePic, bookmarked },
+      { userId: _id },
       process.env.REFRESH_TOKEN_PRIVATE_KEY,
       { expiresIn: "7d" }
     );
@@ -52,7 +53,10 @@ async function verifyRefreshToken(refreshToken) {
       return;
     }
 
-    const decodedToken = jwt().verifyToken(refreshToken, process.env.REFRESH_TOKEN_PRIVATE_KEY);
+    const decodedToken = jwt().verifyToken(
+      refreshToken,
+      process.env.REFRESH_TOKEN_PRIVATE_KEY
+    );
     if (!decodedToken) {
       throw new Error("Invalid refresh token");
     }
@@ -83,13 +87,22 @@ async function generateRefreshToken(ctx) {
 }
 
 function generateAccessToken(userId) {
-  const accessToken = jwt().signToken(
-    { userId },
-    process.env.ACCESS_TOKEN_PRIVATE_KEY,
-    { expiresIn: "1h" }
-  );
-
-  return accessToken;
+  User.findOne({ _id: userId }).then((user) => {
+    const accessToken = jwt().signToken(
+      {
+        userId: userId,
+        username: user.username,
+        email: user.email,
+        profilePic: user.profilePic,
+        likedTweets: user.likedTweets,
+        retweetedTweets: user.retweetedTweets,
+        bookmarked: user.bookmarked,
+      },
+      process.env.ACCESS_TOKEN_PRIVATE_KEY,
+      { expiresIn: "1h" }
+    );
+    return accessToken;
+  });
 }
 
 module.exports = {
