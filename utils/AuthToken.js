@@ -46,7 +46,6 @@ async function generateAuthToken(user) {
 }
 async function verifyRefreshToken(refreshToken) {
   try {
-    const key = process.env.REFRESH_TOKEN_PRIVATE_KEY;
 
     // Find user token in the database
     const userToken = await UserToken.findOne({ token: refreshToken });
@@ -55,7 +54,7 @@ async function verifyRefreshToken(refreshToken) {
     }
 
     // Verify refresh token
-    return jwt().verifyToken(refreshToken, key);
+    return jwt().verifyToken(refreshToken, process.env.REFRESH_TOKEN_PRIVATE_KEY);
   } catch (error) {
     console.error("Error verifying refresh token:", error);
     throw error;
@@ -64,18 +63,15 @@ async function verifyRefreshToken(refreshToken) {
 
 async function generateRefreshToken(ctx) {
   try {
-    const accessToken = ctx.cookies.accessToken;
-    if (!accessToken || accessToken === "undefined") {
-      const refreshToken = ctx.cookies.refreshToken;
-      if (!refreshToken || refreshToken === "undefined") {
-        ctx.redirect("/auth/login");
-        return;
-      }
-      const decoded = await verifyRefreshToken(refreshToken); // Verify refresh token
-      if (decoded) {
-        const newAccessToken = generateAccessToken(decoded.userId); // Generate new access token
-        return newAccessToken;
-      }
+    const refreshToken = ctx.cookies.refreshToken;
+    if (!refreshToken || refreshToken === "undefined") {
+      ctx.redirect("/auth/login");
+      return;
+    }
+    const decoded = await verifyRefreshToken(refreshToken); // Verify refresh token
+    if (decoded) {
+      const newAccessToken = generateAccessToken(decoded.userId); // Generate new access token
+      return newAccessToken;
     }
   } catch (error) {
     console.error("Error generating refresh token:", error);

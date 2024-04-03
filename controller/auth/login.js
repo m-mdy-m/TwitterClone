@@ -1,6 +1,6 @@
 const { bcryptjs } = require("xprz").Package();
 const path = require("path");
-const {generateAuthToken} = $read("utils/AuthToken");
+const { generateAuthToken } = $read("utils/AuthToken");
 const User = $read("model/User");
 // Controller function to render the login page
 exports.getLogin = ({ sendFile }) => {
@@ -69,7 +69,7 @@ exports.postLogin = async (ctx) => {
     // Send success response
     return updated({ tokens });
   } catch (error) {
-    console.log("error:",error);
+    console.log("error:", error);
     internalServerError("Internal server error. Please try again later.");
   }
 };

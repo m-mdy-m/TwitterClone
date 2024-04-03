@@ -16,21 +16,14 @@ exports.ensureAuthenticated = (ctx, next) => {
  * Middleware to verify JWT token extracted from cookies.
  */
 exports.verifyToken = (ctx, nxt) => {
-  const accessToken = ctx.cookies.accessToken;
+  let accessToken = ctx.cookies.accessToken;
   if (!accessToken ||accessToken === "undefined" || jwt().isExpired(accessToken) ) {
-    const refreshToken = ctx.cookies.refreshToken;
-    if (!refreshToken || refreshToken === "undefined") {
-      ctx.redirect("/auth/login");
-      return;
-    }
     try {
       generateRefreshToken(ctx).then((newAccessToken)=>{
         if (newAccessToken) {
           // Set the new access token in session or cookies
           ctx.session.token = newAccessToken;
-          ctx.cookies.set('accessToken', newAccessToken);
-          // Proceed with the request
-          return nxt();
+          accessToken = newAccessToken
         }
       })
     } catch (error) {
@@ -40,5 +33,5 @@ exports.verifyToken = (ctx, nxt) => {
     }
   }
   ctx.headers.authorization = `Bearer ${accessToken}`;
-  return jwt().authenticate(process.env.JWT_SECRET)(ctx, nxt);
+  return jwt().authenticate(process.env.ACCESS_TOKEN_PRIVATE_KEY)(ctx, nxt);
 };
