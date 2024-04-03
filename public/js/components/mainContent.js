@@ -6,10 +6,17 @@ const routes = {
     '/home': () => HOME({ username: "m__mdy__m", profilePic: '/assets/images/profilePic.png', profileStory: "/assets/icon/nav/user.svg" }),
     '/auth/login': () => LoginForm(),
     '/auth/signup': () => SignupForm(),
-    '/profile/': () => ProfilePage(),
 };
 
+function getRouteHandler() {
+    const { pathname } = window.location;
+    if (pathname.startsWith('/profile')) {
+        return ProfilePage;
+    }
+    return routes[pathname] || (() => "");
+}
+
 export function mainContent() {
-    const routeHandler = routes[window.location.pathname] || (() => "");
+    const routeHandler = getRouteHandler();
     return routeHandler();
 }
