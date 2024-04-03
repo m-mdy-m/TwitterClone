@@ -10,7 +10,6 @@ const routes = {
 };
 
 export function mainContent() {
-    const currentPage = window.location.pathname;
-    const routeHandler = routes[currentPage] || (() => "");
+    const routeHandler = routes[window.location.pathname] || (() => "");
     return routeHandler();
 }
