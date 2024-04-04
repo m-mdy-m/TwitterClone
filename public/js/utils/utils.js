@@ -1,3 +1,4 @@
+import {showErrorMessage} from './helper.js';
 // Utility function to get the current path of the window
 export const getPath = () => window.location.pathname;
 
@@ -83,12 +84,12 @@ export function getCurrentTimeFormatted(time) {
   }
 }
 // Function to fetch the CSRF token from the server
-export default async function getCSRFToken() {
+export async function getCSRFToken() {
   try {
     const response = await axios.get("/get-csrf-token");
     return response.data.csrfToken;
   } catch (error) {
-    console.error("Error fetching CSRF token:", error);
+    showErrorMessage()
     return null;
   }
 }
@@ -178,7 +179,5 @@ export function randomGradientColor() {
   const saturation = Math.floor(Math.random() * 50 + 50); // Between 50 and 100
   const lightness = Math.floor(Math.random() * 50 + 25); // Between 25 and 75
 
-  // Return CSS gradient string
   return `linear-gradient(${hue1}deg, hsl(${hue1}, ${saturation}%, ${lightness}%), hsl(${hue2}, ${saturation}%, ${lightness}%))`;
 }
-

@@ -1,6 +1,6 @@
-import getCSRFToken, { getMsgElement, getAccessToken } from "./utils.js";
+import {getCSRFToken, getAccessToken } from "./utils.js";
 
-const msgElm = getMsgElement();
+const msgElm =  document.getElementById("msgElm");
 const iconElement = document.getElementById("icon-tweet");
 const charCount = document.getElementById("charCount");
 const maxLength = 300;
