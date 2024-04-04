@@ -1,4 +1,4 @@
-export function UserInfo(userStats) {
+export function statusUser(userStats) {
   let template = "";
   userStats.forEach(({ id, value, unit, label }) => {
     template += `

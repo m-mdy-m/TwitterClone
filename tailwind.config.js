@@ -24,6 +24,7 @@ module.exports = {
       gridTemplateRows: {
         home: "20% minmax(80% ,1fr)",
         tweet: "60% minmax(40%,1fr)",
+        profile: "30% minmax(70%,1fr)",
         readTweet : "minmax(20%,1fr) 80%",
         box_tweet : "15% minmax(75%,1fr)"
       },
