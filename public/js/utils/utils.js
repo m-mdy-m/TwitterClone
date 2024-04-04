@@ -165,3 +165,20 @@ export function randomColor() {
   }
   return color;
 }
+
+// Function to generate a random gradient color
+export function randomGradientColor() {
+  // Generate random hue for starting color
+  const hue1 = Math.floor(Math.random() * 361);
+  
+  // Generate random hue for ending color, slightly different from starting hue
+  const hue2 = (hue1 + Math.floor(Math.random() * 100 + 50)) % 360;
+  
+  // Generate random saturation and lightness values
+  const saturation = Math.floor(Math.random() * 50 + 50); // Between 50 and 100
+  const lightness = Math.floor(Math.random() * 50 + 25); // Between 25 and 75
+
+  // Return CSS gradient string
+  return `linear-gradient(${hue1}deg, hsl(${hue1}, ${saturation}%, ${lightness}%), hsl(${hue2}, ${saturation}%, ${lightness}%))`;
+}
+
