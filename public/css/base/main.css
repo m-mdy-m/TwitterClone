@@ -90,6 +90,30 @@
   top: 1.5rem;
 }
 
+.-right-0 {
+  right: -0px;
+}
+
+.-bottom-0 {
+  bottom: -0px;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.-bottom-2 {
+  bottom: -0.5rem;
+}
+
+.-bottom-4 {
+  bottom: -1rem;
+}
+
+.-bottom-3 {
+  bottom: -0.75rem;
+}
+
 .-z-10 {
   z-index: -10;
 }
@@ -1722,6 +1746,11 @@
 .\[\&\>\*\]\:my-2>* {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.\[\&\>\*\]\:my-4>* {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .\[\&\>\*\]\:flex>* {
