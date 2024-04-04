@@ -12,13 +12,12 @@ export function ProfilePage() {
         <div class="bg-green-700 rounded-md grid grid-rows-profile">
               <div class="bg-red-700 relative">
 
-              <div class="bg-yellow-500 absolute rounded-full w-40 h-40 left-8 -bottom-16">
+              <div class="bg-yellow-500 absolute rounded-full p-1 border-2 border-[#434346] w-36 h-36 left-8 -bottom-12"> </div>
               </div>
-              </div>
-              <div class="bg-blue-700 pt-16 px-8">
-                    <p class="text-gray-700 font-Aktiv__regular cursor-default">@m__mdy__m</p>
+              <div class="bg-blue-700 pt-12 px-4">
+                    <p class="text-gray-700 font-Aktiv__regular cursor-default pl-4">@m__mdy__m</p>
                     <p class="text-white text-lg">'Greatness، of small steps'!</p>
-                    <div class="flex items-center justify-start mobile:mt-1 mobile:gap-0 smallTb:mt-2 smallTb:gap-2 border-b-4 border-[#2f2f30]">
+                    <div class="flex items-center justify-start border-b-4 border-[#2f2f30]">
                       ${statusUser(userStats)}
                     </div>
                     <div>

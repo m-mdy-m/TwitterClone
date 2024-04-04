@@ -118,6 +118,10 @@
   bottom: 4rem;
 }
 
+.-bottom-12 {
+  bottom: -3rem;
+}
+
 .-z-10 {
   z-index: -10;
 }
@@ -569,6 +573,11 @@
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.border-\[\#434346\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(67 67 70 / var(--tw-border-opacity));
+}
+
 .border-l-transparent {
   border-left-color: transparent;
 }
@@ -693,6 +702,10 @@
   padding: 1rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -772,6 +785,14 @@
 
 .pt-16 {
   padding-top: 4rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pl-7 {
+  padding-left: 1.75rem;
 }
 
 .text-center {
