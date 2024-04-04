@@ -11,8 +11,8 @@ exports.create = async (ctx) => {
   const { tweet } = ctx.getBody();
 
   // Extract JSON handling functions from the response object
-  const { badRequest, created, internalServerError, authRequired } = ctx.
-    jsonSender();
+  const { badRequest, created, internalServerError, authRequired } =
+    ctx.jsonSender();
 
   // Check if the tweet content is missing; return a bad request response if so
   if (!tweet) {
@@ -33,7 +33,6 @@ exports.create = async (ctx) => {
 
     // Populate the 'author' field to include user details in the post
     const result = await Tweet.populate(post, { path: "author" });
-    console.log('result;',result);
     // Send a successful response with the created post
     created(result);
   } catch (error) {
@@ -41,7 +40,7 @@ exports.create = async (ctx) => {
     internalServerError("Internal server error. Unable to post the tweet.");
   }
 };
-exports.getTweets = async ({status}) => {
+exports.getTweets = async ({ status }) => {
   try {
     // Fetch tweets from the database and sort them in descending order of createdAt
     const tweets = await Tweet.find().sort({ createdAt: -1 });
@@ -155,7 +154,7 @@ exports.retweet = async (ctx) => {
     // Return a success response with the updated number of likes
     return created({
       retweet: result,
-      tokens:await tweetManager.saveUser(updatedUser),
+      tokens: await tweetManager.saveUser(updatedUser),
     });
   } catch (error) {
     // Handle any internal server errors
@@ -184,7 +183,7 @@ exports.bookmarkTweet = async (ctx) => {
     const isBookmarked = user.bookmarked.includes(tweetId);
     return updated({
       isBookmarked: isBookmarked,
-      tokens:await tweetManager.saveUser(user),
+      tokens: await tweetManager.saveUser(user),
     });
   } catch (error) {
     internalServerError("Internal server error. Please try again later.");
@@ -201,9 +200,9 @@ exports.deleteTweet = async (ctx) => {
     if (user._id.toString() === tweet.author._id.toString()) {
       // Check if the tweet ID exists in the user's likedTweets, retweetedTweets, or bookmarked arrays
       const userHasTweet =
-      user.likedTweets.includes(tweetId) ||
-      user.retweetedTweets.includes(tweetId) ||
-      user.bookmarked.includes(tweetId);
+        user.likedTweets.includes(tweetId) ||
+        user.retweetedTweets.includes(tweetId) ||
+        user.bookmarked.includes(tweetId);
       // Delete the tweet from the tweets collection
       const deleteResult = await Tweet.deleteOne({ _id: tweetId });
       if (userHasTweet) {
@@ -215,7 +214,6 @@ exports.deleteTweet = async (ctx) => {
               likedTweets: tweetId,
               retweetedTweets: tweetId,
               bookmarked: tweetId,
-              tweets:tweetId,
             },
           }
         );
@@ -224,7 +222,7 @@ exports.deleteTweet = async (ctx) => {
           deleteResult.deletedCount === 1 &&
           updateResult.modifiedCount === 1
         ) {
-          return deleted({ tokens:await tweetManager.saveUser(user) });
+          return deleted({ tokens: await tweetManager.saveUser(user) });
         } else {
           // If deletion or update failed, return internal server error
           internalServerError("Failed to delete the tweet.");
@@ -247,17 +245,17 @@ exports.deleteTweet = async (ctx) => {
     internalServerError("Internal server error. Please try again later.");
   }
 };
-exports.editTweet = async (ctx)=>{
-  const {internalServerError,updated } = ctx.jsonSender()
+exports.editTweet = async (ctx) => {
+  const { internalServerError, updated } = ctx.jsonSender();
   try {
-    const {content} = ctx.getBody()
+    const { content } = ctx.getBody();
     const tweetManager = new TweetUserManager(ctx, ctx.jsonSender);
-    const {tweet} = await tweetManager.findTweetParam()
-    tweet.content = content
-    tweet.edited = true
-    await tweet.save()
-    return updated({tweet:tweet})
+    const { tweet } = await tweetManager.findTweetParam();
+    tweet.content = content;
+    tweet.edited = true;
+    await tweet.save();
+    return updated({ tweet: tweet });
   } catch (error) {
-    internalServerError("Internal server error. Please try again later.")
+    internalServerError("Internal server error. Please try again later.");
   }
-}
+};
