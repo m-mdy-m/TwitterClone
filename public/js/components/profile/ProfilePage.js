@@ -5,7 +5,7 @@ export function ProfilePage() {
   const userStats = [
     { id: "posts", value: 0, unit: "", label: "Posts" },
     { id: "followers", value: 0, unit: "", label: "Posts" },
-    { id: "following", value:0, unit: "" , label: "Posts" },
+    { id: "following", value: 0, unit: "", label: "Posts" },
   ];
   return `
     <div class="w-full h-full grid grid-cols-profile ">
@@ -15,15 +15,27 @@ export function ProfilePage() {
               <div class="bg-yellow-500 absolute rounded-full p-1 border-2 border-[#434346] w-36 h-36 left-8 -bottom-12"> </div>
               </div>
               <div class="bg-blue-700 pt-12 px-4">
-                    <p class="text-gray-700 font-Aktiv__regular cursor-default pl-4">@m__mdy__m</p>
-                    <p class="text-white text-lg">'Greatness، of small steps'!</p>
-                    <div class="flex items-center justify-start border-b-4 border-[#2f2f30]">
+                    <p class="text-gray-700 cursor-default pl-4 font-Aktiv__regular">@m__mdy__m</p>
+                    <p class="text-white text-lg ">'Greatness، of small steps'!</p>
+                    <div class="flex items-center justify-start">
                       ${statusUser(userStats)}
                     </div>
-                    <div>
-                        <div> Posts </div>
-                        <div> Likes </div>
-                        <div> Retweets </div>
+                    <div class=" border-b-4 mt-4 border-[#2f2f30] flex justify-start items-center text-white text-lg [&>*]:mx-2">
+                        <div class="relative button__wrapper-profile">
+                          <button class="cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
+                            Posts
+                          </button>
+                        </div>
+                        <div class="relative button__wrapper-profile"> 
+                          <button class=" cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
+                            Likes
+                          </button> 
+                        </div>
+                        <div class="relative button__wrapper-profile"> 
+                         <button class=" cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
+                           Retweets
+                         </button> 
+                        </div>
                     </div>
               </div>
         </div>

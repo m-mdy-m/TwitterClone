@@ -268,7 +268,7 @@
       rgba(0, 0, 0, 1) 100%
     );
   }
-  .bg-gradient-profile{
+  .bg-gradient-profile {
     background: rgb(101, 25, 4);
     background: radial-gradient(
       circle,
@@ -289,29 +289,52 @@
     );
   }
   @keyframes showButtonEdit {
-    0%{
+    0% {
       opacity: 0;
       right: -7rem;
     }
-    100%{
+    100% {
       opacity: 1;
       right: 0;
     }
   }
   @keyframes hiddenButtonEdit {
-    0%{
-      opacity:1;
-      right:0;
+    0% {
+      opacity: 1;
+      right: 0;
     }
-    100%{
+    100% {
       opacity: 0;
       right: -7rem;
     }
   }
-  .show-button-edit{
-    animation: showButtonEdit 500ms 1s both cubic-bezier(1,-0.27, 0, 1.52);
+  .show-button-edit {
+    animation: showButtonEdit 500ms 1s both cubic-bezier(1, -0.27, 0, 1.52);
   }
-  .remove-button-edit{
-    animation: hiddenButtonEdit 1s both cubic-bezier(1,-0.27, 0, 1.52) ;
+  .remove-button-edit {
+    animation: hiddenButtonEdit 1s both cubic-bezier(1, -0.27, 0, 1.52);
+  }
+  .button__wrapper-profile button:focus,
+  .button__wrapper-profile button:hover {
+    color: #fff;
+  }
+
+  .button__wrapper-profile button:focus:after,
+  .button__wrapper-profile button:hover:after {
+    width: 100%;
+    left: 0%;
+  }
+
+  .button__wrapper-profile button:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-image: linear-gradient(to right bottom, #139d9d, #00a1b1, #19a5c3, #3ba7d2, #5ca8de, #60b0e7, #65b7ef, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: width 0.4s ease, left 0.4s ease;
   }
 }
