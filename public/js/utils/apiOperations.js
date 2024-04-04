@@ -47,20 +47,9 @@ export async function authenticateUser(
       handleNotSuccess(response.data);
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      // If the error is due to unauthorized access, try refreshing the token
-      const tokenRefreshed = await refreshToken();
-      if (tokenRefreshed) {
-        // If token refresh is successful, retry the authentication request
-        await authenticateUser(url, requestData, header, form, btn, oldValue);
-      } else {
-        // If token refresh fails, handle the error
-        handleServerError(form, error);
-      }
-    } else {
-      // If the error is not related to token expiration, handle it as usual
-      handleServerError(form, error);
-    }
+    console.log('error:',error);
+    // If the error is not related to token expiration, handle it as usual
+    handleServerError(form, error);
   } finally {
     // Restore button text
     btn.innerHTML = oldValue;

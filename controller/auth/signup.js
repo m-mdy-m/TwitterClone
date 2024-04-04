@@ -19,7 +19,7 @@ exports.postSignup = async (ctx) => {
 
     // If user already exists, respond with conflict error
     if (existingUser) {
-      return status(409).json({
+      return ctx.status(409).json({
         success: false,
         error: "User already exists.",
       });
@@ -41,6 +41,7 @@ exports.postSignup = async (ctx) => {
       return created({ tokens });
     }
   } catch (error) {
+    
     // Handle other errors (e.g., database error)
     internalServerError(error.message);
   }

@@ -1,9 +1,11 @@
-import {getCSRFToken, getAccessToken } from "./utils.js";
-
-const msgElm =  document.getElementById("msgElm");
-const iconElement = document.getElementById("icon-tweet");
-const charCount = document.getElementById("charCount");
-const maxLength = 300;
+import { getCSRFToken, getMsgElement, getAccessToken } from "./utils.js";
+let msgElm, iconElement, charCount, maxLength;
+document.addEventListener('DOMContentLoaded',()=>{
+  msgElm = getMsgElement();
+  iconElement = document.getElementById("icon-tweet");
+  charCount = document.getElementById("charCount");
+  maxLength = 300;
+})
 
 // Function to handle unsuccessful form submission
 export function handleNotSuccess(data) {
@@ -27,6 +29,7 @@ export function handleSuccess(form, message) {
 }
 // Function to handle server errors
 export function handleServerError(form, error) {
+  console.log("msgElm:", msgElm);
   // Add error message styling to message element
   msgElm.classList.add("msg-errors");
   // Clear previous error messages

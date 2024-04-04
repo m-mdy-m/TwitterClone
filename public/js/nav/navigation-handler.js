@@ -1,13 +1,11 @@
 import { attachLogoutHandler } from "../auth/logout.js";
-import { BodyContent } from "../components/Body.js";
-import { getProfileUser } from "../utils/apiOperations.js";
+import { getProfileUser, getUserInfo } from "../utils/apiOperations.js";
 import { clearWelcomePhotoFlag, showWelcome } from "../utils/utils.js";
 // Function to handle navigation events
 function handleNavigation() {
   const navMobile = document.getElementById("nav-mobile");
   const iconNavigation = document.getElementById("iconNavigation");
   const cancelIcon = document.getElementById("cancelIcon");
-
   // Add event listener to the navigation icon to open the mobile navigation
   iconNavigation.addEventListener("click", () => {
     navMobile.classList.remove("hide-nav");
@@ -35,7 +33,7 @@ function handleNavigation() {
 // Function to execute components on document load
 export function initializeComponentsNavigation() {
   const showWelcomePhotoFlag = showWelcome();
-
+  update_status()
   // Initialize logout functionality
   const btnLogout = document.querySelector(".logout");
   attachLogoutHandler(btnLogout);
@@ -94,4 +92,21 @@ export function initializeComponentsNavigation() {
       navMobile.classList.remove("hide-nav");
     }
   });
+}
+
+async function update_status(){
+  const response = await getUserInfo()
+  console.log('response : ',response);
+}
+
+
+async function update_Posts(){
+
+}
+
+async function update_Followers(){
+
+}
+async function update_Following(){
+
 }

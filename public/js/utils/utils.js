@@ -1,4 +1,5 @@
-import {showErrorMessage} from './helper.js';
+import { showMessage } from "./helper.js";
+
 // Utility function to get the current path of the window
 export const getPath = () => window.location.pathname;
 
@@ -89,7 +90,7 @@ export async function getCSRFToken() {
     const response = await axios.get("/get-csrf-token");
     return response.data.csrfToken;
   } catch (error) {
-    showErrorMessage()
+    console.log('error CsrfTOken',error);
     return null;
   }
 }
