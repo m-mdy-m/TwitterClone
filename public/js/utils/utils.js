@@ -104,8 +104,10 @@ export function clearAuth() {
 // Function to clear the refresh token cookie
 export function clearAllToken() {
   // Set the expiration date of the refresh token cookie to a past time
-  document.cookie ="refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";
-  document.cookie ="accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";
+  document.cookie =
+    "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";
+  document.cookie =
+    "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict; Secure";
 }
 export function extractToken(tokens) {
   saveAccessToken(tokens.accessToken);
@@ -118,7 +120,7 @@ export function saveAccessToken(accessToken) {
 
 // Function to retrieve the access token from session storage
 export function getAccessToken() {
-  return getCookieValue('accessToken')
+  return getCookieValue("accessToken");
 }
 
 // Function to save the refresh token in an HTTP-only cookie
@@ -129,7 +131,7 @@ export function saveRefreshToken(refreshToken) {
 
 // Function to retrieve the refresh token from cookies
 export function getRefreshToken() {
-  return getCookieValue('refreshToken')
+  return getCookieValue("refreshToken");
 }
 /**
  * Parses the document cookies to find the value of a specific cookie by its name.
