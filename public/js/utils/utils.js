@@ -155,3 +155,11 @@ export function getCookieValue(cookieName) {
   // Returns null if the specified cookie is not found
   return null;
 }
+export function randomColor() {
+  var letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}

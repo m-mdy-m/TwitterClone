@@ -22,6 +22,10 @@
   bottom: -0.25rem;
 }
 
+.-bottom-3 {
+  bottom: -0.75rem;
+}
+
 .-right-1 {
   right: -0.25rem;
 }
@@ -90,30 +94,6 @@
   top: 1.5rem;
 }
 
-.-right-0 {
-  right: -0px;
-}
-
-.-bottom-0 {
-  bottom: -0px;
-}
-
-.bottom-0 {
-  bottom: 0px;
-}
-
-.-bottom-2 {
-  bottom: -0.5rem;
-}
-
-.-bottom-4 {
-  bottom: -1rem;
-}
-
-.-bottom-3 {
-  bottom: -0.75rem;
-}
-
 .-z-10 {
   z-index: -10;
 }
@@ -137,11 +117,6 @@
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .mb-4 {
@@ -561,6 +536,11 @@
   background-color: transparent;
 }
 
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -609,6 +589,14 @@
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .px-1 {
@@ -1295,10 +1283,6 @@
   z-index: -10;
 }
 
-.hover\:block:hover {
-  display: block;
-}
-
 .hover\:rotate-45:hover {
   --tw-rotate: 45deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1743,18 +1727,9 @@
   margin-bottom: 0.75rem;
 }
 
-.\[\&\>\*\]\:my-2>* {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 .\[\&\>\*\]\:my-4>* {
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.\[\&\>\*\]\:flex>* {
-  display: flex;
 }
 
 .\[\&\>\*\]\:cursor-pointer>* {
@@ -1765,12 +1740,9 @@
   flex-direction: column;
 }
 
-.\[\&\>\*\]\:items-center>* {
-  align-items: center;
-}
-
-.\[\&\>\*\]\:justify-center>* {
-  justify-content: center;
+.\[\&\>\*\]\:text-white>* {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .\[\&\>\*\]\:opacity-0>* {
@@ -1779,9 +1751,4 @@
 
 .\[\&\>input\]\:p-2>input {
   padding: 0.5rem;
-}
-
-*>.\[\*\>\&\]\:my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
