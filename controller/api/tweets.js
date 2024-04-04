@@ -30,14 +30,15 @@ exports.create = async (ctx) => {
   try {
     // Create the tweet and wait for the operation to complete
     const post = await Tweet.create(data);
-
     // Populate the 'author' field to include user details in the post
     const result = await Tweet.populate(post, { path: "author" });
-    await User.findByIdAndUpdate(ctx.user.userId,{$addToSet:{tweets:result._id}})
+    const newUser = await User.findByIdAndUpdate(ctx.user.userId,{$addToSet:{tweets:result._id}})
+    const tweetManager = new TweetUserManager(ctx,ctx.jsonSender)
+    const tokens = await  tweetManager.saveUser(newUser)
     // Send a successful response with the created post
-    created(result);
+    created({tweet:result, tokens:tokens});
   } catch (error) {
-    // Handle any errors that occur during tweet creation
+  // Handle any errors that occur during tweet creation
     internalServerError("Internal server error. Unable to post the tweet.");
   }
 };
@@ -203,7 +204,8 @@ exports.deleteTweet = async (ctx) => {
       const userHasTweet =
         user.likedTweets.includes(tweetId) ||
         user.retweetedTweets.includes(tweetId) ||
-        user.bookmarked.includes(tweetId);
+        user.bookmarked.includes(tweetId) ||
+        user.tweets.includes(tweetId)
       // Delete the tweet from the tweets collection
       const deleteResult = await Tweet.deleteOne({ _id: tweetId });
       if (userHasTweet) {
