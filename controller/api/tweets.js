@@ -33,6 +33,7 @@ exports.create = async (ctx) => {
 
     // Populate the 'author' field to include user details in the post
     const result = await Tweet.populate(post, { path: "author" });
+    await User.findByIdAndUpdate(ctx.user.userId,{$addToSet:{tweets:result._id}})
     // Send a successful response with the created post
     created(result);
   } catch (error) {
@@ -214,6 +215,7 @@ exports.deleteTweet = async (ctx) => {
               likedTweets: tweetId,
               retweetedTweets: tweetId,
               bookmarked: tweetId,
+              tweets: tweetId,
             },
           }
         );

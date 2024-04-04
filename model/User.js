@@ -23,6 +23,12 @@ const UserSchema = new Schema(
       type: String,
       default: "/assets/images/profilePic.png",
     },
+    tweets: [
+      {
+        type: Schema.ObjectId,
+        ref: "Tweet",
+      },
+    ],
     likedTweets: [
       {
         type: Schema.ObjectId,
