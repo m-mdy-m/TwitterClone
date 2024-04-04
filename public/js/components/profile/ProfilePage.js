@@ -9,14 +9,18 @@ export function ProfilePage() {
   ];
   return `
     <div class="w-full h-full grid grid-cols-profile ">
-        <div class="bg-green-700 rounded-md grid grid-rows-profile">
-              <div class="bg-red-700 relative">
+        <div class="rounded-md grid grid-rows-profile">
+              <div class="relative">
 
-              <div class="bg-yellow-500 absolute rounded-full p-1 border-2 border-[#434346] w-36 h-36 left-8 -bottom-12"> </div>
+              <div class="bg-yellow-500 absolute rounded-full p-1 border-2 border-[#434346] w-36 h-36 left-8 -bottom-12 flex justify-center items-center">
+                 <img src="/assets/icon/nav/user.svg" alt="" class=" rounded-full border-4 w-full h-full  object-cover">
               </div>
-              <div class="bg-blue-700 pt-12 px-4">
-                    <p class="text-gray-700 cursor-default pl-4 font-Aktiv__regular">@m__mdy__m</p>
-                    <p class="text-white text-lg ">'Greatness، of small steps'!</p>
+              </div>
+              <div class="pt-12 px-4">
+                    <!-- User Name -->
+                    <h2 class="text-gray-700 pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
+                    <!-- Bio -->
+                    <p id="bio" class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">'Greatness، of small steps'!</p>
                     <div class="flex items-center justify-start">
                       ${statusUser(userStats)}
                     </div>
