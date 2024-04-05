@@ -108,7 +108,6 @@ export async function update_status() {
     { id: "followers", value: user.followers.length, unit: "", label: "Followers" },
     { id: "following", value:user.following.length, unit: "" , label: "Following" },
   ];
-  console.log('user.following.length:',user.following.length);
   const template = statusUser(userStats)
   wrapper.innerHTML = template 
 }

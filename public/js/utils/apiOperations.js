@@ -1,3 +1,4 @@
+import { update_status } from "../nav/navigation-handler.js";
 import {
   AddTweet,
   ShowTweets,
@@ -205,6 +206,7 @@ export async function tweetCreation(data) {
   // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
     extractToken(response.data.data.tokens);
+    await update_status()
     AddTweet(response.data.data.tweet, userInfo);
   } else {
     // If tweet creation fails, display error message
