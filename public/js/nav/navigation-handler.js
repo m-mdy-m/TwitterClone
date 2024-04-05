@@ -100,14 +100,30 @@ function getProfilePage(wrapper) {
   });
 }
 
+// Function to update user status in the UI
 export async function update_status() {
-  const user = await getUserInfo()
-  const wrapper = document.getElementById('statusUser')
-  const userStats =  [
+  // Fetch user information
+  const user = await getUserInfo();
+
+  // Get the wrapper element where user status will be displayed
+  const wrapper = document.getElementById('statusUser');
+
+  // Define user statistics based on fetched user data
+  const userStats = [
     { id: "posts", value: user.tweets.length, unit: "", label: "Posts" },
     { id: "followers", value: user.followers.length, unit: "", label: "Followers" },
     { id: "following", value:user.following.length, unit: "" , label: "Following" },
   ];
-  const template = statusUser(userStats)
-  wrapper.innerHTML = template 
+
+  // Generate HTML template for displaying user status
+  const template = statusUser(userStats);
+
+  // Update the content of the wrapper element with the generated template
+  wrapper.innerHTML = template;
+
+  // If the current page is a profile page, update the user status in the profile section
+  if(window.location.pathname.startsWith('/profile')){
+    const statusProfile = document.getElementById('statusProfile');
+    statusProfile.innerHTML = template;
+  }
 }

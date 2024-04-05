@@ -21,7 +21,7 @@ export function ProfilePage() {
                 <h2 class="text-gray-700 pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
                 <!-- Bio -->
                 <p id="bio" class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">'Greatness، of small steps'!</p>
-                <div class="flex items-center justify-start">
+                <div id="statusProfile" class="flex items-center justify-start">
                   ${statusUser(userStats)}
                 </div>
                 <div class=" border-b-4 mt-4 border-[#2f2f30] flex justify-start items-center text-white text-lg [&>*]:mx-2">
