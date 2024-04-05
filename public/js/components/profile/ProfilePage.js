@@ -1,7 +1,6 @@
-import { getUserProfile } from "../../profile/navigation.js";
-import { getUserInfo } from "../../utils/apiOperations.js";
-import { randomGradientColor, randomColor } from "../../utils/utils.js";
+import { randomGradientColor } from "../../utils/utils.js";
 import { statusUser } from "../navigation/gen/info.js";
+import { TweetsProfile } from "./Tweets.js";
 import { navUserIcon } from "./nav/nav_profile.js";
 
 export function ProfilePage() {
@@ -43,8 +42,8 @@ export function ProfilePage() {
                      </button> 
                     </div>
                 </div>
-                <div class="text-white">
-                 my Tweets
+                <div class="text-white flex h-full justify-start items-start " id="wrapper_content">
+                 ${TweetsProfile()}
                 </div>
           </div>
         </div>
