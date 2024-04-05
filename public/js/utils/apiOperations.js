@@ -204,7 +204,7 @@ export async function tweetCreation(data) {
   const response = await axios.post("/api/create", data, header);
   // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
-    extractToken(response.data.data.tokens)
+    extractToken(response.data.data.tokens);
     AddTweet(response.data.data.tweet, userInfo);
   } else {
     // If tweet creation fails, display error message
@@ -394,14 +394,28 @@ export async function getProfileUser(username) {
   }
 }
 
-
-
-export async function following(userId,followUserId){
+export async function follow_status(userId, followUserId) {
   try {
-    const response = await sendRequest('follow-status','put',{userId,followUserId})
-    console.log('response:',response);
-  } catch (error) {
-    showErrorMessage(error)
-  }
+    const response = await sendRequest("follow-status", "put", {
+      userId,
+      followUserId,
+    });
+    // If the request is successful
+    if (response.data.success) {
+      // Save the authentication token received from the server's response
+      extractToken(response.data.data.tokens);
 
+      // Return the updated bookmark status of the tweet
+      return response.data.data.statusFollow;
+    } else {
+      // Show error message with appropriate color
+      showMessage(
+        msgElm,
+        "Failed to toggle bookmark status. Please try again later.",
+        "#FF5733"
+      );
+    }
+  } catch (error) {
+    showErrorMessage(error);
+  }
 }

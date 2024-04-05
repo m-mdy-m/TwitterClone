@@ -13,6 +13,8 @@ async function generateAuthToken(user) {
       retweetedTweets,
       bookmarked,
       tweets,
+      followers,
+      following,
     } = user;
     // Generate JWT token with user information
     const accessToken = jwt().signToken(
@@ -24,7 +26,9 @@ async function generateAuthToken(user) {
         likedTweets,
         retweetedTweets,
         bookmarked,
-        tweets:tweets
+        tweets: tweets,
+        followers,
+        following,
       },
       process.env.ACCESS_TOKEN_PRIVATE_KEY,
       { expiresIn: "1h" }
@@ -100,6 +104,8 @@ async function generateAccessToken(userId) {
       retweetedTweets: user.retweetedTweets,
       bookmarked: user.bookmarked,
       tweets: user.tweets,
+      followers: user.followers,
+      following: user.following,
     },
     process.env.ACCESS_TOKEN_PRIVATE_KEY,
     { expiresIn: "1h" }

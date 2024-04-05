@@ -95,8 +95,19 @@ export function showIconOnBlur() {
   iconElement.style.zIndex = 1;
 }
 // get Id Tweet from element
-export function getId(el) {
-  return el.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
+export function getId(el, steps = 4) {
+  let parentNode = el;
+  
+  // Perform the specified number of parentNode calls
+  for (let i = 0; i < steps; i++) {
+    parentNode = parentNode.parentNode;
+  }
+
+  // Get the value of the "data-id" attribute from the parentNode
+  const id = parentNode.getAttribute("data-id");
+
+  // Return the value of the "data-id" attribute
+  return id;
 }
 
 /**

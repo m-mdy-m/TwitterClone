@@ -5,7 +5,7 @@ import {
   getCurrentTimeFormatted,
   getMsgElement,
 } from "../utils/utils.js";
-import { handleClick } from "./Like.js";
+import { handleClick, handlerFollow } from "./Like.js";
 import { listMenuTweet, showUserRetweeted } from "./helperTweet.js";
 const wrapper = document.getElementById("wrapperTweet");
 const msgELm = getMsgElement();
@@ -136,7 +136,8 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
           ? "block"
           : "hidden",
       edited_tweet: tweet.edited ? "block" : "hidden",
-      followStatus:tweetAuthor._id.toString() === userId.toString() ? 'hidden' : 'block'
+      followStatus:tweetAuthor._id.toString() === userId.toString() ? 'hidden' : 'block',
+      content_follow_user:userInfo.following.includes(tweetAuthor._id.toString())? "unfollow" : 'follow'
     };
     // return Tweet
     return Tweet(tweetContent);
@@ -165,6 +166,7 @@ export function attachIconClickListeners() {
     // Select all elements with the class "icons"
     const icons = document.querySelectorAll(".icons");
     // Attach a click event listener to each icon
+    attachFollowClick()
     icons.forEach((icon) => {
       icon.addEventListener("click", handleClick);
     });
@@ -183,7 +185,7 @@ export function attachFollowClick(){
 try {
   const followBtn = document.querySelectorAll('.follow-status')
   followBtn.forEach((btn)=>{
-    btn.addEventListener('click',handleFollow)
+    btn.addEventListener('click',handlerFollow)
   })
 } catch (error) {
   

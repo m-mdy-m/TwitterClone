@@ -1,4 +1,5 @@
 import {
+  follow_status,
   getTweetInfo,
   getUserInfo,
   toggleLike,
@@ -11,7 +12,6 @@ const msgElm = getMsgElement();
 // Function to handle the click event
 export async function handleClick(event) {
   const elm = event.target;
-  console.log('elm:',elm);
   const idIcons = ["likeIcon", "retweetIcon", "shareIcon", "commentIcon"];
   const currentClick = elm.id;
   try {
@@ -109,4 +109,18 @@ function handleError(elm) {
     "Sorry, we couldn't process your like at the moment. Please try again later.",
     "#B71C1C"
   );
+}
+
+// handler follow and unfollow 
+export async  function handlerFollow(e){
+  const elm = e.target
+  const user = await getUserInfo()
+  const id = getId(elm)
+  const {author:{_id}} = await getTweetInfo(id)
+  const status = await follow_status(user.userId,_id)
+  if(status){
+    elm.innerHTML = 'unfollow'
+  }else{
+    elm.innerHTML = 'follow'
+  }
 }

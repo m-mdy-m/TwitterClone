@@ -18,7 +18,8 @@ function Tweet({
   bookmarkIcon,
   showDeleteIcon,
   edited_tweet,
-  followStatus
+  followStatus,
+  content_follow_user
 }) {
   return `
     <div class="max-w-full min-h-20 h-auto my-4 rounded-lg relative flex flex-col border-2 bg-[#11101076] border-t border-[#111010] px-3 pt-6" data-id="${id}">
@@ -34,6 +35,7 @@ function Tweet({
           isRetweeted,
           retweetedUsername,
           followStatus,
+          content_follow_user,
         })}
         <div class="flex justify-center items-center  list__menu-icon w-8 h-8 transition-transform cursor-pointer relative transform hover:scale-110">
            <div class="list__menu-tweet cursor-default [&>*]:opacity-0 [&>*]:cursor-pointer [&>*]:mx-0.5 flex justify-center bg-gray-800 px-4 absolute right-0 -z-10 p-1 rounded-r-md rounded-l-xl transition-all">
