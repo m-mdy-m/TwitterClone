@@ -29,7 +29,6 @@ export function handleSuccess(form, message) {
 }
 // Function to handle server errors
 export function handleServerError(form, error) {
-  console.log("msgElm:", msgElm);
   // Add error message styling to message element
   msgElm.classList.add("msg-errors");
   // Clear previous error messages

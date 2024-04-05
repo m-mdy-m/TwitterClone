@@ -117,7 +117,6 @@ class TweetUserManager {
           "Failed to generate authentication token."
         );
       }
-
       this.req.session.token = tokens.accessToken;
       return tokens;
     } catch (error) {

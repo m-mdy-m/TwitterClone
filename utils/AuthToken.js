@@ -24,10 +24,10 @@ async function generateAuthToken(user) {
         likedTweets,
         retweetedTweets,
         bookmarked,
-        tweets
+        tweets:tweets
       },
       process.env.ACCESS_TOKEN_PRIVATE_KEY,
-      { expiresIn: "2m" }
+      { expiresIn: "1h" }
     );
     // Generate refresh token
     const refreshToken = jwt().signToken(
@@ -99,7 +99,7 @@ async function generateAccessToken(userId) {
       likedTweets: user.likedTweets,
       retweetedTweets: user.retweetedTweets,
       bookmarked: user.bookmarked,
-      tweets:user.tweets,
+      tweets: user.tweets,
     },
     process.env.ACCESS_TOKEN_PRIVATE_KEY,
     { expiresIn: "1h" }

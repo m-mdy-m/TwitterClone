@@ -47,7 +47,6 @@ export async function authenticateUser(
       handleNotSuccess(response.data);
     }
   } catch (error) {
-    console.log('error:',error);
     // If the error is not related to token expiration, handle it as usual
     handleServerError(form, error);
   } finally {

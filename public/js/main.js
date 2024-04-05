@@ -10,16 +10,16 @@ const loader = document.getElementById("loader");
 document.addEventListener("DOMContentLoaded", async () => {
   loader.style.display = "none";
   if(isAuth()){
-    const header = document.querySelector("header");
-    const { username, profilePic } = await getUserInfo();
-    header.innerHTML = Header({ profile: profilePic, username });
-    initializeComponentsNavigation();
     if('/home'.includes(path)){
-        HomePage()
+      HomePage()
     }
     if(path.startsWith('/profile')){
       initProfilePage()
     }
+    const header = document.querySelector("header");
+    const { username, profilePic } = await getUserInfo();
+    header.innerHTML = Header({ profile: profilePic, username });
+    initializeComponentsNavigation();
   }
   if(["/auth/signup", "/auth/login"].includes(path)){
     authPage()

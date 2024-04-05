@@ -96,11 +96,12 @@ export function initializeComponentsNavigation() {
 
 async function update_status(){
   const response = await getUserInfo()
-  console.log('response : ',response);
+  update_Posts(response.tweets.length)
+
 }
 
 
-async function update_Posts(){
+async function update_Posts(count){
 
 }
 
