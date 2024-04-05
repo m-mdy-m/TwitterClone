@@ -26,12 +26,14 @@ exports.updateFollowStatus = async (ctx) => {
         // Save user and generate tokens
         const tokens = await userManager.saveUser(updatedUser);
         // Respond with success message and follow status
+         console.log('updatedUser:',updatedUser)
         if (userFollowed) {
             success('Successfully unfollowed user.', { statusFollow: updatedUserFollowed,tokens:tokens   });
         } else {
             success('Successfully followed user.', { statusFollow: updatedUserFollowed,tokens: tokens  });
         }
     } catch (error) {
+      console.log('error:',error)
         internalServerError();
     }
 };
