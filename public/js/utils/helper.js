@@ -243,7 +243,6 @@ function adjustStyles(
 export function showErrorMessage(error, msg = undefined) {
   let errorMessage = "An unexpected error occurred. Please try again.";
   let color = "#ff6347"; // Default color for unexpected errors
-
   if (error.response) {
     // Server responded with an error status code
     errorMessage =
@@ -252,11 +251,11 @@ export function showErrorMessage(error, msg = undefined) {
   } else if (error.request) {
     // Request was made but no response was received
     errorMessage =
-      "Network Error: No response received from the server. Please check your internet connection.";
+      "Network No response received from the server. Please check your internet connection.";
     color = "#f39c12"; // Orange color for network errors
   } else {
     // Error occurred while setting up the request
-    errorMessage = "Error: Request setup failed. Please try again.";
+    errorMessage = "Request setup failed. Please try again.";
     color = "#3498db"; // Blue color for other errors
   }
   return showMessage(msgElm, errorMessage, color);

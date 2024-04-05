@@ -7,8 +7,12 @@ import {
 } from "../utils/utils.js";
 import { handleClick, handlerFollow } from "./Like.js";
 import { listMenuTweet, showUserRetweeted } from "./helperTweet.js";
-const wrapper = document.getElementById("wrapperTweet");
-const msgELm = getMsgElement();
+let wrapper, msgELm
+document.addEventListener('DOMContentLoaded',()=>{
+  wrapper = document.getElementById("wrapperTweet");
+  console.log('wrapper:',wrapper);
+  msgELm = getMsgElement();
+})
 
 // Function to add a single tweet to the UI
 export function AddTweet(

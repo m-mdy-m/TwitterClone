@@ -43,6 +43,9 @@ export function ProfilePage() {
                      </button> 
                     </div>
                 </div>
+                <div class="text-white">
+                 my Tweets
+                </div>
           </div>
         </div>
         ${navUserIcon()}
