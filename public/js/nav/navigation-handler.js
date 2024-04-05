@@ -1,4 +1,5 @@
 import { attachLogoutHandler } from "../auth/logout.js";
+import { statusUser } from "../components/navigation/gen/info.js";
 import { getProfileUser, getUserInfo } from "../utils/apiOperations.js";
 import { clearWelcomePhotoFlag, showWelcome } from "../utils/utils.js";
 // Function to handle navigation events
@@ -33,7 +34,7 @@ function handleNavigation() {
 // Function to execute components on document load
 export function initializeComponentsNavigation() {
   const showWelcomePhotoFlag = showWelcome();
-  update_status()
+  update_status();
   // Initialize logout functionality
   const btnLogout = document.querySelector(".logout");
   attachLogoutHandler(btnLogout);
@@ -41,28 +42,7 @@ export function initializeComponentsNavigation() {
   // Handle navigation events
   handleNavigation();
   const wrapper = document.querySelector(".userProfileWrapper");
-  wrapper.addEventListener("click", async () => {
-    const usernameElement = wrapper.querySelector(".username");
-    const username = usernameElement ? usernameElement.innerHTML : null;
-
-    if (!username) {
-      console.error("Username element not found");
-      return;
-    }
-    try {
-      const response = await getProfileUser(username);
-      
-      if (response.success) {
-        // Redirect to the profile page if the username matches
-        window.location.href = `/profile/${username}`;
-      } else {
-        // Display an error message or handle the error as needed
-        console.error("Error:", response.error);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  });
+  getProfilePage(wrapper);
 
   // Optionally display welcome photo
   if (showWelcomePhotoFlag) {
@@ -94,20 +74,39 @@ export function initializeComponentsNavigation() {
   });
 }
 
-async function update_status(){
-  const response = await getUserInfo()
-  update_Posts(response.tweets.length)
+// handle profile page /profile/:username
+function getProfilePage(wrapper) {
+  wrapper.addEventListener("click", async () => {
+    const usernameElement = wrapper.querySelector(".username");
+    const username = usernameElement ? usernameElement.innerHTML : null;
 
+    if (!username) {
+      console.error("Username element not found");
+      return;
+    }
+    try {
+      const response = await getProfileUser(username);
+
+      if (response.success) {
+        // Redirect to the profile page if the username matches
+        window.location.href = `/profile/${username}`;
+      } else {
+        // Display an error message or handle the error as needed
+        console.error("Error:", response.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
 }
-
-
-async function update_Posts(count){
-
-}
-
-async function update_Followers(){
-
-}
-async function update_Following(){
-
+async function update_status() {
+  const user = await getUserInfo();
+  const wrapper = document.getElementById('statusUser')
+  const userStats =  [
+    { id: "posts", value: user.tweets.length, unit: "", label: "Posts" },
+    { id: "followers", value: user.followers.length, unit: "", label: "Followers" },
+    { id: "following", value:user.following.length, unit: "" , label: "Following" },
+  ];
+  const template = statusUser(userStats)
+  wrapper.innerHTML = template 
 }
