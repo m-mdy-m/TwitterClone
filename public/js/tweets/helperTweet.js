@@ -78,7 +78,9 @@ export function listMenuTweet(className=".list__menu-tweet",steps=3,eventMouse=t
         }, 1500);
       }
     });
+    let clickIcon = 0
     icon.querySelector(".editIcon").addEventListener("click", async () => {
+      ++clickIcon
       const content = tweet.querySelector("#content-tweet");
       const wrapperContent = content.parentNode;
       const updateContent = PostContent({
@@ -92,7 +94,7 @@ export function listMenuTweet(className=".list__menu-tweet",steps=3,eventMouse=t
       button.classList.add("show-button-edit");
       button.classList.remove("remove-button-edit");
       tweetInput.focus();
-      editTweetContent(tweetId, button, wrapperContent,edited_tweet);
+      await editTweetContent(tweetId, button, wrapperContent,edited_tweet);
     });
   });
 }
