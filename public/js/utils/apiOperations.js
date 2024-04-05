@@ -393,3 +393,15 @@ export async function getProfileUser(username) {
     showErrorMessage(error);
   }
 }
+
+
+
+export async function following(userId,followUserId){
+  try {
+    const response = await sendRequest('following','put',{userId,followUserId})
+    console.log('response:',response);
+  } catch (error) {
+    showErrorMessage(error)
+  }
+
+}
