@@ -18,10 +18,10 @@ export function PostContent({ content, edit_mode, profile_mode }) {
   }
   if (profile_mode) {
     const truncateContent = (content) => {
-      const MAX_CONTENT_LENGTH = 150;
+      const MAX_CONTENT_LENGTH = 110;
       if (content.length > MAX_CONTENT_LENGTH) {
         const truncatedContent = content.slice(0, MAX_CONTENT_LENGTH);
-        return `${truncatedContent}...Read More`;
+        return `${truncatedContent}...more`;
       } else {
         return content;
       }
