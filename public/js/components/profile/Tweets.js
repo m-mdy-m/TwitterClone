@@ -25,8 +25,8 @@ export function TweetsProfile(){
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M19.0711 4.59512C17.9827 3.50676 16.2181 3.50676 15.1298 4.59512L14.0201 5.70482L17.9751 9.65979L19.0848 8.55008C20.1732 7.46172 20.1732 5.69717 19.0711 4.59512ZM16.6062 11.0022L13.6521 7.04815L4.66795 16.0344C4.10741 16.5949 3.72903 17.311 3.58079 18.0898L3.15657 20.3182C3.02461 21.0114 3.63276 21.6196 4.32595 21.4877L6.55442 21.0635C7.33316 20.9152 8.04933 20.5362 8.60987 19.9757L16.6062 11.0022Z" fill="currentColor"/>
             </svg>
         </div>
-      <div class="min-h-auto max-w-80 flex justify-end items-start flex-col pb-3 pr-2 relative">
-      ${PostContent({ content:"jsoosssssssssssssssscccccccccccccccccccccccccccccccccccccccccccccccccccccccccccxxxxxxxxxxxxxssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" })}
+      <div class="min-h-auto max-h-auto max-w-56 flex justify-end items-start flex-col pb-3 pr-2 relative ">
+      ${PostContent({ profile_mode:true, content:"jsoossssssxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxsssssssssscccccccccccccccccccccccccccccccccccccccccccccccccccccccccccxxxxxxxxxxxxxssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" })}
         <div class="wrapper_buttons flex w-full justify-start items-center pt-3 overflow-clip px-2 text-white relative [&>*]:cursor-pointer border-t border-[#252424] ">
             <div id="iconSubmitEdit" class="text-white absolute -right-28 z-40 top-1">
                <button class="bg-[#28252576] hover:contrast-125  text-gray-400 font-mavis__light px-2 py-px rounded-xl transition duration-300 ease-in-out transform">
