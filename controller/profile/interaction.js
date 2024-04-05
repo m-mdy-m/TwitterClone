@@ -4,8 +4,9 @@ exports.findUserTweets = async (ctx) => {
     const { internalServerError } = ctx.jsonSender();
     try {
         const userId = ctx.param('userId');
-        const userTweets = await Tweet.find({ author: userId });
-        ctx.json(userTweets);
+        const userTweets = await Tweet.find({ author: userId }).sort({ createdAt: -1 })
+        const result = await Tweet.populate(userTweets, { path: "author" });
+        ctx.json(result);
     } catch (error) {
         internalServerError("Something went wrong. Please try again later.")
     }

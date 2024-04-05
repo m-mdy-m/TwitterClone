@@ -114,6 +114,18 @@
   top: 1.5rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
 .-z-10 {
   z-index: -10;
 }

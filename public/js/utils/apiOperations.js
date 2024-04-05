@@ -426,8 +426,7 @@ export async function follow_status(userId, followUserId) {
 export async function findUserTweets(userId){
   try {
     const response = await sendRequest(`user/posts/${userId}`,'get')
-    console.log('response:',response);
-    return 
+    return response.data
   } catch (error) {
     showErrorMessage(error);
   }
@@ -435,8 +434,7 @@ export async function findUserTweets(userId){
 export async function findLikedTweets(userId){
   try {
     const response = await sendRequest(`user/likes/${userId}`,'get')
-    console.log('response:',response);
-    return 
+    return response.data
   } catch (error) {
     showErrorMessage(error);
   }
@@ -444,8 +442,7 @@ export async function findLikedTweets(userId){
 export async function findRetweetedTweets(userId){
   try {
     const response = await sendRequest(`user/retweets/${userId}`,'get')
-    console.log('response:',response);
-    return 
+    return response.data
   } catch (error) {
     showErrorMessage(error);
   }

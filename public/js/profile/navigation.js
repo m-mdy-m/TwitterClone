@@ -1,5 +1,7 @@
+import { TweetsProfile } from "../components/profile/Tweets.js";
+import { listMenuTweet } from "../tweets/helperTweet.js";
 import { findUserTweets, getProfileUser } from "../utils/apiOperations.js";
-import { randomColor } from "../utils/utils.js";
+import { getCurrentTimeFormatted, randomColor } from "../utils/utils.js";
 
 export function menuProfile() {
   getUserProfile();
@@ -30,14 +32,22 @@ export async function getUserProfile() {
     "#userProfile_username"
   ).innerHTML = `@${username}`;
   userProfileContainer.querySelector("#userProfile_bio").innerHTML = user.bio;
-  const buttons = userProfileContainer.querySelectorAll("#userInteraction button");
+  const buttons = userProfileContainer.querySelectorAll(
+    "#userInteraction button"
+  );
+  const wrapper = userProfileContainer.querySelector(
+    "#wrapper__content-profile"
+  );
+  const tweet = await loadPosts(wrapper, user);
+  listMenuTweet(".list__menu-icon-profile",tweet,tweet._id,tweet)
   buttons.forEach((button) => {
     button.addEventListener("click", async () => {
       const action = button.dataset.action;
 
       switch (action) {
         case "posts":
-          const posts = await findUserTweets(user.userId);
+          const tweet = await loadPosts(wrapper, user);
+          listMenuTweet(".list__menu-icon-profile",tweet._id,tweet)
           break;
         case "likes":
           break;
@@ -45,5 +55,18 @@ export async function getUserProfile() {
           break;
       }
     });
+  });
+}
+async function loadPosts(wrap, user) {
+  const posts = await findUserTweets(user.userId);
+  posts.forEach((tweet) => {
+    const createdAt = getCurrentTimeFormatted(tweet.createdAt);
+    const isBookmarked = user.bookmarked.includes(tweet._id)
+      ? "block"
+      : "hidden";
+    const content = tweet.content;
+    const template = TweetsProfile({ content, createdAt, isBookmarked });
+    wrap.innerHTML += template;
+    return tweet
   });
 }

@@ -1,6 +1,5 @@
 import { randomGradientColor } from "../../utils/utils.js";
 import { statusUser } from "../navigation/gen/info.js";
-import { TweetsProfile } from "./Tweets.js";
 import { navUserIcon } from "./nav/nav_profile.js";
 
 export function ProfilePage() {
@@ -43,7 +42,6 @@ export function ProfilePage() {
                     </div>
                 </div>
                 <div class="text-white flex h-auto flex-wrap justify-between justify-self-start items-start " id="wrapper__content-profile">
-                 ${TweetsProfile()}
                 </div>
           </div>
         </div>

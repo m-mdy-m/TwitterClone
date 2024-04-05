@@ -34,11 +34,17 @@ export function showUserRetweeted() {
   });
 }
 // Function to handle the list menu of tweets
-export function listMenuTweet() {
-  document.querySelectorAll(".list__menu-tweet").forEach((icon) => {
+export function listMenuTweet(className=".list__menu-tweet",Id) {
+  document.querySelectorAll(className).forEach((icon) => {
     // Find the tweet element and its ID
-    const tweet = icon.parentNode.parentNode.parentNode;
-    const tweetId = tweet.getAttribute("data-id");
+    let tweetId, tweet
+    if(Id){
+      tweet
+      tweetId = Id
+    }else{
+      tweet = icon.parentNode.parentNode.parentNode;
+      tweetId = tweet.getAttribute("data-id");
+    }
     icon.addEventListener("mouseenter", () => {
       icon.classList.add("show-menu-tweet");
       icon.classList.remove("hidden-menu-tweet");
