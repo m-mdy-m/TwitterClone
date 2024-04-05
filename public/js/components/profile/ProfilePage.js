@@ -26,7 +26,7 @@ export function ProfilePage() {
                 <div id="statusProfile" class="flex items-center justify-start">
                   ${statusUser(userStats)}
                 </div>
-                <div class=" border-b-4 mt-4 border-[#2f2f30] flex justify-start items-center text-white text-lg [&>*]:mx-2">
+                <div id="userInteraction" class=" border-b-4 mt-4 border-[#2f2f30] flex justify-start items-center text-white text-lg [&>*]:mx-2">
                     <div class="relative button__wrapper-profile">
                       <button class="cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
                         Posts
