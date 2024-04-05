@@ -27,7 +27,6 @@ export async function getUserProfile(){
     const userProfileContainer = document.getElementById('userProfileContainer')
     const response = await getProfileUser(username);
     const user = response.data.user
-    userProfileContainer.querySelector('#userProfile_username').innerHTML =username
+    userProfileContainer.querySelector('#userProfile_username').innerHTML =`@${username}`
     userProfileContainer.querySelector('#userProfile_bio').innerHTML =user.bio
-    console.log('userProfileContainer:',userProfileContainer);
 }

@@ -22,7 +22,7 @@ export function ProfilePage() {
                 <!-- User Name -->
                 <h2 id="userProfile_username" class="text-gray-700 pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
                 <!-- Bio -->
-                <p id="userProfile_bio" class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">'Greatness، of small steps!'</p>
+                <p id="userProfile_bio" class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis"></p>
                 <div id="statusProfile" class="flex items-center justify-start">
                   ${statusUser(userStats)}
                 </div>

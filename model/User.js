@@ -23,6 +23,10 @@ const UserSchema = new Schema(
       type: String,
       default: "/assets/images/profilePic.png",
     },
+    bio: {
+      type: String,
+      default: "Greatness، of small steps!",
+    },
     tweets: [
       {
         type: Schema.ObjectId,
