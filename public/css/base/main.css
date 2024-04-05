@@ -110,6 +110,46 @@
   bottom: 0.5rem;
 }
 
+.-top-1 {
+  top: -0.25rem;
+}
+
+.-top-2 {
+  top: -0.5rem;
+}
+
+.-top-0 {
+  top: -0px;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.left-2 {
+  left: 0.5rem;
+}
+
+.-left-8 {
+  left: -2rem;
+}
+
+.-left-28 {
+  left: -7rem;
+}
+
+.-left-0 {
+  left: -0px;
+}
+
+.-left-2 {
+  left: -0.5rem;
+}
+
+.-left-16 {
+  left: -4rem;
+}
+
 .-z-10 {
   z-index: -10;
 }
@@ -161,6 +201,10 @@
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mr-8 {
+  margin-right: 2rem;
 }
 
 .block {
@@ -231,6 +275,14 @@
   max-height: 14rem;
 }
 
+.max-h-48 {
+  max-height: 12rem;
+}
+
+.max-h-52 {
+  max-height: 13rem;
+}
+
 .min-h-20 {
   min-height: 5rem;
 }
@@ -253,6 +305,10 @@
 
 .min-h-8 {
   min-height: 2rem;
+}
+
+.min-h-52 {
+  min-height: 13rem;
 }
 
 .w-10 {
@@ -323,6 +379,10 @@
   min-width: 12rem;
 }
 
+.min-w-52 {
+  min-width: 13rem;
+}
+
 .max-w-full {
   max-width: 100%;
 }
@@ -337,6 +397,14 @@
 
 .max-w-56 {
   max-width: 14rem;
+}
+
+.max-w-48 {
+  max-width: 12rem;
+}
+
+.max-w-52 {
+  max-width: 13rem;
 }
 
 .-translate-y-1\/2 {
@@ -392,6 +460,10 @@
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .items-start {
   align-items: flex-start;
 }
@@ -428,6 +500,10 @@
   justify-content: space-evenly;
 }
 
+.justify-stretch {
+  justify-content: stretch;
+}
+
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.25rem * var(--tw-space-x-reverse));
@@ -438,6 +514,10 @@
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.justify-self-start {
+  justify-self: start;
 }
 
 .overflow-auto {
@@ -452,8 +532,16 @@
   overflow: clip;
 }
 
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 .overflow-y-hidden {
   overflow-y: hidden;
+}
+
+.overflow-y-visible {
+  overflow-y: visible;
 }
 
 .truncate {
@@ -747,6 +835,11 @@
 .py-px {
   padding-top: 1px;
   padding-bottom: 1px;
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .pb-3 {

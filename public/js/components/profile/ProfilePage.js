@@ -42,7 +42,7 @@ export function ProfilePage() {
                      </button> 
                     </div>
                 </div>
-                <div class="text-white flex h-full justify-start items-start " id="wrapper_content">
+                <div class="text-white flex h-auto flex-wrap justify-between justify-self-start items-start " id="wrapper_content">
                  ${TweetsProfile()}
                 </div>
           </div>

@@ -3,7 +3,7 @@ import { PostContent } from "../tweet/PostContent.js";
 
 export function TweetsProfile(){
     return `
-    <div class="max-w-full min-h-48 min-w-48 h-auto my-4 rounded-lg relative flex flex-col border-2 bg-[#11101076] border-t border-[#111010] p-2">
+    <div class="max-w-full min-h-52 min-w-52 h-auto my-4 rounded-lg relative flex flex-col border-2 bg-[#11101076] border-t border-[#111010] p-2">
         <!-- Bookmarked Tweet  -->
         <svg class="bookmarked w-4 h-4 top-1 left-1 block absolute text-blue-400 transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 7.75V18C4 19.6481 5.88153 20.5889 7.2 19.6L10.8 16.9C11.5111 16.3667 12.4889 16.3667 13.2 16.9L16.8 19.6C18.1185 20.5889 20 19.6481 20 18V7.75H4ZM4 6.25H20V4C20 2.89543 19.1046 2 18 2H6C4.89543 2 4 2.89543 4 4V6.25Z" fill="currentColor"/>
@@ -25,11 +25,11 @@ export function TweetsProfile(){
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M19.0711 4.59512C17.9827 3.50676 16.2181 3.50676 15.1298 4.59512L14.0201 5.70482L17.9751 9.65979L19.0848 8.55008C20.1732 7.46172 20.1732 5.69717 19.0711 4.59512ZM16.6062 11.0022L13.6521 7.04815L4.66795 16.0344C4.10741 16.5949 3.72903 17.311 3.58079 18.0898L3.15657 20.3182C3.02461 21.0114 3.63276 21.6196 4.32595 21.4877L6.55442 21.0635C7.33316 20.9152 8.04933 20.5362 8.60987 19.9757L16.6062 11.0022Z" fill="currentColor"/>
             </svg>
         </div>
-      <div class="min-h-auto max-h-auto max-w-56 flex justify-end items-start flex-col pb-3 pr-2 relative ">
-      ${PostContent({ profile_mode:true, content:"jsoossssssxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxsssssssssscccccccccccccccccccccccccccccccccccccccccccccccccccccccccccxxxxxxxxxxxxxssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" })}
-        <div class="wrapper_buttons flex w-full justify-start items-center pt-3 overflow-clip px-2 text-white relative [&>*]:cursor-pointer border-t border-[#252424] ">
-            <div id="iconSubmitEdit" class="text-white absolute -right-28 z-40 top-1">
-               <button class="bg-[#28252576] hover:contrast-125  text-gray-400 font-mavis__light px-2 py-px rounded-xl transition duration-300 ease-in-out transform">
+      <div class="min-h-48 max-h-52 max-w-52 flex justify-between items-start flex-col pb-3 pr-2 relative ">
+        ${PostContent({ profile_mode:true, content:"hi men" })}
+        <div class="wrapper_buttons flex w-full justify-end items-center pt-3 px-2 text-white relative [&>*]:cursor-pointer border-t border-[#252424] ">
+            <div id="iconSubmitEdit" class="text-white absolute left-0 top-1">
+               <button class="bg-[#28252576] hover:contrast-125  text-gray-400 font-mavis__light px-2 rounded-md transition duration-300 ease-in-out transform">
                    <span class="z-10">Save Changes</span>
                </button>
             </div>
