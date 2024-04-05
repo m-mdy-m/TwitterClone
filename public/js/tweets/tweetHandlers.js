@@ -10,7 +10,6 @@ import { listMenuTweet, showUserRetweeted } from "./helperTweet.js";
 let wrapper, msgELm
 document.addEventListener('DOMContentLoaded',()=>{
   wrapper = document.getElementById("wrapperTweet");
-  console.log('wrapper:',wrapper);
   msgELm = getMsgElement();
 })
 

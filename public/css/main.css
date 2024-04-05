@@ -318,13 +318,12 @@
   .button__wrapper-profile button:hover {
     color: #fff;
   }
-
+  
   .button__wrapper-profile button:focus:after,
   .button__wrapper-profile button:hover:after {
     width: 100%;
     left: 0%;
   }
-
   .button__wrapper-profile button:after {
     content: "";
     pointer-events: none;
@@ -332,6 +331,26 @@
     left: 50%;
     position: absolute;
     width: 0;
+    height: 2px;
+    background-image: linear-gradient(to right bottom, #139d9d, #00a1b1, #19a5c3, #3ba7d2, #5ca8de, #60b0e7, #65b7ef, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: width 0.4s ease, left 0.4s ease;
+  }
+  .button__wrapper-profile.activeButton button {
+    color: #fff;
+  }
+  
+  .button__wrapper-profile.activeButton button:after {
+    width: 100%;
+    left: 0%;
+  }
+  
+  .button__wrapper-profile.activeButton button:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 0%;
+    position: absolute;
     height: 2px;
     background-image: linear-gradient(to right bottom, #139d9d, #00a1b1, #19a5c3, #3ba7d2, #5ca8de, #60b0e7, #65b7ef, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);

@@ -421,3 +421,12 @@ export async function follow_status(userId, followUserId) {
     showErrorMessage(error);
   }
 }
+
+
+export async function find_interaction_user(userId){
+  try {
+    const response = await sendRequest(`user/interaction/${userId}`,'get')
+  } catch (error) {
+    showErrorMessage(error);
+  }
+}

@@ -10,7 +10,7 @@ exports.getProfile = (ctx) => {
     return ctx.jsonSender().success('Operation successful', { username,user:user });
   } else {
     // If the username does not match, send an error response
-    return ctx.jsonSender().error('Unauthorized', 401);
+    return ctx.jsonSender().internalServerError("Something went wrong. Please try again later.");
   }
 };
 exports.ProfileUser = ({sendFile})=>{
