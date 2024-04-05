@@ -38,16 +38,16 @@ export async function getUserProfile() {
   const wrapper = userProfileContainer.querySelector(
     "#wrapper__content-profile"
   );
-  const tweet = await loadPosts(wrapper, user);
-  listMenuTweet(".list__menu-icon-profile",tweet,tweet._id,tweet)
+  await loadPosts(wrapper, user);
+  handlerClickIcons(wrapper);
   buttons.forEach((button) => {
     button.addEventListener("click", async () => {
       const action = button.dataset.action;
 
       switch (action) {
         case "posts":
-          const tweet = await loadPosts(wrapper, user);
-          listMenuTweet(".list__menu-icon-profile",tweet._id,tweet)
+          await loadPosts(wrapper, user);
+          handlerClickIcons(wrapper);
           break;
         case "likes":
           break;
@@ -65,8 +65,10 @@ async function loadPosts(wrap, user) {
       ? "block"
       : "hidden";
     const content = tweet.content;
-    const template = TweetsProfile({ content, createdAt, isBookmarked });
+    const template = TweetsProfile({id:tweet._id, content, createdAt, isBookmarked });
     wrap.innerHTML += template;
-    return tweet
   });
+}
+function handlerClickIcons() {
+  listMenuTweet(".list__menu-icon-profile",1,false);
 }

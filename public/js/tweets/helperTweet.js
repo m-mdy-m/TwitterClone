@@ -1,12 +1,9 @@
-import { ActionButtons } from "../components/tweet/Action.btn.js";
 import { PostContent } from "../components/tweet/PostContent.js";
 import {
-  getTweetInfo,
   toggleBookmark,
   toggleDeleteTweet,
   toggleEditTweet,
 } from "../utils/apiOperations.js";
-import { setItem } from "../utils/utils.js";
 
 // Function to show user retweeted information on mouse hover
 export function showUserRetweeted() {
@@ -34,25 +31,24 @@ export function showUserRetweeted() {
   });
 }
 // Function to handle the list menu of tweets
-export function listMenuTweet(className=".list__menu-tweet",Id) {
+export function listMenuTweet(className=".list__menu-tweet",steps=3,eventMouse=true) {
   document.querySelectorAll(className).forEach((icon) => {
-    // Find the tweet element and its ID
-    let tweetId, tweet
-    if(Id){
-      tweet
-      tweetId = Id
-    }else{
-      tweet = icon.parentNode.parentNode.parentNode;
-      tweetId = tweet.getAttribute("data-id");
+    let parentNode = icon;
+    for (let i = 0; i < steps; i++) {
+      parentNode = parentNode.parentNode;
     }
-    icon.addEventListener("mouseenter", () => {
-      icon.classList.add("show-menu-tweet");
-      icon.classList.remove("hidden-menu-tweet");
-    });
-    icon.addEventListener("mouseleave", () => {
-      icon.classList.remove("show-menu-tweet");
-      icon.classList.add("hidden-menu-tweet");
-    });
+    let  tweet = parentNode
+    let  tweetId = parentNode.getAttribute("data-id");
+    if(eventMouse){
+      icon.addEventListener("mouseenter", () => {
+        icon.classList.add("show-menu-tweet");
+        icon.classList.remove("hidden-menu-tweet");
+      });
+      icon.addEventListener("mouseleave", () => {
+        icon.classList.remove("show-menu-tweet");
+        icon.classList.add("hidden-menu-tweet");
+      });
+    }
     // Find the bookmarked status element and bookmark icon
     const bookmarked = tweet.querySelector(".bookmarked");
     const bookmarkIcon = icon.querySelector(".bookmarkIcon");
@@ -164,7 +160,9 @@ export function editTweetContent(tweetId, button, wrapperContent,edited_tweet) {
 
     // Update the content wrapper with the updated content
     wrapperContent.innerHTML = updateContent;
-    edited_tweet.style.display = 'block'
+    if(edited_tweet){
+      edited_tweet.style.display = 'block'
+    }
     // Remove the 'show-button-edit' class and add the 'remove-button-edit' class to the button
     button.classList.remove("show-button-edit");
     button.classList.add("remove-button-edit");

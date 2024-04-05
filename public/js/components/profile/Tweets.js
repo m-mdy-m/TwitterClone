@@ -1,15 +1,20 @@
 import { Icon } from "../tweet/Icon.js";
 import { PostContent } from "../tweet/PostContent.js";
 
-export function TweetsProfile({createdAt,isBookmarked,content}){
+export function TweetsProfile({id,createdAt,isBookmarked,content}){
     return `
-    <div class="max-w-full min-h-44 min-w-52 h-auto my-4 rounded-lg relative flex flex-col border-2 bg-[#11101076] border-t border-[#111010] p-2">
+    <div data-id="${id}" class="max-w-full min-h-44 min-w-52 h-auto my-4 rounded-lg relative flex flex-col border-2 bg-[#11101076] border-t border-[#111010] p-2">
         <!-- Bookmarked Tweet  -->
         <svg class="bookmarked w-4 h-4 top-2 left-1 ${isBookmarked} absolute text-blue-400 transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 7.75V18C4 19.6481 5.88153 20.5889 7.2 19.6L10.8 16.9C11.5111 16.3667 12.4889 16.3667 13.2 16.9L16.8 19.6C18.1185 20.5889 20 19.6481 20 18V7.75H4ZM4 6.25H20V4C20 2.89543 19.1046 2 18 2H6C4.89543 2 4 2.89543 4 4V6.25Z" fill="currentColor"/>
         </svg>
         <div class="flex absolute bottom-2 left-1/3  justify-center items-center text-gray-500">
             <p class="flex items-center space-x-1 font-mavis__bold text-sm">${createdAt}</p>
+        </div>
+        <div id="iconSubmitEdit" class="text-white absolute z-50 opacity-0 right-0 bottom-8">
+           <button class="bg-[#28252576] hover:contrast-125  text-gray-400 font-mavis__light px-2 rounded-l-md transition duration-300 ease-in-out transform">
+               <span class="z-10">Save Changes</span>
+           </button>
         </div>
         <div class="flex justify-end items-center min-w-20 list__menu-icon-profile h-auto [&>*]:cursor-pointer relative">
             <!-- Delete tweet icon -->
@@ -29,11 +34,6 @@ export function TweetsProfile({createdAt,isBookmarked,content}){
         ${PostContent({ profile_mode:true, content })}
         <div class="wrapper_buttons flex w-full justify-end items-center pt-3 px-2 text-white relative [&>*]:cursor-pointer border-t border-[#252424] ">
         ${Icon({src:'profile_nav/chart-tweet.svg',alt: 'Chart',styleIcon:'w-6 h-6' , id: 'chart__tweet-icon',className:"!absolute left-0 hover:text-white transition-all"})}
-            <div id="iconSubmitEdit" class="text-white absolute opacity-0 hidden right-0 top-1">
-               <button class="bg-[#28252576] hover:contrast-125  text-gray-400 font-mavis__light px-2 rounded-md transition duration-300 ease-in-out transform">
-                   <span class="z-10">Save Changes</span>
-               </button>
-            </div>
         </div>
       </div>
     </div>
