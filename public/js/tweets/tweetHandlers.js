@@ -79,14 +79,7 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
   }
   try {
     /// extract tweet
-    const {
-      content,
-      createdAt,
-      _id,
-      likes,
-      author: tweetAuthor,
-      retweeters,
-    } = tweet;
+    const { content, createdAt, _id,likes, author: tweetAuthor, retweeters, } = tweet;
     // extract current user
     const { userId } = userInfo;
     // current user is liked ?
@@ -143,6 +136,7 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
           ? "block"
           : "hidden",
       edited_tweet: tweet.edited ? "block" : "hidden",
+      followStatus:tweetAuthor._id.toString() === userId.toString() ? 'hidden' : 'block'
     };
     // return Tweet
     return Tweet(tweetContent);

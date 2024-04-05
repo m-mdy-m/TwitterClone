@@ -6,6 +6,7 @@ export function UserInfo({
   createdAt,
   isRetweeted,
   retweetedUsername,
+  followStatus="hidden",
 }) {
   return `
       <div class="flex justify-start items-center">
@@ -24,7 +25,7 @@ export function UserInfo({
                   <p class="flex items-center space-x-1 font-mavis__bold text-sm tweet-time">${createdAt}</p>
               </div>
           </div>
-          <div class="text-white">
+          <div class="text-white  ${followStatus}">
            <button id="follow-status" class="bg-gradient-to-r from-gray-800 to-gray-900 hover:contrast-125  text-gray-400 font-Aktiv__light px-2 py-px rounded-md transition duration-300 ease-in-out transform">
                <span class="z-10">Follow</span>
            </button>
