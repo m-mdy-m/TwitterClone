@@ -177,3 +177,15 @@ export function attachIconClickListeners() {
     );
   }
 }
+
+
+export function attachFollowClick(){
+try {
+  const followBtn = document.querySelectorAll('.follow-status')
+  followBtn.forEach((btn)=>{
+    btn.addEventListener('click',handleFollow)
+  })
+} catch (error) {
+  
+}
+}

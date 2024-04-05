@@ -4,13 +4,14 @@ import {
   toggleLike,
   toggleRetweet,
 } from "../utils/apiOperations.js";
-import { getId, showErrorMessage, showMessage } from "../utils/helper.js";
+import { getId, showMessage } from "../utils/helper.js";
 import { getMsgElement } from "../utils/utils.js";
 import { AddTweet } from "./tweetHandlers.js";
 const msgElm = getMsgElement();
 // Function to handle the click event
 export async function handleClick(event) {
   const elm = event.target;
+  console.log('elm:',elm);
   const idIcons = ["likeIcon", "retweetIcon", "shareIcon", "commentIcon"];
   const currentClick = elm.id;
   try {

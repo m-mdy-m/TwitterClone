@@ -26,7 +26,7 @@ export function UserInfo({
               </div>
           </div>
           <div class="text-white  ${followStatus}">
-           <button id="follow-status" class="bg-gradient-to-r from-gray-800 to-gray-900 hover:contrast-125  text-gray-400 font-Aktiv__light px-2 py-px rounded-md transition duration-300 ease-in-out transform">
+           <button class="follow-status bg-gradient-to-r from-gray-800 to-gray-900 hover:contrast-125  text-gray-400 font-Aktiv__light px-2 py-px rounded-md transition duration-300 ease-in-out transform">
                <span class="z-10">Follow</span>
            </button>
          </div>
