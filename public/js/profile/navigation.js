@@ -1,4 +1,4 @@
-import { find_interaction_user, getProfileUser } from "../utils/apiOperations.js";
+import { findUserTweets, getProfileUser } from "../utils/apiOperations.js";
 import { randomColor } from "../utils/utils.js";
 
 export function menuProfile() {
@@ -30,26 +30,14 @@ export async function getUserProfile() {
     "#userProfile_username"
   ).innerHTML = `@${username}`;
   userProfileContainer.querySelector("#userProfile_bio").innerHTML = user.bio;
-  const userInteraction =
-    userProfileContainer.querySelector("#userInteraction");
-  const posts = userInteraction.querySelector(".posts");
-  const likes = userInteraction.querySelector(".likes");
-  const retweets = userInteraction.querySelector(".retweets");
-  const buttons = {
-    posts,
-    likes,
-    retweets,
-  };
-  Object.values(buttons).forEach((button) => {
-    console.log({user})
-    button.addEventListener("click", async ()=> {
-      const clickedButton = Object.keys(buttons).find(
-        (key) => buttons[key] === this
-      );
-      const correspondingElement = document.querySelector(`.${clickedButton}`);
-      await find_interaction_user(user.userId)
-      switch(clickedButton){
+  const buttons = userProfileContainer.querySelectorAll("#userInteraction button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const action = button.dataset.action;
+
+      switch (action) {
         case "posts":
+          const posts = await findUserTweets(user.userId);
           break;
         case "likes":
           break;

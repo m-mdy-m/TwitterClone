@@ -27,17 +27,17 @@ export function ProfilePage() {
                 </div>
                 <div id="userInteraction" class=" border-b-4 mt-4 border-[#2f2f30] flex justify-start items-center text-white text-lg [&>*]:mx-2">
                     <div class="relative button__wrapper-profile posts activeButton">
-                      <button class="cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
+                      <button data-action="posts" class="cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
                         Posts
                       </button>
                     </div>
                     <div class="relative button__wrapper-profile likes"> 
-                      <button class=" cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
+                      <button data-action="likes" class=" cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
                         Likes
                       </button> 
                     </div>
                     <div class="relative button__wrapper-profile retweets"> 
-                     <button class=" cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
+                     <button data-action="retweets" class=" cursor-pointer border-none outline-none bg-transparent uppercase transition-all duration-300 font-mavis__bold ">
                        Retweets
                      </button> 
                     </div>

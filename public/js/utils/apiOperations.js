@@ -423,9 +423,29 @@ export async function follow_status(userId, followUserId) {
 }
 
 
-export async function find_interaction_user(userId){
+export async function findUserTweets(userId){
   try {
-    const response = await sendRequest(`user/interaction/${userId}`,'get')
+    const response = await sendRequest(`user/posts/${userId}`,'get')
+    console.log('response:',response);
+    return 
+  } catch (error) {
+    showErrorMessage(error);
+  }
+}
+export async function findLikedTweets(userId){
+  try {
+    const response = await sendRequest(`user/likes/${userId}`,'get')
+    console.log('response:',response);
+    return 
+  } catch (error) {
+    showErrorMessage(error);
+  }
+}
+export async function findRetweetedTweets(userId){
+  try {
+    const response = await sendRequest(`user/retweets/${userId}`,'get')
+    console.log('response:',response);
+    return 
   } catch (error) {
     showErrorMessage(error);
   }
