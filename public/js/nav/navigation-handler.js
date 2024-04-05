@@ -123,6 +123,7 @@ export async function update_status() {
 
   // If the current page is a profile page, update the user status in the profile section
   if(window.location.pathname.startsWith('/profile')){
+    
     const statusProfile = document.getElementById('statusProfile');
     statusProfile.innerHTML = template;
   }

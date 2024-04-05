@@ -1,3 +1,5 @@
+import { getUserProfile } from "../../profile/navigation.js";
+import { getUserInfo } from "../../utils/apiOperations.js";
 import { randomGradientColor, randomColor } from "../../utils/utils.js";
 import { statusUser } from "../navigation/gen/info.js";
 import { navUserIcon } from "./nav/nav_profile.js";
@@ -16,11 +18,11 @@ export function ProfilePage() {
                    <img src="/assets/icon/nav/user.svg" alt="" class=" rounded-full border-4 w-full h-full  object-cover">
                 </div>
           </div>
-          <div class="pt-12 px-4">
+          <div class="pt-12 px-4" id="userProfileContainer">
                 <!-- User Name -->
-                <h2 class="text-gray-700 pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
+                <h2 id="userProfile_username" class="text-gray-700 pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
                 <!-- Bio -->
-                <p id="bio" class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">'Greatness، of small steps'!</p>
+                <p id="userProfile_bio" class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">'Greatness، of small steps!'</p>
                 <div id="statusProfile" class="flex items-center justify-start">
                   ${statusUser(userStats)}
                 </div>

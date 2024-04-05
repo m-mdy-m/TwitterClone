@@ -7,7 +7,7 @@ exports.getProfile = (ctx) => {
   const user = manager.registerUser();
   if (user.username === username) {
     // If the username matches, send a success response with the username
-    return ctx.jsonSender().success('Operation successful', { username });
+    return ctx.jsonSender().success('Operation successful', { username,user:user });
   } else {
     // If the username does not match, send an error response
     return ctx.jsonSender().error('Unauthorized', 401);

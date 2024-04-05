@@ -1,6 +1,8 @@
+import { getProfileUser } from "../utils/apiOperations.js";
 import { randomColor } from "../utils/utils.js";
 
 export function menuProfile() {
+  getUserProfile()
   const navProfile = document.querySelector(".nav__profile-user");
 
   navProfile.querySelectorAll(".icons").forEach((icon)=>{
@@ -17,4 +19,15 @@ export function menuProfile() {
         tagP.style.cssText = 'display: none; transition: all 0.3s ease;';
     })
   });
+}
+
+
+export async function getUserProfile(){
+    const username =  window.location.pathname.split('/')[2]
+    const userProfileContainer = document.getElementById('userProfileContainer')
+    const response = await getProfileUser(username);
+    const user = response.data.user
+    userProfileContainer.querySelector('#userProfile_username').innerHTML =username
+    userProfileContainer.querySelector('#userProfile_bio').innerHTML =user.bio
+    console.log('userProfileContainer:',userProfileContainer);
 }
