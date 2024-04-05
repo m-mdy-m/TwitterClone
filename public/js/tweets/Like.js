@@ -1,3 +1,4 @@
+import { update_status } from "../nav/navigation-handler.js";
 import {
   follow_status,
   getTweetInfo,
@@ -118,6 +119,7 @@ export async  function handlerFollow(e){
   const id = getId(elm)
   const {author:{_id}} = await getTweetInfo(id)
   const status = await follow_status(user.userId,_id)
+  await update_status()
   if(status){
     elm.innerHTML = 'unfollow'
   }else{

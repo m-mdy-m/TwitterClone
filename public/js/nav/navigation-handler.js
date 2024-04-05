@@ -99,14 +99,16 @@ function getProfilePage(wrapper) {
     }
   });
 }
-async function update_status() {
-  const user = await getUserInfo();
+
+export async function update_status() {
+  const user = await getUserInfo()
   const wrapper = document.getElementById('statusUser')
   const userStats =  [
     { id: "posts", value: user.tweets.length, unit: "", label: "Posts" },
     { id: "followers", value: user.followers.length, unit: "", label: "Followers" },
     { id: "following", value:user.following.length, unit: "" , label: "Following" },
   ];
+  console.log('user.following.length:',user.following.length);
   const template = statusUser(userStats)
   wrapper.innerHTML = template 
 }

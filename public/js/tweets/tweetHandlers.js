@@ -1,5 +1,5 @@
 import Tweet from "../components/Tweet.js";
-import { showMessage } from "../utils/helper.js";
+import { showErrorMessage, showMessage } from "../utils/helper.js";
 import {
   calculateLikeCount,
   getCurrentTimeFormatted,
@@ -188,6 +188,6 @@ try {
     btn.addEventListener('click',handlerFollow)
   })
 } catch (error) {
-  
+  showErrorMessage(error)
 }
 }
