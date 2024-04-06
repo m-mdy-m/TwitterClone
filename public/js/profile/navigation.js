@@ -1,6 +1,6 @@
 import { TweetsProfile } from "../components/profile/Tweets.js";
 import { listMenuTweet } from "../tweets/helperTweet.js";
-import { findUserTweets, getProfileUser } from "../utils/apiOperations.js";
+import { findLikedTweets, findRetweetedTweets, findUserTweets, getProfileUser } from "../utils/apiOperations.js";
 import { getCurrentTimeFormatted, randomColor } from "../utils/utils.js";
 
 export function menuProfile() {
@@ -38,27 +38,39 @@ export async function getUserProfile() {
   const wrapper = userProfileContainer.querySelector(
     "#wrapper__content-profile"
   );
-  await loadPosts(wrapper, user);
+  await loading(wrapper, user,findUserTweets);
   handlerClickIcons(wrapper);
   buttons.forEach((button) => {
     button.addEventListener("click", async () => {
       const action = button.dataset.action;
-
+      userProfileContainer.querySelectorAll('#userInteraction .button__wrapper-profile').forEach((elm)=>{
+        setTimeout(elm.classList.remove('activeButton'),700)
+      })
+      button.parentElement.classList.add('activeButton')
+      buttons.forEach(btn => btn.classList.remove('activeButton'));
       switch (action) {
         case "posts":
-          await loadPosts(wrapper, user);
-          handlerClickIcons(wrapper);
+          await loading(wrapper, user,findUserTweets);
+          handlerClickIcons();
           break;
         case "likes":
+          await loading(wrapper, user,findLikedTweets);
+          handlerClickIcons();
           break;
         case "retweets":
+          await loading(wrapper, user,findRetweetedTweets);
+          handlerClickIcons();
           break;
       }
     });
   });
 }
-async function loadPosts(wrap, user) {
-  const posts = await findUserTweets(user.userId);
+function handlerClickIcons() {
+  listMenuTweet(".list__menu-icon-profile",1,false);
+}
+async function loading(wrapper,user,findUser){
+  wrapper.innerHTML=''
+  const posts = await findUser(user.userId)
   posts.forEach((tweet) => {
     const createdAt = getCurrentTimeFormatted(tweet.createdAt);
     const isBookmarked = user.bookmarked.includes(tweet._id)
@@ -66,9 +78,6 @@ async function loadPosts(wrap, user) {
       : "hidden";
     const content = tweet.content;
     const template = TweetsProfile({id:tweet._id, content, createdAt, isBookmarked });
-    wrap.innerHTML += template;
+    wrapper.innerHTML += template;
   });
-}
-function handlerClickIcons() {
-  listMenuTweet(".list__menu-icon-profile",1,false);
 }

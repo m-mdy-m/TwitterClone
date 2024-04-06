@@ -10,7 +10,7 @@ export function BodyContent() {
     style_error = "fixed top-4 left-[40%]";
     height = "full";
   }
-  if(path.startsWith('/profile')){
+  if (path.startsWith("/profile")) {
     style_main = "flex justify-center bg-gradient-profile mt-4 mr-4 mb-4 ";
   }
   return `

@@ -1,11 +1,11 @@
 import { InfoUser } from "./InfoUser.js";
 import { ProfileUserNav } from "./ProfileUserNav.js";
 
-export function InformationUser({ isAuth,profile,username}) {
+export function InformationUser({ bio,isAuth,profile,username}) {
   const authTemplateMobile = `
     <!-- Profile User Section -->
     <div class="flex flex-col items-center rounded-lg mobile:p-0 tablet:p-2 tablet:pt-0 ">
-        ${ProfileUserNav({profile,username})}
+        ${ProfileUserNav({bio,profile,username})}
         ${InfoUser()}
     </div>
 `;
