@@ -31,18 +31,16 @@ const generateTweetQueries = (
   isRetweet,
   retweetId,
   featureTypeTweet = "likes",
-  featureTypeUser = "likedTweets",
-  featureTypeTweetsArray = "tweets"
+  featureTypeUser = "likedTweets"
 ) => {
   // Construct query to associate user with tweet based on the operation and tweet information
   let UserQuery = { [operation]: { [featureTypeTweet]: userId } };
   // Construct update query to perform operation on tweet based on tweet information
-  let TweetQuery = { [operation]: { [featureTypeUser]: tweetId } };
+  const TweetQuery = { [operation]: { [featureTypeUser]: tweetId } };
   if (isRetweet) {
     UserQuery = {
       [operation]: { [featureTypeTweet]: userId, retweets: retweetId },
     };
-    TweetQuery = { [operation]: { [featureTypeUser]: tweetId ,[featureTypeTweetsArray]: tweetId}  };
   }
 
   return { UserQuery, TweetQuery };
