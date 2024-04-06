@@ -71,13 +71,27 @@ function handlerClickIcons() {
 async function loading(wrapper,user,findUser){
   wrapper.innerHTML=''
   const posts = await findUser(user.userId)
-  posts.forEach((tweet) => {
+  posts.forEach(async (tweet, index) => {
     const createdAt = getCurrentTimeFormatted(tweet.createdAt);
-    const isBookmarked = user.bookmarked.includes(tweet._id)
-      ? "block"
-      : "hidden";
+    const isBookmarked = user.bookmarked.includes(tweet._id) ? "block" : "hidden";
     const content = tweet.content;
-    const template = TweetsProfile({id:tweet._id, content, createdAt, isBookmarked });
-    wrapper.innerHTML += template;
-  });
+    const template = TweetsProfile({ id: tweet._id, content, createdAt, isBookmarked });
+
+    // Create a new element and set its opacity to 0
+    const newElement = document.createElement('div');
+    newElement.innerHTML = template;
+    newElement.style.opacity = 0;
+
+    // Append the new element to the wrapper
+    wrapper.appendChild(newElement);
+
+    // Gradually increase the opacity to create a fade-in effect
+    await new Promise((resolve) => {
+        setTimeout(() => {
+            newElement.style.transition = 'opacity 0.5s';
+            newElement.style.opacity = 1;
+            resolve();
+        }, index * 100); // Adjust the duration and delay as needed
+    });
+});
 }
