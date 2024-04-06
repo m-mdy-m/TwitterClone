@@ -1,7 +1,7 @@
 import { Icon } from "../tweet/Icon.js";
 import { PostContent } from "../tweet/PostContent.js";
 
-export function TweetsProfile({id,createdAt,isBookmarked,content}){
+export function TweetsProfile({id,createdAt,isBookmarked,content,showDeleteIcon}){
     return `
     <div data-id="${id}" class="max-w-full min-h-44 min-w-52 h-auto my-4 mx-4 rounded-lg relative flex flex-col border-2 bg-[#11101076] border-t border-[#111010] p-2">
         <!-- Bookmarked Tweet  -->
@@ -18,7 +18,7 @@ export function TweetsProfile({id,createdAt,isBookmarked,content}){
         </div>
         <div class="flex justify-end items-center min-w-20 list__menu-icon-profile h-auto [&>*]:cursor-pointer relative">
             <!-- Delete tweet icon -->
-            <svg class="deleteIcon  w-6 h-6 text-gray-400 hover:text-red-500 transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="deleteIcon ${showDeleteIcon} w-6 h-6 text-gray-400 hover:text-red-500 transition-colors duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.40627 2.8906C9.7772 2.3342 10.4017 2 11.0704 2H12.9296C13.5983 2 14.2228 2.3342 14.5937 2.8906L15.5 4.25H19.25C19.6642 4.25 20 4.58579 20 5C20 5.41421 19.6642 5.75 19.25 5.75H4.75C4.33579 5.75 4 5.41421 4 5C4 4.58579 4.33579 4.25 4.75 4.25H8.5L9.40627 2.8906ZM15 22H9C6.79086 22 5 20.2091 5 18V7H19V18C19 20.2091 17.2091 22 15 22ZM10 10.25C10.4142 10.25 10.75 10.5858 10.75 11V18C10.75 18.4142 10.4142 18.75 10 18.75C9.58579 18.75 9.25 18.4142 9.25 18L9.25 11C9.25 10.5858 9.58579 10.25 10 10.25ZM14 10.25C14.4142 10.25 14.75 10.5858 14.75 11V18C14.75 18.4142 14.4142 18.75 14 18.75C13.5858 18.75 13.25 18.4142 13.25 18V11C13.25 10.5858 13.5858 10.25 14 10.25Z" fill="currentColor"/>
             </svg>
             <!-- Bookmark Icon -->

@@ -75,8 +75,7 @@ async function loading(wrapper,user,findUser){
     const createdAt = getCurrentTimeFormatted(tweet.createdAt);
     const isBookmarked = user.bookmarked.includes(tweet._id) ? "block" : "hidden";
     const content = tweet.content;
-    const template = TweetsProfile({ id: tweet._id, content, createdAt, isBookmarked });
-
+    const template = TweetsProfile({ id: tweet._id, content, createdAt, isBookmarked,showDeleteIcon:tweet.author._id === user.userId? "block": "hidden", });
     // Create a new element and set its opacity to 0
     const newElement = document.createElement('div');
     newElement.innerHTML = template;
