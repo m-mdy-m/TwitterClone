@@ -41,7 +41,7 @@ export function ProfilePage() {
                    </button> 
                   </div>
               </div>
-                  <div class="text-white flex h-auto flex-wrap justify-between justify-self-start items-start " id="wrapper__content-profile">
+                  <div class="text-white flex h-auto flex-wrap justify-between items-start " id="wrapper__content-profile">
               </div>
           </div>
         </div>

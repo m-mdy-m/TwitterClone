@@ -74,8 +74,8 @@ async function loading(wrapper, user, findUser) {
   const posts = await findUser(user.userId);
   if (posts.length === 0) {
     wrapper.style.cssText =
-      "color:white;font-size:25px;font-family:mavis;text-align:center;width";
-    wrapper.innerHTML = "nothing posts";
+    "color: white; font-size: 35px; font-family: 'Mavis', sans-serif;";
+  wrapper.innerHTML = "<p style='margin: 0;text-align: center;'>No posts</p>";
   }
   posts.forEach(async (tweet, index) => {
     const createdAt = getCurrentTimeFormatted(tweet.createdAt);
