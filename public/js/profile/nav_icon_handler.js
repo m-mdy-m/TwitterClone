@@ -9,7 +9,6 @@ export function nav_icons_profile() {
       case "analyze":
         // Code to handle click on analyze_page goes here
         data.addEventListener("click", handleClick);
-        Analyze()
         break;
       case "edit":
         // Code to handle click on edit_page goes here
@@ -35,19 +34,16 @@ export function handleClick() {
   img.style.cssText =
     "width:4rem;height:4rem;padding:0;border-width:1px;bottom:-1.5rem;cursor: pointer;";
   profileWrapper.style.cssText = `grid-template-rows: 10% minmax(90%,1fr);`;
-  let oldTemplate;
-  oldTemplate = document.querySelector("#userProfileContainer").innerHTML 
   img.addEventListener('click',()=>{
     img.style.cssText =
     "width:7rem;height:7rem;padding:8px;border-width:4px;bottom:-2rem;cursor: default;";
     profileWrapper.style.cssText = `grid-template-rows:30% minmax(70%,1fr);`;
-    document.querySelector("#userProfileContainer").innerHTML =oldTemplate 
   })
   setTimeout(document.querySelector("#userProfileContainer").innerHTML='',200)
-  
+  Analyze()
 }
 export function Analyze(){
-   const template = page_analyze()
-   document.querySelector("#userProfileContainer").innerHTML=template
-   handlerChart()
+    const template = page_analyze()
+    document.querySelector("#userProfileContainer").innerHTML=template
+    handlerChart()
 }
