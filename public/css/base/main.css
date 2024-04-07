@@ -369,10 +369,6 @@
   grid-template-columns: 10% minmax(90%,1fr);
 }
 
-.grid-rows-nav_profile {
-  grid-template-rows: 10% minmax(20%,1fr);
-}
-
 .grid-rows-profile {
   grid-template-rows: 30% minmax(70%,1fr);
 }
@@ -977,6 +973,10 @@
   transition-delay: 150ms;
 }
 
+.delay-1000 {
+  transition-delay: 1000ms;
+}
+
 .duration-100 {
   transition-duration: 100ms;
 }
@@ -991,6 +991,10 @@
 
 .duration-75 {
   transition-duration: 75ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
 }
 
 .ease-in-out {

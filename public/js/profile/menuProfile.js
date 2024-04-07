@@ -1,6 +1,7 @@
 import { TweetsProfile } from "../components/profile/Tweets.js";
+import { loadInfo } from "../components/profile/loadInfo.js";
 import { listMenuTweet } from "../tweets/helperTweet.js";
-import { findLikedTweets, findRetweetedTweets, findUserTweets, getProfileUser } from "../utils/apiOperations.js";
+import { findLikedTweets, findRetweetedTweets, findUserTweets } from "../utils/apiOperations.js";
 import { getCurrentTimeFormatted, randomColor } from "../utils/utils.js";
 
 export function menuProfile() {
@@ -24,14 +25,8 @@ export function menuProfile() {
 }
 
 export async function getUserProfile() {
-  const username = window.location.pathname.split("/")[2];
   const userProfileContainer = document.getElementById("userProfileContainer");
-  const response = await getProfileUser(username);
-  const user = response.data.user;
-  userProfileContainer.querySelector(
-    "#userProfile_username"
-  ).innerHTML = `@${username}`;
-  userProfileContainer.querySelector("#userProfile_bio").innerHTML = user.bio;
+  const user = await loadInfo()
   const buttons = userProfileContainer.querySelectorAll(
     "#userInteraction button"
   );
