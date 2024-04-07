@@ -1,4 +1,4 @@
-import { menuProfile } from "./profile/navigation.js";
+import { menuProfile } from "./profile/menuProfile.js";
 
 export function initProfilePage() {
   menuProfile()
