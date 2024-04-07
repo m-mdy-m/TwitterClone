@@ -1509,6 +1509,10 @@
   z-index: 30 !important;
 }
 
+.first\:opacity-100:first-child {
+  opacity: 1;
+}
+
 .hover\:-z-10:hover {
   z-index: -10;
 }
