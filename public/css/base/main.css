@@ -373,6 +373,10 @@
   grid-template-rows: 10% minmax(20%,1fr);
 }
 
+.grid-rows-profile {
+  grid-template-rows: 30% minmax(70%,1fr);
+}
+
 .flex-col {
   flex-direction: column;
 }

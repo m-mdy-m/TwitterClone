@@ -10,7 +10,7 @@ export function ProfilePage() {
   ];
   return `
     <div class="w-full h-full grid grid-cols-profile ">
-        <div class="rounded-md grid grid-rows-nav_profile transition-all delay-150 duration-75">
+        <div data-page="profile-user" class="rounded-md grid grid-rows-profile transition-all delay-150 duration-75">
           <div class="relative  rounded-t-lg flex justify-center" style="background:${randomGradientColor()}">
                 <div class="bg-yellow-500 absolute rounded-full p-2 border-4 border-[#434346] w-28 h-28 left-8 -bottom-8 flex justify-center items-center">
                    <img src="/assets/icon/nav/user.svg" alt="" class=" rounded-full border-4 w-full h-full  object-cover">
