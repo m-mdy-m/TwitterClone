@@ -126,6 +126,14 @@
   top: 1.5rem;
 }
 
+.right-5 {
+  right: 1.25rem;
+}
+
+.top-3 {
+  top: 0.75rem;
+}
+
 .-z-10 {
   z-index: -10;
 }
@@ -154,6 +162,11 @@
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .mb-4 {
@@ -429,10 +442,6 @@
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.justify-self-start {
-  justify-self: start;
-}
-
 .overflow-auto {
   overflow: auto;
 }
@@ -479,6 +488,10 @@
 
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .rounded-l-md {
@@ -628,6 +641,11 @@
   background-color: rgb(234 179 8 / var(--tw-bg-opacity));
 }
 
+.bg-red-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -739,6 +757,11 @@
 .py-px {
   padding-top: 1px;
   padding-bottom: 1px;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .pb-3 {
@@ -981,16 +1004,12 @@
   transition-duration: 150ms;
 }
 
-.delay-150 {
-  transition-delay: 150ms;
-}
-
-.delay-1000 {
-  transition-delay: 1000ms;
-}
-
 .duration-100 {
   transition-duration: 100ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
 }
 
 .duration-150 {
@@ -999,14 +1018,6 @@
 
 .duration-300 {
   transition-duration: 300ms;
-}
-
-.duration-75 {
-  transition-duration: 75ms;
-}
-
-.duration-1000 {
-  transition-duration: 1000ms;
 }
 
 .ease-in-out {
@@ -1478,6 +1489,26 @@
   justify-content: flex-start;
 }
 
+.first\:relative:first-child {
+  position: relative;
+}
+
+.first\:\!relative:first-child {
+  position: relative !important;
+}
+
+.first\:z-20:first-child {
+  z-index: 20;
+}
+
+.first\:z-30:first-child {
+  z-index: 30;
+}
+
+.first\:\!z-30:first-child {
+  z-index: 30 !important;
+}
+
 .hover\:-z-10:hover {
   z-index: -10;
 }
@@ -1917,6 +1948,10 @@
   }
 }
 
+.\[\&\>\*\]\:absolute>* {
+  position: absolute;
+}
+
 .\[\&\>\*\]\:mx-0\.5>* {
   margin-left: 0.125rem;
   margin-right: 0.125rem;
@@ -1943,6 +1978,11 @@
 
 .\[\&\>\*\]\:flex-col>* {
   flex-direction: column;
+}
+
+.\[\&\>\*\]\:text-white>* {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .\[\&\>\*\]\:opacity-0>* {
