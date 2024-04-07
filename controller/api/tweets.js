@@ -32,31 +32,42 @@ exports.create = async (ctx) => {
     const post = await Tweet.create(data);
     // Populate the 'author' field to include user details in the post
     const result = await Tweet.populate(post, { path: "author" });
-    const newUser = await User.findByIdAndUpdate(ctx.user.userId,{$addToSet:{tweets:result._id}})
-    const tweetManager = new TweetUserManager(ctx,ctx.jsonSender)
-    const tokens = await  tweetManager.saveUser(newUser)
+    const newUser = await User.findByIdAndUpdate(ctx.user.userId, {
+      $addToSet: { tweets: result._id },
+    });
+    const tweetManager = new TweetUserManager(ctx, ctx.jsonSender);
+    const tokens = await tweetManager.saveUser(newUser);
     // Send a successful response with the created post
-    created({tweet:result, tokens:tokens});
+    created({ tweet: result, tokens: tokens });
   } catch (error) {
-  // Handle any errors that occur during tweet creation
+    // Handle any errors that occur during tweet creation
     internalServerError("Internal server error. Unable to post the tweet.");
   }
 };
-exports.getTweets = async ({ status }) => {
+exports.getTweets = async (ctx) => {
   try {
     // Fetch tweets from the database and sort them in descending order of createdAt
     const tweets = await Tweet.find().sort({ createdAt: -1 });
     // Populate the 'author' field to include user details in the post
     const result = await Tweet.populate(tweets, { path: "author" });
+    // Increment view count for each tweet
+    await Promise.all(
+      result.map(async (tweet) => {
+        // Increment the view count of each tweet if the user has not already viewed it
+        if (ctx.user.userId && tweet) {
+          await tweet.incrementViews(ctx.user.userId);
+        }
+      })
+    );
     // Send JSON response with success true and tweet data
-    status(200).json({
+    ctx.status(200).json({
       success: true,
       tweets: result,
     });
   } catch (error) {
     console.log("error=>", error);
     // If an error occurs, send an error response
-    status(500).json({
+    ctx.status(500).json({
       success: false,
       error: "Failed to fetch tweets",
     });
@@ -205,7 +216,7 @@ exports.deleteTweet = async (ctx) => {
         user.likedTweets.includes(tweetId) ||
         user.retweetedTweets.includes(tweetId) ||
         user.bookmarked.includes(tweetId) ||
-        user.tweets.includes(tweetId)
+        user.tweets.includes(tweetId);
       // Delete the tweet from the tweets collection
       const deleteResult = await Tweet.deleteOne({ _id: tweetId });
       if (userHasTweet) {
