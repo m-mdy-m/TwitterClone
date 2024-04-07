@@ -46,4 +46,21 @@ export function Analyze(){
     const template = page_analyze()
     document.querySelector("#userProfileContainer").innerHTML=template
     handlerChart()
+    const wrapperChart = document.querySelector('[data-chart]')
+    const parent = wrapperChart.querySelector('div')
+    const buttons = wrapperChart.querySelectorAll('button')
+    // Button click event listener
+    wrapperChart.addEventListener('click', () => {
+      // Delay button animation to avoid rendering issues
+      setTimeout(() => {
+          buttons.forEach((btn, index) => {
+              const delay = index * 20; // Adjust delay for each button
+              setTimeout(() => {
+                  // Apply animation to each button
+                  parent.style.cssText = 'min-height: 4rem; transition: 1s all;';
+                  btn.style.cssText = `top: ${delay}px; opacity: 1; transition: 2.5s all;`;
+              }, delay);
+          });
+      }, 400); // Adjust delay before starting animation
+  });
 }

@@ -134,6 +134,14 @@
   top: 1.5rem;
 }
 
+.top-10 {
+  top: 2.5rem;
+}
+
+.right-1 {
+  right: 0.25rem;
+}
+
 .-z-10 {
   z-index: -10;
 }
@@ -272,6 +280,22 @@
   min-height: 100vh;
 }
 
+.min-h-8 {
+  min-height: 2rem;
+}
+
+.min-h-4 {
+  min-height: 1rem;
+}
+
+.min-h-6 {
+  min-height: 1.5rem;
+}
+
+.min-h-16 {
+  min-height: 4rem;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -326,6 +350,18 @@
 
 .min-w-52 {
   min-width: 13rem;
+}
+
+.min-w-16 {
+  min-width: 4rem;
+}
+
+.min-w-8 {
+  min-width: 2rem;
+}
+
+.min-w-10 {
+  min-width: 2.5rem;
 }
 
 .max-w-52 {
@@ -1002,6 +1038,14 @@
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-1000 {
+  transition-delay: 1000ms;
 }
 
 .duration-100 {
