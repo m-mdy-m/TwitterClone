@@ -1,4 +1,5 @@
 import { page_analyze } from "../components/profile/analyze/page__analyze.js";
+import { handlerChart } from "./analyze/helper__chart.js";
 
 export function nav_icons_profile() {
   document.querySelectorAll("[data-page]").forEach((data) => {
@@ -8,6 +9,7 @@ export function nav_icons_profile() {
       case "analyze":
         // Code to handle click on analyze_page goes here
         data.addEventListener("click", handleClick);
+        Analyze()
         break;
       case "edit":
         // Code to handle click on edit_page goes here
@@ -42,7 +44,10 @@ export function handleClick() {
     document.querySelector("#userProfileContainer").innerHTML =oldTemplate 
   })
   setTimeout(document.querySelector("#userProfileContainer").innerHTML='',200)
-  const template = page_analyze()
-  document.querySelector("#userProfileContainer").innerHTML=template
-
+  
+}
+export function Analyze(){
+   const template = page_analyze()
+   document.querySelector("#userProfileContainer").innerHTML=template
+   handlerChart()
 }
