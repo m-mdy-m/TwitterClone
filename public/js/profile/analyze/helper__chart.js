@@ -34,22 +34,22 @@ export async function handlerChart() {
       datasets: [
         {
           label: "Buy",
-          data: [5, 8, 10, 15, 12, 10], // Adjust your buy data here
-          borderColor: "blue", // Adjust color if needed
+          data: [5, 8, 10, 15, 12, 10], 
+          borderColor: "blue", 
           borderWidth: 1,
           tension: 0.5,
         },
         {
           label: "Sell",
-          data: [7, 10, 6, 8, 9, 11], // Adjust your sell data here
-          borderColor: "green", // Adjust color if needed
+          data: [7, 10, 6, 8, 9, 11],
+          borderColor: "green", 
           borderWidth: 1,
           tension: 0.5,
         },
         {
           label: "Total",
-          data: [12, 18, 16, 23, 21, 21], // Adjust your total data here
-          borderColor: "purple", // Adjust color if needed
+          data: [12, 18, 16, 23, 21, 21],
+          borderColor: "purple", 
           borderWidth: 1,
           tension: 0.5,
         },
