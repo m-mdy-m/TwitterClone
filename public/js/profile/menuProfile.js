@@ -1,5 +1,5 @@
 import { TweetsProfile } from "../components/profile/Tweets.js";
-import { loadInfo } from "../components/profile/loadInfo.js";
+import { loadInfo } from "./loadInfo.js";
 import { listMenuTweet } from "../tweets/helperTweet.js";
 import {
   findLikedTweets,
@@ -74,8 +74,8 @@ async function loading(wrapper, user, findUser) {
   const posts = await findUser(user.userId);
   if (posts.length === 0) {
     wrapper.style.cssText =
-    "color: white; font-size: 35px; font-family: 'Mavis', sans-serif;";
-  wrapper.innerHTML = "<p style='margin: 0;text-align: center;'>No posts</p>";
+      "color: white; font-size: 35px; font-family: 'Mavis', sans-serif;";
+    wrapper.innerHTML = "<p style='margin: 0;text-align: center;'>No posts</p>";
   }
   posts.forEach(async (tweet, index) => {
     const createdAt = getCurrentTimeFormatted(tweet.createdAt);

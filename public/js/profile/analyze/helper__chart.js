@@ -5,12 +5,14 @@ export class handlerChart {
     this.monthLabels = [];
     this.yearLabels = [];
     this.data = [];
+    this.Chart()
   }
-  static setData(data) {
+  set setData(data) {
     this.data.push(data);
   }
 
   Chart() {
+    this.createDate()
     new Chart(this.ctx, {
       type: "line",
       data: {
@@ -18,21 +20,21 @@ export class handlerChart {
         datasets: [
           {
             label: "Buy",
-            data: [5, 8, 10, 15, 12, 10], // follow
+            data: this.data, // follow
             borderColor: "blue",
             borderWidth: 1,
             tension: 0.5,
           },
           {
             label: "Sell",
-            data: [7, 10, 6, 8, 9, 11], // views all post
+            data: this.data, // views all post
             borderColor: "green",
             borderWidth: 1,
             tension: 0.5,
           },
           {
             label: "Total",
-            data: [12, 18, 16, 23, 21, 21], // view
+            data: this.data, // like
             borderColor: "purple",
             borderWidth: 1,
             tension: 0.5,

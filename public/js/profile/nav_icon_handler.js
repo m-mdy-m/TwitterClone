@@ -1,6 +1,10 @@
 import { page_analyze } from "../components/profile/analyze/page__analyze.js";
+import { loadInfo } from "./loadInfo.js";
 import { handlerChart } from "./analyze/helper__chart.js";
-
+let user;
+( async ()=>{
+  user = await loadInfo()
+})()
 export function nav_icons_profile() {
   document.querySelectorAll("[data-page]").forEach((data) => {
     const page = data.getAttribute("data-page");
@@ -75,14 +79,15 @@ export function Analyze() {
       });
     }, 400);
     const target = e.target;
-    if (target.matches('[data-chart-week]')) {
-        const week = target.matches("[data-chart-week]")
+    if (target.matches("[data-chart-week]")) {
+      const week = target;
+      console.log('user:',user);
     }
-    if (target.matches('[data-chart-month]')) {
-        const month = target.matches("[data-chart-month]")
+    if (target.matches("[data-chart-month]")) {
+      const month = target;
     }
-    if (target.matches('[data-chart-year]')) {
-        const year = target.matches("[data-chart-year]")
+    if (target.matches("[data-chart-year]")) {
+      const year = target;
     }
-  });                                                                                                                                 
+  });
 }
