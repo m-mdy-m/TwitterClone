@@ -1,6 +1,6 @@
 import { page_analyze } from "../components/profile/analyze/page__analyze.js";
 import { loadInfo } from "./loadInfo.js";
-import { handlerChart } from "./analyze/helper__chart.js";
+import { ChartDataManager } from "./analyze/helper__chart.js";
 import {
   findLikedTweets,
   findRetweetedTweets,
@@ -62,7 +62,14 @@ export function handleClick() {
 export function Analyze() {
   const template = page_analyze();
   document.querySelector("#userProfileContainer").innerHTML = template;
-  new handlerChart();
+  const chart = new ChartDataManager()
+  let allViews =0
+  tweets.forEach((tweet)=>{
+    console.log('tweet:',tweet)
+    allViews += tweet.views
+  })
+  chart.setData = { views: allViews };
+  // chart.setData({})
   const wrapperChart = document.querySelector("[data-chart]");
   const parent = wrapperChart.querySelector("div");
   const buttons = wrapperChart.querySelectorAll("button");
@@ -91,7 +98,7 @@ export function Analyze() {
     const target = e.target;
     if (target.matches("[data-chart-week]")) {
       const week = target;
-      console.log("user:", user);
+      
     }
     if (target.matches("[data-chart-month]")) {
       const month = target;

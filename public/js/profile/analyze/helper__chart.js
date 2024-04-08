@@ -1,14 +1,28 @@
-export class handlerChart {
+export class ChartDataManager {
   constructor() {
     this.ctx = document.getElementById("chart__all-post");
     this.weakLabels = [];
     this.monthLabels = [];
     this.yearLabels = [];
-    this.data = [];
+    this.follow = []
+    this.views = []
+    this.likes = []
+    this.data = ({views, follow, likes}) => {
+      if (views !== undefined) {
+        this.views.push(views);
+      }
+      if (follow !== undefined) {
+        this.follow.push(follow);
+      }
+      if (likes !== undefined) {
+        this.likes.push(likes);
+      }
+    }
+
     this.Chart()
   }
-  set setData(data) {
-    this.data.push(data);
+  set setData({views, follow, likes}) {
+    this.data({views, follow, likes})
   }
 
   Chart() {
@@ -19,22 +33,22 @@ export class handlerChart {
         labels: this.weakLabels,
         datasets: [
           {
-            label: "Buy",
-            data: this.data, // follow
+            label: "following",
+            data: this.follow, // follow
             borderColor: "blue",
             borderWidth: 1,
             tension: 0.5,
           },
           {
-            label: "Sell",
-            data: this.data, // views all post
+            label: "views",
+            data: this.views, // views all post
             borderColor: "green",
             borderWidth: 1,
             tension: 0.5,
           },
           {
-            label: "Total",
-            data: this.data, // like
+            label: "likes",
+            data: this.likes, // like
             borderColor: "purple",
             borderWidth: 1,
             tension: 0.5,

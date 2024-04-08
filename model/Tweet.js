@@ -39,23 +39,29 @@ const tweetSchema = new Schema(
     },
     viewedBy: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+        user: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+        timestamp: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
     views: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   { timestamps: true }
 );
 tweetSchema.methods.incrementViews = async function (userId) {
   // Check if the user has already viewed this tweet
-  if (!this.viewedBy.includes(userId)) {
+  if (!this.viewedBy.some((entry) => entry.user.equals(userId))) {
     // If not, increment the view count and add the user to the viewedBy array
     this.views += 1;
-    this.viewedBy.push(userId);
+    this.viewedBy.push({ user: userId });
     await this.save();
   }
 };
