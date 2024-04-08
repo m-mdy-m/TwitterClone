@@ -48,7 +48,7 @@ export function handleClick() {
 export function Analyze() {
   const template = page_analyze();
   document.querySelector("#userProfileContainer").innerHTML = template;
-  handlerChart();
+  new handlerChart();
   const wrapperChart = document.querySelector("[data-chart]");
   const parent = wrapperChart.querySelector("div");
   const buttons = wrapperChart.querySelectorAll("button");
@@ -75,8 +75,14 @@ export function Analyze() {
       });
     }, 400);
     const target = e.target;
-    if (target.matches('[data-chart-week], [data-chart-month], [data-chart-year]')) {
-        console.log('Chart type:', target);
+    if (target.matches('[data-chart-week]')) {
+        const week = target.matches("[data-chart-week]")
+    }
+    if (target.matches('[data-chart-month]')) {
+        const month = target.matches("[data-chart-month]")
+    }
+    if (target.matches('[data-chart-year]')) {
+        const year = target.matches("[data-chart-year]")
     }
   });                                                                                                                                 
 }
