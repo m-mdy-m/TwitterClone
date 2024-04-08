@@ -117,7 +117,7 @@ export function extractToken(tokens) {
 }
 // Function to save the access token in session storage
 export function saveAccessToken(accessToken) {
-  document.cookie = `accessToken=${accessToken}; path=/; SameSite=Strict; Secure`;
+  document.cookie = `accessToken=${accessToken}; path=/; SameSite=Strict; Secure;`;
 }
 
 // Function to retrieve the access token from session storage
@@ -128,7 +128,7 @@ export function getAccessToken() {
 // Function to save the refresh token in an HTTP-only cookie
 export function saveRefreshToken(refreshToken) {
   // Set the refresh token in an HTTP-only cookie with a secure flag
-  document.cookie = `refreshToken=${refreshToken}; path=/; SameSite=Strict; Secure`;
+  document.cookie = `refreshToken=${refreshToken}; path=/; SameSite=Strict; Secure;`;
 }
 
 // Function to retrieve the refresh token from cookies

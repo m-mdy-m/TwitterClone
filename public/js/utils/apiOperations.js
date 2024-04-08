@@ -446,3 +446,19 @@ export async function findRetweetedTweets(userId) {
     showErrorMessage(error);
   }
 }
+
+
+export async function add_friend(userId){
+  try {
+    const response = await sendRequest(`add_friend/${userId}`,'post')
+  } catch (error) {
+    showErrorMessage(error)
+  }
+}
+export async function del_friend(userId){
+  try {
+    const response = await sendRequest(`remove_friend/${userId}`,'delete')
+  } catch (error) {
+    showErrorMessage(error)
+  }
+}
