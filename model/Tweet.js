@@ -49,18 +49,13 @@ const tweetSchema = new Schema(
         },
       },
     ],
-    views: {
-      type: Number,
-      default: 0,
-    },
   },
   { timestamps: true }
 );
 tweetSchema.methods.incrementViews = async function (userId) {
   // Check if the user has already viewed this tweet
-  if (!this.viewedBy.some((entry) => entry.user.equals(userId))) {
+  if (!this.viewedBy.some((s) => s.user && s.user.equals(userId))) {
     // If not, increment the view count and add the user to the viewedBy array
-    this.views += 1;
     this.viewedBy.push({ user: userId });
     await this.save();
   }

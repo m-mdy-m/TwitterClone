@@ -205,7 +205,7 @@ export async function tweetCreation(data) {
   const response = await axios.post("/api/create", data, header);
   // If tweet creation is successful, add the tweet and log the response
   if (response.data.success) {
-    await update_status()
+    await update_status();
     extractToken(response.data.data.tokens);
     AddTweet(response.data.data.tweet, userInfo);
   } else {
@@ -389,6 +389,7 @@ export async function toggleEditTweet(id, content) {
 
 export async function getProfileUser(username) {
   try {
+    console.log("username:", username);
     const response = await sendRequest(`profile/${username}`, "get");
     return response.data;
   } catch (error) {
@@ -422,27 +423,26 @@ export async function follow_status(userId, followUserId) {
   }
 }
 
-
-export async function findUserTweets(userId){
+export async function findUserTweets(userId) {
   try {
-    const response = await sendRequest(`user/posts/${userId}`,'get')
-    return response.data
+    const response = await sendRequest(`user/posts/${userId}`, "get");
+    return response.data;
   } catch (error) {
     showErrorMessage(error);
   }
 }
-export async function findLikedTweets(userId){
+export async function findLikedTweets(userId) {
   try {
-    const response = await sendRequest(`user/likes/${userId}`,'get')
-    return response.data
+    const response = await sendRequest(`user/likes/${userId}`, "get");
+    return response.data;
   } catch (error) {
     showErrorMessage(error);
   }
 }
-export async function findRetweetedTweets(userId){
+export async function findRetweetedTweets(userId) {
   try {
-    const response = await sendRequest(`user/retweets/${userId}`,'get')
-    return response.data
+    const response = await sendRequest(`user/retweets/${userId}`, "get");
+    return response.data;
   } catch (error) {
     showErrorMessage(error);
   }
