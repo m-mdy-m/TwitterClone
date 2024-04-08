@@ -7,30 +7,42 @@ export class ChartDataManager {
     this.follow = Array(7).fill(0);
     this.views = Array(7).fill(0);
     this.likes = Array(7).fill(0);
+    this.weekDay = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    this.currentDate = new Date();
   }
   set setData({ views, follow, likes }) {
     this.updateData({ views, follow, likes });
   }
 
   updateData({ views, follow, likes }) {
-    const currentDate = new Date();
-    const weekDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    const currentDayIndex = currentDate.getDay(); 
-    const day = weekDay[currentDayIndex]; 
-    if (views !== undefined) {
-      this.views[currentDayIndex] += views;
-    }
-    if (follow !== undefined) {
-      this.follow[currentDayIndex] += follow;
-    }
-    if (likes !== undefined) {
-      this.likes[currentDayIndex] += likes;
+    this.createDate();
+    const currentDayIndex = this.currentDate.getDay();
+    const day = this.weekDay[currentDayIndex];
+    // Find the index of the current day in weakLabels
+    const index = this.weakLabels.indexOf(day);
+    console.log('index:',index)
+    if (index !== -1) { // Check if the day exists in the weakLabels array
+        if (views !== undefined) {
+          this.views[index] += views;
+        }
+        if (follow !== undefined) {
+          this.follow[index] += follow;
+        }
+        if (likes !== undefined) {
+          this.likes[index] += likes;
+        }
     }
   }
 
   Chart() {
-    this.createDate();
-    console.log('this.views :',this.views )
     new Chart(this.ctx, {
       type: "line",
       data: {
@@ -70,14 +82,12 @@ export class ChartDataManager {
   }
 
   createDate() {
-    const currentDate = new Date();
-    const weekDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-    for (let i = 0; i < 7; i++) {
-      const dayIndex = (currentDate.getDay() + 5 - i ) % 7;
-      const formattedDate = weekDay[dayIndex];
-      console.log('formattedDate:',formattedDate)
-      this.weakLabels.unshift(formattedDate);
+    for (let i = 6; i >= 0; i--) {
+      const pastDate = new Date(this.currentDate);
+      pastDate.setDate(this.currentDate.getDate() - i);
+      const dayIndex = pastDate.getDay();
+      const formattedDate = this.weekDay[dayIndex];
+      this.weakLabels.push(formattedDate);
     }
   }
 }
