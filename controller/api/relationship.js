@@ -45,11 +45,8 @@ exports.handler_friend = async (ctx) => {
   const { userId, followUserId } = ctx.body;
   const { success, internalServerError } = ctx.jsonSender();
   try {
-    const method = ctx.method;
-    console.log("method:", method);
-    const id = ctx.param("id");
-    const user = await User.findById(id);
-  } catch (error) {
+    // 
+} catch (error) {
     internalServerError();
   }
 };
