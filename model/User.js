@@ -45,6 +45,7 @@ const UserSchema = new Schema(
         ref: "Tweet",
       },
     ],
+    
     bookmarked: [
       {
         type: Schema.ObjectId,
