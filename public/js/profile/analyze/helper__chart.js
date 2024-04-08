@@ -4,23 +4,28 @@ export class ChartDataManager {
     this.weakLabels = [];
     this.monthLabels = [];
     this.yearLabels = [];
-    this.follow = [0,0,0,0,0,0,0];
-    this.views = [0,0,0,0,0,0,0];
-    this.likes = [0,0,0,0,0,0,0];
-    this.data = ({ views, follow, likes }) => {
-      if (views !== undefined) {
-        this.views.push(views);
-      }
-      if (follow !== undefined) {
-        this.follow.push(follow);
-      }
-      if (likes !== undefined) {
-        this.likes.push(likes);
-      }
-    };
+    this.follow = Array(7).fill(0);
+    this.views = Array(7).fill(0);
+    this.likes = Array(7).fill(0);
   }
   set setData({ views, follow, likes }) {
-    this.data({ views, follow, likes });
+    this.updateData({ views, follow, likes });
+  }
+
+  updateData({ views, follow, likes }) {
+    const currentDate = new Date();
+    const weekDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const currentDayIndex = currentDate.getDay(); 
+    const day = weekDay[currentDayIndex]; 
+    if (views !== undefined) {
+      this.views[currentDayIndex] += views;
+    }
+    if (follow !== undefined) {
+      this.follow[currentDayIndex] += follow;
+    }
+    if (likes !== undefined) {
+      this.likes[currentDayIndex] += likes;
+    }
   }
 
   Chart() {
@@ -64,25 +69,14 @@ export class ChartDataManager {
     });
   }
 
-  setTimestamp(timestamp){
-   this._date = timestamp;
-   this.createDate = this.createDate.bind(this)
-  }
-
   createDate() {
-    // Get current date
-    const viewDate = new Date(this._date);
-    const weekDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    const dayOfWeek = viewDate.getDay(); 
-    const day = weekDay[dayOfWeek]
+    const currentDate = new Date();
+    const weekDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
     for (let i = 0; i < 7; i++) {
-      // Calculate the index of the day in the week
-      const dayIndex = (viewDate.getDay() + 6 - i) % 7;
-    
-      // Get the weekday name based on the index
+      const dayIndex = (currentDate.getDay() + 5 - i ) % 7;
       const formattedDate = weekDay[dayIndex];
       console.log('formattedDate:',formattedDate)
-      // Add the formatted date to the beginning of the array
       this.weakLabels.unshift(formattedDate);
     }
   }
