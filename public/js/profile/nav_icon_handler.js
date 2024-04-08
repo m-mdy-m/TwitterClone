@@ -7,14 +7,12 @@ import {
   findUserTweets,
 } from "../utils/apiOperations.js";
 let user, tweets, likes, retweets;
-if(window.location.pathname.startsWith('/profile')){
+if (window.location.pathname.startsWith("/profile")) {
   (async () => {
     user = await loadInfo();
-    [tweets, likes, retweets] = await Promise.all([
-      findUserTweets(user.userId),
-      findLikedTweets(user.userId),
-      findRetweetedTweets(user.userId),
-    ]);
+    tweets = await findUserTweets(user.userId);
+    likes = await findLikedTweets(user.userId);
+    retweets = await findRetweetedTweets(user.userId);
   })();
 }
 export function nav_icons_profile() {
@@ -66,23 +64,30 @@ export function Analyze() {
   document.querySelector("#userProfileContainer").innerHTML = template;
   const chart = new ChartDataManager();
   tweets.forEach((tweet) => {
-    const t = tweet.viewedBy.map((e) => {
-      const viewDate = new Date(e.timestamp)
-      const weekDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-      const dayOfWeek = viewDate.getDay(); 
-      const day = weekDay[dayOfWeek]
-      // Compare the time of the view with the current time
+    let view = [] || 0;
+    const t = tweet.viewedBy.forEach((e) => {
+      chart.setTimestamp(e.timestamp)
+      const viewDate = new Date(e.timestamp);
+      const weekDay = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      const dayOfWeek = viewDate.getDay();
+      const day = weekDay[dayOfWeek];
       const currentTime = new Date();
-      const isSameTime = viewDate.getTime() === currentTime.getTime();
-        // Check if the day of the view is the same as today's day
       const isSameDay = day === weekDay[currentTime.getDay()];
-      
-      // Log the comparison results
-      console.log('Is the time the same as present time?', isSameDay);
-      // console.log('Is the day the same as today?', isSameDay);
-      chart.setData = { views: 0};
+      if (isSameDay) {
+        view.push(e);
+      }
     });
+    chart.setData = { views: view.length };
   });
+  chart.Chart();
   // chart.setData({})
   const wrapperChart = document.querySelector("[data-chart]");
   const parent = wrapperChart.querySelector("div");
