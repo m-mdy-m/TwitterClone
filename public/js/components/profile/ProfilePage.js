@@ -14,13 +14,36 @@ export function ProfilePage() {
           <div class="relative  rounded-t-lg flex justify-center" style="background:${randomGradientColor()}">
                 <div data-page="img-profile-user" class="bg-yellow-500 transition-all duration-1000 absolute rounded-full p-2 border-4 border-[#434346] w-28 h-28 left-8 -bottom-8 flex justify-center items-center">
                    <img src="/assets/icon/nav/user.svg" alt="" class=" rounded-full border-4 w-full h-full  object-cover">
+                  <label for="profile-image"  class="absolute bottom-0 z-50 hidden right-0 cursor-pointer hover:contrast-150 hover:rotate-45 transition-all delay-200" id="add-profile">
+                      <svg class="object-cover" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM7.25 12C7.25 11.5858 7.58579 11.25 8 11.25H11.25V8C11.25 7.58579 11.5858 7.25 12 7.25C12.4142 7.25 12.75 7.58579 12.75 8V11.25H16C16.4142 11.25 16.75 11.5858 16.75 12C16.75 12.4142 16.4142 12.75 16 12.75H12.75V16C12.75 16.4142 12.4142 16.75 12 16.75C11.5858 16.75 11.25 16.4142 11.25 16V12.75H8C7.58579 12.75 7.25 12.4142 7.25 12Z" fill="#007bff"/>
+                      </svg>
+                  </label >
+                  <input type="file" id="profile-image" accept="image/*" class="hidden">
                 </div>
           </div>
           <div class="pt-12 px-4 relative" id="userProfileContainer">
-              <!-- User Name -->
-              <h2 data-username class="text-gray-700 pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
-              <!-- Bio -->
-              <p data-bio  class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis"></p>
+              <div class="absolute top-1 right-2 w-3/5 h-2/4  flex justify-start px-8 items-center">
+                 <div class="justify-center items-center hidden">
+                     <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
+                     <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
+                 </div>
+                 <div class="flex flex-col justify-between [&>*]:my-8 items-center">
+                    <div class="flex-col flex">
+                      <input type="text" placeholder="Current password" class="input-form w-48 h-12 px-4 rounded-lg border-none outline-none bg-gray-700 text-white" />
+                      <p> <a href="#">Forgot your password?</a> </p>
+                    </div>
+                    <input type="email" placeholder="new email"  value="" class="input-form w-48 h-12 px-4 rounded-lg border-none outline-none bg-gray-700 text-white" />
+                 </div>
+              </div>
+              <div class="flex justify-start items-start flex-col">
+                <!-- User Name -->
+                <h2 data-username class="text-gray-700 pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
+                <input type="text" value="@m__mdy__m" class="bg-transparent text-gray-700 hidden font-Aktiv__regular w-auto border-none outline-none rounded-md pl-2  " />
+                <!-- Bio -->
+                <p data-bio  class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">Greatness، of small steps!</p>
+                <input type="text" value="Greatness، of small steps!" class="bg-transparent w-auto hidden border-none whitespace-nowrap outline-none rounded-md text-gray-400" />
+              </div>
               <div id="statusProfile" class="flex items-center justify-start">
                 ${statusUser(userStats)}
               </div>
