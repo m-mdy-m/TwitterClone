@@ -1,10 +1,20 @@
 import { page_analyze } from "../components/profile/analyze/page__analyze.js";
 import { loadInfo } from "./loadInfo.js";
 import { handlerChart } from "./analyze/helper__chart.js";
-let user;
-( async ()=>{
-  user = await loadInfo()
-})()
+import {
+  findLikedTweets,
+  findRetweetedTweets,
+  findUserTweets,
+} from "../utils/apiOperations.js";
+let user, tweets, likes, retweets;
+(async () => {
+  user = await loadInfo();
+  [tweets, likes, retweets] = await Promise.all([
+    findUserTweets(user.userId),
+    findLikedTweets(user.userId),
+    findRetweetedTweets(user.userId),
+  ]);
+})();
 export function nav_icons_profile() {
   document.querySelectorAll("[data-page]").forEach((data) => {
     const page = data.getAttribute("data-page");
@@ -81,7 +91,7 @@ export function Analyze() {
     const target = e.target;
     if (target.matches("[data-chart-week]")) {
       const week = target;
-      console.log('user:',user);
+      console.log("user:", user);
     }
     if (target.matches("[data-chart-month]")) {
       const month = target;
