@@ -65,7 +65,7 @@ export function Analyze() {
   const chart = new ChartDataManager();
   tweets.forEach((tweet) => {
     let view = [] || 0;
-    const t = tweet.viewedBy.forEach((e) => {
+    tweet.viewedBy.forEach((e) => {
       const viewDate = new Date(e.timestamp);
       const weekDay = [
         "Sunday",

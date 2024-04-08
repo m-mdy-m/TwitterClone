@@ -4,9 +4,7 @@ export class ChartDataManager {
     this.weakLabels = [];
     this.monthLabels = [];
     this.yearLabels = [];
-    this.follow = Array(7).fill(0);
     this.views = Array(7).fill(0);
-    this.likes = Array(7).fill(0);
     this.weekDay = [
       "Sunday",
       "Monday",
@@ -18,27 +16,21 @@ export class ChartDataManager {
     ];
     this.currentDate = new Date();
   }
-  set setData({ views, follow, likes }) {
-    this.updateData({ views, follow, likes });
+  set setData({ views }) {
+    this.updateData({ views });
   }
 
-  updateData({ views, follow, likes }) {
+  updateData({ views }) {
     this.createDate();
     const currentDayIndex = this.currentDate.getDay();
     const day = this.weekDay[currentDayIndex];
     // Find the index of the current day in weakLabels
     const index = this.weakLabels.indexOf(day);
-    console.log('index:',index)
-    if (index !== -1) { // Check if the day exists in the weakLabels array
-        if (views !== undefined) {
-          this.views[index] += views;
-        }
-        if (follow !== undefined) {
-          this.follow[index] += follow;
-        }
-        if (likes !== undefined) {
-          this.likes[index] += likes;
-        }
+    if (index !== -1) {
+      // Check if the day exists in the weakLabels array
+      if (views !== undefined) {
+        this.views[index] += views;
+      }
     }
   }
 
@@ -47,29 +39,13 @@ export class ChartDataManager {
       type: "line",
       data: {
         labels: this.weakLabels,
-        datasets: [
-          {
-            label: "following",
-            data: this.follow, // follow
-            borderColor: "blue",
-            borderWidth: 1,
-            tension: 0.5,
-          },
-          {
-            label: "views",
-            data: this.views, // views all post
-            borderColor: "green",
-            borderWidth: 1,
-            tension: 0.5,
-          },
-          {
-            label: "likes",
-            data: this.likes, // like
-            borderColor: "purple",
-            borderWidth: 1,
-            tension: 0.5,
-          },
-        ],
+        datasets: [{
+          label: "views",
+          data: this.views, // views all post
+          borderColor: "green",
+          borderWidth: 1,
+          tension: 0.5,
+        }],
       },
       options: {
         scales: {
