@@ -1,7 +1,7 @@
 import { showErrorMessage } from "../utils/helper.js";
 
 export function edit_page() {
-  document.querySelectorAll(".hidden-edit").forEach((elm) => {
+    document.querySelectorAll(".hidden-edit").forEach((elm) => {
     elm.style.display = "none";
   });
   document.querySelectorAll(".show-edit").forEach((elm) => {
@@ -28,14 +28,13 @@ export function edit_page() {
             try {
                 switch (key) {
                   case "inputEmail":
-                    const valid = vfyjs.isEmail(value);
+                    var valid = vfyjs.isEmail(value);
                     console.log("valid:", valid);
                     break;
-      
                   case "inputUsername":
+                    var valid = vfyjs.isUsername(value)
                     break;
-      
-                  case "inputBio":
+                    case "inputBio":
                     break;
                 }
             } catch (error) {

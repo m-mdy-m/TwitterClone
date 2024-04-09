@@ -2,25 +2,21 @@ import { page_analyze } from "../components/profile/analyze/page__analyze.js";
 import { loadInfo } from "./loadInfo.js";
 import { ChartDataManager } from "./analyze/helper__chart.js";
 import {
-  findLikedTweets,
-  findRetweetedTweets,
   findUserTweets,
 } from "../utils/apiOperations.js";
 import { edit_page } from "./edit_page.js";
-let user, tweets, likes, retweets;
+import { getTemplate } from "./utils.js";
+let user, tweets
 if (window.location.pathname.startsWith("/profile")) {
   (async () => {
     user = await loadInfo();
-    [tweets, likes, retweets] = await Promise.all([
-      findUserTweets(user.userId),
-      findLikedTweets(user.userId),
-      findRetweetedTweets(user.userId),
-    ]);
+    tweets = await findUserTweets(user.userId);
   })();
 }
 export function nav_icons_profile() {
   document.querySelectorAll("[data-page]").forEach((data) => {
     const page = data.getAttribute("data-page");
+    getTemplate()
     // Perform actions based on the clicked page
     switch (page) {
       case "analyze":
@@ -61,6 +57,7 @@ export function analyze_page() {
 
   // Adding click event listener to the profile image
   img.addEventListener("click", () => {
+    container.outerHTML  = getTemplate()
     // Changing styles on click
     img.style.cssText =
       "width:7rem;height:7rem;padding:8px;border-width:4px;bottom:-2rem;cursor: default;";
@@ -70,8 +67,9 @@ export function analyze_page() {
   // Clearing user profile container after a timeout
   setTimeout((container.innerHTML = ""), 200);
   if (tweets.length == 0) {
-    container.style.cssText = 'text-align:center;color:#fff;font-size:40px;text-transform:uppercase;'
-    return  container.innerHTML = "no data";
+    container.style.cssText =
+      "text-align:center;color:#fff;font-size:40px;text-transform:uppercase;";
+    return (container.innerHTML = "no data");
   }
   // Generating template for analysis page
   const template = page_analyze();

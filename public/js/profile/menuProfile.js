@@ -7,6 +7,7 @@ import {
   findUserTweets,
 } from "../utils/apiOperations.js";
 import { getCurrentTimeFormatted, randomColor } from "../utils/utils.js";
+import { saveContainer } from "./utils.js";
 
 export function menuProfile() {
   getUserProfile();
@@ -37,7 +38,7 @@ export async function getUserProfile() {
   const wrapper = userProfileContainer.querySelector(
     "#wrapper__content-profile"
   );
-  await loading(wrapper, user, findUserTweets);
+  await loading(wrapper, user, findUserTweets,userProfileContainer);
   handlerClickIcons(wrapper);
   buttons.forEach((button) => {
     button.addEventListener("click", async () => {
@@ -51,15 +52,15 @@ export async function getUserProfile() {
       buttons.forEach((btn) => btn.classList.remove("activeButton"));
       switch (action) {
         case "posts":
-          await loading(wrapper, user, findUserTweets);
+          await loading(wrapper, user, findUserTweets,userProfileContainer);
           handlerClickIcons();
           break;
         case "likes":
-          await loading(wrapper, user, findLikedTweets);
+          await loading(wrapper, user, findLikedTweets,userProfileContainer);
           handlerClickIcons();
           break;
         case "retweets":
-          await loading(wrapper, user, findRetweetedTweets);
+          await loading(wrapper, user, findRetweetedTweets,userProfileContainer);
           handlerClickIcons();
           break;
       }
@@ -69,7 +70,7 @@ export async function getUserProfile() {
 function handlerClickIcons() {
   listMenuTweet(".list__menu-icon-profile", 1, false);
 }
-async function loading(wrapper, user, findUser) {
+async function loading(wrapper, user, findUser,container) {
   wrapper.innerHTML = "";
   const posts = await findUser(user.userId);
   if (posts.length === 0) {
@@ -97,7 +98,7 @@ async function loading(wrapper, user, findUser) {
 
     // Append the new element to the wrapper
     wrapper.appendChild(newElement);
-
+    
     // Gradually increase the opacity to create a fade-in effect
     await new Promise((resolve) => {
       setTimeout(() => {
@@ -106,5 +107,6 @@ async function loading(wrapper, user, findUser) {
         resolve();
       }, index * 100); // Adjust the duration and delay as needed
     });
+    saveContainer(container)
   });
 }
