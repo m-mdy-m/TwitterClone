@@ -15,13 +15,13 @@ export class ChartDataManager {
       "Saturday",
     ];
     this.currentDate = new Date();
+    this.createDate();
   }
   set setData({ views }) {
     this.updateData({ views });
   }
 
   updateData({ views }) {
-    this.createDate();
     views.forEach((obj)=> {
       const dayView = Object.keys(obj)[0]
       const index = this.weakLabels.indexOf(dayView);

@@ -29,8 +29,8 @@ export function nav_icons_profile() {
         break;
       case "edit":
         // Code to handle click on edit_page goes here
-        data.addEventListener("click", ()=>{
-          edit_page()
+        data.addEventListener("click", () => {
+          edit_page();
         });
         break;
       case "friends":
@@ -66,18 +66,18 @@ export function analyze_page() {
       "width:7rem;height:7rem;padding:8px;border-width:4px;bottom:-2rem;cursor: default;";
     profileWrapper.style.cssText = `grid-template-rows:30% minmax(70%,1fr);`;
   });
-
+  const container = document.querySelector("#userProfileContainer");
   // Clearing user profile container after a timeout
-  setTimeout(
-    (document.querySelector("#userProfileContainer").innerHTML = ""),
-    200
-  );
-
+  setTimeout((container.innerHTML = ""), 200);
+  if (tweets.length == 0) {
+    container.style.cssText = 'text-align:center;color:#fff;font-size:40px;text-transform:uppercase;'
+    return  container.innerHTML = "no data";
+  }
   // Generating template for analysis page
   const template = page_analyze();
 
   // Inserting template into user profile container
-  document.querySelector("#userProfileContainer").innerHTML = template;
+  container.innerHTML = template;
 
   // Creating ChartDataManager instance
   const chart = new ChartDataManager();
@@ -100,9 +100,11 @@ export function analyze_page() {
       const dayOfWeek = viewDate.getDay();
       const day = weekDay[dayOfWeek];
       const currentTime = new Date();
-      const isSameWeek = viewDate.getFullYear() === currentTime.getFullYear() && getWeekNumber(viewDate) === getWeekNumber(currentTime);
-      if(isSameWeek){
-        view.push({[day]:e});
+      const isSameWeek =
+        viewDate.getFullYear() === currentTime.getFullYear() &&
+        getWeekNumber(viewDate) === getWeekNumber(currentTime);
+      if (isSameWeek) {
+        view.push({ [day]: e });
       }
     });
     // Setting data for the chart
