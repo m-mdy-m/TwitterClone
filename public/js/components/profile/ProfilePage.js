@@ -14,42 +14,42 @@ export function ProfilePage() {
           <div class="relative  rounded-t-lg flex justify-center" style="background:${randomGradientColor()}">
                 <div data-page="img-profile-user" class="bg-yellow-500 transition-all duration-1000 absolute rounded-full p-2 border-4 border-[#434346] w-28 h-28 left-8 -bottom-8 flex justify-center items-center">
                    <img src="/assets/icon/nav/user.svg" alt="" class=" rounded-full border-4 w-full h-full  object-cover">
-                  <label for="profile-image"  class="absolute bottom-0 z-50 hidden right-0 cursor-pointer hover:contrast-150 hover:rotate-45 transition-all delay-200" id="add-profile">
+                  <label for="profile-image"  class="absolute hidden  show-edit bottom-0 z-50 label__input-img right-0 cursor-pointer hover:contrast-150 hover:rotate-45 transition-all delay-200" id="add-profile">
                       <svg class="object-cover" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM7.25 12C7.25 11.5858 7.58579 11.25 8 11.25H11.25V8C11.25 7.58579 11.5858 7.25 12 7.25C12.4142 7.25 12.75 7.58579 12.75 8V11.25H16C16.4142 11.25 16.75 11.5858 16.75 12C16.75 12.4142 16.4142 12.75 16 12.75H12.75V16C12.75 16.4142 12.4142 16.75 12 16.75C11.5858 16.75 11.25 16.4142 11.25 16V12.75H8C7.58579 12.75 7.25 12.4142 7.25 12Z" fill="#007bff"/>
                       </svg>
                   </label >
                   <input type="file" id="profile-image" accept="image/*" class="hidden">
-                </div>
+                </div>                                                                                                                                     
           </div>
           <div class="pt-12 px-4 relative" id="userProfileContainer">
-              <div class="flex top-0 right-0 absolute z-50 ">
-                   <button class="btn-change-password flex items-center hover:brightness-110 text-xs h-10 w-10 px-2 rounded-2xl border border-gray-600 focus:border-gray-400 bg-gradient-to-br from-blue-600 to-blue-700 text-white font-Aktiv__regular outline-none relative overflow-hidden">
+              <div class="top-2 right-0 absolute z-5 transition-all delay-2000 z-50 show-edit hidden">
+                   <button class=" w-10 btn-change-password flex items-center hover:brightness-110 text-xs h-10 px-2 rounded-l-2xl border border-gray-600 focus:border-gray-400 bg-gradient-to-br from-blue-600 to-blue-700 text-white font-Aktiv__regular outline-none relative overflow-hidden">
                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C16.75 2.75 20.6637 6.33026 21.1899 10.9394L19.2372 10.2885C18.8442 10.1575 18.4195 10.3699 18.2885 10.7628C18.1575 11.1558 18.3699 11.5805 18.7628 11.7115L21.7628 12.7115C21.9915 12.7877 22.243 12.7494 22.4385 12.6084C22.6341 12.4675 22.75 12.2411 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C16.2219 22.75 19.874 20.3161 21.6322 16.7782C21.8165 16.4073 21.6652 15.9571 21.2943 15.7728C20.9234 15.5885 20.4732 15.7397 20.2889 16.1107C18.7744 19.1582 15.6308 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12ZM12 7.75C11.3096 7.75 10.75 8.30964 10.75 9V10H13.25V9C13.25 8.30964 12.6904 7.75 12 7.75ZM9.25 10C9.25 10.0479 9.25449 10.0947 9.26307 10.1401C8.5232 10.4335 8 11.1557 8 12V14C8 15.1046 8.89543 16 10 16H14C15.1046 16 16 15.1046 16 14V12C16 11.1557 15.4768 10.4335 14.7369 10.1401C14.7455 10.0947 14.75 10.0479 14.75 10V9C14.75 7.48122 13.5188 6.25 12 6.25C10.4812 6.25 9.25 7.48122 9.25 9V10Z" fill="#FFFFFF"/>
                        </svg>
-                       <span class="ml-2 opacity-0 transition-transform ease-in-out duration-300 transform translate-x-0 absolute">Change Password</span>
+                       <span class="ml-2 opacity-0 right-2 transition-all ease-in-out duration-300 absolute">Change Password</span>
                    </button>
               </div>
-              <div class="absolute bottom-4 right-4 flex items-center justify-center">
+              <div class="absolute bottom-4 right-4  items-center justify-center show-edit change-save hidden">
                  <button class="btn-save bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out">Save Changes</button>
               </div>
-              <div class="absolute top-1 right-2 w-3/5 h-2/4  flex justify-start px-8 items-center">
-                <div class="justify-center items-center hidden">
-                  <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
-                  <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
+              <div class="absolute top-1 right-2 w-3/5 h-2/4  justify-start px-8 items-center hidden show-edit">
+                <div class="justify-center items-center hidden  change-inputs">
+                  <input type="password" value="" class="w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
+                  <input type="password" value="" class="w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
                 </div>
                 <div class="flex flex-col justify-evenly h-full items-center">
-                  <input type="email" placeholder="Enter your email address" class="input-form w-64 placeholder-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
+                  <input data-input-email type="email" placeholder="Enter your new email address" class="change-info_user w-64 placeholder:text-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
                 </div>
               </div>
               <div class="flex justify-start items-start flex-col">
                 <!-- User Name -->
-                <h2 data-username class="text-gray-700 pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
-                <input type="text" value="@m__mdy__m" class="bg-transparent text-gray-700 hidden font-Aktiv__regular w-auto border-none outline-none rounded-md pl-2  " />
+                <h2 data-username class="text-gray-700 hidden-edit pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
+                <input data-input-username  type="text" value="@m__mdy__m" class="hidden show-edit change-info_user bg-transparent text-gray-700 font-Aktiv__regular w-auto border-none outline-none rounded-md pl-2  "/>
                 <!-- Bio -->
-                <p data-bio  class=" text-gray-400 mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">Greatness، of small steps!</p>
-                <input type="text" value="Greatness، of small steps!" class="bg-transparent w-auto hidden border-none whitespace-nowrap outline-none rounded-md text-gray-400" />
+                <p data-bio  class=" text-gray-400 hidden-edit mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">Greatness، of small steps!</p>
+                <input data-input-bio type="text" value="Greatness، of small steps!" class="hidden show-edit change-info_user  bg-transparent w-auto border-none whitespace-nowrap outline-none rounded-md text-gray-400"/>
               </div>
               <div id="statusProfile" class="flex items-center justify-start">
                 ${statusUser(userStats)}
