@@ -24,17 +24,19 @@ export function ProfilePage() {
           </div>
           <div class="pt-12 px-4 relative" id="userProfileContainer">
               <div class="absolute top-1 right-2 w-3/5 h-2/4  flex justify-start px-8 items-center">
-                 <div class="justify-center items-center hidden">
-                     <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
-                     <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
-                 </div>
-                 <div class="flex flex-col justify-between [&>*]:my-8 items-center">
-                    <div class="flex-col flex">
-                      <input type="text" placeholder="Current password" class="input-form w-48 h-12 px-4 rounded-lg border-none outline-none bg-gray-700 text-white" />
-                      <p> <a href="#">Forgot your password?</a> </p>
-                    </div>
-                    <input type="email" placeholder="new email"  value="" class="input-form w-48 h-12 px-4 rounded-lg border-none outline-none bg-gray-700 text-white" />
-                 </div>
+                <div class="justify-center items-center hidden">
+                  <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
+                  <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
+                </div>
+                <div class="flex flex-col justify-evenly h-full items-center">
+                  <div class="flex flex-col items-center justify-center space-y-4">
+                    <input type="text" placeholder="Enter your current password" class="input-form w-64 placeholder:text-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
+                    <p class="text-sm">
+                      <a href="#" class="text-white hover:underline">Forgot your password?</a>
+                    </p>
+                  </div>
+                  <input type="email" placeholder="Enter your email address" class="input-form w-64 placeholder:text-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
+                </div>
               </div>
               <div class="flex justify-start items-start flex-col">
                 <!-- User Name -->
