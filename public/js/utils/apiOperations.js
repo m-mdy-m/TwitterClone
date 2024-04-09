@@ -447,18 +447,33 @@ export async function findRetweetedTweets(userId) {
   }
 }
 
-
-export async function add_friend(userId){
+export async function add_friend(userId) {
   try {
-    const response = await sendRequest(`add_friend/${userId}`,'post')
+    const response = await sendRequest(`add_friend/${userId}`, "post");
   } catch (error) {
-    showErrorMessage(error)
+    showErrorMessage(error);
   }
 }
-export async function del_friend(userId){
+export async function del_friend(userId) {
   try {
-    const response = await sendRequest(`remove_friend/${userId}`,'delete')
+    const response = await sendRequest(`remove_friend/${userId}`, "delete");
   } catch (error) {
-    showErrorMessage(error)
+    showErrorMessage(error);
+  }
+}
+export async function updateUserInformation(username, email, bio,userId) {
+  try {
+    const header = await getAuthHeaders();
+    const url = `/user-info?username=${username}&email=${email}&bio=${bio}&userId=${userId}`;
+    let response = await axios.put(url, {}, header);
+    return response.data.success;
+  } catch (error) {
+    // If the error is not due to unauthorized access, display an error message
+    showErrorMessage(
+      error.response.data.validationErrors?.errors || error,
+      error.response.data.error,
+      true,
+    );
+    return null;
   }
 }

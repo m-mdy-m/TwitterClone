@@ -32,7 +32,7 @@ export function ProfilePage() {
                    </button>
               </div>
               <div class="absolute bottom-4 right-4  items-center justify-center show-edit change-save hidden">
-                 <button class="btn-save bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out">Save Changes</button>
+                 <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out">Save Changes</button>
               </div>
               <div class="absolute top-1 right-2 w-3/5 h-2/4  justify-start px-8 items-center hidden show-edit">
                 <div class="justify-center items-center hidden  change-inputs">
@@ -40,16 +40,16 @@ export function ProfilePage() {
                   <input type="password" value="" class="w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
                 </div>
                 <div class="flex flex-col justify-evenly h-full items-center">
-                  <input data-input-email type="email" placeholder="Enter your new email address" class="change-info_user w-64 placeholder:text-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
+                  <input data-input-email type="email" placeholder="Enter your new email address" class="w-64 placeholder:text-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
                 </div>
               </div>
               <div class="flex justify-start items-start flex-col">
                 <!-- User Name -->
                 <h2 data-username class="text-gray-700 hidden-edit pl-2  font-Aktiv__regular cursor-default">@m__mdy__m</h2>
-                <input data-input-username  type="text" value="@m__mdy__m" class="hidden show-edit change-info_user bg-transparent text-gray-700 font-Aktiv__regular w-auto border-none outline-none rounded-md pl-2  "/>
+                <input data-input-username  type="text" value="" class="hidden show-edit bg-transparent text-gray-700 font-Aktiv__regular w-auto border-none outline-none rounded-md pl-2  "/>
                 <!-- Bio -->
                 <p data-bio  class=" text-gray-400 hidden-edit mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">Greatness، of small steps!</p>
-                <input data-input-bio type="text" value="Greatness، of small steps!" class="hidden show-edit change-info_user  bg-transparent w-auto border-none whitespace-nowrap outline-none rounded-md text-gray-400"/>
+                <input data-input-bio type="text" value="" class="hidden show-edit  bg-transparent w-auto border-none whitespace-nowrap outline-none rounded-md text-gray-400"/>
               </div>
               <div id="statusProfile" class="flex items-center justify-start">
                 ${statusUser(userStats)}

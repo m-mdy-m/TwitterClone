@@ -1,7 +1,8 @@
-const {route, expose} = require("xprz").Route();
+const {route, expose,mids} = require("xprz").Route();
 const { verifyToken } = $read("middleware/is-auth");
-const { findUser,findTweet } = $read("controller/info/info");
+const { findUser,findTweet,edit_user_mode } = $read("controller/info/info");
+mids([verifyToken])
 // Defining a GET route for fetching tweets
-route('/user-info').mid([verifyToken]).get(findUser);
-route("/tweet-info/:id").mid([verifyToken]).get(findTweet);
+route('/user-info').get(findUser).put(edit_user_mode)
+route("/tweet-info/:id").get(findTweet);
 module.exports = expose;

@@ -27,6 +27,10 @@ export function menuProfile() {
       tagP.style.cssText = "display: none; transition: all 0.3s ease;";
     });
   });
+  const container = document.getElementById("userProfileContainer");
+  document.addEventListener('DOMContentLoaded',()=>{
+    saveContainer(container)
+  })
 }
 
 export async function getUserProfile() {
@@ -38,7 +42,7 @@ export async function getUserProfile() {
   const wrapper = userProfileContainer.querySelector(
     "#wrapper__content-profile"
   );
-  await loading(wrapper, user, findUserTweets,userProfileContainer);
+  await loading(wrapper, user, findUserTweets);
   handlerClickIcons(wrapper);
   buttons.forEach((button) => {
     button.addEventListener("click", async () => {
@@ -52,7 +56,7 @@ export async function getUserProfile() {
       buttons.forEach((btn) => btn.classList.remove("activeButton"));
       switch (action) {
         case "posts":
-          await loading(wrapper, user, findUserTweets,userProfileContainer);
+          await loading(wrapper, user, findUserTweets);
           handlerClickIcons();
           break;
         case "likes":
@@ -60,7 +64,7 @@ export async function getUserProfile() {
           handlerClickIcons();
           break;
         case "retweets":
-          await loading(wrapper, user, findRetweetedTweets,userProfileContainer);
+          await loading(wrapper, user, findRetweetedTweets);
           handlerClickIcons();
           break;
       }
@@ -70,7 +74,7 @@ export async function getUserProfile() {
 function handlerClickIcons() {
   listMenuTweet(".list__menu-icon-profile", 1, false);
 }
-async function loading(wrapper, user, findUser,container) {
+async function loading(wrapper, user, findUser) {
   wrapper.innerHTML = "";
   const posts = await findUser(user.userId);
   if (posts.length === 0) {
@@ -107,6 +111,5 @@ async function loading(wrapper, user, findUser,container) {
         resolve();
       }, index * 100); // Adjust the duration and delay as needed
     });
-    saveContainer(container)
   });
 }

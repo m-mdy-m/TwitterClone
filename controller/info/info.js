@@ -49,3 +49,57 @@ exports.findTweet = async (ctx) => {
     );
   }
 };
+exports.edit_user_mode = async (ctx) => {
+  const { notFound, success, internalServerError, validationFailed } =
+    ctx.jsonSender();
+  try {
+    const { username, email, bio, userId } = ctx.getQuery();
+    const rules = {
+      username: "username",
+      email: "email",
+    };
+    const user = await User.findById(userId);
+    // Check if the user exists
+    if (!user) {
+      return notFound("User not found.");
+    }
+    const existingUser = await User.findOne({
+      $and: [{ _id: { $ne: userId } }, { $or: [{ username }, { email }] }],
+    });
+    if (existingUser) {
+      return ctx.status(409).json({
+        success: false,
+        error: "User already exists.",
+      });
+    }
+    // Check if there are any changes to update
+    const changes = {};
+    if (username !== undefined && username !== user.username) {
+      changes.username = username;
+    }
+    if (email !== undefined && email !== user.email) {
+      changes.email = email;
+    }
+    if (bio !== undefined && bio !== user.bio) {
+      changes.bio = bio;
+    }
+    // If no changes are detected, send success response
+    if (Object.keys(changes).length === 0) {
+      return success("No changes detected.");
+    }
+    const errors = ctx.verifyBody(rules);
+    if (Object.keys(errors).length > 0) {
+      return validationFailed({
+        errors:errors.username || errors.email,
+      });
+    }
+    // Apply changes and save user
+    Object.assign(user, changes);
+    await user.save();
+    return success();
+  } catch (error) {
+    internalServerError(
+      "An error occurred while processing your request. Please try again later."
+    );
+  }
+};

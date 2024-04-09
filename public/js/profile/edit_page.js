@@ -1,7 +1,6 @@
-import { showErrorMessage } from "../utils/helper.js";
-
+import { getUserInfo, updateUserInformation } from "../utils/apiOperations.js";
 export function edit_page() {
-    document.querySelectorAll(".hidden-edit").forEach((elm) => {
+  document.querySelectorAll(".hidden-edit").forEach((elm) => {
     elm.style.display = "none";
   });
   document.querySelectorAll(".show-edit").forEach((elm) => {
@@ -18,30 +17,17 @@ export function edit_page() {
     btn.querySelector("span").style.cssText = "opacity:0;";
     btn.style.cssText = "width:2.5rem;transition: all .5s ease;";
   });
-  const inputs = document.querySelectorAll(".change-info_user");
-  inputs.forEach((input) => {
-    input.addEventListener("input", (e) => {
-      const dataset = e.target.dataset;
-      const value = e.target.value;
-      for (const key in dataset) {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            try {
-                switch (key) {
-                  case "inputEmail":
-                    var valid = vfyjs.isEmail(value);
-                    console.log("valid:", valid);
-                    break;
-                  case "inputUsername":
-                    var valid = vfyjs.isUsername(value)
-                    break;
-                    case "inputBio":
-                    break;
-                }
-            } catch (error) {
-                showErrorMessage(error,error,true)
-            }
-        }
-      }
-    });
+  saveChange();
+}
+function saveChange() {
+  document.querySelector(".change-save").addEventListener("click", async () => {
+    const user = await getUserInfo();
+    const username = document
+      .querySelector("[data-input-username]")
+      .value.split("@")[1];
+    const email = document.querySelector("[data-input-email]").value;
+    const bio = document.querySelector("[data-input-bio]").value;
+    await updateUserInformation(username, email, bio, user.userId);
+    window.location.href = `/profile/${username}`;
   });
 }
