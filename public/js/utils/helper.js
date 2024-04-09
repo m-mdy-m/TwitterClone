@@ -240,7 +240,7 @@ function adjustStyles(
     return { valid: validation.valid, value: validation.value };
   }
 }
-export function showErrorMessage(error, msg = undefined) {
+export function showErrorMessage(error, msg = undefined,validation=false) {
   let errorMessage = "An unexpected error occurred. Please try again.";
   let color = "#ff6347"; // Default color for unexpected errors
   if (error.response) {
@@ -255,7 +255,7 @@ export function showErrorMessage(error, msg = undefined) {
     color = "#f39c12"; // Orange color for network errors
   } else {
     // Error occurred while setting up the request
-    errorMessage = "Request setup failed. Please try again.";
+    errorMessage = validation?error :"Request setup failed. Please try again.";
     color = "#3498db"; // Blue color for other errors
   }
   return showMessage(msgElm, errorMessage, color);

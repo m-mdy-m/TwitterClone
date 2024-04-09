@@ -1,3 +1,5 @@
+import { showErrorMessage } from "../utils/helper.js";
+
 export function edit_page() {
   document.querySelectorAll(".hidden-edit").forEach((elm) => {
     elm.style.display = "none";
@@ -9,8 +11,8 @@ export function edit_page() {
   btn.addEventListener("mouseenter", () => {
     setTimeout(() => {
       btn.querySelector("span").style.opacity = "1";
-    }, 700);
-    btn.style.cssText = "width:9rem;transition: all 1s ease;";
+    }, 650);
+    btn.style.cssText = "width:9rem;transition: all .6s ease;";
   });
   btn.addEventListener("mouseleave", () => {
     btn.querySelector("span").style.cssText = "opacity:0;";
@@ -20,19 +22,25 @@ export function edit_page() {
   inputs.forEach((input) => {
     input.addEventListener("input", (e) => {
       const dataset = e.target.dataset;
+      const value = e.target.value;
       for (const key in dataset) {
         if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          switch (key) {
-            case "inputEmail":
-                console.log('hi')
-              break;
-
-            case "inputUsername":
-              break;
-
-            case "inputBio":
-              break;
-          }
+            try {
+                switch (key) {
+                  case "inputEmail":
+                    const valid = vfyjs.isEmail(value);
+                    console.log("valid:", valid);
+                    break;
+      
+                  case "inputUsername":
+                    break;
+      
+                  case "inputBio":
+                    break;
+                }
+            } catch (error) {
+                showErrorMessage(error,error,true)
+            }
         }
       }
     });

@@ -22,16 +22,16 @@ export class ChartDataManager {
 
   updateData({ views }) {
     this.createDate();
-    const currentDayIndex = this.currentDate.getDay();
-    const day = this.weekDay[currentDayIndex];
-    // Find the index of the current day in weakLabels
-    const index = this.weakLabels.indexOf(day);
-    if (index !== -1) {
-      // Check if the day exists in the weakLabels array
-      if (views !== undefined) {
-        this.views[index] += views;
+    views.forEach((obj)=> {
+      const dayView = Object.keys(obj)[0]
+      const index = this.weakLabels.indexOf(dayView);
+      if (index !== -1) {
+        // Check if the day exists in the weakLabels array
+        if (views !== undefined) {
+          this.views[index] += views.length;
+        }
       }
-    }
+    })
   }
 
   Chart() {

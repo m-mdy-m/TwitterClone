@@ -29,7 +29,9 @@ export function nav_icons_profile() {
         break;
       case "edit":
         // Code to handle click on edit_page goes here
-        data.addEventListener("click", edit_page);
+        data.addEventListener("click", ()=>{
+          edit_page()
+        });
         break;
       case "friends":
         // Code to handle click on friends_page goes here
@@ -98,15 +100,20 @@ export function analyze_page() {
       const dayOfWeek = viewDate.getDay();
       const day = weekDay[dayOfWeek];
       const currentTime = new Date();
-      const isSameDay = day === weekDay[currentTime.getDay()];
-      if (isSameDay) {
-        view.push(e);
+      const isSameWeek = viewDate.getFullYear() === currentTime.getFullYear() && getWeekNumber(viewDate) === getWeekNumber(currentTime);
+      if(isSameWeek){
+        view.push({[day]:e});
       }
     });
     // Setting data for the chart
-    chart.setData = { views: view.length };
+    chart.setData = { views: view };
   });
 
   // Rendering the chart
   chart.Chart();
+}
+function getWeekNumber(date) {
+  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+  const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
 }
