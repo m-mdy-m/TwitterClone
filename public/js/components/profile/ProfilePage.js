@@ -23,19 +23,24 @@ export function ProfilePage() {
                 </div>
           </div>
           <div class="pt-12 px-4 relative" id="userProfileContainer">
+              <div class="flex top-0 right-0 absolute z-50 ">
+                   <button class="btn-change-password flex items-center hover:brightness-110 text-xs h-10 w-10 px-2 rounded-2xl border border-gray-600 focus:border-gray-400 bg-gradient-to-br from-blue-600 to-blue-700 text-white font-Aktiv__regular outline-none relative overflow-hidden">
+                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C16.75 2.75 20.6637 6.33026 21.1899 10.9394L19.2372 10.2885C18.8442 10.1575 18.4195 10.3699 18.2885 10.7628C18.1575 11.1558 18.3699 11.5805 18.7628 11.7115L21.7628 12.7115C21.9915 12.7877 22.243 12.7494 22.4385 12.6084C22.6341 12.4675 22.75 12.2411 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C16.2219 22.75 19.874 20.3161 21.6322 16.7782C21.8165 16.4073 21.6652 15.9571 21.2943 15.7728C20.9234 15.5885 20.4732 15.7397 20.2889 16.1107C18.7744 19.1582 15.6308 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12ZM12 7.75C11.3096 7.75 10.75 8.30964 10.75 9V10H13.25V9C13.25 8.30964 12.6904 7.75 12 7.75ZM9.25 10C9.25 10.0479 9.25449 10.0947 9.26307 10.1401C8.5232 10.4335 8 11.1557 8 12V14C8 15.1046 8.89543 16 10 16H14C15.1046 16 16 15.1046 16 14V12C16 11.1557 15.4768 10.4335 14.7369 10.1401C14.7455 10.0947 14.75 10.0479 14.75 10V9C14.75 7.48122 13.5188 6.25 12 6.25C10.4812 6.25 9.25 7.48122 9.25 9V10Z" fill="#FFFFFF"/>
+                       </svg>
+                       <span class="ml-2 opacity-0 transition-transform ease-in-out duration-300 transform translate-x-0 absolute">Change Password</span>
+                   </button>
+              </div>
+              <div class="absolute bottom-4 right-4 flex items-center justify-center">
+                 <button class="btn-save bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out">Save Changes</button>
+              </div>
               <div class="absolute top-1 right-2 w-3/5 h-2/4  flex justify-start px-8 items-center">
                 <div class="justify-center items-center hidden">
                   <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
                   <input type="password" value="" class="input-form w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
                 </div>
                 <div class="flex flex-col justify-evenly h-full items-center">
-                  <div class="flex flex-col items-center justify-center space-y-4">
-                    <input type="text" placeholder="Enter your current password" class="input-form w-64 placeholder:text-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
-                    <p class="text-sm">
-                      <a href="#" class="text-white hover:underline">Forgot your password?</a>
-                    </p>
-                  </div>
-                  <input type="email" placeholder="Enter your email address" class="input-form w-64 placeholder:text-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
+                  <input type="email" placeholder="Enter your email address" class="input-form w-64 placeholder-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
                 </div>
               </div>
               <div class="flex justify-start items-start flex-col">
