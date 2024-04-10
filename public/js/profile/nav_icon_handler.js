@@ -6,6 +6,7 @@ import {
 } from "../utils/apiOperations.js";
 import { edit_page } from "./edit_page.js";
 import { getTemplate } from "./utils.js";
+import { deleteAccount } from "./deleteAccount.js";
 let user, tweets
 if (window.location.pathname.startsWith("/profile")) {
   (async () => {
@@ -25,9 +26,7 @@ export function nav_icons_profile() {
         break;
       case "edit":
         // Code to handle click on edit_page goes here
-        data.addEventListener("click", () => {
-          edit_page();
-        });
+        data.addEventListener("click",edit_page);
         break;
       case "friends":
         // Code to handle click on friends_page goes here
@@ -35,7 +34,7 @@ export function nav_icons_profile() {
         break;
       case "deleteAccount":
         // Code to handle click on deleteAccount_page goes here
-        data.addEventListener("click", analyze_page);
+        data.addEventListener("click", deleteAccount);
         break;
       default:
         break;

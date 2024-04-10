@@ -495,3 +495,11 @@ export async function changePassword(password,userId){
     showErrorMessage(error);
   }
 }
+export async function deleteAccountApi(){
+  try {
+    let response = await sendRequest('/user/delete','delete')
+    return response.data.success
+  } catch (error) {
+    showErrorMessage(error)
+  }
+} 
