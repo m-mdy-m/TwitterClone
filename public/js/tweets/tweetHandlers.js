@@ -139,6 +139,9 @@ function renderTweet(tweet, userInfo, author = "", originalTweet = null) {
           ? "block"
           : "hidden",
       edited_tweet: tweet.edited ? "block" : "hidden",
+      showEditICon:  tweet.author._id.toString() === userInfo.userId.toString()
+      ? "block"
+      : "hidden",
       followStatus:tweetAuthor._id.toString() === userId.toString() ? 'hidden' : 'block',
       content_follow_user:userInfo.following.includes(tweetAuthor._id.toString())? "unfollow" : 'follow'
     };

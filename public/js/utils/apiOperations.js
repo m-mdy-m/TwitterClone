@@ -374,7 +374,7 @@ export async function toggleDeleteTweet(id) {
 export async function toggleEditTweet(id, content) {
   try {
     const response = await sendRequest(`edit/${id}`, "put", { content });
-    if (!response.data.success) {
+    if (!response) {
       // Show error message with appropriate color
       showMessage(
         msgElm,

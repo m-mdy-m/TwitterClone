@@ -261,11 +261,14 @@ exports.deleteTweet = async (ctx) => {
   }
 };
 exports.editTweet = async (ctx) => {
-  const { internalServerError, updated } = ctx.jsonSender();
+  const { internalServerError, notFound, updated } = ctx.jsonSender();
   try {
     const { content } = ctx.getBody();
     const tweetManager = new TweetUserManager(ctx, ctx.jsonSender);
     const { tweet } = await tweetManager.findTweetParam();
+    if (ctx.user.userId !== tweet.author._id.toString()) {
+      return notFound("Only the author of the tweet can edit it.");
+    }
     tweet.content = content;
     tweet.edited = true;
     await tweet.save();
