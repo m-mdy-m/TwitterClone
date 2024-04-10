@@ -103,3 +103,13 @@ exports.edit_user_mode = async (ctx) => {
     );
   }
 };
+exports.checkPassword = (ctx)=>{
+  const { notFound, success, internalServerError, validationFailed } = ctx.jsonSender();
+  try {
+    
+  } catch (error) {
+    internalServerError(
+      "An error occurred while processing your request. Please try again later."
+    );
+  }
+}

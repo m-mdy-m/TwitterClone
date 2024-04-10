@@ -5,4 +5,5 @@ mids([verifyToken])
 // Defining a GET route for fetching tweets
 route('/user-info').get(findUser).put(edit_user_mode)
 route("/tweet-info/:id").get(findTweet);
+route('/password-check').get('')
 module.exports = expose;

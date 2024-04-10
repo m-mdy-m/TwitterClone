@@ -1,5 +1,10 @@
 import { getUserInfo, updateUserInformation } from "../utils/apiOperations.js";
 export function edit_page() {
+  const wrapperForm = document.querySelector('.wrapper__change-password')
+  const btnCancel = document.querySelector('.button__cancel-form')
+  btnCancel.addEventListener('click',()=>{
+    wrapperForm.style.cssText = 'opacity:0;display:none;'
+  })
   document.querySelectorAll(".hidden-edit").forEach((elm) => {
     elm.style.display = "none";
   });
@@ -17,6 +22,10 @@ export function edit_page() {
     btn.querySelector("span").style.cssText = "opacity:0;";
     btn.style.cssText = "width:2.5rem;transition: all .5s ease;";
   });
+  btn.addEventListener('click',()=>{
+    wrapperForm.style.cssText = 'opacity:1;display:block;'
+    handlerPasswordChanger(wrapperForm)
+  })
   saveChange();
 }
 function saveChange() {
@@ -30,4 +39,16 @@ function saveChange() {
     await updateUserInformation(username, email, bio, user.userId);
     window.location.href = `/profile/${username}`;
   });
+}
+
+function handlerPasswordChanger(wrapperForm){
+  const password_old = document.querySelector('.password_old input')
+  const form = document.querySelector('.password_new-form')
+  password_old.addEventListener('input',(e)=>{
+    const value = e.target.value
+    setTimeout(()=>{
+      
+    },1000)
+  })
+
 }
