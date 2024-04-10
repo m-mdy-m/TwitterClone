@@ -486,3 +486,12 @@ export async function checkPasswordValue(password,userId) {
     showErrorMessage(error);
   }
 }
+export async function changePassword(password,userId){
+  try {
+    const header = await getAuthHeaders();
+    let response = await axios.post(`/changepassowrd/${userId}`, {password}, header);
+    return response.data.success
+  } catch (error) {
+    showErrorMessage(error);
+  }
+}

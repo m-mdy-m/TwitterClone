@@ -20,10 +20,10 @@ export function ProfilePage() {
               <div class="flex justify-center w-full password_old">
                 <input type="text" placeholder="write current password"  class="placeholder:capitalize p-2 rounded-md h-full py-4 w-2/3 border border-slate-500  outline-none bg-[#13171ec6] text-white">
               </div>
-              <form class="justify-center opacity-0 password_new-form [&>*]:cursor-default flex w-full [&>*]:my-4 flex-col items-center form__password-changes" method="POST">
+              <form action="" class="justify-center opacity-0 password_new-form [&>*]:cursor-default flex w-full [&>*]:my-4 flex-col items-center form__password-changes" method="POST">
                 <input type="password" placeholder="new Password" class="password_new-input  h-full py-4 w-2/3 border-none outline-none bg-gray-700 text-white p-2 rounded-md " />
                 <input type="password" placeholder="Confirm Password" class="password_new-input-conf h-full py-4 w-2/3 border-none outline-none bg-gray-700 text-white p-2 rounded-md" />
-                <button class="capitalize p-3 rounded-md w-1/2 bg-blue-300"> save password </button>
+                <button type="submit"  class=" z-50 capitalize p-3 rounded-md w-1/2 bg-blue-300"> save password </button>
               </form>
           </div>
         </div>

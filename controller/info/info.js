@@ -1,6 +1,6 @@
 const Tweet = require("../../model/Tweet");
 const User = require("../../model/User");
-const bcryptjs = require('xprz').Package().bcryptjs()
+const bcryptjs = require("xprz").Package().bcryptjs();
 exports.findUser = async (ctx) => {
   const { notFound, internalServerError } = ctx.jsonSender();
   try {
@@ -91,7 +91,7 @@ exports.edit_user_mode = async (ctx) => {
     const errors = ctx.verifyBody(rules);
     if (Object.keys(errors).length > 0) {
       return validationFailed({
-        errors:errors.username || errors.email,
+        errors: errors.username || errors.email,
       });
     }
     // Apply changes and save user
@@ -104,33 +104,51 @@ exports.edit_user_mode = async (ctx) => {
     );
   }
 };
-exports.checkPassword =  async (ctx)=>{
-  const { notFound, success, internalServerError, validationFailed } = ctx.jsonSender();
+exports.checkPassword = async (ctx) => {
+  const { notFound, success, internalServerError, validationFailed } =
+    ctx.jsonSender();
   try {
-    const value = ctx.param('password')
-    const userId = ctx.query('id')
-    const user = await User.findById(userId)
-    const match = await  bcryptjs.compare(value , user.password)
-    if(!match){
+    const value = ctx.param("password");
+    const userId = ctx.query("id");
+    const user = await User.findById(userId);
+    const match = await bcryptjs.compare(value, user.password);
+    if (!match) {
       return ctx.status(403).json({
-        error:'password is not match',
-        success:false,
-      })
+        error: "password is not match",
+        success: false,
+      });
     }
-    success()
+    success();
   } catch (error) {
     internalServerError(
       "An error occurred while processing your request. Please try again later."
     );
   }
-}
-exports.changePassword = (ctx)=>{
-  const { notFound, success, internalServerError, validationFailed } = ctx.jsonSender();
-try {
-  
-} catch (error) {
-  internalServerError(
-    "An error occurred while processing your request. Please try again later."
-  );
-}
-}
+};
+exports.changePassword = async (ctx) => {
+  const {  success, internalServerError, validationFailed } = ctx.jsonSender();
+  try {
+    const { password } = ctx.body
+    const userId = ctx.param("id");
+    console.log('password:',password)
+    console.log('userId:',userId)
+    // const user = await User.findById(userId);
+    // const rules = {
+    //   password: "password",
+    // };
+    // const errors = ctx.verifyBody(rules);
+    // if (Object.keys(errors).length > 0) {
+    //   return validationFailed({
+    //     errors: errors.password,
+    //   });
+    // }
+    // const hashedPassword = await bcryptjs.hash(password);
+    // user.password = hashedPassword;
+    // await user.save();
+    // success();
+  } catch (error) {
+    internalServerError(
+      "An error occurred while processing your request. Please try again later."
+    );
+  }
+};
