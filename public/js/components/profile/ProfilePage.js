@@ -9,17 +9,28 @@ export function ProfilePage() {
     { id: "following", value: 0, unit: "", label: "Posts" },
   ];
   return `
-    <div class="w-full h-full grid grid-cols-profile ">
+    <div class="w-full h-full grid grid-cols-profile relative">
+        <div class="absolute bg-[#11101076] border-2 hidden opacity-0 border-gray-600  top-1/2 h-5/6 w-2/5  rounded-md z-50 -translate-x-1/2 -translate-y-1/2 transform left-1/2 ">
+          <div class="flex justify-evenly w-full h-full flex-col">
+              <div class="flex justify-center w-full">
+                <input type="text" placeholder="write current password"  class=" p-2 rounded-md h-full py-4 w-2/3 border border-slate-500  outline-none bg-[#13171ec6] text-white">
+              </div>
+              <form class="justify-center [&>*]:opacity-0 [&>*]:cursor-not-allowed flex w-full [&>*]:my-4 flex-col items-center form__password-changes" method="POST">
+                <input type="password" placeholder="new Password" class="h-full py-4 w-2/3 border-none outline-none bg-gray-700 text-white p-2 rounded-md " />
+                <input type="password" placeholder="Confirm Password" class="h-full py-4 w-2/3 border-none outline-none bg-gray-700 text-white p-2 rounded-md" />
+              </form>
+          </div>
+        </div>
         <div data-page="profile-user" class="rounded-md grid grid-rows-profile transition-all duration-300 ">
           <div class="relative  rounded-t-lg flex justify-center" style="background:${randomGradientColor()}">
                 <div data-page="img-profile-user" class="bg-yellow-500 transition-all duration-1000 absolute rounded-full p-2 border-4 border-[#434346] w-28 h-28 left-8 -bottom-8 flex justify-center items-center">
                    <img src="/assets/icon/nav/user.svg" alt="" class=" rounded-full border-4 w-full h-full  object-cover">
-                  <label for="profile-image"  class="absolute hidden  show-edit bottom-0 z-50 label__input-img right-0 cursor-pointer hover:contrast-150 hover:rotate-45 transition-all delay-200" id="add-profile">
-                      <svg class="object-cover" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM7.25 12C7.25 11.5858 7.58579 11.25 8 11.25H11.25V8C11.25 7.58579 11.5858 7.25 12 7.25C12.4142 7.25 12.75 7.58579 12.75 8V11.25H16C16.4142 11.25 16.75 11.5858 16.75 12C16.75 12.4142 16.4142 12.75 16 12.75H12.75V16C12.75 16.4142 12.4142 16.75 12 16.75C11.5858 16.75 11.25 16.4142 11.25 16V12.75H8C7.58579 12.75 7.25 12.4142 7.25 12Z" fill="#007bff"/>
-                      </svg>
-                  </label >
-                  <input type="file" id="profile-image" accept="image/*" class="hidden">
+                   <label for="profile-image"  class="absolute hidden  show-edit bottom-0 z-50 label__input-img right-0 cursor-pointer hover:contrast-150 hover:rotate-45 transition-all delay-200" id="add-profile">
+                       <svg class="object-cover" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM7.25 12C7.25 11.5858 7.58579 11.25 8 11.25H11.25V8C11.25 7.58579 11.5858 7.25 12 7.25C12.4142 7.25 12.75 7.58579 12.75 8V11.25H16C16.4142 11.25 16.75 11.5858 16.75 12C16.75 12.4142 16.4142 12.75 16 12.75H12.75V16C12.75 16.4142 12.4142 16.75 12 16.75C11.5858 16.75 11.25 16.4142 11.25 16V12.75H8C7.58579 12.75 7.25 12.4142 7.25 12Z" fill="#007bff"/>
+                       </svg>
+                   </label>
+                   <input type="file" id="profile-image" accept="image/*" class="hidden">
                 </div>                                                                                                                                     
           </div>
           <div class="pt-12 px-4 relative" id="userProfileContainer">
@@ -35,10 +46,6 @@ export function ProfilePage() {
                  <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out">Save Changes</button>
               </div>
               <div class="absolute top-1 right-2 w-3/5 h-2/4  justify-start px-8 items-center hidden show-edit">
-                <div class="justify-center items-center hidden  change-inputs">
-                  <input type="password" value="" class="w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
-                  <input type="password" value="" class="w-4/6 rounded-lg border-none outline-none  h-full bg-gray-700 text-white" />
-                </div>
                 <div class="flex flex-col justify-evenly h-full items-center">
                   <input data-input-email type="email" placeholder="Enter your new email address" class="w-64 placeholder:text-sm h-12 px-5 rounded-2xl border-2 border-gray-600 focus:border-gray-400 bg-gradient-to-br from-gray-800 to-gray-900 placeholder-gray-400 text-white text-base font-Aktiv__regular outline-none" />
                 </div>
