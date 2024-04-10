@@ -1,13 +1,20 @@
 const { expose, route } = require("xprz").Route();
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs").promises
 const User = require("../../model/User");
-const {
-  RegexValidator,
-} = require("vfyjs/src/validator/requests/utils/AdditionalValidators");
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "/public/upload/");
+  destination: async function (req, file, cb) {
+    const uploadPath = path.join(process.cwd(), "public", "upload");
+    try {
+      await fs.mkdir(uploadPath, { recursive: true });
+      cb(null, '/public/upload');
+    } catch (err) {
+      console.error("Error creating upload directory:", err);
+      return cb(err);
+    }
+
+    cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
     cb(
@@ -30,7 +37,6 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
-  dest: "/public/upload/",
 });
 
 route("/upload/profile/:userId")
@@ -45,10 +51,10 @@ route("/upload/profile/:userId")
       return badRequest("No file uploaded.");
     }
     const userId = ctx.param("userId");
-    const modifiedPath  = path.normalize(ctx.file.path)  .replace(/^\\public\\/, '/')
-    .replace(/\\/g, '/');
-    // const modifiedPath = originalPath.replace(/\\public\\/, '/');
-    console.log("modifiedPath:", modifiedPath);
+    const modifiedPath = path
+      .normalize(ctx.file.path)
+      .replace(/^\\public\\/, "/")
+      .replace(/\\/g, "/");
     const user = await User.findByIdAndUpdate(userId, {
       profilePic: modifiedPath,
     });

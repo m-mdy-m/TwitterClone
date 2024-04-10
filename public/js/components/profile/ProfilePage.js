@@ -30,7 +30,7 @@ export function ProfilePage() {
         <div data-page="profile-user" class="rounded-md grid grid-rows-profile transition-all duration-300 ">
           <div class="relative  rounded-t-lg flex justify-center" style="background:${randomGradientColor()}">
                 <div data-page="img-profile-user" class="bg-yellow-500 transition-all duration-1000 absolute rounded-full p-2 border-4 border-[#434346] w-28 h-28 left-8 -bottom-8 flex justify-center items-center">
-                   <img src="/assets/icon/nav/user.svg" alt="" class=" rounded-full border-4 w-full h-full  object-cover">
+                   <img src="/assets/icon/nav/user.svg" alt="" class="profile-img-user rounded-full border-4 w-full h-full  object-cover">
                    <form action="" id="upload_img" method="POST" enctype="multipart/form-data">
                       <label for="profile-image" class="absolute hidden btn__upload-img show-edit bottom-0 z-50 label__input-img right-0 cursor-pointer hover:contrast-150 hover:rotate-45 transition-all delay-200" id="add-profile">
                           <svg class="object-cover" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
