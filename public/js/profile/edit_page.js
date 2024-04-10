@@ -58,10 +58,8 @@ async function handlerPasswordChanger() {
     setTimeout(async () => {
       const response = await checkPasswordValue(value, user.userId);
       if (response) {
-        let action=  form.attributes['action']
-        action = `/profile/${user.username}`
-        console.log('action : ',action)
-        console.log('action : ',form)
+        let  action = `/profile/${user.username}`;
+        form.attributes.getNamedItem('action').value = action
         passwordInput.style.cursor = "text;";
         confInput.style.cursor = "text;";
         btn.style.cursor = "pointer;";
@@ -70,15 +68,12 @@ async function handlerPasswordChanger() {
     }, 1500);
   });
   btn.addEventListener("click", async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const newPassword = passwordInput.value;
     const confPassword = confInput.value;
-    console.log('newPassword:',newPassword)
-    console.log('confPassword:',confPassword)
     const response = await changePassword(newPassword, user.userId);
     if (response && confPassword == newPassword) {
       window.location.reload();
     }
   });
 }
-// $2a$10$O5ku02l.JHPcwyN9g.1h1ekpZo26x8bBtnF9M005nO3pjDxf1BgRK

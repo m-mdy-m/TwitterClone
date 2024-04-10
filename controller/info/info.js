@@ -129,23 +129,21 @@ exports.changePassword = async (ctx) => {
   const {  success, internalServerError, validationFailed } = ctx.jsonSender();
   try {
     const { password } = ctx.body
-    const userId = ctx.param("id");
-    console.log('password:',password)
-    console.log('userId:',userId)
-    // const user = await User.findById(userId);
-    // const rules = {
-    //   password: "password",
-    // };
-    // const errors = ctx.verifyBody(rules);
-    // if (Object.keys(errors).length > 0) {
-    //   return validationFailed({
-    //     errors: errors.password,
-    //   });
-    // }
-    // const hashedPassword = await bcryptjs.hash(password);
-    // user.password = hashedPassword;
-    // await user.save();
-    // success();
+    const userId = ctx.param("userId");
+    const user = await User.findById(userId);
+    const rules = {
+      password: "password",
+    };
+    const errors = ctx.verifyBody(rules);
+    if (Object.keys(errors).length > 0) {
+      return validationFailed({
+        errors: errors.password,
+      });
+    }
+    const hashedPassword = await bcryptjs.hash(password);
+    user.password = hashedPassword;
+    await user.save();
+    success();
   } catch (error) {
     internalServerError(
       "An error occurred while processing your request. Please try again later."
