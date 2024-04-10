@@ -37,7 +37,7 @@ export function edit_page() {
   btnUpload.addEventListener("click", async () => {
     const file = profileImage.files[0];
     const formData = new FormData();
-    console.log("formData:", formData);
+    console.log("file:", file);
     formData.append("profilePic", file);
     const response = await uploadApi(formData);
   });
