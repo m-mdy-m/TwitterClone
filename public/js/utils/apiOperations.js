@@ -525,7 +525,6 @@ export async function uploadApi(file, userId) {
     // Construct FormData object
     const formData = new FormData();
     formData.append("profile-image", file);
-    console.log("form:", formData);
     // Construct headers object including CSRF token and JWT token
     const header = {
       headers: {
