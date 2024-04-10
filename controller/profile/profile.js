@@ -1,5 +1,6 @@
 const path = require("path");
 const TweetUserManager = require("../../utils/helper");
+const User = require("../../model/User");
 
 exports.getProfile = (ctx) => {
   const username = ctx.param("username");
@@ -21,10 +22,15 @@ exports.ProfileUser = ({ sendFile }) => {
   sendFile(path.join(process.cwd(), "/public/main.html"));
 };
 
-exports.deleteAccount = (ctx) => {
-  const { success, internalServerError } = ctx.jsonSender();
+exports.deleteAccount = async  (ctx) => {
+  const { success, internalServerError,notFound } = ctx.jsonSender();
   try {
-    co
+    const {userId} = ctx.body
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if(!deletedUser){
+      return notFound('User not found')
+    }
+    success('User account deleted successfully')
   } catch (error) {
     internalServerError(error.message);
   }

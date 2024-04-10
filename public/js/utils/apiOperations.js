@@ -495,9 +495,9 @@ export async function changePassword(password,userId){
     showErrorMessage(error);
   }
 }
-export async function deleteAccountApi(){
+export async function deleteAccountApi(userId){
   try {
-    let response = await sendRequest('/user/delete','delete')
+    let response = await sendRequest('/user/delete','delete',{userId})
     return response.data.success
   } catch (error) {
     showErrorMessage(error)

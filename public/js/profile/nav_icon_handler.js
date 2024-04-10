@@ -34,7 +34,9 @@ export function nav_icons_profile() {
         break;
       case "deleteAccount":
         // Code to handle click on deleteAccount_page goes here
-        data.addEventListener("click", deleteAccount);
+        data.addEventListener("click", ()=>{
+          deleteAccount(user.userId)
+        });
         break;
       default:
         break;
