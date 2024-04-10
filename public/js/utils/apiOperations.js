@@ -537,7 +537,7 @@ export async function uploadApi(file, userId) {
       formData,
       header
     );
-    console.log("response:", response);
+    return response.data.success
   } catch (error) {
     showErrorMessage(error);
   }

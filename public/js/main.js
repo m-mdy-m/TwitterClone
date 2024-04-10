@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const header = document.querySelector("header");
     const { username, profilePic } = await getUserInfo();
-    header.innerHTML = Header({ profile: profilePic, username });
+    header.innerHTML = Header({ profile: '/upload/profile-image-1712781538408.jpg', username });
     initializeComponentsNavigation();
   }
   if(["/auth/signup", "/auth/login"].includes(path)){

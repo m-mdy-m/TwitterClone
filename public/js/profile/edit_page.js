@@ -45,7 +45,9 @@ export function edit_page() {
       if (file) {
         try {
           const response = await uploadApi(file, user.userId);
-          console.log("Upload response:", response);
+          if(response){
+            window.location.reload()
+          }
           // Handle response if needed
         } catch (error) {
           console.error("Upload failed:", error);
