@@ -142,10 +142,6 @@
   top: 1.5rem;
 }
 
-.right-1 {
-  right: 0.25rem;
-}
-
 .-z-10 {
   z-index: -10;
 }
@@ -312,6 +308,10 @@
   width: 4rem;
 }
 
+.w-2\/3 {
+  width: 66.666667%;
+}
+
 .w-2\/5 {
   width: 40%;
 }
@@ -354,10 +354,6 @@
 
 .w-full {
   width: 100%;
-}
-
-.w-2\/3 {
-  width: 66.666667%;
 }
 
 .min-w-20 {
@@ -404,10 +400,6 @@
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.cursor-none {
-  cursor: none;
 }
 
 .resize-none {
@@ -534,10 +526,6 @@
   border-radius: 0.75rem;
 }
 
-.rounded {
-  border-radius: 0.25rem;
-}
-
 .rounded-l-2xl {
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
@@ -635,14 +623,14 @@
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
 .border-slate-500 {
   --tw-border-opacity: 1;
   border-color: rgb(100 116 139 / var(--tw-border-opacity));
+}
+
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
 .border-l-transparent {
@@ -662,8 +650,17 @@
   background-color: #11101076;
 }
 
+.bg-\[\#13171ec6\] {
+  background-color: #13171ec6;
+}
+
 .bg-\[\#28252576\] {
   background-color: #28252576;
+}
+
+.bg-blue-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 197 253 / var(--tw-bg-opacity));
 }
 
 .bg-blue-500 {
@@ -691,11 +688,6 @@
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
-.bg-red-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
-}
-
 .bg-transparent {
   background-color: transparent;
 }
@@ -703,51 +695,6 @@
 .bg-yellow-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity));
-}
-
-.bg-teal-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(94 234 212 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#282525c6\] {
-  background-color: #282525c6;
-}
-
-.bg-\[\#3e3a3ac6\] {
-  background-color: #3e3a3ac6;
-}
-
-.bg-\[\#1e1c1cc6\] {
-  background-color: #1e1c1cc6;
-}
-
-.bg-\[\#13171ec6\] {
-  background-color: #13171ec6;
-}
-
-.bg-\[\#22238e76\] {
-  background-color: #22238e76;
-}
-
-.bg-\[\#22248e\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(34 36 142 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#2a848e\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(42 132 142 / var(--tw-bg-opacity));
-}
-
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-
-.bg-blue-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 197 253 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-br {
@@ -829,12 +776,12 @@
   padding: 0.5rem;
 }
 
-.p-4 {
-  padding: 1rem;
-}
-
 .p-3 {
   padding: 0.75rem;
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .px-1 {
@@ -882,14 +829,14 @@
   padding-bottom: 0.75rem;
 }
 
-.py-px {
-  padding-top: 1px;
-  padding-bottom: 1px;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.py-px {
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 .pb-3 {
@@ -1086,10 +1033,6 @@
   opacity: 0.3;
 }
 
-.opacity-50 {
-  opacity: 0.5;
-}
-
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -1111,16 +1054,6 @@
 
 .blur {
   --tw-blur: blur(8px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.blur-sm {
-  --tw-blur: blur(4px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.blur-none {
-  --tw-blur: blur(0);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
@@ -2185,20 +2118,12 @@
   margin-bottom: 1rem;
 }
 
-.\[\&\>\*\]\:cursor-pointer>* {
-  cursor: pointer;
-}
-
-.\[\&\>\*\]\:cursor-none>* {
-  cursor: none;
-}
-
-.\[\&\>\*\]\:cursor-not-allowed>* {
-  cursor: not-allowed;
-}
-
 .\[\&\>\*\]\:cursor-default>* {
   cursor: default;
+}
+
+.\[\&\>\*\]\:cursor-pointer>* {
+  cursor: pointer;
 }
 
 .\[\&\>\*\]\:flex-col>* {
@@ -2207,10 +2132,6 @@
 
 .\[\&\>\*\]\:opacity-0>* {
   opacity: 0;
-}
-
-.\[\&\>\*\]\:opacity-50>* {
-  opacity: 0.5;
 }
 
 .\[\&\>input\]\:p-2>input {

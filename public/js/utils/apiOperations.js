@@ -468,6 +468,7 @@ export async function updateUserInformation(username, email, bio, userId) {
     const header = await getAuthHeaders();
     const url = `/user-info?username=${username}&email=${email}&bio=${bio}&userId=${userId}`;
     let response = await axios.put(url, {}, header);
+    extractToken(response.data.data.tokens);
     return response.data.success;
   } catch (error) {
     // If the error is not due to unauthorized access, display an error message
@@ -500,6 +501,7 @@ export async function changePassword(password, userId) {
       { password },
       header
     );
+    extractToken(response.data.data.tokens);
     return response.data.success;
   } catch (error) {
     showErrorMessage(error);
@@ -537,6 +539,7 @@ export async function uploadApi(file, userId) {
       formData,
       header
     );
+    extractToken(response.data.data.tokens);
     return response.data.success
   } catch (error) {
     showErrorMessage(error);

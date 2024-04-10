@@ -3,6 +3,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs").promises
 const User = require("../../model/User");
+const TweetUserManager = require("../../utils/helper");
 const storage = multer.diskStorage({
   destination: async function (req, file, cb) {
     const uploadPath = path.join(process.cwd(), "public", "upload");
@@ -61,6 +62,8 @@ route("/upload/profile/:userId")
     if (!user) {
       return notFound("User not found");
     }
-    success("Profile picture uploaded successfully");
+    const tweetManager = new TweetUserManager(ctx, ctx.jsonSender);
+    const tokens = await tweetManager.saveUser(user)
+    success("Profile picture uploaded successfully",{tokens: tokens});
   });
 module.exports = expose;

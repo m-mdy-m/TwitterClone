@@ -1,5 +1,6 @@
 const Tweet = require("../../model/Tweet");
 const User = require("../../model/User");
+const TweetUserManager = require("../../utils/helper");
 const bcryptjs = require("xprz").Package().bcryptjs();
 exports.findUser = async (ctx) => {
   const { notFound, internalServerError } = ctx.jsonSender();
@@ -97,7 +98,9 @@ exports.edit_user_mode = async (ctx) => {
     // Apply changes and save user
     Object.assign(user, changes);
     await user.save();
-    return success();
+    const tweetManager = new TweetUserManager(ctx, ctx.jsonSender);
+    const tokens = await tweetManager.saveUser(user)
+    return success('edited user',{tokens: tokens});
   } catch (error) {
     internalServerError(
       "An error occurred while processing your request. Please try again later."
@@ -143,7 +146,9 @@ exports.changePassword = async (ctx) => {
     const hashedPassword = await bcryptjs.hash(password);
     user.password = hashedPassword;
     await user.save();
-    success();
+    const tweetManager = new TweetUserManager(ctx, ctx.jsonSender);
+    const tokens = await tweetManager.saveUser(user)
+    success('Password Changed',{tokens: tokens});
   } catch (error) {
     internalServerError(
       "An error occurred while processing your request. Please try again later."

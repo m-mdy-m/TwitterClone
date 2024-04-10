@@ -14,7 +14,7 @@ export function UserInfo({
          ${UserProfile({
            username: username,
            profile: profile,
-           className: "w-8 h-8",
+           className: "w-8 h-8 rounded-full",
            isRetweeted,
            retweetedUsername,
          })} 
