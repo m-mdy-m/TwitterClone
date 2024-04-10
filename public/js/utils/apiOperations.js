@@ -477,31 +477,48 @@ export async function updateUserInformation(username, email, bio, userId) {
     return null;
   }
 }
-export async function checkPasswordValue(password,userId) {
+export async function checkPasswordValue(password, userId) {
   try {
     const header = await getAuthHeaders();
-    let response = await axios.get(`/password-check/${password}?id=${userId}`, {}, header);
-    return response.data.success
+    let response = await axios.get(
+      `/password-check/${password}?id=${userId}`,
+      {},
+      header
+    );
+    return response.data.success;
   } catch (error) {
     showErrorMessage(error);
   }
 }
-export async function changePassword(password,userId){
+export async function changePassword(password, userId) {
   try {
     const header = await getAuthHeaders();
-    let response = await axios.post(`/changepassowrd/${userId}`, {password}, header);
-    return response.data.success
+    let response = await axios.post(
+      `/changepassowrd/${userId}`,
+      { password },
+      header
+    );
+    return response.data.success;
   } catch (error) {
     showErrorMessage(error);
   }
 }
-export async function deleteAccountApi(userId){
+export async function deleteAccountApi(userId) {
   try {
     // Retrieve authentication headers
     const headers = await getAuthHeaders();
-    let response = await axios.delete(`/api/user/delete/${userId}`,headers)
-    return response.data.success
+    let response = await axios.delete(`/api/user/delete/${userId}`, headers);
+    return response.data.success;
   } catch (error) {
-    showErrorMessage(error)
+    showErrorMessage(error);
   }
-} 
+}
+export async function uploadApi(data) {
+  try {
+    const headers = await getAuthHeaders();
+    const response = await axios.post('/upload/profile',{data},headers)
+    console.log('response:',response)
+  } catch (error) {
+    showErrorMessage(error);
+  }
+}

@@ -3,6 +3,7 @@ import {
   checkPasswordValue,
   getUserInfo,
   updateUserInformation,
+  uploadApi,
 } from "../utils/apiOperations.js";
 export function edit_page() {
   const wrapperForm = document.querySelector(".wrapper__change-password");
@@ -31,6 +32,15 @@ export function edit_page() {
     wrapperForm.style.cssText = "opacity:1;display:block;";
     handlerPasswordChanger();
   });
+  const profileImage = document.querySelector("#profile-image");
+  const btnUpload = document.querySelector(".btn__upload-img");
+  btnUpload.addEventListener("click", async () => {
+    const file = profileImage.files[0];
+    const formData = new FormData();
+    console.log("formData:", formData);
+    formData.append("profilePic", file);
+    const response = await uploadApi(formData);
+  });
   saveChange();
 }
 function saveChange() {
@@ -58,8 +68,8 @@ async function handlerPasswordChanger() {
     setTimeout(async () => {
       const response = await checkPasswordValue(value, user.userId);
       if (response) {
-        let  action = `/profile/${user.username}`;
-        form.attributes.getNamedItem('action').value = action
+        let action = `/profile/${user.username}`;
+        form.attributes.getNamedItem("action").value = action;
         passwordInput.style.cursor = "text;";
         confInput.style.cursor = "text;";
         btn.style.cursor = "pointer;";
