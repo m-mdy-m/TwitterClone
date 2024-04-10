@@ -22,15 +22,15 @@ exports.ProfileUser = ({ sendFile }) => {
   sendFile(path.join(process.cwd(), "/public/main.html"));
 };
 
-exports.deleteAccount = async  (ctx) => {
-  const { success, internalServerError,notFound } = ctx.jsonSender();
+exports.deleteAccount = async (ctx) => {
+  const { success, internalServerError, notFound } = ctx.jsonSender();
   try {
-    const {userId} = ctx.body
+    const userId = ctx.param("userId");
     const deletedUser = await User.findByIdAndDelete(userId);
-    if(!deletedUser){
-      return notFound('User not found')
+    if (!deletedUser) {
+      return notFound("User not found");
     }
-    success('User account deleted successfully')
+    success("User account deleted successfully");
   } catch (error) {
     internalServerError(error.message);
   }

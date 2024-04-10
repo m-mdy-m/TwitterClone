@@ -497,7 +497,9 @@ export async function changePassword(password,userId){
 }
 export async function deleteAccountApi(userId){
   try {
-    let response = await sendRequest('/user/delete','delete',{userId})
+    // Retrieve authentication headers
+    const headers = await getAuthHeaders();
+    let response = await axios.delete(`/api/user/delete/${userId}`,headers)
     return response.data.success
   } catch (error) {
     showErrorMessage(error)

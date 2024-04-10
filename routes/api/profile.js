@@ -9,7 +9,7 @@ group('/api',({route})=>{
     route('/user/posts/:userId').get(findUserTweets)
     route('/user/likes/:userId').get(findLikedTweets)
     route('/user/retweets/:userId').get(findRetweetedTweets)
-    route('/user/delete').del(deleteAccount)
+    route('/user/delete/:userId').del(deleteAccount)
 })
 
 
