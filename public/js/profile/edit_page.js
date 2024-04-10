@@ -34,21 +34,17 @@ export function edit_page() {
     handlerPasswordChanger();
   });
   const profileImage = document.querySelector("#profile-image");
+  const form = document.querySelector("#upload_img");
   const btnUpload = document.querySelector(".btn__upload-img");
   btnUpload.addEventListener("click", async () => {
     const user = await getUserInfo();
-    const form = document.querySelector("#upload_img");
     let action = `/profile/${user.username}`;
     form.setAttribute("action", action);
     profileImage.addEventListener("input", async () => {
       const file = profileImage.files[0];
       if (file) {
-        console.log("form:", form);
-        const formData = new FormData(form);
-        formData.append("profilePic", file);
-        console.log("formData:", formData);
         try {
-          const response = await uploadApi(formData, user.userId);
+          const response = await uploadApi(file, user.userId);
           console.log("Upload response:", response);
           // Handle response if needed
         } catch (error) {

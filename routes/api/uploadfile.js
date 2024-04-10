@@ -1,19 +1,15 @@
 const { expose, route } = require("xprz").Route();
 const multer = require("multer");
+const path = require('path')
 const User = require("../../model/User");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "/public/upload/");
+    cb(null, "upload/");
   },
   filename: function (req, file, cb) {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth()
-    const day = date.getDate();
+    console.log('file:',file)
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
 
-    const formatDate = `${year}-${month}-${day}`;
-    const formatFil = `${formatDate}-${file.originalname}`;
-    cb(null, formatFil);
   },
 });
 const fileFilter = (req, file, cb) => {
@@ -27,18 +23,12 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-const upload = multer({ storage: storage, fileFilter: fileFilter }).single("profilePic");
+const upload = multer({ storage: storage, fileFilter: fileFilter,dest:"upload/" })
 
 route("/upload/profile/:userId")
   .mid([
     (ctx, nxt) => {
-        upload(ctx.req, ctx.res, (err) => {
-          if (err) {
-            console.error("Upload error:", err);
-            return ctx.jsonSender().badRequest("Error uploading file: " + err.message);
-          }
-          nxt();
-        });
+        upload.single('profile-image')(ctx.req,ctx.res,nxt)
       },
   ])
   .post(async (ctx) => {

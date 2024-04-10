@@ -515,35 +515,26 @@ export async function deleteAccountApi(userId) {
     showErrorMessage(error);
   }
 }
-export async function uploadApi(data, userId) {
+export async function uploadApi(file, userId) {
   try {
-    // Fetch CSRF token asynchronously
+    // Get CSRF token and JWT token (implementation for these functions is assumed)
     const csrfToken = await getCSRFToken();
-    // If CSRF token is missing or invalid, display an error message and return early
-    if (!csrfToken) {
-      msgElm.style.display = "block";
-      showMessage(
-        msgElm,
-        "Unable to create tweet. CSRF token is missing or invalid.",
-        "#ff6347"
-      );
-      return;
-    }
-
-    // Retrieve JWT token
     const token = getAccessToken();
+    // Construct FormData object
+    const formData = new FormData();
+    formData.append("profile-image", file);
+    console.log("form:", formData);
     // Construct headers object including CSRF token and JWT token
     const header = {
       headers: {
         "Content-Type": "multipart/form-data",
         "X-CSRF-Token": csrfToken,
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
     };
     const response = await axios.post(
       `/upload/profile/${userId}`,
-      { data },
+      formData,
       header
     );
     console.log("response:", response);
