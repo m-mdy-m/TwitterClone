@@ -461,7 +461,7 @@ export async function del_friend(userId) {
     showErrorMessage(error);
   }
 }
-export async function updateUserInformation(username, email, bio,userId) {
+export async function updateUserInformation(username, email, bio, userId) {
   try {
     const header = await getAuthHeaders();
     const url = `/user-info?username=${username}&email=${email}&bio=${bio}&userId=${userId}`;
@@ -472,8 +472,17 @@ export async function updateUserInformation(username, email, bio,userId) {
     showErrorMessage(
       error.response.data.validationErrors?.errors || error,
       error.response.data.error,
-      true,
+      true
     );
     return null;
+  }
+}
+export async function checkPasswordValue(password,userId) {
+  try {
+    const header = await getAuthHeaders();
+    let response = await axios.get(`/password-check/${password}?id=${userId}`, {}, header);
+    return response.data.success
+  } catch (error) {
+    showErrorMessage(error);
   }
 }

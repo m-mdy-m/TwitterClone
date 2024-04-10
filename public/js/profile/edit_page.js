@@ -1,4 +1,4 @@
-import { getUserInfo, updateUserInformation } from "../utils/apiOperations.js";
+import { checkPasswordValue, getUserInfo, updateUserInformation } from "../utils/apiOperations.js";
 export function edit_page() {
   const wrapperForm = document.querySelector('.wrapper__change-password')
   const btnCancel = document.querySelector('.button__cancel-form')
@@ -41,14 +41,22 @@ function saveChange() {
   });
 }
 
-function handlerPasswordChanger(wrapperForm){
+async function handlerPasswordChanger(wrapperForm){
+  const user = await getUserInfo()
   const password_old = document.querySelector('.password_old input')
   const form = document.querySelector('.password_new-form')
+  const passwordInput = document.querySelector('.password_new-input')
+  const confInput = document.querySelector('.password_new-input-conf')
   password_old.addEventListener('input',(e)=>{
     const value = e.target.value
-    setTimeout(()=>{
-      
-    },1000)
+    setTimeout(async ()=>{
+      const response  = await checkPasswordValue(value,user.userId)
+      if(response){
+        passwordInput.style.cursor = 'text;'
+        confInput.style.cursor = 'text;'
+        form.style.opacity = 1
+      }
+    },1500)
   })
 
 }
