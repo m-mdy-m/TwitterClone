@@ -1,25 +1,58 @@
 const { expose, route } = require("xprz").Route();
 const multer = require("multer");
-const path = require("path");
+const User = require("../../model/User");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); 
+    cb(null, "/public/upload/");
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname)); 
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth()
+    const day = date.getDate();
+
+    const formatDate = `${year}-${month}-${day}`;
+    const formatFil = `${formatDate}-${file.originalname}`;
+    cb(null, formatFil);
   },
 });
-const upload = multer({ storage: storage });
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+const upload = multer({ storage: storage, fileFilter: fileFilter }).single("profilePic");
 
-route("/upload/profile").mid([
-    (ctx,nxt)=>{
-        upload.single('profilePic')(ctx.req,ctx.res,nxt)
-    }
-]).post(ctx=>{
+route("/upload/profile/:userId")
+  .mid([
+    (ctx, nxt) => {
+        upload(ctx.req, ctx.res, (err) => {
+          if (err) {
+            console.error("Upload error:", err);
+            return ctx.jsonSender().badRequest("Error uploading file: " + err.message);
+          }
+          nxt();
+        });
+      },
+  ])
+  .post(async (ctx) => {
+    const { success, notFound, badRequest } = ctx.jsonSender();
     if (!ctx.file) {
-        return ctx.status(400).send('No file uploaded.');
-      }
-      ctx.send('File uploaded successfully.');
-});
+      return badRequest("No file uploaded.");
+    }
+    const userId = ctx.param("userId");
+    const user = await User.findByIdAndUpdate(userId, {
+      profilePic: ctx.file.path,
+    });
+    if (!user) {
+      return notFound("User not found");
+    }
+    success("Profile picture uploaded successfully");
+  });
 module.exports = expose;

@@ -5,6 +5,7 @@ import {
   updateUserInformation,
   uploadApi,
 } from "../utils/apiOperations.js";
+import { showErrorMessage } from "../utils/helper.js";
 export function edit_page() {
   const wrapperForm = document.querySelector(".wrapper__change-password");
   const btnCancel = document.querySelector(".button__cancel-form");
@@ -35,11 +36,27 @@ export function edit_page() {
   const profileImage = document.querySelector("#profile-image");
   const btnUpload = document.querySelector(".btn__upload-img");
   btnUpload.addEventListener("click", async () => {
-    const file = profileImage.files[0];
-    const formData = new FormData();
-    console.log("file:", file);
-    formData.append("profilePic", file);
-    const response = await uploadApi(formData);
+    const user = await getUserInfo();
+    const form = document.querySelector("#upload_img");
+    let action = `/profile/${user.username}`;
+    form.setAttribute("action", action);
+    profileImage.addEventListener("input", async () => {
+      const file = profileImage.files[0];
+      if (file) {
+        console.log("form:", form);
+        const formData = new FormData(form);
+        formData.append("profilePic", file);
+        console.log("formData:", formData);
+        try {
+          const response = await uploadApi(formData, user.userId);
+          console.log("Upload response:", response);
+          // Handle response if needed
+        } catch (error) {
+          console.error("Upload failed:", error);
+          showErrorMessage(error);
+        }
+      }
+    });
   });
   saveChange();
 }
@@ -69,7 +86,7 @@ async function handlerPasswordChanger() {
       const response = await checkPasswordValue(value, user.userId);
       if (response) {
         let action = `/profile/${user.username}`;
-        form.attributes.getNamedItem("action").value = action;
+        form.setAttribute("action", action);
         passwordInput.style.cursor = "text;";
         confInput.style.cursor = "text;";
         btn.style.cursor = "pointer;";
