@@ -6,7 +6,7 @@ export function BodyContent() {
   let height = "screen";
   const path = window.location.pathname;
   if (path === "/home") {
-    style_main = "grid grid-cols-main bg-gradient-main mt-4 mr-4 mb-4 ";
+    style_main = "grid grid-cols-main bg-gradient-main mt-4 mb-4 ";
     style_error = "fixed top-4 left-[40%]";
     height = "full";
   }

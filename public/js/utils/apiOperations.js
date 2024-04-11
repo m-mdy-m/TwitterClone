@@ -388,7 +388,7 @@ export async function toggleEditTweet(id, content) {
   }
 }
 
-export async function getProfileUser(username,page="profile") {
+export async function getProfileUser(username, page = "profile") {
   try {
     const response = await sendRequest(`${page}/${username}`, "get");
     return response.data;

@@ -1,5 +1,6 @@
 import Header from "./components/common/header.js";
 import { UserStory } from "./components/home/UserStory.js";
+import { template_direct } from "./components/home/direct/wrapper__direct.js";
 import { handleTweetTextAreaEvents } from "./tweets/Post.js";
 import { listMenuTweet, showUserRetweeted } from "./tweets/helperTweet.js";
 import {
@@ -33,15 +34,19 @@ export async function renderStory(user) {
     };
     const tm = UserStory(info);
     storyBox.innerHTML += tm;
+    const directs = template_direct({
+      bio: user.bio,
+      profile: user.profilePic,
+      username: user.username,
+    });
+    const wrapper_directs = document.querySelector(".wrapper_directs");
+    wrapper_directs.innerHTML += directs;
   });
-  viewPage()
-}
-export async function viewPage(){
-  const pages = document.querySelectorAll('.box_pages-following')
-  pages.forEach((page)=>{
-    page.addEventListener('click',()=>{
-      const username = page.querySelector('h1').innerHTML
-      window.location.href = `/page/${username}`
-    })
-  })
+  const pages = document.querySelectorAll(".box_pages-following");
+  pages.forEach((page) => {
+    page.addEventListener("click", () => {
+      const username = page.querySelector("h1").innerHTML;
+      window.location.href = `/page/${username}`;
+    });
+  });
 }
