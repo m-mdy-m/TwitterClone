@@ -1,7 +1,7 @@
 import { ContentSection } from "../home/Content.js";
 export function HOME() {
   return `
-    <div class="flex flex-col justify-start items-stretch">
+    <div class="flex flex-col justify-start items-stretch" id="content_section-main">
         ${ContentSection()}
     </div>
     <!-- Wrapper Directs -->

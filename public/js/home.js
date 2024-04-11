@@ -1,5 +1,6 @@
 import Header from "./components/common/header.js";
 import { UserStory } from "./components/home/UserStory.js";
+import { chat_template } from "./components/home/direct/chart_template.js";
 import { template_direct } from "./components/home/direct/wrapper__direct.js";
 import { handleTweetTextAreaEvents } from "./tweets/Post.js";
 import { listMenuTweet, showUserRetweeted } from "./tweets/helperTweet.js";
@@ -54,11 +55,14 @@ export async function renderStory(user) {
 
 
 export function selectChat(user){
+  const contentMain= document.getElementById('content_section-main')
   const directs_users = document.querySelectorAll('.directs_users')
   directs_users.forEach((itm)=>{
     const username = itm.getAttribute('data-username')
     if(user.username === username){
-      console.log('user:',user)
+      itm.addEventListener('click',()=>{
+        contentMain.innerHTML = chat_template()
+      })
     }
   })
 }
