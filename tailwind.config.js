@@ -27,7 +27,8 @@ module.exports = {
         profile: "30% minmax(70%,1fr)",
         nav_profile  : "20% minmax(80%,1fr)",
         readTweet : "minmax(20%,1fr) 80%",
-        box_tweet : "15% minmax(75%,1fr)"
+        box_tweet : "15% minmax(75%,1fr)",
+        chat_box: "minmax(90%,1fr) 10%"
       },
       backgroundColor: {
         body: "#131314",
