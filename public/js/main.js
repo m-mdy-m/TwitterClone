@@ -1,6 +1,7 @@
 import { authPage } from "./auth.js";
 import Header from "./components/common/header.js";
 import { HomePage } from "./home.js";
+import { initPage } from "./initPage.js";
 import { initializeComponentsNavigation } from "./nav/navigation-handler.js";
 import { initProfilePage } from "./profile.js";
 import { getUserInfo } from "./utils/apiOperations.js";
@@ -15,6 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if(path.startsWith('/profile')){
       initProfilePage()
+    }
+    if(path.startsWith('/page')){
+      initPage()
     }
     const header = document.querySelector("header");
     const { username, profilePic,bio } = await getUserInfo();

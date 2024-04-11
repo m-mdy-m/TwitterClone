@@ -390,7 +390,9 @@ export async function toggleEditTweet(id, content) {
 
 export async function getProfileUser(username) {
   try {
-    const response = await sendRequest(`profile/${username}`, "get");
+    const page = window.location.pathname.split("/")[1]
+    console.log('page:',page)
+    const response = await sendRequest(`${page}/${username}`, "get");
     return response.data;
   } catch (error) {
     showErrorMessage(error);
