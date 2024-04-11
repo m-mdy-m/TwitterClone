@@ -24,14 +24,14 @@ export async function HomePage() {
   listMenuTweet();
 }
 export async function renderStory(user) {
-  const storyBox= document.querySelector('#wrapper__story-box')
+  const storyBox = document.querySelector("#wrapper__story-box");
   const users = await findFollowingUser(user.userId);
-  users.forEach((user)=>{
+  users.forEach((user) => {
     const info = {
-      img:user.profilePic,
-      username:user.username
-    }
-    const tm = UserStory(info)
-    storyBox.innerHTML += tm
-  })
+      img: user.profilePic,
+      username: user.username,
+    };
+    const tm = UserStory(info);
+    storyBox.innerHTML += tm;
+  });
 }
