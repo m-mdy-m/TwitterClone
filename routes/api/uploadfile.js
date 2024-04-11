@@ -50,12 +50,19 @@ const upload = multer({
 route("/upload/profile/:userId")
   .mid([
     (ctx, nxt) => {
+      // Check file size first
+      if (ctx.req.headers["content-length"] > 400 * 1024) {
+        return ctx
+          .jsonSender()
+          .badRequest(
+            `File size exceeds the limit. Maximum allowed file size is 400 KB.`
+          );
+      }
       upload.single("profile-image")(ctx.req, ctx.res, (err) => {
         if (err instanceof multer.MulterError) {
-          if (err.code === "LIMIT_FILE_SIZE") {
-            return ctx.jsonSender().badRequest(`File size exceeds the limit. Maximum allowed file size is 400 KB.`);
-          }
+          throw err;
         }
+        // If no error and file is uploaded, continue to the final middleware for handling file upload
         nxt();
       });
     },
