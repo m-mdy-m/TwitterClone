@@ -80,7 +80,6 @@ function getProfilePage(wrapper) {
   wrapper.addEventListener("click", async () => {
     const usernameElement = wrapper.querySelector(".username");
     const username = usernameElement ? usernameElement.innerHTML : null;
-
     if (!username) {
       console.error("Username element not found");
       return;

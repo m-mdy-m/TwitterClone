@@ -388,9 +388,8 @@ export async function toggleEditTweet(id, content) {
   }
 }
 
-export async function getProfileUser(username) {
+export async function getProfileUser(username,page="profile") {
   try {
-    const page = window.location.pathname.split("/")[1];
     const response = await sendRequest(`${page}/${username}`, "get");
     return response.data;
   } catch (error) {
