@@ -1,4 +1,5 @@
 import Header from "./components/common/header.js";
+import { UserStory } from "./components/home/UserStory.js";
 import { handleTweetTextAreaEvents } from "./tweets/Post.js";
 import { listMenuTweet, showUserRetweeted } from "./tweets/helperTweet.js";
 import {
@@ -23,6 +24,14 @@ export async function HomePage() {
   listMenuTweet();
 }
 export async function renderStory(user) {
-  const response = await findFollowingUser(user.userId);
-  console.log("response:", response);
+  const storyBox= document.querySelector('#wrapper__story-box')
+  const users = await findFollowingUser(user.userId);
+  users.forEach((user)=>{
+    const info = {
+      img:user.profilePic,
+      username:user.username
+    }
+    const tm = UserStory(info)
+    storyBox.innerHTML += tm
+  })
 }

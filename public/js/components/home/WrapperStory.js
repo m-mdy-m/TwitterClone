@@ -1,6 +1,4 @@
 import { StoryBox } from "./StoryBox.js";
-import { UserStory } from "./UserStory.js";
-
 export function WrapperStory() {
   return `
     <!-- Your Add Story -->
@@ -8,8 +6,7 @@ export function WrapperStory() {
       ${StoryBox()}
     </div>
     <!-- Wrapper Story -->
-    <div class="flex justify-start items-center w-auto mr-2" >
-        ${UserStory()}
+    <div class="flex justify-start items-center w-auto mr-2" id="wrapper__story-box">
     </div>
     `;
 }
