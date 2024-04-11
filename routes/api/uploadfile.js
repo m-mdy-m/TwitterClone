@@ -52,7 +52,6 @@ route("/upload/profile/:userId")
       return badRequest("No file uploaded.");
     }
     const userId = ctx.param("userId");
-    console.log('ctx.file:',ctx.file)
     const modifiedPath = ctx.file.path
       .replace(/^\\public\\/, "/")
       .replace(/\\/g, "/");
