@@ -178,7 +178,7 @@ export async function getTweets() {
           })
         );
         authors.forEach((author) => {
-            user = author;
+          user = author;
         });
       }
       ShowTweets(tweetsResponse, userInfo, user);
@@ -390,8 +390,7 @@ export async function toggleEditTweet(id, content) {
 
 export async function getProfileUser(username) {
   try {
-    const page = window.location.pathname.split("/")[1]
-    console.log('page:',page)
+    const page = window.location.pathname.split("/")[1];
     const response = await sendRequest(`${page}/${username}`, "get");
     return response.data;
   } catch (error) {
@@ -540,15 +539,15 @@ export async function uploadApi(file, userId) {
       header
     );
     extractToken(response.data.data.tokens);
-    return response.data.success
+    return response.data.success;
   } catch (error) {
     showErrorMessage(error);
   }
 }
-export async function findFollowingUser(userId){
+export async function findFollowingUser(userId) {
   try {
     const response = await sendRequest(`follower/list/${userId}`, "get");
-    return response.data.data
+    return response.data.data;
   } catch (error) {
     showErrorMessage(error);
   }

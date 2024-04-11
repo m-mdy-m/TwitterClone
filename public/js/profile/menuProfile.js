@@ -76,7 +76,7 @@ function handlerClickIcons() {
 }
 async function loading(wrapper, user, findUser) {
   wrapper.innerHTML = "";
-  const posts = await findUser(user.userId);
+  const posts = await findUser(user.userId ?? user._id);
   if (posts.length === 0) {
     wrapper.style.cssText =
       "color: white; font-size: 35px; font-family: 'Mavis', sans-serif;";

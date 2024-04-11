@@ -1,5 +1,6 @@
+import { loadInfo } from "./profile/loadInfo.js";
 import { getUserProfile } from "./profile/menuProfile.js";
 
-export function initPage() {
+export async  function initPage() {
     getUserProfile()
 }

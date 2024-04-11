@@ -1,5 +1,6 @@
 import { attachLogoutHandler } from "../auth/logout.js";
 import { statusUser } from "../components/navigation/gen/info.js";
+import { loadInfo } from "../profile/loadInfo.js";
 import { getProfileUser, getUserInfo } from "../utils/apiOperations.js";
 import { clearWelcomePhotoFlag, showWelcome } from "../utils/utils.js";
 // Function to handle navigation events
@@ -102,9 +103,21 @@ function getProfilePage(wrapper) {
 
 // Function to update user status in the UI
 export async function update_status() {
-  // Fetch user information
   const user = await getUserInfo();
-
+  let userPage,userStatsPage;
+  // Fetch user information
+  if(window.location.pathname.startsWith('/page')){
+    userPage = await  loadInfo()
+     // Define user statistics based on fetched user data
+      userStatsPage = [
+        { id: "posts", value: userPage.tweets.length, unit: "", label: "Posts" },
+        { id: "followers", value: userPage.followers.length, unit: "", label: "Followers" },
+        { id: "following", value:userPage.following.length, unit: "" , label: "Following" },
+      ];
+    const tm = statusUser(userStatsPage)
+    const statusPageUser = document.getElementById('statusPageUser');
+    statusPageUser.innerHTML = tm;
+  }
   // Get the wrapper element where user status will be displayed
   const wrapper = document.getElementById('statusUser');
 
@@ -114,7 +127,6 @@ export async function update_status() {
     { id: "followers", value: user.followers.length, unit: "", label: "Followers" },
     { id: "following", value:user.following.length, unit: "" , label: "Following" },
   ];
-
   // Generate HTML template for displaying user status
   const template = statusUser(userStats);
 
@@ -123,7 +135,6 @@ export async function update_status() {
 
   // If the current page is a profile page, update the user status in the profile section
   if(window.location.pathname.startsWith('/profile')){
-    
     const statusProfile = document.getElementById('statusProfile');
     statusProfile.innerHTML = template;
   }

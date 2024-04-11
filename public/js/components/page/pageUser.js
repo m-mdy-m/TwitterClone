@@ -22,7 +22,7 @@ export function pageUser() {
                 <!-- Bio -->
                 <p data-bio  class=" text-gray-400 hidden-edit mobile:text-sm smallTb:text-base overflow-hidden whitespace-nowrap overflow-ellipsis">Greatness، of small steps!</p>
               </div>
-              <div id="statusProfile" class="flex items-center justify-start">
+              <div id="statusPageUser" class="flex items-center justify-start">
                 ${statusUser(userStats)}
               </div>
               <div id="userInteraction" class=" border-b-4 mt-4 border-[#2f2f30] flex justify-start items-center text-white text-lg [&>*]:mx-2">

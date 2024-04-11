@@ -4,7 +4,6 @@ export async function loadInfo() {
   const username = window.location.pathname.split("/")[2];
   const path = window.location.pathname.split("/")[1];
   const response = await getProfileUser(username);
-  console.log('response:',response)
   const user = response.data.user;
   const usernameElm = document.querySelector("[data-username]");
   const bioElm = document.querySelector("[data-bio]");
