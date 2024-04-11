@@ -4,7 +4,7 @@ import { listMenuTweet, showUserRetweeted } from "./tweets/helperTweet.js";
 import {
   getTweets,
   getUserInfo,
-  findFollowerUser,
+  findFollowingUser,
 } from "./utils/apiOperations.js";
 
 export async function HomePage() {
@@ -23,6 +23,6 @@ export async function HomePage() {
   listMenuTweet();
 }
 export async function renderStory(user) {
-  const response = await findFollowerUser(user.userId);
+  const response = await findFollowingUser(user.userId);
   console.log("response:", response);
 }

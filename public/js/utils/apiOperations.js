@@ -544,10 +544,10 @@ export async function uploadApi(file, userId) {
     showErrorMessage(error);
   }
 }
-export async function findFollowerUser(userId){
+export async function findFollowingUser(userId){
   try {
     const response = await sendRequest(`follower/list/${userId}`, "get");
-    return response.data.success
+    return response.data.data
   } catch (error) {
     showErrorMessage(error);
   }

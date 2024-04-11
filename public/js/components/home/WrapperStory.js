@@ -8,7 +8,7 @@ export function WrapperStory() {
       ${StoryBox()}
     </div>
     <!-- Wrapper Story -->
-    <div class="flex justify-start items-center w-auto mr-2">
+    <div class="flex justify-start items-center w-auto mr-2" >
         ${UserStory()}
     </div>
     `;

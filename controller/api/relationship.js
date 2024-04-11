@@ -45,28 +45,23 @@ exports.handler_friend = async (ctx) => {
   const { userId, followUserId } = ctx.body;
   const { success, internalServerError } = ctx.jsonSender();
   try {
-    // 
-} catch (error) {
+    //
+  } catch (error) {
     internalServerError();
   }
 };
 
-
-exports.followingList = async (ctx)=>{
+exports.followingList = async (ctx) => {
   const { success, internalServerError } = ctx.jsonSender();
   try {
-    const userId = ctx.param('userId')
-    const user  = await User.findById(userId)
-    const users = await user.followers.map( async (followerId)=>{
-      var user = await User.findById(followerId)
-      return user
-    })
-    console.log('users:',users)
-
-
-
-
+    const userId = ctx.param("userId");
+    const user = await User.findById(userId);
+    const users = await Promise.all(user.following.map(async (followerId) => {
+      const user = await User.findById(followerId);
+      return user;
+    }));
+    success("Successfully retrieved the list of users followed by the specified user.",users)
   } catch (error) {
-  
- } 
-}
+    internalServerError();
+  }
+};
