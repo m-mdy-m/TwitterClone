@@ -41,7 +41,8 @@ export async function renderStory(user) {
     });
     const wrapper_directs = document.querySelector(".wrapper_directs");
     wrapper_directs.innerHTML += directs;
-  });
+   selectChat(user)
+});
   const pages = document.querySelectorAll(".box_pages-following");
   pages.forEach((page) => {
     page.addEventListener("click", () => {
@@ -49,4 +50,15 @@ export async function renderStory(user) {
       window.location.href = `/page/${username}`;
     });
   });
+}
+
+
+export function selectChat(user){
+  const directs_users = document.querySelectorAll('.directs_users')
+  directs_users.forEach((itm)=>{
+    const username = itm.getAttribute('data-username')
+    if(user.username === username){
+      console.log('user:',user)
+    }
+  })
 }
