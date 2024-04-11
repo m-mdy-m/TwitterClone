@@ -56,11 +56,16 @@ exports.followingList = async (ctx) => {
   try {
     const userId = ctx.param("userId");
     const user = await User.findById(userId);
-    const users = await Promise.all(user.following.map(async (followerId) => {
-      const user = await User.findById(followerId);
-      return user;
-    }));
-    success("Successfully retrieved the list of users followed by the specified user.",users)
+    const users = await Promise.all(
+      user.following.map(async (followerId) => {
+        const user = await User.findById(followerId);
+        return user;
+      })
+    );
+    success(
+      "Successfully retrieved the list of users followed by the specified user.",
+      users
+    );
   } catch (error) {
     internalServerError();
   }

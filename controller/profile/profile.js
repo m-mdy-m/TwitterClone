@@ -1,6 +1,7 @@
 const path = require("path");
 const TweetUserManager = require("../../utils/helper");
 const User = require("../../model/User");
+const Tweet = require("../../model/Tweet");
 
 exports.getProfile = (ctx) => {
   const username = ctx.param("username");
@@ -26,6 +27,10 @@ exports.deleteAccount = async (ctx) => {
   const { success, internalServerError, notFound } = ctx.jsonSender();
   try {
     const userId = ctx.param("userId");
+    const user = await User.findById(userId);
+    await Promise.all([user.tweets.map( async (tweet)=>{
+         await Tweet.findByIdAndDelete(tweet)
+    })]);
     const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) {
       return notFound("User not found");

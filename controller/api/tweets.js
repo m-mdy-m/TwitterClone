@@ -53,10 +53,10 @@ exports.getTweets = async (ctx) => {
     // Increment view count for each tweet
     await Promise.all(
       result.map(async (tweet) => {
-        // Increment the view count of each tweet if the user has not already viewed it
-        if (ctx.user.userId && tweet) {
-          await tweet.incrementViews(ctx.user.userId);
-        }
+          // Increment the view count of each tweet if the user has not already viewed it
+          if (ctx.user.userId && tweet) {
+            await tweet.incrementViews(ctx.user.userId);
+          }
       })
     );
     // Send JSON response with success true and tweet data

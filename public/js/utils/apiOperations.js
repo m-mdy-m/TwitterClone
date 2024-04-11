@@ -144,7 +144,6 @@ export async function getTweets() {
     const header = await getAuthHeaders();
     // Make asynchronous calls to fetch tweets and user information in parallel
     const tweetsResponse = await axios.get("/api/tweets", { headers: header });
-
     // Check if the request was successful
     if (tweetsResponse.data.success) {
       const userInfo = await getUserInfo();
@@ -179,7 +178,7 @@ export async function getTweets() {
           })
         );
         authors.forEach((author) => {
-          user = author;
+            user = author;
         });
       }
       ShowTweets(tweetsResponse, userInfo, user);

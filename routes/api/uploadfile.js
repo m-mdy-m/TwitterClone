@@ -38,6 +38,9 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
+  limits:{
+    fileSize:1024 * 1024 // 1mb
+  }
 });
 
 route("/upload/profile/:userId")
@@ -52,6 +55,7 @@ route("/upload/profile/:userId")
       return badRequest("No file uploaded.");
     }
     const userId = ctx.param("userId");
+    console.log('ctx.file:',ctx.file)
     const modifiedPath = ctx.file.path
       .replace(/^\\public\\/, "/")
       .replace(/\\/g, "/");
