@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       initProfilePage()
     }
     const header = document.querySelector("header");
-    const { username, profilePic } = await getUserInfo();
-    header.innerHTML = Header({ profile:profilePic, username });
+    const { username, profilePic,bio } = await getUserInfo();
+    header.innerHTML = Header({ profile:profilePic, username ,bio});
     initializeComponentsNavigation();
   }
   if(["/auth/signup", "/auth/login"].includes(path)){
