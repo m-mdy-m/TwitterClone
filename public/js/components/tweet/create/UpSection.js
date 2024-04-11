@@ -1,9 +1,9 @@
 import { UserProfile } from "../UserProfile.js";
 
-export function UpSection({username,profile}){
+export function UpSection(){
     return `<!-- User Profile -->
     <div class="flex flex-col justify-start items-center">
-      ${UserProfile({username:username,profile:profile,className:'w-12 h-12'})}
+      <img src="/assets/images/profilePic.png" alt="" class="profile_user_create w-12 h-12 object-cover rounded-full">
     </div>
     <!-- Tweet section -->
     <div class="flex justify-center items-center relative" id="tweet__box">

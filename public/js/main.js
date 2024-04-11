@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const header = document.querySelector("header");
     const { username, profilePic } = await getUserInfo();
-    console.log('profile:',profilePic)
     header.innerHTML = Header({ profile:profilePic, username });
     initializeComponentsNavigation();
   }

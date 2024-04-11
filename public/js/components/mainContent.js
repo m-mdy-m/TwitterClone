@@ -3,7 +3,7 @@ import { LoginForm, SignupForm } from "./form/FormHandler.js";
 import { HOME } from "./main/Home.js";
 
 const routes = {
-    '/home': () => HOME({ username: "m__mdy__m", profilePic: '/assets/images/profilePic.png', profileStory: "/assets/icon/nav/user.svg" }),
+    '/home': () => HOME(),
     '/auth/login': () => LoginForm(),
     '/auth/signup': () => SignupForm(),
 };
