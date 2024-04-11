@@ -25,9 +25,9 @@ export async function HomePage() {
   showUserRetweeted();
   listMenuTweet();
 }
-export async function renderStory(user) {
+export async function renderStory(userCurrent) {
   const storyBox = document.querySelector("#wrapper__story-box");
-  const users = await findFollowingUser(user.userId);
+  const users = await findFollowingUser(userCurrent.userId);
   users.forEach((user) => {
     const info = {
       img: user.profilePic,
@@ -42,7 +42,7 @@ export async function renderStory(user) {
     });
     const wrapper_directs = document.querySelector(".wrapper_directs");
     wrapper_directs.innerHTML += directs;
-   selectChat(user)
+   selectChat(user,userCurrent)
 });
   const pages = document.querySelectorAll(".box_pages-following");
   pages.forEach((page) => {
@@ -53,15 +53,16 @@ export async function renderStory(user) {
   });
 }
 
-
-export function selectChat(user){
+// user : recipient
+// sender : current user 
+export function selectChat(user,sender){
   const contentMain= document.getElementById('content_section-main')
   const directs_users = document.querySelectorAll('.directs_users')
   directs_users.forEach((itm)=>{
     const username = itm.getAttribute('data-username')
     if(user.username === username){
       itm.addEventListener('click',()=>{
-        contentMain.innerHTML = chat_template()
+        contentMain.innerHTML = chat_template({img:user.profilePic})
       })
     }
   })
