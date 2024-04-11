@@ -22,8 +22,6 @@ const storage = multer.diskStorage({
       null,
       "profile-" +
         req.params.userId +
-        "-" +
-        Date.now() +
         path.extname(file.originalname)
     );
   },
@@ -51,7 +49,7 @@ route("/upload/profile/:userId")
   .mid([
     (ctx, nxt) => {
       // Check file size first
-      if (ctx.req.headers["content-length"] > 400 * 1024) {
+      if ( ctx.req.headers["content-length"] > 400 * 1024 ) {
         return ctx
           .jsonSender()
           .badRequest(
@@ -60,7 +58,9 @@ route("/upload/profile/:userId")
       }
       upload.single("profile-image")(ctx.req, ctx.res, (err) => {
         if (err instanceof multer.MulterError) {
-          throw err;
+          return ctx.jsonSender().badRequest(
+            err.message
+          );
         }
         // If no error and file is uploaded, continue to the final middleware for handling file upload
         nxt();
