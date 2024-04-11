@@ -20,7 +20,11 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(
       null,
-      "profile-" + req.params.userId + "-" + Date.now() + path.extname(file.originalname)
+      "profile-" +
+        req.params.userId +
+        "-" +
+        Date.now() +
+        path.extname(file.originalname)
     );
   },
 });
@@ -38,15 +42,22 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
-  limits:{
-    fileSize:1024 * 1024 // 1mb
-  }
+  limits: {
+    fileSize: 400 * 1024, // 400 KB file size limit
+  },
 });
 
 route("/upload/profile/:userId")
   .mid([
     (ctx, nxt) => {
-      upload.single("profile-image")(ctx.req, ctx.res, nxt);
+      upload.single("profile-image")(ctx.req, ctx.res, (err) => {
+        if (err instanceof multer.MulterError) {
+          if (err.code === "LIMIT_FILE_SIZE") {
+            return ctx.jsonSender().badRequest(`File size exceeds the limit. Maximum allowed file size is 400 KB.`);
+          }
+        }
+        nxt();
+      });
     },
   ])
   .post(async (ctx) => {
@@ -55,16 +66,15 @@ route("/upload/profile/:userId")
       return badRequest("No file uploaded.");
     }
     const userId = ctx.param("userId");
-    console.log('ctx.file:',ctx.file)
     const modifiedPath = ctx.file.path
       .replace(/^\\public\\/, "/")
       .replace(/\\/g, "/");
-    const user =await User.findById(userId)
+    const user = await User.findById(userId);
     if (!user) {
       return notFound("User not found");
     }
-    user.profilePic = modifiedPath
-    await user.save()
+    user.profilePic = modifiedPath;
+    await user.save();
     const tweetManager = new TweetUserManager(ctx, ctx.jsonSender);
     const tokens = await tweetManager.saveUser(user);
     success("Profile picture uploaded successfully", { tokens: tokens });
