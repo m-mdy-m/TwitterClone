@@ -1,6 +1,6 @@
 import Header from "./components/common/header.js";
 import { UserStory } from "./components/home/UserStory.js";
-import { chat_template } from "./components/home/direct/chart_template.js";
+import { chat_template } from "./components/home/direct/chat_template.js";
 import { template_direct } from "./components/home/direct/wrapper__direct.js";
 import { handleTweetTextAreaEvents } from "./tweets/Post.js";
 import { listMenuTweet, showUserRetweeted } from "./tweets/helperTweet.js";
