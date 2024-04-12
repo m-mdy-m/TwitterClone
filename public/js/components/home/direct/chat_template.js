@@ -10,9 +10,9 @@ export function chat_template({img}){
 
 
                 </div>
-                <div class="flex justify-center items-center relative p-2">
-                 <textarea placeholder="What's happening?" class=" bg-green-400 right-0 h-auto w-11/12 absolute bg-transparent border-r-transparent border-l-transparent border-b border-[#161617] text-gray-300 outline-none transition-all focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none overflow-y-hidden"></textarea>
-                  <button class="absolute bg-blue-600 px-2 py-1 left-1 rounded-md capitalize">send</button>
+                <div class="flex justify-center items-center relative p-2  m-2">
+                <button class="bg-blue-600 px-2 py-1 left-1 rounded-md capitalize">send</button>
+                <textarea placeholder="What's happening?" class=" bg-green-400 right-0 rounded-md p-2  h-auto w-11/12 border-r-transparent border-l-transparent border-b border-[#161617] text-gray-300 outline-none transition-all focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none overflow-y-hidden"></textarea>
                 </div>
             </div>
         </div>
