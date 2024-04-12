@@ -425,7 +425,21 @@
   .dropdown-item:hover {
     background-color: #ddd;
   }
-  .show_list_chart{
-    @apply opacity-100 relative
+  .show_list_chart {
+    @apply opacity-100 relative;
+  }
+  .message-sender {
+    background-color: #0088cc;
+    color: white;
+    max-width: 70%;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 150% 150%, 77% 100%, 43% 100%, 0 100%);
+    @apply p-2 my-1 rounded-l-lg float-right right-0
+  }
+  .message-recipient {
+    background-color: #f2f2f2; 
+    color: black;
+    max-width: 70%; 
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0 100%);
+    @apply p-2 my-1 rounded-r-lg float-left left-0
   }
 }
