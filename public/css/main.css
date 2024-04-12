@@ -431,15 +431,25 @@
   .message-sender {
     background-color: #0088cc;
     color: white;
-    max-width: 70%;
     clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 150% 150%, 77% 100%, 43% 100%, 0 100%);
-    @apply p-2 my-1 rounded-l-lg float-right right-0
+    @apply p-2 my-1 rounded-l-lg float-right
   }
   .message-recipient {
     background-color: #f2f2f2; 
     color: black;
-    max-width: 70%; 
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0 100%);
-    @apply p-2 my-1 rounded-r-lg float-left left-0
+    @apply p-2 my-1 rounded-r-lg float-left
   }
+  .scrollbar__hidden{
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    overflow-y: scroll;
+  }
+  .scrollbar__hidden::-webkit-scrollbar {
+    width: 6px; 
+}
+
+.scrollbar__hidden::-webkit-scrollbar-thumb {
+    background-color: transparent; 
+}
 }
