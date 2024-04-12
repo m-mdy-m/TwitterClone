@@ -1,6 +1,5 @@
 import { getUserProfile } from "./profile/menuProfile.js";
 import { recipient, sender } from './components/home/direct/messageTemplates.js'
-import io from "socket.io-client";
 export async function initPage() {
   getUserProfile();
   const socket = io();
