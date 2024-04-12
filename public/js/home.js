@@ -56,40 +56,75 @@ export async function renderStory(userCurrent) {
     });
   });
 }
-
+const SOCKET_URL ='ws://localhost:3000/socket.io/?EIO=4&transport=websocket';
 // user : recipient
 // sender : current user
 export function selectChat(user, senderUser) {
-  const contentMain = document.getElementById("content_section-main");
   const directs_users = document.querySelectorAll(".directs_users");
   directs_users.forEach((itm) => {
     const username = itm.getAttribute("data-username");
     if (user.username === username) {
       itm.addEventListener("click", () => {
-        contentMain.innerHTML = chat_template({ img: user.profilePic });
-        const box = document.querySelector("#chat_box");
-        let socket = io()
-        console.log('socket:',socket)
-        document.querySelector("#btn-send").addEventListener("click", () => {
-          const message = document.querySelector("textarea").value;
-          console.log("message:", message);
-          const tm = sender({ message });
-          box.innerHTML += tm;
-          socket.emit("message", message);
-          // Clear textarea after sending message
-          document.querySelector("textarea").value = "";
-          // Add event listener for receiving messages
-        });
-        socket.on("message", (message) => {
-          const tm = recipient({ message });
-          box.innerHTML += tm;
-        });
+        handlerClickProfilePage(user)
       });
     }
   });
 }
 
 
-export function handelrClickProfilePage(){
-  
+async function handlerClickProfilePage(user, chatService) {
+  try {
+    const contentMain = document.getElementById("content_section-main");
+    contentMain.innerHTML = chat_template({ img: user.profilePic });
+    const chatBox = document.querySelector("#chat_box");
+
+    const socket = await connectToServer();
+    console.log('socket:', socket);
+
+    setupMessageListeners(socket, chatBox, chatService); // Inject chatService
+
+    socket.on('error', (error) => {
+      console.error('Socket error:', error);
+      // Handle connection errors gracefully (e.g., display error message)
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from socket server.');
+      // Handle disconnection (e.g., reconnect attempts)
+    });
+
+  } catch (error) {
+    console.error('Error initializing chat:', error);
+  }
+}
+async function connectToServer() {
+  try {
+    const socket = io(SOCKET_URL, { transports: ['websocket'] });
+    console.log('socket:', socket);
+    await new Promise((resolve, reject) => {
+      socket.on('connect', () => resolve(socket));
+      socket.on('connect_error', reject);
+    });
+    console.log('Successfully connected to socket server!');
+    return socket;
+  } catch (error) {
+    console.error('Failed to connect to socket server:', error);
+    throw error;
+  }
+}
+
+function setupMessageListeners(socket, chatBox, chatService) {
+  document.querySelector("#btn-send").addEventListener("click", () => {
+    const message = document.querySelector("textarea").value;
+    socket.emit("message", message);
+    const tm = sender({ message });
+    chatBox.innerHTML += tm;
+    document.querySelector("textarea").value = ""; // Clear textarea
+  });
+
+  socket.on("message", (message) => {
+    const tm = recipient({ message });
+    chatBox.innerHTML += tm;
+    chatService.handleIncomingMessage(message); // Delegate message handling
+  });
 }

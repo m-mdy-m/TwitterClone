@@ -1,11 +1,10 @@
-const {createServer} = require('http')
-const {Server} = require('socket.io')
-const Message = require('./model/Messages')
 const Xprz = require("xprz");
+const Message = require("./model/Messages");
 // Initialize Xprz package with dotenv setup
 Xprz.Package().dotenv();
 // Destructure required functions from Xprz App module
-const { use, useCtx, launch, loadRoutes, bodyParsing, static } = Xprz.App();
+const { use, useCtx, launch, loadRoutes, bodyParsing, static } = Xprz.App()
+const {  route } = Xprz.Route()
 
 // Launch the application
 const app = launch();
@@ -15,27 +14,26 @@ bodyParsing();
 // Serve static files from the 'public' directory
 static("public");
 
+const http = require("http").createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(http);
+io.on("connection", (socket) => {
+  console.log("a user connected");
 
-const io = new Server(createServer(app))
-io.on('connection',(socket)=>{ 
-  console.log('a user connected')
-
-  socket.on("message", async(data)=>{
+  socket.on("message", async (data) => {
     try {
-      console.log('a user connected',data)
-      const newMessage  = await Message.create({content:data})
-      io.emit('message',newMessage.content)
+      console.log("Received message:", data);
+      const newMessage = await Message.create({ content: data });
+      io.emit("message", newMessage.content);
     } catch (error) {
-      console.error('Error saving message:', error);
+      console.error("Error saving message:", error);
     }
-  })
-  // Handle disconnection
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
   });
-})
-
-
+  // Handle disconnection
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
+  });
+});
 // Import and use cookie-parser middleware
 const cookieParser = require("cookie-parser");
 use(cookieParser());
@@ -63,3 +61,4 @@ $read("utils/database");
 
 // Load route handlers
 loadRoutes("routes");
+io.attach(http)
