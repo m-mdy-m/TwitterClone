@@ -1,16 +1,32 @@
 const {createServer} = require('http')
-const {Server} = require('socket.io')
+const socket = require('socket.io')
 const mongoose = require('mongoose')
-// Import necessary modules
+const Message = require('./model/Messages')
 const Xprz = require("xprz");
 // Initialize Xprz package with dotenv setup
 Xprz.Package().dotenv();
-
 // Destructure required functions from Xprz App module
 const { use, useCtx, launch, loadRoutes, bodyParsing, static } = Xprz.App();
 
 // Launch the application
-launch();
+const app = launch();
+const io = socket(createServer(app))
+io.on('connection',(socket)=>{
+  console.log('a user connected')
+
+  socket.on("message", async(data)=>{
+    try {
+      const newMessage  = await Message.create({content:data})
+      io.emit('message',newMessage.content)
+    } catch (error) {
+      console.error('Error saving message:', error);
+    }
+  })
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+})
 // Enable parsing of JSON bodies
 bodyParsing();
 

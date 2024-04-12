@@ -38,6 +38,8 @@
     "mongoose": "^8.2.0",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.0",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
     "twitter-api-v2": "^1.16.1",
     "vfyjs": "^2.0.3",
     "xprz": "^2.1.0"
