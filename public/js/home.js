@@ -68,10 +68,11 @@ export function selectChat(user, senderUser) {
       itm.addEventListener("click", () => {
         contentMain.innerHTML = chat_template({ img: user.profilePic });
         const box = document.querySelector("#chat_box");
-        const socket = io();
+        let socket = io()
+        console.log('socket:',socket)
         document.querySelector("#btn-send").addEventListener("click", () => {
           const message = document.querySelector("textarea").value;
-          console.log('message:',message)
+          console.log("message:", message);
           const tm = sender({ message });
           box.innerHTML += tm;
           socket.emit("message", message);
@@ -86,4 +87,9 @@ export function selectChat(user, senderUser) {
       });
     }
   });
+}
+
+
+export function handelrClickProfilePage(){
+  
 }
