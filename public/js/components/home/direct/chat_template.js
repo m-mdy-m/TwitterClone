@@ -10,7 +10,7 @@ export function chat_template({ img }) {
                         
                 </div>
                 <div class="flex justify-center items-center relative ">
-                    <form action="/home" method="post">
+                    <form action="/home" method="post" class="flex justify-center items-center w-full h-full">
                         <button id="btn-send" class="bg-sky-400 hover:bg-sky-900 transition-all ml-2 mb-2 duration-150 px-4 py-2 h-3/4 rounded-md capitalize">send</button>
                         <textarea placeholder="What's happening?" class="bg-transparent mx-4 right-0 px-2 mb-2 rounded-md w-11/12 text-gray-300 outline-none transition-all focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none overflow-y-hidden"></textarea>
                     </form>
