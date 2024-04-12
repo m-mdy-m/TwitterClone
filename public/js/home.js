@@ -5,6 +5,10 @@ import { template_direct } from "./components/home/direct/wrapper__direct.js";
 import { handleTweetTextAreaEvents } from "./tweets/Post.js";
 import { listMenuTweet, showUserRetweeted } from "./tweets/helperTweet.js";
 import {
+  recipient,
+  sender,
+} from "./components/home/direct/messageTemplates.js";
+import {
   getTweets,
   getUserInfo,
   findFollowingUser,
@@ -42,8 +46,8 @@ export async function renderStory(userCurrent) {
     });
     const wrapper_directs = document.querySelector(".wrapper_directs");
     wrapper_directs.innerHTML += directs;
-   selectChat(user,userCurrent)
-});
+    selectChat(user, userCurrent);
+  });
   const pages = document.querySelectorAll(".box_pages-following");
   pages.forEach((page) => {
     page.addEventListener("click", () => {
@@ -54,16 +58,32 @@ export async function renderStory(userCurrent) {
 }
 
 // user : recipient
-// sender : current user 
-export function selectChat(user,sender){
-  const contentMain= document.getElementById('content_section-main')
-  const directs_users = document.querySelectorAll('.directs_users')
-  directs_users.forEach((itm)=>{
-    const username = itm.getAttribute('data-username')
-    if(user.username === username){
-      itm.addEventListener('click',()=>{
-        contentMain.innerHTML = chat_template({img:user.profilePic})
-      })
+// sender : current user
+export function selectChat(user, senderUser) {
+  const contentMain = document.getElementById("content_section-main");
+  const directs_users = document.querySelectorAll(".directs_users");
+  directs_users.forEach((itm) => {
+    const username = itm.getAttribute("data-username");
+    if (user.username === username) {
+      itm.addEventListener("click", () => {
+        contentMain.innerHTML = chat_template({ img: user.profilePic });
+        const box = document.querySelector("#chat_box");
+        const socket = io();
+        document.querySelector("#btn-send").addEventListener("click", () => {
+          const message = document.querySelector("textarea").value;
+          console.log('message:',message)
+          const tm = sender({ message });
+          box.innerHTML += tm;
+          socket.emit("message", message);
+          // Clear textarea after sending message
+          document.querySelector("textarea").value = "";
+          // Add event listener for receiving messages
+        });
+        socket.on("message", (message) => {
+          const tm = recipient({ message });
+          box.innerHTML += tm;
+        });
+      });
     }
-  })
+  });
 }
