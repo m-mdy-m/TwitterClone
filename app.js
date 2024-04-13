@@ -18,11 +18,12 @@ const http = require("http").createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(http);
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log("A user connected:", socket.id);
+  console.log("Socket details:", socket);
 
   socket.on("message", async (data) => {
     try {
-      console.log("Received message:", data);
+      console.log("Received message from", socket.id, ":", data); // Log sender ID
       const newMessage = await Message.create({ content: data });
       io.emit("message", newMessage.content);
     } catch (error) {
@@ -31,7 +32,7 @@ io.on("connection", (socket) => {
   });
   // Handle disconnection
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    console.log("User disconnected:", socket.id); // Log disconnected ID
   });
 });
 // Import and use cookie-parser middleware

@@ -33,6 +33,7 @@ export async function renderStory(userCurrent) {
   const storyBox = document.querySelector("#wrapper__story-box");
   const users = await findFollowingUser(userCurrent.userId);
   users.forEach((user) => {
+    if (!user) return;
     const info = {
       img: user.profilePic,
       username: user.username,
@@ -56,7 +57,7 @@ export async function renderStory(userCurrent) {
     });
   });
 }
-const SOCKET_URL ='ws://localhost:3000/socket.io/?EIO=4&transport=websocket';
+const SOCKET_URL = "ws://localhost:3000/";
 // user : recipient
 // sender : current user
 export function selectChat(user, senderUser) {
@@ -65,12 +66,11 @@ export function selectChat(user, senderUser) {
     const username = itm.getAttribute("data-username");
     if (user.username === username) {
       itm.addEventListener("click", () => {
-        handlerClickProfilePage(user)
+        handlerClickProfilePage(user);
       });
     }
   });
 }
-
 
 async function handlerClickProfilePage(user, chatService) {
   try {
@@ -79,36 +79,27 @@ async function handlerClickProfilePage(user, chatService) {
     const chatBox = document.querySelector("#chat_box");
 
     const socket = await connectToServer();
-    console.log('socket:', socket);
-
     setupMessageListeners(socket, chatBox, chatService); // Inject chatService
-
-    socket.on('error', (error) => {
-      console.error('Socket error:', error);
-      // Handle connection errors gracefully (e.g., display error message)
-    });
-
-    socket.on('disconnect', () => {
-      console.log('Disconnected from socket server.');
-      // Handle disconnection (e.g., reconnect attempts)
-    });
-
   } catch (error) {
-    console.error('Error initializing chat:', error);
+    console.error("Error initializing chat:", error);
   }
 }
 async function connectToServer() {
   try {
-    const socket = io(SOCKET_URL, { transports: ['websocket'] });
-    console.log('socket:', socket);
+    const socket = io(SOCKET_URL, { transports: ["websocket"] });
     await new Promise((resolve, reject) => {
-      socket.on('connect', () => resolve(socket));
-      socket.on('connect_error', reject);
+      socket.on("connect", () => {
+        console.log("Successfully connected to WebSocket server!");
+        resolve(socket);
+      });
+      socket.on("connect_error", (error) => {
+        console.error("Failed to connect to WebSocket server:", error);
+        reject(error);
+      });
     });
-    console.log('Successfully connected to socket server!');
     return socket;
   } catch (error) {
-    console.error('Failed to connect to socket server:', error);
+    console.error("Failed to connect to socket server:", error);
     throw error;
   }
 }
@@ -120,11 +111,5 @@ function setupMessageListeners(socket, chatBox, chatService) {
     const tm = sender({ message });
     chatBox.innerHTML += tm;
     document.querySelector("textarea").value = ""; // Clear textarea
-  });
-
-  socket.on("message", (message) => {
-    const tm = recipient({ message });
-    chatBox.innerHTML += tm;
-    chatService.handleIncomingMessage(message); // Delegate message handling
   });
 }
