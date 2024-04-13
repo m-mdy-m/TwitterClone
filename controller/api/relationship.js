@@ -50,12 +50,37 @@ exports.handler_friend = async (ctx) => {
     internalServerError();
   }
 };
+/**
+ * @module followingListController
+ * @description Exports the `followingList` function for retrieving a list of followed users.
+ */
 
+/**
+ * @function followingList
+ * @description Retrieves a list of users followed by the specified user.
+ *
+ * @param {Object} ctx - The context object from the framework.
+ * @param {string} ctx.param("userId") - The ID of the user whose following list is requested.
+ *
+ * @returns {Promise} Resolves with an object containing:
+ *   - `success` (boolean): Indicates successful retrieval.
+ *   - `message` (string): Success or error message.
+ *   - `data` (array): An array of followed user objects (if successful).
+ *
+ * @throws {Error} - Internal server error if an unexpected error occurs.
+ */
 exports.followingList = async (ctx) => {
   const { success, internalServerError } = ctx.jsonSender();
   try {
+    // 1. Retrieve and Validate User ID:
     const userId = ctx.param("userId");
     const user = await User.findById(userId);
+    if (!user) {
+      return success(
+        "User not found with the provided ID.",
+        [], // Return an empty array or handle appropriately
+      );
+    }
     const users = await Promise.all(
       user.following.map(async (followerId) => {
         const user = await User.findById(followerId);
