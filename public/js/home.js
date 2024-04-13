@@ -57,7 +57,7 @@ export async function renderStory(userCurrent) {
     });
   });
 }
-const SOCKET_URL = "ws://localhost:3000/";
+const SOCKET_URL = "http://localhost:3000";
 // user : recipient
 // sender : current user
 export function selectChat(user, senderUser) {
@@ -79,24 +79,15 @@ async function handlerClickProfilePage(user, chatService) {
     const chatBox = document.querySelector("#chat_box");
 
     const socket = await connectToServer();
-    setupMessageListeners(socket, chatBox, chatService); // Inject chatService
+    setupMessageListeners(chatBox, chatService); // Inject chatService
   } catch (error) {
     console.error("Error initializing chat:", error);
   }
 }
 async function connectToServer() {
   try {
-    const socket = io(SOCKET_URL, { transports: ["websocket"] });
-    await new Promise((resolve, reject) => {
-      socket.on("connect", () => {
-        console.log("Successfully connected to WebSocket server!");
-        resolve(socket);
-      });
-      socket.on("connect_error", (error) => {
-        console.error("Failed to connect to WebSocket server:", error);
-        reject(error);
-      });
-    });
+    const socket = io(SOCKET_URL);
+    console.log('hi')
     return socket;
   } catch (error) {
     console.error("Failed to connect to socket server:", error);
@@ -104,10 +95,10 @@ async function connectToServer() {
   }
 }
 
-function setupMessageListeners(socket, chatBox, chatService) {
+function setupMessageListeners(chatBox, chatService) {
   document.querySelector("#btn-send").addEventListener("click", () => {
     const message = document.querySelector("textarea").value;
-    socket.emit("message", message);
+    // socket.emit("message", message);
     const tm = sender({ message });
     chatBox.innerHTML += tm;
     document.querySelector("textarea").value = ""; // Clear textarea

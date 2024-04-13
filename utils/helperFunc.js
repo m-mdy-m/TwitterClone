@@ -55,7 +55,7 @@ function clearAllCookies(ctx) {
 
   // Iterate over each cookie
   for (const cookieName in cookies) {
-  // Clear the cookie by setting its expiration time to a past date
+    // Clear the cookie by setting its expiration time to a past date
     ctx.clearCookie(cookieName);
   }
 }
@@ -76,6 +76,9 @@ async function handleRetweet(tweet, userId, option, internalServerError) {
 
     // Find the parent tweet and all its children
     const parent = await getParentTweet(tweet, TweetQuery);
+    if(!parent){
+      return parent
+    }
     const children = await getAllChildren(parent);
     // If the parent tweet has retweets, update likes recursively
     if (parent.retweets && parent.retweets.length > 0) {
@@ -140,14 +143,15 @@ async function updateRetweetLikes(currentTweet, children, option, userId) {
 async function getParentTweet(tweet, query) {
   // Determine the ID of the original tweet
   const originalTweetId = tweet.originalTweet ?? tweet;
-
   // Update the original tweet with the provided query to track likes
   const updatedTweet = await Tweet.findByIdAndUpdate(
     originalTweetId._id,
     query,
     { new: true }
   );
-
+  if(!updatedTweet){
+    return undefined
+  }
   // If the original tweet still exists, recursively find its parent tweet
   if (updatedTweet.originalTweet) {
     return await getParentTweet(updatedTweet, query);

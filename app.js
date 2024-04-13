@@ -15,8 +15,7 @@ bodyParsing();
 static("public");
 
 const http = require("http").createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(http);
+const io = require("socket.io")(http);
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
   console.log("Socket details:", socket);

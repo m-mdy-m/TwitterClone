@@ -53,10 +53,10 @@ exports.getTweets = async (ctx) => {
     // Increment view count for each tweet
     await Promise.all(
       result.map(async (tweet) => {
-          // Increment the view count of each tweet if the user has not already viewed it
-          if (ctx.user.userId && tweet) {
-            await tweet.incrementViews(ctx.user.userId);
-          }
+        // Increment the view count of each tweet if the user has not already viewed it
+        if (ctx.user.userId && tweet) {
+          await tweet.incrementViews(ctx.user.userId);
+        }
       })
     );
     // Send JSON response with success true and tweet data
@@ -106,7 +106,9 @@ exports.likeTweet = async (ctx) => {
     );
 
     // Use the parent tweet ID if it's a retweet
-    id = parentTweet._id;
+    if (parentTweet) {
+      id = parentTweet._id;
+    }
     // Create the update queries for the user and the tweet
     const { UserQuery, TweetQuery } = generateTweetQueries(option, userId, id);
     // Update user and tweet documents
